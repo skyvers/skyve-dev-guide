@@ -2,77 +2,44 @@
 
 ### Contents
 
-[Domain Model](#domain-model)
-
-[Module and Document](#module-and-document)
-
-[Types](#types)
-
-[List and Edit](#list-and-edit)
-
-[List Views](#list-views)
-
-[Filtering](#filtering)
-
-[Simple Filter line](#simple-filter-line)
-
-[Advanced Filter constructor](#advanced-filter-constructor)
-
-[Flat style](#flat-style)
-
-[Nested style](#nested-style)
-
-[Inline style](#inline-style)
-
-[Edit Views](#edit-views)
-
-[Overriding](#overriding)
-
-[Example – overriding data entry widgets](#example-overriding-data-entry-widgets)
-
-[Example – overriding query definitions for lists of documents](#example-overriding-query-definitions-for-lists-of-documents)
-
-[BizKey – the business key concept](#bizkey-the-business-key-concept)
-
-[Zoom](#zoom)
-
-[Concurrent conversations and transactional demarcation](#concurrent-conversations-and-transactional-demarcation)
-
-[Customer](#customer)
-
-[Customer Overriding](#customer-overriding)
-
-[Role Privileges](#role-privileges)
-
-[Document Scoping](#document-scoping)
-
-[Data Group](#data-group)
-
-[Bean](#bean)
-
-[Bizlet](#bizlet)
-
-[Actions](#actions)
-
-[Enumerations](#enumerations)
-
-[Domain Values and Types](#domain-values-and-types)
-
-[Performance Implications of Domain Types](#performance-implications-of-domain-types)
-
-[Converters](#converters)
-
-[Resources](#resources)
-
-[Resource Hierarchy](#resource-hierarchy)
-
-[Documentation](#documentation)
-
-[Bizport](#bizport)
-
-[Note to Readers](#note-to-readers)
-
-[Identifying the Skyve Version](#identifying-the-skyve-version)
+* [Chapter 1: Architectural Overview](../README.md)
+* **[Chapter 2: Concepts](#concepts)**
+  * [2.1: Domain Model](#domain-model)
+  * [2.2: Module and Document](#module-and-document)
+  * [2.3: Types](#types)
+  * [2.4: List and Edit](#list-and-edit)
+    * [List Views](#list-views)
+  * [2.5: Filtering](#filtering)
+    * [Simple Filter line](#simple-filter-line)
+    * [Advanced Filter constructor](#advanced-filter-constructor)
+    * [Flat style](#flat-style)
+    * [Nested style](#nested-style)
+    * [Inline style](#inline-style)
+    * [Edit Views](#edit-views)
+  * [2.6: Overriding](#overriding)
+    * [Example – overriding data entry widgets](#example-overriding-data-entry-widgets)
+    * [Example – overriding query definitions for lists of documents](#example-overriding-query-definitions-for-lists-of-documents)
+  * [2.7: BizKey – the business key concept](#bizkey-the-business-key-concept)
+  * [2.8: Zoom](#zoom)
+    * [Concurrent conversations and transactional demarcation](#concurrent-conversations-and-transactional-demarcation)
+  * [2.9: Customer](#customer)
+  * [2.10: Customer Overriding](#customer-overriding)
+  * [2.11: Role Privileges](#role-privileges)
+  * [2.12: Document Scoping](#document-scoping)
+  * [2.13: Data Group](#data-group)
+  * [2.14: Bean](#bean)
+  * [2.15: Bizlet](#bizlet)
+  * [2.16: Actions](#actions)
+  * [2.17: Enumerations](#enumerations)
+  * [2.18: Domain Values and Types](#domain-values-and-types)
+    * [Performance Implications of Domain Types](#performance-implications-of-domain-types)
+  * [2.19: Converters](#converters)
+  * [2.20: Resources](#resources)
+    * [Resource Hierarchy](#resource-hierarchy)
+  * [2.21: Documentation](#documentation)
+  * [2.22: Bizport](#bizport)
+  * [2.23: Note to Readers](#note-to-readers)
+* [Chapter 3: Identifying the Skyve Version](#identifying-the-skyve-version)
 
 ### Domain Model
 An application domain model can be thought of as a conceptual model

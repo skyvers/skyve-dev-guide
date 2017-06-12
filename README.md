@@ -7,21 +7,14 @@
 
 ### Contents
 
-[Introduction](#introduction)
-
-[Architectural Overview](#architectural-overview)
-
-[Technical description](#technical-description)
-
-[General Approach and Design Principles](#general-approach-and-design-principles)
-
-[Use of SQL](#use-of-sql)
-
-[Multi-tenant & Mass-Customisation](#multi-tenant--mass-customisation)
-
-[“Open-source” Inclusions ](#open-source-inclusions)
-
-[Concepts](chapters/concepts.md)
+* [Section 1: Introduction](#introduction)
+* **[Chapter 1: Architectural Overview](#architectural-overview)**
+  * [1.1: Technical description](#technical-description)
+  * [1.2: General Approach and Design Principles](#general-approach-and-design-principles)
+  * [1.3: Use of SQL](#use-of-sql)
+  * [1.4: Multi-tenant & Mass-Customisation](#multi-tenant--mass-customisation)
+  * [1.5: “Open-source” Inclusions ](#open-source-inclusions)
+* [Chapter 2: Concepts](chapters/concepts.md)
 
 # Introduction
 
