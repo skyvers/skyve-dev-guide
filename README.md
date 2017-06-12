@@ -21,6 +21,8 @@
 
 [“Open-source” Inclusions ](#open-source-inclusions)
 
+[Concepts](chapters/concepts.md)
+
 # Introduction
 
 ## Architectural Overview
