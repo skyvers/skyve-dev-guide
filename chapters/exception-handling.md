@@ -2,6 +2,10 @@
 
 ### Contents
 
+* [Chapter 1: Architectural Overview](../README.md)
+* [Chapter 2: Concepts](./../chapters/concepts.md)
+* [Chapter 3: Identifying the Skyve Version](./../chapters/concepts.md)
+* [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
 * **[Chapter 5: Exception Handling](#exception-handling)**
   * [ValidationException 32](#validationexception)
   * [Concurrent Multiple Validation 32](#concurrent-multiple-validation)
@@ -24,12 +28,11 @@ including:
 
 ### ValidationException
 
-In addition, the Skyve API provides the ValidationException class. A
+In addition, the Skyve API provides the `ValidationException` class. A
 ValidationException occurs when validation fails of data against the
 specified type, or against specified business rules.
 
-The associated class ValidationMessage allows the developer to specify a
-binding context.
+The associated class `ValidationMessage` allows the developer to specify a binding context.
 
 Skyve will attempt to locate the binding on the view when the
 ValidationMessage is displayed. If the ValidationMessage is created with
@@ -62,7 +65,7 @@ The native validate() method is called by the platform with an existing
 ValidationException container and additional validations may be added
 using the .getSubordinates().add pattern. If the subordinates do not
 have valid bindings supplied, Skyve will automatically list all
-validation messages in a `<ul>`
+validation messages in a `<ul>`.
 
 ![Figure 11](media/image33.png "Figure 11 Concurrent Multiple Validation")
 
@@ -146,4 +149,4 @@ Validation capability_
 
 ---
 **Next Chapter 6: Customers**  
-**Previous [Chapter 4: Security, Persistence and Access control](./chapters/security-persistence-and-access-control.md)**
+**Previous [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)**

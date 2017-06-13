@@ -40,6 +40,8 @@
   * [2.22: Bizport](#bizport)
   * [2.23: Note to Readers](#note-to-readers)
 * [Chapter 3: Identifying the Skyve Version](#identifying-the-skyve-version)
+* [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
+* [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
 
 ### Domain Model
 An application domain model can be thought of as a conceptual model
@@ -734,5 +736,5 @@ If using Skyve with [maven](https://maven.apache.org), the version of Skyve can 
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 4: Security, Persistence and Access control](./chapters/security-persistence-and-access-control.md)**  
+**Next [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)**  
 **Previous [Chapter 1: Architectural Overview](../README.md)**  

@@ -1,4 +1,4 @@
-![skyve_white_bg.png](chapters/media/image4.png)
+<img src="chapters/media/image4.png" width="300" style="margin: 0 auto; text-align: center" />
 
 # Skyve Enterprise Platform
 ## Developer Guide
@@ -17,6 +17,7 @@
 * [Chapter 2: Concepts](chapters/concepts.md)
 * [Chapter 3: Identifying the Skyve Version](chapters/concepts.md)
 * [Chapter 4: Security, Persistence and Access control](chapters/security-persistence-and-access-control.md)
+* [Chapter 5: Exception Handling](chapters/exception-handling.md)
 
 # Introduction
 
