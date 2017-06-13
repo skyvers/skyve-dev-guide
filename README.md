@@ -15,6 +15,8 @@
   * [1.4: Multi-tenant & Mass-Customisation](#multi-tenant--mass-customisation)
   * [1.5: “Open-source” Inclusions ](#open-source-inclusions)
 * [Chapter 2: Concepts](chapters/concepts.md)
+* [Chapter 3: Identifying the Skyve Version](chapters/concepts.md)
+* [Chapter 4: Security, Persistence and Access control](chapters/security-persistence-and-access-control.md)
 
 # Introduction
 
@@ -264,3 +266,8 @@ These include:
 
 Customised versions of the Skyve platform can be created to integrate
 deeply with other 3rd party packages or custom architectural elements.
+
+**[⬆ back to top](#contents)**
+
+---
+**Next [Chapter 2: Concepts](chapters/concepts.md)**  

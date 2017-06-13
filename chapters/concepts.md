@@ -67,8 +67,8 @@ within the list view. Documents may contain collections of, and
 references to, other documents, with each instance persisted as a tuple
 in the database.
 
-![](media/image8.png)
-Figure 1 Basic UI layout
+![Figure 1](media/image8.png "Figure 1 Basic UI layout")
+_Figure 1 - Basic UI layout_
 
 Both module and document objects are implemented in the Skyve API and
 are available to developers. Using the API, developers can create
@@ -115,8 +115,8 @@ document attributes for searching and review. Each row of the list
 corresponds to a document instance however the list may represent data
 from related documents within the document’s object hierarchy.
 
-![](media/image9.png)
-Figure 2 List view
+![Figure 2](media/image9.png "Figure 2 List view")
+_Figure 2 - List view_
 
 List views are provided by a generic list component (called a
 *listGrid*) which offers searching, filtering, tagging, exporting,
@@ -284,8 +284,8 @@ area.
 Edit views provide detailed access to document attributes within the
 context of the document instance.
 
-![](media/image25.png)
-Figure 3 Edit View
+![Figure 3](media/image25.png "Figure 3 Edit View")
+_Figure 3 - Edit View_
 
 If no specific view metadata is provided, Skyve will generate a default
 edit view which will include all attributes, actions and reports defined
@@ -331,6 +331,7 @@ customer, the developer may choose to override again by overriding the
 view declaration for the customer and specify another kind of widget.
 
 ![Figure 4](media/image26.png "Figure 4 Override levels for a document widget declaration")
+_Figure 4 - Override levels for a document widget declaration_
 
 At each context level (application, view, customer), the developer has
 the option to rely on the default characteristic or override this with
@@ -719,6 +720,8 @@ Skyve is focused on making experienced developers more productive and
 lowering the costs associated with building sophisticated enterprise
 solutions.
 
+**[⬆ back to top](#contents)**
+
 ## Identifying the Skyve Version
 
 The specific version number of the platform can be retrieved by viewing
@@ -727,3 +730,9 @@ the source of any application page.
 ![Image 29](media/image29.png)
 
 If using Skyve with [maven](https://maven.apache.org), the version of Skyve can be obtained from the *pom.xml* file in the project hierarchy.
+
+**[⬆ back to top](#contents)**
+
+---
+**Next [Chapter 4: Security, Persistence and Access control](chapters/security-persistence-and-access-control.md)**  
+**Previous [Chapter 1: Architectural Overview](../README.md)**  
