@@ -2,311 +2,33 @@
 
 ### Contents
 
-[Modules 38](#modules-1)
-
-[Defining the *module.xml* 39](#defining-the-module.xml)
-
-[Module header 39](#module-header)
-
-[Documents 40](#documents)
-
-[Queries 40](#queries)
-
-[Generic Queries 40](#generic-queries)
-
-[Declaring Queries 41](#declaring-queries)
-
-[Query Column Definition 42](#query-column-definition)
-
-[Queries for Reference Attributes 43](#queries-for-reference-attributes)
-
-[Roles 44](#roles)
-
-[Document Scope 45](#document-scope)
-
-[Worked Example 45](#worked-example)
-
-[Requirement 45](#requirement)
-
-[Implementation 45](#implementation)
-
-[Results 45](#results)
-
-[Role Documentation 46](#role-documentation)
-
-[Menus 46](#menus)
-
-[Module Documentation 47](#module-documentation)
-
-[Overriding Modules 47](#overriding-modules)
-
-[Java Implementation 47](#java-implementation)
-
-[Documents 49](#documents-1)
-
-[Document.xml 49](#document.xml)
-
-[Document.xml Sections 50](#document.xml-sections)
-
-[Metadata 50](#metadata)
-
-[BizKey 51](#bizkey)
-
-[Attributes 51](#attributes)
-
-[Attribute Types 51](#attribute-types)
-
-[Conditions 59](#conditions)
-
-[Constraints 59](#constraints)
-
-[Documentation 59](#documentation-1)
-
-[Overriding Documents 60](#overriding-documents)
-
-[Database Persistence of Relationships and Key Constraints
-61](#database-persistence-of-relationships-and-key-constraints)
-
-[Database Indexes 62](#database-indexes)
-
-[Java Classes 62](#java-classes)
-
-[Bean 63](#bean-1)
-
-[Persistent Bean 63](#persistent-bean)
-
-[Persistence and Locking 64](#persistence-and-locking)
-
-[Converters 65](#converters-1)
-
-[Defined Converters 65](#defined-converters)
-
-[Worked Example 66](#worked-example-1)
-
-[Requirement 66](#requirement-1)
-
-[Implementation 66](#implementation-1)
-
-[Results 66](#results-1)
-
-[Bizlets 68](#bizlets)
-
-[Lifecycle 68](#lifecycle)
-
-[Bean level: 68](#bean-level)
-
-[User Interface level: 69](#user-interface-level)
-
-[Implicit Actions 69](#implicit-actions)
-
-[Views 71](#views)
-
-[Containers 71](#containers)
-
-[Autofit Behaviour 71](#autofit-behaviour)
-
-[Form 74](#form)
-
-[Form Example 74](#form-example)
-
-[Table 74](#table)
-
-[Item 74](#item)
-
-[Widget 76](#widget)
-
-[OnChange Event Action (Client-side Events)
-84](#onchange-event-action-client-side-events)
-
-[The lookupDescription Widget in Detail
-84](#the-lookupdescription-widget-in-detail)
-
-[Multi-column Drop-down/Combo 85](#multi-column-drop-downcombo)
-
-[Filter Parameters 85](#filter-parameters)
-
-[OnChange Handlers 86](#onchange-handlers)
-
-[dataGrid 86](#datagrid)
-
-[Columns 88](#columns)
-
-[listGrid 88](#listgrid)
-
-[Filter Parameters 89](#filter-parameters-1)
-
-[Actions 90](#actions-1)
-
-[Report Action 91](#report-action)
-
-[New Parameter 91](#new-parameter)
-
-[Actions 93](#actions-2)
-
-[OnChange Event Actions (Client-side Events)
-94](#onchange-event-actions-client-side-events)
-
-[Reports 95](#reports)
-
-[Custom Reports 95](#custom-reports)
-
-[Automatic Customer Resource Parameter
-96](#automatic-customer-resource-parameter)
-
-[Object data source 96](#object-data-source)
-
-[Ad-hoc Reports 96](#ad-hoc-reports)
-
-[Offline Reporting Jobs 96](#offline-reporting-jobs)
-
-[Jobs 97](#jobs)
-
-[Job Classes 97](#job-classes)
-
-[Utility Classes 99](#utility-classes)
-
-[Persistence 99](#persistence)
-
-[Insecure SQL 100](#insecure-sql)
-
-[DocumentQuery 100](#documentquery)
-
-[Common Patterns 102](#common-patterns)
-
-[Identify Current User Contact 102](#identify-current-user-contact)
-
-[Identify if Current User has Role
-102](#identify-if-current-user-has-role)
-
-[Save a Document Instance 102](#save-a-document-instance)
-
-[Instantiate a New Document Instance
-102](#instantiate-a-new-document-instance)
-
-[Building a Variant Domain List 103](#building-a-variant-domain-list)
-
-[Schedule an Offline Job 103](#schedule-an-offline-job)
-
-[Persist Scalar Values Without Traversing Bean Structure
-103](#persist-scalar-values-without-traversing-bean-structure)
-
-[Retrieve and Iterate Through Beans
-104](#retrieve-and-iterate-through-beans)
-
-[Singleton Documents (Parameter /Configuration Documents)
-104](#singleton-documents-parameter-configuration-documents)
-
-[User-scoped Documents (Personal preferences Documents)
-105](#user-scoped-documents-personal-preferences-documents)
-
-[Customise Document and Document Attribute Names
-105](#customise-document-and-document-attribute-names)
-
-[Persistence 107](#persistence-1)
-
-[Skyve Persistence Mechanisms 108](#skyve-persistence-mechanisms)
-
-[Generic Naming Conventions 108](#generic-naming-conventions)
-
-[Relationship naming convention 109](#relationship-naming-convention)
-
-[Ordering and bizOrdinal 109](#ordering-and-bizordinal)
-
-[UUID Enterprise-level Guaranteed Uniqueness
-109](#uuid-enterprise-level-guaranteed-uniqueness)
-
-[Optimistic Lock concurrency controls
-110](#optimistic-lock-concurrency-controls)
-
-[Enterprise-wide consistent reference representation
-110](#enterprise-wide-consistent-reference-representation)
-
-[Multi-tenant Support 110](#multi-tenant-support)
-
-[Collaborative record flagging 110](#collaborative-record-flagging)
-
-[Document scoping row-level security & source identification
-111](#document-scoping-row-level-security-source-identification)
-
-[Platform Tools 112](#platform-tools)
-
-[Ant Utilities 113](#ant-utilities)
-
-[Generate Domain 114](#generate-domain)
-
-[Generate a Default Edit View 114](#generate-a-default-edit-view)
-
-[Generating a Deployable Archive - copyProdEAR
-114](#generating-a-deployable-archive---copyprodear)
-
-[Javadoc 115](#javadoc)
-
-[Content Repository Tools 118](#content-repository-tools)
-
-[Backing up the Repository 118](#backing-up-the-repository)
-
-[Reindexing the Repository 118](#reindexing-the-repository)
-
-[Bizport 119](#bizport-1)
-
-[Working With Bizport 119](#working-with-bizport)
-
-[Using Bizport 119](#using-bizport)
-
-[To enter bulk data using Bizport
-119](#to-enter-bulk-data-using-bizport)
-
-[To remove bulk data using Bizport
-119](#to-remove-bulk-data-using-bizport)
-
-[WILDCAT Conversion Tool 120](#wildcat-conversion-tool)
-
-[NOTE: Refer to the WCT developer guide for full details. Using the
-Skyve Converstion Tool (WCT)
-120](#note-refer-to-the-wct-developer-guide-for-full-details.-using-the-skyve-converstion-tool-wct)
-
-[Development Approach and Roundtripping
-122](#development-approach-and-roundtripping)
-
-[Report Conversion 122](#report-conversion)
-
-[Appendix 123](#appendix)
-
-[Appendix 1. Deploying a Skyve Application
-124](#deploying-a-skyve-application)
-
-[Appendix 2. Installing and configuring the Skyve Development
-Environment
-125](#installing-and-configuring-the-skyve-development-environment)
-
-[Prerequisites checklist 125](#prerequisites-checklist)
-
-[Configuring Java 125](#configuring-java)
-
-[Configuring the IDE (Windows example)
-125](#configuring-the-ide-windows-example)
-
-[Configuring the workspace 125](#configuring-the-workspace)
-
-[Importing Projects 125](#importing-projects)
-
-[Creating the server 126](#creating-the-server)
-
-[Configuring JBoss 127](#configuring-jboss)
-
-[Starting the server 127](#starting-the-server)
-
-[Deploying your solution 127](#deploying-your-solution)
-
-[Appendix 3. Example Deployment Instructions with Single Sign-on
-130](#example-deployment-instructions-with-single-sign-on)
+* **[Chapter 7: Modules](#modules)**
+  * [Defining the `module.xml`](#defining-the-module.xml)
+    * [Module header](#module-header)
+  * [Documents](#documents)
+  * [Queries](#queries)
+  * [Generic Queries](#generic-queries)
+  * [Declaring Queries](#declaring-queries)
+    * [Query Column Definition](#query-column-definition)
+    * [Queries for Reference Attributes](#queries-for-reference-attributes)
+  * [Roles](#roles)
+    * [Document Scope](#document-scope)
+  * [Worked Example](#worked-example)
+    * [Requirement](#requirement)
+    * [Implementation](#implementation)
+    * [Results](#results)
+    * [Role Documentation](#role-documentation)
+  * [Menus](#menus)
+  * [Module Documentation](#module-documentation)
+  * [Overriding Modules](#overriding-modules)
+  * [Java Implementation](#java-implementation)
 
 Modules define self-contained application pieces and correspond to menus
 within the system accordion menu pane. The repository/apps folder
 contains all application metadata and code, organised as application
 modules.
 
-Each module folder contains a *module.xml* manifest file (declaring the
+Each module folder contains a `module.xml` manifest file (declaring the
 existence of the module components including jobs, documents, queries,
 roles and menus) document packages (one package per document) and a
 domain folder (which contains the generated domain classes).
@@ -315,89 +37,63 @@ Code in the domain folder is never manipulated by the developer
 directly; all application changes are done via metadata and API-level
 code.
 
-![](media/image39.emf){width="6.954861111111111in" height="4.333333333333333in"} {#section-4 .Picture}
---------------------------------------------------------------------------------
+![Figure 17](media/image39.png "Figure 17 Skyve in the Eclipse IDE")
 
-Figure 17 Skyve in the Eclipse IDE
+_Figure 17 - Skyve in the Eclipse IDE_
 
-The *module.xml* file is located in the top level directory of the
+The `module.xml` file is located in the top level directory of the
 module and defines the following:
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Attribute/Section   Definition
-  ------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  name                The name used by the developer to define and distinguish the module.
+  Attribute/Section | Definition
+  ----------------- | ----------
+  name              | The name used by the developer to define and distinguish the module.
+  title             | The title of the module as presented in the user interface.<br>The module title will be the label shown on the accordion pane containing the module menu.
+  homeRef           | Whether the homeDocument (see below) will open in list or edit view.<br>This attribute is optional – if not included Skyve assumes a homeRef of *list* (i.e. a list view rather than a detail view).
+  homeDocument      | The document which will open by default when the module is accessed by the user.
+  documents         | The list of documents.<br>Documents may be persistent or transient. Each persistent document maps to a database table. (Transient documents exist only in memory.)
+  queries           | The queries referenced within the application metadata.<br>Each list view is based on a metadata query specified in the `module.xml` and any queries referenced within document metadata (e.g. for collections or references) must be declared here. Skyve will generate default queries for each document unless a specific metadata query is declared.
+  roles             | The user roles specified for the application.<br>Each role specifies permission levels for each document and actions which that role is permitted to execute.
+  menu              | The menu specifies which menu items are applicable for each role specified in the roles section.
 
-  title               The title of the module as presented in the user interface.
 
-                      The module title will be the label shown on the accordion pane containing the module menu.
+_Table 2 - Module.xml sections_
 
-  homeRef             Whether the homeDocument (see below) will open in list or edit view.
+### Defining the `module.xml`
 
-                      This attribute is optional – if not included Skyve assumes a homeRef of *list* (i.e. a list view rather than a detail view).
-
-  homeDocument        The document which will open by default when the module is accessed by the user.
-
-  documents           The list of documents.
-
-                      Documents may be persistent or transient. Each persistent document maps to a database table. (Transient documents exist only in memory.)
-
-  queries             The queries referenced within the application metadata.
-
-                      Each list view is based on a metadata query specified in the *module.xml* and any queries referenced within document metadata (e.g. for collections or references) must be declared here. Skyve will generate default queries for each document unless a specific metadata query is declared.
-
-  roles               The user roles specified for the application.
-
-                      Each role specifies permission levels for each document and actions which that role is permitted to execute.
-
-  menu                The menu specifies which menu items are applicable for each role specified in the roles section.
-  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Table 2 Module.xml sections
-
-Defining the *module.xml* {#defining-the-module.xml .Chaptersubheading}
--------------------------
-
-### Module header {#module-header .Sectionheading}
+#### Module header
 
 An example module header is provided below. Note the key attributes of
 *schemaLocation*, name, title *homeRef* and *homeDocument*.
 
-![](media/image40.emf){width="6.969444444444444in" height="1.3784722222222223in"} {#section-5 .Picture}
----------------------------------------------------------------------------------
+![Figure 18](media/image40.png "Figure 18 Module definition header")
 
-Figure 18 Module definition header
+_Figure 18 - Module definition header_
 
-\
-Documents {#documents .Chaptersubheading}
----------
+### Documents
 
-The *module.xml* includes declarations for each document.
+The `module.xml` includes declarations for each document.
 
 If documents from another module are referenced, the source module must
 be nominated as *moduleRef*. Document privileges and scoping is always
 only defined in the home module, to avoid the potential of conflicting
 scoping or permissions.
 
-![](media/image41.png){width="5.666666666666667in"
-height="2.151388888888889in"}
+![Figure 19](media/image41.png "Figure 19 Module definition - document manifest")
 
-Figure 19 Module definition - document manifest
+_Figure 19 - Module definition - document manifest_
 
-Documents listed in the *module.xml* may reference documents from other
+Documents listed in the `module.xml` may reference documents from other
 modules (*moduleRef*) or are matched with document packages within the
 module folder.
 
-![](media/image42.png){width="3.0909722222222222in" height="1.636111111111111in"} {#section-6 .Picture}
----------------------------------------------------------------------------------
+![Figure 20](media/image42.png "Figure 20 Document packages")
 
-Figure 20 Document packages
+_Figure 20 - Document packages_
 
-Queries {#queries .Chaptersubheading}
--------
+### Queries
 
-The *module.xml* file can include definitions of queries used in the
-application. Queries declared in the *module.xml* are called *metadata
+The `module.xml` file can include definitions of queries used in the
+application. Queries declared in the `module.xml` are called *metadata
 queries* to distinguish them from other queries which may exist as views
 on the database server or as insecure SQL strings within developer code.
 
@@ -410,8 +106,7 @@ If a query name is not supplied Skyve will generate a default or
 *generic* query which will include all columns for all document
 attributes.
 
-Generic Queries {#generic-queries .Chaptersubheading}
----------------
+### Generic Queries
 
 When Skyve generates a query (in the situation where a query is required
 but none has been specified), this *generic* query will contain all
@@ -420,8 +115,7 @@ for all references. Columns will be in the order of document attributes
 (as specified in the *document.xml*) with ascending ordering applied to
 the first column. All columns will be non-editable inline in the list.
 
-Declaring Queries {#declaring-queries .Chaptersubheading}
------------------
+### Declaring Queries
 
 Skyve metadata queries use object references, rather than SQL.
 
@@ -431,75 +125,42 @@ document which is the subject of the query.
 If the query is the basis of a *listGrid*, then double-clicking in the
 listGrid will zoom to the *driving document*.
 
-![](media/image43.png){width="6.9847222222222225in" height="4.454861111111111in"} {#section-7 .Picture}
----------------------------------------------------------------------------------
+![Figure 21](media/image43.png "Figure 21 Metadata query definition")
 
-Figure 21 Metadata query definition
+_Figure 21 - Metadata query definition_
 
-![](media/image44.png){width="4.151388888888889in" height="3.0in"}
+![Figure 22](media/image44.png "Figure 22 Query description displays as the list title")
 
-Figure 22 Query description displays as the list title
+_Figure 22 - Query description displays as the list title_
 
-### Query Column Definition {#query-column-definition .Sectionheading}
+#### Query Column Definition
 
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Query Column Attributes   Description
-  ------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  binding                   The document value to be shown in the query column.
-
-                            A compound binding can be used where the value to be shown is in a related document.
-
-  displayName               An alias for the query column.
-
-                            If no displayName is specified in the query, the list column title will be the displayName specified for the document attribute.
-
-  editable                  Whether the column is editable in the list view inline.
-
-                            By default editable is set to false.
-
-  expression                A valid OQL expression which defines the value to be shown in the list column.
-
-  filterable                Whether a filter can be applied to this column in the list view.
-
-  filterExpression          A literal value or one of a number of expressions.
-
-                            Defined expressions include:
-
-                            -   {DATE} - current date
-
-                            -   {DATETIME} - current date and time
-
-                            -   {USERID} - bizId of the current user
-
-                            -   {USER} – the userName of the current user
-
-                            -   {CONTACTID} – the id of the contact who is the current user
-
-                            -   {DATAGROUPID} – the id of the data group of the current user
-
-                            -   {CUSTOMER} – the name of the customer context in which the current user operates
-
-
-  filterOperator            One of the following operators:
+  Query Column Attributes | Description
+  ----------------------- | -----------
+  binding                 | The document value to be shown in the query column.<br>A compound binding can be used where the value to be shown is in a related document.
+  displayName             | An alias for the query column.<br>If no displayName is specified in the query, the list column title will be the displayName specified for the document attribute.
+  editable                | Whether the column is editable in the list view inline.<br>By default editable is set to false.
+  expression              | A valid OQL expression which defines the value to be shown in the list column.
+  filterable              | Whether a filter can be applied to this column in the list view.
+  filterExpression        | A literal value or one of a number of expressions.<br>Defined expressions include:<br>
+    -   {DATE} - current date
+    -   {DATETIME} - current date and time
+    -   {USERID} - bizId of the current user
+    -   {USER} – the userName of the current user
+    -   {CONTACTID} – the id of the contact who is the current user
+    -   {DATAGROUPID} – the id of the data group of the current user
+    -   {CUSTOMER} – the name of the customer context in which the current user operates
+  filterOperator          | One of the following operators:
 
                             -   equal, notEqual,
-
                             -   greater, less,
-
                             -   greaterEqual, lessEqual,
-
                             -   like, notLike,
-
                             -   notNull, isNull,
-
                             -   nullOrEqual, nullOrNotEqual,
-
                             -   nullOrGreater, nullOrLess,
-
                             -   nullOrGreaterEqual, nullOrLessEqual,
-
                             -   nullOrLike, nullOrNotLike;
-
 
   hidden                    Whether the query column will be hidden by default in a list view.
 
@@ -524,7 +185,7 @@ Table 3 Query column definitions
 
 Driving documents can be the subject of many queries.
 
-Queries defined in the *module.xml* are also available to developers in
+Queries defined in the `module.xml` are also available to developers in
 *Bizlet* code. Queries can also be declared as the source for document
 attribute associations and collections. When used in this way, the query
 determines eligible references for membership in the association or
@@ -556,7 +217,7 @@ above) if a query is specified for the *lookupDescription* in the view.
 Roles {#roles .Chaptersubheading}
 -----
 
-The *module.xml* declares roles for the module.
+The `module.xml` declares roles for the module.
 
 Each role specifies the privilege levels for documents the role will
 access (and associated actions). The role name is the name displayed
@@ -723,14 +384,14 @@ All aspects of the module can be overridden including:
 
 -   menus (structure, names and targets).
 
-To override a *module.xml*, place the overriding *module.xml* file into
+To override a `module.xml`, place the overriding `module.xml` file into
 the customer package.
 
 ![](media/image53.png){width="2.651388888888889in" height="1.60625in"}
 
 Figure 30 Example module override
 
-As the *module.xml* file is a single artefact, it must contain all
+As the `module.xml` file is a single artefact, it must contain all
 elements of the module available for the bespoke experience and not
 simply the components that differ. This is because the module override
 can be subtractive, by not including elements contained within the
@@ -751,7 +412,7 @@ The domain folder includes a Hibernate object-relational mapping
 definition file for the module, named *&lt;module&gt;\_orm.hbm.xml*, as
 well as classes for all module documents.
 
-Where the *module.xml* is overridden for a customer within a
+Where the `module.xml` is overridden for a customer within a
 multi-tenant paradigm, a mapping file will be generated into the
 customer module override folder, within the customer package.
 
