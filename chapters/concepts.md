@@ -650,7 +650,7 @@ StringBuilder sb = new StringBuilder();
 sb.append("The invoice is overdue and should have been paid on ");
 sb.append(customer.getDefaultDateConverter().toDisplayValue(bean.getActDate()));
 ```
-Figure 7 The use of converters ensures consistent representation
+_Figure 7 - The use of converters ensures consistent representation_
 
 ### Resources
 
@@ -734,5 +734,5 @@ If using Skyve with [maven](https://maven.apache.org), the version of Skyve can 
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 4: Security, Persistence and Access control](chapters/security-persistence-and-access-control.md)**  
+**Next [Chapter 4: Security, Persistence and Access control](./chapters/security-persistence-and-access-control.md)**  
 **Previous [Chapter 1: Architectural Overview](../README.md)**  

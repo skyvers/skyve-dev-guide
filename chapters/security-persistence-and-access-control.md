@@ -7,7 +7,7 @@
 * [Chapter 3: Identifying the Skyve Version](chapters/concepts.md)
 * **[Chapter 4: Security, Persistence and Access control](#security-persistence-and-access-control)**
   * [4.1: Transaction Control](#transaction-control)
-    * [Concurrent conversations and transactional demarcation](#concurrent-conversations-and-transactional-demarcation-1)
+    * [Concurrent conversations and transactional demarcation](#concurrent-conversations-and-transactional-demarcation)
     * [Authorisation model - Summary of Options and Discussion](#authorisation-model---summary-of-options-and-discussion)
 * [Chapter 5: Exception Handling](chapters/exception-handling.md)
 
@@ -141,5 +141,5 @@ pervasively and consistently throughout any Skyve application.
 **[⬆ back to top](#contents)**
 
 ---
-**Next Chapter 5: Exception Handling**  
-**Previous [Chapter 3: Identifying the Skyve Version](chapters/concepts.md)**  
+**Next [Chapter 5: Exception Handling](./chapters/exception-handling.md)**  
+**Previous [Chapter 3: Identifying the Skyve Version](./chapters/concepts.md)**  
