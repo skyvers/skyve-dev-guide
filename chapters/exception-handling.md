@@ -13,6 +13,8 @@
   * [Mandatory field validation 33](#mandatory-field-validation)
   * [Business rule validation 33](#business-rule-validation)
   * [Building Applications 35](#building-applications)
+* [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
+* [Chapter 6: Customers](./../chapters/customers.md)
 
 Skyve provides powerful error management capabilities extending general
 Java Exception handling.
@@ -148,5 +150,5 @@ Validation capability_
 **[⬆ back to top](#contents)**
 
 ---
-**Next Chapter 6: Customers**  
+**Next [Chapter 6: Customers](./../chapters/customers.md)**  
 **Previous [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)**

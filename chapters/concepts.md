@@ -42,6 +42,7 @@
 * [Chapter 3: Identifying the Skyve Version](#identifying-the-skyve-version)
 * [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
 * [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
+* [Chapter 6: Customers](./../chapters/customers.md)
 
 ### Domain Model
 An application domain model can be thought of as a conceptual model

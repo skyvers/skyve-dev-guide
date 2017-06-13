@@ -10,6 +10,7 @@
     * [Concurrent conversations and transactional demarcation](#concurrent-conversations-and-transactional-demarcation)
     * [Authorisation model - Summary of Options and Discussion](#authorisation-model---summary-of-options-and-discussion)
 * [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
+* [Chapter 6: Customers](./../chapters/customers.md)
 
 ### Transaction Control
 
