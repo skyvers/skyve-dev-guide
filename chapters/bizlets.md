@@ -2,7 +2,7 @@
 
 ### Contents
 
-* **[Chapter 9: Bizlets](#bizlets)**
+* **[Chapter 10: Bizlets](#bizlets)**
   * [Lifecycle](#lifecycle)
     * [Bean level:](#bean-level)
     * [User Interface level:](#user-interface-level)

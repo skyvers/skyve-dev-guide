@@ -2,181 +2,81 @@
 
 ### Contents
 
-[Views](#views)
-
-[Containers](#containers)
-
-[Autofit Behaviour](#autofit-behaviour)
-
-[Form](#form)
-
-[Form Example](#form-example)
-
-[Table](#table)
-
-[Item](#item)
-
-[Widget](#widget)
-
-[OnChange Event Action (Client-side Events)](#onchange-event-action-client-side-events)
-
-[The lookupDescription Widget in Detail](#the-lookupdescription-widget-in-detail)
-
-[Multi-column Drop-down/Combo](#multi-column-drop-downcombo)
-
-[Filter Parameters](#filter-parameters)
-
-[OnChange Handlers](#onchange-handlers)
-
-[dataGrid](#datagrid)
-
-[Columns](#columns)
-
-[listGrid](#listgrid)
-
-[Filter Parameters](#filter-parameters-1)
-
-[Actions](#actions-1)
-
-[Report Action](#report-action)
-
-[New Parameter](#new-parameter)
-
-[Actions](#actions-2)
-
-[OnChange Event Actions (Client-side Events)](#onchange-event-actions-client-side-events)
-
-[Reports](#reports)
-
-[Custom Reports](#custom-reports)
-
-[Automatic Customer Resource Parameter](#automatic-customer-resource-parameter)
-
-[Object data source](#object-data-source)
-
-[Ad-hoc Reports](#ad-hoc-reports)
-
-[Offline Reporting Jobs](#offline-reporting-jobs)
-
-[Jobs](#jobs)
-
-[Job Classes](#job-classes)
-
-[Utility Classes](#utility-classes)
-
-[Persistence](#persistence)
-
-[Insecure SQL](#insecure-sql)
-
-[DocumentQuery](#documentquery)
-
-[Common Patterns](#common-patterns)
-
-[Identify Current User Contact](#identify-current-user-contact)
-
-[Identify if Current User has Role](#identify-if-current-user-has-role)
-
-[Save a Document Instance](#save-a-document-instance)
-
-[Instantiate a New Document Instance](#instantiate-a-new-document-instance)
-
-[Building a Variant Domain List](#building-a-variant-domain-list)
-
-[Schedule an Offline Job](#schedule-an-offline-job)
-
-[Persist Scalar Values Without Traversing Bean Structure](#persist-scalar-values-without-traversing-bean-structure)
-
-[Retrieve and Iterate Through Beans](#retrieve-and-iterate-through-beans)
-
-[Singleton Documents (Parameter /Configuration Documents)](#singleton-documents-parameter-configuration-documents)
-
-[User-scoped Documents (Personal preferences Documents)](#user-scoped-documents-personal-preferences-documents)
-
-[Customise Document and Document Attribute Names](#customise-document-and-document-attribute-names)
-
-[Persistence](#persistence-1)
-
-[Skyve Persistence Mechanisms](#skyve-persistence-mechanisms)
-
-[Generic Naming Conventions](#generic-naming-conventions)
-
-[Relationship naming convention](#relationship-naming-convention)
-
-[Ordering and bizOrdinal](#ordering-and-bizordinal)
-
-[UUID Enterprise-level Guaranteed Uniqueness](#uuid-enterprise-level-guaranteed-uniqueness)
-
-[Optimistic Lock concurrency controls](#optimistic-lock-concurrency-controls)
-
-[Enterprise-wide consistent reference representation](#enterprise-wide-consistent-reference-representation)
-
-[Multi-tenant Support](#multi-tenant-support)
-
-[Collaborative record flagging](#collaborative-record-flagging)
-
-[Document scoping row-level security & source identification](#document-scoping-row-level-security-source-identification)
-
-[Platform Tools](#platform-tools)
-
-[Ant Utilities](#ant-utilities)
-
-[Generate Domain](#generate-domain)
-
-[Generate a Default Edit View](#generate-a-default-edit-view)
-
-[Generating a Deployable Archive - copyProdEAR](#generating-a-deployable-archive---copyprodear)
-
-[Javadoc](#javadoc)
-
-[Content Repository Tools](#content-repository-tools)
-
-[Backing up the Repository](#backing-up-the-repository)
-
-[Reindexing the Repository](#reindexing-the-repository)
-
-[Bizport](#bizport-1)
-
-[Working With Bizport](#working-with-bizport)
-
-[Using Bizport](#using-bizport)
-
-[To enter bulk data using Bizport](#to-enter-bulk-data-using-bizport)
-
-[To remove bulk data using Bizport](#to-remove-bulk-data-using-bizport)
-
-[WILDCAT Conversion Tool](#wildcat-conversion-tool)
-
-[NOTE: Refer to the WCT developer guide for full details. Using the Skyve Converstion Tool (WCT)](#note-refer-to-the-wct-developer-guide-for-full-details.-using-the-skyve-converstion-tool-wct)
-
-[Development Approach and Roundtripping](#development-approach-and-roundtripping)
-
-[Report Conversion](#report-conversion)
-
-[Appendix](#appendix)
-
-[Appendix 1. Deploying a Skyve Application](#deploying-a-skyve-application)
-
-[Appendix 2. Installing and configuring the Skyve Development Environment](#installing-and-configuring-the-skyve-development-environment)
-
-[Prerequisites checklist](#prerequisites-checklist)
-
-[Configuring Java](#configuring-java)
-
-[Configuring the IDE (Windows example)](#configuring-the-ide-windows-example)
-
-[Configuring the workspace](#configuring-the-workspace)
-
-[Importing Projects](#importing-projects)
-
-[Creating the server](#creating-the-server)
-
-[Configuring JBoss](#configuring-jboss)
-
-[Starting the server](#starting-the-server)
-
-[Deploying your solution](#deploying-your-solution)
-
-[Appendix 3. Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
+* **[Chapter 11: Views](#views)**
+  * [Containers](#containers)
+    * [Autofit Behaviour](#autofit-behaviour)
+  * [Form](#form)
+    * [Form Example](#form-example)
+  * [Table](#table)
+  * [Item](#item)
+  * [Widget](#widget)
+  * [OnChange Event Action (Client-side Events)](#onchange-event-action-client-side-events)
+  * [The lookupDescription Widget in Detail](#the-lookupdescription-widget-in-detail)
+    * [Multi-column Drop-down/Combo](#multi-column-drop-downcombo)
+    * [Filter Parameters](#filter-parameters)
+    * [OnChange Handlers](#onchange-handlers)
+  * [dataGrid](#datagrid)
+    * [Columns](#columns)
+  * [listGrid](#listgrid)
+    * [Filter Parameters](#filter-parameters-1)
+  * [Actions](#actions)
+  * [Report Action](#report-action)
+  * [New Parameter](#new-parameter)
+* **[Chapter 12: Actions](#actions-2)**
+  * [OnChange Event Actions (Client-side Events)](#onchange-event-actions-client-side-events)
+* **[Chapter 13: Reports](#reports)**
+  * [Custom Reports](#custom-reports)
+    * [Automatic Customer Resource Parameter](#automatic-customer-resource-parameter)
+    * [Object data source](#object-data-source)
+  * [Ad-hoc Reports](#ad-hoc-reports)
+  * [Offline Reporting Jobs](#offline-reporting-jobs)
+* **[Chapter 14: Jobs](#jobs)**
+  * [Job Classes](#job-classes)
+* **[Chapter 15: Utility Classes](#utility-classes)**
+  * [Persistence](#persistence)
+    * [Insecure SQL](#insecure-sql)
+  * [DocumentQuery](#documentquery)
+* **[Chapter 16: Common Patterns](#common-patterns)**
+  * [Identify Current User Contact](#identify-current-user-contact)
+  * [Identify if Current User has Role](#identify-if-current-user-has-role)
+  * [Save a Document Instance](#save-a-document-instance)
+  * [Instantiate a New Document Instance](#instantiate-a-new-document-instance)
+  * [Building a Variant Domain List](#building-a-variant-domain-list)
+  * [Schedule an Offline Job](#schedule-an-offline-job)
+  * [Persist Scalar Values Without Traversing Bean Structure](#persist-scalar-values-without-traversing-bean-structure)
+  * [Retrieve and Iterate Through Beans](#retrieve-and-iterate-through-beans)
+  * [Singleton Documents (Parameter /Configuration Documents)](#singleton-documents-parameter-configuration-documents)
+  * [User-scoped Documents (Personal preferences Documents)](#user-scoped-documents-personal-preferences-documents)
+  * [Customise Document and Document Attribute Names](#customise-document-and-document-attribute-names)
+* [Section 3: Persistence](#persistence)
+* **[Chapter 17: Skyve Persistence Mechanisms](#skyve-persistence-mechanisms)**
+  * [Generic Naming Conventions](#generic-naming-conventions)
+    * [Relationship naming convention](#relationship-naming-convention)
+    * [Ordering and bizOrdinal](#ordering-and-bizordinal)
+  * [UUID Enterprise-level Guaranteed Uniqueness](#uuid-enterprise-level-guaranteed-uniqueness)
+  * [Optimistic Lock concurrency controls](#optimistic-lock-concurrency-controls)
+  * [Enterprise-wide consistent reference representation](#enterprise-wide-consistent-reference-representation)
+  * [Multi-tenant Support](#multi-tenant-support)
+  * [Collaborative record flagging](#collaborative-record-flagging)
+  * [Document scoping row-level security & source identification](#document-scoping-row-level-security-source-identification)
+* [Section 4: Platform Tools](#platform-tools)
+  * **[Chapter 18: Ant Utilities](#ant-utilities)**
+    * [Generate Domain](#generate-domain)
+    * [Generate a Default Edit View](#generate-a-default-edit-view)
+    * [Generating a Deployable Archive - copyProdEAR](#generating-a-deployable-archive---copyprodear)
+    * [Javadoc](#javadoc)
+  * **[Chapter 19: Content Repository Tools](#content-repository-tools)**
+    * [Backing up the Repository](#backing-up-the-repository)
+    * [Reindexing the Repository](#reindexing-the-repository)
+  * **[Chapter 20: Bizport](#bizport)**
+    * [Working With Bizport](#working-with-bizport)
+    * [Using Bizport](#using-bizport)
+    * [To enter bulk data using Bizport](#to-enter-bulk-data-using-bizport)
+    * [To remove bulk data using Bizport](#to-remove-bulk-data-using-bizport)
+  * **[Chapter 21: WILDCAT Conversion Tool](#wildcat-conversion-tool)**
+    * [NOTE: Refer to the WCT developer guide for full details. Using the Skyve Converstion Tool (WCT)](#note-refer-to-the-wct-developer-guide-for-full-details.-using-the-skyve-converstion-tool-wct)
+    * [Development Approach and Roundtripping](#development-approach-and-roundtripping)
+    * [Report Conversion](#report-conversion)
 
 View definition files override the default detail view (generated by
 Skyve).
@@ -187,19 +87,12 @@ the document from a list.
 
 Two detail views can be declared for each document.
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  View         Description
-  ------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  edit.xml     The basic view definition for detail editing of a bean (normally accessed by zooming into a row from a list).
+  View        | Description
+  ----------- | -----------
+  edit.xml    | The basic view definition for detail editing of a bean (normally accessed by zooming into a row from a list).<br>Menu items can also target edit views directly. In this case the menu item will trigger newInstance() and a new document instance will be returned (and therefore displayed). To show a singleton (a document instance which is the only applicable existing instance within the context), the newInstance() method can be overridden to select and return an existing bean in place of the newly created instance.<br>If a *create.xml* is supplied, the *edit.xml* file is only used after the document is created.
+  create.xml  | A special case of edit view which is used if *create,xml* supplied and if *isCreated*() is false.
 
-               Menu items can also target edit views directly. In this case the menu item will trigger newInstance() and a new document instance will be returned (and therefore displayed). To show a singleton (a document instance which is the only applicable existing instance within the context), the newInstance() method can be overridden to select and return an existing bean in place of the newly created instance.
-
-               If a *create.xml* is supplied, the *edit.xml* file is only used after the document is created.
-
-  create.xml   A special case of edit view which is used if *create,xml* supplied and if *isCreated*() is false.
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Table 10 View definition files
+_Table 10 - View definition files_
 
 Containers {#containers .Chaptersubheading}
 ----------
@@ -208,25 +101,17 @@ Containers are layout devices which contain other elements.
 
 Containers share basic properties:
 
-  -------------------------------------------------------------------------------------------------------------------------
-  Property           Description
-  ------------------ ------------------------------------------------------------------------------------------------------
-  invisible          Whether the container (and contents) are invisible to the user.
+  Property          | Description
+  ----------------- | ------------
+  invisible         | Whether the container (and contents) are invisible to the user.<br>Invisibility may be set to *true*, *false* or the result of a declared condition.
+  percentageHeight  | Percentage of the vertical visible area over which the container (and contents) will be stretched.
+  percentageWidth   | Percentage of the horizontal visible area over which the container (and contents) will be stretched.
+  pixelWidth        | Width of the container in pixels.
+  pixelHeight       | Height of the container in pixels.
 
-                     Invisibility may be set to *true*, *false* or the result of a declared condition.
+_Table 11 - Basic container properties_
 
-  percentageHeight   Percentage of the vertical visible area over which the container (and contents) will be stretched.
-
-  percentageWidth    Percentage of the horizontal visible area over which the container (and contents) will be stretched.
-
-  pixelWidth         Width of the container in pixels.
-
-  pixelHeight        Height of the container in pixels.
-  -------------------------------------------------------------------------------------------------------------------------
-
-Table 11 Basic container properties
-
-### Autofit Behaviour {#autofit-behaviour .Sectionheading}
+#### Autofit Behaviour
 
 Rendering behaviour is specific to browsers, however Skyve will attempt
 to render the view as declared. Unless pixel sizes are specified, Skyve
@@ -238,7 +123,6 @@ the view will render with scroll bars. Containers may overflow if the
 view definition doesn’t adequately take account of the number and nature
 of items contained.
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   Container      Description                                                                        Specific Properties                                                                                                                                                 Example
   -------------- ---------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------
   hbox           Elements are laid out horizontally in the view and may contain other containers.   -   border – whether a border is displayed
@@ -271,10 +155,9 @@ of items contained.
 
   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Table 12 View containers
+_Table 12 - View containers_
 
-Form {#form .Chaptersubheading}
-----
+### Form
 
 Forms contain columns and rows. Rows may only contain items.
 
@@ -284,12 +167,11 @@ sized according to the impact of other elements of the view.
 p*ercentageWidth* will size the column accordingly, provided this is
 possible.
 
-### Form Example {#form-example .Sectionheading}
+#### Form Example
 
-![](media/image97.png){width="4.711805555555555in"
-height="0.9395833333333333in"}
+![Figure 50](media/image97.png "Figure 50 Example form definition")
 
-Figure 50 Example form definition
+_Figure 50 - Example form definition_
 
 In the above example, 3 columns are declared. The two rows contain only
 a single widget, however the textField and textArea widgets include
@@ -297,11 +179,10 @@ labels. These widgets therefore fill the two leftmost columns, leaving
 the third column empty. Together the 3 columns stretch the width of the
 entire available horizontal window space.
 
-![](media/image98.png){width="5.136111111111111in"
-height="1.1513888888888888in"}
+![Figure 51](media/image98.png "Figure 51 Example form with 3 columns and 2 rows (with dotted lines showing column boundaries)")
 
-Figure 51 Example form with 3 columns and 2 rows (with dotted lines
-showing column boundaries)
+_Figure 51 - Example form with 3 columns and 2 rows (with dotted lines
+showing column boundaries)_
 
 Most widgets span two columns – one for the widget label and one for the
 actual widget itself. If the number of columns exceeds the number of
@@ -321,80 +202,42 @@ of the available horizontal space.
 ***Tip:*** To allow the view to autofit and resize correctly, leave at
 least one column unsized.
 
-Table {#table .Chaptersubheading}
------
+### Table
 
 Deprecated. This feature is now met by using a disabled dataGrid.
 
-Item {#item .Chaptersubheading}
-----
+### Item
 
-  Property     Description
-  ------------ ----------------------------------------------------------------------------------------------------------------------------------------------
-  align        Controls alignment of the item (left, right or centre).
-  colspan      The number of columns which the item spans.
-  label        A label to be displayed irrespective of the type of widget the item contains.
-  labelAlign   Controls the alignment of the item label.
-  required     Whether the contained widget must have a value set before any actions can be completed.
-  rowspan      The number of rows which the item spans.
-  showHelp     Whether the contained widget will include a tooltip help icon button, for a widget with an attribute which has a *shortDescription* defined.
-  showLabel    Whether the label of the contained widget will be displayed.
+  Property     | Description
+  ------------ | ------------
+  align        | Controls alignment of the item (left, right or centre).
+  colspan      | The number of columns which the item spans.
+  label        | A label to be displayed irrespective of the type of widget the item contains.
+  labelAlign   | Controls the alignment of the item label.
+  required     | Whether the contained widget must have a value set before any actions can be completed.
+  rowspan      | The number of rows which the item spans.
+  showHelp     | Whether the contained widget will include a tooltip help icon button, for a widget with an attribute which has a *shortDescription* defined.
+  showLabel    | Whether the label of the contained widget will be displayed.
 
-Table 13 Item properties
+_Table 13 - Item properties_
 
- {#section-15 .Chaptersubheading}
-
-Widget {#widget .Chaptersubheading}
-------
+### Widget
 
 Skyve provides a number of view widgets, which can also be defined as
 document attribute defaultWidget. When widgets contain labels, the label
 will be displayed in bold type if the attribute is required.
 
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Widget              Description                                                                                                                                                                                                             Example
-  ------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  button              can be placed within the view when the *inActionPanel* flag for an Action is set to *false*
-
-                      If the Action is declared to be in the Action Panel, then no button widget is required to be declared.
-
-  checkBox            Tri-state check box
-
-  colourPicker        displays a text box containing the colour code value together with a sample square of the colour                                                                                                                        In this example, the colour button at the RHS will open a colour selector as shown below:
-
-                      Clicking on the sample square activates a colour selector popup.
-
-  combo               drop-down selector for enumerations or where a domain type is specified for the document attribute
-
-  contentImage        displays the loaded image along with an upload action
-
-  contentLink         displays a hyperlink to open the content in a new browers window together with an upload action
-
-  default             If used in a view, this will render whatever the default widget is.
-
-                      Either the *defaultWidget* declared on the document attribute or the Skyve default control for the attribute type.
-
-  dialogButton        Not yet implemented.
-
-  geoLocator          Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget.                                                           In this example, the Map button is displayed. When clicked, the geolocator (shown below) will be displayed in a modal window.
-
-                      A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.                                                                                                                  ![](media/image107.png){width="4.302777777777778in" height="2.863888888888889in"}
-
-                      The Geolocator Widget has multiple bindings which interact with the map:
-
-                      -   addressBinding
-
-                      -   cityBinding
-
-                      -   stateBinding
-
-                      -   postcodeBinding
-
-                      -   countryBinding
-
-                      -   latitudeBinding
-
-                      -   longitudeBinding
+  Widget | Description | Example
+  ------ | ----------- | -------
+  button             | can be placed within the view when the *inActionPanel* flag for an Action is set to *false*<br>If the Action is declared to be in the Action Panel, then no button widget is required to be declared.
+  checkBox           | Tri-state check box
+  colourPicker       | displays a text box containing the colour code value together with a sample square of the colour | In this example, the colour button at the RHS will open a colour selector as shown below:<br>Clicking on the sample square activates a colour selector popup.
+  combo              | drop-down selector for enumerations or where a domain type is specified for the document attribute
+  contentImage       | displays the loaded image along with an upload action
+  contentLink        | displays a hyperlink to open the content in a new browers window together with an upload action
+  default            | If used in a view, this will render whatever the default widget is.<br>Either the *defaultWidget* declared on the document attribute or the Skyve default control for the attribute type.
+  dialogButton       | Not yet implemented.
+  geoLocator         | Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. | In this example, the Map button is displayed. When clicked, the geolocator (shown below) will be displayed in a modal window.<br>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br>![](media/image107.png)<br>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding<li>cityBinding<li>stateBinding<li>postcodeBinding<li>countryBinding<li>latitudeBinding<li>longitudeBinding</ul>
 
 
   html                displays HTML content together with an Edit button                                                                                                                                                                      ![](media/image108.png){width="5.636111111111111in" height="3.060416666666667in"}
@@ -2009,281 +1852,3 @@ SQL from MS Access to SQL in the selected destination dialect.
 
 Report conversion is a separate process and can happen in parallel with
 application development and Skyve round-tripping.
-
-Appendix
-========
-
-Deploying a Skyve Application {#deploying-a-skyve-application .Appendix}
-=============================
-
-Skyve applications are deployed in two parts, the application metadata
-and the Skyve enterprise archive.
-
-Application metadata is deployed by copying the metadata Apps package to
-the destination location. The Enterprise Archive is deployed by copying
-the .ear package to the application server deployment area.
-
-For example, to deploy a Skyve application to a Windows server:
-
--   Install JBoss 6.0 or later,
-
-Copy the application metadata package to C:\\\_\\ ,
-
-Copy the Skyve .ear package and the \*ds.xml file to
-&lt;jboss&gt;\\server\\default\\deploy\\ ,
-
-Update the \*ds.xml with a valid connection string,
-
-Update the \\Apps\\content\\repository.xml,
-\\Apps\\content\\workspaces\\&lt;workspace&gt;\\workspace.xml with a
-valid JDBC connection string, (usually the same connection string in the
-\*ds.xml file), and
-
-Touch the server.
-
-Additional steps may be required for single sign-on configuration, and
-the creation of service user accounts, SPNs and port configuration as
-required.
-
-Installing and configuring the Skyve Development Environment {#installing-and-configuring-the-skyve-development-environment .Appendix}
-============================================================
-
-These instructions describe the process required to install and
-configure the development environment for Skyve.
-
-### Prerequisites checklist {#prerequisites-checklist .Sectionheading}
-
-Before you begin, ensure you have the following:
-
-Java ([www.oracle.com](http://www.oracle.com)), at least JRE 1.6
-
-Eclipse ([www.eclipse.org](http://www.eclipse.org)) with Subclipse
-(<http://subclipse.tigris.org/update_1.6.x>), so that the installation
-is in C:\\eclipse\\
-
-JBoss 4.0.5.GA or greater ([www.redhat.com](http://www.redhat.com)) to
-C:\\ so that the installation is in C:\\jboss-4.0.5.GA\\
-
-A RDBMS which is supported by Hibernate
-([www.hibernate.org](http://www.hibernate.org)) – ensure you record the
-administrator username and password
-
-It is generally also a good idea to install Tortoise
-(tortoisesvn.tigris.org) to resolve occasional problems with Subclipse.
-You also need to have the username/password for the Skyve subversion
-repository.
-
-### Configuring Java {#configuring-java .Sectionheading}
-
-Copy jaxb-api.jar from bizhub/bizhub.ear/lib/ to
-&lt;java-home&gt;/jre/lib/endorsed/ or to
-&lt;jboss-home&gt;/lib/endorsed depending on java property
-java.endorsed.dirs - which can be found in jboss boot.log
-
-Configuring the IDE (Windows example) {#configuring-the-ide-windows-example .Chaptersubheading}
--------------------------------------
-
-### Configuring the workspace {#configuring-the-workspace .Sectionheading}
-
-Create C:\\\_\\
-
-Start eclipse using C:\\eclipse\\eclipse.exe
-
-Select C:\\\_\\ as the workspace location and check 'Use as default
-option - do not ask again'
-
-Cancel the welcome wizard
-
-Close the welcome tab in the editor frame.
-
-Change compiler compliance level to 6.0 (Window -&gt; Preferences -&gt;
-Java -&gt; Compiler) press apply - press Yes for full build, and then
-press OK.
-
-### Importing Projects {#importing-projects .Sectionheading}
-
-From eclipse, import the projects from the repository (in eclipse,
-File-&gt;Import-&gt;SVN-&gt;Checkout Projects from SVN)
-
-![](media/image167.emf){width="4.757638888888889in" height="3.8333333333333335in"} {#section-19 .Picture}
-----------------------------------------------------------------------------------
-
-Follow the steps to connect to the repository and import the nominated
-project.
-
-Project -&gt; Clean - Select clean all projects and press OK - wait for
-activity to cease in bottom right corner of the eclipse window.
-
-### Creating the server {#creating-the-server .Sectionheading}
-
-Window -&gt; Show View -&gt; Other... -&gt; JBoss IDE -&gt; Server
-Navigator - press OK.
-
-Right click in Server Navigator View (docked at bottom of editor by
-default) and select Configuration
-
-Select JBoss 4.0.x and press \[New\]
-
-Change name, select JBoss home directory as C:\\jboss-4.0.5.GA and
-select default as the server configuration.
-
-Go to Start tab and enter
-
--Djavax.management.builder.initial=org.jboss.system.server.jmx.MBeanServerBuilderImpl
--Djboss.platform.mbeanserver -Dcom.sun.management.jmxremote -Xms128m
--Xmx512m -XX:PermSize=128m
-
-in the VM Arguments field
-
-Press apply, then close.
-
-Window -&gt; Preferences -&gt; JBoss IDE -&gt; deployer -&gt; Add -&gt;
-Local JBoss Main Deployer \[Localhost:8080\] -&gt; OK and OK again
-
-There should now be a JBoss server instance in the Server Navigator
-view.
-
-![](media/image168.emf){width="6.757638888888889in" height="1.3333333333333333in"} {#section-20 .Picture}
-----------------------------------------------------------------------------------
-
-### Configuring JBoss {#configuring-jboss .Sectionheading}
-
-Refer to JBoss documentation.
-
-### Starting the server {#starting-the-server .Sectionheading}
-
-In Server Navigator, click the start widget or right-click on the server
-and select start - look for errors in the log output.
-
-Select bizhub project directory in the package explorer and select
-Project -&gt; Clean - check Clean projects selected below and press OK
-
-Select bizhub/bizhub.ear in package explorer and press
-&lt;Ctrl&gt;-&lt;Shift&gt;-&lt;F3&gt; to deploy it to the JBoss server.
-
-Select local JBoss main deployer as the target (NOT THE FILE DEPLOYER)
-
-Open a browser and attempt to access
-[http://localhost:8080/&lt;projectname&gt;/init.biz](http://localhost:8080/%3cprojectname%3e/init.biz)
-
-Drag the following ant task files to the Ant view:
-
-C:\\\_\\&lt;projectname&gt;\\build.xml
-
-![](media/image159.png){width="2.10625in" height="1.8180555555555555in"} {#section-21 .Picture}
-------------------------------------------------------------------------
-
-Other run configurations made need the jaxb libraries added to their
-bootstrap classpath.
-
-### Deploying your solution {#deploying-your-solution .Sectionheading}
-
-To deploy new application changes, choose *generateDomain* (from the
-Apps ant task), select the Apps folder and press F5 (to refresh) and
-then the touch target.
-
-Example Deployment Instructions with Single Sign-on {#example-deployment-instructions-with-single-sign-on .Appendix}
-===================================================
-
-The following steps are to install an instance of XXX onto a vanilla
-Windows 7.
-
---JAVA
-
-Install Java - jdk-6u25-windows-i586
-
-Set JAVA\_HOME to location of the Java root directory - e.g.
-C:\\Java\\jdk1.6.0\_25
-
-Set Path to include Java\\bin - e.g. C:\\Java\\jdk1.6.0\_25\\bin
-
-copy sqljdbc4.jar and sqljdbc\_auth.dll to java\\jdk\\jre\\lib\\ext
-
---JBOSS
-
-Install jboss (unzip and copy to c:\\)
-
-either: jboss-4.0.5.GA.zip or jboss-as-distribution-6.0.0.Final.zip
-
-check/update jboss\\bin\\run.conf settings for memory -
-JAVA\_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=512m (1 occurence)
-
-check/update jboss\\bin\\service.bat settings for calls to run.bat to
-include the options -c default -b 0.0.0.0 (2 occurrences)
-
-e.g. call run.bat -c default -b 0.0.0.0 &lt; .r.lock &gt;&gt; run.log
-2&gt;&1
-
-as administrator, install service (from command prompt, in jboss\\bin\\
-"service install"
-
-set service to run as XXX\\svc.jboss user (from service msc, change user
-and startup type - don't check name as it will try to resolve as
-svc.jboss@NET.XXX)
-
---KERBEROS
-
-copy krb5.conf to jboss\\bin
-
-copy spnego-r7.jar to jboss\\server\\default\\lib\\
-
-add clauses from web.xml\_amendment.txt
-(jboss\\..deploy\\jbossweb.sar\\web.xml or
-jboss\\..\\deploy\\jbossweb-tomcat55.sar\\conf\\web.xml)
-
-add clauses from login-config.xml\_amendment.txt
-(jboss\\..\\default\\conf\\login-config.xml)
-
-copy hello\_spnego.jsp jboss\\..\\root.war
-
-check HTTP SPNs added to both svc.jboss user and machine
-
---DEPLOYMENT
-
-Stop JBoss service
-
-Copy \\\\dev\\C\$\\\_\\Example to C:\\\_\\Example
-
-check C:\\\_\\Example\\javaee\\arc\_ds.xml connection string
-
-check C:\\\_\\Example\\content\\repository.xml connection strings (x2)
-
-check C:\\\_\\Example\\content\\workspaces\\arc\\workspace.xml
-connection string
-
-check C:\\\_\\Example\\content\\workspaces\\default\\workspace.xml
-connection string
-
-check C:\\\_\\Example\\apps\\repository\\customers\\arc\\arc.xml icon
-
-Copy C:\\\_\\Example\\javaee\\arc.ear & arc\_ds.xml to
-C:\\jbossxxx\\server\\default\\deploy\\
-
-Start JBoss service
-
---CHECKS
-
-check http://&lt;server&gt;.net.arc:8080/hello\_spnego.jsp
-
-if "Failure unspecified at GSS-API level (Mechanism level: Checksum
-failed)- check SPNs
-
-check http://&lt;server&gt;.net.arc:8080/arc/init.biz
-
-if error - check that you have an account in XXX, check
-C:\\jbossxxx\\server\\default\\log\\server.log to see your user
-principal is being recognised
-
-  ----------------------------------------------------------------------------------------------------------------
-  **More information**
-
-  For more information, email **info@bizhub.com.au** or call us on **+61 (0) 433 209 943**.
-  ----------------------------------------------------------------------------------------------------------------
-  **Brought to you by Biz Hub Australia Pty Ltd.**
-
-  **1, Northcote St, Torrensville, SA, 5031, AUSTRALIA.**
-
-  **www.bizhub.com.au**
-
-  ![bizhub\_logo\_CMYK\_main\_sm](media/image169.png){width="2.636111111111111in" height="0.9243055555555556in"}
-  ----------------------------------------------------------------------------------------------------------------

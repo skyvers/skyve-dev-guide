@@ -82,5 +82,6 @@ user from within the user functionality (within the admin module).
 **[⬆ back to top](#contents)**
 
 ---
-**Next Chapter 7: Modules**  
+<!-- **Next [Chapter 7: Modules](./../chapters/modules.md)**   -->
+**Next Chapter 7: Modules**
 **Previous [Chapter 5: Exception Handling](./../chapters/exception-handling.md)**

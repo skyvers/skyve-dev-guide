@@ -8,17 +8,30 @@
 ### Contents
 
 * [Section 1: Introduction](#introduction)
-* **[Chapter 1: Architectural Overview](#architectural-overview)**
-  * [1.1: Technical description](#technical-description)
-  * [1.2: General Approach and Design Principles](#general-approach-and-design-principles)
-  * [1.3: Use of SQL](#use-of-sql)
-  * [1.4: Multi-tenant & Mass-Customisation](#multi-tenant--mass-customisation)
-  * [1.5: “Open-source” Inclusions ](#open-source-inclusions)
-* [Chapter 2: Concepts](chapters/concepts.md)
-* [Chapter 3: Identifying the Skyve Version](chapters/concepts.md)
-* [Chapter 4: Security, Persistence and Access control](chapters/security-persistence-and-access-control.md)
-* [Chapter 5: Exception Handling](chapters/exception-handling.md)
-* [Chapter 6: Customers](chapters/customers.md)
+  * **[Chapter 1: Architectural Overview](#architectural-overview)**
+    * [1.1: Technical description](#technical-description)
+    * [1.2: General Approach and Design Principles](#general-approach-and-design-principles)
+    * [1.3: Use of SQL](#use-of-sql)
+    * [1.4: Multi-tenant & Mass-Customisation](#multi-tenant--mass-customisation)
+    * [1.5: “Open-source” Inclusions ](#open-source-inclusions)
+  * [Chapter 2: Concepts](chapters/concepts.md)
+  * [Chapter 3: Identifying the Skyve Version](chapters/concepts.md)
+  * [Chapter 4: Security, Persistence and Access control](chapters/security-persistence-and-access-control.md)
+  * [Chapter 5: Exception Handling](chapters/exception-handling.md)
+* [Section 2: Building Applications](chapters/customers.md)
+  * [Chapter 6: Customers](chapters/customers.md)
+  <!-- * [Chapter 7: Modules](chapters/modules.md) -->
+  <!-- * [Chapter 8: Documents](chapters/documents.md) -->
+  <!-- * [Chapter 9: Converters](chapters/converters.md) -->
+  <!-- * [Chapter 10: Bizlets](chapters/bizlets.md) -->
+  <!-- * [Chapter 11: Views](chapters/views.md) -->
+  <!-- * [Chapter 12: Actions](chapters/actions.md) -->
+  <!-- * [Chapter 13: Reports](chapters/reports.md) -->
+  <!-- * [Chapter 14: Jobs](chapters/jobs.md) -->
+  <!-- * [Chapter 15: Utility Classes](chapters/utility-classes.md) -->
+  <!-- * [Chapter 16: Common Patterns](chapters/common-patterns.md) -->
+  <!-- * [Section 3: Persistence](chapters/skyve-persistence-mechanisms.md) -->
+  <!-- * [Chapter 17: Skyve Persistence Mechanisms](chapters/skyve-persistence-mechanisms.md) -->
 
 # Introduction
 
