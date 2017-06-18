@@ -31,10 +31,10 @@ For example, to deploy a Skyve application to a Windows server:
 
 Copy the application metadata package to C:\\\_\\ ,
 
-Copy the Skyve .ear package and the \*ds.xml file to
+Copy the Skyve `.ear` package and the `*ds.xml` file to
 &lt;jboss&gt;\\server\\default\\deploy\\ ,
 
-Update the \*ds.xml with a valid connection string,
+Update the `*ds.xml` with a valid connection string,
 
 Update the \\Apps\\content\\repository.xml,
 \\Apps\\content\\workspaces\\&lt;workspace&gt;\\workspace.xml with a
@@ -56,16 +56,13 @@ configure the development environment for Skyve.
 
 Before you begin, ensure you have the following:
 
-Java ([www.oracle.com](http://www.oracle.com)), at least JRE 1.6
-
-Eclipse ([www.eclipse.org](http://www.eclipse.org)) with Subclipse
+* Java ([www.oracle.com](http://www.oracle.com)), at least JRE 1.6
+* Eclipse ([www.eclipse.org](http://www.eclipse.org)) with Subclipse
 (<http://subclipse.tigris.org/update_1.6.x>), so that the installation
 is in C:\\eclipse\\
-
-JBoss 4.0.5.GA or greater ([www.redhat.com](http://www.redhat.com)) to
+* JBoss 4.0.5.GA or greater ([www.redhat.com](http://www.redhat.com)) to
 C:\\ so that the installation is in C:\\jboss-4.0.5.GA\\
-
-A RDBMS which is supported by Hibernate
+* A RDBMS which is supported by Hibernate
 ([www.hibernate.org](http://www.hibernate.org)) – ensure you record the
 administrator username and password
 
@@ -81,10 +78,9 @@ Copy jaxb-api.jar from bizhub/bizhub.ear/lib/ to
 &lt;jboss-home&gt;/lib/endorsed depending on java property
 java.endorsed.dirs - which can be found in jboss boot.log
 
-Configuring the IDE (Windows example) {#configuring-the-ide-windows-example .Chaptersubheading}
--------------------------------------
+### Configuring the IDE (Windows example)
 
-### Configuring the workspace
+#### Configuring the workspace
 
 Create C:\\\_\\
 
@@ -106,8 +102,7 @@ press OK.
 From eclipse, import the projects from the repository (in eclipse,
 File-&gt;Import-&gt;SVN-&gt;Checkout Projects from SVN)
 
-![](media/image167.emf){width="4.757638888888889in" height="3.8333333333333335in"} {#section-19 .Picture}
-----------------------------------------------------------------------------------
+![](media/image167.png)
 
 Follow the steps to connect to the repository and import the nominated
 project.
@@ -144,8 +139,7 @@ Local JBoss Main Deployer \[Localhost:8080\] -&gt; OK and OK again
 There should now be a JBoss server instance in the Server Navigator
 view.
 
-![](media/image168.emf){width="6.757638888888889in" height="1.3333333333333333in"} {#section-20 .Picture}
-----------------------------------------------------------------------------------
+![](media/image168.png)
 
 #### Configuring JBoss
 
@@ -171,7 +165,7 @@ Drag the following ant task files to the Ant view:
 
 C:\\\_\\&lt;projectname&gt;\\build.xml
 
-![](media/image159.png){width="2.10625in" height="1.8180555555555555in"} {#section-21 .Picture}
+![](media/image159.png)
 
 Other run configurations made need the jaxb libraries added to their
 bootstrap classpath.
@@ -275,7 +269,7 @@ principal is being recognised
 
 ## More information
 
-For more information, email **info@bizhub.com.au** or call us on **+61 (0) 433 209 943**.
+For more information, email <a href="mailto:info@bizhub.com.au">**info@bizhub.com.au**</a> or call us on **+61 (0) 433 209 943**.
 
 <div style="text-align: center">
   **Brought to you by Biz Hub Australia Pty Ltd.**<br><br>
@@ -283,4 +277,4 @@ For more information, email **info@bizhub.com.au** or call us on **+61 (0) 433 2
   **www.bizhub.com.au**
 </div>
 
-![bizhub\_logo\_CMYK\_main\_sm](media/image169.png){width="2.636111111111111in" height="0.9243055555555556in"}
+<img src="media/bizhub_logo_main.png" alt="Biz Hub Logo" style="margin: 0 auto; text-align: center;" width=300 />

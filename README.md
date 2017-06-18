@@ -32,6 +32,10 @@
   <!-- * [Chapter 16: Common Patterns](chapters/common-patterns.md) -->
   <!-- * [Section 3: Persistence](chapters/skyve-persistence-mechanisms.md) -->
   <!-- * [Chapter 17: Skyve Persistence Mechanisms](chapters/skyve-persistence-mechanisms.md) -->
+* [Section 5: Appendix](chapters/appendix.md)
+  * [Appendix 1: Deploying a Skyve Application](chapters/appendix.md#deploying-a-skyve-application)
+  * [Appendix 2: Installing and configuring the Skyve Development Environment](chapters/appendix.md#installing-and-configuring-the-skyve-development-environment)
+  * [Appendix 3: Example Deployment Instructions with Single Sign-on](chapters/appendix.md#example-deployment-instructions-with-single-sign-on)
 
 # Introduction
 
