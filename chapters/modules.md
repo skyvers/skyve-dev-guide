@@ -149,7 +149,6 @@ If the query is the basis of a *listGrid*, then double-clicking in the
 listGrid will zoom to the *driving document*.
 
 ![Figure 21](media/image43.png "Figure 21 Metadata query definition")
-
 _Figure 21 - Metadata query definition_
 
 ![Figure 22](media/image44.png "Figure 22 Query description displays as the list title")
@@ -199,7 +198,6 @@ order as the default query (or ordered by the first column if no query
 is specified).
 
 ![](media/image45.png)
-
 _Figure 23 - Queries as a source for record selection_
 
 However, *lookupDescription* combos can display multiple columns (as
@@ -226,7 +224,6 @@ document scope access level, either G, C, D or U. The underscore
 character (`_`) means no permission is granted.
 
 ![Figure 25](media/image47.png "Figure 25 Example role declaration")
-
 _Figure 25 - Example role declaration_
 
 For example, a document privilege of CRUDLPC means the role has access
@@ -309,7 +306,7 @@ If a user is given both roles, the privileges are added and result in
 Administrator users, if they also require personal preferences, are
 assigned both roles.
 
-### Role Documentation {#role-documentation .Sectionheading}
+### Role Documentation
 
 Role definition can include documentation within a &lt;doc&gt; tag which
 is available to the application and to the documentation generation
@@ -337,7 +334,6 @@ within the *&lt;doc&gt;* tag. This documentation is used by the
 documentation generation module (Doctor).
 
 ![Figure 29](media/image52.png "Figure 29 Example of detailed module documentation")
-
 _Figure 29 - Example of detailed module documentation_
 
 ### Overriding Modules
@@ -358,7 +354,6 @@ To override a `module.xml`, place the overriding `module.xml` file into
 the customer package.
 
 ![Figure 30](media/image53.png "Figure 30 Example module override")
-
 _Figure 30 - Example module override_
 
 As the `module.xml` file is a single artefact, it must contain all
@@ -373,7 +368,6 @@ Java classes are contained within the domain folder situated within the
 module package.
 
 ![Figure 31](media/image51.png "Figure 31 Domain classes are located within the module package")
-
 _Figure 31 - Domain classes are located within the module package_
 
 The domain folder includes a Hibernate object-relational mapping
