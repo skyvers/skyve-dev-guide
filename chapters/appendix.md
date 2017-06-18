@@ -271,10 +271,9 @@ principal is being recognised
 
 For more information, email <a href="mailto:info@bizhub.com.au">**info@bizhub.com.au**</a> or call us on **+61 (0) 433 209 943**.
 
-<div style="text-align: center">
-  **Brought to you by Biz Hub Australia Pty Ltd.**<br><br>
-  **1, Northcote St, Torrensville, SA, 5031, AUSTRALIA.**<br><br>
-  **www.bizhub.com.au**
+<div style="text-align: center; font-weight: bold; margin: 25px 0">
+  Brought to you by Biz Hub Australia Pty Ltd.<br><br>
+  1, Northcote St, Torrensville, SA, 5031, AUSTRALIA.<br><br>
+  www.bizhub.com.au<br><br>
+  <img src="media/bizhub_logo_main.png" alt="Biz Hub Logo" width=300 />
 </div>
-
-<img src="media/bizhub_logo_main.png" alt="Biz Hub Logo" style="margin: 0 auto; text-align: center;" width=300 />
