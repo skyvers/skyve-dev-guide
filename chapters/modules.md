@@ -65,9 +65,17 @@ _Table 2 - Module.xml sections_
 An example module header is provided below. Note the key attributes of
 *schemaLocation*, name, title *homeRef* and *homeDocument*.
 
-![Figure 18](media/image40.png "Figure 18 Module definition header")
-
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<module name="admin" title="Admin" xmlns="http://www.skyve.org/xml/module" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<homeRef>edit</homeRef>
+	<homeDocument>Welcome</homeDocument>
+	<documents>
+```
 _Figure 18 - Module definition header_
+
+_In this example, the home (or default) target for the module is the edit view of the Welcome document._
 
 ### Documents
 
@@ -78,9 +86,24 @@ be nominated as *moduleRef*. Document privileges and scoping is always
 only defined in the home module, to avoid the potential of conflicting
 scoping or permissions.
 
-![Figure 19](media/image41.png "Figure 19 Module definition - document manifest")
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<module name="todo" title="ToDo" xmlns="http://www.skyve.org/xml/module" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<homeDocument>ToDo</homeDocument>
+	<documents>
+    <document ref="Project" />
+    <document ref="ToDo" />
+    <document ref="Version" />
+    <document ref="Contact" moduleRef="admin" />
+    <document ref="User" moduleRef="admin" />
+  </documents>
+  <queries>
+```
 
 _Figure 19 - Module definition - document manifest_
+
+_`moduleRef` indicates the documents are originally declared in another module._
 
 Documents listed in the `module.xml` may reference documents from other
 modules (*moduleRef*) or are matched with document packages within the
@@ -142,46 +165,15 @@ _Figure 22 - Query description displays as the list title_
   editable                | Whether the column is editable in the list view inline.<br>By default editable is set to false.
   expression              | A valid OQL expression which defines the value to be shown in the list column.
   filterable              | Whether a filter can be applied to this column in the list view.
-  filterExpression        | A literal value or one of a number of expressions.<br>Defined expressions include:<br>
-    -   {DATE} - current date
-    -   {DATETIME} - current date and time
-    -   {USERID} - bizId of the current user
-    -   {USER} – the userName of the current user
-    -   {CONTACTID} – the id of the contact who is the current user
-    -   {DATAGROUPID} – the id of the data group of the current user
-    -   {CUSTOMER} – the name of the customer context in which the current user operates
-  filterOperator          | One of the following operators:
+  filterExpression        | A literal value or one of a number of expressions.<br>Defined expressions include:<br><ul><li>{DATE} - current date<li>{DATETIME} - current date and time<li>{USERID} - bizId of the current user<li>{USER} – the userName of the current user<li>{CONTACTID} – the id of the contact who is the current user<li>{DATAGROUPID} – the id of the data group of the current user<li>{CUSTOMER} – the name of the customer context in which the current user operates</ul>
+  filterOperator          | One of the following operators:<ul><li>equal, notEqual,<li>greater, less,<li>greaterEqual, lessEqual,<li>like, notLike,<li>notNull, isNull,<li>nullOrEqual, nullOrNotEqual,<li>nullOrGreater, nullOrLess,<li>nullOrGreaterEqual, nullOrLessEqual,<li>nullOrLike, nullOrNotLike;</ul>
+  hidden                  | Whether the query column will be hidden by default in a list view.<br>Hidden columns are hidden by default, but can be un-hidden by the user unless the column has projected=false.
+  name                    | You can include calculated or derived values in a query however you must create a non-persistent field in the driving document to hold the value. The *name* is the name of the non-persistent document field which holds the calculated value.<br>Note that the name must correspond to a transient (i.e. non persistent) field in the document which describes other aspects of the expression result (such as type, length, display format etc.).
+  projected               | Whether the column will exist in the result set.<br>By default all query columns are projected unless this attribute is *false*.
+  sortable                | Whether the query can be sorted by this column in the list view.
+  sortOrder               | The sorting order (ascending or descending) to use by default when this query is displayed.<br>If the column is sortable, the user will be able to re-sort the list results.
 
-                            -   equal, notEqual,
-                            -   greater, less,
-                            -   greaterEqual, lessEqual,
-                            -   like, notLike,
-                            -   notNull, isNull,
-                            -   nullOrEqual, nullOrNotEqual,
-                            -   nullOrGreater, nullOrLess,
-                            -   nullOrGreaterEqual, nullOrLessEqual,
-                            -   nullOrLike, nullOrNotLike;
-
-  hidden                    Whether the query column will be hidden by default in a list view.
-
-                            Hidden columns are hidden by default, but can be un-hidden by the user unless the column has projected=false.
-
-  name                      You can include calculated or derived values in a query however you must create a non-persistent field in the driving document to hold the value. The *name* is the name of the non-persistent document field which holds the calculated value.
-
-                            Note that the name must correspond to a transient (i.e. non persistent) field in the document which describes other aspects of the expression result (such as type, length, display format etc.).
-
-  projected                 Whether the column will exist in the result set.
-
-                            By default all query columns are projected unless this attribute is *false*.
-
-  sortable                  Whether the query can be sorted by this column in the list view.
-
-  sortOrder                 The sorting order (ascending or descending) to use by default when this query is displayed.
-
-                            If the column is sortable, the user will be able to re-sort the list results.
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Table 3 Query column definitions
+_Table 3 - Query column definitions_
 
 Driving documents can be the subject of many queries.
 
@@ -191,7 +183,7 @@ attribute associations and collections. When used in this way, the query
 determines eligible references for membership in the association or
 collection.
 
-### Queries for Reference Attributes {#queries-for-reference-attributes .Sectionheading}
+#### Queries for Reference Attributes
 
 If a query is specified for an association attribute, Skyve will use
 that query for association selections in the application user interface.
@@ -206,16 +198,14 @@ list of the *bizKeys* of the driving document instances in the same
 order as the default query (or ordered by the first column if no query
 is specified).
 
-![](media/image45.png){width="6.211805555555555in" height="0.89375in"}
+![](media/image45.png)
 
-Figure 23 Queries as a source for record selection
+_Figure 23 - Queries as a source for record selection_
 
 However, *lookupDescription* combos can display multiple columns (as
 above) if a query is specified for the *lookupDescription* in the view.
 
-\
-Roles {#roles .Chaptersubheading}
------
+### Roles
 
 The `module.xml` declares roles for the module.
 
@@ -223,23 +213,21 @@ Each role specifies the privilege levels for documents the role will
 access (and associated actions). The role name is the name displayed
 when assigning roles to user security groups in the admin module.
 
-Roles specified within the module.xml are available for selection within
+Roles specified within the `module.xml` are available for selection within
 the admin module at run-time.
 
-![](media/image46.emf){width="2.60625in" height="2.0in"} {#section-8 .Picture}
---------------------------------------------------------
+![Figure 24](media/image46.png "Figure 24 Assigning roles")
 
-Figure 24 Assigning roles
+_Figure 24 - Assigning roles_
 
 For each document, the privilege level is specified in terms of C
 (Create) R (Read) U (Update) D (Delete) L (List) P (Pick) and the
 document scope access level, either G, C, D or U. The underscore
-character (\_) means no permission is granted.
+character (`_`) means no permission is granted.
 
-![](media/image47.emf){width="4.863888888888889in" height="2.5305555555555554in"} {#section-9 .Picture}
----------------------------------------------------------------------------------
+![Figure 25](media/image47.png "Figure 25 Example role declaration")
 
-Figure 25 Example role declaration
+_Figure 25 - Example role declaration_
 
 For example, a document privilege of CRUDLPC means the role has access
 to *Create*, *Read*, *Update*, *Delete*, *List* and *Pick* the document,
@@ -257,7 +245,7 @@ developer code (except for insecure SQL). The benefit of this is that
 developer code does not have to handle security issues and therefore the
 developer is not able to make inadvertent security holes.
 
-### Document Scope {#document-scope .Sectionheading}
+#### Document Scope
 
 While document privileges define what type of activities a role may
 perform on a document, the document scope defines which document
@@ -284,24 +272,22 @@ within the same *DataGroup* context as the user.
 A *User* scope means that for that role, only data created within a
 user’s context can be viewed by that user.
 
-Worked Example {#worked-example .Chaptersubheading}
---------------
+### Worked Example
 
-### Requirement {#requirement .Sectionheading}
+#### Requirement
 
 An application must allow each user to create and manage but not delete
 their personal preferences securely, while allowing administrators to
 maintain read, update and delete but not create preferences.
 
-### Implementation {#implementation .Sectionheading}
+#### Implementation
 
-The module.xml declares two roles, User and Administrator:
+The `module.xml` declares two roles, User and Administrator:
 
-![](media/image48.png){width="4.439583333333333in"
-height="1.5756944444444445in"}
+![Figure 26](media/image48.png "Figure 26 Worked document scope example: role declaration in the module.xml")
 
-Figure 26 Worked document scope example: role declaration in the
-module.xml
+_Figure 26 - Worked document scope example: role declaration in the
+`module.xml`_
 
 The user is assigned privileges (CRU\_LPU) to create, read, update, list
 and pick their own (i.e user-scoped) personal preference document.
@@ -309,7 +295,7 @@ and pick their own (i.e user-scoped) personal preference document.
 The administrator role has privileges (\_RUDLPC) to documents within the
 customer scope.
 
-### Results {#results .Sectionheading}
+#### Results
 
 Skyve will guarantee the no user activity or developer code can bypass
 the declared permissions.
@@ -329,43 +315,32 @@ Role definition can include documentation within a &lt;doc&gt; tag which
 is available to the application and to the documentation generation
 module (Doctor).
 
-![](media/image49.png){width="5.863888888888889in" height="2.4694444444444446in"} {#section-10 .Picture}
----------------------------------------------------------------------------------
+![](media/image49.png)
 
-Menus {#menus .Chaptersubheading}
------
+### Menus
 
 The application menu is defined in terms of groups and items. A menu
 group is an expandable menu (submenu).
 
-![](media/image50.emf){width="4.257638888888889in" height="1.9548611111111112in"} {#section-11 .Picture}
----------------------------------------------------------------------------------
+![](media/image50.png)
 
-Figure 27 Menu definition
-
-![](media/image51.png){width="1.89375in" height="1.1819444444444445in"} {#section-12 .Picture}
------------------------------------------------------------------------
-
-Figure 28 Menu display
+_Figure 27 - Menu definition and Menu display_
 
 Roles included in the menu item stanza have access to that menu item. If
 the menu item specifies a role, then users with that role will see the
 menu item.
 
-Module Documentation {#module-documentation .Chaptersubheading}
---------------------
+### Module Documentation
 
 Module definition can include detailed documentation about the module
 within the *&lt;doc&gt;* tag. This documentation is used by the
 documentation generation module (Doctor).
 
-![](media/image52.png){width="6.878472222222222in" height="0.8638888888888889in"} {#section-13 .Picture}
----------------------------------------------------------------------------------
+![Figure 29](media/image52.png "Figure 29 Example of detailed module documentation")
 
-Figure 29 Example of detailed module documentation
+_Figure 29 - Example of detailed module documentation_
 
-Overriding Modules {#overriding-modules .Chaptersubheading}
-------------------
+### Overriding Modules
 
 Module definitions can be overridden to provide a bespoke experience of
 the application.
@@ -373,23 +348,18 @@ the application.
 All aspects of the module can be overridden including:
 
 -   inclusion or exclusion of documents,
-
 -   jobs,
-
 -   queries,
-
 -   roles,
-
 -   document scoping, and
-
 -   menus (structure, names and targets).
 
 To override a `module.xml`, place the overriding `module.xml` file into
 the customer package.
 
-![](media/image53.png){width="2.651388888888889in" height="1.60625in"}
+![Figure 30](media/image53.png "Figure 30 Example module override")
 
-Figure 30 Example module override
+_Figure 30 - Example module override_
 
 As the `module.xml` file is a single artefact, it must contain all
 elements of the module available for the bespoke experience and not
@@ -397,16 +367,14 @@ simply the components that differ. This is because the module override
 can be subtractive, by not including elements contained within the
 generic module.
 
-Java Implementation {#java-implementation .Chaptersubheading}
--------------------
+### Java Implementation
 
 Java classes are contained within the domain folder situated within the
 module package.
 
-![](media/image42.png){width="2.3333333333333335in"
-height="1.242361111111111in"}
+![Figure 31](media/image51.png "Figure 31 Domain classes are located within the module package")
 
-Figure 31 Domain classes are located within the module package
+_Figure 31 - Domain classes are located within the module package_
 
 The domain folder includes a Hibernate object-relational mapping
 definition file for the module, named *&lt;module&gt;\_orm.hbm.xml*, as
@@ -420,3 +388,9 @@ All domain classes are regenerated by the *generateDomain* ant task and
 should not be modified in any way by developers. However, inspection of
 the domain classes can be a useful process to analyse validation
 problems within the module.
+
+**[⬆ back to top](#contents)**
+
+---
+**Next [Chapter 8: Documents](./../chapters/documents.md)**  
+**Previous [Chapter 6: Customers](./../chapters/customers.md)**
