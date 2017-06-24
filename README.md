@@ -21,7 +21,7 @@
 * [Section 2: Building Applications](chapters/customers.md)
   * [Chapter 6: Customers](chapters/customers.md)
   * [Chapter 7: Modules](chapters/modules.md)
-  <!-- * [Chapter 8: Documents](chapters/documents.md) -->
+  * [Chapter 8: Documents](chapters/documents.md)
   <!-- * [Chapter 9: Converters](chapters/converters.md) -->
   <!-- * [Chapter 10: Bizlets](chapters/bizlets.md) -->
   <!-- * [Chapter 11: Views](chapters/views.md) -->
