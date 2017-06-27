@@ -39,6 +39,24 @@ The `customer.xml` file must declare the customer name. The customer
 name is used to differentiate ownership of data rows within the database
 (and therefore also users at the default login page).
 
+Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute.
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customer name="projecta"
+            xmlns="http://www.skyve.org/xml/customer"
+            xsi:schemaLocation="http://www.skyve.org/xml/customer ../../schemas/customer.xsd"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            language="ar">
+</customer>
+```
+
+If the language is not specified in the `customer.xml`, Skyve will detect the language set in the browser, provided there is an internationalisation file provided.
+
+![Figure 16.1](media/image38-1.png "Figure 16.1 - Language resource files")
+
+_Figure 16.1 - Language resource files_
+
 The `customer.xml` file also declares the location of the customer logo
 file (displayed in the top left hand corner of the UI above the
 accordion pane), and assumes the file is located within the customer’s
