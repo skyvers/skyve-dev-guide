@@ -27,9 +27,13 @@ Skyve provides the following Implicit Actions:
  *Table 20 Implicit Actions*
  
 In addition to implicit actions provided by Skyve, developers can create Custom actions, or override Implicit action behaviour in the document *Bizlet*.
+
 To create a new action behaviour, developers create an action class and set permissions to execute the action within the role definitions section of the *module.xml* file. 
+
 When a user has access to execute an action (declared via role permissions) Skyve will generate a button by default in the detail view. When a view definition is supplied the view definition will control visibility and other properties of the action button.
+
 The trivial *ServerSideAction* causes the view to be refreshed.
+
 Action classes implement *ServerSideAction* and are located within the actions folder in a document package and correlate to action buttons in the user interface. 
 
  
