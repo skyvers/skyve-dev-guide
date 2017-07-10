@@ -9,7 +9,7 @@
 Skyve provides the following Implicit Actions:
 
 | ImplicitActionName | Description |
-|--------------------|:-----------:|
+|--------------------|-------------|
 | DEFAULTS | A way to refer to the default set of Implicit actions for the view type and gesture context |
 | OK | *OK* button pressed by user while viewing the document edit view |
 | Save | *Save* button pressed by user while viewing the document edit view |
