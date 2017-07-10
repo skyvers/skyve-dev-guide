@@ -16,3 +16,11 @@ Skyve provides the following Implicit Actions:
  Delete | *Delete* button pressed by user while viewing the document edit view |
  Add | *Add* button pressed by user while viewing the child document edit view |
  ZoomOut | *Zoom Out* button pressed by user while viewing the child document edit view |
+ Cancel| *Cancel* button pressed by user either at document or child-document edit view |
+ Remove	| *Remove* button pressed by user while viewing the document edit view |
+ New | user adds a new item to the list view |
+ Edit | user edits an item from the list view |
+ Report	| user presses a Report action button (useful for dialog and prompts before the report is opened) |
+ Navigate |	user navigates to a binding within a conversation |
+ BizImport | user attempts to import data using the Bizport capability |
+ BizExport |	user attempts to export data using the Bizport capability |
