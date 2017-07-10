@@ -24,6 +24,7 @@ Skyve provides the following Implicit Actions:
  Navigate |	user navigates to a binding within a conversation |
  BizImport | user attempts to import data using the *Bizport* capability |
  BizExport |	user attempts to export data using the *Bizport* capability |
+ 
  *Table 20 Implicit Actions*
  
 In addition to implicit actions provided by Skyve, developers can create Custom actions, or override Implicit action behaviour in the document *Bizlet*.
