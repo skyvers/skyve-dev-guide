@@ -36,4 +36,4 @@ The trivial *ServerSideAction* causes the view to be refreshed.
 
 Action classes implement *ServerSideAction* and are located within the actions folder in a document package and correlate to action buttons in the user interface. 
 
- 
+![Figure 64](media/image100.png "Figure 64 Example trivial action")
