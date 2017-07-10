@@ -71,6 +71,8 @@ logic in anticipation of each action type.
 
 Full details of implicit actions are provided later in Table 20.
 
+**[⬆ back to top](#contents)**
+
+---
 **Next [Chapter 11: Views](./../chapters/views.md)**  
 **Previous [Chapter 9: Converters](./../chapters/converters.md)**
-

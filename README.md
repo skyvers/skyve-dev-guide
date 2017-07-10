@@ -32,6 +32,11 @@
   <!-- * [Chapter 16: Common Patterns](chapters/common-patterns.md) -->
   <!-- * [Section 3: Persistence](chapters/skyve-persistence-mechanisms.md) -->
   <!-- * [Chapter 17: Skyve Persistence Mechanisms](chapters/skyve-persistence-mechanisms.md) -->
+<!-- * [Section 4: Platform Tools](chapters/platform-tools.md) -->
+  <!-- * [Chapter 18: Ant Utilities](chapters/ant-utilities.md) -->
+  <!-- * [Chapter 19: Content Repository Tools](chapters/content-repository-tools.md) -->
+  <!-- * [Chapter 20: Bizport](chapters/bizport.md) -->
+  <!-- * [Chapter 21: WILDCAT Conversion Tool](chapters/wildcat-conversion-tool.md) -->
 * [Section 5: Appendix](chapters/appendix.md)
   * [Appendix 1: Deploying a Skyve Application](chapters/appendix.md#deploying-a-skyve-application)
   * [Appendix 2: Installing and configuring the Skyve Development Environment](chapters/appendix.md#installing-and-configuring-the-skyve-development-environment)
