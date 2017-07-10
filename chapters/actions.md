@@ -8,6 +8,7 @@
 *Implicit Actions* are actions which are provided by Skyve by default based on the context of the current user gesture. By default, a Skyve view will contain a default collection of Implicit actions.
 Skyve provides the following Implicit Actions:
 
+|--------------------|-------------|
 | ImplicitActionName | Description |
 |--------------------|-------------|
 | DEFAULTS | A way to refer to the default set of Implicit actions for the view type and gesture context |
