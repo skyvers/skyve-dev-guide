@@ -180,94 +180,24 @@ will be displayed in bold type if the attribute is required.
   combo              | drop-down selector for enumerations or where a domain type is specified for the document attribute | ![](media/image103.png)
   contentImage       | displays the loaded image along with an upload action | ![](media/image104.png)
   contentLink        | displays a hyperlink to open the content in a new browers window together with an upload action | ![](media/image105.png)
-  default            | If used in a view, this will render whatever the default widget is.<br>Either the *defaultWidget* declared on the document attribute or the Skyve default control for the attribute type.
-  dialogButton       | Not yet implemented.
-  geoLocator         | Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. 
-  <br>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br>![](media/image107.png)<br>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding<li>cityBinding<li>stateBinding<li>postcodeBinding<li>countryBinding<li>latitudeBinding<li>longitudeBinding</ul> | In this example, the Map button is displayed. When clicked, the geolocator (shown below) will be displayed in a modal window.
-
-
-  html                displays HTML content together with an Edit button                                                                                                                                                                      ![](media/image108.png){width="5.636111111111111in" height="3.060416666666667in"}
-
-                      When the edit button is clicked, a popup HTML editor window is displayed allowing users to create rich HTML.
-
-  label               Simple text.                                                                                                                                                                                                            ![](media/image109.png){width="0.9243055555555556in" height="0.21180555555555555in"}
-
-  lookup              Deprecated.
-
-  lookupDescription   *lookupDescription* is used to display an association to another document, and combines a combo with a pick button.                                                                                                     In this example the *bizKey* of the currently associated document instance is displayed in the control. To use another attribute change the lookupDescription’s *descriptionBinding* attribute.
-
-                      Users may select a value from the combo, or type values into the text box which will locate a matching value in the combo drop-down list if found.                                                                      If the Pick button is clicked, a listGrid of eligible document instances is shown in a modal window.
-
-                      When the pick button is pressed, a Pick window containing a listGrid is displayed, showing eligible values as declared in the document association.                                                                     ![](media/image111.png){width="5.409027777777778in" height="3.0756944444444443in"}
-
-                      Whereas normally double-clicking in a grid will zoom into the row, double-clicking in a Pick grid will select that value, close the popup and set the value of the *lookupDescription* combo next to the Pick button.   The down-arrow selector button will display options for Edit (edit the referenced document on-the-fly), New (create a new potential reference on-the-fly) and Clear (clear the reference).
-
-                      The down-arrow button reveals options to Edit (i.e. Zoom), New or Clear the reference.                                                                                                                                  ![](media/image112.png){width="1.4243055555555555in" height="0.7881944444444444in"}
-
-                      More features of the *lookupDescription* are explained in the next section.
-
-  password            a textField which obfuscates the entered value
-
-  progressBar         Not yet implemented.
-
-  radio               radio selector for enumerations or for document attributes where a domain type is specified                                                                                                                             Vertical arrangement is the default arrangement for radio selectors when no arrangement is specified.
-
-                      Radios may be laid out vertically or horizontally, using the property *vertical*.
-
-  richText            provides a rich text area together with formatting toolbar                                                                                                                                                              ![](media/image115.png){width="4.151388888888889in" height="0.8784722222222222in"}
-
-  slider              Numeric slider.
-
-                      Properties include:
-
-                      -   min
-
-                      -   max
-
-                      -   numberOfDiscreteValues
-
-                      -   roundingPrecision
-
-                      May be displayed vertically when *vertical* is set to *true*.
-
-  spacer              a widget provided to fill a column when no other widget is required                                                                                                                                                     The spacer widget displays nothing.
-
-                      Items within rows always fill from the leftmost available column. The spacer widget is provided to allow items to fill from other than the leftmost column.
-
-  spinner             numeric spinner allowing users to either type or select a value using the arrows
-
-                      Properties include:
-
-                      -   min
-
-                      -   max
-
-                      -   step – the amount to increment/decrement for each arrow button press
-
-
-  staticImage         displays a static image                                                                                                                                                                                                 ![](media/image118.png){width="1.2881944444444444in" height="0.8784722222222222in"}
-
-  staticLink          hyperlink to a static URL                                                                                                                                                                                               Not yet implemented.
-
-                      Properties:
-
-                      -   ref – the URL
-
-                      -   value - the value displayed in the link, this defaults to the URL if not supplied.
-
-                      -   newWindow – whether the target will be displayed in a new window
-
-
-  textArea            basic data entry field for long text                                                                                                                                                                                    ![](media/image119.png){width="4.560416666666667in" height="0.8180555555555555in"}
-
-                      textArea provides a *wrap* property to control whether the contained text is word wrapped.
-
-  textField           provides basic data entry for text attributes                                                                                                                                                                           This example is a *textField* widget bound to a text type attribute.
-
-                      *textField* responds to the type of the bound attribute, and will display converter hint if the value is null.                                                                                                          This example is a *textField* widget bound to a time attribute using the *HH\_MM* converter.
-
-                      For *date* and *dateTime* types, a calendar selector is displayed.                                                                                                                                                      This example is a *textField* widget bound to a *date* or *dateTime* attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+default            | If used in a view, this will render whatever the default widget is.<br>Either the *defaultWidget* declared on the document attribute or the Skyve default control for the attribute type.
+dialogButton       | Not yet implemented.
+geoLocator         | Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. <br> <br>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br> <br>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding<li>cityBinding<li>stateBinding<li>postcodeBinding<li>countryBinding<li>latitudeBinding<li>longitudeBinding</ul> | In this example, the Map button is displayed. When clicked, the geolocator (shown below) will be displayed in a modal window. ![](media/image107.png)
+html | displays HTML content together with an Edit button <br> When the edit button is clicked, a popup HTML editor window is displayed allowing users to create rich HTML. | ![](media/image108.png)
+label | Simple text. | ![](media/image109.png)
+lookup | Deprecated. | 
+lookupDescription | *lookupDescription* is used to display an association to another document, and combines a combo with a pick button. <br> Users may select a value from the combo, or type values into the text box which will locate a matching value in the combo drop-down list if found. <br> When the pick button is pressed, a Pick window containing a listGrid is displayed, showing eligible values as declared in the document association. <br> Whereas normally double-clicking in a grid will zoom into the row, double-clicking in a Pick grid will select that value, close the popup and set the value of the *lookupDescription* combo next to the Pick button. <br> The down-arrow button reveals options to Edit (i.e. Zoom), New or Clear the reference. <br> More features of the *lookupDescription* are explained in the next section. | ![](media/image110.png) <br> In this example the *bizKey* of the currently associated document instance is displayed in the control. To use another attribute change the lookupDescription’s *descriptionBinding* attribute. <br> If the Pick button is clicked, a listGrid of eligible document instances is shown in a modal window. <br> ![](media/image111.png) <br> The down-arrow selector button will display options for Edit (edit the referenced document on-the-fly), New (create a new potential reference on-the-fly) and Clear (clear the reference). <br> ![](media/image112.png)
+password | a textField which obfuscates the entered value | ![](media/image113.png)
+progressBar | Not yet implemented.|
+radio | radio selector for enumerations or for document attributes where a domain type is specified <br> Radios may be laid out vertically or horizontally, using the property *vertical*. | ![](media/image114.png) <br> Vertical arrangement is the default arrangement for radio selectors when no arrangement is specified.
+richText | provides a rich text area together with formatting toolbar | ![](media/image115.png                 
+slider | Numeric slider. <br> Properties include: <br> <li> min <li> max <li> numberOfDiscreteValues <li> roundingPrecision <br> May be displayed vertically when *vertical* is set to *true*. | ![](media/image116.png         
+spacer | a widget provided to fill a column when no other widget is required <br> Items within rows always fill from the leftmost available column. The spacer widget is provided to allow items to fill from other than the leftmost column.| The spacer widget displays nothing.
+spinner | numeric spinner allowing users to either type or select a value using the arrows <br><li>min<li>max<li>step – the amount to increment/decrement for each arrow button press | ![](media/image117.png)
+staticImage | displays a static image |  ![](media/image118.png)
+staticLink | hyperlink to a static URL<br><li>ref – the URL<li>value - the value displayed in the link, this defaults to the URL if not supplied.<li>newWindow – whether the target will be displayed in a new window|  Not yet implemented.
+textArea | basic data entry field for long text<br>textArea provides a *wrap* property to control whether the contained text is word wrapped. |![](media/image119.png)
+textField | provides basic data entry for text attributes <br> *textField* responds to the type of the bound attribute, and will display converter hint if the value is null.<br>For *date* and *dateTime* types, a calendar selector is displayed.| ![](media/image120.png) <br> This example is a *textField* widget bound to a text type attribute. <br> ![](media/image121.png) <br> This example is a *textField* widget bound to a time attribute using the *HH\_MM* converter. <br> ![](media/image122.png) <br> This example is a *textField* widget bound to a *date* or *dateTime* attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.
 
 ### OnChange Event Action (Client-side Events)
 
