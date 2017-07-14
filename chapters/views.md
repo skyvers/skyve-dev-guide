@@ -174,12 +174,14 @@ will be displayed in bold type if the attribute is required.
 
   Widget | Description | Example
   ------ | ----------- | -------
-  button             | can be placed within the view when the *inActionPanel* flag for an Action is set to *false*<br>If the Action is declared to be in the Action Panel, then no button widget is required to be declared.
-  checkBox           | Tri-state check box
-  colourPicker       | displays a text box containing the colour code value together with a sample square of the colour | In this example, the colour button at the RHS will open a colour selector as shown below:<br>Clicking on the sample square activates a colour selector popup.
-  combo              | drop-down selector for enumerations or where a domain type is specified for the document attribute
-  contentImage       | displays the loaded image along with an upload action
-  contentLink        | displays a hyperlink to open the content in a new browers window together with an upload action
+  button             | can be placed within the view when the *inActionPanel* flag for an Action is set to *false*<br>If the Action is declared to be in the Action Panel, then no button widget is required to be declared.| ![](media/image99.png)
+  checkBox           | Tri-state check box | ![](media/image100.png)
+  colourPicker       | displays a text box containing the colour code value together with a sample square of the colour | In this example, the colour button at the RHS will open a colour selector as shown below:<br>Clicking on the sample square activates a colour selector popup. | ![](media/image101.png)
+  In this example, the colour button at the RHS will open a colour selector as shown below: 
+  ![](media/image102.png)
+  combo              | drop-down selector for enumerations or where a domain type is specified for the document attribute | ![](media/image103.png)
+  contentImage       | displays the loaded image along with an upload action | ![](media/image104.png)
+  contentLink        | displays a hyperlink to open the content in a new browers window together with an upload action | ![](media/image105.png)
   default            | If used in a view, this will render whatever the default widget is.<br>Either the *defaultWidget* declared on the document attribute or the Skyve default control for the attribute type.
   dialogButton       | Not yet implemented.
   geoLocator         | Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. | In this example, the Map button is displayed. When clicked, the geolocator (shown below) will be displayed in a modal window.<br>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br>![](media/image107.png)<br>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding<li>cityBinding<li>stateBinding<li>postcodeBinding<li>countryBinding<li>latitudeBinding<li>longitudeBinding</ul>
