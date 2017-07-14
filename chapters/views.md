@@ -190,8 +190,8 @@ lookupDescription | *lookupDescription* is used to display an association to ano
 password | a textField which obfuscates the entered value | ![](media/image113.png)
 progressBar | Not yet implemented.|
 radio | radio selector for enumerations or for document attributes where a domain type is specified <br> Radios may be laid out vertically or horizontally, using the property *vertical*. | ![](media/image114.png) <br> Vertical arrangement is the default arrangement for radio selectors when no arrangement is specified.
-richText | provides a rich text area together with formatting toolbar | ![](media/image115.png                 
-slider | Numeric slider. <br> Properties include: <br> <li> min <li> max <li> numberOfDiscreteValues <li> roundingPrecision <br> May be displayed vertically when *vertical* is set to *true*. | ![](media/image116.png         
+richText | provides a rich text area together with formatting toolbar | ![](media/image115.png)                 
+slider | Numeric slider. <br> Properties include: <br> <li> min <li> max <li> numberOfDiscreteValues <li> roundingPrecision <br> May be displayed vertically when *vertical* is set to *true*. | ![](media/image116.png)   
 spacer | a widget provided to fill a column when no other widget is required <br> Items within rows always fill from the leftmost available column. The spacer widget is provided to allow items to fill from other than the leftmost column.| The spacer widget displays nothing.
 spinner | numeric spinner allowing users to either type or select a value using the arrows <br><li>min<li>max<li>step – the amount to increment/decrement for each arrow button press | ![](media/image117.png)
 staticImage | displays a static image |  ![](media/image118.png)
