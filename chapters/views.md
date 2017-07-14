@@ -176,9 +176,7 @@ will be displayed in bold type if the attribute is required.
   ------ | ----------- | -------
   button             | can be placed within the view when the *inActionPanel* flag for an Action is set to *false*<br>If the Action is declared to be in the Action Panel, then no button widget is required to be declared.| ![](media/image99.png)
   checkBox           | Tri-state check box | ![](media/image100.png)
-  colourPicker       | displays a text box containing the colour code value together with a sample square of the colour | In this example, the colour button at the RHS will open a colour selector as shown below:<br>Clicking on the sample square activates a colour selector popup. | ![](media/image101.png)
-  In this example, the colour button at the RHS will open a colour selector as shown below: 
-  ![](media/image102.png)
+  colourPicker       | displays a text box containing the colour code value together with a sample square of the colour | ![](media/image101.png) In this example, the colour button at the RHS will open a colour selector as shown below:<br>Clicking on the sample square activates a colour selector popup. ![](media/image102.png)
   combo              | drop-down selector for enumerations or where a domain type is specified for the document attribute | ![](media/image103.png)
   contentImage       | displays the loaded image along with an upload action | ![](media/image104.png)
   contentLink        | displays a hyperlink to open the content in a new browers window together with an upload action | ![](media/image105.png)
