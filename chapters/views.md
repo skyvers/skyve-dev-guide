@@ -39,7 +39,7 @@ Two detail views can be declared for each document.
 
 _Table 10 - View definition files_
 
-###Containers
+### Containers
 
 Containers are layout devices which contain other elements.
 
@@ -68,8 +68,8 @@ view definition doesn’t adequately take account of the number and nature
 of items contained.
 
 Container | Description | Specific Properties | Example
-hbox | Elements are laid out horizontally in the view and may contain other containers. | <li>border – whether a border is displayed
-<li>borderTitle – the text to be displayed as a border title <li> pixelMemberPadding – padding (in pixels) between members <li>pixelPadding – padding (in pixels) around all members <li> | ![](media/image96.png)
+----------|-------------|---------------------|----------
+hbox | Elements are laid out horizontally in the view and may contain other containers. | <li>border – whether a border is displayed<li>borderTitle – the text to be displayed as a border title <li> pixelMemberPadding – padding (in pixels) between members <li>pixelPadding – padding (in pixels) around all members <li> | ![](media/image96.png)
 vbox | Elements are laid out vertically in the view and may contain other containers. | <li>border – whether a border is visible <li> borderTitle – the text to be displayed as a border title <li>pixelMemberPadding – padding (in pixels) between members <li>pixelPadding – padding (in pixels) around all members | ![](media/image97.png)
 tabPane, tab | A tab pane contains tabs. <br> Tabs may contain other containers. | <li>name – a logical way of referring to the tabPane <li>disabled – whether the tabPane is disabled <li>disabled (tab) – whether the tab is disabled. A disabled tab will display the tab header, but cannot be accessed. <li>title (tab) – the title of the tab <li>selected (tab) – whether the tab is opened by default when the view is accessed. Selected can be set to *true*, *false* or the result of a defined condition. | ![](media/image97.png)
 Table 12 - View containers
