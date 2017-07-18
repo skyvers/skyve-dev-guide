@@ -39,8 +39,7 @@ Two detail views can be declared for each document.
 
 _Table 10 - View definition files_
 
-Containers {#containers .Chaptersubheading}
-----------
+###Containers
 
 Containers are layout devices which contain other elements.
 
@@ -68,39 +67,12 @@ the view will render with scroll bars. Containers may overflow if the
 view definition doesn’t adequately take account of the number and nature
 of items contained.
 
-  Container      Description                                                                        Specific Properties                                                                                                                                                 Example
-  -------------- ---------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------
-  hbox           Elements are laid out horizontally in the view and may contain other containers.   -   border – whether a border is displayed
-
-                                                                                                    -   borderTitle – the text to be displayed as a border title
-
-                                                                                                    -   pixelMemberPadding – padding (in pixels) between members
-
-                                                                                                    -   pixelPadding – padding (in pixels) around all members
-
-
-  vbox           Elements are laid out vertically in the view and may contain other containers.     -   border – whether a border is visible
-
-                                                                                                    -   borderTitle – the text to be displayed as a border title
-
-                                                                                                    -   pixelMemberPadding – padding (in pixels) between members
-
-                                                                                                    -   pixelPadding – padding (in pixels) around all members
-
-
-  tabPane, tab   A tab pane contains tabs.                                                          -   name – a logical way of referring to the tabPane                                                                                                                ![](media/image96.png){width="3.5305555555555554in" height="2.2270833333333333in"}
-
-                 Tabs may contain other containers.                                                 -   disabled – whether the tabPane is disabled
-
-                                                                                                    -   disabled (tab) – whether the tab is disabled. A disabled tab will display the tab header, but cannot be accessed.
-
-                                                                                                    -   title (tab) – the title of the tab
-
-                                                                                                    -   selected (tab) – whether the tab is opened by default when the view is accessed. Selected can be set to *true*, *false* or the result of a defined condition.
-
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-_Table 12 - View containers_
+Container | Description | Specific Properties | Example
+hbox | Elements are laid out horizontally in the view and may contain other containers. | <li>border – whether a border is displayed
+<li>borderTitle – the text to be displayed as a border title <li> pixelMemberPadding – padding (in pixels) between members <li>pixelPadding – padding (in pixels) around all members <li> | ![](media/image96.png)
+vbox | Elements are laid out vertically in the view and may contain other containers. | <li>border – whether a border is visible <li> borderTitle – the text to be displayed as a border title <li>pixelMemberPadding – padding (in pixels) between members <li>pixelPadding – padding (in pixels) around all members | ![](media/image97.png)
+tabPane, tab | A tab pane contains tabs. <br> Tabs may contain other containers. | <li>name – a logical way of referring to the tabPane <li>disabled – whether the tabPane is disabled <li>disabled (tab) – whether the tab is disabled. A disabled tab will display the tab header, but cannot be accessed. <li>title (tab) – the title of the tab <li>selected (tab) – whether the tab is opened by default when the view is accessed. Selected can be set to *true*, *false* or the result of a defined condition. | ![](media/image97.png)
+Table 12 - View containers
 
 ### Form
 
@@ -250,13 +222,11 @@ each row returned by the effective query in the drop-down. However,
 *lookupDescription* can alternatively nominate a subset of query columns
 for display in the drop-down.
 
-![](media/image124.png){width="6.878472222222222in"
-height="2.0756944444444443in"}
+![](media/image124.png)
 
 Figure 53 Example multi-column drop-down
 
-![](media/image125.png){width="5.151388888888889in"
-height="1.757638888888889in"}
+![](media/image125.png)
 
 Figure 54 Example rendering of the lookupDescription
 
@@ -268,19 +238,15 @@ defined in the applicable query). Filter parameters can be value (for a
 static value) or binding (filtering the list of eligible references by
 the value of a binding from the document being viewed).
 
-![](media/image126.png){width="4.136111111111111in"
-height="0.5152777777777777in"}
-
+![](media/image126.png)
 Figure 55 Example of filter parameters
 
 If *filterParameters* have been defined and the user creates a reference
 on-the-fly (using the *Add*/*New* action), the created document will
 have the *filterParameter* values set by default.
 
-![](media/image127.png){width="6.969444444444444in"
-height="0.7881944444444444in"}
-
-_Figure 56 - Example lookupDescription with filterParameter_
+![](media/image127.png)
+Figure 56 - Example lookupDescription with filterParameter_
 
 In Figure 56 above, the *lookupDescription* for binding
 *codeListAllocationCode* has a *filterParameter* using the current
@@ -312,8 +278,7 @@ The available event handlers are:
 
 -   *onPickedHandlers*.
 
-![](media/image128.png){width="4.302777777777778in"
-height="0.9548611111111112in"}
+![](media/image128.png)
 
 Figure 57 Example application of an onAddedHandler event action
 
