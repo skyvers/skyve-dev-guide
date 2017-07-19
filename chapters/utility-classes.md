@@ -9,12 +9,10 @@
 
 Skyve provides the following utility classes:
 
-  -----------------------------------------------------------------------------------------------------------------------------------
-  Class/Library   Description
-  --------------- -------------------------------------------------------------------------------------------------------------------
-  Util            Bean-level generic utilities, including generic bean methods e.g. *cloneToTransientBySerialisation*().
-
-  Binder          Provides methods for generic bean binding manipulations, including:
+  Class/Library | Description
+  --------------| -------------------------------------------------------------------------------------------------------------------
+  Util          | Bean-level generic utilities, including generic bean methods e.g. *cloneToTransientBySerialisation*().
+  Binder        | Provides methods for generic bean binding manipulations, including:
 
                   -   generic get() and set() methods for a bean with nominated binding,
 
@@ -23,7 +21,7 @@ Skyve provides the following utility classes:
                   -   read and interpret the nature of bean properties.
 
 
-  ModulesUtil     Contains a number of business-focused methods and enumerations for cross-module functionality, including:
+  ModulesUtil   |  Contains a number of business-focused methods and enumerations for cross-module functionality, including:
 
                   -   *getNextDocumentNumber*() to create unique formatted serial document identifiers,
 
@@ -36,14 +34,13 @@ Skyve provides the following utility classes:
                   -   basic Tax and loan calculation methods.
 
 
-  JobScheduler    Provides methods to schedule declared jobs, e.g. *runOneShotJob*().
+  JobScheduler  |  Provides methods to schedule declared jobs, e.g. *runOneShotJob*().
 
-  Persistence     Provides access to interact directly with the persistence mechanism (detailed below).
+  Persistence   |  Provides access to interact directly with the persistence mechanism (detailed below).
 
-  DocumentQuery   Provides methods for constructing object queries without resorting to constructing OQL or SQL strings.
-  -----------------------------------------------------------------------------------------------------------------------------------
+  DocumentQuery  | Provides methods for constructing object queries without resorting to constructing OQL or SQL strings.
 
-Table 21 Utility classes and libraries
+_Table 21 Utility classes and libraries_
 
 ### Persistence
 
@@ -53,39 +50,18 @@ developer code will comply with security and threading mandates.
 
 Key persistence methods are:
 
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Method                       Description
-  ---------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  get                          Instantiates a *Persistence* object
+  Method  | Description
+  --------| ------------------
+  get                |          Instantiates a *Persistence* object
+  getUser             |         Gets the current conversation *metadata.user*.
+  begin, rollback, commit   |   Control the state of the current transaction.
+  evictAllCached, <br><br> evitCached           |     Evict beans from cached memory.<br><br>These methods are useful where code interactions with *persistentBeans* may be in contention with default actions resulting from user activity (like pressing the Save button). <br><br>For example, if a user executes an action which impacts on the bean displayed in the view, and modified beans are not evicted, the user’s action will be in contention with the action. In this case, the user’s subsequent attempt to Save the bean will be met with a message stating that the current bean has already been modified by the user and can’t be saved. <br><br> Evicting cached beans at the conclusion of the action will avoid such a contention issue.
+ executeDML, <br><br>executeInsecureSQLDML   |    Execute persistence data manipulation language queries, either object DML or Insecure SQL DML.
+  upsertBeanTuple, <br><br>upsertCollectionTuples | Persists values only within the top-most level of the bean structure. <br><br>During an *upsert*, no bean validation is performed, and reference ID values are persisted without traversing into the related bean.
+  retrieve(ProjectionQuery), <br><br>retrieveInsecureSQL |  Retrieve a bean or collection of beans using a project query or via Insecure SQL
+  retrieve(Bean) | Retrieve the current bean as it was last persisted.
 
-  getUser                      Gets the current conversation *metadata.user*.
-
-  begin, rollback, commit      Control the state of the current transaction.
-
-  evictAllCached,              Evict beans from cached memory.
-
-  evitCached                   These methods are useful where code interactions with *persistentBeans* may be in contention with default actions resulting from user activity (like pressing the Save button).
-
-                               For example, if a user executes an action which impacts on the bean displayed in the view, and modified beans are not evicted, the user’s action will be in contention with the action. In this case, the user’s subsequent attempt to Save the bean will be met with a message stating that the current bean has already been modified by the user and can’t be saved.
-
-                               Evicting cached beans at the conclusion of the action will avoid such a contention issue.
-
-  executeDML,                  Execute persistence data manipulation language queries, either object DML or Insecure SQL DML.
-
-  executeInsecureSQLDML
-
-  upsertBeanTuple,             Persists values only within the top-most level of the bean structure.
-
-  upsertCollectionTuples       During an *upsert*, no bean validation is performed, and reference ID values are persisted without traversing into the related bean.
-
-  retrieve(ProjectionQuery),   Retrieve a bean or collection of beans using a project query or via Insecure SQL
-
-  retrieveInsecureSQL
-
-  retrieve(Bean)               Retrieve the current bean as it was last persisted.
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Table 22 Key methods of the Persistence Utility class
+_Table 22 Key methods of the Persistence Utility class_
 
 #### Insecure SQL
 
