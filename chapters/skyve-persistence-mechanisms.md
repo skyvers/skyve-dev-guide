@@ -14,7 +14,7 @@
     * [Enterprise-wide consistent reference representation](#enterprise-wide-consistent-reference-representation)
     * [Multi-tenant Support](#multi-tenant-support)
     * [Collaborative record flagging](#collaborative-record-flagging)
-    * [Document scoping row-level security & source identification](#document-scoping-row-level-security-source-&-identification)
+    * [Document scoping row-level security and source identification](#document-scoping-row-level-security-source-and-identification)
 
 ## Persistence
 
@@ -196,7 +196,7 @@ hover gesture displaying the persisted comment.
 
 _Figure 87 Example of the result of hover action over the flag icon_
 
- ### Document scoping row-level security & source identification
+ ### Document scoping row-level security and source identification
 
 Skyve supports declarative row-level security which is enforced
 pervasively and implicitly across all development contexts. Documents
