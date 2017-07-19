@@ -54,3 +54,9 @@ updated automatically.
 
 To reindex the repository, run the reindex.bat file located at &lt;
 Project Home Directory &gt;/prod/backup/
+
+**[⬆ back to top](#contents)**
+
+---
+**Next [Chapter 20: Bizport](./../chapters/bizport.md)**  
+**Previous [Chapter 18: Ant Utilities](./../chapters/ant-utilities.md)**
