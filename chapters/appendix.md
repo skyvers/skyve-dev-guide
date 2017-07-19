@@ -178,8 +178,6 @@ To deploy new application changes, choose *generateDomain* (from the
 Apps ant task), select the Apps folder and press F5 (to refresh) and
 then the touch target.
 
-**[⬆ back to top](#contents)**
-
 ## Example Deployment Instructions with Single Sign-on
 
 The following steps are to install an instance of XXX onto a vanilla
