@@ -91,3 +91,9 @@ SQL from MS Access to SQL in the selected destination dialect.
 
 Report conversion is a separate process and can happen in parallel with
 application development and Skyve round-tripping.
+
+**[⬆ back to top](#contents)**
+
+---
+**Next [Chapter 20: Bizport](./../chapters/bizport.md)**  
+**Previous [Chapter 22: Appendix](./../chapters/appendix.md)**
