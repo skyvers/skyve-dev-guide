@@ -47,10 +47,9 @@ Note that actions can also be triggered by declaring onChangeHandlers for a spec
 When a view declaration is supplied, the action must be declared in the
 *actions* section of the *view.xml*.
 
-![](media/image136.png){width="6.090972222222222in"
-height="0.9243055555555556in"}
+![](media/image136.png)
 
-Figure 65 Example action section of a view definition
+_Figure 65 Example action section of a view definition_
 
 The action element of the view definition indicates the *className* of
 the action as well as the *displayName* (button text). Action properties
