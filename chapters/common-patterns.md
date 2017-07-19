@@ -20,10 +20,9 @@
 To identify the current user in Bizlet code, instantiate the Persistence
 class. The Persistence class provides the *getUser*() method.
 
-![](media/image146.png){width="5.878472222222222in"
-height="1.5152777777777777in"}
+![](media/image146.png)
 
-Figure 75 Example code to retrieve the current user contact
+_Figure 75 Example code to retrieve the current user contact_
 
 In the example above, the method first obtains the Persistence
 mechanism, then the current user, the customer context in which that
@@ -35,10 +34,9 @@ correctly typed.
 
 ### Identify if Current User has Role
 
-![](media/image147.png){width="3.6972222222222224in"
-height="0.6666666666666666in"}
+![](media/image147.png)
 
-Figure 76 Example of isUserInRole
+_Figure 76 Example of isUserInRole_
 
 The above example establishes whether the current user has the role of
 TimesheetManager in the time module.
@@ -48,24 +46,21 @@ TimesheetManager in the time module.
 To save a document instance, you must identify the module and document
 of the bean.
 
-![](media/image148.png){width="5.242361111111111in"
-height="1.1513888888888888in"}
+![](media/image148.png)
 
-Figure 77 Example code to save a bean
+_Figure 77 Example code to save a bean_
 
 ### Instantiate a New Document Instance
 
-![](media/image149.png){width="5.348611111111111in"
-height="0.8784722222222222in"}
+![](media/image149.png)
 
-Figure 78 Example code to instantiate a new document instance
+_Figure 78 Example code to instantiate a new document instance_
 
 ### Building a Variant Domain List
 
-![](media/image150.png){width="5.863888888888889in"
-height="2.5756944444444443in"}
+![](media/image150.png)
 
-Figure 79 Example code to create a variant domain set
+_Figure 79 Example code to create a variant domain set_
 
 The above example creates a list of domain values (for a selection)
 where the relationship to invoices has not been modelled or is ad-hoc.
@@ -80,10 +75,9 @@ domain lists via code (as above).
 Declare the Job within the *module.xml* file and the Job class
 (extending *BizHubJob*).
 
-![](media/image144.png){width="5.802777777777778in"
-height="2.7118055555555554in"}
+![](media/image151.png)
 
-Figure 80 Example code to schedule a oneShot Job
+_Figure 80 Example code to schedule a oneShot Job_
 
 Note when scheduling a Job, the customer and user context must be
 established so that the job will run correctly within the specified
@@ -100,17 +94,15 @@ attributes of the bean, without traversing the entire bean structure.
 This is useful if the task requires updates of trivial nature to beans
 with substantial complexity.
 
-![](media/image151.png){width="4.045138888888889in"
-height="0.9548611111111112in"}
+![](media/image152.png)
 
-Figure 81 Example upsertBeanTuple()
+_Figure 81 Example upsertBeanTuple()_
 
 ### Retrieve and Iterate Through Beans
 
-![](media/image152.png){width="5.6819444444444445in"
-height="0.6972222222222222in"}
+![](media/image153.png)
 
-Figure 82 Example code to retrieve and iterate through a list of beans
+_Figure 82 Example code to retrieve and iterate through a list of beans_
 
 ### Singleton Documents (Parameter /Configuration Documents)
 
@@ -125,10 +117,9 @@ number of hours to be completed.
 First, in the *module.xml* file, add a menu item for the document which
 has a ref of edit.
 
-![](media/image153.png){width="4.151388888888889in"
-height="0.3784722222222222in"}
+![](media/image154.png)
 
-Figure 83 Example edit menu target
+_Figure 83 Example edit menu target_
 
 Next, override the *newInstance*() method in the document *Bizlet* to
 set the bean to be the first bean returned from *DocumentQuery*. Using
@@ -136,10 +127,9 @@ set the bean to be the first bean returned from *DocumentQuery*. Using
 permissions will automatically be applied, restricting the beans
 returned as declared.
 
-![](media/image154.png){width="6.151388888888889in"
-height="1.6666666666666667in"}
+![](media/image155.png)
 
-Figure 84 Example newInstance method which sets the current Bean
+_Figure 84 Example newInstance method which sets the current Bean_
 
 Because the document will always show in edit mode (i.e. is not accessed
 from a list), the view should not offer the OK action as this implies
@@ -154,10 +144,9 @@ the document to User scope in the *module.xml*.
 Generally for this type of document, the *Delete* permission is not
 assigned.
 
-![](media/image155.png){width="3.7118055555555554in"
-height="0.15138888888888888in"}
+![](media/image156.png)
 
-Figure 85 Example of user scoped document permission
+_Figure 85 Example of user scoped document permission_
 
 For example, a Timesheet module may have a User-scoped preference
 document allowing users to set their default task (which could be set
@@ -172,11 +161,10 @@ attribute *displayName* and *shortDescription* values accordingly.
 To complete the customisation, also place an override of *module.xml*
 for each module and update query, role and menu text as required.
 
-![](media/image156.png){width="3.3027777777777776in"
-height="5.3180555555555555in"}
+![](media/image157.png)
 
-Figure 86 Example of customer override of the Contact document, Bizlet
-and view
+_Figure 86 Example of customer override of the Contact document, Bizlet
+and view_
 
 Validation will ensure that both the “vanilla” and overridden artefacts
 are consistent with the rest of the application module.
