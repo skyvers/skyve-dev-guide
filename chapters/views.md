@@ -319,19 +319,7 @@ relevant for managing the collection. d*atagrids* support drag-drop for
 ordering, provided this is allowed as per the declaration of the
 collection.
 
-![](media/image129.png){width="6.075694444444444in"
-height="1.6819444444444445in"}
-
-Figure 58 Example dataGrid
-
-Columns may contain a specific input widget if required (e.g. textFied)
-or use the default widget for that attribute type (shown above) when not
-specified.
-
-The above *dataGrid* could also be declared in the view (e.g. *edit.xml*
-file) with a specific input as follows:
-
-![](media/image130.png){width="4.89375in" height="1.1819444444444445in"}
+![](media/image129.png)
 
 Figure 59 Example dataGrid definition of the dataGrid above.
 
