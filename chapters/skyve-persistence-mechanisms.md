@@ -14,7 +14,7 @@
     * [Enterprise-wide consistent reference representation](#enterprise-wide-consistent-reference-representation)
     * [Multi-tenant Support](#multi-tenant-support)
     * [Collaborative record flagging](#collaborative-record-flagging)
-    * [Document scoping row-level security & source identification](#document-scoping-row-level-security-source-identification)
+    * [Document scoping row-level security & source identification](#document-scoping-row-level-security-source-&-identification)
 
 ## Persistence
 
@@ -62,7 +62,7 @@ bizFlagComment | Collaborative record flagging | Used in the generic list capabi
 bizDataGroupId | Document scoping - declarative row level security | For sub-organisational row-level security, bizDataGroupId records the data group context in which the record was created.
 bizUserId  | Document scoping - source identification |For individual user security, bizUserId maintains the user context in which the record was created.
 
-## Relationship naming convention
+#### Relationship naming convention
 
 In Skyve, relationships are declared as attributes within the document
 declaration. To make clear the special nature of the attribute within
@@ -80,7 +80,7 @@ For many-many relationships a separate joining table is used which will
 always have columns “owner\_id” and “entity\_id” where these represent
 the semantic nature of each relationship.
 
-## Ordering and bizOrdinal
+#### Ordering and bizOrdinal
 
 Column Name |  Purpose  |  Comments 
 ------------| ----------|-----------
@@ -217,3 +217,9 @@ that user-role combination will occur and be interpreted by Skyve as
 within that data group context. User-role combinations without a
 specified data group are interpreted as having authority to interact
 across data group contexts.
+
+**[⬆ back to top](#contents)**
+
+---
+**Next [Chapter 18: Actions](./../chapters/actions.md)**  
+**Previous [Chapter 16: Common Patterns](./../chapters/common-patterns.md)**
