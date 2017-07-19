@@ -78,3 +78,9 @@ Note that on import, the data will not be recognised by the system
 because the source data was deleted. Even though your workbook may have
 UUIDs in the *bizId* columns, these UUIDs will not be recognised and new
 UUIDs will be created as the data is imported.
+
+**[⬆ back to top](#contents)**
+
+---
+**Next [Chapter 19: Content Repository](./../chapters/content-repository.md)**  
+**Previous [Chapter 21: WILDCAT Conversion Tool](./../chapters/wildcat-conversion-tool.md)**
