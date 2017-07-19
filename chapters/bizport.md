@@ -82,5 +82,5 @@ UUIDs will be created as the data is imported.
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 19: Content Repository](./../chapters/content-repository.md)**  
+**Next [Chapter 19: Content Repository Tools](./../chapters/content-repository-tools.md)**  
 **Previous [Chapter 21: WILDCAT Conversion Tool](./../chapters/wildcat-conversion-tool.md)**
