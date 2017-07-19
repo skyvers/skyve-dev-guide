@@ -104,7 +104,7 @@ press OK.
 From eclipse, import the projects from the repository (in eclipse,
 File-&gt;Import-&gt;SVN-&gt;Checkout Projects from SVN)
 
-![](media/image167.png)
+![](media/image169.png)
 
 Follow the steps to connect to the repository and import the nominated
 project.
@@ -141,7 +141,7 @@ Local JBoss Main Deployer \[Localhost:8080\] -&gt; OK and OK again
 There should now be a JBoss server instance in the Server Navigator
 view.
 
-![](media/image168.png)
+![](media/image170.png)
 
 #### Configuring JBoss
 
@@ -167,7 +167,7 @@ Drag the following ant task files to the Ant view:
 
 C:\\\_\\&lt;projectname&gt;\\build.xml
 
-![](media/image159.png)
+![](media/image171.png)
 
 Other run configurations made need the jaxb libraries added to their
 bootstrap classpath.
