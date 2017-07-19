@@ -11,6 +11,8 @@ NOTE: Refer to the WCT developer guide for full details.
 
 ### Using the Skyve Converstion Tool (WCT)
 
+![](media/image167.png)
+
 Application metadata may be created using WCT. WCT combines ETL
 capabilities with generation of *Bizlet* code and application metadata.
 
@@ -30,32 +32,17 @@ process at each step.
 
 The development method using WCT is as follows:
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  WCT process      Description                                                                                                                                                                                  Artefacts
-  ---------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- --------------------------------------------
-  Analysis         WCT performs analysis of the source database using the Table Inclusion file and Hints file.                                                                                                  Table Inclusion file
+WCT process | Description | Artefacts
+------------|-------------|----------
+Analysis    | WCT performs analysis of the source database using the Table Inclusion file and Hints file. | Table Inclusion file <br><br>Hints file  
+Transformation | WCT creates a default Transformation file | Transformation file
+Generation | WCT generates application metadata and Bizlet code. <br><br>Skyve application metadata and Bizlet code | Skyve performs schema updates according to the application metadata, resulting in an updated destination DB schema.
+Migration Plan | WCT creates a default migration plan (as a mapping file), which includes SQL update statements for references. A postload file is also created, containing just the SQL update statements.<br><br>SQL updates run after the data is migrated to the destination DB and use legacy fields as staging mechanisms.<br><br>The postload file can be used to ensure referential integrity after subsequent data manipulations during the development process. | Mapping file<br><br>Postload file
+Migration | WCT either migrates the data directly from the source DB to the destination DB, or creates a data load file. | Data load file (optionally)
 
-                                                                                                                                                                                                                Hints file
+![](media/image168.png)
 
-  Transformation   WCT creates a default Transformation file                                                                                                                                                    Transformation file
-
-  Generation       WCT generates application metadata and Bizlet code.                                                                                                                                          Skyve application metadata and Bizlet code
-
-                   Skyve performs schema updates according to the application metadata, resulting in an updated destination DB schema.
-
-  Migration Plan   WCT creates a default migration plan (as a mapping file), which includes SQL update statements for references. A postload file is also created, containing just the SQL update statements.   Mapping file
-
-                   SQL updates run after the data is migrated to the destination DB and use legacy fields as staging mechanisms.                                                                                Postload file
-
-                   The postload file can be used to ensure referential integrity after subsequent data manipulations during the development process.
-
-  Migration        WCT either migrates the data directly from the source DB to the destination DB, or creates a data load file.                                                                                 Data load file (optionally)
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-![](media/image166.emf){width="5.863888888888889in"
-height="9.302777777777777in"}
-
-Figure 96 Detailed Conversion Process and Artefacts
+_Figure 96 Detailed Conversion Process and Artefacts_
 
 ### Development Approach and Roundtripping
 
