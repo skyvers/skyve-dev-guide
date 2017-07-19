@@ -128,4 +128,4 @@ destination directory_
 
 ---
 **Next [Chapter 19: Content Repository Tools](./../chapters/content-repository-tools.md)**  
-**Previous [Chapter 17: Skyve Perstistence Machanisms](./../skyve-persistence-machanisms.md)**
+**Previous [Chapter 17: Skyve Perstistence Mechanisms](./../skyve-persistence-mechanisms.md)**
