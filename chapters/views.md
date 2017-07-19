@@ -506,7 +506,5 @@ the document of the target view. The binding does not need to be present
 in the target view definition, but it must be a valid binding in the
 target document.
 
-![](media/image134.png){width="2.2270833333333333in"
-height="0.5451388888888888in"}
-
+![](media/image134.png)
 _Figure 63 - Example newParameters section_
