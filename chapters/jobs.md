@@ -11,10 +11,9 @@ session).
 
 Jobs are declared in the *module.xml* file in the *jobs* section.
 
-![](media/image142.png){width="6.439583333333333in"
-height="1.3486111111111112in"}
+![](media/image142.png)
 
-Figure 71 Example job declaration within the module.xml file
+_Figure 71 Example job declaration within the module.xml file_
 
 Job declaration includes logical name, *displayName* and *className.*
 
@@ -35,18 +34,16 @@ role.
 Job classes must extend the *BizHubJob* abstract class. Custom job code
 is located in the *execute*() method.
 
-![](media/image143.png){width="5.0152777777777775in"
-height="3.2576388888888888in"}
+![](media/image143.png)
 
-Figure 72 Example Job class
+_Figure 72 Example Job class_
 
 Jobs can be scheduled in action or *Bizlet* code using the
 *JobScheduler* class.
 
-![](media/image144.png){width="5.802777777777778in"
-height="2.7118055555555554in"}
+![](media/image144.png)
 
-Figure 73 Example action class code to run a one-shot Job
+_Figure 73 Example action class code to run a one-shot Job_
 
 As Jobs are run within the context of a user so that Skyve’s embedded
 comprehensive security model can be enforced.
