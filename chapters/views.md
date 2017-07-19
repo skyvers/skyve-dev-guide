@@ -507,10 +507,11 @@ in the target view definition, but it must be a valid binding in the
 target document.
 
 ![](media/image134.png)
+
 _Figure 63 - Example newParameters section_
 
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 12: Actions](./../chapters/actionss.md)**  
+**Next [Chapter 12: Actions](./../chapters/actions.md)**  
 **Previous [Chapter 10: Bizlets](./../chapters/bizlets.md)**
