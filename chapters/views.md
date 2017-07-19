@@ -397,8 +397,7 @@ If *filterParameters* have been defined and the user creates a new
 document from the grid (using the grid *Add* action), the created
 document will have the *filterParameter* values set by default.
 
-![](media/image131.png){width="6.211805555555555in"
-height="3.363888888888889in"}
+![](media/image131.png)
 
 Figure 60 Example listGrid with filterParameters
 
@@ -437,8 +436,7 @@ view.
 *Report* actions (described below) provide access to defined report
 objects and must also be declared in the actions section of the view.
 
-![](media/image132.png){width="4.439583333333333in"
-height="1.9243055555555555in"}
+![](media/image132.png)
 
 Figure 61 Example ActionPanel including Implicit, Custom and Report
 actions
