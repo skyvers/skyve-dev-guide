@@ -16,11 +16,9 @@
     * [Collaborative record flagging](#collaborative-record-flagging)
     * [Document scoping row-level security & source identification](#document-scoping-row-level-security-source-identification)
 
-Persistence
-===========
+## Persistence
 
-Skyve Persistence Mechanisms {#skyve-persistence-mechanisms .ChapterHeading}
-============================
+### Skyve Persistence Mechanisms
 
 The Skyve Enterprise Platform mandates support for a number of
 best-practice Web design features on every logical table within the
@@ -41,8 +39,8 @@ application persistence model including:
 
 -   Collaborative record flagging.
 
-Generic Naming Conventions {#generic-naming-conventions .Chaptersubheading}
---------------------------
+### Generic Naming Conventions
+
 
 As a general principle Skyve adopts generic naming conventions wherever
 possible particularly with respect to mandated persistence mechanisms.
@@ -54,18 +52,18 @@ prefixed “biz”.
 Skyve mandates the existence of the following named columns on all
 primary data rows in a Skyve managed database:
 
-  Column Name      Purpose                                               Comments
-  ---------------- ----------------------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  bizId            Enterprise wide unique identifier                     The use of UUID guarantees consistency and means no performance costs for assigning IDs, also means that IDs can be generated in external source applications without the need for re-keying when importing into a Skyve application store.
-  bizVersion       Optimistic lock concurrency control                   Skyve compares the persisted version number at the time the bean is loaded with the version number when attempting to save. If the numbers are different, the bean has been changed by another conversation.
-  bizLock          Optimistic lock concurrency control                   Skyve keeps the timestamp and user principal of the last successful transaction.
-  bizKey           Enterprise-wide consistent reference representation   bizKey is an enterprise wide way of representing an entire tuple as a string - similar to the “.toString” concept available for most OO classes and suitable for displaying relationships particularly where multi-column display is not possible in the UI.
-  bizCustomer      Multi-tenancy                                         Skyve supports multi-tenant security. Each row is owned by a customer.
-  bizFlagComment   Collaborative record flagging                         Used in the generic list capability allows collaboration between users to flag issues or reminders on specific rows.
-  bizDataGroupId   Document scoping - declarative row level security     For sub-organisational row-level security, bizDataGroupId records the data group context in which the record was created.
-  bizUserId        Document scoping - source identification              For individual user security, bizUserId maintains the user context in which the record was created.
+Column Name | Purpose | Comments 
+------------|---------|----------
+bizId       | Enterprise wide unique identifier  | The use of UUID guarantees consistency and means no performance costs for assigning IDs, also means that IDs can be generated in external source applications without the need for re-keying when importing into a Skyve application store.
+bizVersion  | Optimistic lock concurrency control | Skyve compares the persisted version number at the time the bean is loaded with the version number when attempting to save. If the numbers are different, the bean has been changed by another conversation.
+bizLock     | Optimistic lock concurrency control | Skyve keeps the timestamp and user principal of the last successful transaction.
+bizKey      | Enterprise-wide consistent reference representation   bizKey is an enterprise wide way of representing an entire tuple as a string - similar to the “.toString” concept available for most OO classes and suitable for displaying relationships particularly where multi-column display is not possible in the UI.
+bizCustomer | Multi-tenancy | Skyve supports multi-tenant security. Each row is owned by a customer.
+bizFlagComment | Collaborative record flagging | Used in the generic list capability allows collaboration between users to flag issues or reminders on specific rows.
+bizDataGroupId | Document scoping - declarative row level security | For sub-organisational row-level security, bizDataGroupId records the data group context in which the record was created.
+bizUserId  | Document scoping - source identification |For individual user security, bizUserId maintains the user context in which the record was created.
 
-### Relationship naming convention {#relationship-naming-convention .Sectionheading}
+### Relationship naming convention
 
 In Skyve, relationships are declared as attributes within the document
 declaration. To make clear the special nature of the attribute within
@@ -83,11 +81,11 @@ For many-many relationships a separate joining table is used which will
 always have columns “owner\_id” and “entity\_id” where these represent
 the semantic nature of each relationship.
 
-### Ordering and bizOrdinal {#ordering-and-bizordinal .Sectionheading}
+### Ordering and bizOrdinal
 
-  Column Name   Purpose                               Comments
-  ------------- ------------------------------------- ------------------------------------------------------------------------------------
-  bizOrdinal    Generic collection ordinal position   bizOrdinal is used for implicit ordering where collections are declared “ordered”.
+Column Name |  Purpose  |  Comments 
+------------| ----------|-----------
+bizOrdinal  | Generic collection ordinal position | bizOrdinal is used for implicit ordering where collections are declared “ordered”.
 
 Where collections are declared to be ordered, Skyve maintains the
 ordinal position of each record in the collection with a persisted
@@ -106,8 +104,7 @@ data has bizOrdinals of 2,5,5 and 11 and there are only 4 rows, Skyve
 will still order them for presentation, but the next time the collection
 is saved, they will be reset to 0,1,2 and 3.
 
-UUID Enterprise-level Guaranteed Uniqueness {#uuid-enterprise-level-guaranteed-uniqueness .Chaptersubheading}
--------------------------------------------
+### UUID Enterprise-level Guaranteed Uniqueness
 
 To guarantee enterprise-wide uniqueness, Skyve generally uses
 Universally Unique Identifier (UUID) for all key identifiers named
@@ -135,8 +132,7 @@ system ID can be placed into the bizId field, provided it will be unique
 in the table context under all circumstances and provided it is up to 36
 characters.
 
-Optimistic Lock concurrency controls {#optimistic-lock-concurrency-controls .Chaptersubheading}
-------------------------------------
+### Optimistic Lock concurrency controls
 
 Skyve supports multi-conversation interactions allowing each user to
 maintain multiple conversational interactions with the application,
@@ -155,8 +151,8 @@ Skyve keeps the timestamp and user principal of the last successful
 transaction as the bizLock column. This is useful for a range of
 auditing and process inspection requirements.
 
-Enterprise-wide consistent reference representation {#enterprise-wide-consistent-reference-representation .Chaptersubheading}
----------------------------------------------------
+### Enterprise-wide consistent reference representation
+
 
 In Object Oriented applications, most classes will implement a
 “.toString” method as a consistent scalar representation of complex
@@ -176,8 +172,7 @@ The bizKey is persisted to allow performant scaling of large data sets
 so that the more complex key representation can be used in common ad-hoc
 searching, filtering and sorting.
 
-Multi-tenant Support {#multi-tenant-support .Chaptersubheading}
---------------------
+### Multi-tenant Support
 
 Skyve supports multi-tenant security. Each row is owned by a customer
 and created within a customer context.
@@ -191,21 +186,18 @@ In a simple standalone application the bizCustomer column is technically
 unnecessary, but to enforce the portability principle is still mandated
 by the platform in case requirements change.
 
-Collaborative record flagging {#collaborative-record-flagging .Chaptersubheading}
------------------------------
+### Collaborative record flagging
 
 To support ad-hoc collaboration of data users, Skyve provides a
 text-based flag for every entity/record within the application.
 bizFlagComment will be represented in the list by a flag icon with the
 hover gesture displaying the persisted comment.
 
-![](media/image157.png){width="2.939583333333333in" height="2.515277777777778in"} {#section-18 .Picture}
----------------------------------------------------------------------------------
+![](media/image159.png)
 
-Figure 87 Example of the result of hover action over the flag icon
+_Figure 87 Example of the result of hover action over the flag icon_
 
- Document scoping row-level security & source identification {#document-scoping-row-level-security-source-identification .Chaptersubheading}
-------------------------------------------------------------
+ ### Document scoping row-level security & source identification
 
 Skyve supports declarative row-level security which is enforced
 pervasively and implicitly across all development contexts. Documents
