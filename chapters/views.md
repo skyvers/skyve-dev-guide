@@ -321,7 +321,7 @@ collection.
 
 ![](media/image129.png)
 
-Figure 59 Example dataGrid definition of the dataGrid above.
+_Figure 59 Example dataGrid definition of the dataGrid above._
 
 #### Columns
 
@@ -399,7 +399,7 @@ document will have the *filterParameter* values set by default.
 
 ![](media/image131.png)
 
-Figure 60 Example listGrid with filterParameters
+_Figure 60 Example listGrid with filterParameters_
 
 In the example shown above, the *filterParameter* name “supplier”
 corresponds to the binding of the “qProducts” query column being
@@ -438,43 +438,26 @@ objects and must also be declared in the actions section of the view.
 
 ![](media/image132.png)
 
-Figure 61 Example ActionPanel including Implicit, Custom and Report
-actions
+_Figure 61 Example ActionPanel including Implicit, Custom and Report
+actions_
 
 ***Tip:*** You must declare all actions in the action section even if
 they will not appear in the ActionPanel.
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Property               Description
-  ---------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------
-  inActionPanel          controls whether the action button is included in the Action Panel at the top of the view
-
-                         If a button is not to be displayed in the *ActionPanel* a button widget will be required elsewhere within the view for the action to be accessible.
-
-  displayName            the text which will appear on the button
-
-  className              the name of the Java action class to be executed when the button is pressed
-
-  confirm                a confirmation message to be displayed requesting confirmation by the user
-
-                         If no confirmation message is supplied, no confirmation is requested.
-
-  disabled               whether the button is shown in a disabled state
-
-  invisible              whether the button is visible
-
-  relativeIconFileName   the filename of an icon which will be displayed together with the *displayName* on the button
-
-                         Filenames are usually relative allowing the Skyve overriding mechanism to locate the absolute path to the file based on the context of the user.
-
-  toolTip                tooltip help to be displayed for the button
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Property | Description |
+---------| ------------|
+inActionPanel | controls whether the action button is included in the Action Panel at the top of the view <br><br>If a button is not to be displayed in the *ActionPanel* a button widget will be required elsewhere within the view for the action to be accessible.
+displayName | the text which will appear on the button
+className | the name of the Java action class to be executed when the button is pressed
+confirm | a confirmation message to be displayed requesting confirmation by the user<br><br>If no confirmation message is supplied, no confirmation is requested.
+disabled | whether the button is shown in a disabled state
+invisible | whether the button is visible
+relativeIconFileName | the filename of an icon which will be displayed together with the *displayName* on the button<br><br>        Filenames are usually relative allowing the Skyve overriding mechanism to locate the absolute path to the file based on the context of the user.
+toolTip | tooltip help to be displayed for the button
 
 _Table 19 - View definition Action properties_
 
-![](media/image133.png){width="6.227083333333334in"
-height="1.8486111111111112in"}
-
+![](media/image133.png)
 _Figure 62 - Example action declaration including Default, Custom and Report actions_
 
 The example declaration in Figure 62 above declares default actions
