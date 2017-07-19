@@ -16,9 +16,9 @@ build.xml file which contains a number of utilities to assist
 developers. To access the utilities, drag the build.xml file into the
 ant view in Eclipse.
 
-_![](media/image159.png)_
+![](media/image159.png)
 
-Figure 88 Accessing the ant utilities
+_Figure 88 Accessing the ant utilities_
 
 The default target is generateDomain – which performs model validation
 and generates the domain classes.
