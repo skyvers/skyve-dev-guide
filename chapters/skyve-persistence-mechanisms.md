@@ -41,7 +41,6 @@ application persistence model including:
 
 ### Generic Naming Conventions
 
-
 As a general principle Skyve adopts generic naming conventions wherever
 possible particularly with respect to mandated persistence mechanisms.
 
@@ -63,7 +62,7 @@ bizFlagComment | Collaborative record flagging | Used in the generic list capabi
 bizDataGroupId | Document scoping - declarative row level security | For sub-organisational row-level security, bizDataGroupId records the data group context in which the record was created.
 bizUserId  | Document scoping - source identification |For individual user security, bizUserId maintains the user context in which the record was created.
 
-### Relationship naming convention
+## Relationship naming convention
 
 In Skyve, relationships are declared as attributes within the document
 declaration. To make clear the special nature of the attribute within
@@ -81,7 +80,7 @@ For many-many relationships a separate joining table is used which will
 always have columns “owner\_id” and “entity\_id” where these represent
 the semantic nature of each relationship.
 
-### Ordering and bizOrdinal
+## Ordering and bizOrdinal
 
 Column Name |  Purpose  |  Comments 
 ------------| ----------|-----------
@@ -193,7 +192,7 @@ text-based flag for every entity/record within the application.
 bizFlagComment will be represented in the list by a flag icon with the
 hover gesture displaying the persisted comment.
 
-![](media/image159.png)
+![](media/image158.png)
 
 _Figure 87 Example of the result of hover action over the flag icon_
 
