@@ -22,23 +22,23 @@
   * [Chapter 6: Customers](chapters/customers.md)
   * [Chapter 7: Modules](chapters/modules.md)
   * [Chapter 8: Documents](chapters/documents.md)
-  <!-- * [Chapter 9: Converters](chapters/converters.md) -->
-  <!-- * [Chapter 10: Bizlets](chapters/bizlets.md) -->
-  <!-- * [Chapter 11: Views](chapters/views.md) -->
-  <!-- * [Chapter 12: Actions](chapters/actions.md) -->
-  <!-- * [Chapter 13: Reports](chapters/reports.md) -->
-  <!-- * [Chapter 14: Jobs](chapters/jobs.md) -->
-  <!-- * [Chapter 15: Utility Classes](chapters/utility-classes.md) -->
-  <!-- * [Chapter 16: Common Patterns](chapters/common-patterns.md) -->
-  <!-- * [Section 3: Persistence](chapters/skyve-persistence-mechanisms.md) -->
-  <!-- * [Chapter 17: Skyve Persistence Mechanisms](chapters/skyve-persistence-mechanisms.md) -->
-<!-- * [Section 4: Platform Tools](chapters/platform-tools.md) -->
-  <!-- * [Chapter 18: Ant Utilities](chapters/ant-utilities.md) -->
-  <!-- * [Chapter 19: Content Repository Tools](chapters/content-repository-tools.md) -->
-  <!-- * [Chapter 20: Bizport](chapters/bizport.md) -->
-  <!-- * [Chapter 21: WILDCAT Conversion Tool](chapters/wildcat-conversion-tool.md) -->
+  * [Chapter 9: Converters](chapters/converters.md)
+  * [Chapter 10: Bizlets](chapters/bizlets.md)
+  * [Chapter 11: Views](chapters/views.md)
+  * [Chapter 12: Actions](chapters/actions.md)
+  * [Chapter 13: Reports](chapters/reports.md)
+  * [Chapter 14: Jobs](chapters/jobs.md)
+  * [Chapter 15: Utility Classes](chapters/utility-classes.md)
+  * [Chapter 16: Common Patterns](chapters/common-patterns.md)
+ * [Section 3: Persistence](chapters/skyve-persistence-mechanisms.md)
+  * [Chapter 17: Skyve Persistence Mechanisms](chapters/skyve-persistence-mechanisms.md)
+ * [Section 4: Platform Tools](chapters/ant-utilities.md)
+  * [Chapter 18: Ant Utilities](chapters/ant-utilities.md)
+  * [Chapter 19: Content Repository Tools](chapters/content-repository-tools.md)
+  * [Chapter 20: Bizport](chapters/bizport.md)
+  * [Chapter 21: WILDCAT Conversion Tool](chapters/wildcat-conversion-tool.md)
 * [Section 5: Appendix](chapters/appendix.md)
-  * [Appendix 1: Deploying a Skyve Application](chapters/appendix.md#deploying-a-skyve-application)
+  * [Appendix 1: Deploying a Skyve Application](chapters/appendix.md)
   * [Appendix 2: Installing and configuring the Skyve Development Environment](chapters/appendix.md#installing-and-configuring-the-skyve-development-environment)
   * [Appendix 3: Example Deployment Instructions with Single Sign-on](chapters/appendix.md#example-deployment-instructions-with-single-sign-on)
 
