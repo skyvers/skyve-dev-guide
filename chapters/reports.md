@@ -21,8 +21,8 @@ reports folder of the driving document.
 
 ![](media/image138.png)]
 
-Figure 67 Report objects are located within the reports folder for the
-applicable document
+_Figure 67 Report objects are located within the reports folder for the
+applicable document_
 
 Report actions must be declared in a view for reports to be accessible
 to the user. If no view has yet been defined, use the *generateEditView*
@@ -33,7 +33,7 @@ By default, report actions are displayed with the printer icon.
 
 ![](media/image139.png)
 
-Figure 68 Example report action button
+_Figure 68 Example report action button_
 
 To ensure all reports are valid and can be run, use the *compileReports*
 ant task to recompile all Jasper reports.
@@ -44,7 +44,7 @@ be rendered.
 
 ![](media/image140.png)
 
-Figure 69 Selecting a report format
+_Figure 69 Selecting a report format_
 
 It is the responsibility of the report designer to consider the
 implications of the user selecting a format which the designer has not
@@ -83,8 +83,8 @@ the basis for grouped detail rows, as with SQL data sources.
 
 ![](media/image141.png)
 
-Figure 70 Example report query using the object data source declared in
-iReport.
+_Figure 70 Example report query using the object data source declared in
+iReport._
 
 ### Ad-hoc Reports
 
