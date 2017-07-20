@@ -39,8 +39,8 @@
   * [Chapter 21: WILDCAT Conversion Tool](chapters/wildcat-conversion-tool.md)
 * [Section 5: Appendix](chapters/appendix.md)
   * [Appendix 1: Deploying a Skyve Application](chapters/appendix.md)
-  * [Appendix 2: Installing and configuring the Skyve Development Environment](chapters/appendix.md#installing-and-configuring-the-skyve-development-environment)
-  * [Appendix 3: Example Deployment Instructions with Single Sign-on](chapters/appendix.md#example-deployment-instructions-with-single-sign-on)
+  * [Appendix 2: Installing and configuring the Skyve Development Environment](chapters/appendix.md)
+  * [Appendix 3: Example Deployment Instructions with Single Sign-on](chapters/appendix.md)
 
 # Introduction
 
