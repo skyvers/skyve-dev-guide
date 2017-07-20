@@ -7,9 +7,9 @@
 * [Chapter 3: Identifying the Skyve Version](./../chapters/concepts.md)
 * [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
 * [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
-* [Chapter 6: Customers](#customers)
-* [Chapter 7: Modules](#modules)
-* [Chapter 8: Documents](#documents)
+* [Chapter 6: Customers](./../chapters/customers.md)
+* [Chapter 7: Modules](./../chapters/modules.md)
+* [Chapter 8: Documents](./../chapters/documents.md)
 * **[Chapter 9: Converters](#converters)**
   * [Defined Converters](#defined-converters)
   * [Worked Example](#worked-example)
