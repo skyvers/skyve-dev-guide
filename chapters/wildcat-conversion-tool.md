@@ -94,6 +94,6 @@ application development and Skyve round-tripping.
 
 **[⬆ back to top](#contents)**
 
----
-**Next [Chapter 20: Bizport](./../chapters/bizport.md)**  
-**Previous [Chapter 22: Appendix](./../chapters/appendix.md)**
+---  
+**Next [Chapter 22: Appendix](./../chapters/appendix.md)**<br>
+**Previous [Chapter 20: Bizport](./../chapters/bizport.md)**
