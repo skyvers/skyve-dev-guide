@@ -31,7 +31,7 @@
   * [Chapter 15: Utility Classes](chapters/utility-classes.md)
   * [Chapter 16: Common Patterns](chapters/common-patterns.md)
  * [Section 3: Persistence](chapters/skyve-persistence-mechanisms.md)
-  * [Chapter 17: Skyve Persistence Mechanisms](chapters/skyve-persistence-mechanisms.md)
+  ** [Chapter 17: Skyve Persistence Mechanisms](chapters/skyve-persistence-mechanisms.md)**
  * [Section 4: Platform Tools](chapters/ant-utilities.md)
   * [Chapter 18: Ant Utilities](chapters/ant-utilities.md)
   * [Chapter 19: Content Repository Tools](chapters/content-repository-tools.md)
