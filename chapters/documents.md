@@ -244,7 +244,6 @@ _Figure 37 - Example definition of a document constraint_
 The *document.xml* includes a `<doc>` tag to allow document
 specific documentation to be included with the document definition.
 
-![](media/image82.png)
 ```xml
 <doc>
   <![CDATA[A Configuration document contains all of the configuration the details for the creation of documentation using Doctor.]]>
