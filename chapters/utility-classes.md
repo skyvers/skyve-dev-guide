@@ -70,6 +70,5 @@ type conversion which may arise if SQL strings were used.
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 16: Common Patterns](./../chapters/common-patterns.md)**
-
-**Previous [Chapter 14: Jobs](./../chapters/jobs.md)**  
+**Next [Chapter 16: Common Patterns](./../chapters/common-patterns.md)**<br>
+**Previous [Chapter 14: Jobs](./../chapters/jobs.md)**
