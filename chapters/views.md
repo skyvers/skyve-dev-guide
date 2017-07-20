@@ -34,7 +34,7 @@ Two detail views can be declared for each document.
 
   View        | Description
   ----------- | -----------
-  edit.xml    | The basic view definition for detail editing of a bean (normally accessed by zooming into a row from a list).<br>Menu items can also target edit views directly. In this case the menu item will trigger newInstance() and a new document instance will be returned (and therefore displayed). To show a singleton (a document instance which is the only applicable existing instance within the context), the newInstance() method can be overridden to select and return an existing bean in place of the newly created instance.<br>If a *create.xml* is supplied, the *edit.xml* file is only used after the document is created.
+  edit.xml    | The basic view definition for detail editing of a bean (normally accessed by zooming into a row from a list).<br><br>Menu items can also target edit views directly. In this case the menu item will trigger newInstance() and a new document instance will be returned (and therefore displayed). To show a singleton (a document instance which is the only applicable existing instance within the context), the newInstance() method can be overridden to select and return an existing bean in place of the newly created instance.<br><br>If a *create.xml* is supplied, the *edit.xml* file is only used after the document is created.
   create.xml  | A special case of edit view which is used if *create.xml* supplied and if *isCreated*() is false.
 
 _Table 10 - View definition files_
@@ -47,7 +47,7 @@ Containers share basic properties:
 
   Property          | Description
   ----------------- | ------------
-  invisible         | Whether the container (and contents) are invisible to the user.<br>Invisibility may be set to *true*, *false* or the result of a declared condition.
+  invisible         | Whether the container (and contents) are invisible to the user.<br><br>Invisibility may be set to *true*, *false* or the result of a declared condition.
   percentageHeight  | Percentage of the vertical visible area over which the container (and contents) will be stretched.
   percentageWidth   | Percentage of the horizontal visible area over which the container (and contents) will be stretched.
   pixelWidth        | Width of the container in pixels.
