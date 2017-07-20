@@ -2,7 +2,7 @@
 
 ### Contents
 
-   * [Chapter 1: Architectural Overview](../README.md)
+  * [Chapter 1: Architectural Overview](../README.md)
   * [Chapter 2: Concepts](./../chapters/concepts.md)
   * [Chapter 3: Identifying the Skyve Version](./../chapters/concepts.md)
   * [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
