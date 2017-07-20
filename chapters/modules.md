@@ -6,7 +6,7 @@
 * [Chapter 3: Identifying the Skyve Version](./../chapters/concepts.md)
 * [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
 * [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
-* [Chapter 6: Customers](#customers)
+* [Chapter 6: Customers](./../chapters/customers.md)
 * **[Chapter 7: Modules](#modules)**
   * [Defining the `module.xml`](#defining-the-module.xml)
     * [Module header](#module-header)
