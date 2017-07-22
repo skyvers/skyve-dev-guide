@@ -97,7 +97,15 @@ possible.
 
 #### Form Example
 
-![Figure 50](media/image97.png "Figure 50 Example form definition")
+```xml
+<form>
+  <column percentageWidth="20" />
+  <column />
+  <column />
+  <row><item><textField binding="name" /></item></row>
+  <row><item><textArea binding="description" wrap="true" /></item></row>
+</form>
+```
 
 _Figure 50 - Example form definition_
 
@@ -163,38 +171,38 @@ will be displayed in bold type if the attribute is required.
   combo              | drop-down selector for enumerations or where a domain type is specified for the document attribute | ![](media/image103.png)
   contentImage       | displays the loaded image along with an upload action | ![](media/image104.png)
   contentLink        | displays a hyperlink to open the content in a new browers window together with an upload action | ![](media/image105.png)
-default            | If used in a view, this will render whatever the default widget is.<br><br>Either the *defaultWidget* declared on the document attribute or the Skyve default control for the attribute type.
-dialogButton       | Not yet implemented.
-geoLocator         | Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. <br> <br>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br> <br>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding<li>cityBinding<li>stateBinding<li>postcodeBinding<li>countryBinding<li>latitudeBinding<li>longitudeBinding</ul> | In this example, the Map button is displayed. When clicked, the geolocator (shown below) will be displayed in a modal window. ![](media/image107.png)
-html | displays HTML content together with an Edit button <br><br> When the edit button is clicked, a popup HTML editor window is displayed allowing users to create rich HTML. | ![](media/image108.png)
-label | Simple text. | ![](media/image109.png)
-lookup | Deprecated. | 
-lookupDescription | *lookupDescription* is used to display an association to another document, and combines a combo with a pick button. <br><br> Users may select a value from the combo, or type values into the text box which will locate a matching value in the combo drop-down list if found. <br><br> When the pick button is pressed, a Pick window containing a listGrid is displayed, showing eligible values as declared in the document association. <br><br> Whereas normally double-clicking in a grid will zoom into the row, double-clicking in a Pick grid will select that value, close the popup and set the value of the *lookupDescription* combo next to the Pick button. <br><br> The down-arrow button reveals options to Edit (i.e. Zoom), New or Clear the reference. <br> More features of the *lookupDescription* are explained in the next section. | ![](media/image110.png) <br> In this example the *bizKey* of the currently associated document instance is displayed in the control. To use another attribute change the lookupDescription’s *descriptionBinding* attribute. <br> If the Pick button is clicked, a listGrid of eligible document instances is shown in a modal window. <br> ![](media/image111.png) <br> The down-arrow selector button will display options for Edit (edit the referenced document on-the-fly), New (create a new potential reference on-the-fly) and Clear (clear the reference). <br> ![](media/image112.png)
-password | a textField which obfuscates the entered value | ![](media/image113.png)
-progressBar | Not yet implemented.|
-radio | radio selector for enumerations or for document attributes where a domain type is specified <br> <br> Radios may be laid out vertically or horizontally, using the property *vertical*. | ![](media/image114.png) <br> Vertical arrangement is the default arrangement for radio selectors when no arrangement is specified.
-richText | provides a rich text area together with formatting toolbar | ![](media/image115.png)                 
-slider | Numeric slider. <br><br> Properties include: <br> <li> min <li> max <li> numberOfDiscreteValues <li> roundingPrecision <br> May be displayed vertically when *vertical* is set to *true*. | ![](media/image116.png)   
-spacer | a widget provided to fill a column when no other widget is required <br><br> Items within rows always fill from the leftmost available column. The spacer widget is provided to allow items to fill from other than the leftmost column.| The spacer widget displays nothing.
-spinner | numeric spinner allowing users to either type or select a value using the arrows <br><br>Properties include:<li>min<li>max<li>step – the amount to increment/decrement for each arrow button press | ![](media/image117.png)
-staticImage | displays a static image |  ![](media/image118.png)
-staticLink | hyperlink to a static URL<br><br>Properties:<li>ref – the URL<li>value - the value displayed in the link, this defaults to the URL if not supplied.<li>newWindow – whether the target will be displayed in a new window|  Not yet implemented.
-textArea | basic data entry field for long text<br><br>textArea provides a *wrap* property to control whether the contained text is word wrapped. |![](media/image119.png)
-textField | provides basic data entry for text attributes <br><br> *textField* responds to the type of the bound attribute, and will display converter hint if the value is null.<br><br>For *date* and *dateTime* types, a calendar selector is displayed.| ![](media/image120.png) <br> This example is a *textField* widget bound to a text type attribute. <br> ![](media/image121.png) <br> This example is a *textField* widget bound to a time attribute using the *HH\_MM* converter. <br> ![](media/image122.png) <br> This example is a *textField* widget bound to a *date* or *dateTime* attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.
+  default            | If used in a view, this will render whatever the default widget is.<br><br>Either the *defaultWidget* declared on the document attribute or the Skyve default control for the attribute type.
+  dialogButton       | Not yet implemented.
+  geoLocator         | Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. <br> <br>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br> <br>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding<li>cityBinding<li>stateBinding<li>postcodeBinding<li>countryBinding<li>latitudeBinding<li>longitudeBinding</ul> | In this example, the Map button is displayed. When clicked, the geolocator (shown below) will be displayed in a modal window. ![](media/image107.png)
+  html | displays HTML content together with an Edit button <br><br> When the edit button is clicked, a popup HTML editor window is displayed allowing users to create rich HTML. | ![](media/image108.png)
+  label | Simple text. | ![](media/image109.png)
+  lookup | Deprecated. |
+  lookupDescription | *lookupDescription* is used to display an association to another document, and combines a combo with a pick button. <br><br> Users may select a value from the combo, or type values into the text box which will locate a matching value in the combo drop-down list if found. <br><br> When the pick button is pressed, a Pick window containing a listGrid is displayed, showing eligible values as declared in the document association. <br><br> Whereas normally double-clicking in a grid will zoom into the row, double-clicking in a Pick grid will select that value, close the popup and set the value of the *lookupDescription* combo next to the Pick button. <br><br> The down-arrow button reveals options to Edit (i.e. Zoom), New or Clear the reference. <br> More features of the *lookupDescription* are explained in the next section. | ![](media/image110.png) <br> In this example the *bizKey* of the currently associated document instance is displayed in the control. To use another attribute change the lookupDescription’s *descriptionBinding* attribute. <br> If the Pick button is clicked, a listGrid of eligible document instances is shown in a modal window. <br> ![](media/image111.png) <br> The down-arrow selector button will display options for Edit (edit the referenced document on-the-fly), New (create a new potential reference on-the-fly) and Clear (clear the reference). <br> ![](media/image112.png)
+  password | a textField which obfuscates the entered value | ![](media/image113.png)
+  progressBar | Not yet implemented.|
+  radio | radio selector for enumerations or for document attributes where a domain type is specified <br> <br> Radios may be laid out vertically or horizontally, using the property *vertical*. | ![](media/image114.png) <br> Vertical arrangement is the default arrangement for radio selectors when no arrangement is specified.
+  richText | provides a rich text area together with formatting toolbar | ![](media/image115.png)                 
+  slider | Numeric slider. <br><br> Properties include: <br> <li> min <li> max <li> numberOfDiscreteValues <li> roundingPrecision <br> May be displayed vertically when *vertical* is set to *true*. | ![](media/image116.png)   
+  spacer | a widget provided to fill a column when no other widget is required <br><br> Items within rows always fill from the leftmost available column. The spacer widget is provided to allow items to fill from other than the leftmost column.| The spacer widget displays nothing.
+  spinner | numeric spinner allowing users to either type or select a value using the arrows <br><br>Properties include:<li>min<li>max<li>step – the amount to increment/decrement for each arrow button press | ![](media/image117.png)
+  staticImage | displays a static image |  ![](media/image118.png)
+  staticLink | hyperlink to a static URL<br><br>Properties:<li>ref – the URL<li>value - the value displayed in the link, this defaults to the URL if not supplied.<li>newWindow – whether the target will be displayed in a new window|  Not yet implemented.
+  textArea | basic data entry field for long text<br><br>textArea provides a *wrap* property to control whether the contained text is word wrapped. |![](media/image119.png)
+  textField | provides basic data entry for text attributes <br><br> *textField* responds to the type of the bound attribute, and will display converter hint if the value is null.<br><br>For *date* and *dateTime* types, a calendar selector is displayed.| ![](media/image120.png) <br> This example is a *textField* widget bound to a text type attribute. <br> ![](media/image121.png) <br> This example is a *textField* widget bound to a time attribute using the *HH\_MM* converter. <br> ![](media/image122.png) <br> This example is a *textField* widget bound to a *date* or *dateTime* attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.
 
 ### OnChange Event Action (Client-side Events)
 
 *OnChange* event actions can be defined for the change of value of
 widgets defined within a view.
 
-  Event Action      Description
-  ----------------- ------------------------------------------------------------------------------------------
-  rerender          hits the server, reevaluates the UI conditions, but maintains user edits.
-  server            executes a server-side action.
-  setDisabled       sets the widget to disabled based on a condition.
-  toggleDisabled    checks the state of the widget pointed to by the binding and toggles the disabled state.
-  setInvisible      sets the widget to invisible based on a condition.
-  toggleInvisible   checks the state of the widget pointed to by the binding and toggles the disabled state.
+  Event Action    | Description
+  --------------- | -----------
+  rerender        | hits the server, reevaluates the UI conditions, but maintains user edits.
+  server          | executes a server-side action.
+  setDisabled     | sets the widget to disabled based on a condition.
+  toggleDisabled  | checks the state of the widget pointed to by the binding and toggles the disabled state.
+  setInvisible    | sets the widget to invisible based on a condition.
+  toggleInvisible | checks the state of the widget pointed to by the binding and toggles the disabled state.
 
 _Table 14 - OnChange Event Actions_
 
@@ -202,7 +210,15 @@ Multiple event actions can be defined for the single event, and the
 order of execution will follow the order in which the handlers are
 defined.
 
-![Figure 52](media/image123.png "Figure 52 Example of multiple onChangeHandlers")-
+```xml
+<combo binding="treatmentType">
+  <onChangeHandlers>
+    <server action="recalculate" />
+    <setDisabled disabled="zeroValue" />
+    <rerender />
+  </onChangeHandlers>
+</combo>
+```
 
 _Figure 52 - Example of multiple onChangeHandlers_
 
@@ -233,13 +249,13 @@ each row returned by the effective query in the drop-down. However,
 *lookupDescription* can alternatively nominate a subset of query columns
 for display in the drop-down.
 
-![](media/image124.png)
+![Figure 53](media/image124.png "Figure 53 - Example multi-column drop-down")
 
-Figure 53 Example multi-column drop-down
+_Figure 53 - Example multi-column drop-down_
 
-![](media/image125.png)
+![Figure 54](media/image125.png "Figure 54 - Example rendering of the lookupDescription")
 
-Figure 54 Example rendering of the lookupDescription
+_Figure 54 - Example rendering of the lookupDescription_
 
 #### Filter Parameters
 
@@ -249,15 +265,28 @@ defined in the applicable query). Filter parameters can be value (for a
 static value) or binding (filtering the list of eligible references by
 the value of a binding from the document being viewed).
 
-![](media/image126.png)
-Figure 55 Example of filter parameters
+```xml
+<lookupDescription binding="contact" descriptionBinding="bizKey" disabled="notManager">
+  <filterParameter name="contactType" value="Person" />
+</lookupDescription>
+```
+
+_Figure 55 - Example of filter parameters_
 
 If *filterParameters* have been defined and the user creates a reference
 on-the-fly (using the *Add*/*New* action), the created document will
 have the *filterParameter* values set by default.
 
-![](media/image127.png)
-Figure 56 - Example lookupDescription with filterParameter_
+```xml
+<row>
+  <item>
+    <lookupDescription binding="codeListAllocationCode" descriptionBinding="bizKey">
+      <filterParameter name="codeListSchemeCode" binding="parent.codeListSchemeRound.codeListSchemeCode" />
+    </lookupDescription>
+  </item>
+</row>
+```
+_Figure 56 - Example lookupDescription with filterParameter_
 
 In Figure 56 above, the *lookupDescription* for binding
 *codeListAllocationCode* has a *filterParameter* using the current
@@ -282,16 +311,20 @@ widget supports.
 The available event handlers are:
 
 -   *onAddedHandlers*,
-
 -   *onClearedHandlers*,
-
 -   *onEditedHandlers*, and
-
 -   *onPickedHandlers*.
 
-![](media/image128.png)
+```xml
+<lookupDescription binding="contact" descriptionBinding="bizKey" disabled="notManager">
+  <onAddedHandlers>
+    <server action="applyRules" />
+  </onAddedHandlers>
+  <filterParameter name="contactType" value="Person" />
+</lookupDescription>
+```
 
-Figure 57 Example application of an onAddedHandler event action
+_Figure 57 - Example application of an onAddedHandler event action_
 
 In the above example, if the user sets a reference by creating a
 document on-the-fly, the server-side action *applyRules* will be
@@ -329,9 +362,9 @@ relevant for managing the collection. d*atagrids* support drag-drop for
 ordering, provided this is allowed as per the declaration of the
 collection.
 
-![](media/image129.png)
+![Figure 59](media/image129.png "Figure 59 - Example dataGrid definition of the dataGrid above")
 
-_Figure 59 Example dataGrid definition of the dataGrid above._
+_Figure 59 - Example dataGrid definition of the dataGrid above_
 
 #### Columns
 
@@ -407,9 +440,9 @@ If *filterParameters* have been defined and the user creates a new
 document from the grid (using the grid *Add* action), the created
 document will have the *filterParameter* values set by default.
 
-![](media/image131.png)
+![Figure 60](media/image131.png "Figure 60 - Example listGrid with filterParameters")
 
-_Figure 60 Example listGrid with filterParameters_
+_Figure 60 - Example listGrid with filterParameters_
 
 In the example shown above, the *filterParameter* name “supplier”
 corresponds to the binding of the “qProducts” query column being
@@ -446,28 +479,28 @@ view.
 *Report* actions (described below) provide access to defined report
 objects and must also be declared in the actions section of the view.
 
-![](media/image132.png)
+![Figure 61](media/image132.png "Figure 61 - Example ActionPanel including Implicit, Custom and Report actions")
 
-_Figure 61 Example ActionPanel including Implicit, Custom and Report
-actions_
+_Figure 61 - Example ActionPanel including Implicit, Custom and Report actions_
 
 ***Tip:*** You must declare all actions in the action section even if
 they will not appear in the ActionPanel.
 
-Property | Description |
----------| ------------|
-inActionPanel | controls whether the action button is included in the Action Panel at the top of the view <br><br>If a button is not to be displayed in the *ActionPanel* a button widget will be required elsewhere within the view for the action to be accessible.
-displayName | the text which will appear on the button
-className | the name of the Java action class to be executed when the button is pressed
-confirm | a confirmation message to be displayed requesting confirmation by the user<br><br>If no confirmation message is supplied, no confirmation is requested.
-disabled | whether the button is shown in a disabled state
-invisible | whether the button is visible
-relativeIconFileName | the filename of an icon which will be displayed together with the *displayName* on the button<br><br>        Filenames are usually relative allowing the Skyve overriding mechanism to locate the absolute path to the file based on the context of the user.
-toolTip | tooltip help to be displayed for the button
+  Property      | Description
+  ------------- | -----------
+  inActionPanel | controls whether the action button is included in the Action Panel at the top of the view <br><br>If a button is not to be displayed in the *ActionPanel* a button widget will be required elsewhere within the view for the action to be accessible.
+  displayName   | the text which will appear on the button
+  className     | the name of the Java action class to be executed when the button is pressed
+  confirm       | a confirmation message to be displayed requesting confirmation by the user<br><br>If no confirmation message is supplied, no confirmation is requested.
+  disabled      | whether the button is shown in a disabled state
+  invisible     | whether the button is visible
+  relativeIconFileName | the filename of an icon which will be displayed together with the *displayName* on the button<br><br>        Filenames are usually relative allowing the Skyve overriding mechanism to locate the absolute path to the file based on the context of the user.
+  toolTip       | tooltip help to be displayed for the button
 
 _Table 19 - View definition Action properties_
 
-![](media/image133.png)
+![Figure 62](media/image133.png "Figure 62 - Example action declaration including Default, Custom and Report actions")
+
 _Figure 62 - Example action declaration including Default, Custom and Report actions_
 
 The example declaration in Figure 62 above declares default actions
@@ -516,7 +549,12 @@ the document of the target view. The binding does not need to be present
 in the target view definition, but it must be a valid binding in the
 target document.
 
-![](media/image134.png)
+```xml
+<newParameters>
+  <parameter name="model" />
+  <parameter name="type" />
+</newParameters>
+```
 
 _Figure 63 - Example newParameters section_
 
