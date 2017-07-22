@@ -116,5 +116,8 @@ contexts (including in grids).
 
 _Figure 47 - Worked converters example: converted value as displayed in a grid_
 
+**[⬆ back to top](#contents)**
+
+---
 **Next [Chapter 10: Bizlets](./../chapters/bizlets.md)**  
-**Previous [Chapter 8: Documents](./../chapters/documents.md)** 
+**Previous [Chapter 8: Documents](./../chapters/documents.md)**
