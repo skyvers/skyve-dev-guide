@@ -31,9 +31,10 @@ Jasper Reports.
 Jasper report templates, created using iReport, are located within the
 reports folder of the driving document.
 
-![](media/image138.png)]
+![Figure 67](media/image138.png "Figure 67 - Report objects are located within the reports folder for the
+applicable document")
 
-_Figure 67 Report objects are located within the reports folder for the
+_Figure 67 - Report objects are located within the reports folder for the
 applicable document_
 
 Report actions must be declared in a view for reports to be accessible
@@ -43,9 +44,9 @@ report actions to the action section.
 
 By default, report actions are displayed with the printer icon.
 
-![](media/image139.png)
+![Figure 68](media/image139.png "Figure 68 - Example report action button")
 
-_Figure 68 Example report action button_
+_Figure 68 - Example report action button_
 
 To ensure all reports are valid and can be run, use the *compileReports*
 ant task to recompile all Jasper reports.
@@ -54,9 +55,9 @@ When reports are requested by the user (using the report action button)
 Skyve will offer the user a choice of formats in which the report will
 be rendered.
 
-![](media/image140.png)
+![Figure 69](media/image140.png "Figure 69 - Selecting a report format")
 
-_Figure 69 Selecting a report format_
+_Figure 69 - Selecting a report format_
 
 It is the responsibility of the report designer to consider the
 implications of the user selecting a format which the designer has not
@@ -93,10 +94,9 @@ persisted (i.e. saved) values.
 If the bean passed to the report has collections, these can be used as
 the basis for grouped detail rows, as with SQL data sources.
 
-![](media/image141.png)
+![Figure 70](media/image141.png "Figure 70 - Example report query using the object data source declared in iReport")
 
-_Figure 70 Example report query using the object data source declared in
-iReport._
+_Figure 70 - Example report query using the object data source declared in iReport_
 
 ### Ad-hoc Reports
 

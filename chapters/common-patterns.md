@@ -35,9 +35,21 @@
 To identify the current user in Bizlet code, instantiate the Persistence
 class. The Persistence class provides the *getUser*() method.
 
-![](media/image146.png)
+```java
+public static Contact getCurrentUserContact() throws MetadataException, DomainException {
+  Persistence persistence = CORE.getPersistence();
+  User user = persistence.getUser();
+  Customer customer = user.getCustomer();
+  Module module = customer.getModule(Contact.MODULE_NAME);
+  Document document = module.getDocument(customer, Contact.DOCUMENT_NAME);
 
-_Figure 75 Example code to retrieve the current user contact_
+  Contact contact = persistence.retrieve(document, user.getContactId(), false);
+
+  return contact;
+}
+```
+
+_Figure 75 - Example code to retrieve the current user contact_
 
 In the example above, the method first obtains the Persistence
 mechanism, then the current user, the customer context in which that
@@ -49,33 +61,51 @@ correctly typed.
 
 ### Identify if Current User has Role
 
-![](media/image147.png)
+```java
+@Override
+public boolean isManager() {
+  return isUserInRole("time", "TimesheetManager");
+}
+```
 
-_Figure 76 Example of isUserInRole_
+_Figure 76 - Example of isUserInRole_
 
 The above example establishes whether the current user has the role of
 TimesheetManager in the time module.
 
 ### Save a Document Instance
 
-To save a document instance, you must identify the module and document
-of the bean.
+To save a document instance, you can identify the module and document
+of the bean, or optionally save any subclass of `PersistentBean` directly.
 
-![](media/image148.png)
+```java
+Persistence persistence = CORE.getPersistence();
+Customer customer = persistence.getUser().getCustomer();
+Module module = customer.getModule(Contact.MODULE_NAME);
+Document document = module.getDocument(customer, Contact.DOCUMENT_NAME);
 
-_Figure 77 Example code to save a bean_
+// save the bean specifying the document
+bean = persistence.save(document, bean);
+
+// or save the bean directly
+bean = persistence.save(bean);
+```
+
+_Figure 77 - Example code to save a bean_
 
 ### Instantiate a New Document Instance
 
-![](media/image149.png)
+```java
+ContactInteraction interaction = ContactInteraction.newInstance();
+```
 
-_Figure 78 Example code to instantiate a new document instance_
+_Figure 78 - Example code to instantiate a new document instance_
 
 ### Building a Variant Domain List
 
-![](media/image150.png)
+![Figure 79](media/image150.png "Figure 79 - Example code to create a variant domain set")
 
-_Figure 79 Example code to create a variant domain set_
+_Figure 79 - Example code to create a variant domain set_
 
 The above example creates a list of domain values (for a selection)
 where the relationship to invoices has not been modelled or is ad-hoc.
@@ -87,12 +117,29 @@ domain lists via code (as above).
 
 ### Schedule an Offline Job
 
-Declare the Job within the *module.xml* file and the Job class
-(extending *BizHubJob*).
+Declare the Job within the `module.xml` file and the Job class
+(extending `org.skyve.job.Job`).
 
-![](media/image151.png)
+```java
+/**
+ * Kick off the annual returns job
+ */
+@Override
+public ServerSideActionResult<GrowerSearchCriteria> execute(GrowerSearchCriteria search, WebContext WebContext) throws Exception {
+  User user = CORE.getPersistence().getUser();
+  Customer customer = user.getCustomer();
+  Module module = customer.getModule(Grower.MODULE_NAME);
+  Job job = module.getJob("jAnnualReturns");
 
-_Figure 80 Example code to schedule a oneShot Job_
+  EXT.runOneShotJob(job, search, user);
+
+  search.setReturnResults("The generation job has commenced.");
+
+  return new ServerSideActionResult<>(search);
+}
+```
+
+_Figure 80 - Example code to schedule a oneShot Job_
 
 Note when scheduling a Job, the customer and user context must be
 established so that the job will run correctly within the specified
@@ -107,19 +154,33 @@ reasons, this may not be required.
 Use the *upsertBeanTuple*() method to save the values of the top-most
 attributes of the bean, without traversing the entire bean structure.
 This is useful if the task requires updates of trivial nature to beans
-with substantial complexity.
+with substantial complexity, or if bean validation needs to be bypassed for some reason.
 
-![](media/image152.png)
+```java
+DateOnly requestedDate = new DateOnly();
+for(Subscription sub : subsToUpdate) {
+  sub.setRequestedDateTime(requestedDate);
+  CORE.getPersistence().upsertBeanTuple(sub);
+}
+```
 
-_Figure 81 Example upsertBeanTuple()_
+_Figure 81 - Example upsertBeanTuple()_
 
 ### Retrieve and Iterate Through Beans
 
-![](media/image153.png)
+```java
+DocumentQuery q = CORE.getPersistence().newDocumentQuery(FileCategory.MODULE_NAME, FileCategory.DOCUMENT_NAME);
+q.addOrdering(FileCategory.namePropertyName);
 
-_Figure 82 Example code to retrieve and iterate through a list of beans_
+List<FileCategory> categories = q.beanResults();
+for(FileCategory cat : categories) {
 
-### Singleton Documents (Parameter /Configuration Documents)
+}
+```
+
+_Figure 82 - Example code to retrieve and iterate through a list of beans_
+
+### Singleton Documents (Parameter / Configuration Documents)
 
 A singleton document is a document of which there should only ever be
 one instance within the current scope or context.
@@ -129,12 +190,16 @@ which contain module configuration/preference settings. For example, a
 Timesheet module may have a preference document specifying the expected
 number of hours to be completed.
 
-First, in the *module.xml* file, add a menu item for the document which
-has a ref of edit.
+First, in the `module.xml` file, add a menu item for the document which
+has an element type of _edit_.
 
-![](media/image154.png)
+```xml
+<edit name="Configuration" document="Configuration">
+	<role name="Administrator" />
+</edit>
+```
 
-_Figure 83 Example edit menu target_
+_Figure 83 - Example edit menu target_
 
 Next, override the *newInstance*() method in the document *Bizlet* to
 set the bean to be the first bean returned from *DocumentQuery*. Using
@@ -142,9 +207,20 @@ set the bean to be the first bean returned from *DocumentQuery*. Using
 permissions will automatically be applied, restricting the beans
 returned as declared.
 
-![](media/image155.png)
+```java
+@Override
+	public Configuration newInstance(Configuration bean) throws Exception {
+		Persistence p = CORE.getPersistence();
+		DocumentQuery q = p.newDocumentQuery(Configuration.MODULE_NAME, Configuration.DOCUMENT_NAME);
+		Configuration result = q.beanResult();
+		if (result == null) {
+			result = bean;
+		}
+		return result;
+	}
+```
 
-_Figure 84 Example newInstance method which sets the current Bean_
+_Figure 84 - Example newInstance method which sets the current Bean_
 
 Because the document will always show in edit mode (i.e. is not accessed
 from a list), the view should not offer the OK action as this implies
@@ -154,14 +230,16 @@ action is sensible in the particular context.
 ### User-scoped Documents (Personal preferences Documents)
 
 Create a singleton document (as described above), but additionally scope
-the document to User scope in the *module.xml*.
+the document to User scope in the `module.xml`.
 
 Generally for this type of document, the *Delete* permission is not
 assigned.
 
-![](media/image156.png)
+```xml
+<document name="FinancialReports" permission="CRU_U" />
+```
 
-_Figure 85 Example of user scoped document permission_
+_Figure 85 - Example of user scoped document permission_
 
 For example, a Timesheet module may have a User-scoped preference
 document allowing users to set their default task (which could be set
@@ -173,13 +251,12 @@ To customise document attribute names, place an override of the
 *document.xml* file into the customer package and modify the document
 attribute *displayName* and *shortDescription* values accordingly.
 
-To complete the customisation, also place an override of *module.xml*
+To complete the customisation, also place an override of `module.xml`
 for each module and update query, role and menu text as required.
 
-![](media/image157.png)
+![Figure 86](media/image157.png "Figure 86 - Example of customer override of the Contact document, Bizlet and view")
 
-_Figure 86 Example of customer override of the Contact document, Bizlet
-and view_
+_Figure 86 - Example of customer override of the Contact document, Bizlet and view_
 
 Validation will ensure that both the “vanilla” and overridden artefacts
 are consistent with the rest of the application module.

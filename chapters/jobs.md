@@ -24,9 +24,9 @@ session).
 
 Jobs are declared in the *module.xml* file in the *jobs* section.
 
-![](media/image142.png)
+![Figure 71](media/image142.png "_Figure 71 - Example job declaration within the module.xml file")
 
-_Figure 71 Example job declaration within the module.xml file_
+_Figure 71 - Example job declaration within the module.xml file_
 
 Job declaration includes logical name, *displayName* and *className.*
 
@@ -44,19 +44,35 @@ role.
 
 ### Job Classes
 
-Job classes must extend the *BizHubJob* abstract class. Custom job code
-is located in the *execute*() method.
+Job classes must extend the `org.skyve.job.Job` abstract class. Custom job code is located in the `execute()` method.
 
-![](media/image143.png)
+![Figure 72](media/image143.png "Figure 72 - Example Job class")
 
-_Figure 72 Example Job class_
+_Figure 72 - Example Job class_
 
 Jobs can be scheduled in action or *Bizlet* code using the
 *JobScheduler* class.
 
-![](media/image144.png)
+```java
+/**
+ * Kick off the annual returns job
+ */
+@Override
+public ServerSideActionResult<GrowerSearchCriteria> execute(GrowerSearchCriteria search, WebContext WebContext) throws Exception {
+  User user = CORE.getPersistence().getUser();
+  Customer customer = user.getCustomer();
+  Module module = customer.getModule(Grower.MODULE_NAME);
+  Job job = module.getJob("jAnnualReturns");
 
-_Figure 73 Example action class code to run a one-shot Job_
+  EXT.runOneShotJob(job, search, user);
+
+  search.setReturnResults("The generation job has commenced.");
+
+  return new ServerSideActionResult<>(search);
+}
+```
+
+_Figure 73 - Example action class code to run a one-shot Job_
 
 As Jobs are run within the context of a user so that Skyve’s embedded
 comprehensive security model can be enforced.
