@@ -37,7 +37,7 @@ Skyve provides the following Implicit Actions:
   BizImport          | user attempts to import data using the *Bizport* capability
   BizExport          | user attempts to export data using the *Bizport* capability
 
-*Table 20 Implicit Actions*
+_Table 20 - Implicit Actions_
 
 In addition to implicit actions provided by Skyve, developers can create Custom actions, or override Implicit action behaviour in the document *Bizlet*.
 
@@ -58,9 +58,17 @@ Note that actions can also be triggered by declaring onChangeHandlers for a spec
 When a view declaration is supplied, the action must be declared in the
 *actions* section of the *view.xml*.
 
-![](media/image136.png)
+```xml
+  <actions>
+    <action displayName="PreviousPeriod" className="PreviousPeriod" inActionPanel="true" />
+    <action displayName="NextPeriod" className="NextPeriod" inActionPanel="true" />
+    <action displayName="Calculate" className="Calculate" inActionPanel="true" />
+    <action displayName="Update" className="Update" inActionPanel="false" />
+  </actions>
+</view>
+```
 
-_Figure 65 Example action section of a view definition_
+_Figure 65 - Example action section of a view definition_
 
 The action element of the view definition indicates the *className* of
 the action as well as the *displayName* (button text). Action properties
@@ -69,7 +77,19 @@ are explained in full in Table 19.
 Note that the action section of a view definition also includes implicit
 actions.
 
-![Figure 66](media/image137.png "Figure 66 Example customisation of the Save Implicit action")
+```java
+/**
+ * Standardise the contact on press of Save button.
+ */
+@Override
+public Contact preExecute(ImplicitActionName actionName, Contact bean, WebContext webContext) throws Exception {
+  if(ImplicitActionName.Save.equals(actionName)) {
+    AdminUtil.standardiseContact(bean);
+  }
+
+  return bean;
+}
+```
 
 _Figure 66 - Example customisation of the Save Implicit action_
 
