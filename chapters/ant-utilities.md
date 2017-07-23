@@ -28,22 +28,22 @@
     * [Javadoc](#javadoc)
 
 Specific to the Java implementation of Skyve, Skyve projects include a
-build.xml file which contains a number of utilities to assist
-developers. To access the utilities, drag the build.xml file into the
+`build.xml` file which contains a number of utilities to assist
+developers. To access the utilities, drag the `build.xml` file into the
 ant view in Eclipse.
 
-![](media/image159.png)
+![Figure 88](media/image159.png "Figure 88 - Accessing the ant utilities")
 
-_Figure 88 Accessing the ant utilities_
+_Figure 88 - Accessing the ant utilities_
 
 The default target is generateDomain – which performs model validation
 and generates the domain classes.
 
-![](media/image160.png)
+![Figure 89](media/image160.png "Figure 89 - Ant tasks")
 
-_Figure 89 Ant tasks_
+_Figure 89 - Ant tasks_
 
-Developers can customise the build.xml, adding their own targets as
+Developers can customise the `build.xml`, adding their own targets as
 required, or customising those provided.
 
 ### Generate Domain
@@ -61,16 +61,16 @@ the default view as Skyve would generate for a document on-the-fly.
 From the ant view, edit the target and nominate the customer, module and
 document arguments.
 
-![](media/image161.png)
+![Figure 90](media/image161.png "Figure 90 - Setting the parameters to create a default edit view")
 
-_Figure 90 Setting the parameters to create a default edit view_
+_Figure 90 - Setting the parameters to create a default edit view_
 
 When you run the target, a file generatedEdit.xml will be created at the
 in the file system at the top level of the project.
 
-![](media/image162.png)
+![Figure 91](media/image162.png "Figure 91 - Locating the generated edit view")
 
-_Figure 91 Locating the generated edit view_
+_Figure 91 - Locating the generated edit view_
 
 ### Generating a Deployable Archive - copyProdEAR
 
@@ -78,9 +78,9 @@ The copyProdEAR target copies all files required for deployment, without
 the associated git or subversion files into a deployment ear folder in
 the project prod folder.
 
-![](media/image163.png)
+![Figure 92](media/image163.png "Figure 92 - Creating a deployable archive")
 
-_Figure 92 Creating a deployable archive_
+_Figure 92 - Creating a deployable archive_
 
 ### Javadoc
 
@@ -88,9 +88,7 @@ Skyve provides a javadoc ant target which generates a documentation set
 incorporating:
 
 -   doc metadata attributes as specified in the Skyve metadata,
-
 -   generic javadoc, and
-
 -   logical model graph, generated using graphviz “dot” application.
 
 ![](media/image164.png)
@@ -103,10 +101,9 @@ Custom javadoc can also be created using the usual doclet interface.
 The javadoc utility includes a combination of the application metadata
 formatted and combined with the embedded documentation.
 
-![](media/image165.png)
+![Figure 93](media/image165.png "Figure 93 - Example of formatted application specification combining metadata and embedded documentation")
 
-_Figure 93 Example of formatted application specification combining
-metadata and embedded documentation_
+_Figure 93 - Example of formatted application specification combining metadata and embedded documentation_
 
 Skyve includes documentation attributes at every level of application
 metadata.
@@ -119,15 +116,10 @@ the metadata), according to the concepts inherent in the platform.
 The utility creates a full documentation set including:
 
 -   Titles,
-
 -   Overviews,
-
 -   Indexes and Table of Contents for each section,
-
 -   Automatic numbered references for each section, table and figure,
-
 -   Internal links, and
-
 -   External links.
 
 Because the utility generates documentation for every part of the
@@ -135,10 +127,9 @@ application specification, it encourages developers and technical
 writers to be thorough and cover all aspects of the application they are
 documenting.
 
-![](media/image166.png)
+![Figure 94](media/image166.png "Figure 94 - Customise the javadoc task to specify the package and destination directory")
 
-_Figure 94 Customise the javadoc task to specify the package and
-destination directory_
+_Figure 94 - Customise the javadoc task to specify the package and destination directory_
 
 **[⬆ back to top](#contents)**
 

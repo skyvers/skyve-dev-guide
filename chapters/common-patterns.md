@@ -209,15 +209,15 @@ returned as declared.
 
 ```java
 @Override
-	public Configuration newInstance(Configuration bean) throws Exception {
-		Persistence p = CORE.getPersistence();
-		DocumentQuery q = p.newDocumentQuery(Configuration.MODULE_NAME, Configuration.DOCUMENT_NAME);
-		Configuration result = q.beanResult();
-		if (result == null) {
-			result = bean;
-		}
-		return result;
+public Configuration newInstance(Configuration bean) throws Exception {
+	Persistence p = CORE.getPersistence();
+	DocumentQuery q = p.newDocumentQuery(Configuration.MODULE_NAME, Configuration.DOCUMENT_NAME);
+	Configuration result = q.beanResult();
+	if (result == null) {
+		result = bean;
 	}
+	return result;
+}
 ```
 
 _Figure 84 - Example newInstance method which sets the current Bean_

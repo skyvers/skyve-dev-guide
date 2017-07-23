@@ -40,18 +40,11 @@ best-practice Web design features on every logical table within the
 application persistence model including:
 
 -   Generic naming conventions for generic mechanisms,
-
 -   UUID enterprise-level guaranteed key uniqueness,
-
 -   Optimistic Lock concurrency controls,
-
--   Document scoping - declarative row-level security & source
-    identification,
-
+-   Document scoping - declarative row-level security & source identification,
 -   Multi-tenancy,
-
 -   Enterprise-wide consistent reference representation, and
-
 -   Collaborative record flagging.
 
 ### Generic Naming Conventions
@@ -66,7 +59,7 @@ prefixed “biz”.
 Skyve mandates the existence of the following named columns on all
 primary data rows in a Skyve managed database:
 
-Column Name | Purpose | Comments 
+Column Name | Purpose | Comments
 ------------|---------|----------
 bizId       | Enterprise wide unique identifier  | The use of UUID guarantees consistency and means no performance costs for assigning IDs, also means that IDs can be generated in external source applications without the need for re-keying when importing into a Skyve application store.
 bizVersion  | Optimistic lock concurrency control | Skyve compares the persisted version number at the time the bean is loaded with the version number when attempting to save. If the numbers are different, the bean has been changed by another conversation.
@@ -97,8 +90,8 @@ the semantic nature of each relationship.
 
 #### Ordering and bizOrdinal
 
-Column Name |  Purpose  |  Comments 
-------------| ----------|-----------
+Column Name | Purpose   | Comments
+----------- | --------- | -----------
 bizOrdinal  | Generic collection ordinal position | bizOrdinal is used for implicit ordering where collections are declared “ordered”.
 
 Where collections are declared to be ordered, Skyve maintains the
@@ -207,9 +200,9 @@ text-based flag for every entity/record within the application.
 bizFlagComment will be represented in the list by a flag icon with the
 hover gesture displaying the persisted comment.
 
-![](media/image158.png)
+![Figure 87](media/image158.png "Figure 87 - Example of the result of hover action over the flag icon")
 
-_Figure 87 Example of the result of hover action over the flag icon_
+_Figure 87 - Example of the result of hover action over the flag icon_
 
  ### Document scoping row-level security and source identification
 

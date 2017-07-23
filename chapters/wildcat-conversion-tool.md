@@ -31,7 +31,9 @@ NOTE: Refer to the WCT developer guide for full details.
 
 ### Using the Skyve Converstion Tool (WCT)
 
-![](media/image167.png)
+![Figure 95](media/image167.png "Figure 95 - Conversion Overview")
+
+_Figure 95 - Conversion Overview_
 
 Application metadata may be created using WCT. WCT combines ETL
 capabilities with generation of *Bizlet* code and application metadata.
@@ -60,9 +62,9 @@ Generation | WCT generates application metadata and Bizlet code. <br><br>Skyve a
 Migration Plan | WCT creates a default migration plan (as a mapping file), which includes SQL update statements for references. A postload file is also created, containing just the SQL update statements.<br><br>SQL updates run after the data is migrated to the destination DB and use legacy fields as staging mechanisms.<br><br>The postload file can be used to ensure referential integrity after subsequent data manipulations during the development process. | Mapping file<br><br>Postload file
 Migration | WCT either migrates the data directly from the source DB to the destination DB, or creates a data load file. | Data load file (optionally)
 
-![](media/image168.png)
+![Figure 96](media/image168.png "Figure 96 - Detailed Conversion Process and Artefacts")
 
-_Figure 96 Detailed Conversion Process and Artefacts_
+_Figure 96 - Detailed Conversion Process and Artefacts_
 
 ### Development Approach and Roundtripping
 
