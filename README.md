@@ -37,6 +37,7 @@
   * [Chapter 19: Content Repository Tools](chapters/content-repository-tools.md)
   * [Chapter 20: Bizport](chapters/bizport.md)
   * [Chapter 21: WILDCAT Conversion Tool](chapters/wildcat-conversion-tool.md)
+  * [Chapter 22: Automated Unit Testing](chapters/automated-unit-testing.md)
 * [Section 5: Appendix](chapters/appendix.md)
   * [Appendix 1: Deploying a Skyve Application](chapters/appendix.md)
   * [Appendix 2: Installing and configuring the Skyve Development Environment](chapters/appendix.md)
