@@ -25,7 +25,7 @@
 * [Chapter 21: WILDCAT Conversion Tool](./../chapters/wildcat-conversion-tool.md)
 * **[Chapter 22: Automated Unit Testing](#automated-unit-testing)**
 	* [Configuration](#configuration)
-		* [Build.xml parameters](#build-xml-parameters)
+		* [Build.xml parameters](#buildxml-parameters)
 		* [Maven parameters](#maven-parameters)
 		* [AbstractH2Test](#abstracth2test)
 		* [AbstractDomainTest](#abstractdomaintest)
