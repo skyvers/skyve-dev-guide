@@ -125,8 +125,8 @@ After cloning the master, go to Project -> Clean - Select clean all projects and
 #### Configuring JBoss
 
 * Locate the 'java-ee' project->javaee->'skyve-ds.xml' file and delete that file. It is no longer needed as we will be entering SQL Server later in Wildfly standalone.xml.
-* Now download the SQL server JDBC jtds jar file from here - http://www.java2s.com/Code/Jar/s/Downloadsqljdbc430jar.htm
-* From your wildfly installation folder, create \wildfly-10.0.0.Final\modules\system\layers\base\com\microsoft\sqlserver\main\ folder structure and copy the jtds jar inside the main folder, and then create an new XML file in the same location named 'module.xml' and enter the following before saving and close:
+* Now download the SQL server JDBC sqljdbc4-3.0.jar file from here - http://www.java2s.com/Code/Jar/s/Downloadsqljdbc430jar.htm
+* From your wildfly installation folder, create \wildfly-10.0.0.Final\modules\system\layers\base\com\microsoft\sqlserver\main\ folder structure and copy the JDBC jar inside the main folder, and then create an new XML file in the same location named 'module.xml' and enter the following before saving and close:
 
 ```
  <module xmlns="urn:jboss:module:1.1" name="com.microsoft.sqlserver">
