@@ -97,11 +97,6 @@ administrator username and password. For this example, we are going to use MS SQ
 * On the same dialog box, choose Default database as skyve, now go to Server Roles on left hand pane and tick 'sysadmin', then go to User Mapping and tick 'skyve' and finally, click the 'OK' button down the bottom right.
 * If you've just installed SQL server, you will need to specify the port for this database, see instruction here (https://community.spiceworks.com/how_to/124598-find-the-port-sql-server-is-using-and-change-a-dynamic-port-to-static), again, remember the port number you've entered.
 
-It is generally also a good idea to install Tortoise
-(tortoisesvn.tigris.org) to resolve occasional problems with Subclipse.
-You also need to have the username/password for the Skyve subversion
-repository.
-
 ### Configuring Java
 * Download jdk1.8.0 (if you haven't already) (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and install it to your machine.
 * Go your Control Panel->System and Security->System (for windows). Now select 'Advanced system settings' and click the "Environment Variables..." button.
@@ -130,7 +125,7 @@ After cloning the master, go to Project -> Clean - Select clean all projects and
 #### Configuring JBoss
 
 * Locate the 'java-ee' project->javaee->'skyve-ds.xml' file and delete that file. It is no longer needed as we will be entering SQL Server later in Wildfly standalone.xml.
-* Now download the SQL server JDBC jtds jar file from here - https://sourceforge.net/projects/jtds/?source=typ_redirect
+* Now download the SQL server JDBC jtds jar file from here - http://www.java2s.com/Code/Jar/s/Downloadsqljdbc430jar.htm
 * From your wildfly installation folder, create \wildfly-10.0.0.Final\modules\system\layers\base\com\microsoft\sqlserver\main\ folder structure and copy the jtds jar inside the main folder, and then create an new XML file in the same location named 'module.xml' and enter the following before saving and close:
 
 ```
