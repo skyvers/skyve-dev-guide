@@ -249,7 +249,15 @@ each row returned by the effective query in the drop-down. However,
 *lookupDescription* can alternatively nominate a subset of query columns
 for display in the drop-down.
 
-![Figure 53](media/image124.png "Figure 53 - Example multi-column drop-down")
+```xml
+<lookupDescription binding="bankAccount" descriptionBinding="bizKey" query="docQueryBankAccount" >
+    <filterParameter operator="equal" name="active" value="true"/>
+    <dropDown>
+        <column>bsb.bsb</column>
+        <column>accountNumber</column>
+    </dropDown>
+</lookupDescription>
+```
 
 _Figure 53 - Example multi-column drop-down_
 
