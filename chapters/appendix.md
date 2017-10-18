@@ -32,7 +32,7 @@
     * [Configuring the IDE (Windows example)](#configuring-the-ide-windows-example)      
       * [Importing Projects](#importing-projects)
       * [Creating the server](#creating-the-server)
-      * [Configuring JBoss](#configuring-jboss)
+      * [Configuring Wildfly](#configuring-wildfly)
       * [Starting the server](#starting-the-server)      
   * [Appendix 3: Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
 
@@ -43,29 +43,22 @@ and the Skyve enterprise archive.
 
 Application metadata is deployed by copying the metadata Apps package to
 the destination location. The Enterprise Archive is deployed by copying
-the .ear package to the application server deployment area.
+the `.ear` package to the application server deployment area.
 
 For example, to deploy a Skyve application to a Windows server:
 
--   Install JBoss 6.0 or later,
-
-Copy the application metadata package to C:\\\_\\ ,
-
-Copy the Skyve `.ear` package and the `*ds.xml` file to
-&lt;jboss&gt;\\server\\default\\deploy\\ ,
-
-Update the `*ds.xml` with a valid connection string,
-
-Update the \\Apps\\content\\repository.xml,
-\\Apps\\content\\workspaces\\&lt;workspace&gt;\\workspace.xml with a
+- Install Wildfly 8 or later,
+- Copy the application metadata package to `C:\_\`,
+- Copy the Skyve `.ear` package and the `*ds.xml` file to `<wildfly>\standalone\deployments\`,
+- Update the `*ds.xml` with a valid connection string,
+- Update the `<wildfly>\standalone\configuration\standalone.xml` with a
 valid JDBC connection string, (usually the same connection string in the
 \*ds.xml file), and
+- Touch the server
 
-Touch the server.
-
-Additional steps may be required for single sign-on configuration, and
-the creation of service user accounts, SPNs and port configuration as
-required.
+See [Configuring Wildfly](#configuring-wildfly) for more detailed Wildfly setup 
+instructions. Additional steps may be required for single sign-on configuration, 
+and the creation of service user accounts, SPNs and port configuration as required.
 
 **[⬆ back to top](#contents)**
 
@@ -80,8 +73,6 @@ Before you begin, ensure you have the following:
 * Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)), at least JDK 1.7
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)), so that the installation
 is in C:\\eclipse\\
-* Note: for Eclipse to start, you need to follow the steps in 'Configuring Java' section first (next section).
-* For the app server, In Eclipse, go to Help->'Eclipse Marketplace...' Search for 'Jboss' then choose JBoss tools for your Eclipse version, then click the 'Install' button.
 * Wildfly 10 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
 * A RDBMS which is supported by Hibernate
 ([www.hibernate.org](http://www.hibernate.org)) – ensure you record the
@@ -104,22 +95,42 @@ administrator username and password. For this example, we are going to use MS SQ
 
 ### Configuring the IDE (Windows example)
 
-* Create C:\\\_\\ (just go to C:\\->right click->New->Folder then type "_" as the folder name)
-You may use whatever folder for you workspace in Eclipse, just do remember the folder you've chosen and make sure that the folder name has no spaces (java doesn't like naming convention with spaces).
-* Start Eclipse uisng Eclipse.exe and select C:\\\_\\ as workspace, tick 'Use as default option - do not ask again', Cancel the welcome wizard and Close the welcome tab in the editor frame.
-* Change compiler compliance level to 1.8 (Window -> Preferences -> Java -> Compiler) press ‘Apply’ - press Yes for full build, and then press OK.
+* Create C:\\\_\\ (just go to C:\\->right click->New->Folder then type "_" as the 
+folder name). You may use any folder for you workspace in Eclipse, just do remember 
+the folder you've chosen and try to ensure that the folder name has no spaces to avoid 
+any issues with Java paths and spaces.
+* Start Eclipse uisng Eclipse.exe and select C:\\\_\\ as workspace, tick 'Use as 
+default option - do not ask again', Cancel the welcome wizard and Close the welcome 
+tab in the editor frame.
+* Change compiler compliance level to 1.8 (Window -> Preferences -> Java -> Compiler) 
+press ‘Apply’ - press Yes for full build, and then press OK.
+* To manage the Wildfly application server from Eclipse:
+  * Open the server explorer window if it is not already in your workspace (Window -> Show View -> Servers)
+  * Right click inside the server explorer and select New
+  * Expand JBoss Community
+  * If WildFly 10.x is not in the list of adapters, you will need to download them:
+    * Choose JBoss, WildFly & EAP Server Tools and click Next
+    * Accept the licence terms and click Finish
+    * Restart Eclipse when prompted
+  * Select WildFly 10.x and click _Next_
+  * Accept the defaults and click _Next_
+  * Click _Finish_
 
 #### Importing Projects
 
-In Eclipse, choose File->Import.. ->Git->Projects from Git->Next->Clone URI and type in https://github.com/skyvers/skyve.git as URI, then click the 'Next' button, choose the master and click the 'Next' button. Choose your destination directory, in this example, we have chosen C:\\\_\\ directory. Then click the 'Next' button. The import wizard should be displayed and cloning the Skyve project.
+In Eclipse, choose File->Import.. ->Git->Projects from Git->Next->Clone URI and 
+type in https://github.com/skyvers/skyve.git as URI, then click the _Next_ button, 
+choose the master and click the _Next_ button. Choose your destination directory, 
+in this example, we have chosen C:\\\_\\ directory. Then click the _Next_ button. 
+The import wizard should be displayed and cloning the Skyve project.
 
 After cloning the master, go to Project -> Clean - Select clean all projects and press OK - wait for activity to cease in bottom right corner of the eclipse window.
 
 #### Creating the server
 
 * In Eclipse, open the 'Servers' view. Window->Show View->Other...->Server->Servers
-* Right click inside the 'Server' tab/view and select New->Server. Now if you have installed the JBoss tools as per above instruction, you should be able to select 'Wildfly 10.x'. Leave everything as is and click the 'Next' button, leave everything as is and click the 'Next' button again.
-* On the next dialog box named JBoss Runtime, click 'Download and install runtime...' link and select 'Wildfly 10.0.0 Final' and click 'Next', accept the terms and click 'Next'.
+* Right click inside the 'Server' tab/view and select New->Server. Now if you have installed the JBoss tools as per above instruction, you should be able to select 'Wildfly 10.x'. Leave everything as is and click the _Next_ button, leave everything as is and click the _Next_ button again.
+* On the next dialog box named JBoss Runtime, click 'Download and install runtime...' link and select 'Wildfly 10.0.0 Final' and click _Next_, accept the terms and click _Next_.
 * You may choose your preferred installation folder but do remember this folder as you will need it later, and click 'Finish'. Once your Wildfly is installed, choose 'jdk1.8.0_xxx' as the 'Alternate JRE' for your Wildfly Runtime JRE then click the 'Finish' button.
 
 #### Configuring Wildfly
@@ -178,20 +189,20 @@ After cloning the master, go to Project -> Clean - Select clean all projects and
 ```xml
 <subsystem xmlns="urn:jboss:domain:datasources:4.0">
   <datasources>
-   <datasource jndi-name="java:/DefaultDS" pool-name="DefaultDS" enabled="true" use-java-context="true">
-    <connection-url>jdbc:sqlserver://localhost:1433;databasename=skyve</connection-url>
-    <driver>sqlserver</driver>
-   <security>
-    <user-name>[your SQL Server user]</user-name>
-    <password>[your SQL Server password]</password>
-   </security>
-  </datasource>
-  <drivers>
-   <driver name="sqlserver" module="com.microsoft.sqlserver">
-    <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-   </driver>
-  </drivers>
- </datasources>
+    <datasource jndi-name="java:/DefaultDS" pool-name="DefaultDS" enabled="true" use-java-context="true">
+      <connection-url>jdbc:sqlserver://localhost:1433;databasename=skyve</connection-url>
+      <driver>sqlserver</driver>
+      <security>
+        <user-name>[your SQL Server user]</user-name>
+        <password>[your SQL Server password]</password>
+      </security>
+    </datasource>
+    <drivers>
+      <driver name="sqlserver" module="com.microsoft.sqlserver">
+        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+      </driver>
+    </drivers>
+  </datasources>
 </subsystem>
 ```
 * Open `skyve/skyve-ee/javaee/skyve.json`, the find the following settings entry.
@@ -211,7 +222,6 @@ dataStores: {
 and replace it with the following:
 
 ```javascript
-dataStores: {
 dataStores: {
 	// Skyve data store
 	"skyve": {
