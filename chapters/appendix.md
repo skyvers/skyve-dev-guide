@@ -72,7 +72,7 @@ different operating system or database.
 
 Before you begin, ensure you have the following:
 
-* Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)), at least JDK 1.7
+* Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)), at least JDK 1.8
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)), so that the installation
 is in C:\\eclipse\\
 * Wildfly 10 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
