@@ -71,25 +71,25 @@ required.
 
 ## Installing and configuring the Skyve Development Environment
 
-These instructions describe the process required to install and
-configure the development environment for Skyve.
+These instructions describe the process required to install and configure the development environment for Skyve. These instructions assume that you are using Windows and SQL Server. Some changes will need to be made if using a different operating system or database.
 
 ### Prerequisites checklist
 
 Before you begin, ensure you have the following:
 
-* Java ([www.oracle.com](http://www.oracle.com)), at least JDK 1.8
-* Eclipse ([www.eclipse.org](http://www.eclipse.org)) with Subclipse
-(<http://subclipse.tigris.org/update_1.6.x>), so that the installation
+* Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)), at least JDK 1.7
+* Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)), so that the installation
 is in C:\\eclipse\\
 * Note: for Eclipse to start, you need to follow the steps in 'Configuring Java' section first (next section).
 * For the app server, In Eclipse, go to Help->'Eclipse Marketplace...' Search for 'Jboss' then choose JBoss tools for your Eclipse version, then click the 'Install' button.
+* Wildfly 10 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
 * A RDBMS which is supported by Hibernate
 ([www.hibernate.org](http://www.hibernate.org)) – ensure you record the
 administrator username and password. For this example, we are going to use MS SQL Server as the database for the Skyve project.
-* If you already have SQL Server installed on your machine or on the network, you may skip the download/installations steps, otherwise, here are the instructions (you may need your DB administrator to help you out on this if you don’t have admin the rights).
-1) Download and install SQL Server (https://www.microsoft.com/en-au/download/details.aspx?id=29062)
-2) Download SQL Server Management Studio (https://www.microsoft.com/en-au/download/details.aspx?id=15366) and install it.
+* If you do not already have SQL Server installed:
+  * download and install the latest version of the developer or express edition for your platform from the [Microsoft website](https://www.microsoft.com/en-au/sql-server/sql-server-downloads)
+  * you will also need to download and install a copy of [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) to connect you your database and execute scripts
+
 * Open SQL Server Management Studio, choose Authentication as Windows Authentication and click the 'Connect' button.
 * Create a db named 'skyve', right click Databases->New Databases... and leave everything as is and click the 'OK' button.
 * Create a user for skyve db in SQL Server Management Studio, right click Security->New->Login...
@@ -99,8 +99,8 @@ administrator username and password. For this example, we are going to use MS SQ
 
 ### Configuring Java
 * Download jdk1.8.0 (if you haven't already) (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and install it to your machine.
-* Go your Control Panel->System and Security->System (for windows). Now select 'Advanced system settings' and click the "Environment Variables..." button.
-* Locate 'Path' under System variables double click it, click the New button and enter this (with the semicolon) ;<jdk1.8.0_xxx installation folder>\bin\ and click the 'OK' button and 'OK', again 'OK' to close the System Properties dialog box.
+* Go your Control Panel->System and Security->System (for Windows). Now select 'Advanced system settings' and click the "Environment Variables..." button.
+* Locate 'Path' under System variables double click it, click the New button and enter this (with the semicolon) `;<jdk1.8.0_xxx installation folder>\bin\` and click the 'OK' button and 'OK', again 'OK' to close the System Properties dialog box.
 
 ### Configuring the IDE (Windows example)
 
@@ -122,55 +122,60 @@ After cloning the master, go to Project -> Clean - Select clean all projects and
 * On the next dialog box named JBoss Runtime, click 'Download and install runtime...' link and select 'Wildfly 10.0.0 Final' and click 'Next', accept the terms and click 'Next'.
 * You may choose your preferred installation folder but do remember this folder as you will need it later, and click 'Finish'. Once your Wildfly is installed, choose 'jdk1.8.0_xxx' as the 'Alternate JRE' for your Wildfly Runtime JRE then click the 'Finish' button.
 
-#### Configuring JBoss
+#### Configuring Wildfly
 
-* Locate the 'java-ee' project->javaee->'skyve-ds.xml' file and delete that file. It is no longer needed as we will be entering SQL Server later in Wildfly standalone.xml.
+* Locate the 'java-ee' project->javaee->`skyve-ds.xml` file and delete that file. It is no longer needed as we will be entering SQL Server later in Wildfly standalone.xml.
 * Now download the SQL server JDBC sqljdbc4-3.0.jar file from here - http://www.java2s.com/Code/Jar/s/Downloadsqljdbc430jar.htm
 * From your wildfly installation folder, create \wildfly-10.0.0.Final\modules\system\layers\base\com\microsoft\sqlserver\main\ folder structure and copy the JDBC jar inside the main folder, and then create an new XML file in the same location named 'module.xml' and enter the following before saving and close:
 
-```
- <module xmlns="urn:jboss:module:1.1" name="com.microsoft.sqlserver">
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver">
   <resources>
-   <resource-root path="sqljdbc4-3.0.jar"/>    
+    <resource-root path="sqljdbc4-3.0.jar"/>
   </resources>
   <dependencies>
-   <module name="javax.api"/>
-   <module name="javax.transaction.api"/>
-   <module name="javax.servlet.api" optional="true"/>
+    <module name="javax.api"/>
+    <module name="javax.transaction.api"/>
+    <module name="javax.xml.bind.api"/>
   </dependencies>
- </module>
- ```
-* In Eclipse, go to “Server” view, then Filesets->Configuration File folder->open up 'standalone.xml' file then click the ‘Source’ tab and Find the ```<subsystem xmlns="urn:jboss:domain:datasources:4.0"> ``` and delete that whole entry of that line. Also find and delete the line ```<default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>```
+</module>
+```
+* In Eclipse, go to "Server" view, then Filesets->Configuration File folder->open up 'standalone.xml' file then click the 'Source' tab and Find the `<subsystem xmlns="urn:jboss:domain:datasources:4.0">` and delete that whole entry of that line. Also find and delete the line:
+```xml
+<default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
+```
 * These are all default Wildfly DB setup which you won’t need when using MS SQL Server. Whilst on this file, you need to add other some entries for Skyve security domain, so locate the ```<security-domains...>``` and add this entry within the body of ```<security-domains...>``` :
 
+```xml
+<security-domain name="skyve" cache-type="default">
+	<authentication>
+		<login-module code="Database" flag="required">
+			<module-option name="dsJndiName" value="java:/DefaultDB"/>
+			<module-option name="principalsQuery" value="select password from ADM_SecurityUser where bizCustomer || '/' || userName = ?"/>
+			<module-option name="rolesQuery" value="select 'Nobody', 'Roles' from ADM_SecurityUser where bizCustomer || '/' || userName = ?"/>
+			<module-option name="hashAlgorithm" value="MD5"/>
+			<module-option name="hashEncoding" value="base64"/>
+		</login-module>
+	</authentication>
+ </security-domain>
 ```
-	<security-domain name="skyve" cache-type="default">
-		<authentication>
-	       	<login-module code="Database" flag="required">
-	                 <module-option name="dsJndiName" value="java:/DefaultDB"/>
-	                 <module-option name="principalsQuery" value="select password from ADM_SecurityUser where bizCustomer || '/' || userName = ?"/>
-	                           <module-option name="rolesQuery" value="select 'Nobody', 'Roles' from ADM_SecurityUser where bizCustomer || '/' || userName = ?"/>
-	                 <module-option name="hashAlgorithm" value="MD5"/>
-	                 <module-option name="hashEncoding" value="base64"/>
-	              </login-module>
-	       </authentication>
-	 </security-domain>
+* Find the `<deployment-scanner..>` and underneath the `<deployment-scanner path="deployments" relative-to="jboss.server.base.dir"..>` add the following entry (remember where you have cloned the Skyve project from Git, in this example, we have cloned it in C:\\\_\\ directory).
 
+```xml
+<deployment-scanner name="skyve" path="/C:/_/skyve/skyve-ee/javaee" scan-interval="5000" runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>
 ```
-* Find the ```<deployment-scanner..>``` and underneath the ```<deployment-scanner path="deployments" relative-to="jboss.server.base.dir"..>``` add the following entry (remember where you have cloned the Skyve project from Git, in this example, we have cloned it in C:\\\_\\ directory).
-
-```<deployment-scanner name="skyve" path="/C:/_/skyve/skyve-ee/javaee" scan-interval="5000" runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>```
 
 * Now find the ```<subsystem xmlns="urn:jboss:domain:ee:4.0">``` then add the following inside the body of that entry.
 
-```
+```xml
 <global-modules>
- <module name="com.microsoft.sqlserver" slot="main"/>
+	<module name="com.microsoft.sqlserver" slot="main"/>
 </global-modules>
 ```
 
-* Locate the ```<profile>``` and enter these SQL Server settings inside the ```<profile>```.
-```
+* Locate the `<profile>` and enter these SQL Server settings inside the `<profile>`.
+```xml
 <subsystem xmlns="urn:jboss:domain:datasources:4.0">
   <datasources>
    <datasource jndi-name="java:/DefaultDS" pool-name="DefaultDS" enabled="true" use-java-context="true">
@@ -188,55 +193,52 @@ After cloning the master, go to Project -> Clean - Select clean all projects and
   </drivers>
  </datasources>
 </subsystem>
-
 ```
-* Open skyve/skyve-ee/javaee/skyve.json, the find the following settings entry.
+* Open `skyve/skyve-ee/javaee/skyve.json`, the find the following settings entry.
 
-```
+```javascript
 dataStores: {
-		// Skyve data store
-		"skyve": {
-			// JNDI name
-			jndi: "java:/H2Demo", 
-			// Dialect
+	// Skyve data store
+	"skyve": {
+		// JNDI name
+		jndi: "java:/H2Demo", 
+		// Dialect
 		dialect: "org.skyve.impl.persistence.hibernate.dialect.H2SpatialDialect"
-		}
+	}
 },
-
 ```
 
 and replace it with the following:
 
-```
+```javascript
 dataStores: {
-// Skyve data store
+dataStores: {
+	// Skyve data store
 	"skyve": {
 		// JNDI name
-		jndi: "java:/DefaultDS", 
+		jndi: "java:/H2Demo", 
 		// Dialect
-  dialect:"org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect"
+		dialect: "org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect"
 	}
 },
-
 ```
 
-For more information, refer to JBoss documentation.
+For more information, refer to the Wildfly documentation.
 
 #### Starting the server
 
-* Right click on the skyve project, and select Run As->Maven install. 
-* Expand the skyve-ee project and find the pom.xml
+* Right click on the **skyve** project, and select Run As->Maven install. 
+* Expand the **skyve-ee** project and find the pom.xml
 * Right click on that file and select Run As->Maven install. After all the dependencies have been downloaded, refresh ALL projects.
 * Open the Ant view. Windows->Show View->Other... then select Ant.
 * From here, drag the skyve/ skyve-ee/skyve-build.xml and the skyve/skyve-ee/build.xml to the Ant view and expand them.
 * In Ant view, skyve/skyve-ee/skyve-build.xml, double click "generateDomain[defult]"
 * Refresh all the projects (highlight all the skyve projects and press F5)
-* In C:\_\skyve\skyve-ee\javaee folder, create a file named "skyve.ear.deployed"
 * In skyve/skyve-ee/skyve-build.xml, double click "build [default]"
 * You may now deploy the project, so in Ant view, skyve/skyve-ee/build.xml, double click "touch" then start the Wildfly server.
 * Whilst the server is starting and application is being deployed, it will create various tables within the 'skyve' database you've created earlier. Once, the application and the server have started successfully, open you SQL Server Management Studio and run this SQL script
 
-```
+```sql
 USE skyve;
 GO
 
