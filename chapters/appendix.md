@@ -63,7 +63,10 @@ and the creation of service user accounts, SPNs and port configuration as requir
 
 ## Installing and configuring the Skyve Development Environment
 
-These instructions describe the process required to install and configure the development environment for Skyve. These instructions assume that you are using Windows and SQL Server. Some changes will need to be made if using a different operating system or database.
+These instructions describe the process required to install and configure the 
+development environment for Skyve. These instructions assume that you are 
+using Windows and SQL Server. Some changes will need to be made if using a 
+different operating system or database.
 
 ### Prerequisites checklist
 
@@ -139,9 +142,16 @@ After cloning the master, go to Project -> Clean - Select clean all projects and
 
 #### Configuring Wildfly
 
-* Locate the 'java-ee' project->javaee->`skyve-ds.xml` file and delete that file. It is no longer needed as we will be entering SQL Server later in Wildfly standalone.xml.
-* Now download the SQL server JDBC sqljdbc4-3.0.jar file from here - http://www.java2s.com/Code/Jar/s/Downloadsqljdbc430jar.htm
-* From your wildfly installation folder, create \wildfly-10.0.0.Final\modules\system\layers\base\com\microsoft\sqlserver\main\ folder structure and copy the JDBC jar inside the main folder, and then create an new XML file in the same location named 'module.xml' and enter the following before saving and close:
+* Locate the 'java-ee' project->javaee->`skyve-ds.xml` file and delete that file. 
+  It is no longer needed as we will be entering SQL Server later in Wildfly 
+  standalone.xml.
+* Download the SQL server JDBC sqljdbc4-3.0.jar file from here - 
+  http://www.java2s.com/Code/Jar/s/Downloadsqljdbc430jar.htm
+* From your wildfly installation folder, create the 
+  `{wildfly directory}\modules\system\layers\base\com\microsoft\sqlserver\main\` 
+  folder structure and copy the JDBC jar inside the `main` folder, and then 
+  create a new XML file in the same location named `module.xml` and with the 
+  following contents:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -156,11 +166,17 @@ After cloning the master, go to Project -> Clean - Select clean all projects and
   </dependencies>
 </module>
 ```
-* In Eclipse, go to "Server" view, then Filesets->Configuration File folder->open up 'standalone.xml' file then click the 'Source' tab and Find the `<subsystem xmlns="urn:jboss:domain:datasources:4.0">` and delete that whole entry of that line. Also find and delete the line:
+* In Eclipse, go to "Server" view, then Filesets->Configuration File folder->open 
+  up `standalone.xml` file then click the 'Source' tab and find the 
+  `<subsystem xmlns="urn:jboss:domain:datasources:4.0">` and delete that whole 
+  entry of that line. Also find and delete the line:
 ```xml
 <default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
 ```
-* These are all default Wildfly DB setup which you won’t need when using MS SQL Server. Whilst on this file, you need to add other some entries for Skyve security domain, so locate the ```<security-domains...>``` and add this entry within the body of ```<security-domains...>``` :
+* These are all default Wildfly DB setup which you won’t need when using 
+  MS SQL Server. Whilst on this file, you need to add other some entries for 
+  Skyve security domain, so locate the `<security-domains...>` and add this 
+  entry within the body of `<security-domains...>` :
 
 ```xml
 <security-domain name="skyve" cache-type="default">
@@ -243,14 +259,20 @@ For more information, refer to the Wildfly documentation.
 
 * Right click on the **skyve** project, and select Run As->Maven install. 
 * Expand the **skyve-ee** project and find the pom.xml
-* Right click on that file and select Run As->Maven install. After all the dependencies have been downloaded, refresh ALL projects.
+* Right click on that file and select Run As->Maven install. After all the 
+  dependencies have been downloaded, refresh ALL projects.
 * Open the Ant view. Windows->Show View->Other... then select Ant.
-* From here, drag the skyve/ skyve-ee/skyve-build.xml and the skyve/skyve-ee/build.xml to the Ant view and expand them.
+* From here, drag the skyve/ skyve-ee/skyve-build.xml and the 
+  skyve/skyve-ee/build.xml to the Ant view and expand them.
 * In Ant view, skyve/skyve-ee/skyve-build.xml, double click "generateDomain[defult]"
 * Refresh all the projects (highlight all the skyve projects and press F5)
 * In skyve/skyve-ee/skyve-build.xml, double click "build [default]"
-* You may now deploy the project, so in Ant view, skyve/skyve-ee/build.xml, double click "touch" then start the Wildfly server.
-* Whilst the server is starting and application is being deployed, it will create various tables within the 'skyve' database you've created earlier. Once, the application and the server have started successfully, open you SQL Server Management Studio and run this SQL script
+* You may now deploy the project, so in Ant view, skyve/skyve-ee/build.xml, double 
+  click "touch" then start the Wildfly server.
+* Whilst the server is starting and application is being deployed, it will create 
+  various tables within the 'skyve' database you've created earlier. Once, the 
+  application and the server have started successfully, open you SQL Server 
+  Management Studio and run this SQL script:
 
 ```sql
 USE skyve;
@@ -273,10 +295,9 @@ INSERT INTO adm_securityuser (bizId,bizVersion,bizLock,bizCustomer,bizUserId,biz
 
 INSERT INTO adm_securityuser_groups (owner_id,element_id) VALUES
 ('781e8526-0795-49a9-926b-de40b8c4fb9e','397f731c-6b7c-40f9-bf35-142d4d30d55b');
-
 ```
 * You may now login using the following URL http://localhost:8080/skyve
-* The credential are as follows:
+* The credentials are as follows:
 Customer : demo, Username : mike , Password : mike
 
 ## Example Deployment Instructions with Single Sign-on
