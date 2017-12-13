@@ -107,7 +107,7 @@ In addition to configuring the additional generate-domain arguments, you will ne
 	    <source>src/generatedTest/java</source>
 	  </sources>
 	</configuration>
-</execution>
+      </execution>
     </executions>
 </plugin>
 ```
