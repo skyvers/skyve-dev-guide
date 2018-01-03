@@ -12,7 +12,7 @@
 * **[Chapter 6: Customers](#customers)**
   * [Resources](#resources)
   * [Modules](#modules)
-  * [Adding a new customer](#adding-new-customer)
+  * [Adding a new customer](#adding-a-new-customer)
     * [Creating the customer scope](#creating-the-customer-scope)
     * [Deploying the customer](#deploying-the-customer)
     * [Adding a setup user](#adding-a-setup-user)
@@ -135,6 +135,10 @@ Now start up the application server, by running _\demo\run.bat_ (or \demo\run.sh
 
 If you're using the demo h2 database, to access the h2 database manager embedded in the demo, browse to ```http://localhost:8080/skyve/h2```
 
+![Figure 16.2](media/h2_database_manager_sign_in.png "Figure 16.2 Signing in to the embedded h2 database manager")
+
+_Figure 16.2 - Signing in to the embedded h2 database manager_
+
 Check that the JDBC URL matches the name of the h2 file in the ```\demo\content\``` folder – for the demo, this will be _demo_ – and so the JDBC URL should have the full path, for example  ```jdbc:h2:C:/demo/skyve/content/demo``` (where ```C:/demo/skyve/content/demo``` is the full path to the file _demo.h2.db_ – without the ".h2.db")
 
 ##### Inserting the user record
@@ -158,6 +162,11 @@ INSERT INTO adm_securityuser (bizId,bizVersion,bizLock,bizCustomer,bizUserId,biz
 
 INSERT INTO adm_securityuser_groups (owner_id,element_id) VALUES  ('setup','setupGroup');
  ```
+ 
+ ![Figure 16.3](media/h2_database_manager.png "Figure 16.3 Using the h2 database manager")
+
+_Figure 16.3 - Using the h2 database manager_
+ 
 NOTE: This script assumes the SHA1 password hashing algorithm. If you're using something else, you'll need to swap the value _'0RGzjA5zvIZ8S61AI2BqDg32TC8='_ for the encrypted value using that algorithm.
 
 The above script can be trivially modified if you're using an RDBMS other than h2.
@@ -170,6 +179,10 @@ Now you can log in as the setup user in the new customer _acme_ - with the follo
 - Username _setup_
 - Password _password01_
 
+![Figure 16.4](media/skyve_customer_sign_in.png "Figure 16.4 Skyve customer sign in")
+
+_Figure 16.4 - Skyve customer sign in_
+
 ### Setting a default customer
 
 Note that if you only ever want to use a single customer, you can specify a default customer in the .json file of your instance. This will also avoid having to enter a customer name at the sign in prompt.
@@ -178,6 +191,13 @@ Note that if you only ever want to use a single customer, you can specify a defa
 2. Search for the ```// Customer Default``` comment
 3. Change the default customer setting from null to your customer name, for example changing ```customer: null,``` to ```customer: "acme",```
 4. Save the file and restart your wildfly server (or redeploy the application by renaming ```demo.deployed``` to ```demo.dodeploy``` in the \demo\skyve\javaee\ folder while the server is running).
+
+
+![Figure 16.5](media/skyve_default_customer_sign_in.png "Figure 16.5 Signing in with a default customer")
+
+_Figure 16.5 - Signing in with a default customer_
+
+
 
 **[⬆ back to top](#contents)**
 
