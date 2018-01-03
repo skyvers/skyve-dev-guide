@@ -12,6 +12,13 @@
 * **[Chapter 6: Customers](#customers)**
   * [Resources](#resources)
   * [Modules](#modules)
+  * [Adding a new customer](#adding-new-customer)
+    * [Creating the customer scope](#creating-the-customer-scope)
+    * [Deploying the customer](#deploying-the-customer)
+    * [Adding a setup user](#adding-a-setup-user)
+      * [Using the h2 database manager](#using-the-h2-database-manager)
+      * [Inserting the user record](#inserting-the-user-record)
+  * [Setting a default customer](#setting-a-default-customer)
 
 Skyve supports multi-tenant Software-As-A-Service (SAAS) applications
 with extensive ability to customise the application for each
@@ -163,7 +170,7 @@ Now you can log in as the setup user in the new customer _acme_ - with the follo
 - Username _setup_
 - Password _password01_
 
-#### Setting a default customer
+### Setting a default customer
 
 Note that if you only ever want to use a single customer, you can specify a default customer in the .json file of your instance. This will also avoid having to enter a customer name at the sign in prompt.
 
