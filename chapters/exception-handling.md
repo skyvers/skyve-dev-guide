@@ -7,12 +7,12 @@
 * [Chapter 3: Identifying the Skyve Version](./../chapters/concepts.md)
 * [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
 * **[Chapter 5: Exception Handling](#exception-handling)**
-  * [ValidationException 32](#validationexception)
-  * [Concurrent Multiple Validation 32](#concurrent-multiple-validation)
-  * [Data type validation 33](#data-type-validation)
-  * [Mandatory field validation 33](#mandatory-field-validation)
-  * [Business rule validation 33](#business-rule-validation)
-  * [Building Applications 35](#building-applications)
+  * [ValidationException](#validationexception)
+  * [Concurrent Multiple Validation](#concurrent-multiple-validation)
+  * [Data type validation](#data-type-validation)
+  * [Mandatory field validation](#mandatory-field-validation)
+  * [Business rule validation](#business-rule-validation)
+  * [Building Applications](#building-applications)
 * [Chapter 6: Customers](./../chapters/customers.md)
 
 Skyve provides powerful error management capabilities extending general
