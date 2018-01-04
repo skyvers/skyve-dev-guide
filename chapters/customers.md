@@ -143,6 +143,8 @@ Check that the JDBC URL matches the name of the h2 file in the ```\demo\content\
 
 ##### Inserting the user record
 
+NOTE: You will only ever need this script once - to get started - from that point on you won't need to use SQL again to build, test or maintain your application.
+
 Paste in the following lines into your database manager (modify by replacing _acme_ with your customer name):
 
  ```
