@@ -232,12 +232,27 @@ across data group contexts.
 
 ### Before you start
 1. Install the preferred DBMS and management studio (e.g. mysql and mysql workbench)
- - there are some specific options to avoid depending on vendor, for example with mysql, choose the option to ignore case sensitivity to save your self some hassle
+ - there are some specific options to avoid depending on vendor, for example with mysql, choose the option to ignore case sensitivity to save yourself some hassle
  - create a new database, schema or (for oracle) user - you do not need to create any tables at this stage
 2. Ensure you have a valid jdbc driver that can connect to your DBMS
 3. Load the driver into your app server configuration (e.g. if you're using mysql and jboss wildfly, the driver jar and associated xml needs to be loaded into `/wildfly.../system/layers/base/com/mysql/main/`)
  - this should just be a file copy of the jar and xml into place, if the specific vendor folder doesn't exist in your wildfly distribution, create it
  - for jboss wildfly, you also need to make a declaration that the driver exists in the `<drivers/>` section of the `/wildfly.../standalone/configuration/standalone.xml` file
+ - for example, if you run multiple projects with different DBMS, your drivers stanza may look something like this:
+ ```
+                 <drivers>
+                    <driver name="h2" module="com.h2database.h2">
+                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    </driver>
+                    <driver name="mysql" module="com.mysql"/>
+                    <driver name="sqlserver" module="com.microsoft.sqlserver">
+                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+                    </driver>
+                    <driver name="oracle" module="com.oracle">
+                        <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+                    </driver>
+                </drivers>
+```		
 
 ### Changing the Skyve configuration
 1. Update the connection string and credentials in the datasource xml file (e.g. `/demo/skyve/javaee/skyve-ds.xml`)
