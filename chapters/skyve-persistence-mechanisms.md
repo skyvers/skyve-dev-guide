@@ -235,7 +235,7 @@ across data group contexts.
  - there are some specific options to avoid depending on vendor, for example with mysql, choose the option to ignore case sensitivity to save yourself some hassle
  - create a new database, schema or (for oracle) user - you do not need to create any tables at this stage
 2. Ensure you have a valid jdbc driver that can connect to your DBMS
-3. Load the driver into your app server configuration (e.g. if you're using mysql and jboss wildfly, the driver jar and associated xml needs to be loaded into `/wildfly.../system/layers/base/com/mysql/main/`)
+3. Load the driver into your app server configuration (e.g. if you're using mysql and jboss wildfly, the driver jar and associated xml needs to be loaded into `/wildfly.../system/layers/base/com/mysql/main/`) - the exact path will vary according the your wildfly distribution
  - this should just be a file copy of the jar and xml into place, if the specific vendor folder doesn't exist in your wildfly distribution, create it
  - for jboss wildfly, you also need to make a declaration that the driver exists in the `<drivers/>` section of the `/wildfly.../standalone/configuration/standalone.xml` file
  - for example, if you run multiple projects with different DBMS, your drivers stanza may look something like this:
@@ -256,11 +256,25 @@ across data group contexts.
 
 ### Changing the Skyve configuration
 1. Update the connection string and credentials in the datasource xml file (e.g. `/demo/skyve/javaee/skyve-ds.xml`)
- - an example connection string for my sql might be declared as follows:
-``` 
+ - Example connection strings
+ - for mysql 
+ ``` 
 <connection-url>jdbc:mysql://localhost:3306/skyve?useCursorFetch=true&amp;defaultFetchSize=100</connection-url> 
 		<driver>mysql</driver> 
   ```
+  
+ - for sqlserver
+ ```
+ 		<connection-url>jdbc:sqlserver://Laptop\SQLEXPRESS:1433;databaseName=skyve;sendStringParametersAsUnicode=false;</connection-url>
+                <driver>sqlserver</driver>
+```
+
+- for h2
+```
+		<connection-url>jdbc:h2:file:C:/_/skyve/skyve/content/demo;IFEXISTS=TRUE;IGNORECASE=TRUE;AUTO_SERVER=TRUE</connection-url>
+		<driver>h2</driver>
+```
+
 2. Update the skyve json instance settings dataStores section (i.e. in `/demo/skyve/javaee/skyve.json`) with the corresponding hibernate dialect class 
  - for h2
 ``` dialect: "org.skyve.impl.persistence.hibernate.dialect.H2SpatialDialect" ```
