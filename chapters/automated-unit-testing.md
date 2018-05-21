@@ -49,7 +49,7 @@ This is intended to give developers:
 - a growing regression suite which can be immediately placed into a Continuous Integration environment
 
 ### Configuration
-By default, automated test generation is configured for all modules detected from the metatdata for a Skyve project (see [Chapter 6: Customers](./../chapters/customers.md)). Execution of the generate domain step during development is responsible for keeping the generated test artefacts in sync with new documents and actions as they are added to a project.
+By default, automated test generation is configured for all modules detected from the metadata for a Skyve project (see [Chapter 6: Customers](./../chapters/customers.md)). Execution of the generate domain step during development is responsible for keeping the generated test artefacts in sync with new documents and actions as they are added to a project.
 
 The following sections describe the configuration which enables and creates the automated tests.
 
