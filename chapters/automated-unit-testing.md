@@ -39,6 +39,7 @@
 		* [Data Files](#data-files)
 		* [The @DataMap annotation](#the-datamap-annotation)
 	* [Upgrading existing projects](#upgrading-existing-projects)
+	* [Extending automated tests](#extending-automated-tests)
 
 Along with the ability to generate domain files for [Documents](./../chapters/documents.md), Skyve also generates CRUD unit tests against these documents as well as tests for any defined actions.
 
@@ -144,10 +145,12 @@ The base test class uses the JUnit testing framework by default. See the [TestNG
 #### TestNG
 The provided action and domain tests are intended to be run in jUnit. If required, these can be converted easily to run with TestNG instead. The following changes will need to be made in addition to adding the required TestNG jars to your project class path:
 
-**AbstractH2Test.java**
+_AbstractH2Test.java_
+
 The jUnit `@Before` and `@After` annotations need to be replaced with the TestNG `@BeforeMethod` and `@AfterMethod` annotations.
 
-**AbstractActionTest.java, AbstractDomainTest.java**
+_AbstractActionTest.java, AbstractDomainTest.java_
+
 Remove the import to `org.junit.Test` and replace it with the correct import for a TestNG test.
 
 ### Fixtures
@@ -227,6 +230,47 @@ After performing the typical upgrade steps to update your project to the latest 
 - _src.modules.admin.Factory*_ into your source path configured in your [ant configuration](#build-xml-parameters) or your [maven configuration](#maven-configuration)
 - test data friles from _src.test.resources.data_ into your _src.test.resources.data_ directory
 - Update your build file following the relevant configuration depending on whether you are using maven or ant
+
+### Extending automated tests
+For pure metadata projects (only XML files) with no custom development, automated unit tests are sufficient to provide test coverage and regression of the generated application source code. Specific testing of framework validation logic and other framework behaviour is already covered in the framework project and is not required to be duplicated in your project.
+
+Once you start adding custom behaviour to your project, such as action classes, or bizlets, it is good development practice to test desired behaviour, boundary conditions, expected and unexpted inputs manually. The automated unit tests will check that your bilzet lifecycle and action methods will pass with a known good result. To extend this behaviour, developer created unit tests should be created in your test path (usually `/src/test/java/` in a maven project).
+
+For example, let's create a test for the `GeneratePassword` action of the admin User document. This action should generate a new password and set the password expired flag for the current User. This action already has an automated test created to verify the action runs through without errors, but the automated test doesn't know how to validate the expected behaviour of this action. Lets create a specific test for that now.
+
+While not strictly necessary, it is recommended to create the test file in the _same_ package as the source file in the corresponding test source directory. This provides benefits like being able to test `default` scoped methods without having to make them `public` in your class. So to test a User action, we create the file in the same `modules.admin.User.actions` package.
+
+File: *src/test/java/modules/admin/User/actions/GeneratePasswordActionTest.java*
+
+```java
+public class GeneratePasswordActionTest extends AbstractH2Test {
+
+	@Test
+	public void testExecuteGeneratesNewPassword() throws Exception {
+		// setup the test data
+		User user = new DataBuilder().fixture(FixtureType.crud).build(User.MODULE_NAME, User.DOCUMENT_NAME);
+		user.setConfirmPassword(null);
+		user.setGeneratedPassword(null);
+		user.setPasswordExpired(Boolean.FALSE);
+
+		// call the method under test
+		new GeneratePassword().execute(user, null);
+
+		// verify the result
+		assertThat(user.getPasswordExpired(), is(Boolean.TRUE));
+		assertThat(user.getGeneratedPassword(), is(notNullValue()));
+		assertThat(user.getConfirmPassword(), is(notNullValue()));
+	}
+}
+```
+
+Let's break this test down:
+
+* we extend `AbstractH2Test` which is our Skyve test harness and sets up things like persistence and dependency injection for us
+* the `new DataBuilder().fixture(FixtureType.crud)` creates a new User, and if there is a `UserFactory` defined, will return the crud fixture from that Factory
+* we make sure the attributes we are testing for are in the desired state during fixture setup, e.g. we're hoping this method will generate a password so we set generated password to `null`
+* we invoke the method we are testing
+* we then assert the expected outcomes
 
 **[⬆ back to top](#contents)**
 
