@@ -99,35 +99,35 @@ In addition to configuring the additional generate-domain arguments, you will ne
 
 ```xml
 <plugin>
-  <groupId>org.codehaus.mojo</groupId>
-  <artifactId>build-helper-maven-plugin</artifactId>
-  <version>1.7</version>
-  <executions>
-    <!-- required if generatd path is not src/main/java/ -->
-    <execution>
-      <phase>generate-sources</phase>
-      <goals>
-        <goal>add-source</goal>
-      </goals>
-      <configuration>
-      <sources>
-        <source>src/generated/java</source>
-      </sources>
-      </configuration>
-    </execution>
-    <execution>
-      <id>add-test-source</id>
-      <phase>generate-test-sources</phase>
-      <goals>
-        <goal>add-test-source</goal>
-      </goals>
-      <configuration>
-      <sources>
-        <source>src/generatedTest/java</source>
-      </sources>
-      </configuration>
-    </execution>
-  </executions>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>build-helper-maven-plugin</artifactId>
+	<version>1.7</version>
+	<executions>
+		<!-- required if generatd path is not src/main/java/ -->
+		<execution>
+			<phase>generate-sources</phase>
+			<goals>
+				<goal>add-source</goal>
+			</goals>
+			<configuration>
+				<sources>
+					<source>src/generated/java</source>
+				</sources>
+			</configuration>
+		</execution>
+		<execution>
+			<id>add-test-source</id>
+			<phase>generate-test-sources</phase>
+			<goals>
+				<goal>add-test-source</goal>
+			</goals>
+			<configuration>
+				<sources>
+					<source>src/generatedTest/java</source>
+				</sources>
+			</configuration>
+		</execution>
+	</executions>
 </plugin>
 ```
 
@@ -167,7 +167,7 @@ For example:
 Contact c = new DataBuilder().fixture(FixtureType.crud).build(Contact.MODULE_NAME, Contact.DOCUMENT_NAME);
 ```
 
-### Fixture Factories
+#### Fixture Factories
 
 Factories are useful for customising a DataBuilder to specify specific test data for a certain fixture type, or if the randomly selected data from the DataBuilder does not pass validation, or for defining different fixtures for different types, e.g. crud vs sail. By convention, a document can have a corresponding factory by defining a class called `<Document-Name>Factory`, similar to Bizlets. DataBuilder will find these classes when it needs to construct an instance of the document. It looks for public static or instance methods that take no arguments and returns the domain object type required. If there is more than one candidate method that can be called, DataBuilder will randomly call one of the methods.
 
