@@ -42,6 +42,8 @@
   * [Appendix 1: Deploying a Skyve Application](chapters/appendix.md)
   * [Appendix 2: Installing and configuring the Skyve Development Environment](chapters/appendix.md)
   * [Appendix 3: Example Deployment Instructions with Single Sign-on](chapters/appendix.md)
+  * [Appendix 4: Example Deployment Problems caused by problems in the .json file](chapters/appendix.md)
+  * [Appendix 5: Installing Skyve in Production](chapters/appendix.md)
 
 # Introduction
 

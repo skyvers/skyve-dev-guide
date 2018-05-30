@@ -34,6 +34,14 @@
       * [Configuring Wildfly](#configuring-wildfly)
       * [Starting the server](#starting-the-server)      
   * [Appendix 3: Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
+  * [Appendix 4: Example Deployment Problems caused by problems in the .json file](#example-deployment-problems-caused-by-problems-in-the-json-file)
+    * [Example Output for incorrect Content folder](#example-output-for-incorrect-content-folder)
+    * [Example incorrect/invalid customer in bootstrap stanza](#example-incorrect-invalid-customer-in-bootstrap-stanza)
+    * [Missing comma or badly formed .json file](#missing-comma-or-badly-formed-json-file)
+  * [Appendix 5: Installing Skyve in Production](#installing-skyve-in-production)
+    * [Wildfly Standalone Production Install (Windows)](#wildfly-standalone-production-install-windows)
+      * [Troubleshooting](#troubleshooting)
+    * [Wildfly Bitnami Production Install (Windows)](#wildfly-bitnami-production-install-windows)
 
 ## Deploying a Skyve Application
 
@@ -396,7 +404,7 @@ Key problems in the .json configuration file block your project from deploying s
 
 ### Example Output for incorrect Content folder
 Incorrect content folder - the folder doesn't exist:
-```
+```json
 	// Content settings
 	content: {
 		// directory path
@@ -443,7 +451,7 @@ Caused by: java.lang.IllegalStateException: content.directory C:/skyve/content/ 
 
 ### Example incorrect/invalid customer in bootstrap stanza
 Incorrect customer in the bootstrap- there is no such customer defined:
-```
+```json
 // bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
 bootstrap: {
 	customer: "skyve",
@@ -498,7 +506,7 @@ Attempting to deploy in this case yields results such as the following:
 ### Missing comma or badly formed .json file
 
 Missing comma or badly formed .json file:
-```
+```json
 	// bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
 	bootstrap: {
 		customer: "skyve",
@@ -543,9 +551,260 @@ Caused by: java.lang.ClassCastException: java.lang.Long cannot be cast to java.u
 	at io.undertow.servlet.core.DeploymentManagerImpl.deploy(DeploymentManagerImpl.java:234)
 	... 8 more
 ```
+
+## Installing Skyve in Production
+
+The following are our personal instructions for deploying a Skyve application in a production environment. You may need to tweak these to suit your personal situation, and feel free to submit a pull request to update these instructions if you find something better or they become out of date.
+
+### Wildfly Standalone Production Install (Windows)
+
+These instructions apply to a standalone server installation of Wildfly 10 on Windows server connecting to Microsoft SQL Server.
+
+- [download](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and install the latest JDK 
+- create a SYSTEM "JAVA_HOME" system environment variable and set it to where you installed the JDK to (`C:\Program Files\Java\jdk1.8.0_45` by default, substitute with correct Java version path)
+- [download](http://wildfly.org/downloads/) Wildfly 10.1 Final 
+  - extract to C:\wildfly
+- [download](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-2017) and copy the sql server driver jar and module.xml (below) to `C:\wildfly\modules\system\layers\base\com\microsoft\sqlserver\main`
+
+`module.xml` (modify the `resource-root` path to match your sql server jdbc jar name)
+```xml
+<?xml version="1.0" encoding="utf-8"?> 
+<module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 
+  <resources> 
+    <resource-root path="sqljdbc41.jar"/> 
+  </resources> 
+  <dependencies> 
+    <module name="javax.api"/> 
+    <module name="javax.transaction.api"/> 
+  </dependencies> 
+</module>
+```
+
+- edit `standalone.xml`
+- if using integrated security to connect to the database:
+  - install the sqljdbc_auth.dll driver into `C:\windows\system32`
+  - Note: If you don't have permissions for the system32 directory, you may instead create a directory anywhere (e.g. `D:\java\libs`) and add it to the System Path. This can be done by Advanced System Settings → Environment Variables → System Variables)
+- add the sql server driver
+
+```xml
+<driver name="sqlserver" module="com.microsoft.sqlserver">
+    <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</xa-datasource-class>
+</driver>
+```
+
+- add the security-domain (replace {projectNameDB} with your project name, e.g. exampleDB)
+
+```xml
+<security-domain name="skyve" cache-type="default">
+    <authentication>
+        <login-module code="Database" flag="required">
+            <module-option name="dsJndiName" value="java:/{projectNameDB}"/>
+            <module-option name="principalsQuery" value="select password from ADM_SecurityUser where bizCustomer + '/' + userName = ?;"/>
+            <module-option name="rolesQuery" value="select 'Nobody', 'Roles' from ADM_SecurityUser where bizCustomer + '/' + userName = ?"/>
+            <module-option name="hashAlgorithm" value="SHA1"/>
+            <module-option name="hashEncoding" value="base64"/>
+        </login-module>
+    </authentication>
+</security-domain>
+```
+
+or, if using Active Directory authentication:
+
+```xml
+<security-domain name="skyve" cache-type="default">
+    <authentication>
+        <login-module code="org.jboss.security.auth.spi.LdapLoginModule" flag="requisite">
+            <module-option name="java.naming.factory.initial" value="com.sun.jndi.ldap.LdapCtxFactory"/>
+            <module-option name="java.naming.provider.url" value="ldaps://{adServerName}:636/"/>
+            <module-option name="java.naming.security.authentication" value="simple"/>
+            <module-option name="throwValidateError" value="true"/>
+            <module-option name="principalDNPrefix" value=""/>
+            <module-option name="principalDNSuffix" value="@{adsuffix}"/>
+            <module-option name="rolesCtxDN" value="cn={cn},dc={dc}"/>
+            <module-option name="uidAttributeID" value="sAMAccountName"/>
+            <module-option name="matchOnUserDN" value="false"/>
+            <module-option name="roleAttributeID" value="memberOf"/>
+            <module-option name="roleAttributeIsDN" value="true"/>
+            <module-option name="roleNameAttributeID" value="name"/>
+            <module-option name="password-stacking" value="useFirstPass"/>
+        </login-module>
+        <login-module code="Database" flag="optional">
+            <module-option name="dsJndiName" value="java:/{projectNameDB}"/>
+            <module-option name="principalsQuery" value="select password from ADM_SecurityUser where bizCustomer + '/' + userName = ?;"/>
+            <module-option name="rolesQuery" value="select 'Nobody', 'Roles' from ADM_SecurityUser where userName =  ?"/>
+            <module-option name="hashAlgorithm" value="SHA1"/>
+            <module-option name="hashEncoding" value="base64"/>
+            <module-option name="password-stacking" value="useFirstPass"/>
+        </login-module>
+    </authentication>
+</security-domain>
+```
+- replace instances of `{adServerName}`, `{adsuffix}`, `{cn}`, `{dc}` and `{projectNameDB}` from the above
+
+- remove the following filter-refs from the default-server definition in the undertow stanza
+  ```xml
+  <filter-ref name="server-header"/>
+  <filter-ref name="x-powered-by-header"/>
+  ```
+- comment out the welcome content `<location name="/" handler="welcome-content"/>`
+- replace <jsp-config/> in the default servlet-container config with
+  ```xml
+  <jsp-config x-powered-by="false"/>
+  ```
+- add Wildfly as a windows service
+  - go to the directory `C:\wildfly\docs\contrib\scripts`
+  - copy the folder "service"
+  - go to the directory `C:\wildfly\bin`
+  - paste the service folder there
+  - edit `C:\wildfly\bin\service\service.bat`
+  - search for: "set DESCRIPTION="
+  - remove the double quotes, save and exit
+  - open a new command prompt to `C:\wildfly\bin\service\`
+  - from a command prompt, run: `service.bat install`
+  - verify that the service has been installed, change the startup type to _Automatic (Delayed Start)_
+  - set the system account that should be running the wildfly service
+
+ - make Wildfly accessible outside of localhost
+   - edit `standalone.xml`
+   - find `<interface name=”public”>` and change to the following
+  ```xml
+  <interface name="public">
+  <inet-address value="${jboss.bind.address:0.0.0.0}"/>
+  </interface>
+  ```
+- to run on port 80 instead of 8080, search for `<socket-binding name="http" port="${jboss.http.port:8080}"/>` and replace with `<socket-binding name="http" port="${jboss.http.port:80}"/>`
+
+- copy the datasource.xml file into wildfly\standalone\deployments
+  - configure the connection url, JNDI name, and authentication
+- copy the projectName.json into wildfly\standalone\deployments
+  - configure the _server name_, _content path_ and _catalog_
+  - check if the bootstrap user is required
+- create the content directory if it does not exist
+- start the wildfly service and make sure the datasources deploy successfully
+- deploy projectName.war
+
+#### Troubleshooting
+If you receive an error like:
+
+```
+Caused by: org.hibernate.engine.jndi.JndiException: Unable to lookup JNDI name [java:jboss/datasources/{projectNameDB}]
+    Caused by: javax.naming.NameNotFoundException: datasources/{projectNameDB} -- service jboss.naming.context.java.jboss.datasources.{projectNameDB}\"},
+```
+
+then check that your JNDI name in the standalone.xml (`<module-option name="dsJndiName" value="java:/{projectNameDB}"/>`) matches _exactly_ (case sensitive):
+- the JNDI name in the JSON
+  ```json
+  "skyve": {
+      // JNDI name
+      jndi: "java:/{projectNameDB}",
+  ```
+- and the JNDI name in the ds.xml
+  ```xml
+  <datasource jndi-name="java:/{projectNameDB}" pool-name="skyve" enabled="true" jta="true" use-ccm="false">
+  ```
+
+### Wildfly Bitnami Production Install (Windows)
+
+These instructions apply to Bitnami Wildfly 10 stack installation on Windows server modified to connect to Microsoft SQL Server.
 	
+* Download the latest Bitnami Wildfly Windows image (https://bitnami.com/stack/wildfly)
+* Ideally install Bitnami to a location on a non-OS partition
+* Rename serviceinstall.bat to _DO_NOT_RUN_serviceinstall.bat (rename this back if you are going to uninstall Bitnami)
+* If not using MySQL, go to services, disable the MySql service (named `wildflyMySQL`)
+* Install the SqlServer module into Wildfly:
+  * Edit `standalone.xml` in Bitnami\wildfly-10.1.0-1\wildfly\standalone\configuration
+  * Find the Drivers section in the document and add the following:
+  ```xml
+  <driver name="sqlserver" module="com.microsoft.sqlserver">
+      <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</xa-datasource-class>
+  </driver>
+  ```
+* Copy the files into Bitnami\wildfly-10.1.0-1\wildfly\modules\system\layers\base\com\microsoft\sqlserver\main
+  * `module.xml` (below)
+  * [download](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-2017) the latest SQL Server JDBC driver and copy the jbbc jar
 
+`module.xml` (modify the `resource-root` path to match your sql server jdbc jar name)
+```xml
+<?xml version="1.0" encoding="utf-8"?> 
+<module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 
+  <resources> 
+    <resource-root path="sqljdbc41.jar"/> 
+  </resources> 
+  <dependencies> 
+    <module name="javax.api"/> 
+    <module name="javax.transaction.api"/> 
+  </dependencies> 
+</module>
+```
 
+* If using Integrated Security to authenticate with the database:
+  * Install the `sqljdbc_auth.dll` driver into C:\windows\system32
+  * Note: If you don't have permissions for the system32 directory, you may instead create a directory anywhere (e.g. D:\java\libs) and add it to the System Path. This can be done by Advanced System Settings → Environment Variables → System Variables)
+* Stop the Wildfly service if it is running
+* Add driver config to standalone.xml
+* Add security domain to standalone.xml
+
+```xml
+<security-domain name="skyve" cache-type="default">
+    <authentication>
+        <login-module code="Database" flag="required">
+            <module-option name="dsJndiName" value="java:/{projectNameDB}"/>
+            <module-option name="principalsQuery" value="select password from ADM_SecurityUser where bizCustomer + '/' + userName = ?;"/>
+            <module-option name="rolesQuery" value="select 'Nobody', 'Roles' from ADM_SecurityUser where bizCustomer + '/' + userName = ?"/>
+            <module-option name="hashAlgorithm" value="MD5"/>
+            <module-option name="hashEncoding" value="base64"/>
+        </login-module>
+    </authentication>
+</security-domain>
+```
+
+* rename folder `Bitnami\wildfly-10.1.0-1\java` to `Bitnami\wildfly-10.1.0-1\javaold`
+* Download latest Java 8 64 runtime but select to change destination folder during install to `Bitnami\wildfly-10.1.0-1\java`
+* Add java_home env variable and append `%JAVA_HOME%\bin` to path env variable eg `JAVA_HOME=D:\Bitnami\wildfly-10.1.0-1\java`, `Path=%JAVA_HOME%\bin`
+* Add env variable:
+  * name: `JAVA_OPTS`
+  * value: `-Xms4G -Xmx4G -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=2G`
+* Ensure the following...
+  * `ErrorDocument 503 /static/index.html` is in Bitnami\wildfly-10.1.0-1\apache2\conf\bitnami\bitnami.conf
+* Copy static.zip to `Bitnami\wildfly-10.1.0-1\apache2\htdocs\`
+* Copy static.zip to `Bitnami\wildfly-10.1.0-1\wildfly\welcome-content\`
+* Change Bitnami\wildfly-10.1.0-1\wildfly\conf\wildfly.conf that contains
+  ```xml
+  <Location />
+  ProxyPass http://localhost:8080/
+  ProxyPassReverse http://localhost:8080/
+  </Location>
+  ```
+
+to contain the following
+
+```
+ProxyPass /static !
+ProxyPass / http://localhost:8080/ timeout=600 Keepalive=On
+ProxyPassReverse / http://localhost:8080/
+```
+(literally replace the whole lot exactly as shown - so that there are no <Location/> tags)
+
+* Change the path of the `welcome-content` path attribute in the file handler to point to `welcome-content\static\` in `Bitnami\wildfly-10.1.0-1\wildfly\standalone\configuration\standalone.xml` like so
+  ```xml
+  <file name="welcome-content" path="${jboss.home.dir}/welcome-content/static/"/>
+  ```
+* Change `standalone.xml`
+  * Remove the following filter-refs from the default-server definition in the undertow stanza
+
+    ```xml
+    <filter-ref name="server-header"/>
+    <filter-ref name="x-powered-by-header"/>
+    ```
+  * Replace ```<jsp-config/>``` in the default servlet container config with 
+    ```xml
+    <jsp-config x-powered-by="false"/>
+    ```
+* Copy the datasource xml files into wildfly\standalone\deployments
+* Copy the `{projectName}.json` into wildfly\standalone\deployments and configure the server name and the content path
+* Set the system account that should be running the wildfly service
+* Start the wildfly service and make sure the datasources deploy successfully
+* Deploy `{projectName}.war`
 
 **[⬆ back to top](#contents)**
 
