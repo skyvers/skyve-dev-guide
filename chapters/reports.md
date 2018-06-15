@@ -28,8 +28,17 @@ Jasper Reports.
 
 ### Custom Reports
 
-Jasper report templates, created using iReport, are located within the
-reports folder of the driving document.
+You can of course use any reporting solution to create reports on your SQL data base, however to integrate
+reporting into your Skyve application, by default, Skyve allows inclusion of Jasper reports.
+
+This chapter is not intended as a training course to make you a professional report template designer, but to provide
+some tips to get you started.
+
+Jasper reports can be based on a number of data source types, though usually reports are based in SQL.
+However, Skyve offers a "bean" based data source for reporting, which provides a lot of advantages - particularly for ensuring
+value formats are consistent with your application.
+
+By convention, Jasper report templates are located within the reports folder of the driving document.
 
 ![Figure 67](media/image138.png "Figure 67 - Report objects are located within the reports folder for the
 applicable document")
@@ -37,10 +46,20 @@ applicable document")
 _Figure 67 - Report objects are located within the reports folder for the
 applicable document_
 
-Report actions must be declared in a view for reports to be accessible
-to the user. If no view has yet been defined, use the *generateEditView*
-ant task to generate a default view definition and then add the required
-report actions to the action section.
+Report actions must be declared in a view for reports to be accessible to the user. 
+```<report reportName="WeeklyTimeSheet" moduleName="time" documentName="WeeklyTimesheet" displayName="Preview Timesheet"
+            reportFormat="pdf" >
+            <parameter name="ID" binding="bizId" />
+        </report>```
+
+Parameters can be passed to the report, based on local bindings (e.g. "bizId" in the above example)  - you need to declare these parameters in your jasper report (with the same name -  e..g. "ID" as above) (edited)
+In your report, you can refer to these parameters like any other value, for example, in an sql based report you can include a query string like this:
+```select * from TIME_WeeklyTimesheet where bizId = $P{ID}```
+
+If you don't have a view defined, then any reports in the "reports" folder will automatically be given a button in the auto-generated view, but obviously you'll need to declare a view (and the report action) if you want to specify parameter bindings.
+
+Skyve provides the *generateEditView* run configuration to generate a default view definition. You can then add the required
+report actions to the action section or parameters as required.
 
 By default, report actions are displayed with the printer icon.
 
@@ -48,8 +67,7 @@ By default, report actions are displayed with the printer icon.
 
 _Figure 68 - Example report action button_
 
-To ensure all reports are valid and can be run, use the *compileReports*
-ant task to recompile all Jasper reports.
+To ensure all reports are valid and can be run, compile the reports using the Eclipse Jasper Report Designer plug in.
 
 When reports are requested by the user (using the report action button)
 Skyve will offer the user a choice of formats in which the report will
@@ -62,6 +80,18 @@ _Figure 69 - Selecting a report format_
 It is the responsibility of the report designer to consider the
 implications of the user selecting a format which the designer has not
 catered for.
+
+#### Skyve Report Designer
+
+Skyve provides an automated report designer which generates a .jrxml template file. 
+
+The report designer is available in the DevOps tools in the admin module->devOps->Report Design.
+
+![Figure 69a](media/adminDevOpsReportDesignerExample1.png "Figure 69a - Skyve report designer")
+
+_Figure 69a - Skyve report designer_
+
+This will create a jasper template based on an existing view, document or query.
 
 #### Automatic Customer Resource Parameter
 
