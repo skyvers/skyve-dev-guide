@@ -47,7 +47,8 @@ _Figure 67 - Report objects are located within the reports folder for the
 applicable document_
 
 Report actions must be declared in a view for reports to be accessible to the user. 
-```<report reportName="WeeklyTimeSheet" moduleName="time" documentName="WeeklyTimesheet" displayName="Preview Timesheet"
+```
+        <report reportName="WeeklyTimeSheet" moduleName="time" documentName="WeeklyTimesheet" displayName="Preview Timesheet"
             reportFormat="pdf" >
             <parameter name="ID" binding="bizId" />
         </report>
@@ -55,7 +56,8 @@ Report actions must be declared in a view for reports to be accessible to the us
 
 Parameters can be passed to the report, based on local bindings (e.g. "bizId" in the above example)  - you need to declare these parameters in your jasper report (with the same name -  e..g. "ID" as above) (edited)
 In your report, you can refer to these parameters like any other value, for example, in an sql based report you can include a query string like this:
-```select * from TIME_WeeklyTimesheet where bizId = $P{ID}
+```
+select * from TIME_WeeklyTimesheet where bizId = $P{ID}
 ```
 
 If you don't have a view defined, then any reports in the "reports" folder will automatically be given a button in the auto-generated view, but obviously you'll need to declare a view (and the report action) if you want to specify parameter bindings.
@@ -89,7 +91,7 @@ Skyve provides an automated report designer which generates a .jrxml template fi
 
 The report designer is available in the DevOps tools in the admin module->devOps->Report Design.
 
-![Figure 69a](media/adminDevOpsReportDesignerExample1.png "Figure 69a - Skyve report designer")
+![Figure 69a](media/adminDevOpsReportDesignerExample1.PNG "Figure 69a - Skyve report designer")
 
 _Figure 69a - Skyve report designer_
 
@@ -116,7 +118,7 @@ which might be part of highly formatted reports. By passing the specific
 customer resource location (evaluated at run-time) references to these
 types of items can be used generically for all customers.
 
-#### Object data source
+#### Object "bean" data source
 
 Skyve provides an object data source which can be used in place of SQL
 as the driving query for the report. The object data source provides the
