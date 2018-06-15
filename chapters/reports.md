@@ -26,13 +26,13 @@ capabilities available within every *listGrid* and list view, however,
 where highly formatted reports are required, these are provided via
 Jasper Reports.
 
+This chapter is not intended as a training course to make you a professional report template designer, but to provide
+some tips to get you started.
+
 ### Custom Reports
 
 You can of course use any reporting solution to create reports on your SQL data base, however to integrate
 reporting into your Skyve application, by default, Skyve allows inclusion of Jasper reports.
-
-This chapter is not intended as a training course to make you a professional report template designer, but to provide
-some tips to get you started.
 
 Jasper reports can be based on a number of data source types, though usually reports are based in SQL.
 However, Skyve offers a "bean" based data source for reporting, which provides a lot of advantages - particularly for ensuring
@@ -50,11 +50,13 @@ Report actions must be declared in a view for reports to be accessible to the us
 ```<report reportName="WeeklyTimeSheet" moduleName="time" documentName="WeeklyTimesheet" displayName="Preview Timesheet"
             reportFormat="pdf" >
             <parameter name="ID" binding="bizId" />
-        </report>```
+        </report>
+```
 
 Parameters can be passed to the report, based on local bindings (e.g. "bizId" in the above example)  - you need to declare these parameters in your jasper report (with the same name -  e..g. "ID" as above) (edited)
 In your report, you can refer to these parameters like any other value, for example, in an sql based report you can include a query string like this:
-```select * from TIME_WeeklyTimesheet where bizId = $P{ID}```
+```select * from TIME_WeeklyTimesheet where bizId = $P{ID}
+```
 
 If you don't have a view defined, then any reports in the "reports" folder will automatically be given a button in the auto-generated view, but obviously you'll need to declare a view (and the report action) if you want to specify parameter bindings.
 
