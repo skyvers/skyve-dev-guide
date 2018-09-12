@@ -275,21 +275,22 @@ for operation or deployment, or recommended.
 
 These include:
 
--   Hibernate™ Object Relational Mapping framework -
+- Hibernate™ Object Relational Mapping framework -
     <http://www.hibernate.org/>
--   SmartClient Ajax Framework - <http://www.smartclient.com/>
--   Elastic™ content repository - <https://www.elastic.co/>
--   Google maps - <http://www.google.com>
--   Jasper Reports™ report library -
+- Spring Security - <https://spring.io/projects/spring-security>
+- SmartClient Ajax Framework - <http://www.smartclient.com/>
+- Elastic™ content repository - <https://www.elastic.co/>
+- Google maps - <http://www.google.com>
+- Jasper Reports™ report library -
     <http://www.jaspersoft.com/jasperreports>
--   Apache Lucene™ textual indexing engine - <http://lucene.apache.org/>
--   iText and PDFBox generation and content libraries,
--   Apache POI and JXL office interoperability support,and
--   JBoss™ Wildfly Application Server - <http://www.jboss.org/>
--   Eclipse™ Integrated Development Environment -
+- Apache Lucene™ textual indexing engine - <http://lucene.apache.org/>
+- iText and PDFBox generation and content libraries,
+- Apache POI and JXL office interoperability support,and
+- JBoss™ Wildfly Application Server - <http://www.jboss.org/>
+- Eclipse™ Integrated Development Environment -
     <http://www.eclipse.org/>
--   iReport report designer - <http://jasperforge.org/projects/ireport>
--   Eve lightweight JVM for mobile platforms- <http://www.ewesoft.com>
+- iReport report designer - <http://jasperforge.org/projects/ireport>
+- Eve lightweight JVM for mobile platforms- <http://www.ewesoft.com>
 
 Customised versions of the Skyve platform can be created to integrate
 deeply with other 3rd party packages or custom architectural elements.
