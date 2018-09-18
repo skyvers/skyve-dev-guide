@@ -3,7 +3,7 @@
 # Skyve Enterprise Platform
 ## Developer Guide
 
-![](chapters/media/image5.png)
+![](chapters/media/hero-display-minimal.png)
 
 ### Contents
 
