@@ -27,7 +27,7 @@
   * [Module Documentation](#module-documentation)
   * [Overriding Modules](#overriding-modules)
   * [Java Implementation](#java-implementation)
-  * [The Skyve Administration 'admin' Module](#the-skyve-administration-'admin'-module)
+  * [The Skyve Administration admin Module](#the-skyve-administration-admin-module)
 
 Modules define self-contained application pieces and correspond to menus
 within the system accordion menu pane. The repository/apps folder
@@ -395,7 +395,7 @@ should not be modified in any way by developers. However, inspection of
 the domain classes can be a useful process to analyse validation
 problems within the module.
 
-### The Skyve Administration 'admin' Module
+### The Skyve Administration admin Module
 
 The Skyve admin (administration) module is a module provided as part of the Skyve platform, however
 it is able to be customised if required according to the methods described above (as for any other 
