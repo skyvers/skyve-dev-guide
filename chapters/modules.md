@@ -395,8 +395,6 @@ should not be modified in any way by developers. However, inspection of
 the domain classes can be a useful process to analyse validation
 problems within the module.
 
-**[⬆ back to top](#contents)**
-
 ### The Skyve Administration 'admin' Module
 
 The Skyve admin (administration) module is a module provided as part of the Skyve platform, however
@@ -434,7 +432,7 @@ _Figure 31a - Admin module privileges by Role_
 
 _Figure 31b - Admin module privileges by Document_
 
-
+**[⬆ back to top](#contents)**
 
 ---
 **Next [Chapter 8: Documents](./../chapters/documents.md)**  
