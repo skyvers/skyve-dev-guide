@@ -27,6 +27,7 @@
   * [Module Documentation](#module-documentation)
   * [Overriding Modules](#overriding-modules)
   * [Java Implementation](#java-implementation)
+  * [The Skyve Administration 'admin' Module](#the-skyve-administration-'admin'-module)
 
 Modules define self-contained application pieces and correspond to menus
 within the system accordion menu pane. The repository/apps folder
@@ -395,6 +396,45 @@ the domain classes can be a useful process to analyse validation
 problems within the module.
 
 **[⬆ back to top](#contents)**
+
+### The Skyve Administration 'admin' Module
+
+The Skyve admin (administration) module is a module provided as part of the Skyve platform, however
+it is able to be customised if required according to the methods described above (as for any other 
+Skyve module).
+
+In particular the admin module provides basic roles for common user profiles who interact with admin
+module features, such as managing contacts and users.
+
+#### Admin module roles
+
+  Role | Description | Comments
+  -----|-------------|-----------
+  Anonymous | Anonymous (not logged in) access public features. | 
+  AppUser | Manage own contact details and password. | The App User role is intended for retail and public users interacting through the "front office". These users are assumed to operate within their own scope and have only visibility to their own data. App Users can create their own contacts, and change their own passwords.			
+  AuditManager | Manage the activity audit log. | 
+  BasicUser | General access to the administration module. | The intention of Basic User role is to provide basic capability to back-office users. The role is for a typical office situation where users collaborate within the "Customer" scope on key application areas. For example, shared contact management, common document number serials and the ability to use Skyve's basic personal efficiency and automation capabilities, Tags, Snapshots, Communication and view dashboards.			
+  ContactManager | Manage contact details and interactions. | Allows atomic control over management of, and interaction with, contacts.
+  ContactViewer | View-only access to contact details. | Allows atomic control over visibility of contacts.
+  DevOps | Generate Skyve designs and metadata and administer technical aspects of the Skyve runtime. | 
+  JobMaintainer | Maintain Jobs. | Allows atomic control over the ability to schedule jobs and review job progress.
+  SecurityAdministrator | Allows administration of Users and Groups. | Administration of users and permissions.
+  ViewUser | View-only access to the administration module.| The view user is intended as a read-only office user, with visibility as per Basic User role.
+
+_Table 3 - Query column definitions_
+
+The following summaries provide a basic overview of the role combinations provided by the admin module
+however for specific details of privileges, view the admin module xml declaration file directly.
+
+![Figure 31a](media/image31a.png "Figure 31a Admin module privileges by Role")
+
+_Figure 31a - Admin module privileges by Role_
+
+![Figure 31b](media/image31b.png "Figure 31b Admin module privileges by Document")
+
+_Figure 31b - Admin module privileges by Document_
+
+
 
 ---
 **Next [Chapter 8: Documents](./../chapters/documents.md)**  
