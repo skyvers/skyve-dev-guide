@@ -419,7 +419,7 @@ module features, such as managing contacts and users.
   SecurityAdministrator | Allows administration of Users and Groups. | Administration of users and permissions.
   ViewUser | View-only access to the administration module.| The view user is intended as a read-only office user, with visibility as per Basic User role.
 
-_Table 3 - Query column definitions_
+_Table 3a - admin role definitions_
 
 The following summaries provide a basic overview of the role combinations provided by the admin module
 however for specific details of privileges, view the admin module xml declaration file directly.
