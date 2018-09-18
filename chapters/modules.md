@@ -412,11 +412,11 @@ module features, such as managing contacts and users.
   AppUser | Manage own contact details and password. | The App User role is intended for retail and public users interacting through the "front office". These users are assumed to operate within their own scope and have only visibility to their own data. App Users can create their own contacts, and change their own passwords.			
   AuditManager | Manage the activity audit log. | 
   BasicUser | General access to the administration module. | The intention of Basic User role is to provide basic capability to back-office users. The role is for a typical office situation where users collaborate within the "Customer" scope on key application areas. For example, shared contact management, common document number serials and the ability to use Skyve's basic personal efficiency and automation capabilities, Tags, Snapshots, Communication and view dashboards.			
-  ContactManager | Manage contact details and interactions. | Allows atomic control over management of, and interaction with, contacts.
-  ContactViewer | View-only access to contact details. | Allows atomic control over visibility of contacts.
+  ContactManager | Manage contact details and interactions. | Allows control over management of, and interaction with all contacts for the user's customer.
+  ContactViewer | View-only access to contact details. | 
   DevOps | Generate Skyve designs and metadata and administer technical aspects of the Skyve runtime. | 
-  JobMaintainer | Maintain Jobs. | Allows atomic control over the ability to schedule jobs and review job progress.
-  SecurityAdministrator | Allows administration of Users and Groups. | Administration of users and permissions.
+  JobMaintainer | Maintain Jobs. | Permission to schedule jobs and review job progress.
+  SecurityAdministrator | Allows administration of Users and Groups. | This role has the ability to add new users, configure groups and modify existing users's permissions. All Skyve applications should have at least 1 user with this role.
   ViewUser | View-only access to the administration module.| The view user is intended as a read-only office user, with visibility as per Basic User role.
 
 _Table 3a - admin role definitions_
