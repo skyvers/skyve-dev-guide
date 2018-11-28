@@ -42,16 +42,13 @@
       * [Create a folder for content](#create-a-folder-for-content)
       * [Install the wildfly service](#install-the-wildfly-service)
       * [Skyve application configuration](#skyve-application-configuration) 
-  * [Appendix 4: Creating a new Skyve project](#creating-a-new-skyve-project)
-      * [Configuring your new project](#configuring-your-new-project)
-      * [Deploying your new project and logging in](#deploying-your-new-project-and-logging-in)
-  * [Appendix 5: Importing an existing Skyve project from Git](#importing-an-existing-skyve-project-from-git)
-  * [Appendix 5: Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
-  * [Appendix 6: Example Deployment Problems caused by problems in the .json file](#example-deployment-problems-caused-by-problems-in-the-json-file)
+  * [Appendix 5: Changing the project URL context](#changing-the-project-url-context)
+  * [Appendix 6: Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
+  * [Appendix 7: Example Deployment Problems caused by problems in the .json file](#example-deployment-problems-caused-by-problems-in-the-json-file)
     * [Example Output for incorrect Content folder](#example-output-for-incorrect-content-folder)
     * [Example incorrect/invalid customer in bootstrap stanza](#example-incorrect-invalid-customer-in-bootstrap-stanza)
     * [Missing comma or badly formed .json file](#missing-comma-or-badly-formed-json-file)
-  * [Appendix 5: Installing Skyve in Production](#installing-skyve-in-production)
+  * [Appendix 8: Installing Skyve in Production](#installing-skyve-in-production)
     * [Wildfly Standalone Production Install (Windows)](#wildfly-standalone-production-install-windows)
       * [Troubleshooting](#troubleshooting)
     * [Wildfly Bitnami Production Install (Windows)](#wildfly-bitnami-production-install-windows)
@@ -317,6 +314,72 @@ Ensure the '.json' properties file has been updated for the specific instance in
 - environment identifier
 
 Finally, ensure that the user credential that will run the wildfly service has read/write permissions to the wildfly folder and the content folder created above.
+
+**[⬆ back to top](#contents)**
+
+## Changing the project URL context
+Normally, the project name will be the name of the war - which will be the context on the url for example `https://skyve.org/myApplication` where `myApplication` is also the name of the project.
+
+However if you need to change the project for a different URL context, like `https://skyve.org/tax_management`, then there's a few simple steps you need to take to make that work.
+
+1. Remove the project from your wildfly server (and ensure the myApplication.war is removed from the deployments area). 
+
+2. Edit your pom.xml file to change the name of the war to be built:
+
+change
+```
+	<groupId>cit</groupId>
+	<artifactId>myApplication</artifactId>
+	<version>1.0</version>
+
+	<packaging>war</packaging>
+	<name>myApplication</name>
+```
+to
+```
+	<groupId>cit</groupId>
+	<artifactId>tax_management</artifactId>
+	<version>1.0</version>
+
+	<packaging>war</packaging>
+	<name>tax_management</name>
+```
+3. Rename the json from myApplication.json to tax_management.json
+
+4. Update the project json file for the new context
+from
+```
+	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
+	url: {
+		// server URL
+		server: "https://skyve.org",
+		// web context path
+		context: "/myApplication",
+		// home path
+		home: "/"
+	},
+```
+to
+```
+        // URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
+	url: {
+		// server URL
+		server: "https://skyve.org",
+		// web context path
+		context: "/tax_management",
+		// home path
+		home: "/"
+	},
+```
+4. Rename the `myApplication-ds.xml` to `tax_management-ds.xml`
+
+5. Maven update the project (for example, in eclipse, right-click the project, choose Maven and update Project)
+
+6. Add the project to your wildfly server
+
+Note that when deploying, you may need to manually create the tax_management-ds.xml.dodeploy and tax_management.war.dodeploy signal files. You may need to manually remove the previous .war if you didn't in the preparation stage. If you didn't rename the previous .json and ds.xml, you should also remove the previous myApplication-ds.xml and myApplication.json files to avoid confusion.
+
+**[⬆ back to top](#contents)**
 
 ## Example Deployment Instructions with Single Sign-on
 
