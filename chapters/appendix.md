@@ -30,7 +30,8 @@
     * [Prerequisites checklist](#prerequisites-checklist)
     * [Configuring Java](#configuring-java)
     * [Configuring the IDE (Windows example)](#configuring-the-ide-windows-example)      
-      * [Importing Projects](#importing-projects)
+      * [Creating a new Project](#creating-a-new-project)
+      * [Importing an existing Project from Git](#importing-an-existing-project-from-git)
       * [Configuring Wildfly](#configuring-wildfly)
       * [Starting the server](#starting-the-server)      
   * [Appendix 3: Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
@@ -45,23 +46,29 @@
 
 ## Deploying a Skyve Application
 
-Skyve applications are deployed in two parts, the application metadata
-and the Skyve enterprise archive.
+Skyve applications as a single web archive (`.war`) folder, containing the application metadata and framework components. By default, Skyve `.war` folders are deployed 'exploded' or 'unzipped'.
 
-Application metadata is deployed by copying the metadata Apps package to
-the destination location. The Enterprise Archive is deployed by copying
-the `.ear` package to the application server deployment area.
+The `.war` folder is deployed with a `.json` settings file and a `-ds.xml` datasource file. 
 
-For example, to deploy a Skyve application to a Windows server:
+For example, to deploy a Skyve application called `hellowWorld` using a Wildfly application server, you will need to place the following into the Wildfly `deployment/` area:
+```
+helloWorld.war
+helloWorld-ds.xml
+helloWorld.json
+```
+Where 
+* `helloWorld.war` is the self-contained web archive containing application metadata and framework libraries
+* `helloWorld-ds.xml` is the datasource file containing the jdbc connection string and credentials
+* `helloWorld.json` is the instance-specific settings file, containing all of the settings specific to the particular instance.
 
-- Install Wildfly 8 or later,
-- Copy the application metadata package to `C:\_\`,
-- Copy the Skyve `.ear` package and the `*ds.xml` file to `<wildfly>\standalone\deployments\`,
-- Update the `*ds.xml` with a valid connection string,
-- Update the `<wildfly>\standalone\configuration\standalone.xml` with a
-valid JDBC connection string, (usually the same connection string in the
-\*ds.xml file), and
-- Touch the server
+You can manually signal Wildfly to deploy the datasource and application by creating files named with `.dodeploy` - i.e.:
+`helloWorld-ds.xml.dodeploy` and `helloWorld.war.dodeploy` (the contents of the files is irrelevant - creating empty files with the correct names is sufficient). If Wildfly is running, it will detect the presence of these files and attempt to deploy them, resulting in the creation of either a `.deployed` or a `.failed` signal file.
+
+This approach is part of the Skyve risk reduction strategy, to minimise the risk of problems when updating new versions of your application. Once each instance is configured, moving from DEV to UAT and PROD becomes a low-risk trivial activity, requiring no reconfiguration (unless the different instance have significantly different set ups) - in fact all that is required to deploy a new version on each instance is:
+- undeploy the project (or stop Wildfly)
+- remove the existing `.war` from the deplpoyment area
+- place the new `.war` folder into the deployment area
+- redeploy the project (or restart Wildfly)
 
 See [Configuring Wildfly](#configuring-wildfly) for more detailed Wildfly setup 
 instructions. Additional steps may be required for single sign-on configuration, 
@@ -83,9 +90,11 @@ Before you begin, ensure you have the following:
 * Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)), at least JDK 1.8
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)), so that the installation
 is in C:\\eclipse\\
-* Wildfly 10 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
+* Wildfly 13 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
 * A RDBMS which is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) – ensure you record the
-  administrator username and password. For this example, we are going to use MS SQL Server as the database for the Skyve project.
+  administrator username and password. 
+
+For this example, to use MS SQL Server as the database for the Skyve project:
 * If you do not already have SQL Server installed:
   * download and install the latest version of the developer or express edition for your platform from the [Microsoft website](https://www.microsoft.com/en-au/sql-server/sql-server-downloads)
   * you will also need to download and install a copy of [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) to connect you your database and execute scripts
@@ -97,7 +106,7 @@ is in C:\\eclipse\\
   requires a 'strong' password (remember this password as you will need it later), 
   untick the 'Enforce password expiration' and the 'User must change password at 
   next login'
-* On the same dialog box, choose Default database as skyve, now go to Server Roles 
+* On the same dialog box, choose Default database as 'skyve', now go to Server Roles 
   on left hand pane and tick 'sysadmin', then go to User Mapping and tick 'skyve' 
   and finally, click the _OK_ button down the bottom right.
 * If you've just installed SQL server, you will need to specify the port for this 
@@ -130,18 +139,27 @@ press ‘Apply’ - press Yes for full build, and then press OK.
   * Open the server explorer window if it is not already in your workspace (Window -> Show View -> Servers)
   * Right click inside the server explorer and select New
   * Expand JBoss Community
-  * If WildFly 10.x is not in the list of adapters, you will need to download them:
+  * If WildFly 13.x is not in the list of adapters, you will need to download them:
     * Choose JBoss, WildFly & EAP Server Tools and click Next
     * Accept the licence terms and click Finish
     * Restart Eclipse when prompted
-  * Select WildFly 10.x and click _Next_
+  * Select WildFly 13.x and click _Next_
   * Accept the defaults and click _Next_
   * Click _Finish_
 
-#### Importing Projects
+### Creating a new Project
+To get started, go to the project creation page (at foundry.skyve.org/foundry/project.xhtml). The project creator will create a configured Java project, set up for maven dependency management, for common development environments like Eclipse and IntelliJ.
+* Enter your email address (so you can be notified when the project is created and ready to download) and give your  project a name.
+* Skyve supports multi-tennanted applications - so all data is secured against a customer or client name. Just enter your organisation name.
+* Next choose the type of database you want for structured data - if you're not sure, the H2 file-based option is an easy way to get started -  and you can change to something else later.
+* Finally, if you've got a Skyve Script you can add it here. If you don't, just leave this blank.
+* Create your project, and in about 1 minute, you'll receive an email with a download link.
+* Once you receive the email, use the link to download your project, and unzip it to your Java workspace. 
+* From your development environment, import the project as a maven project.
 
-In Eclipse, choose File->Import.. ->Git->Projects from Git->Next->Clone URI and 
-type in https://github.com/skyvers/skyve.git as URI, then click the _Next_ button, 
+#### Importing an Existing Project from Git
+
+In Eclipse, choose File->Import.. ->Git->Projects from Git->Next->Clone URI and set the URI (for example type in https://github.com/skyvers/skyve.git as URI), then click the _Next_ button, 
 choose the master and click the _Next_ button. Choose your destination directory, 
 in this example, we have chosen C:\\\_\\ directory. Then click the _Next_ button. 
 The import wizard should be displayed and cloning the Skyve project.
@@ -149,90 +167,8 @@ The import wizard should be displayed and cloning the Skyve project.
 After cloning the master, go to Project -> Clean - Select clean all projects and press OK - wait for activity to cease in bottom right corner of the eclipse window.
 
 #### Configuring Wildfly
+If you project is using MySQL or MS SQL (or other dialects) you'll need to ensure that Wildfly can access the drivers for these. Refer to the section on Setting up a Skyve Instance for detailed instructions.
 
-* Locate the 'java-ee' project->javaee->`skyve-ds.xml` file and delete that file. 
-  It is no longer needed as we will be entering SQL Server later in Wildfly 
-  standalone.xml.
-* Download the SQL server JDBC sqljdbc4-3.0.jar file from here - 
-  http://www.java2s.com/Code/Jar/s/Downloadsqljdbc430jar.htm
-* From your wildfly installation folder, create the 
-  `{wildfly directory}\modules\system\layers\base\com\microsoft\sqlserver\main\` 
-  folder structure and copy the JDBC jar inside the `main` folder, and then 
-  create a new XML file in the same location named `module.xml` and with the 
-  following contents:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver">
-  <resources>
-    <resource-root path="sqljdbc4-3.0.jar"/>
-  </resources>
-  <dependencies>
-    <module name="javax.api"/>
-    <module name="javax.transaction.api"/>
-    <module name="javax.xml.bind.api"/>
-  </dependencies>
-</module>
-```
-* In Eclipse, go to "Server" view, then Filesets->Configuration File folder->open 
-  up `standalone.xml` file then click the 'Source' tab and find the 
-  `<subsystem xmlns="urn:jboss:domain:datasources:4.0">` and delete that whole 
-  entry of that line. Also find and delete the line:
-```xml
-<default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
-```
-* These are all default Wildfly DB setup which you won’t need when using 
-  MS SQL Server. Whilst on this file, you need to add other some entries for 
-  Skyve security domain, so locate the `<security-domains...>` and add this 
-  entry within the body of `<security-domains...>` :
-
-```xml
-<security-domain name="skyve" cache-type="default">
-  <authentication>
-    <login-module code="Database" flag="required">
-      <module-option name="dsJndiName" value="java:/DefaultDB"/>
-      <module-option name="principalsQuery" value="select password from ADM_SecurityUser where bizCustomer || '/' || userName = ?"/>
-      <module-option name="rolesQuery" value="select 'Nobody', 'Roles' from ADM_SecurityUser where bizCustomer || '/' || userName = ?"/>
-      <module-option name="hashAlgorithm" value="MD5"/>
-      <module-option name="hashEncoding" value="base64"/>
-    </login-module>
-  </authentication>
-</security-domain>
-```
-* Find the `<deployment-scanner..>` and underneath the `<deployment-scanner path="deployments" relative-to="jboss.server.base.dir"..>` add the following entry (remember where you have cloned the Skyve project from Git, in this example, we have cloned it in C:\\\_\\ directory).
-
-```xml
-<deployment-scanner name="skyve" path="/C:/_/skyve/skyve-ee/javaee" scan-interval="5000" runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>
-```
-
-* Now find the ```<subsystem xmlns="urn:jboss:domain:ee:4.0">``` then add the following inside the body of that entry.
-
-```xml
-<global-modules>
-  <module name="com.microsoft.sqlserver" slot="main"/>
-</global-modules>
-```
-
-* Locate the `<profile>` and enter these SQL Server settings inside the `<profile>`.
-```xml
-<subsystem xmlns="urn:jboss:domain:datasources:4.0">
-  <datasources>
-    <datasource jndi-name="java:/DefaultDS" pool-name="DefaultDS" enabled="true" use-java-context="true">
-      <connection-url>jdbc:sqlserver://localhost:1433;databasename=skyve</connection-url>
-      <driver>sqlserver</driver>
-      <security>
-        <user-name>[your SQL Server user]</user-name>
-        <password>[your SQL Server password]</password>
-      </security>
-    </datasource>
-    <drivers>
-      <driver name="sqlserver" module="com.microsoft.sqlserver">
-        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-      </driver>
-    </drivers>
-  </datasources>
-</subsystem>
-```
 * Open `skyve/skyve-ee/javaee/skyve.json`, the find the following settings entry.
 
 ```javascript
@@ -265,48 +201,11 @@ For more information, refer to the Wildfly documentation.
 
 #### Starting the server
 
-* Right click on the **skyve** project, and select Run As->Maven install. 
-* Expand the **skyve-ee** project and find the pom.xml
-* Right click on that file and select Run As->Maven install. After all the 
-  dependencies have been downloaded, refresh ALL projects.
-* Open the Ant view. Windows->Show View->Other... then select Ant.
-* From here, drag the skyve/ skyve-ee/skyve-build.xml and the 
-  skyve/skyve-ee/build.xml to the Ant view and expand them.
-* In Ant view, skyve/skyve-ee/skyve-build.xml, double click "generateDomain[defult]"
-* Refresh all the projects (highlight all the skyve projects and press F5)
-* In skyve/skyve-ee/skyve-build.xml, double click "build [default]"
-* You may now deploy the project, so in Ant view, skyve/skyve-ee/build.xml, double 
-  click "touch" then start the Wildfly server.
-* Whilst the server is starting and application is being deployed, it will create 
-  various tables within the 'skyve' database you've created earlier. Once, the 
-  application and the server have started successfully, open you SQL Server 
-  Management Studio and run this SQL script:
+##### Development environment
+Skyve provides a bootstrap user configuration (specified in the `.json` file) - this will insert a user with all module roles as a way to get started. The bootstrap configuration is disabled if the instance is a production instance.
 
-```sql
-USE skyve;
-GO
-
-INSERT INTO adm_contact (bizId,bizVersion,bizLock,bizCustomer,bizUserId,bizKey,name,mobile,email1,contactType) VALUES
-('3b596402-553b-4046-8660-c4c0b47e58ec',72,'20080114123937714mike','demo','781e8526-0795-49a9-926b-de40b8c4fb9e','Mike Sands','Mike Sands',NULL,'mike.sands@bizhub.com.au','Person');
-
-INSERT INTO adm_securitygroup (bizId,bizVersion,bizLock,bizCustomer,bizUserId,bizKey, name,description) VALUES
-('397f731c-6b7c-40f9-bf35-142d4d30d55b',200,'20080114123937714mike','demo','781e8526-0795-49a9-926b-de40b8c4fb9e','Everything','Everything','The kitchen sink');
-
-INSERT INTO adm_securitygrouprole (bizId,bizVersion,bizLock,bizCustomer,bizUserId,bizKey, roleName,parent_id) VALUES
-('4d3e4e15-fd50-48ca-ac00-72d1d6e44430',69,'20080114123937714mike','demo','781e8526-0795-49a9-926b-de40b8c4fb9e','admin.BasicUser','admin.BasicUser','397f731c-6b7c-40f9-bf35-142d4d30d55b'),
-('6686f21b-f9e6-4d94-9cf9-ca22dd4a731f',69,'20080114123937714mike','demo','781e8526-0795-49a9-926b-de40b8c4fb9e','admin.ContactViewer','admin.ContactViewer','397f731c-6b7c-40f9-bf35-142d4d30d55b'),
-('a9af46cd-292c-4810-ab23-db3344e81d41',69,'20080114123937714mike','demo','781e8526-0795-49a9-926b-de40b8c4fb9e','admin.StyleMaintainer','admin.StyleMaintainer','397f731c-6b7c-40f9-bf35-142d4d30d55b'),
-('be6c3124-1774-4925-90fc-0a1cdba1c52c',69,'20080114123937714mike','demo','781e8526-0795-49a9-926b-de40b8c4fb9e','admin.SecurityAdministrator','admin.SecurityAdministrator','397f731c-6b7c-40f9-bf35-142d4d30d55b');
-
-INSERT INTO adm_securityuser (bizId,bizVersion,bizLock,bizCustomer,bizUserId,bizKey, userName,password,contact_id) VALUES
-('781e8526-0795-49a9-926b-de40b8c4fb9e',57,'20080114123937698mike','demo','781e8526-0795-49a9-926b-de40b8c4fb9e','mike','mike','GBJue9P4Sz8+TfCU3vW33g==','3b596402-553b-4046-8660-c4c0b47e58ec');
-
-INSERT INTO adm_securityuser_groups (owner_id,element_id) VALUES
-('781e8526-0795-49a9-926b-de40b8c4fb9e','397f731c-6b7c-40f9-bf35-142d4d30d55b');
-```
-* You may now login using the following URL http://localhost:8080/skyve
-* The credentials are as follows:
-Customer : demo, Username : mike , Password : mike
+##### Other environments
+In UAT and PROD environments, Wildfly should be configured as a service. Refer to Wildfly documentation for detailed instructions.
 
 ## Example Deployment Instructions with Single Sign-on
 
