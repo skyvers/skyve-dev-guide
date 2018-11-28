@@ -33,10 +33,17 @@
       * [Creating a new Project](#creating-a-new-project)
       * [Importing an existing Project from Git](#importing-an-existing-project-from-git)
       * [Configuring Wildfly](#configuring-wildfly)
-      * [Setting up a Skyve instance](#setting-up-a-skyve-instance)
       * [Starting the server](#starting-the-server)      
-  * [Appendix 3: Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
-  * [Appendix 4: Example Deployment Problems caused by problems in the .json file](#example-deployment-problems-caused-by-problems-in-the-json-file)
+  * [Appendix 3: Setting up a Skyve instance](#setting-up-a-skyve-instance)
+      * [Recommended requirements](#recommended-requirements)
+      * [Installation of prerequisites](#installation-of-prerequisites)
+      * [Installing database driver](#installing-database-driver)
+      * [Configuring ports](#configuring-ports)
+      * [Create a folder for content](#create-a-folder-for-content)
+      * [Install the wildfly service](#install-the-wildfly-service)
+      * [Skyve application configuration](#skyve-application-configuration)    
+  * [Appendix 4: Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
+  * [Appendix 5: Example Deployment Problems caused by problems in the .json file](#example-deployment-problems-caused-by-problems-in-the-json-file)
     * [Example Output for incorrect Content folder](#example-output-for-incorrect-content-folder)
     * [Example incorrect/invalid customer in bootstrap stanza](#example-incorrect-invalid-customer-in-bootstrap-stanza)
     * [Missing comma or badly formed .json file](#missing-comma-or-badly-formed-json-file)
@@ -73,6 +80,12 @@ Where an instance has already been configured, to deploy a new application versi
 - remove the existing `.war` from the deplpoyment area
 - place the new `.war` folder into the deployment area
 - redeploy the project (or restart Wildfly)
+
+If the server has multiple Skyve application deployments, you can replace one of these without impacting on other deployments by signalling an undeployment and deployment as follows:
+
+To undeploy, create an '.undeploy' file in the wildfly/standalone/deployment/ folder corresponding to the name of your application (an empty text file with that name is all that is required), for example 'helloworld.undeploy'. After approximately 30s, wildlfly will replace this file with a file named 'helloworld.undeployed'. 
+
+To redeploy, create a '.dodeploy' file in the wildfly/standalone/deployment/ folder corresponding to the name of your application, for example 'helloworld.dodeploy' (an empty text file with that name is all that is required). After approximately 30s, wildfly will replace this file with 'helloworld.isdeploying' and once deployment is successful, wildfly will replace this with 'helloworld.deployed' (if successful) or 'helloworld.failed' (if unsuccesful).
 
 See [Configuring Wildfly](#configuring-wildfly) for more detailed Wildfly setup 
 instructions. Additional steps may be required for single sign-on configuration, 
@@ -203,16 +216,26 @@ dataStores: {
 
 For more information, refer to the Wildfly documentation.
 
-### Setting up a Skyve instance
+#### Starting the server
 
-#### Recommended requirements 
+##### Development environment
+Skyve provides a bootstrap user configuration (specified in the `.json` file) - this will insert a user with all module roles as a way to get started. The bootstrap configuration is disabled if the instance is a production instance.
+
+##### Other environments
+In UAT and PROD environments, Wildfly should be configured as a service. Refer to Wildfly documentation for detailed instructions.
+
+**[⬆ back to top](#contents)**
+
+## Setting up a Skyve instance
+
+### Recommended requirements 
 We recommend the following:
 - 4GB RAM for Linux and 8GB RAM for Windows
 - Java JDK 8u191 (this is the JDK for Java 8)
 - Wildfly Wildfly 10.1.0.Final
 - Disk space requirements depend on the nature of the application especially if the database and content repository are located on the same drive, however, for most common applications, 50GB drive space will probably be sufficient.
 
-#### Installation of prerequisites
+### Installation of prerequisites
 To run a Skyve application, the server requires:
 
 Java 8 (also called 1.8) – while the JRE is sufficient, the JDK is recommended.
@@ -223,7 +246,7 @@ Wildfly 10.1.0.Final
  - Download from http://wildfly.org/downloads/   
  - This link may assist - https://linuxtechlab.com/wildfly-10-10-1-0-installation/ 
 
-#### Installing database driver
+### Installing database driver
 For database access, load the appropriate driver and declare this driver in the Wildfly standalone.xml configuration file.
 
 For example, for SQL Server:
@@ -250,7 +273,7 @@ For example, for SQL Server:
                 </driver>
 ```
 
-#### Configuring ports
+### Configuring ports
 To configure which ports will be used for accessing the application, modify the <socket-binding-group> section in the wildfly configuration file wildfly/standalone/configuration/standalone.xml for http and https:
 ```
         <socket-binding name="http" port="${jboss.http.port:8080}"/>
@@ -262,23 +285,23 @@ For example, for external access, typically you would assign as follows:
         <socket-binding name="https" port="${jboss.https.port:443}"/>
 ```
 
-#### Create a folder for content
+### Create a folder for content
 Skyve includes the elastic content repository - the repository requires a dedicated folder to persist files. The user credential running wildfly (for example) will need read-write permissions to this folder.
 
-#### Install the wildfly service
+### Install the wildfly service
 So that the Skyve application will be always available, install the wildfly service, ensuring that the service will have read/write access to the content folder.
 The following may be useful for linux installations - https://community.i2b2.org/wiki/display/getstarted/2.4.2.3+Run+Wildfly+as+a+Linux+Service
 
-#### Skyve application configuration
+### Skyve application configuration
 To deploy a Skyve application, there are typically three artefacts:
 - the application '.war' folder
 - the datasource 'ds.xml' file
 - the properties '.json' file
 
 For example, if your Skyve application is called 'helloworld', these will be:
-- 'helloworld.war'
-- 'helloworld-ds.xml'
-- 'helloworld.json'
+- 'helloWorld.war'
+- 'helloWorld-ds.xml'
+- 'helloWorld.json'
 
 The 'ds.xml' and '.json' remain on the server you are deploying to, and are customised for that specific instance, so that when you are  deploying a new version of your Skyve application, the instance settings do not need to be adjusted.
 
@@ -294,26 +317,6 @@ Ensure the '.json' properties file has been updated for the specific instance in
 - environment identifier
 
 Finally, ensure that the user credential that will run the wildfly service has read/write permissions to the wildfly folder and the content folder created above.
-
-#### Deploying a new version of your Skyve application
-Once a Skyve application has been successfully deployed, to update your application with a new version:
-- undeploy the previous version or stop the wildfly service
-- replace the application '.war' folder with the new version (remove the old version, copy in the new)
-- deploy the new version or start the wildfly service
-
-If the server has multiple Skyve application deployments, you can replace one of these without impacting on other deployments by signalling an undeployment and deployment as follows:
-
-To undeploy, create an '.undeploy' file in the wildfly/standalone/deployment/ folder corresponding to the name of your application (an empty text file with that name is all that is required), for example 'helloworld.undeploy'. After approximately 30s, wildlfly will replace this file with a file named 'helloworld.undeployed'. 
-
-To redeploy, create a '.dodeploy' file in the wildfly/standalone/deployment/ folder corresponding to the name of your application, for example 'helloworld.dodeploy' (an empty text file with that name is all that is required). After approximately 30s, wildfly will replace this file with 'helloworld.isdeploying' and once deployment is successful, wildfly will replace this with 'helloworld.deployed' (if successful) or 'helloworld.failed' (if unsuccesful).
-
-#### Starting the server
-
-##### Development environment
-Skyve provides a bootstrap user configuration (specified in the `.json` file) - this will insert a user with all module roles as a way to get started. The bootstrap configuration is disabled if the instance is a production instance.
-
-##### Other environments
-In UAT and PROD environments, Wildfly should be configured as a service. Refer to Wildfly documentation for detailed instructions.
 
 ## Example Deployment Instructions with Single Sign-on
 
