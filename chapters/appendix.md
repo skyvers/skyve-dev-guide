@@ -377,7 +377,10 @@ to
 
 6. Add the project to your wildfly server
 
-Note that when deploying, you may need to manually create the tax_management-ds.xml.dodeploy and tax_management.war.dodeploy signal files. You may need to manually remove the previous .war if you didn't in the preparation stage. If you didn't rename the previous .json and ds.xml, you should also remove the previous myApplication-ds.xml and myApplication.json files to avoid confusion.
+Note that 
+* when deploying, you may need to manually create the `tax_management-ds.xml.dodeploy` and `tax_management.war.dodeploy` signal files. 
+* You need to manually remove the previous `.war` if you didn't in the preparation stage. 
+* If you didn't rename the previous `.json` and `ds.xml`, you should also remove the previous `myApplication-ds.xml` and `myApplication.json` files to avoid confusion.
 
 **[⬆ back to top](#contents)**
 
