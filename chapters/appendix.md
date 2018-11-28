@@ -41,9 +41,13 @@
       * [Configuring ports](#configuring-ports)
       * [Create a folder for content](#create-a-folder-for-content)
       * [Install the wildfly service](#install-the-wildfly-service)
-      * [Skyve application configuration](#skyve-application-configuration)    
-  * [Appendix 4: Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
-  * [Appendix 5: Example Deployment Problems caused by problems in the .json file](#example-deployment-problems-caused-by-problems-in-the-json-file)
+      * [Skyve application configuration](#skyve-application-configuration) 
+  * [Appendix 4: Creating a new Skyve project](#creating-a-new-skyve-project)
+      * [Configuring your new project](#configuring-your-new-project)
+      * [Deploying your new project and logging in](#deploying-your-new-project-and-logging-in)
+  * [Appendix 5: Importing an existing Skyve project from Git](#importing-an-existing-skyve-project-from-git)
+  * [Appendix 5: Example Deployment Instructions with Single Sign-on](#example-deployment-instructions-with-single-sign-on)
+  * [Appendix 6: Example Deployment Problems caused by problems in the .json file](#example-deployment-problems-caused-by-problems-in-the-json-file)
     * [Example Output for incorrect Content folder](#example-output-for-incorrect-content-folder)
     * [Example incorrect/invalid customer in bootstrap stanza](#example-incorrect-invalid-customer-in-bootstrap-stanza)
     * [Missing comma or badly formed .json file](#missing-comma-or-badly-formed-json-file)
@@ -164,7 +168,9 @@ press ‘Apply’ - press Yes for full build, and then press OK.
   * Accept the defaults and click _Next_
   * Click _Finish_
 
-### Creating a new Project
+**[⬆ back to top](#contents)**
+
+## Creating a new Skyve project
 To get started, go to the project creation page (at foundry.skyve.org/foundry/project.xhtml). The project creator will create a configured Java project, set up for maven dependency management, for common development environments like Eclipse and IntelliJ.
 * Enter your email address (so you can be notified when the project is created and ready to download) and give your  project a name.
 * Skyve supports multi-tennanted applications - so all data is secured against a customer or client name. Just enter your organisation name.
@@ -174,7 +180,31 @@ To get started, go to the project creation page (at foundry.skyve.org/foundry/pr
 * Once you receive the email, use the link to download your project, and unzip it to your Java workspace. 
 * From your development environment, import the project as a maven project.
 
-#### Importing an Existing Project from Git
+### Configuring your new project
+First, add the project to your server.
+
+The project contains two configuration files - a data source xml and a project properties json file. Copy these into the Wildfly standalone deployment folder.
+
+Now, create a folder for your noSQL data store - which will hold your content attachments and images. Skyve backups will also be placed here. You can place it anywhere, but its best to place it outside of your project, so that Eclipse doesn't waste time scanning it for changes. Then update the project json configuration to match that location.
+
+If you're using SQL Server, you'll need to configure Wildfly by placing the jdbc jar and windows authentication dll in place. And if you've chosen to use MySQL or SQL Server, you'll also need to go and create an empty database - but if you're using H2, you can skip this step.
+
+Don't worry about creating tables, Skyve will do that for your when you first deploy - for now, just update your datasource xml to match your local configuration.
+
+Finally, run the Generate Domain target to build your project and resolve all dependencies.
+
+### Deploying your new project and logging in
+
+Start your wildfly server. 
+
+Right click your project in the server tree and publish - Skyve will automatically create all the tables your database needs for you. Your project properties json file includes a bootstrap user - this is a user credential which will be automatically injected into your database so you can log in. Note that the bootstrap user is disabled if you're in a production environment, it's only for getting started.
+
+Once your project is running, go to your local context and login in.
+
+
+**[⬆ back to top](#contents)**
+
+## Importing an existing Skyve project from Git
 
 In Eclipse, choose File->Import.. ->Git->Projects from Git->Next->Clone URI and set the URI (for example type in https://github.com/skyvers/skyve.git as URI), then click the _Next_ button, 
 choose the master and click the _Next_ button. Choose your destination directory, 
@@ -182,39 +212,6 @@ in this example, we have chosen C:\\\_\\ directory. Then click the _Next_ button
 The import wizard should be displayed and cloning the Skyve project.
 
 After cloning the master, go to Project -> Clean - Select clean all projects and press OK - wait for activity to cease in bottom right corner of the eclipse window.
-
-#### Configuring Wildfly
-If you project is using MySQL or MS SQL (or other dialects) you'll need to ensure that Wildfly can access the drivers for these. Refer to the section on Setting up a Skyve Instance for detailed instructions.
-
-* Open `skyve/skyve-ee/javaee/skyve.json`, the find the following settings entry.
-
-```javascript
-dataStores: {
-  // Skyve data store
-  "skyve": {
-    // JNDI name
-    jndi: "java:/H2Demo", 
-    // Dialect
-    dialect: "org.skyve.impl.persistence.hibernate.dialect.H2SpatialDialect"
-  }
-},
-```
-
-and replace it with the following:
-
-```javascript
-dataStores: {
-  // Skyve data store
-  "skyve": {
-    // JNDI name
-    jndi: "java:/H2Demo", 
-    // Dialect
-    dialect: "org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect"
-  }
-},
-```
-
-For more information, refer to the Wildfly documentation.
 
 #### Starting the server
 
@@ -311,8 +308,9 @@ Ensure the 'ds.xml' file uses a connection string and credentials corresponding 
 
 Ensure the '.json' properties file has been updated for the specific instance including:
 - content directory
-- smtp settings
 - context url
+- database dialect
+- smtp settings
 - maps and other api keys
 - environment identifier
 
