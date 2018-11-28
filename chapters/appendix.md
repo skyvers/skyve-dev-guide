@@ -167,6 +167,8 @@ press ‘Apply’ - press Yes for full build, and then press OK.
   * Select WildFly 13.x and click _Next_
   * Accept the defaults and click _Next_
   * Click _Finish_
+  
+See additional details in [Setting up a Skyve instance](#setting-up-a-skyve-instance)(below)
 
 **[⬆ back to top](#contents)**
 
@@ -229,7 +231,7 @@ In UAT and PROD environments, Wildfly should be configured as a service. Refer t
 We recommend the following:
 - 4GB RAM for Linux and 8GB RAM for Windows
 - Java JDK 8u191 (this is the JDK for Java 8)
-- Wildfly Wildfly 10.1.0.Final
+- Wildfly 13
 - Disk space requirements depend on the nature of the application especially if the database and content repository are located on the same drive, however, for most common applications, 50GB drive space will probably be sufficient.
 
 ### Installation of prerequisites
@@ -239,7 +241,7 @@ Java 8 (also called 1.8) – while the JRE is sufficient, the JDK is recommended
  - Download the Java JDK 8u191 from https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html 
  - These instructions may assist for linux - https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html#BJFGGEFG (though note that this mentions an slightly older version of Java)
 
-Wildfly 10.1.0.Final 
+Wildfly 13 
  - Download from http://wildfly.org/downloads/   
  - This link may assist - https://linuxtechlab.com/wildfly-10-10-1-0-installation/ 
 
