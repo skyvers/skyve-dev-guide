@@ -297,7 +297,7 @@ To deploy a Skyve application, there are typically three artefacts:
 - the datasource 'ds.xml' file
 - the properties '.json' file
 
-For example, if your Skyve application is called 'helloworld', these will be:
+For example, if your Skyve application is called 'helloWorld', these will be:
 - 'helloWorld.war'
 - 'helloWorld-ds.xml'
 - 'helloWorld.json'
