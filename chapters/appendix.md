@@ -318,13 +318,15 @@ Finally, ensure that the user credential that will run the wildfly service has r
 **[⬆ back to top](#contents)**
 
 ## Changing the project URL context
-Normally, the project name will be the name of the war - which will be the context on the url for example `https://skyve.org/myApplication` where `myApplication` is also the name of the project.
+Normally, the project name will be the name of the `.war` - which will be the context on the URL for example `https://skyve.org/myApplication` where `myApplication` is also the name of the project.
+
+If you only need to change the base URL (for example, from `https://skyve.org/` to `https://myDomain.com/`), you can do this by specifiying the URL in the `.json` settings file.
 
 However if you need to change the project for a different URL context, like `https://skyve.org/tax_management`, then there's a few simple steps you need to take to make that work.
 
-1. Remove the project from your wildfly server (and ensure the myApplication.war is removed from the deployments area). 
+1. Remove the project from your wildfly server (and ensure the `myApplication.war` is removed from the deployments area). 
 
-2. Edit your pom.xml file to change the name of the war to be built:
+2. Edit the project `pom.xml` file to change the name of the `.war` to be built:
 
 change
 ```
@@ -344,9 +346,9 @@ to
 	<packaging>war</packaging>
 	<name>tax_management</name>
 ```
-3. Rename the json from myApplication.json to tax_management.json
+3. Rename the `.json` settings file from `myApplication.json` to `tax_management.json`
 
-4. Update the project json file for the new context
+4. Update the project `.json` file for the new context
 from
 ```
 	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
