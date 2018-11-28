@@ -64,7 +64,10 @@ Where
 You can manually signal Wildfly to deploy the datasource and application by creating files named with `.dodeploy` - i.e.:
 `helloWorld-ds.xml.dodeploy` and `helloWorld.war.dodeploy` (the contents of the files is irrelevant - creating empty files with the correct names is sufficient). If Wildfly is running, it will detect the presence of these files and attempt to deploy them, resulting in the creation of either a `.deployed` or a `.failed` signal file.
 
-This approach is part of the Skyve risk reduction strategy, to minimise the risk of problems when updating new versions of your application. Once each instance is configured, moving from DEV to UAT and PROD becomes a low-risk trivial activity, requiring no reconfiguration (unless the different instance have significantly different set ups) - in fact all that is required to deploy a new version on each instance is:
+This approach is part of the Skyve risk reduction strategy, to minimise the risk of problems when updating new versions of your application. Once each instance is configured, moving from DEV to UAT and PROD becomes a low-risk trivial activity, requiring no reconfiguration (unless the different instance have significantly different set ups).
+
+### Deploying a new application version
+Where an instance has already been configured, to deploy a new application version on each instance:
 - undeploy the project (or stop Wildfly)
 - remove the existing `.war` from the deplpoyment area
 - place the new `.war` folder into the deployment area
