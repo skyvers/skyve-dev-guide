@@ -320,7 +320,23 @@ Finally, ensure that the user credential that will run the wildfly service has r
 ## Changing the project URL context
 Normally, the project name will be the name of the `.war` - which will be the context on the URL for example `https://skyve.org/myApplication` where `myApplication` is also the name of the project.
 
-If you only need to change the base URL (for example, from `https://skyve.org/` to `https://myDomain.com/`), you can do this by specifiying the URL in the `.json` settings file.
+If you only need to change the base URL (for example, from `https://skyve.org/` to `https://myDomain.com/`), you can do this by specifiying the URL in the `.json` settings file. Similarly, if your application will operate from the base URL then make the change to the URL in the `.json` file and set the context setting to `/` for example:
+```
+	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
+	url: {
+		// server URL
+		server: "https://skyve.org",
+		// web context path
+		context: "/",
+		// home path
+		home: "/"
+	},
+```
+Note that URLs without a specified port will require you to change the Wildlfy port settings suitably, for example:
+```
+        <socket-binding name="http" port="${jboss.http.port:80}"/>
+        <socket-binding name="https" port="${jboss.https.port:443}"/>
+```
 
 However if you need to change the project for a different URL context, like `https://skyve.org/tax_management`, then there's a few simple steps you need to take to make that work.
 
