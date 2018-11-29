@@ -325,7 +325,7 @@ If you only need to change the base URL (for example, from `https://skyve.org/` 
 	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
 	url: {
 		// server URL
-		server: "https://skyve.org",
+		server: "https://myDomain.com",
 		// web context path
 		context: "/",
 		// home path
