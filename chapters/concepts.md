@@ -305,8 +305,8 @@ area.
 Edit views provide detailed access to document attributes within the
 context of the document instance.
 
-![Figure 3](media/image25.png "Figure 3 Edit View")
-_Figure 3 - Edit View_
+![Edit View](media/image25.png "Edit View")
+_Edit View_
 
 If no specific view metadata is provided, Skyve will generate a default
 edit view which will include all attributes, actions and reports defined
@@ -673,7 +673,7 @@ StringBuilder sb = new StringBuilder();
 sb.append("The invoice is overdue and should have been paid on ");
 sb.append(customer.getDefaultDateConverter().toDisplayValue(bean.getActDate()));
 ```
-_Figure 7 - The use of converters ensures consistent representation_
+_The use of converters ensures consistent representation_
 
 ### Resources
 
