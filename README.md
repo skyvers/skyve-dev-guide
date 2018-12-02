@@ -315,7 +315,7 @@ These include:
 - iReport report designer - <http://jasperforge.org/projects/ireport>
 - Eve lightweight JVM for mobile platforms- <http://www.ewesoft.com>
 
-Because Skyve is open-source, developers are at liberty to create ustomised versions of the platform to integrate
+Because Skyve is open-source, developers are at liberty to create customised versions of the platform to integrate
 deeply with other 3rd party packages or custom architectural elements.
 
 **[⬆ back to top](#contents)**
