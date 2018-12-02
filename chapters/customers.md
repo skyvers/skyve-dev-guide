@@ -9,6 +9,8 @@
 * [Chapter 3: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
 * [Chapter 4: Exception Handling](./../chapters/exception-handling.md)
 * **[Chapter 5: Customers](#customers)**
+  * [Customer declaration](#customer-declaration)
+  	* [Internationalisation](#internationalisation)
   * [Resources](#resources)
   * [Modules](#modules)
   * [Adding a new customer](#adding-a-new-customer)
@@ -47,7 +49,8 @@ name is used to differentiate ownership of data rows within the database
 (and therefore also users at the default login page).
 
 #### Internationalisation
-Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute.
+Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute
+, and Skyve supports both left-to-right and right-to-left languages.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -61,8 +64,8 @@ Internationalisation and language support can also be specified when declaring t
 
 If the language is not specified in the `customer.xml`, Skyve will detect the language set in the browser, provided there is an internationalisation file provided.
 
-![Figure 16.1](media/image38-1.png "Figure 16.1 - Language resource files")
-_Figure 16.1 - Language resource files_
+![Language resource files](media/image38-1.png "Language resource files")
+_Language resource files_
 
 The `customer.xml` file also declares the location of the customer logo
 file (displayed in the top left hand corner of the UI above the
