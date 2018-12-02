@@ -165,7 +165,7 @@ nature of the data being maintained implies the functionality required
 to maintain it.
 
 ***'Business component platforms'*** organise all information relating
-to a business concept in a single location – to reduce the risks arising
+to a business concept in a single location - to reduce the risks arising
 from changes or enhancements to the business requirements and to ensure
 consistency.
 
@@ -183,7 +183,7 @@ Skyve is created from the following design principles:
 
   Principle | Description | In Simple Terms…
   --------- | ----------- | ----------------
-  Parsimony | Only the minimum amount of information required to declare a system should be required to build the system. <br>This principle implies the provision of implicit functionality and features - but with the ability for developers to override these without restriction where required. | Developers shouldn’t need to spend effort to create aspects of the system which are implicit.
+  Parsimony | Only the minimum amount of information required to declare a system should be required to build the system. <br>This principle implies the provision of implicit functionality and features - but with the ability for developers to override these without restriction where required. | Developers shouldn't need to spend effort to create aspects of the system which are implicit.
   Authority | Each element of system declaration should be authoritative.<br>This principle implies that each element of declaration must be in only one location. | Developers should be able to declare each system concept once, without the possibility of contradiction or confusion.
   Independence | The effort required to build a system should be reusable across different technologies and therefore independent from any specific implementation.<br>This principle implies human-readable platform independent formats for application declaration. | Developers should be able to reuse development effort when technology changes or updates.
   Security | Best-practice security must not be able to be compromised by simple error or omission.<br>This principle implies the provision of transparent security, with user permissions assigned declaratively rather programmatically. | Developers should not be able to accidentally compromise system security.
@@ -191,7 +191,7 @@ Skyve is created from the following design principles:
   Maintainability | The declaration of a system must be able to be changed with minimum effort and risk.<br>In addition to the parsimonious implication that changes be made with the minimum information required to declare the change, this principle implies the provision of extensive validation of the system declaration to mitigate the risk of introducing errors. | Developers should be able to make changes to the system with confidence that the change they are making is conceptually correct and will not result in system failure.   
   Exit | By the principle of independence, the declaration of a system must be reusable at the end-of-life either for replacement or incorporation into other systems.<br>In addition to the implications from parsimony and independence, this principle implies that the format of system declaration correlates clearly and obviously to the requirements of the system. | The system declaration must be self-describing so that it can inform (or be reused in) other systems.<br>Data must be accessible via a range of technologies and always exist in a valid state.
 
-Table 1 Skyve design principles
+_Skyve design principles_
 
 ***Unless an application complies with these principles, it represents a
 significant risk to the organisation in terms of usability,
@@ -227,11 +227,11 @@ contravenes the business component principle, and potentially increases
 maintenance effort and costs.
 
 Skyve provides an object data source which can be used by application
-reports, further reducing the need for SQL.In some situations using
+reports, further reducing the need for SQL. In some situations using
 implementation-specific SQL is necessary for performance or to integrate
 with 3rd party systems and the Skyve API provides an execute method for
 insecure SQL, i.e. SQL which is not within the Skyve security
-architecture
+architecture.
 
 Remembering that schema object creation is handled automatically by
 Skyve via Hibernate, scripts for table creation are not only unnecessary
@@ -243,7 +243,7 @@ review if this is preferred to automatic database manipulation.
 If SQL artefacts are created, it is recommended that developers locate
 creation scripts (or a single creation script) for all SQL artefacts
 within the Skyve code package, e.g. in a folder called SQL (or similar).
-That way, searches for identifiers within the IDE workspace won’t
+That way, searches for identifiers within the IDE workspace won't
 inadvertently miss references within SQL artefacts, supporting the
 common tasks of refactoring, deprecation and change impact analysis.
 
@@ -315,7 +315,7 @@ These include:
 - iReport report designer - <http://jasperforge.org/projects/ireport>
 - Eve lightweight JVM for mobile platforms- <http://www.ewesoft.com>
 
-Customised versions of the Skyve platform can be created to integrate
+Because Skyve is open-source, developers are at liberty to create ustomised versions of the platform to integrate
 deeply with other 3rd party packages or custom architectural elements.
 
 **[⬆ back to top](#contents)**
