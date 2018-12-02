@@ -16,6 +16,8 @@ sidebar:
   <img src="assets/images/readme/hero-display-minimal.png" width="100%" alt="Skyve Enterprise Platform" />
 </div>
 
+## Introduction
+
 ### Contents
 
 * [Section 1: Introduction](#introduction)
@@ -55,18 +57,16 @@ sidebar:
   * [Appendix 4: Example Deployment Problems caused by problems in the .json file](chapters/appendix.md)
   * [Appendix 5: Installing Skyve in Production](chapters/appendix.md)
 
-## Introduction
-
-### Note to Readers
+## Note to Readers
 
 This reference guide assumes familiarity with Web technology and
 architecture, Java EE concepts, the Java language and the use of common
-development tools Eclipse and Ant.
+development tools like Eclipse.
 
-While Skyve makes the job of developers simpler and more robust, it is
+Skyve makes the job of developers simpler and more robust, however it is
 not intended as a replacement for software development experience.
 
-Skyve is focused on making experienced developers more productive and
+Skyve is focused on making developers more productive and
 lowering the costs associated with building sophisticated enterprise
 solutions.
 
