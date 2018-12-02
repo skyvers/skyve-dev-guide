@@ -232,27 +232,27 @@ In flat style search, any number of criteria can be applied to filter the list.
 In flat style the criteria are applied according to the method selected
 (either "Match All", "Match Any" or "Match None").
 
+![Flat style advanced filter](media/image19.png "Flat style advanced filter")
+_Flat style advanced filter_
+
 Using the "Match All" method will apply all criteria specified to the
 resulting data. In the example above, the list will be filtered for
-Organisations with a Short name starting with "CSIRO" ***AND*** which
-have "Eligible for funding" set to "true".
+Timesheets where the "Week ending" date is between the specified dates ***AND*** 
+which have "Total hours" is greater than the specified value.
 
 Using the "Match Any" method will apply any of the criteria to the data.
 In the example above, switching to "Match Any" would return all
-Organisations where either the Short name starts with "CSIRO" ***OR***
-which have "Eligible for funding" set to "true".
+Timesheets where either the "Week ending" date is between the specified dates ***OR***
+where the "Total hours" is greater than the specified value.
 
 Using the "Match None" method applies all of the criteria but in the
 negative sense. In the example above, switching to the "Match None"
-method would return all Organisations which ***do not*** have Short name
-starting with "CSIRO" ***AND*** which ***do not*** have "Eligible for
-funding" set to "true".
+method would return all Timesheets which ***do not*** have "Week ending" date is between the specified dates ***AND*** 
+which ***do not*** have "Total hours" greater than the specified value.
 
 The advanced filter is applied using the filter tool
 ![](media/image15.png) which is available in the construction
 area.
-
-![](media/image19.png)
 
 The red minus tool ![](media/image17.png) allows for criteria to be removed.
 
