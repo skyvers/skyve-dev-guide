@@ -141,7 +141,7 @@ environments while working on the same project - as developers may have
 their own preferences for their own development environment.
 
 Skyve also provides a revolutionary database independent backup and
-restore facility for the combined relational and "non-SQL" data store -
+restore facility for the combined relational ("SQL") and "non-SQL" data store -
 which means support teams can backup from production instances running
 on different operating systems and database technologies and restore to
 another environment seamlessly.

@@ -12,7 +12,7 @@ Skyve has two rendering modes to suit different user agents/device types.
 Skyve applications will (by default) automatically switch to use the most suitable
 rendering for the user agent or device type.
 
-![Rendering Modes](media/concepts_rendering_modes.png "Rendering Modes")
+![Rendering Modes]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/concepts_rendering_modes.png "Rendering Modes")
 _Rendering Modes_
 
 The SmartClient AJAX framework rendering mode provides a feature rich user experience, mimicking thick-client
@@ -52,7 +52,7 @@ within the list view. Documents may contain collections of, and
 references to, other documents, with each instance persisted as a tuple
 in the database.
 
-![Basic UI Layout](media/image8.png "Basic UI layout")
+![Basic UI Layout]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image8.png "Basic UI layout")
 _Basic UI layout_
 
 Both module and document objects are implemented in the Skyve API and
@@ -100,7 +100,7 @@ document attributes for searching and review. Each row of the list
 corresponds to a document instance however the list may represent data
 from related documents within the document's object hierarchy.
 
-![List view](media/image9.png "List view")
+![List view]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image9.png "List view")
 _List view_
 
 List views are provided by a generic list component (called a
@@ -144,7 +144,7 @@ query (or implicit query), columns are defined as either filterable or
 not. If a column is defined as filterable, a filter widget will be
 available above the column header in the list.
 
-![](media/image10.png)
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image10.png)
 
 The simple filter line provides basic filtering capability. Values
 entered in the filter line are the basis of an inclusive "Like" filter
@@ -152,15 +152,15 @@ applied to the data set.
 
 The list supports any number of filter parameters set in the filter
 line. The filter is activated using the filter tool
-![](media/image11.png), or by keying &lt;Enter&gt; in any of
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image11.png), or by keying &lt;Enter&gt; in any of
 the parameter controls, or by refreshing the list, using the refresh
-tool ![](media/image12.png) (from the tool bar or context menu).
+tool ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image12.png) (from the tool bar or context menu).
 
 The filter is cleared by either clearing the values from the filter line
 controls, or by using the clear filter tool
-![](media/image13.png).
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image13.png).
 
-![](media/image14.png)
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image14.png)
 
 #### Advanced Filter constructor
 
@@ -171,7 +171,7 @@ The Advanced Filter constructor operates in three styles:
 -   Inline.
 
     The advanced filter is applied using the filter tool
-    ![](media/image15.png) which is available in the
+    ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image15.png) which is available in the
     construction area.
 
     Whereas the simple filter line applies inclusive like operators to
@@ -179,14 +179,14 @@ The Advanced Filter constructor operates in three styles:
     selection of a wide range of filtering operators pertinent to the
     specific data type of the attribute (column) being filtered.
 
-    ![](media/image16.png)
+    ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image16.png)
 
-The red minus tool ![](media/image17.png) allows for criteria to be removed.
+The red minus tool ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image17.png) allows for criteria to be removed.
 
-The green plus tool ![](media/image18.png) allows for additional criteria to be added.
+The green plus tool ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image18.png) allows for additional criteria to be added.
 
 The advanced filter is applied using the filter tool
-![](media/image15.png) which is available in the construction
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image15.png) which is available in the construction
 area.
 
 #### Flat style advanced search
@@ -196,7 +196,7 @@ In flat style search, any number of criteria can be applied to filter the list.
 In flat style the criteria are applied according to the method selected
 (either "Match All", "Match Any" or "Match None").
 
-![Flat style advanced filter](media/image19.png "Flat style advanced filter")
+![Flat style advanced filter]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image19.png "Flat style advanced filter")
 _Flat style advanced filter_
 
 Using the "Match All" method will apply all criteria specified to the
@@ -215,37 +215,37 @@ method would return all Timesheets which ***do not*** have "Week ending" date is
 which ***do not*** have "Total hours" greater than the specified value.
 
 The advanced filter is applied using the filter tool
-![](media/image15.png) which is available in the construction
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image15.png) which is available in the construction
 area.
 
-The red minus tool ![](media/image17.png) allows for criteria to be removed.
+The red minus tool ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image17.png) allows for criteria to be removed.
 
-The green plus tool ![](media/image18.png) allows for additional criteria to be
+The green plus tool ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image18.png) allows for additional criteria to be
 added.
 
 The advanced filter is applied using the filter tool
-![](media/image15.png) which is available in the construction
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image15.png) which is available in the construction
 area.
 
 #### Nested style
 
 Nested style allows complex and sophisticated filter criteria.
 
-![](media/image21.png)
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image21.png)
 
 In Nested style, ***AND*** an ***OR*** operators are explicitly selected
 with logical subclauses. The scope of each subclause is indicated by the
 square bracket.
 
-![](media/image22.png)
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image22.png)
 
-The red minus tool ![](media/image17.png) allows for criteria to be removed.
+The red minus tool ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image17.png) allows for criteria to be removed.
 
-The green plus tool ![](media/image18.png) allows for additional criteria to be
+The green plus tool ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image18.png) allows for additional criteria to be
 added.
 
 The advanced filter is applied using the filter tool
-![](media/image15.png) which is available in the construction
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image15.png) which is available in the construction
 area.
 
 #### Inline style
@@ -254,14 +254,14 @@ Inline style is a simplified version of the Nested style, which allows
 the ***AND*** and ***OR*** operators to be specified for each criteria,
 however without the complexity of nesting.
 
-![](media/image23.png)
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image23.png)
 
-The red minus tool ![](media/image17.png) allows for criteria to be removed.
+The red minus tool ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image17.png) allows for criteria to be removed.
 
-The green plus tool ![](media/image18.png) allows for additional criteria to be added.
+The green plus tool ![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image18.png) allows for additional criteria to be added.
 
 The advanced filter is applied using the filter tool
-![](media/image15.png) which is available in the construction
+![]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image15.png) which is available in the construction
 area.
 
 #### Edit Views
@@ -269,7 +269,7 @@ area.
 Edit views provide detailed access to document attributes within the
 context of the document instance.
 
-![Edit View](media/image25.png "Edit View")
+![Edit View]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image25.png "Edit View")
 _Edit View_
 
 If no specific view metadata is provided, Skyve will generate a default
@@ -315,7 +315,7 @@ specifying a spinner widget in the view declaration. For a particular
 customer, the developer may choose to override again by overriding the
 view declaration for the customer and specify another kind of widget.
 
-![Override levels for a document widget declaration](media/image26.png "Override levels for a document widget declaration")
+![Override levels for a document widget declaration]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image26.png "Override levels for a document widget declaration")
 _Override levels for a document widget declaration_
 
 At each context level (application, view, customer), the developer has
@@ -335,7 +335,7 @@ query. When displaying a *listGrid* in a view, the developer may choose
 to override the default characteristic and declare another query for the
 list, and so on.
 
-![Override levels for a document widget declaration](media/image27.png "Override levels for a document widget declaration")
+![Override levels for a document widget declaration]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image27.png "Override levels for a document widget declaration")
 _Override levels for a document widget declaration_
 
 ### BizKey - the business key concept
@@ -396,7 +396,7 @@ creation of referenced document instances.
 Skyve automatically modifies default actions depending on the zoom level
 or transaction context.
 
-![Zoom levels and transactions](media/image28.png "Zoom levels and transactions")
+![Zoom levels and transactions]({{ site.url }}{{ site.baseurl }}/assets/images/concepts/image28.png "Zoom levels and transactions")
 _Zoom levels and transactions_
 
 #### Concurrent conversations and transactional demarcation
