@@ -4,16 +4,15 @@
 
 * [Chapter 1: Architectural Overview](../README.md)
 * [Chapter 2: Concepts](./../chapters/concepts.md)
-* [Chapter 3: Identifying the Skyve Version](./../chapters/concepts.md)
-* [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
-* **[Chapter 5: Exception Handling](#exception-handling)**
+* [Chapter 3: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
+* **[Chapter 4: Exception Handling](#exception-handling)**
   * [ValidationException](#validationexception)
   * [Concurrent Multiple Validation](#concurrent-multiple-validation)
   * [Data type validation](#data-type-validation)
   * [Mandatory field validation](#mandatory-field-validation)
   * [Business rule validation](#business-rule-validation)
   * [Building Applications](#building-applications)
-* [Chapter 6: Customers](./../chapters/customers.md)
+* [Chapter 5: Customers](./../chapters/customers.md)
 
 Skyve provides powerful error management capabilities extending general
 Java Exception handling.
@@ -68,9 +67,8 @@ using the .getSubordinates().add pattern. If the subordinates do not
 have valid bindings supplied, Skyve will automatically list all
 validation messages in a `<ul>`.
 
-![Figure 11](media/image33.png "Figure 11 Concurrent Multiple Validation")
-
-_Figure 11 - Concurrent Multiple Validation_
+![Concurrent multiple validation](media/image33.png "Concurrent multiple validation")
+_Concurrent multiple validation_
 
 ### Data type validation
 
@@ -89,9 +87,8 @@ Skyve employs the following methods for data type validation:
 -   Native Server side validation which can be extended by the
     developer.
 
-![Figure 12](media/image34.png "Figure 12 Data type validation is handled automatically by Skyve both client side and server side.")
-
-_Figure 12 - Data type validation is handled automatically by Skyve both
+![Data type validation](media/image34.png "Data type validation is handled automatically by Skyve both client side and server side.")
+_Data type validation is handled automatically by Skyve both
 client side and server side._
 
 The automatic data type validation occurs before any API validation to
@@ -104,7 +101,7 @@ Mandatory fields (i.e. requiredness) are specified within the
 document.xml to ensure the requiredness is handled pervasively within
 the application tier.
 
-Where attributes are declared with property required=”true”, Skyve will
+Where attributes are declared with property required="true", Skyve will
 automatically display associated user interface controls with bold
 labels.
 
@@ -112,9 +109,8 @@ Requiredness is automatically validated in the client and server side
 before developer API validation overrides so that the developer is not
 required to duplicate obvious and implicit validations.
 
-![Figure 13](media/image35.png "Figure 13 Requiredness violations are displayed consistently within the UI")
-
-_Figure 13 - Requiredness violations are displayed consistently within the UI_
+![Requiredness violations](media/image35.png "Requiredness violations are displayed consistently within the UI")
+_Requiredness violations are displayed consistently within the UI_
 
 ### Business rule validation
 
@@ -129,25 +125,26 @@ ValidationException and these will occur in the UI as general browser
 alerts.
 
 The API also allows for developers to call the native validation using
-the Validator Utility class, for example:
+the BeanValidator Utility class, for example:
 
 ```java
-@Override
-public ServerSideActionResult execute(ChangePassword bean, WebContext webContext) throws Exception {
-  Persistence persistence = CORE.getPersistence();
-  User user = persistence.getUser();
-  Customer customer = user.getCustomer();
-  Module module = customer.getModule(ChangePassword.MODULE_NAME);
-  Document changePasswordDocument = module.getDocument(customer, ChangePassword.DOCUMENT_NAME);
-
-  Validator.validateBeanAgainstDocument(changePasswordDocument, bean);
+	@Override
+	public ServerSideActionResult<ChangePassword> execute(ChangePassword bean, WebContext webContext) throws Exception {
+		
+		Persistence persistence = CORE.getPersistence();
+		User user = persistence.getUser();
+		Customer customer = user.getCustomer();
+		Module module = customer.getModule(ChangePassword.MODULE_NAME);
+		Document changePasswordDocument = module.getDocument(customer, ChangePassword.DOCUMENT_NAME);
+		
+		BeanValidator.validateBeanAgainstDocument(changePasswordDocument, bean);
 }
 ```
-_Figure 14 - The Validator Utility class provides access to the native
+_The BeanValidator Utility class provides access to the native
 Validation capability_
 
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 6: Customers](./../chapters/customers.md)**  
-**Previous [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)**
+**Next [Chapter 5: Customers](./../chapters/customers.md)**  
+**Previous [Chapter 3: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)**

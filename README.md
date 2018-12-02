@@ -13,31 +13,30 @@
     * [1.2: General Approach and Design Principles](#general-approach-and-design-principles)
     * [1.3: Use of SQL](#use-of-sql)
     * [1.4: Multi-tenant & Mass-Customisation](#multi-tenant--mass-customisation)
-    * [1.5: “Open-source” Inclusions ](#open-source-inclusions)
+    * [1.5: 'Open-source' Inclusions ](#open-source-inclusions)
   * [Chapter 2: Concepts](chapters/concepts.md)
-  * [Chapter 3: Identifying the Skyve Version](chapters/concepts.md)
-  * [Chapter 4: Security, Persistence and Access control](chapters/security-persistence-and-access-control.md)
-  * [Chapter 5: Exception Handling](chapters/exception-handling.md)
+  * [Chapter 3: Security, Persistence and Access control](chapters/security-persistence-and-access-control.md)
+  * [Chapter 4: Exception Handling](chapters/exception-handling.md)
 * [Section 2: Building Applications](chapters/customers.md)
-  * [Chapter 6: Customers](chapters/customers.md)
-  * [Chapter 7: Modules](chapters/modules.md)
-  * [Chapter 8: Documents](chapters/documents.md)
-  * [Chapter 9: Converters](chapters/converters.md)
-  * [Chapter 10: Bizlets](chapters/bizlets.md)
-  * [Chapter 11: Views](chapters/views.md)
-  * [Chapter 12: Actions](chapters/actions.md)
-  * [Chapter 13: Reports](chapters/reports.md)
-  * [Chapter 14: Jobs](chapters/jobs.md)
-  * [Chapter 15: Utility Classes](chapters/utility-classes.md)
-  * [Chapter 16: Common Patterns](chapters/common-patterns.md)
+  * [Chapter 5: Customers](chapters/customers.md)
+  * [Chapter 6: Modules](chapters/modules.md)
+  * [Chapter 7: Documents](chapters/documents.md)
+  * [Chapter 8: Converters](chapters/converters.md)
+  * [Chapter 9: Bizlets](chapters/bizlets.md)
+  * [Chapter 10: Views](chapters/views.md)
+  * [Chapter 11: Actions](chapters/actions.md)
+  * [Chapter 12: Reports](chapters/reports.md)
+  * [Chapter 13: Jobs](chapters/jobs.md)
+  * [Chapter 14: Utility Classes](chapters/utility-classes.md)
+  * [Chapter 15: Common Patterns](chapters/common-patterns.md)
 * [Section 3: Persistence](chapters/skyve-persistence-mechanisms.md)  
-  * [Chapter 17: Skyve Persistence Mechanisms](chapters/skyve-persistence-mechanisms.md)
+  * [Chapter 16: Skyve Persistence Mechanisms](chapters/skyve-persistence-mechanisms.md)
 * [Section 4: Platform Tools](chapters/ant-utilities.md)
-  * [Chapter 18: Ant Utilities](chapters/ant-utilities.md)
-  * [Chapter 19: Content Repository Tools](chapters/content-repository-tools.md)
-  * [Chapter 20: Bizport](chapters/bizport.md)
-  * [Chapter 21: WILDCAT Conversion Tool](chapters/wildcat-conversion-tool.md)
-  * [Chapter 22: Automated Unit Testing](chapters/automated-unit-testing.md)
+  * [Chapter 17: Ant Utilities](chapters/ant-utilities.md)
+  * [Chapter 18: Content Repository Tools](chapters/content-repository-tools.md)
+  * [Chapter 19: Bizport](chapters/bizport.md)
+  * [Chapter 20: WILDCAT Conversion Tool](chapters/wildcat-conversion-tool.md)
+  * [Chapter 21: Automated Unit Testing](chapters/automated-unit-testing.md)
 * [Section 5: Appendix](chapters/appendix.md)
   * [Appendix 1: Deploying a Skyve Application](chapters/appendix.md)
   * [Appendix 2: Installing and configuring the Skyve Development Environment](chapters/appendix.md)
@@ -46,6 +45,19 @@
   * [Appendix 5: Installing Skyve in Production](chapters/appendix.md)
 
 # Introduction
+
+### Note to Readers
+
+This reference guide assumes familiarity with Web technology and
+architecture, Java EE concepts, the Java language and the use of common
+development tools Eclipse and Ant.
+
+While Skyve makes the job of developers simpler and more robust, it is
+not intended as a replacement for software development experience.
+
+Skyve is focused on making experienced developers more productive and
+lowering the costs associated with building sophisticated enterprise
+solutions.
 
 ## Architectural Overview
 
@@ -133,15 +145,15 @@ Technically, Skyve is an open-source ***meta-data driven data-centric
 business component application platform*** designed for rapid
 development of high-quality, secure Web applications.
 
-***“Meta-data driven”*** means that applications are controlled by
+***'Meta-data driven'*** means that applications are controlled by
 high-level specification of requirements (meta-data) rather than by
 programming code.
 
-***“Data-centric”*** reflects an approach which recognises that the
+***'Data-centric'*** reflects an approach which recognises that the
 nature of the data being maintained implies the functionality required
 to maintain it.
 
-***“Business component platforms”*** organise all information relating
+***'Business component platforms'*** organise all information relating
 to a business concept in a single location – to reduce the risks arising
 from changes or enhancements to the business requirements and to ensure
 consistency.
@@ -267,7 +279,7 @@ interfaces are generated on-the-fly using Web 2.0 with piecemeal
 downloads for improved performance. Web, Mobile/PDA or exe type clients
 can be generated without additional development effort.
 
-### “Open-source” Inclusions
+### 'Open-source' Inclusions
 
 Skyve takes advantage of a number of open-source and LGPL frameworks
 which are either distributed with the platform, required to be present

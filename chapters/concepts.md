@@ -39,9 +39,7 @@
     * [Resource Hierarchy](#resource-hierarchy)
   * [2.22: Documentation](#documentation)
   * [2.23: Bizport](#bizport)
-  * [2.24: Note to Readers](#note-to-readers)
-* [Chapter 3: Identifying the Skyve Version](#identifying-the-skyve-version)
-* [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
+* [Chapter 3: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
 * [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
 * [Chapter 6: Customers](./../chapters/customers.md)
 
@@ -50,14 +48,16 @@ Skyve has two rendering modes to suit different user agents/device types.
 Skyve applications will (by default) automatically switch to use the most suitable
 rendering for the user agent or device type.
 
-![Figure 2_1](media/concepts_rendering_modes.png "Figure 2_1 Rendering Modes")
-_Figure 2_1 - Rendering Modes_
+![Rendering Modes](media/concepts_rendering_modes.png "Rendering Modes")
+_Rendering Modes_
 
 The SmartClient AJAX framework rendering mode provides a feature rich user experience, mimicking thick-client
 applications. This mode is suitable for office environments and users who regularly use the software
 on desktop or laptop devices.
 
-The PrimeFaces rendering mode is a responsive renderer suitable for phones and tablet devices.
+The PrimeFaces rendering mode is a responsive renderer suitable for phones and tablet devices. 
+The responsive renderer offers a reduced capability set (compared with the SmartClient rendering mode) 
+as a simplified mode suitable for mobile devices and occasional use.
 
 Skyve's powerful routing capability gives developers the ability to override Skyve's default activity 
 and decide which rendering options suit their applications best.
@@ -88,8 +88,8 @@ within the list view. Documents may contain collections of, and
 references to, other documents, with each instance persisted as a tuple
 in the database.
 
-![Figure 1](media/image8.png "Figure 1 Basic UI layout")
-_Figure 1 - Basic UI layout_
+![Basic UI Layout](media/image8.png "Basic UI layout")
+_Basic UI layout_
 
 Both module and document objects are implemented in the Skyve API and
 are available to developers. Using the API, developers can create
@@ -136,8 +136,8 @@ document attributes for searching and review. Each row of the list
 corresponds to a document instance however the list may represent data
 from related documents within the document's object hierarchy.
 
-![Figure 2](media/image9.png "Figure 2 List view")
-_Figure 2 - List view_
+![List view](media/image9.png "List view")
+_List view_
 
 List views are provided by a generic list component (called a
 *listGrid*) which offers searching, filtering, tagging, exporting,
@@ -225,9 +225,9 @@ The advanced filter is applied using the filter tool
 ![](media/image15.png) which is available in the construction
 area.
 
-#### Flat style
+#### Flat style advanced search
 
-In flat style, any number of criteria can be applied to filter the list.
+In flat style search, any number of criteria can be applied to filter the list.
 
 In flat style the criteria are applied according to the method selected
 (either "Match All", "Match Any" or "Match None").
@@ -351,8 +351,8 @@ specifying a spinner widget in the view declaration. For a particular
 customer, the developer may choose to override again by overriding the
 view declaration for the customer and specify another kind of widget.
 
-![Figure 4](media/image26.png "Figure 4 Override levels for a document widget declaration")
-_Figure 4 - Override levels for a document widget declaration_
+![Override levels for a document widget declaration](media/image26.png "Override levels for a document widget declaration")
+_Override levels for a document widget declaration_
 
 At each context level (application, view, customer), the developer has
 the option to rely on the default characteristic or override this with
@@ -371,7 +371,8 @@ query. When displaying a *listGrid* in a view, the developer may choose
 to override the default characteristic and declare another query for the
 list, and so on.
 
-![Figure 5](media/image27.png "Figure 5 Override levels for a document widget declaration")
+![Override levels for a document widget declaration](media/image27.png "Override levels for a document widget declaration")
+_Override levels for a document widget declaration_
 
 ### BizKey - the business key concept
 
@@ -431,7 +432,8 @@ creation of referenced document instances.
 Skyve automatically modifies default actions depending on the zoom level
 or transaction context.
 
-![Figure 6](media/image28.png "Figure 6 Zoom levels and transactions")
+![Zoom levels and transactions](media/image28.png "Zoom levels and transactions")
+_Zoom levels and transactions_
 
 #### Concurrent conversations and transactional demarcation
 
@@ -728,32 +730,8 @@ validation rules specified in metadata and *Bizlet* code.
 Bizport is fully extensible, and developers can override and extend the
 *Bizport* behaviour as required.
 
-### Note to Readers
-
-This reference guide assumes familiarity with Web technology and
-architecture, Java EE concepts, the Java language and the use of common
-development tools Eclipse and Ant.
-
-While Skyve makes the job of developers simpler and more robust, it is
-not intended as a replacement for software development experience.
-
-Skyve is focused on making experienced developers more productive and
-lowering the costs associated with building sophisticated enterprise
-solutions.
-
-**[⬆ back to top](#contents)**
-
-## Identifying the Skyve Version
-
-The specific version number of the platform can be retrieved by viewing
-the source of any application page.
-
-![Image 29](media/image29.png)
-
-If using Skyve with [maven](https://maven.apache.org), the version of Skyve can be obtained from the *pom.xml* file in the project hierarchy.
-
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)**  
+**Next [Chapter 3: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)**  
 **Previous [Chapter 1: Architectural Overview](../README.md)**  

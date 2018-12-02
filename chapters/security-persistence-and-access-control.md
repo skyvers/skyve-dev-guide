@@ -4,13 +4,12 @@
 
 * [Chapter 1: Architectural Overview](../README.md)
 * [Chapter 2: Concepts](./../chapters/concepts.md)
-* [Chapter 3: Identifying the Skyve Version](./../chapters/concepts.md)
-* **[Chapter 4: Security, Persistence and Access control](#security-persistence-and-access-control)**
-  * [4.1: Transaction Control](#transaction-control)
+* **[Chapter 3: Security, Persistence and Access control](#security-persistence-and-access-control)**
+  * [3.1: Transaction Control](#transaction-control)
     * [Concurrent conversations and transactional demarcation](#concurrent-conversations-and-transactional-demarcation)
     * [Authorisation model - Summary of Options and Discussion](#authorisation-model---summary-of-options-and-discussion)
-* [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
-* [Chapter 6: Customers](./../chapters/customers.md)
+* [Chapter 4: Exception Handling](./../chapters/exception-handling.md)
+* [Chapter 5: Customers](./../chapters/customers.md)
 
 ### Transaction Control
 
@@ -66,7 +65,7 @@ There are three common authorisation models:
 
 The impersonation model offers the most granular authorisation, however
 “the approach suffers from poor application scalability because
-effective connection pooling for database access is not possible.”
+effective connection pooling for database access is not possible."
 (Refer to MSDN Library - Improving Web Application Security: Threats and
 Countermeasures, Chapter 4 Design Guidelines for Secure Web
 Applications, extracted from
@@ -125,7 +124,7 @@ implemented. Skyve does not adopt this method natively because:
     access tokens used to establish different security contexts for
     downstream resource access using Windows authentication is a
     privileged operation that requires privileged process accounts. This
-    is counter to the principle of least privilege.”, and
+    is counter to the principle of least privilege.", and
 
 -   User access requirements for GPS were not clearly identified so
     decisions about the specifics of the Trusted service access was not
