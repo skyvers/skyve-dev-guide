@@ -4,45 +4,63 @@
 
 * [Chapter 1: Architectural Overview](../README.md)
 * **[Chapter 2: Concepts](#concepts)**
-  * [2.1: Domain Model](#domain-model)
-  * [2.2: Module and Document](#module-and-document)
-  * [2.3: Types](#types)
-  * [2.4: List and Edit](#list-and-edit)
+  * [2.1: Rendering Modes](#rendering-modes)
+  * [2.2: Domain Model](#domain-model)
+  * [2.3: Module and Document](#module-and-document)
+  * [2.4: Types](#types)
+  * [2.5: List and Edit](#list-and-edit)
     * [List Views](#list-views)
-  * [2.5: Filtering](#filtering)
+  * [2.6: Filtering](#filtering)
     * [Simple Filter line](#simple-filter-line)
     * [Advanced Filter constructor](#advanced-filter-constructor)
     * [Flat style](#flat-style)
     * [Nested style](#nested-style)
     * [Inline style](#inline-style)
     * [Edit Views](#edit-views)
-  * [2.6: Overriding](#overriding)
-    * [Example – overriding data entry widgets](#example-overriding-data-entry-widgets)
-    * [Example – overriding query definitions for lists of documents](#example-overriding-query-definitions-for-lists-of-documents)
-  * [2.7: BizKey – the business key concept](#bizkey-the-business-key-concept)
-  * [2.8: Zoom](#zoom)
+  * [2.7: Overriding](#overriding)
+    * [Example - overriding data entry widgets](#example-overriding-data-entry-widgets)
+    * [Example - overriding query definitions for lists of documents](#example-overriding-query-definitions-for-lists-of-documents)
+  * [2.8: BizKey - the business key concept](#bizkey-the-business-key-concept)
+  * [2.9: Zoom](#zoom)
     * [Concurrent conversations and transactional demarcation](#concurrent-conversations-and-transactional-demarcation)
-  * [2.9: Customer](#customer)
-  * [2.10: Customer Overriding](#customer-overriding)
-  * [2.11: Role Privileges](#role-privileges)
-  * [2.12: Document Scoping](#document-scoping)
-  * [2.13: Data Group](#data-group)
-  * [2.14: Bean](#bean)
-  * [2.15: Bizlet](#bizlet)
-  * [2.16: Actions](#actions)
-  * [2.17: Enumerations](#enumerations)
-  * [2.18: Domain Values and Types](#domain-values-and-types)
+  * [2.10: Customer](#customer)
+  * [2.11: Customer Overriding](#customer-overriding)
+  * [2.12: Role Privileges](#role-privileges)
+  * [2.13: Document Scoping](#document-scoping)
+  * [2.14: Data Group](#data-group)
+  * [2.15: Bean](#bean)
+  * [2.16: Bizlet](#bizlet)
+  * [2.17: Actions](#actions)
+  * [2.18: Enumerations](#enumerations)
+  * [2.19: Domain Values and Types](#domain-values-and-types)
     * [Performance Implications of Domain Types](#performance-implications-of-domain-types)
-  * [2.19: Converters](#converters)
-  * [2.20: Resources](#resources)
+  * [2.20: Converters](#converters)
+  * [2.21: Resources](#resources)
     * [Resource Hierarchy](#resource-hierarchy)
-  * [2.21: Documentation](#documentation)
-  * [2.22: Bizport](#bizport)
-  * [2.23: Note to Readers](#note-to-readers)
+  * [2.22: Documentation](#documentation)
+  * [2.23: Bizport](#bizport)
+  * [2.24: Note to Readers](#note-to-readers)
 * [Chapter 3: Identifying the Skyve Version](#identifying-the-skyve-version)
 * [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
 * [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
 * [Chapter 6: Customers](./../chapters/customers.md)
+
+### Rendering Modes
+Skyve has two rendering modes to suit different user agents/device types. 
+Skyve applications will (by default) automatically switch to use the most suitable
+rendering for the user agent or device type.
+
+![Figure 2_1](media/concepts_rendering_modes.png "Figure 2_1 Rendering Modes")
+_Figure 2_1 - Rendering Modes_
+
+The SmartClient AJAX framework rendering mode provides a feature rich user experience, mimicking thick-client
+applications. This mode is suitable for office environments and users who regularly use the software
+on desktop or laptop devices.
+
+The PrimeFaces rendering mode is a responsive renderer suitable for phones and tablet devices.
+
+Skyve's powerful routing capability gives developers the ability to override Skyve's default activity 
+and decide which rendering options suit their applications best.
 
 ### Domain Model
 An application domain model can be thought of as a conceptual model
@@ -116,7 +134,7 @@ early stage.
 List views are based on queries which generally include only key
 document attributes for searching and review. Each row of the list
 corresponds to a document instance however the list may represent data
-from related documents within the document’s object hierarchy.
+from related documents within the document's object hierarchy.
 
 ![Figure 2](media/image9.png "Figure 2 List view")
 _Figure 2 - List view_
@@ -128,17 +146,17 @@ provide the list feature.
 
 Skyve provides flagging and tagging features for all lists.
 
-Flags are small amounts of rich-text attached to a data row – displayed
+Flags are small amounts of rich-text attached to a data row - displayed
 as tool-tip comments when the document instance is browsed.
 
-Unlike basic multi-select capability in many applications, Skyve’s Tag
+Unlike basic multi-select capability in many applications, Skyve's Tag
 capability allows users to save the collection of rows and name that
 collection for later recall.
 
 Tags are named collections of rows within a specific user context.
 Tagging rows provides users with the ability to create and work with
 their own groups of records for specific purposes. Tags are
-heterogeneous – meaning that a single tag can include different document
+heterogeneous - meaning that a single tag can include different document
 types, e.g. a user can create a tag which holds a collection of both
 Contacts and Timesheets.
 
@@ -165,7 +183,7 @@ available above the column header in the list.
 ![](media/image10.png)
 
 The simple filter line provides basic filtering capability. Values
-entered in the filter line are the basis of an inclusive “Like” filter
+entered in the filter line are the basis of an inclusive "Like" filter
 applied to the data set.
 
 The list supports any number of filter parameters set in the filter
@@ -212,23 +230,23 @@ area.
 In flat style, any number of criteria can be applied to filter the list.
 
 In flat style the criteria are applied according to the method selected
-(either “Match All”, “Match Any” or “Match None”).
+(either "Match All", "Match Any" or "Match None").
 
-Using the “Match All” method will apply all criteria specified to the
+Using the "Match All" method will apply all criteria specified to the
 resulting data. In the example above, the list will be filtered for
-Organisations with a Short name starting with “CSIRO” ***AND*** which
-have “Eligible for funding” set to “true”.
+Organisations with a Short name starting with "CSIRO" ***AND*** which
+have "Eligible for funding" set to "true".
 
-Using the “Match Any” method will apply any of the criteria to the data.
-In the example above, switching to “Match Any” would return all
-Organisations where either the Short name starts with “CSIRO” ***OR***
-which have “Eligible for funding” set to “true”.
+Using the "Match Any" method will apply any of the criteria to the data.
+In the example above, switching to "Match Any" would return all
+Organisations where either the Short name starts with "CSIRO" ***OR***
+which have "Eligible for funding" set to "true".
 
-Using the “Match None” method applies all of the criteria but in the
-negative sense. In the example above, switching to the “Match None”
+Using the "Match None" method applies all of the criteria but in the
+negative sense. In the example above, switching to the "Match None"
 method would return all Organisations which ***do not*** have Short name
-starting with “CSIRO” ***AND*** which ***do not*** have “Eligible for
-funding” set to “true”.
+starting with "CSIRO" ***AND*** which ***do not*** have "Eligible for
+funding" set to "true".
 
 The advanced filter is applied using the filter tool
 ![](media/image15.png) which is available in the construction
@@ -319,7 +337,7 @@ part of the application. The purpose of this is to try to encourage
 developers to use consistent approaches except where absolutely
 necessary.
 
-#### Example – overriding data entry widgets
+#### Example - overriding data entry widgets
 
 For example, in Skyve an Invoice document may have a Quantity attribute.
 Once the attribute is declared as type *Integer*, the developer can rely
@@ -341,11 +359,11 @@ the option to rely on the default characteristic or override this with
 for the particular context. This means that the developer only needs to
 be specific where required.
 
-#### Example – overriding query definitions for lists of documents
+#### Example - overriding query definitions for lists of documents
 
 Similarly, wherever Invoices are presented in a list, the developer can
 rely on Skyve to provide all attributes of the Invoice in the list by
-default – this is the inferred default query. The developer may choose
+default - this is the inferred default query. The developer may choose
 to override this by supplying a *defaultQueryName* for the Invoice
 document. When declaring a reference to Invoices from another document,
 the developer may choose to override the *defaultQueryName* with another
@@ -355,7 +373,7 @@ list, and so on.
 
 ![Figure 5](media/image27.png "Figure 5 Override levels for a document widget declaration")
 
-### BizKey – the business key concept
+### BizKey - the business key concept
 
 To enable the application to display references simply, each document
 must define a business key (*bizKey*) definition (similar to a Java
@@ -444,7 +462,7 @@ Any individual piece of Skyve application metadata can be overridden for
 tenants within a multi-tenant environment, enabling comprehensively
 mass-customised Software-As-A-Service (SAAS).
 
-Skyve’s unique customer overriding paradigm not only allows
+Skyve's unique customer overriding paradigm not only allows
 comprehensive customisation but also provides a significantly more
 maintainable solution than attempting to cater for all varying customer
 experiences within the one application definition.
@@ -459,7 +477,7 @@ Skyve allows developers to specify application security roles in terms
 of access permissions on a per-document basis.
 
 A role declares a set of document privileges, and each document
-privilege within a role specifies that role’s ability to *Create*,
+privilege within a role specifies that role's ability to *Create*,
 *Read*, *Update*, *Delete*, *List* and *Pick* documents.
 
 Each privilege also declares the document scope and what custom actions
@@ -490,7 +508,7 @@ respect data contexts.
 Data Groups roughly correspond to the concept of a department or
 business group, where most users only interact with data relevant to
 their organisational context, but administration/managing users work
-with a federated collection of the organisation’s data.
+with a federated collection of the organisation's data.
 
 The Data Group concept is for row-level security. Users within a Data
 Group can interact only with data which was created for that group,
@@ -537,9 +555,9 @@ method) within the document package.
 
 An action is declared as part of the action declaration section of a
 view. Each declaration nominates the Java class and representation
-information specific to that view, including the action’s button text,
+information specific to that view, including the action's button text,
 icon, visibility, confirmation text, tool-tip text etc. Skyve will not
-allow an action to be displayed on a view unless the user’s role
+allow an action to be displayed on a view unless the user's role
 declares execute privileges for the action.
 
 ### Enumerations
@@ -550,7 +568,7 @@ defined in metadata can be referenced across modules and documents,
 where two or more attributes share the same value set. Developers can
 also create normal Java enumerations (*enums*) without restriction.
 
-For example, an enumeration to specify a person’s gender might be the
+For example, an enumeration to specify a person's gender might be the
 set of values {male, female, intersex, not specified}.
 
 A traditional approach might require the developer to:
@@ -579,7 +597,7 @@ situation.
 Skyve includes a number of domain value concepts to allow the developer
 to optimise application performance.
 
-There are three domain types – *constant*, *variant* (depending on the
+There are three domain types - *constant*, *variant* (depending on the
 user context) and *dynamic* (depending on the bean instance context). In
 most cases, *constant* domains should be declared as *enums*.
 
@@ -590,10 +608,10 @@ If all three values are always applicable then the *constant* domain
 type is applicable (and could be declared as an *enum*).
 
 If only a manager can set a timesheet to authorised, then the
-application requires a *variant* domain based on the user’s role.
+application requires a *variant* domain based on the user's role.
 
 If an application should only offer authorised when the timesheet is
-submitted and the manager’s review has been completed, then the
+submitted and the manager's review has been completed, then the
 application would declare a *dynamic* domain type (calculated based on
 the current state of the timesheet bean).
 
@@ -663,14 +681,14 @@ levels of overriding.
 For example, rather than specify an absolute file location for a button
 icon, the application will specify the icon filename within a resource
 context. The absolute location of the file will be resolved at run-time
-depending on the user’s context.
+depending on the user's context.
 
 #### Resource Hierarchy
 
-Skyve provides icons for default action buttons – *Add*, *Save*,
+Skyve provides icons for default action buttons - *Add*, *Save*,
 *Cancel*, *Delete* etc. A customer may require a different icon set and
 override the default icons by placing files of the same name in the
-customer’s resources folder.
+customer's resources folder.
 
 A module may require particular icons for these default actions and in
 this case the developer would place module-specific icons into the
