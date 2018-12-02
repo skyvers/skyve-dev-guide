@@ -1,5 +1,7 @@
 docs:
-  - title: Concepts
-    url: /concepts/
-  - title: Security, Persistence and Access control
-    url: /security-persistence-and-access-control/       
+  - title: Introduction
+    children:
+      - title: "Concepts"
+        url: /concepts/
+      - title: "Security, Persistence and Access control"
+        url: /security-persistence-and-access-control/

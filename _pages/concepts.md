@@ -7,8 +7,6 @@ sidebar:
   title: "Index"
   nav: docs
 ---
-## Concepts
-
 ### Rendering Modes
 Skyve has two rendering modes to suit different user agents/device types. 
 Skyve applications will (by default) automatically switch to use the most suitable

@@ -7,8 +7,6 @@ sidebar:
   title: "Index"
   nav: docs
 ---
-## Security, Persistence and Access control
-
 ### Transaction Control
 
 Skyve implements consistent transaction control pervasively and provides
