@@ -125,22 +125,23 @@ ValidationException and these will occur in the UI as general browser
 alerts.
 
 The API also allows for developers to call the native validation using
-the BeanValidator Utility class, for example:
+the BeanValidator utility class, for example:
 
 ```java
-	@Override
-	public ServerSideActionResult<ChangePassword> execute(ChangePassword bean, WebContext webContext) throws Exception {
-		
-		Persistence persistence = CORE.getPersistence();
-		User user = persistence.getUser();
-		Customer customer = user.getCustomer();
-		Module module = customer.getModule(ChangePassword.MODULE_NAME);
-		Document changePasswordDocument = module.getDocument(customer, ChangePassword.DOCUMENT_NAME);
-		
-		BeanValidator.validateBeanAgainstDocument(changePasswordDocument, bean);
+@Override
+public ServerSideActionResult<ChangePassword> execute(ChangePassword bean, WebContext webContext) 
+throws Exception {
+	
+	Persistence persistence = CORE.getPersistence();
+	User user = persistence.getUser();
+	Customer customer = user.getCustomer();
+	Module module = customer.getModule(ChangePassword.MODULE_NAME);
+	Document changePasswordDocument = module.getDocument(customer, ChangePassword.DOCUMENT_NAME);
+	
+	BeanValidator.validateBeanAgainstDocument(changePasswordDocument, bean);
 }
 ```
-_The BeanValidator Utility class provides access to the native
+_The BeanValidator utility class provides access to the native
 Validation capability_
 
 **[⬆ back to top](#contents)**
