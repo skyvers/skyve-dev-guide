@@ -48,6 +48,11 @@ The `customer.xml` file must declare the customer name. The customer
 name is used to differentiate ownership of data rows within the database
 (and therefore also users at the default login page).
 
+The `customer.xml` file also declares the location of the customer logo
+file (displayed in the top left hand corner of the UI above the
+accordion pane), and assumes the file is located within the customer's
+resources folder.
+
 #### Internationalisation
 Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute
 , and Skyve supports both left-to-right and right-to-left languages.
@@ -66,11 +71,6 @@ If the language is not specified in the `customer.xml`, Skyve will detect the la
 
 ![Language resource files](media/image38-1.png "Language resource files")
 _Language resource files_
-
-The `customer.xml` file also declares the location of the customer logo
-file (displayed in the top left hand corner of the UI above the
-accordion pane), and assumes the file is located within the customer's
-resources folder.
 
 ### Resources
 
@@ -109,9 +109,12 @@ user from within the user functionality (within the admin module).
 
 ### Adding a new customer
 
-Skyve is designed around the ability to build applications, then re-sell them to multiple _customers_ or _tennants_ as Software-as-a-Service (SaaS). The _customer_ concept allows you to share and reuse the code you create for your application, and customise it for each _customer_ (where appropriate).
+Skyve is designed around the ability to build applications, then re-sell them to multiple _customers_ or _tennants_ as Software-as-a-Service (SaaS). 
+The _customer_ concept allows you to share and reuse the code you create for your application, 
+and customise it for each _customer_ (where appropriate).
 
-In Skyve the term _Customer_ connotes customisation. If there's no (or only trivial) customisation required, you might resell the software to millions of users under the one Skyve customer context.
+In Skyve the term _Customer_ connotes customisation. If there's no (or only trivial) customisation required,
+ you might resell the software to millions of users under the one Skyve customer context.
 
 #### Creating the customer scope
 

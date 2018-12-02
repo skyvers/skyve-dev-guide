@@ -1,9 +1,21 @@
-<img src="chapters/media/image4.png" width="300" style="margin: 0 auto; text-align: center" />
+---
+title: "Skyve Enterprise Platform Developer Guide"
+permalink: /
+excerpt: "Skyve Enteprise Platform - a guide to development and configuration"
+toc: true
+sidebar:
+  title: "Index"
+  nav: docs
+---
+
+<div style="margin: 0 auto; text-align: center">
+  <img src="assets/images/skyve-logo.png" width="300" alt="Skyve logo" />
+</div>
 
 # Skyve Enterprise Platform
 ## Developer Guide
 
-![](chapters/media/hero-display-minimal.png)
+![](assets/readme/hero-display-minimal.png)
 
 ### Contents
 
