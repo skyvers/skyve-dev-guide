@@ -55,9 +55,7 @@ sidebar:
   * [Appendix 4: Example Deployment Problems caused by problems in the .json file](chapters/appendix.md)
   * [Appendix 5: Installing Skyve in Production](chapters/appendix.md)
 
-## Introduction
-
-### Note to Readers
+## Note to Readers
 
 This reference guide assumes familiarity with Web technology and
 architecture, Java EE concepts, the Java language and the use of common
