@@ -16,7 +16,7 @@ sidebar:
 ## Developer Guide
 
 <div style="margin: 0 auto; text-align: center">
-  <img src="assets/images/readme/hero-display-minimal.png" alt="Skyve Enterprise Platform" />
+  <img src="assets/images/readme/hero-display-minimal.png" width="100%" alt="Skyve Enterprise Platform" />
 </div>
 
 
