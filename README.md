@@ -12,13 +12,9 @@ sidebar:
   <img src="assets/images/skyve-logo.png" width="300" alt="Skyve logo" />
 </div>
 
-# Skyve Enterprise Platform
-## Developer Guide
-
 <div style="margin: 0 auto; text-align: center">
   <img src="assets/images/readme/hero-display-minimal.png" width="100%" alt="Skyve Enterprise Platform" />
 </div>
-
 
 ### Contents
 
@@ -59,7 +55,7 @@ sidebar:
   * [Appendix 4: Example Deployment Problems caused by problems in the .json file](chapters/appendix.md)
   * [Appendix 5: Installing Skyve in Production](chapters/appendix.md)
 
-# Introduction
+## Introduction
 
 ### Note to Readers
 
