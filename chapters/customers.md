@@ -6,10 +6,9 @@
 
 * [Chapter 1: Architectural Overview](../README.md)
 * [Chapter 2: Concepts](./../chapters/concepts.md)
-* [Chapter 3: Identifying the Skyve Version](./../chapters/concepts.md)
-* [Chapter 4: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
-* [Chapter 5: Exception Handling](./../chapters/exception-handling.md)
-* **[Chapter 6: Customers](#customers)**
+* [Chapter 3: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)
+* [Chapter 4: Exception Handling](./../chapters/exception-handling.md)
+* **[Chapter 5: Customers](#customers)**
   * [Resources](#resources)
   * [Modules](#modules)
   * [Adding a new customer](#adding-a-new-customer)
@@ -20,11 +19,12 @@
       * [Inserting the user record](#inserting-the-user-record)
   * [Setting a default customer](#setting-a-default-customer)
 
+### Customer declaration
 Skyve supports multi-tenant Software-As-A-Service (SAAS) applications
 with extensive ability to customise the application for each
 tenant/customer.
 
-Each customer’s experience of the application is declared within the
+Each customer's experience of the application is declared within the
 customer package. The customer package includes a `customer.xml`
 manifest file and a resources folder.
 
@@ -32,20 +32,21 @@ By convention, developers are encouraged to locate all
 application-specific artefacts (such as project management and reference
 materials) within the customer package.
 
-![Figure 15](media/image37.png "Figure 15 Example customer package")
-_Figure 15 - Example customer package_
+![Example customer package](media/image37.png "Example customer package")
+_Example customer package_
 
 The `customer.xml` file declares which modules the customer has access
 to, which default converters to use, the location of key resources, and
 the default (or home) module.
 
-![Figure 16](media/image38.png "Figure 16 Example customer.xml file")
-_Figure 16 - Example customer.xml file_
+![Example customer.xml file](media/image38.png "Example customer.xml file")
+_Example customer.xml file_
 
 The `customer.xml` file must declare the customer name. The customer
 name is used to differentiate ownership of data rows within the database
 (and therefore also users at the default login page).
 
+#### Internationalisation
 Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute.
 
 ```xml
@@ -61,12 +62,11 @@ Internationalisation and language support can also be specified when declaring t
 If the language is not specified in the `customer.xml`, Skyve will detect the language set in the browser, provided there is an internationalisation file provided.
 
 ![Figure 16.1](media/image38-1.png "Figure 16.1 - Language resource files")
-
 _Figure 16.1 - Language resource files_
 
 The `customer.xml` file also declares the location of the customer logo
 file (displayed in the top left hand corner of the UI above the
-accordion pane), and assumes the file is located within the customer’s
+accordion pane), and assumes the file is located within the customer's
 resources folder.
 
 ### Resources
@@ -83,7 +83,7 @@ the module *resources* folder. Resources can also be defined per
 customer within the customer *resources* folder (e.g. the company logo
 file).
 
-A module *resources* folder can be overridden as part of a customer’s
+A module *resources* folder can be overridden as part of a customer's
 module override by placing files of the same name as occur in the
 original module.
 
@@ -112,24 +112,24 @@ In Skyve the term _Customer_ connotes customisation. If there's no (or only triv
 
 #### Creating the customer scope
 
-Here’s how to create another customer to the Skyve demo.zip download example, for example a customer called _acme_:
+Here's how to create another customer to the Skyve demo.zip download example, for example a customer called _acme_:
 1.    Copy the _demo_ customer folder from ```\demo\skyve\src\skyve\customers\demo``` to ```\demo\skyve\src\skyve\customers\acme```
 2.    Rename the file ```\demo\skyve\src\skyve\customers\acme\demo.xml``` to ```\demo\skyve\src\skyve\customers\acme\acme.xml```
-3.    Edit the new file ```\demo\skyve\src\skyve\customers\acme\acme.xml``` and change the customer name value to match – i.e. on line 2 ```<customer name="acme" ... ```
+3.    Edit the new file ```\demo\skyve\src\skyve\customers\acme\acme.xml``` and change the customer name value to match - i.e. on line 2 ```<customer name="acme" ... ```
 
 All customisations specific to this customer will live within this customer folder.
 
 #### Deploying the customer
 
-If you’re not using a development tool (an IDE like eclipse) and you just want another customer in the demo, then you’ll need to copy the customer folder manually to the deployment area, i.e. copy ```\demo\skyve\src\skyve\customers\acme``` to  ```\demo\skyve\javaee\skyve.ear\apps.jar\skyve\customers\acme```
+If you're not using a development tool (an IDE like eclipse) and you just want another customer in the demo, then you'll need to copy the customer folder manually to the deployment area, i.e. copy ```\demo\skyve\src\skyve\customers\acme``` to  ```\demo\skyve\javaee\skyve.ear\apps.jar\skyve\customers\acme```
 
-If you’re using an IDE like eclipse then this copy will happen automatically.
+If you're using an IDE like eclipse then this copy will happen automatically.
 
 #### Adding a setup user
 
-However to start creating data within that customer context, you’ll need a user credential in the database so that you can log in the first time. There’s several ways to do this but the simplest at the moment would be to open up the database and run a script – this will inject a user credential. This is just to get you started. Once you’ve logged in as this user, you can begin adding more users and data via the user interface.
+However to start creating data within that customer context, you'll need a user credential in the database so that you can log in the first time. There's several ways to do this but the simplest at the moment would be to open up the database and run a script - this will inject a user credential. This is just to get you started. Once you've logged in as this user, you can begin adding more users and data via the user interface.
 
-Now start up the application server, by running _\demo\run.bat_ (or \demo\run.sh if you’re not using Windows)
+Now start up the application server, by running _\demo\run.bat_ (or \demo\run.sh if you're not using Windows)
 
 ##### Using the h2 database manager
 
@@ -139,7 +139,7 @@ If you're using the demo h2 database, to access the h2 database manager embedded
 
 _Figure 16.2 - Signing in to the embedded h2 database manager_
 
-Check that the JDBC URL matches the name of the h2 file in the ```\demo\content\``` folder – for the demo, this will be _demo_ – and so the JDBC URL should have the full path, for example  ```jdbc:h2:C:/demo/skyve/content/demo``` (where ```C:/demo/skyve/content/demo``` is the full path to the file _demo.h2.db_ – without the ".h2.db")
+Check that the JDBC URL matches the name of the h2 file in the ```\demo\content\``` folder - for the demo, this will be _demo_ - and so the JDBC URL should have the full path, for example  ```jdbc:h2:C:/demo/skyve/content/demo``` (where ```C:/demo/skyve/content/demo``` is the full path to the file _demo.h2.db_ - without the ".h2.db")
 
 ##### Inserting the user record
 
@@ -204,5 +204,5 @@ _Figure 16.5 - Signing in with a default customer_
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 7: Modules](./../chapters/modules.md)**  
-**Previous [Chapter 5: Exception Handling](./../chapters/exception-handling.md)**
+**Next [Chapter 6: Modules](./../chapters/modules.md)**  
+**Previous [Chapter 4: Exception Handling](./../chapters/exception-handling.md)**
