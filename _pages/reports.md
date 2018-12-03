@@ -91,16 +91,6 @@ catered for.
 
 Alternatively, a report format can be specified in the report action declaration, avoiding the need for a user to select a format.
 
-#### Skyve Report Designer
-
-Skyve provides an automated report designer which generates a .jrxml template file. 
-
-The report designer is available in the DevOps tools in the admin module->devOps->Report Design.
-
-![Skyve report designer](../assets/images/reports/adminDevOpsReportDesignerExample1.PNG "Skyve report designer")
-
-This will create a Jasper template based on an existing view, document or query.
-
 #### Automatic Customer Resource Parameter
 
 Skyve automatically passes a contextual parameter named *RESOURCE\_DIR*
@@ -147,6 +137,17 @@ engine.
 
 Jobs can be declared to create reports offline, including bulk report
 generation. Jobs are described in the next section.
+
+#### Skyve Report Designer
+
+Skyve provides an automated report designer which generates a .jrxml template file. 
+
+The report designer is available in the DevOps tools in the admin module->devOps->Report Design.
+
+![Skyve report designer](../assets/images/reports/adminDevOpsReportDesignerExample1.PNG "Skyve report designer")
+
+This will create a Jasper template based on an existing view, document or query.
+
 
 **[⬆ back to top](#contents)**
 
