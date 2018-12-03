@@ -11,3 +11,5 @@ docs:
     children:
       - title: "Customers"
         url: /customers/                
+      - title: "Modules"
+        url: /modules/                        

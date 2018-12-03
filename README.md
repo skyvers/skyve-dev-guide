@@ -32,7 +32,7 @@ sidebar:
   * [Chapter 4: Exception Handling](_pages/exception-handling.md)
 * [Section 2: Building Applications](_pages/customers.md)
   * [Chapter 5: Customers](_pages/customers.md)
-  * [Chapter 6: Modules](chapters/modules.md)
+  * [Chapter 6: Modules](_pages/modules.md)
   * [Chapter 7: Documents](chapters/documents.md)
   * [Chapter 8: Converters](chapters/converters.md)
   * [Chapter 9: Bizlets](chapters/bizlets.md)
