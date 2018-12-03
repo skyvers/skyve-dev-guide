@@ -37,7 +37,7 @@ sidebar:
   * [Converters](_pages/converters.md)
   * [Bizlets](_pages/bizlets.md)
   * [Views](_pages/views.md)
-  * [Chapter 11: Actions](chapters/actions.md)
+  * [Actions](_pages/actions.md)
   * [Chapter 12: Reports](chapters/reports.md)
   * [Chapter 13: Jobs](chapters/jobs.md)
   * [Chapter 14: Utility Classes](chapters/utility-classes.md)
