@@ -26,7 +26,7 @@ _Utility classes and libraries_
 ### Persistence
 
 Skyve's Persistence mechanism is described in detail in
-* [Skyve Persistence Mechanisms](_pages/skyve-persistence-mechanisms.md)
+* [Skyve Persistence Mechanisms](./../_pages/skyve-persistence-mechanisms.md)
 
 The following is specific to the use of the Persistence utility class.
 
