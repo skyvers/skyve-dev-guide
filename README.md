@@ -1,7 +1,7 @@
 ---
 title: "Skyve Enterprise Platform Developer Guide"
 permalink: /
-excerpt: "Skyve Enteprise Platform - a guide to development and configuration"
+excerpt: "Skyve Enterprise Platform - a guide to development and configuration"
 toc: true
 sidebar:
   title: "Index"

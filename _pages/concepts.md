@@ -1,7 +1,7 @@
 ---
 title: "Concepts"
 permalink: /concepts/
-excerpt: "Skyve Enteprise Platform concepts."
+excerpt: "Skyve Enterprise Platform concepts."
 toc: true
 sidebar:
   title: "Index"
@@ -12,7 +12,7 @@ Skyve has two rendering modes to suit different user agents/device types.
 Skyve applications will (by default) automatically switch to use the most suitable
 rendering for the user agent or device type.
 
-![Rendering Modes](assets/images/concepts/concepts_rendering_modes.png "Rendering Modes")
+![Rendering Modes](/assets/images/concepts/concepts_rendering_modes.png "Rendering Modes")
 _Rendering Modes_
 
 The SmartClient AJAX framework rendering mode provides a feature rich user experience, mimicking thick-client
