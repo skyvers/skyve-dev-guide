@@ -5,3 +5,9 @@ docs:
         url: /concepts/
       - title: "Security, Persistence and Access control"
         url: /security-persistence-and-access-control/
+      - title: "Exception Handling"
+        url: /exception-handling/        
+  - title: Building Applications
+    children:
+      - title: "Customers"
+        url: /customers/                
