@@ -12,8 +12,7 @@ Skyve has two rendering modes to suit different user agents/device types.
 Skyve applications will (by default) automatically switch to use the most suitable
 rendering for the user agent or device type.
 
-![Rendering Modes](../../assets/images/concepts/concepts_rendering_modes.png "Rendering Modes")
-_Rendering Modes_
+![Rendering Modes](../assets/images/concepts/concepts_rendering_modes.png "Rendering Modes")
 
 The SmartClient AJAX framework rendering mode provides a feature rich user experience, mimicking thick-client
 applications. This mode is suitable for office environments and users who regularly use the software
