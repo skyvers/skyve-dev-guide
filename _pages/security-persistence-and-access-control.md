@@ -7,6 +7,8 @@ sidebar:
   title: "Index"
   nav: docs
 ---
+## Security, Persistence and Access control
+
 ### Transaction Control
 
 Skyve implements consistent transaction control pervasively and provides
@@ -129,5 +131,5 @@ pervasively and consistently throughout any Skyve application.
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 5: Exception Handling](./../_pages/exception-handling.md)**  
+**Next [Exception Handling](./../_pages/exception-handling.md)**  
 **Previous [Concepts](./../_pages/concepts.md)**  

@@ -7,6 +7,8 @@ sidebar:
   title: "Index"
   nav: docs
 ---
+## Concepts
+
 ### Rendering Modes
 Skyve has two rendering modes to suit different user agents/device types. 
 Skyve applications will (by default) automatically switch to use the most suitable
@@ -696,5 +698,5 @@ Bizport is fully extensible, and developers can override and extend the
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 3: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)**  
-**Previous [Chapter 1: Architectural Overview](../README.md)**  
+**Next [Security, Persistence and Access control](./../_pages/security-persistence-and-access-control.md)**  
+**Previous [Introduction](../README.md)**  
