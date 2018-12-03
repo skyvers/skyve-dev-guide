@@ -13,3 +13,7 @@ docs:
         url: /customers/                
       - title: "Modules"
         url: /modules/                        
+      - title: "Documents"
+        url: /documents/                                
+      - title: "Converters"
+        url: /converters/                                
