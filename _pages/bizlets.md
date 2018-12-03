@@ -127,7 +127,6 @@ public Configuration preExecute(ImplicitActionName actionName, Configuration bea
 }
 ```	
 
-
 ### Extension classes
 
 Skyve allows for extension of the automatically generated domain classes for each document, 
@@ -138,7 +137,6 @@ the domain model provided by Skyve (see anaemic versus rich domain models).
 
 ```
 public class ControlPanelExtension extends ControlPanel {
-	private static final long serialVersionUID = -6204655500999983605L;
 
 	public void trapException(Exception e) {
 		StringWriter sw = new StringWriter(512);
@@ -166,6 +164,7 @@ public class ControlPanelExtension extends ControlPanel {
 		return Boolean.valueOf(UtilImpl.BIZLET_TRACE);
 	}
 ```
+
 _Example of convenience and overridden methods in an Extension class_
 
 Domain generation uses the extension class (if it exists).

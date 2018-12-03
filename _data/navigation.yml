@@ -19,3 +19,5 @@ docs:
         url: /converters/                                
       - title: "Bizlet and extension classes"
         url: /bizlets/                                        
+      - title: "Views"
+        url: /views/                                                

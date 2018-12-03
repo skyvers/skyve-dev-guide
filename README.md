@@ -36,7 +36,7 @@ sidebar:
   * [Documents](_pages/documents.md)
   * [Converters](_pages/converters.md)
   * [Bizlets](_pages/bizlets.md)
-  * [Chapter 10: Views](chapters/views.md)
+  * [Views](_pages/views.md)
   * [Chapter 11: Actions](chapters/actions.md)
   * [Chapter 12: Reports](chapters/reports.md)
   * [Chapter 13: Jobs](chapters/jobs.md)
