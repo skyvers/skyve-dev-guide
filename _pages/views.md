@@ -439,8 +439,8 @@ no formal relationship to a Post Code document is implemented).
 
 ![listGrid declaration](../assets/images/views/list-grid-declaration.png "listGrid declaration")
 
-  Property                           | Description
-  ---------------------------------- | ---------------------------
+  Property      | Description
+  ------------- | -----------------------------------------------
   autoPopulate                       | whether or not the list results will be populated as soon as the list is due to be rendered - if autoPopulate is set to "false", the list will not populate results until filter criteria have been provided and the filter control is actioned
   disableAdd                         | disables the ability to add members to the collection (i.e. the *Add* button and context menu item *Add* are disabled)
   disabled                           | an overall control disabling all aspects of the grid
@@ -534,24 +534,24 @@ The action section of the view declares which actions will be available
 to the user and under what conditions.
 
 Skyve offers the following action types:
- Action Type | Description
- ------------|------------
- action | a custom action created by the developer which implements org.skyve.metadata.controller.ServerSideAction
- add | the implicit Skyve action to add a member to the dataGrid/collection (deprecated)
- cancel | the implicit Skyve action to cancel editing of the current view
- defaults | the collection of implicit Skyve actions - specific actions will be determined by user access privileges and context (for example whether zoomed in from a dataGrid or listGrid, or "pinned"/navigated to directly)
- delete | the implicit Skyve action to delete a document instance (not relevant for a dataGrid/collection member, not relevant unless the user has _Delete_ privileges)
- download | a special case of the custom action that extends org.skyve.metadata.controller.DownloadAction, capable of delivery of an artefact/files to the user
- import | a special case of custom action using Skyve's bizport capability to import and process data
- export | a special case of custom action using Skyve's bizport capability to export data
- new | the implicit Skyve action to create a new document instance (not relevant for dataGrid/collection member, not relevant unless the user has _Create_ privileges)
- ok | the implicit Skyve action to *Save and return* to the list context (not relevant unless the user has _Update_ privileges)
- print |
- remove | the implicit Skyve action to remove the current document instance from the collection (relevant for dataGrid/collections, not relevant unless the user has _Delete_ privileges)
- report | run a report (for example using the Jasper report framework)
- save | the implicit Skyve action to *save* the current document instance (not relevant unless the user has _Update_ priveleges)
- upload | a special case of custom action that extends org.skyve.metadata.controller.UploadAction, capable of receiving (and processing) a file uploaded by the user
- zoomOut | the implicit Skyve action to return from a collection member to the bean that owns the collection (relevant for dataGrid/collection members, not relevant unless the user has _Update_ privileges)
+  Action Type      | Description
+  ------------- | -----------------------------------------------
+ action      | a custom action created by the developer which implements org.skyve.metadata.controller.ServerSideAction
+ add         | the implicit Skyve action to add a member to the dataGrid/collection (deprecated)
+ cancel      | the implicit Skyve action to cancel editing of the current view
+ defaults    | the collection of implicit Skyve actions - specific actions will be determined by user access privileges and context (for example whether zoomed in from a dataGrid or listGrid, or "pinned"/navigated to directly)
+ delete      | the implicit Skyve action to delete a document instance (not relevant for a dataGrid/collection member, not relevant unless the user has _Delete_ privileges)
+ download    | a special case of the custom action that extends org.skyve.metadata.controller.DownloadAction, capable of delivery of an artefact/files to the user
+ import      | a special case of custom action using Skyve's bizport capability to import and process data
+ export      | a special case of custom action using Skyve's bizport capability to export data
+ new         | the implicit Skyve action to create a new document instance (not relevant for dataGrid/collection member, not relevant unless the user has _Create_ privileges)
+ ok          | the implicit Skyve action to *Save and return* to the list context (not relevant unless the user has _Update_ privileges)
+ print       | calls the Skyve report generator to layout the view as a report
+ remove      | the implicit Skyve action to remove the current document instance from the collection (relevant for dataGrid/collections, not relevant unless the user has _Delete_ privileges)
+ report      | run a report (for example using the Jasper report framework)
+ save        | the implicit Skyve action to *save* the current document instance (not relevant unless the user has _Update_ privileges)
+ upload      | a special case of custom action that extends org.skyve.metadata.controller.UploadAction, capable of receiving (and processing) a file uploaded by the user
+ zoomOut     | the implicit Skyve action to return from a collection member to the bean that owns the collection (relevant for dataGrid/collection members, not relevant unless the user has _Update_ privileges)
 
 Skyve will hide actions which are declared inappropriately (for example, if the *new* action is declared, 
 but a user's privileges do not include the _create_ privelege for the relevant document).
