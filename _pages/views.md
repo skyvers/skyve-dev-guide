@@ -534,8 +534,9 @@ The action section of the view declares which actions will be available
 to the user and under what conditions.
 
 Skyve offers the following action types:
-  Action Type| Description
-  -----------| -----------------------------------------------
+
+  Action Type | Description
+  ----------- | -----------------------------------------------
   action      | a custom action created by the developer which implements org.skyve.metadata.controller.ServerSideAction
   add         | the implicit Skyve action to add a member to the dataGrid/collection (deprecated)
   cancel      | the implicit Skyve action to cancel editing of the current view
