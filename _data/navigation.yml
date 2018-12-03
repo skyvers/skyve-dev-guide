@@ -25,3 +25,16 @@ docs:
         url: /actions/                                                
       - title: "Reports"
         url: /reports/                                                                
+      - title: "Jobs"
+        url: /jobs/                                                                
+      - title: "Utility Classes"
+        url: /utility-classes/                                                                                
+      - title: "Common Patterns"
+        url: /common-patterns/                                                                                
+      - title: "Skyve persistence mechanisms"
+        url: /skyve-persistence-mechanisms/                                                                                
+  - title: Platform tools
+    children:
+      - title: "Maven Targets"
+        url: /maven-targets/                                                                                
+        

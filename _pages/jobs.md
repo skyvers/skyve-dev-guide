@@ -36,7 +36,27 @@ role.
 
 Job classes must extend the `org.skyve.job.Job` abstract class. Custom job code is located in the `execute()` method.
 
-![Job class](../assets/images/jobs/image143.png "Job class")
+```
+public class ProcessCommunicationForTagJob extends Job {
+	private static final long serialVersionUID = 6282346785863992703L;
+
+	@Override
+	public String cancel() {
+		return null;
+	}
+
+	@Override
+	public void execute() throws Exception {
+
+		List<String> log = getLog();
+
+		Communication communication = (Communication) getBean();
+```
+
+The Skyve Job method getLog() retrieves the corresponding job log object, allowing the developer to log job activity (viewable for a suitably privileged user in the Job view in the admin module).
+
+The Skyve Job method getBean() returns the corresponding bean instance where applicable (where a job has been instantiated 
+within a bean context or action).
 
 Jobs can be scheduled in action or *Bizlet* code using the
 *JobScheduler* class.
