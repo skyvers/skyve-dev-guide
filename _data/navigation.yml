@@ -37,4 +37,12 @@ docs:
     children:
       - title: "Maven Targets"
         url: /maven-targets/                                                                                
+      - title: "Content Repository Tools"
+        url: /content-repository-tools/                                                                                
+      - title: "Bizport"
+        url: /bizport/                                                                                
+      - title: "Wildcat Conversion Tool"
+        url: /widcat-conversion-tool/                                                                                
+      - title: "Automated Unit Testing"
+        url: /automated-unit-testing/                                                                                
         
