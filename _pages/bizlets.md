@@ -53,17 +53,13 @@ _Bean level events_
 
   Event | Description
   ----- | -----------
-  getConstantDomainValues(), getVariantDomainValues(), getDynamicDomainValues() | called when rendering the pertinent field (including in list view) depending on the domain type declared for the attribute 
-  * Constant domain values may be baked into the view and remain invariant for the system life. 
-  * Variant domain values are guaranteed to be evaluated each request-response cycle. 
-  * Dynamic domain values are guaranteed to be evaluated as for variant values, except
-that the bean is provided to the method for value generation.
+  getConstantDomainValues() | called when rendering the pertinent field (including in list view) - Constant domain values may be baked into the view and remain invariant for the system life. 
+  getVariantDomainValues() | called when rendering the pertinent field (including in list view) - Variant domain values are guaranteed to be evaluated each request-response cycle.
+  getDynamicDomainValues() | called when rendering the pertinent field (including in list view) - Dynamic domain values are guaranteed to be evaluated as for variant values, except that the bean is provided to the method for value generation.
   preExecute() | called before an implicit action is executed
   preRerender() | called before the rerender action is executed (immediately before a view is re-rendered after another action)
 
 _User Interface level events_
-
-
 
 ### Implicit Actions
 
