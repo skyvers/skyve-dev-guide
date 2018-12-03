@@ -696,5 +696,5 @@ Bizport is fully extensible, and developers can override and extend the
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 3: Security, Persistence and Access control](./../chapters/security-persistence-and-access-control.md)**  
-**Previous [Chapter 1: Architectural Overview](../README.md)**  
+**Next [Chapter 3: Security, Persistence and Access control](./../_pages/security-persistence-and-access-control.md)**  
+**Previous [Introduction](../README.md)**  
