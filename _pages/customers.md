@@ -43,6 +43,8 @@ resources folder.
 Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute
 , and Skyve supports both left-to-right and right-to-left languages.
 
+![Example Arabic with right-to-left](../assets/images/customers/arabic-detail.png "Example Arabic view with right-to-left")
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <customer name="projecta"
