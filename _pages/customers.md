@@ -109,11 +109,10 @@ In Skyve the term _Customer_ connotes customisation. If there's no (or only triv
 
 Note that if you only ever want to use a single customer, you can specify a default customer in the .json file of your instance. This will also avoid having to enter a customer name at the sign in prompt.
 
-1. Edit the file \demo\skyve\javaee\demo.json
+1. Edit the file '.json' instance settings file (in the `wildfly/standalone/deployments/` folder)
 2. Search for the ```// Customer Default``` comment
 3. Change the default customer setting from null to your customer name, for example changing ```customer: null,``` to ```customer: "acme",```
-4. Save the file and restart your wildfly server (or redeploy the application by renaming ```demo.deployed``` to ```demo.dodeploy``` in the \demo\skyve\javaee\ folder while the server is running).
-
+4. Save the file and restart your wildfly server (or redeploy the application by renaming ```myApplication.war.deployed``` to ```myApplication.war.dodeploy```.
 
 ![Signing in with a default customer](../assets/images/customers/skyve_default_customer_sign_in.png "Signing in with a default customer")
 
