@@ -438,6 +438,15 @@ Customer overrides are managed completely within the customer package so
 that identifying and managing the particular customer experience is as
 simple as possible.
 
+Customer overriding finds the intersection of document properties by name and 
+extrudes them into an abstract class in the _vanilla_ module (if there is one).
+This means that the _vanilla_ code that imports that abstract class can only
+use those properties (unless it casts somewhere else).
+
+_(By vanilla module, we mean the module which is in the main module package rather than an overridden one.)_
+
+Each customers get their corresponding properties and any behaviour in the overridden package uses the overridden class.
+
 ### Role Privileges
 
 Skyve allows developers to specify application security roles in terms

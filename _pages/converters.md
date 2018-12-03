@@ -1,5 +1,5 @@
 ---
-title: "Converters"
+title: "Converter, validator and format"
 permalink: /converters/
 excerpt: "Converters, validators and type formatting."
 toc: true
@@ -7,7 +7,7 @@ sidebar:
   title: "Index"
   nav: docs
 ---
-## Converters
+## Converter, validator and format
 In certain circumstances, data of the same type may need to be
 represented in differing ways.
 
@@ -114,18 +114,18 @@ Note that within the SmartClient renderer, validators will take effect in the cl
 while for the PrimeFaces renderer, validation occurs only at the server.
 
 Skyve provides the following predefined validators:
-	- creditCard
-	- internetDomain
-	- ean13CheckDigit
-	- email
-	- ibanCheckDigit
-	- ipAddress
-	- ipv4Address
-	- isbnCheckDigit
-	- isinCheckDigit
-	- luhnCheckDigit
-	- url
-	- verhoeffCheckDigit
+- creditCard
+- internetDomain
+- ean13CheckDigit
+- email
+- ibanCheckDigit
+- ipAddress
+- ipv4Address
+- isbnCheckDigit
+- isinCheckDigit
+- luhnCheckDigit
+- url
+- verhoeffCheckDigit
 
 For example, to ensure that only valid email addresses are recorded for the `{email1}` attribute, 
 you can declare the validator of that type, as follows:
@@ -160,5 +160,5 @@ However, supports the use of regular expressions for validation and custom messa
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 10: Bizlets](./../chapters/bizlets.md)**  
-**Previous [Chapter 8: Documents](./../chapters/documents.md)**
+**Next [Bizlets](./../_pages/bizlets.md)**  
+**Previous [Documents](./../_pages/documents.md)**

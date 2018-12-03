@@ -15,5 +15,7 @@ docs:
         url: /modules/                        
       - title: "Documents"
         url: /documents/                                
-      - title: "Converters"
+      - title: "Converter, validator and format"
         url: /converters/                                
+      - title: "Bizlet and extension classes"
+        url: /bizlets/                                        
