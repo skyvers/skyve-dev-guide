@@ -38,7 +38,7 @@ sidebar:
   * [Bizlets](_pages/bizlets.md)
   * [Views](_pages/views.md)
   * [Actions](_pages/actions.md)
-  * [Chapter 12: Reports](chapters/reports.md)
+  * [Reports](_pages/reports.md)
   * [Chapter 13: Jobs](chapters/jobs.md)
   * [Chapter 14: Utility Classes](chapters/utility-classes.md)
   * [Chapter 15: Common Patterns](chapters/common-patterns.md)

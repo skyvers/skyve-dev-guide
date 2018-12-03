@@ -53,7 +53,7 @@ The trivial *ServerSideAction* causes the view to be refreshed.
 
 Action classes implement *ServerSideAction* and are located within the actions folder in a document package and correlate to action buttons in the user interface.
 
-![Trivial action example](media/image135.png "Trivial action example")
+![Trivial action example](../assets/images/actions/image135.png "Trivial action example")
 
 Note that actions can also be triggered by declaring onChangeHandlers for a specific widget in a view.
 
