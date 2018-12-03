@@ -11,16 +11,27 @@ sidebar:
 ## Maven Targets
 
 Specific to the Java implementation of Skyve, Skyve projects a number of Maven target utilities to assist
-developers.
+developers. The Maven targets provided can be customised where required.
 
-### Generate Domain
+### Apply Skyve Script
 
-The *generateDomain* target will validate
+### Assemble
+
+### Generate Default Queries
+
+The *Generate Default Queries* target will validate
 the application model and generate domain classes. The *generateDomain*
 target parameter is the path to the src folder being validated (normally
 "src/").
 
-### Generate a Default Edit View
+### Generate Domain
+
+The *Generate Domain* target will validate
+the application model and generate domain classes. The *generateDomain*
+target parameter is the path to the src folder being validated (normally
+"src/").
+
+### Generate Edit View
 
 To save time, it can be useful when creating a custom view to start with
 the default view as Skyve would generate for a document on-the-fly.
@@ -28,8 +39,12 @@ the default view as Skyve would generate for a document on-the-fly.
 The target will prompt for the customer, module and
 document arguments.
 
-When you run the target, a file generatedEdit.xml will be created within the _views_ package within the specified document package.
+When you run the target, a file `generatedEdit.xml` will be created within the _views_ package within the specified document package.
 If no document is specified, the target will generate edit views for all documents within the module.
+
+### Local Deploy
+
+### Update Resources
 
 ### Javadoc
 
@@ -75,10 +90,6 @@ Because the utility generates documentation for every part of the
 application specification, it encourages developers and technical
 writers to be thorough and cover all aspects of the application they are
 documenting.
-
-![](../assets/images/maven-targets/image166.png "Customise the javadoc task to specify the package and destination directory")
-
-_Customise the javadoc task to specify the package and destination directory_
 
 **[⬆ back to top](#contents)**
 
