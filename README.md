@@ -21,6 +21,8 @@ sidebar:
 ### Contents
 
 * [Section 1: Introduction](#introduction)
+  * **[Note to Readers](#note-to-readers)**
+  * **[What is Skyve?](#what-is-skyve)**
   * **[Architectural Overview](#architectural-overview)**
     * [Technical description](#technical-description)
     * [General Approach and Design Principles](#general-approach-and-design-principles)
@@ -30,7 +32,7 @@ sidebar:
   * [Concepts](_pages/concepts.md)
   * [Security, Persistence and Access control](_pages/security-persistence-and-access-control.md)
   * [Exception Handling](_pages/exception-handling.md)
-* [Section 2: Building Applications](_pages/customers.md)
+* [Section 2: Building Applications](_pages/building-applications.md)
   * [Customers](_pages/customers.md)
   * [Modules](_pages/modules.md)
   * [Documents](_pages/documents.md)
@@ -56,6 +58,24 @@ sidebar:
   * [Appendix 4: Example Deployment Problems caused by problems in the .json file](chapters/appendix.md)
   * [Appendix 5: Installing Skyve in Production](chapters/appendix.md)
 
+## What is Skyve?
+
+Skyve is an open-source low-code platform that gives you access to all of the key capabilities needed to build sophisticated, robust and scalable cloud solutions. 
+
+Skyve is platform/operating-system independent, works with all common database types, and is accessible through all common browsers and devices.
+
+By incorporating and integrating a range of other open-source technologies to handle persistence, rich UI, security, navigation, reporting, jobs, content, spatial, mobile integration; Skyve provides a platform with all the technology specific areas required to support the Skyve standard for enterprise applications.
+
+Skyve also provides sophisticated validation and a high-level API so that you can build powerful enterprise SaaS solutions today.
+
+At any time, branch out into "traditional" development without restriction, but will all the benefits of the API and integrated platform.
+
+Skyve supports spatial concepts natively with MySQL, SQL Server and H2 - Oracle and Postgres coming soon. Otherwise, pretty much anything supported by Hibernate should work (but we haven’t tested them all!).
+
+For more details on the framework and its capabilities, please check out the platform homepage - [www.skyve.org](https://skyve.org/).
+
+Skyve is created by [Biz Hub Australia](https://www.bizhub.com.au/) and we offer a range of support agreements if required. Or use it for free, no obligation.
+
 ## Note to Readers
 
 This reference guide assumes familiarity with Web technology and
@@ -68,6 +88,18 @@ not intended as a replacement for software development experience.
 Skyve is focused on making developers more productive and
 lowering the costs associated with building sophisticated enterprise
 solutions.
+
+### User Guide
+
+The user guide is available at [https://skyvers.github.io/skyve-user-guide/](https://skyvers.github.io/skyve-user-guide/). The user guide is for end users of Skyve applications and describes how to navigate around the user interface and make use of the built in functions that ship with Skyve.
+
+### Skyve Cookbook
+
+The Skyve Cookbook is available at [github.com/skyvers/skyve-cookbook](https://github.com/skyvers/skyve-cookbook). This contains code samples of advanced usage such as REST API configuration and troubleshooting advice.
+
+### Skyve Readme
+
+The skyve project contains a Readme at [github.com/skyvers/skyve](https://github.com/skyvers/skyve) with useful information for getting started, configuring Spring security and other steps to get you started.
 
 ## Architectural Overview
 
