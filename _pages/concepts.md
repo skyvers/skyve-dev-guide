@@ -581,7 +581,7 @@ For example, to define the state of a timesheet an application might
 require the set of values {draft, submitted, authorised}.
 
 If all three values are always applicable then the *constant* domain
-type is applicable (and could be declared as an *enum*).
+type is applicable (and could be declared as an *enum*). 
 
 If only a manager can set a timesheet to authorised, then the
 application requires a *variant* domain based on the user's role.
@@ -590,6 +590,14 @@ If an application should only offer authorised when the timesheet is
 submitted and the manager's review has been completed, then the
 application would declare a *dynamic* domain type (calculated based on
 the current state of the timesheet bean).
+
+#### Domain types and caching implications
+Constant domain values may be baked into the view and remain invariant for the system life.
+
+Variant domain values are guaranteed to be evaluated each request-response cycle.
+
+Dynamic domain values are guaranteed to be evaluated as for variant values, except
+that the bean is provided to the method for value generation.
 
 #### Performance Implications of Domain Types
 

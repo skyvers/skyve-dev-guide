@@ -11,7 +11,7 @@ sidebar:
 ## Bizlets
 
 A *Bizlet* is a class related to a document which extends default bean
-behaviours.
+behaviours and extends org.skyve.metadata.model.document.Bizlet
 
 *Bizlets* can reference other classes without restriction and may be the
 point of connection to highly specific application code.
@@ -54,10 +54,16 @@ _Bean level events_
   Event | Description
   ----- | -----------
   getConstantDomainValues(), getVariantDomainValues(), getDynamicDomainValues() | called when rendering the pertinent field (including in list view) depending on the domain type declared for the attribute
+- Constant domain values may be baked into the view and remain invariant for the system life.
+- Variant domain values are guaranteed to be evaluated each request-response cycle.
+- Dynamic domain values are guaranteed to be evaluated as for variant values, except
+that the bean is provided to the method for value generation.
   preExecute() | called before an implicit action is executed
   preRerender() | called before the rerender action is executed (immediately before a view is re-rendered after another action)
 
 _User Interface level events_
+
+
 
 ### Implicit Actions
 
