@@ -98,6 +98,10 @@ Skyve is designed around the ability to build applications, then re-sell them to
 The _customer_ concept allows you to share and reuse the code you create for your application, 
 and customise it for each _customer_ (where appropriate).
 
+In a multi-tenanted environment, each user must specify the customer scope in which their account exists.
+
+![Signing in](../assets/images/customers/skyve_customer_sign_in.png "Signing in")
+
 In Skyve the term _Customer_ connotes customisation. If there's no (or only trivial) customisation required,
  you might resell the software to millions of users under the one Skyve customer context.
 
