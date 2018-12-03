@@ -112,5 +112,5 @@ Table 14 (above).
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Reports](./../_page/reports.md)**  
-**Previous [Views](./../_page/views.md)**
+**Next [Reports](./../_pages/reports.md)**  
+**Previous [Views](./../_pages/views.md)**
