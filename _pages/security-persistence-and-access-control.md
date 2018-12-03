@@ -69,10 +69,7 @@ http://msdn.microsoft.com/en-us/library/ff649874.aspx on 2013-09-17)
 
 The impersonation model is shown below.
 
-![Figure 8](media/image30.png "Figure 8 Impersonation model providing per end user authorisation granularity")
-
-_Figure 8 - Impersonation model providing per end user authorisation
-granularity_
+![Impersonation model](../assets/images/security-persistence-and-access-control/image30.png "Impersonation model providing per end user authorisation granularity")
 
 Skyve does not adopt this model for a number of reasons:
 
@@ -106,17 +103,14 @@ persistence layer. This model was selected for GPS because:
 -   This model is widely used and therefore assumed to be acceptable in
     > an otherwise unknown policy and strategy environment.
 
-![Figure 9](media/image31.png "Figure 9 Trusted subsystem model that supports database connection pooling")
-
-_Figure 9 Trusted subsystem model that supports database connection
-pooling_
+![Trusted subsystem model](../assets/images/security-persistence-and-access-control/image31.png "Trusted subsystem model that supports database connection pooling")
 
 ***Hybrid Model***
 
 Under the hybrid model, a combination of both of the above models is
 implemented. Skyve does not adopt this method natively because:
 
--   According (for example) to Microsoft “creating multiple thread
+-   According (for example) to Microsoft - creating multiple thread
     access tokens used to establish different security contexts for
     downstream resource access using Windows authentication is a
     privileged operation that requires privileged process accounts. This
@@ -126,9 +120,7 @@ implemented. Skyve does not adopt this method natively because:
     decisions about the specifics of the Trusted service access was not
     able to be ascertained.
 
-![Figure 10](media/image32.png "Figure 10 The hybrid model")
-
-_Figure 10 - The hybrid model_
+![Hybrid model](../assets/images/security-persistence-and-access-control/image32.png "The hybrid model")
 
 Additionally, Skyve supports sophisticated declarative group, row and
 column level security modelling and enforces these declarations
@@ -137,5 +129,5 @@ pervasively and consistently throughout any Skyve application.
 **[⬆ back to top](#contents)**
 
 ---
-**Next [Chapter 5: Exception Handling](./../chapters/exception-handling.md)**  
-**Previous [Chapter 3: Identifying the Skyve Version](./../chapters/concepts.md)**  
+**Next [Chapter 5: Exception Handling](./../_pages/exception-handling.md)**  
+**Previous [Concepts](./../_pages/concepts.md)**  

@@ -10,7 +10,7 @@ sidebar:
 ### Rendering Modes
 Skyve has two rendering modes to suit different user agents/device types. 
 Skyve applications will (by default) automatically switch to use the most suitable
-rendering for the user agent or device type.
+rendering for the user agent or device type it detects.
 
 ![Rendering Modes](../assets/images/concepts/concepts_rendering_modes.png "Rendering Modes")
 
