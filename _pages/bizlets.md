@@ -94,6 +94,40 @@ Print |	Prints the current view
 
 _ImplictActionName enumerated values_
 
+#### preExecute() versus preSave()
+
+Using the _preExecute()_ method provides a level of control to the developer
+to perform specific code only when the user initiates an action, as opposed to 
+the code being performed as part of the bean lifecycle.
+
+For example, if code is added to the _preSave()_ method, the code will be performed
+every time the bean is persisted, whether as the result of a user interaction, a job
+, or as the result of cascading saves within the context of another document.
+
+Using the _preExecute(ImplicitActionName.Save)_ however will only execute when the user
+initiates the _Save_ action (presses the _Save_ button in the view). Note - this will not include 
+the use of the _OK_ action. 
+
+The following example shows a common use of _preExecute()_ using the _Save_ and _OK_ implicit actions
+so that the code is executed when the user either presses _Save_ or _Ok_ since both will result in
+the instance being persisted.
+
+```
+@Override
+public Configuration preExecute(ImplicitActionName actionName, Configuration bean, Bean parentBean, WebContext webContext) 
+		throws Exception {
+	
+	if(ImplicitActionName.Save.equals(actionName) || ImplicitActionName.OK.equals(actionName)) {
+		if(bean.getUserSelfRegistrationGroup()==null) {
+			bean.setAllowUserSelfRegistration(Boolean.FALSE);
+		}
+	}
+	
+	return super.preExecute(actionName, bean, parentBean, webContext);
+}
+```	
+
+
 ### Extension classes
 
 Skyve allows for extension of the automatically generated domain classes for each document, 
