@@ -51,6 +51,13 @@ docs:
         url: /automated-unit-testing/                                                                                
   - title: Appendix
     children:
-      - title: "Appendix"
-        url: /appendix/                                                                                
-        
+      - title: "Deploying a Skyve Application"
+        url: /appendix/                  
+      - title: "Installing and configuring the Skyve Development Environment"
+        url: /appendix/                  
+      - title: "Setting up a Skyve instance"
+        url: /appendix/                  
+      - title: "Skyve application configuration"
+        url: /appendix/                  
+      - title: "Installing Skyve in Production"
+        url: /appendix/                          

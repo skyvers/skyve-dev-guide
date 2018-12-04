@@ -18,46 +18,6 @@ sidebar:
 
 ## Introduction
 
-### Contents
-
-* [Section 1: Introduction](#introduction)
-  * **[Note to Readers](#note-to-readers)**
-  * **[What is Skyve?](#what-is-skyve)**
-  * **[Architectural Overview](#architectural-overview)**
-    * [Technical description](#technical-description)
-    * [General Approach and Design Principles](#general-approach-and-design-principles)
-    * [Use of SQL](#use-of-sql)
-    * [Multi-tenant Mass-Customisation](#multi-tenant-mass-customisation)
-    * [Open-source Inclusions ](#open-source-inclusions)
-  * [Concepts](_pages/concepts.md)
-  * [Security, Persistence and Access control](_pages/security-persistence-and-access-control.md)
-  * [Exception Handling](_pages/exception-handling.md)
-* [Section 2: Building Applications](_pages/building-applications.md)
-  * [Customers](_pages/customers.md)
-  * [Modules](_pages/modules.md)
-  * [Documents](_pages/documents.md)
-  * [Converters](_pages/converters.md)
-  * [Bizlets](_pages/bizlets.md)
-  * [Views](_pages/views.md)
-  * [Actions](_pages/actions.md)
-  * [Reports](_pages/reports.md)
-  * [Jobs](_pages/jobs.md)
-  * [Utility Classes](_pages/utility-classes.md)
-  * [Common Patterns](_pages/common-patterns.md)
-  * [Skyve Persistence Mechanisms](_pages/skyve-persistence-mechanisms.md)
-* [Platform Tools](_pages/maven-targets.md)
-  * [Maven Targets](_pages/maven-targets.md)
-  * [Content Repository Tools](_pages/content-repository-tools.md)
-  * [Bizport](_pages/bizport.md)
-  * [Wildcat Conversion Tool](_pages/wildcat-conversion-tool.md)
-  * [Automated Unit Testing](_pages/automated-unit-testing.md)
-* [Section 5: Appendix](_pages/appendix.md)
-  * [Appendix 1: Deploying a Skyve Application](_pages/appendix.md)
-  * [Appendix 2: Installing and configuring the Skyve Development Environment](_pages/appendix.md)
-  * [Appendix 3: Example Deployment Instructions with Single Sign-on](_pages/appendix.md)
-  * [Appendix 4: Example Deployment Problems caused by problems in the .json file](_pages/appendix.md)
-  * [Appendix 5: Installing Skyve in Production](_pages/appendix.md)
-
 ## What is Skyve?
 
 Skyve is an open-source low-code platform that gives you access to all of the key capabilities needed to build sophisticated, robust and scalable cloud solutions. 
