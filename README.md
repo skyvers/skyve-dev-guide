@@ -212,7 +212,7 @@ problems.
 
 Skyve is created from the following design principles:
 
-  Principle | Description | In Simple Terms…
+  Principle | Description | In Simple Terms�
   --------- | ----------- | ----------------
   Parsimony | Only the minimum amount of information required to declare a system should be required to build the system. <br>This principle implies the provision of implicit functionality and features - but with the ability for developers to override these without restriction where required. | Developers shouldn't need to spend effort to create aspects of the system which are implicit.
   Authority | Each element of system declaration should be authoritative.<br>This principle implies that each element of declaration must be in only one location. | Developers should be able to declare each system concept once, without the possibility of contradiction or confusion.
@@ -234,7 +234,7 @@ requirements, are as follows:
 
   Principle | Implication
   --------- | -----------
-  Parsimony | Skyve shall allow developers to define applications using the smallest amount of information possible. <br>The application specification shall be declared in XML rather than programming code. Skyve shall always refers back to this declaration, reducing the possibility of programming errors and inconsistencies. <br>Skyve metadata shall be comprehensive – covering menus, security roles, queries, reports, document attributes, relationships, textual indexes, enumerations, constraints, conditions and views. <br>Skyve shall offer default functionality and behaviours where these can be implied, i.e. intelligent defaults. Where highly-custom application behaviours are required, default behaviours must be able to be overridden without restriction. <br>Skyve shall provide the ability to customise user experience at all definable levels, e.g. by user, by role, by department, by organisation, even where applications exist in a shared multi-tenant environment.
+  Parsimony | Skyve shall allow developers to define applications using the smallest amount of information possible. <br>The application specification shall be declared in XML rather than programming code. Skyve shall always refers back to this declaration, reducing the possibility of programming errors and inconsistencies. <br>Skyve metadata shall be comprehensive - covering menus, security roles, queries, reports, document attributes, relationships, textual indexes, enumerations, constraints, conditions and views. <br>Skyve shall offer default functionality and behaviours where these can be implied, i.e. intelligent defaults. Where highly-custom application behaviours are required, default behaviours must be able to be overridden without restriction. <br>Skyve shall provide the ability to customise user experience at all definable levels, e.g. by user, by role, by department, by organisation, even where applications exist in a shared multi-tenant environment.
   Authority | Skyve shall conform to (and encourage developers to conform to) the Business Component design principle of having a single-point of reference for all application concepts, and locating all related artefacts together.
   Independence | Skyve applications shall be independent of platform, device, browser and database technologies - so that organisations are not locked into any particular vendor and can move applications with minimal technical risk and without refactoring.
   Security | Skyve applications shall not allow developers to contravene best-practice security by simple error or omission.
