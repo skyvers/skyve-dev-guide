@@ -13,6 +13,14 @@ sidebar:
 
 The skyve project contains a Readme at [github.com/skyvers/skyve](https://github.com/skyvers/skyve) with useful information for getting started, configuring Spring security and other steps to get you started.
 
+We strongly recommend you follow the instructions provided in the video at the [Skyve Project Creator]( "Skyve Project Creator")
+
+<div style="margin: 0 auto; text-align: center">
+	<a href="https://youtu.be/Ar7y1y1xhHg" target="_blank">
+		<img src="../assets/images/building-applications/skyve-project-creator.png" alt="Skyve Project Creator" width="500" border="10" />
+	</a>
+</div>
+
 ## Creating a new Skyve project
 
 ### Before you start:
