@@ -1,6 +1,8 @@
 docs:
   - title: Introduction
     children:
+      - title: "Introduction"
+        url: /
       - title: "Concepts"
         url: /concepts/
       - title: "Security, Persistence and Access control"
@@ -9,6 +11,8 @@ docs:
         url: /exception-handling/        
   - title: Building Applications
     children:
+      - title: "Building Applications"
+        url: /building-applications/                
       - title: "Customers"
         url: /customers/                
       - title: "Modules"
@@ -47,4 +51,6 @@ docs:
         url: /automated-unit-testing/                                                                                
   - title: Appendix
     children:
+      - title: "Appendix"
+        url: /appendix/                                                                                
         
