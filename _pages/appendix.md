@@ -19,18 +19,18 @@ The `.war` folder is deployed with a `.json` settings file and a `-ds.xml` datas
 For example, to deploy a Skyve application called `myApplication` using a Wildfly application server, you will need to place the following into the Wildfly `deployment/` area:
 
 ```
-helloWorld.war
-helloWorld-ds.xml
-helloWorld.json
+myApplication.war
+myApplication-ds.xml
+myApplication.json
 ```
 
 Where 
-* `helloWorld.war` is the self-contained web archive containing application metadata and framework libraries
-* `helloWorld-ds.xml` is the datasource file containing the jdbc connection string and credentials
-* `helloWorld.json` is the instance-specific settings file, containing all of the settings specific to the particular instance.
+* `myApplication.war` is the self-contained web archive containing application metadata and framework libraries
+* `myApplication-ds.xml` is the datasource file containing the jdbc connection string and credentials
+* `myApplication.json` is the instance-specific settings file, containing all of the settings specific to the particular instance.
 
 You can manually signal Wildfly to deploy the datasource and application by creating files named with `.dodeploy` - i.e.:
-`helloWorld-ds.xml.dodeploy` and `helloWorld.war.dodeploy` (the contents of the files is irrelevant - creating empty files with the correct names is sufficient). If Wildfly is running, it will detect the presence of these files and attempt to deploy them, resulting in the creation of either a `.deployed` or a `.failed` signal file.
+`myApplication-ds.xml.dodeploy` and `myApplication.war.dodeploy` (the contents of the files is irrelevant - creating empty files with the correct names is sufficient). If Wildfly is running, it will detect the presence of these files and attempt to deploy them, resulting in the creation of either a `.deployed` or a `.failed` signal file.
 
 This approach is part of the Skyve risk reduction strategy, to minimise the risk of problems when updating new versions of your application. Once each instance is configured, moving from DEV -> TEST -> PROD becomes a low-risk trivial activity, requiring no reconfiguration (unless the different instance have significantly different set ups).
 
