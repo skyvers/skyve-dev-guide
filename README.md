@@ -70,7 +70,7 @@ Skyve also provides sophisticated validation and a high-level API so that you ca
 
 At any time, branch out into "traditional" development without restriction, but will all the benefits of the API and integrated platform.
 
-Skyve supports spatial concepts natively with MySQL, SQL Server and H2 - Oracle and Postgres coming soon. Otherwise, pretty much anything supported by Hibernate should work (but we haven’t tested them all!).
+Skyve supports spatial concepts natively with MySQL, SQL Server and H2 - Oracle and Postgres coming soon. Otherwise, pretty much anything supported by Hibernate should work (but we haven't tested them all!).
 
 For more details on the framework and its capabilities, please check out the platform homepage - [www.skyve.org](https://skyve.org/).
 
@@ -210,7 +210,7 @@ problems.
 
 Skyve is created from the following design principles:
 
-  Principle | Description | In Simple Terms¦
+  Principle | Description | In Simple Terms
   --------- | ----------- | ----------------
   Parsimony | Only the minimum amount of information required to declare a system should be required to build the system. <br>This principle implies the provision of implicit functionality and features - but with the ability for developers to override these without restriction where required. | Developers shouldn't need to spend effort to create aspects of the system which are implicit.
   Authority | Each element of system declaration should be authoritative.<br>This principle implies that each element of declaration must be in only one location. | Developers should be able to declare each system concept once, without the possibility of contradiction or confusion.
