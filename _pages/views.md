@@ -608,7 +608,7 @@ Report parameter declarations can be in terms of bindings (within the
 currently viewed document) or static values. Report parameters are
 matched using the name attribute with parameters declared in the report.
 
-```
+```xml
 <report reportName="PaySheet" moduleName="time" documentName="PaySheet" displayName="Print PaySheet" visible="saved">
 	<parameter name="ID" binding="bizId" />
 </report>

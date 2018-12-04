@@ -212,7 +212,7 @@ across data group contexts.
  - for jboss wildfly, you also need to make a declaration that the driver exists in the `<drivers/>` section of the `/wildfly.../standalone/configuration/standalone.xml` file
  - for example, if you run multiple projects with different DBMS, your drivers stanza may look something like this:
  
- ```
+ ```xml
                  <drivers>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
@@ -232,21 +232,21 @@ across data group contexts.
  - Example connection strings
  - for mysql 
  
- ``` 
+ ```xml
 <connection-url>jdbc:mysql://localhost:3306/skyve?useCursorFetch=true&amp;defaultFetchSize=100</connection-url> 
 		<driver>mysql</driver> 
   ```
   
  - for sqlserver
  
- ```
+ ```xml
  		<connection-url>jdbc:sqlserver://Laptop\SQLEXPRESS:1433;databaseName=skyve;sendStringParametersAsUnicode=false;</connection-url>
                 <driver>sqlserver</driver>
 ```
 
 - for h2
 
-```
+```xml
 		<connection-url>jdbc:h2:file:C:/_/skyve/skyve/content/demo;IFEXISTS=TRUE;IGNORECASE=TRUE;AUTO_SERVER=TRUE</connection-url>
 		<driver>h2</driver>
 ```

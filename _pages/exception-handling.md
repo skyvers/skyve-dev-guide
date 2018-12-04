@@ -136,6 +136,7 @@ throws Exception {
 	BeanValidator.validateBeanAgainstDocument(changePasswordDocument, bean);
 }
 ```
+
 _The BeanValidator utility class provides access to the native
 Validation capability_
 

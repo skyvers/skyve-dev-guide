@@ -99,7 +99,7 @@ Skyve provides a format mask capability for key-listener input control.
 
 Format masking enforces specified input, rather than reflecting back to the user if their entered data is invalid.
 
-```
+```xml
 <text name="accreditationNo" required="true">
 	<displayName>Accreditation No</displayName>
 	<length>20</length>
@@ -130,7 +130,7 @@ Skyve provides the following predefined validators:
 For example, to ensure that only valid email addresses are recorded for the `{email1}` attribute, 
 you can declare the validator of that type, as follows:
 
-```
+```xml
 <text name="email1" >
 	<displayName>Email</displayName>
 	<length>500</length>
@@ -145,7 +145,7 @@ In the above example, if the user enters an invalid email address, the validator
 
 However, supports the use of regular expressions for validation and custom messages, for example:
 
-```
+```xml
 <text name="addressMainState">
 	<displayName>Main State</displayName>
 	<description>State of the Operator's physical address</description>

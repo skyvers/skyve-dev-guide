@@ -112,7 +112,7 @@ The following example shows a common use of _preExecute()_ using the _Save_ and 
 so that the code is executed when the user either presses _Save_ or _Ok_ since both will result in
 the instance being persisted.
 
-```
+```java
 @Override
 public Configuration preExecute(ImplicitActionName actionName, Configuration bean, Bean parentBean, WebContext webContext) 
 		throws Exception {
@@ -135,7 +135,7 @@ enabling developers to extend default skyve code generation.
 Extension classes can be used for domain-specific business logic to override and further enrich 
 the domain model provided by Skyve (see anaemic versus rich domain models).
 
-```
+```java
 public class ControlPanelExtension extends ControlPanel {
 
 	public void trapException(Exception e) {

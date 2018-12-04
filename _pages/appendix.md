@@ -167,7 +167,8 @@ For database access, load the appropriate driver and declare this driver in the 
 For example, for SQL Server:
 - load the sqljdbc42.jar into wildfy.../modules/system/layers/base/com/microsoft/sqlserver/main/
 - copy the following definition into a new file  wildfy.../modules/system/layers/base/com/microsoft/sqlserver/main/module.xml
-```
+
+```xml
  		<?xml version="1.0" encoding="utf-8"?> 
 			<module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 
   			<resources> 
@@ -182,7 +183,8 @@ For example, for SQL Server:
 ```
 
 - declare the driver in the wildfly configuration file wildfly/standalone/configuration/standalone.xml <drivers> stanza as follows:
-```
+
+```xml
 		<driver name="sqlserver" module="com.microsoft.sqlserver">
                         <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
                 </driver>
@@ -190,12 +192,15 @@ For example, for SQL Server:
 
 ### Configuring ports
 To configure which ports will be used for accessing the application, modify the <socket-binding-group> section in the wildfly configuration file wildfly/standalone/configuration/standalone.xml for http and https:
-```
+
+```xml
         <socket-binding name="http" port="${jboss.http.port:8080}"/>
         <socket-binding name="https" port="${jboss.https.port:8443}"/>
-````
-For example, for external access, typically you would assign as follows:
 ```
+
+For example, for external access, typically you would assign as follows:
+
+```xml
 	<socket-binding name="http" port="${jboss.http.port:80}"/>
         <socket-binding name="https" port="${jboss.https.port:443}"/>
 ```
@@ -239,7 +244,7 @@ Normally, the project name will be the name of the `.war` - which will be the co
 
 If you only need to change the base URL (for example, from `https://skyve.org/` to `https://myDomain.com/`), you can do this by specifiying the URL in the `myApplication.json` settings file. Similarly, if your application will operate from the base URL then make the change to the URL in the `myApplication.json` file and set the context setting to `/` for example:
 
-```
+```json
 	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
 	url: {
 		// server URL
@@ -253,7 +258,7 @@ If you only need to change the base URL (for example, from `https://skyve.org/` 
 
 Note that URLs without a specified port will require you to change the Wildlfy port settings suitably, for example:
 
-```
+```xml
         <socket-binding name="http" port="${jboss.http.port:80}"/>
         <socket-binding name="https" port="${jboss.https.port:443}"/>
 ```
@@ -277,7 +282,7 @@ change
 
 to
 
-```
+```xml
 	<groupId>myApplication</groupId>
 	<artifactId>tax_management</artifactId>
 	<version>1.0</version>
@@ -291,7 +296,7 @@ to
 4. Update the project `.json` file for the new context
 from
 
-```
+```json
 	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
 	url: {
 		// server URL
@@ -305,7 +310,7 @@ from
 
 to
 
-```
+```json
         // URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
 	url: {
 		// server URL
@@ -421,6 +426,7 @@ Key problems in the `myApplication.json` configuration file block your project f
 
 ### Example Output for incorrect Content folder
 Incorrect content folder - the folder doesn't exist:
+
 ```json
 	// Content settings
 	content: {
@@ -468,6 +474,7 @@ Caused by: java.lang.IllegalStateException: content.directory C:/skyve/content/ 
 
 ### Example incorrect/invalid customer in bootstrap stanza
 Incorrect customer in the bootstrap- there is no such customer defined:
+
 ```json
 // bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
 bootstrap: {
@@ -480,6 +487,7 @@ bootstrap: {
 In this case, there is no _skyve_ customer declaration file within the _customer_ folder.
 
 Attempting to deploy in this case yields results such as the following:
+
 ```
 15:48:03,814 ERROR [stderr] (ServerService Thread Pool -- 68) org.skyve.metadata.MetaDataException: A problem was encountered.
 15:48:03,814 ERROR [stderr] (ServerService Thread Pool -- 68) 	at org.skyve.impl.metadata.repository.LocalDesignRepository.getCustomer(LocalDesignRepository.java:174)
@@ -523,6 +531,7 @@ Attempting to deploy in this case yields results such as the following:
 ### Missing comma or badly formed .json file
 
 Missing comma or badly formed .json file:
+
 ```json
 	// bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
 	bootstrap: {
@@ -538,6 +547,7 @@ Missing comma or badly formed .json file:
 For example, should have been a comma after the bootstrap stanza.
 
 Attempting to deploy in this case yields results such as the following:
+
 ```
 15:40:16,947 ERROR [org.jboss.msc.service.fail] (ServerService Thread Pool -- 69) MSC000001: Failed to start service jboss.undertow.deployment.default-server.default-host./phweb: org.jboss.msc.service.StartException in service jboss.undertow.deployment.default-server.default-host./phweb: java.lang.RuntimeException: java.lang.ClassCastException: java.lang.Long cannot be cast to java.util.Map
 	at org.wildfly.extension.undertow.deployment.UndertowDeploymentService$1.run(UndertowDeploymentService.java:85)
@@ -584,6 +594,7 @@ These instructions apply to a standalone server installation of Wildfly 10 on Wi
 - [download](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-2017) and copy the sql server driver jar and module.xml (below) to `C:\wildfly\modules\system\layers\base\com\microsoft\sqlserver\main`
 
 `module.xml` (modify the `resource-root` path to match your sql server jdbc jar name)
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?> 
 <module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 
@@ -659,15 +670,19 @@ or, if using Active Directory authentication:
 - replace instances of `{adServerName}`, `{adsuffix}`, `{cn}`, `{dc}` and `{projectNameDB}` from the above
 
 - remove the following filter-refs from the default-server definition in the undertow stanza
+
   ```xml
   <filter-ref name="server-header"/>
   <filter-ref name="x-powered-by-header"/>
   ```
+  
 - comment out the welcome content `<location name="/" handler="welcome-content"/>`
 - replace <jsp-config/> in the default servlet-container config with
+
   ```xml
   <jsp-config x-powered-by="false"/>
   ```
+  
 - add Wildfly as a windows service
   - go to the directory `C:\wildfly\docs\contrib\scripts`
   - copy the folder "service"
@@ -741,6 +756,7 @@ These instructions apply to Bitnami Wildfly 10 stack installation on Windows ser
   * [download](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-2017) the latest SQL Server JDBC driver and copy the jbbc jar
 
 `module.xml` (modify the `resource-root` path to match your sql server jdbc jar name)
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?> 
 <module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 

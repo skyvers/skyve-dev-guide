@@ -328,7 +328,7 @@ and *bizUserId* (the user who created the data) are also indexed.
 
 In addition, developers can declare a database index on document attributes, 
 or turn off the default indexing behaviour where it is not required, as follows:
-```
+```xml
 		<longInteger name="millis" required="true">
 			<displayName>Millis</displayName>
 			<index>database</index>

@@ -55,7 +55,7 @@ By convention, Jasper report templates are located within the reports folder of 
 applicable document")
 
 Report actions must be declared in a view for reports to be accessible to the user. 
-```
+```xml
         <report reportName="WeeklyTimeSheet" moduleName="time" documentName="WeeklyTimesheet" displayName="Preview Timesheet"
             reportFormat="pdf" >
             <parameter name="ID" binding="bizId" />
@@ -64,7 +64,7 @@ Report actions must be declared in a view for reports to be accessible to the us
 
 Parameters can be passed to the report, based on local bindings (e.g. "bizId" in the above example)  - you need to declare these parameters in your jasper report (with the same name -  e..g. "ID" as above) (edited)
 In your report, you can refer to these parameters like any other value, for example, in an sql based report you can include a query string like this:
-```
+```sql
 select * from TIME_WeeklyTimesheet where bizId = $P{ID}
 ```
 

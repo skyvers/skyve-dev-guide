@@ -36,7 +36,7 @@ role.
 
 Job classes must extend the `org.skyve.job.Job` abstract class. Custom job code is located in the `execute()` method.
 
-```
+```java
 public class ProcessCommunicationForTagJob extends Job {
 	private static final long serialVersionUID = 6282346785863992703L;
 

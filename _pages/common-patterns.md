@@ -40,7 +40,6 @@ To achieve this:
 For a _User_ scoped document permission, of the singleton pattern is followed, there will only ever be one retrievable record (if it has been created), and so the newInstance() override code is trivial, for example:
 
 ```java
-
 	@Override
 	public PersonalDetails newInstance(PersonalDetails bean) 
 		throws Exception {
