@@ -27,8 +27,8 @@ sidebar:
     * [Technical description](#technical-description)
     * [General Approach and Design Principles](#general-approach-and-design-principles)
     * [Use of SQL](#use-of-sql)
-    * [Multi-tenant & Mass-Customisation](#multi-tenant--mass-customisation)
-    * ['Open-source' Inclusions ](#open-source-inclusions)
+    * [Multi-tenant Mass-Customisation](#multi-tenant-mass-customisation)
+    * [Open-source Inclusions ](#open-source-inclusions)
   * [Concepts](_pages/concepts.md)
   * [Security, Persistence and Access control](_pages/security-persistence-and-access-control.md)
   * [Exception Handling](_pages/exception-handling.md)
@@ -73,8 +73,6 @@ At any time, branch out into "traditional" development without restriction, but 
 Skyve supports spatial concepts natively with MySQL, SQL Server and H2 - Oracle and Postgres coming soon. Otherwise, pretty much anything supported by Hibernate should work (but we haven’t tested them all!).
 
 For more details on the framework and its capabilities, please check out the platform homepage - [www.skyve.org](https://skyve.org/).
-
-Skyve is sponsored by [Biz Hub Australia](https://www.bizhub.com.au/) and we offer a range of support agreements. Or use it for free, no obligation.
 
 ## Note to Readers
 
@@ -278,7 +276,7 @@ That way, searches for identifiers within the IDE workspace won't
 inadvertently miss references within SQL artefacts, supporting the
 common tasks of refactoring, deprecation and change impact analysis.
 
-### Multi-tenant & Mass-Customisation
+### Multi-tenant Mass-Customisation
 
 Skyve supports multi-tenant applications concepts out of the box- when a
 Skyve application is created, it is ready to support multiple customers
@@ -321,7 +319,7 @@ interfaces are generated on-the-fly using Web 2.0 with piecemeal
 downloads for improved performance. Web, Mobile/PDA or exe type clients
 can be generated without additional development effort.
 
-### 'Open-source' Inclusions
+### Open-source Inclusions
 
 Skyve takes advantage of a number of open-source and LGPL frameworks
 which are either distributed with the platform, required to be present
@@ -352,4 +350,4 @@ deeply with other 3rd party packages or custom architectural elements.
 **[â¬† back to top](#contents)**
 
 ---
-**Next [Chapter 2: Concepts](chapters/concepts.md)**  
+**Next [Chapter 2: Concepts](_pages/concepts.md)**  
