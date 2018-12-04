@@ -1,7 +1,7 @@
 ---
-title: "Bizlet and extension classes"
-permalink: /bizlets/
-excerpt: "Bizlet and extension classes"
+title: "Views"
+permalink: /views/
+excerpt: "Views"
 toc: true
 sidebar:
   title: "Index"
