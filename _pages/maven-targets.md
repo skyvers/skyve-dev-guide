@@ -39,7 +39,7 @@ Depending on how you configure your Wildfly, if you are not publishing changes d
 
 #### Local Deploy
 `man compile war:exploded skyve:touch`
-This refreshes your project’s `/deployments’ directory and creates a ‘projectName.dodeploy’ file telling Wildfly to restart the module. This is used when there are any Java or module changes which are cannot be hot-reloaded.
+This refreshes your projects `/deployments` directory and creates a `projectName.war.dodeploy` file telling Wildfly to restart the module. This is used when there are any Java or module changes which are cannot be hot-reloaded.
 
 ### Updating Skyve version
 To update your project with a specific Skyve version, you'll need to pull/check-out the Skyve project (from https://github.com/skyvers/skyve.git) prior to the following steps, ensuring you pull the specific Skyve version you're after. If in doubt, pull Skyve and check which version is retrieved. Releases are tagged, so it is typically safest to checkout the last tagged commit.
