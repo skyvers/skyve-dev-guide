@@ -293,6 +293,123 @@ Roles included in the menu item stanza have access to that menu item. If
 the menu item specifies a role, then users with that role will see the
 menu item.
 
+#### Menu item types
+Skyve supports a number of multiple-result menu items - _list_, _calendar_, _map_, _tree_.
+
+These item types provide the user with the ability to understand their information within the context it exists. 
+For example, a map item shows document instances _spatially_, a calendar shows them _temporally_. In both situations
+the purpose of the menu item is to provide contextual and/or searching ability - so that the user is able to identify 
+a specific instance and understand the context in which it exists.
+
+For these multiple-result item types, Skyve supports three population approaches: _document_, _query_ and _model_.
+
+The _document_ source type will populate results based on the document _defaultQuery_ (if one is declared). 
+
+If no _defaultQuery_ is declared, Skyve will populate all document instance results the user is allowed to _Read_ 
+(according to the document scope). For example, if the document privilege has been declared for the user role as 'CRUDC'
+then Skyve will return all results for the customer.
+
+By contrast, if the document privelege has been declared for the user role as 'CRUDU', the all results owned by the user
+will be returned (normally the instances created by the user - where the bizUserId = the user Id)
+
+The _query_ source type will populate results based on the specified module query.
+
+The _model_ source type will populate results based on the specified model.   
+
+##### calendar
+Partially implemented.
+
+Represents each result instance as a time-period bar within a calendar layout.
+
+Properties:
+* _document_ -  if populating instances for all 
+* _model_ - if populating instances from a model, the name of the model
+* _name_ - the display name of the menu item is it appears in the menu
+* _query_ - a specific module query to use to populate results
+* _startBinding_ - the date/dateTime attribute binding which represents the start of the time period to be displayed in the calendar for each result
+* _endBinding_ - the date/dateTime attribute binding which represents the end of the time period to be displayed in the calendar for each result
+
+##### edit
+Navigates the user to a new instance of the specified document.
+
+The Skyve _edit_ view allows a user to interact with a single bean instance and normally, a user will
+navigate to the _edit_ view from a _list_ view which sets the context. When the `edit` view is provided as a menu item, the user has no way of setting the context, as they do not navigate to the view from a list, and so Skyve implicitly creates a new bean instance for the view.
+
+Alternatively, if the document is transient and not persisted, then the developer can
+rely on the implicit creation of a new bean, and override the _newInstance()_ to set bean default values.
+
+![User dashboard example of an edit menu item](../assets/images/modules/user-dashboard.png "User dashboard example of an edit menu item")
+
+Properties:
+* _document_ -  if populating instances for all 
+* _name_ - the display name of the menu item is it appears in the menu
+
+##### group
+A group is an expandable menu (submenu).
+
+![Group menu item](../assets/images/modules/group-menu-item.png "Group menu item")
+
+Properties:
+* _name_ - the display name of the menu item is it appears in the menu
+
+##### item
+This is the abstract type for menu items - not applicable for declaration in the module declaration. 
+
+##### link
+Not yet implemented
+
+##### list
+Represents a list/grid of instances.
+
+Properties:
+* _document_ -  if populating instances for all 
+* _model_ - if populating instances from a model, the name of the model
+* _name_ - the display name of the menu item is it appears in the menu
+* _query_ - a specific module query to use to populate results
+
+![SmartClient list menu](../assets/images/modules/smart-client-menu.png "SmartClient list menu item")
+
+##### map
+Represents instances spatially on a map.
+
+Properties:
+* _document_ -  if populating instances for all
+* _geometryBinding_ - the attribute geometry binding to use as the basis of locating pins on the map
+* _model_ - if populating instances from a model, the name of the model
+* _name_ - the display name of the menu item is it appears in the menu
+* _query_ - a specific module query to use to populate results
+* _refreshTimeInSeconds_ - the refresh rate of the map (not implemented)
+* _showRefreshControls_ - whether to show or hide map refresh controls (not implemented)
+
+![SmartClient map menu](../assets/images/modules/smart-client-menu-map.png "SmartClient map menu item")
+
+##### tree
+SmartClient render only.
+Represents hierarchical information in a lazy-loaded tree structure.
+
+Properties:
+* _autoPopulate_ - whether to populate the tree or use a lazy-loading approach
+* _document_ -  if populating instances for all 
+* _model_ - if populating instances from a model, the name of the model
+* _name_ - the display name of the menu item is it appears in the menu
+* _query_ - a specific module query to use to populate results
+
+![SmartClient tree menu](../assets/images/modules/smart-client-menu-tree.png "SmartClient tree menu item")
+
+#### Other menu options
+For the PrimeFaces render, you can take advantage of PrimeFaces options for menu arrangement within the _template.xhtml_ component.
+For example, the default menu behaviour is declared as:
+```<div class="#{leftMenu ? 'layout-wrapper layout-menu-static layout-menu-light' : 'layout-wrapper layout-menu-light'}">```
+
+![Static menu](../assets/images/modules/prime-faces-static-menu.png "Static/vertical menu (PrimeFaces renderer)
+
+While a horizontal behaviour is declared as follows:
+```<div class="#{leftMenu ? 'layout-wrapper layout-menu-horizontal layout-menu-light' : 'layout-wrapper layout-menu-light'}">```
+
+![Horizontal menu](../assets/images/modules/prime-faces-horizontal-menu.png "Horizontal menu (PrimeFaces renderer)
+
+For more information and other options refer to the PrimeFaces documentation.
+
 ### Module Documentation
 
 Module definition can include detailed documentation about the module

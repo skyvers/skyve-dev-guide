@@ -10,6 +10,64 @@ sidebar:
 
 ## Common Patterns
 
+### Singleton documents
+There are a variety of situations where (from the User perspective) there is only ever 1 record they deal with.
+
+For example: 
+* if the user has a personal settings page
+* a "sticky" search page (which remembers a user's own search criteria) 
+* a personal details page (for personal/private details)
+* a systems settings page (where these contain settings or controls for the system - admin.DataMaintenance is an example of this)
+
+The Skyve _edit_ view allows a user to interact with a single bean instance and normally, a user will
+navigate to the _edit_ view from a _list_ view which sets the context.
+
+However, with the above examples, the usual gesture of _list-then-edit_ makes little sense, and instead, there will almost always be a single record which is the one the user wants to interact with.
+
+When the `edit` view is provided as a menu item, the user has no way of setting the context, as they
+do not navigate to the view from a list, and so Skyve implicitly creates a new bean instance for the view.
+
+This implicit behaviour can be ambushed for the _singleton_ pattern, by overriding the _newInstance()_ Bizlet method - by retrieving the desired bean instance and returning this, instead of the instance implicitly created by Skyve.
+
+![User dashboard example of an edit menu item](../assets/images/modules/user-dashboard.png "User dashboard example of an edit menu item")
+_The User dashboard (admin module) is an example of a singleton pattern_
+
+To achieve this:
+* set the scope of the document appropriately 
+* add an `edit` menu item to the `module.xml` for the document
+* override the `newInstance()` Bizlet method to search for the relevant record and return that, instead of the new bean
+
+For a _User_ scoped document permission, of the singleton pattern is followed, there will only ever be one retrievable record (if it has been created), and so the newInstance() override code is trivial, for example:
+
+```java
+
+	@Override
+	public PersonalDetails newInstance(PersonalDetails bean) 
+		throws Exception {
+
+			// find the only retrievable instance if it exists
+			Persistence pers = CORE.getPersistence();
+			DocumentQuery q = pers.newDocumentQuery(PersonalDetails.MODULE_NAME, PersonalDetails.DOCUMENT_NAME);
+			q.setMaxResults(1); //defensively ensure only one result is returned
+
+			PersonalDetails found = q.beanResult();
+
+			if (found != null) {
+				// we have found our singleton, 
+				// return this instead of the new bean
+				bean = found;
+			} else {
+				// set bean defaults in the usual way...
+			}
+
+			return super.newInstance(bean);
+		}
+```
+
+Alternatively, if the singleton document is transient and not persisted, then the developer can
+rely on the implicit creation of a new bean, and override the _newInstance()_ to set bean default values.
+
+
 ### Identify Current User Contact
 
 To identify the current user in Bizlet code, instantiate the Persistence
