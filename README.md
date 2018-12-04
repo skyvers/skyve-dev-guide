@@ -74,7 +74,7 @@ Skyve supports spatial concepts natively with MySQL, SQL Server and H2 - Oracle 
 
 For more details on the framework and its capabilities, please check out the platform homepage - [www.skyve.org](https://skyve.org/).
 
-Skyve is created by [Biz Hub Australia](https://www.bizhub.com.au/) and we offer a range of support agreements if required. Or use it for free, no obligation.
+Skyve is sponsored by [Biz Hub Australia](https://www.bizhub.com.au/) and we offer a range of support agreements. Or use it for free, no obligation.
 
 ## Note to Readers
 

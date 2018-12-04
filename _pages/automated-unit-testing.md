@@ -165,7 +165,7 @@ See the source `modules.admin.*` package in your project for example factories f
 The `@SkyveFactory` annotation can be applied to any Factory class for finer grained control over which tests get generated for a particular document. The annotation can be used to:
 - skip domain test generation for the document (`@SkyveFactory(testDomain = false)`)
 - skip action test generation for the document’s actions (`@SkyveFactory(testAction = false)`)
-- skip specified action test generation for some of the document’s actions (`@SkyveFactory(excludedActions = { Check.class, Next.class })`)
+- skip specified action test generation for some of the document's actions (`@SkyveFactory(excludedActions = { Check.class, Next.class })`)
 
 Any combination of these can be provided, but if `testAction` is set to false, `excludedActions` will be ignored as all actions will be skipped.
 
@@ -198,13 +198,13 @@ After performing the typical upgrade steps to update your project to the latest 
 - AbstractActionTest
 - AbstractDomainTest
 - _src.modules.admin.Factory*_ into your source path configured in your [ant configuration](#build-xml-parameters) or your [maven configuration](#maven-configuration)
-- test data friles from _src.test.resources.data_ into your _src.test.resources.data_ directory
+- test data files from _src.test.resources.data_ into your _src.test.resources.data_ directory
 - Update your build file following the relevant configuration depending on whether you are using maven or ant
 
 ### Extending automated tests
-For pure metadata projects (only XML files) with no custom development, automated unit tests are sufficient to provide test coverage and regression of the generated application source code. Specific testing of framework validation logic and other framework behaviour is already covered in the framework project and is not required to be duplicated in your project.
+For pure metadata projects (only XML files) with no custom development, automated unit tests are sufficient to provide test coverage and regression of the generated application source code. Specific testing of Skyve platform validation logic and other Skyve platform behaviour is already covered in the Skyve platform project and is not required to be duplicated in your project.
 
-Once you start adding custom behaviour to your project, such as action classes, or bizlets, it is good development practice to test desired behaviour, boundary conditions, expected and unexpted inputs manually. The automated unit tests will check that your bilzet lifecycle and action methods will pass with a known good result. To extend this behaviour, developer created unit tests should be created in your test path (usually `/src/test/java/` in a maven project).
+Once you start adding custom behaviour to your project, such as action classes, or bizlets, it is good development practice to test desired behaviour, boundary conditions, expected and unexpected inputs manually. The automated unit tests will check that your bizlet lifecycle and action methods will pass with a known good result. To extend this behaviour, developer created unit tests should be created in your test path (usually `/src/test/java/` in a maven project).
 
 For example, let's create a test for the `GeneratePassword` action of the admin User document. This action should generate a new password and set the password expired flag for the current User. This action already has an automated test created to verify the action runs through without errors, but the automated test doesn't know how to validate the expected behaviour of this action. Lets create a specific test for that now.
 

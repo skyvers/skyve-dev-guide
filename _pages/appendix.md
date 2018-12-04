@@ -12,7 +12,7 @@ sidebar:
 
 ## Deploying a Skyve Application
 
-Skyve applications as a single web archive (`.war`) folder, containing the application metadata and framework components. By default, Skyve `.war` folders are deployed 'exploded' or 'unzipped'.
+Skyve applications as a single web archive (`.war`) folder, containing the application metadata and Skyve platform components. By default, Skyve `.war` folders are deployed 'exploded' or 'unzipped'.
 
 The `.war` folder is deployed with a `.json` settings file and a `-ds.xml` datasource file. 
 
@@ -25,7 +25,7 @@ myApplication.json
 ```
 
 Where 
-* `myApplication.war` is the self-contained web archive containing application metadata and framework libraries
+* `myApplication.war` is the self-contained web archive containing application metadata and Skyve platform libraries
 * `myApplication-ds.xml` is the datasource file containing the jdbc connection string and credentials
 * `myApplication.json` is the instance-specific settings file, containing all of the settings specific to the particular instance.
 
