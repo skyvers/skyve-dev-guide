@@ -51,12 +51,12 @@ sidebar:
   * [Bizport](_pages/bizport.md)
   * [Wildcat Conversion Tool](_pages/wildcat-conversion-tool.md)
   * [Automated Unit Testing](_pages/automated-unit-testing.md)
-* [Section 5: Appendix](chapters/appendix.md)
-  * [Appendix 1: Deploying a Skyve Application](chapters/appendix.md)
-  * [Appendix 2: Installing and configuring the Skyve Development Environment](chapters/appendix.md)
-  * [Appendix 3: Example Deployment Instructions with Single Sign-on](chapters/appendix.md)
-  * [Appendix 4: Example Deployment Problems caused by problems in the .json file](chapters/appendix.md)
-  * [Appendix 5: Installing Skyve in Production](chapters/appendix.md)
+* [Section 5: Appendix](_pages/appendix.md)
+  * [Appendix 1: Deploying a Skyve Application](_pages/appendix.md)
+  * [Appendix 2: Installing and configuring the Skyve Development Environment](_pages/appendix.md)
+  * [Appendix 3: Example Deployment Instructions with Single Sign-on](_pages/appendix.md)
+  * [Appendix 4: Example Deployment Problems caused by problems in the .json file](_pages/appendix.md)
+  * [Appendix 5: Installing Skyve in Production](_pages/appendix.md)
 
 ## What is Skyve?
 
