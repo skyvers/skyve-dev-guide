@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-# Appendix
-
 ## Deploying a Skyve Application
 
 Skyve applications as a single web archive (`.war`) folder, containing the application metadata and Skyve platform components. By default, Skyve `.war` folders are deployed 'exploded' or 'unzipped'.
