@@ -21,6 +21,8 @@ docs:
         url: /documents/                                
       - title: "Converter, validator and format"
         url: /converters/                                
+      - title: "Internationalisation"
+        url: /internationalisation/                                
       - title: "Bizlet and extension classes"
         url: /bizlets/                                        
       - title: "Views"

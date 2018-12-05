@@ -59,6 +59,8 @@ If the language (in this case "ar") is not specified in the `customer.xml`, Skyv
 
 ![Language resource files](../assets/images/customers/image38-1.png "Language resource files")
 
+For more details, see [Internationalisation](./../_pages/internationalisation.md)
+
 ### Resources
 
 Skyve provides a resource hierarchy to allow for the inclusion of
