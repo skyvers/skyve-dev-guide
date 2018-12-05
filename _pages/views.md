@@ -599,9 +599,9 @@ The following table lists the properties for each action declaration.
 
 ![Action declaration](../assets/images/views/image133.png "Action declaration including _default_, _custom_ and _report_ actions")
 
-The example declaration in the above example declares default actions
-using the *&lt;defaults&gt;* action set and the *&lt;cancel&gt;* action,
-using mutually exclusive conditions. Numerous *Custom* actions are
+The above example shows implicit actions are included using the  
+the *&lt;defaults&gt;* action set and the *&lt;cancel&gt;* action,
+but with mutually exclusive conditions. Numerous *Custom* actions are
 declared as well as a report action.
 
 For more details see [Actions](./../_pages/actions.md "Actions").
