@@ -1,7 +1,7 @@
 ---
-title: "Actions"
-permalink: /actions/
-excerpt: "Actions"
+title: "Internationalisation"
+permalink: /internationalisation/
+excerpt: "Internationalisation and local language support"
 toc: true
 sidebar:
   title: "Index"
