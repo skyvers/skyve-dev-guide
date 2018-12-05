@@ -55,7 +55,7 @@ Internationalisation and language support can also be specified when declaring t
 </customer>
 ```
 
-If the language (in this case "ar") is not specified in the `customer.xml`, Skyve will detect the language set in the browser, provided there is an internationalisation file provided.
+If the language (in this case "ar") is not specified in the `customer.xml`, Skyve will detect the language set in the browser, provided there is a matching internationalisation file.
 
 ![Language resource files](../assets/images/customers/image38-1.png "Language resource files")
 
