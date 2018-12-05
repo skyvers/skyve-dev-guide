@@ -31,31 +31,22 @@ Skyve offers the following action types:
   upload      | a special case of custom action that extends org.skyve.metadata.controller.UploadAction, capable of receiving (and processing) a file uploaded by the user
   zoomOut     | the implicit Skyve action to return from a collection member to the bean that owns the collection (relevant for dataGrid/collection members, not relevant unless the user has _Update_ privileges)
 
-Skyve will hide actions which are declared inappropriately (for example, if the *new* action is declared, 
-but a user's privileges do not include the _create_ privelege for the relevant document).
-
-Typically, scaffolded views contain the _<defaults/>_ action which represents the group of actions Skyve deems to be valid in the specific context given the user's privileges. Alternatively, default actions can be declared individually (e.g. *OK*,
-*Save*, *Cancel* etc.).
-
-Note that actions can be located either in the *ActionPanel* or using the _<button/>_ widget within a view _form_, however the action is declared
-in the _<actions/>_ section, whether or not the action
-button will be displayed in the *ActionPanel* or elsewhere .
-
 *Implicit Actions* are actions which are provided by Skyve by default based on the context of the current user gesture. By default, a Skyve view will contain a default collection of Implicit actions.
 
 In addition to implicit actions provided by Skyve, developers can create Custom actions, or override Implicit action behaviour in the document *Bizlet*.
 
-To create a new action behaviour, developers create an action class and set permissions to execute the action within the role definitions section of the *module.xml* file.
+If no view has been declared for a document, Skyve will include all actions the user has access to (declared via role permissions) in the default view. When a view declaration is supplied, the view declaration will control visibility and other properties of the action button.
 
-When a user has access to execute an action (declared via role permissions) Skyve will generate a button by default in the detail view. When a view definition is supplied the view definition will control visibility and other properties of the action button.
-
-The trivial *ServerSideAction* causes the view to be refreshed.
-
-Action classes implement *ServerSideAction* and are located within the actions folder in a document package and correlate to action buttons in the user interface.
+Action classes are located within the actions folder in a document package and correlate to action buttons in the user interface. All actions implementing *ServerSideAction* cause the view to be re-rendered.
 
 ![Trivial action example](../assets/images/actions/image135.png "Trivial action example")
 
-Note that actions can also be triggered by declaring onChangeHandlers for a specific widget in a view.
+To create a new action behaviour:
+* create an action class in the *actions* package within the document package
+* declare the action in the *<actions/>* section of the view declaration
+* set permissions to execute the action within the role definitions section of the *module.xml* file.
+
+Note that actions can also be triggered by declaring *onChangeHandlers* for a specific widget in a view.
 
 When a view declaration is supplied, the action must be declared in the
 *actions* section of the *view.xml*.
@@ -76,8 +67,8 @@ The action element of the view definition indicates the *className* of
 the action as well as the *displayName* (button text). Action properties
 are explained in full in the previous chapter.
 
-Note that the action section of a view definition also includes implicit
-actions.
+Note that the action section of a view definition may also include implicit
+actions, for example, with the `<defaults/>` tag.
 
 ```java
 /**
@@ -101,13 +92,20 @@ of the *eligibility* attribute. This code will be executed prior to the
 usual *Implicit Save* behaviour.
 
 Note that the behaviour above is initiated by the use of the Save button
-in the view, and this is a separate event to the bean’s preSave.
+in the view, and this is a separate event to the bean's _preSave_ lifecycle event.
 
-### OnChange Event Actions (Client-side Events)
+OnChange events can trigger custom actions using the `<server/>` tag.
+ 
+```xml
+<combo binding="orgName" disabled="locked">
+	<onChangedHandlers>
+		<server action="UpdateModule" />
+	</onChangedHandlers>
+</combo>
+```
 
-Skyve provides a number of client-side events actions which can be
-assigned to widgets. Details of *OnChange* event actions are provided in
-Table 14 (above).
+_Example: the combo for *orgName* will call the custom action *UpdateModule* when changed_
+
 
 **[⬆ back to top](#contents)**
 
