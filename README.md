@@ -285,8 +285,7 @@ Skyve takes advantage of a number of open-source and LGPL frameworks
 which are either distributed with the platform, required to be present
 for operation or deployment, or recommended.
 
-These include:
-
+These include
 - Java™ EE - [Java Platform, Enterprise Edition (Java EE)](https://www.oracle.com/technetwork/java/javaee/overview/index.html)
 - Hibernate™ [Object Relational Mapping framework](http://www.hibernate.org)
 - Spring - [Spring Framework](https://spring.io/)
@@ -295,11 +294,14 @@ These include:
 - React - [React javascript library](https://reactjs.org/)
 - Elastic™ - [Elastic content repository](https://www.elastic.co/)
 - JasperReports™ - [JasperReports library](http://www.jaspersoft.com/jasperreports)
-- Apache Lucene™ - [Lucene textual indexing engine](http://lucene.apache.org/)
-- iText and PDFBox generation and content libraries
-- Apache POI and JXL office interoperability support
+- Apache™ Lucene - [Lucene textual indexing engine](http://lucene.apache.org/)
+- iText - [iText PDF Generation](https://itextpdf.com/)
+- PDFBox™ - [Apache PDFBox library](https://pdfbox.apache.org/)
+- Apache™ POI - [Java API for Microsoft Documents](https://poi.apache.org/)
 - JBoss™ Wildfly - [Wildfly Application Server](http://www.jboss.org/)
 - Eclipse™ - [Eclipse Integrated Development Environment](http://www.eclipse.org/)
+
+For the current complete list see the [skyve-ee pom.xml](https://github.com/skyvers/skyve/blob/master/skyve-ee/pom.xml)
 
 Because Skyve is open-source, developers are at liberty to create customised versions of the platform to integrate deeply with other 3rd party packages or custom architectural elements.
 
