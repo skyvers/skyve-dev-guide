@@ -10,20 +10,20 @@ sidebar:
 
 ### Internationalisation and language support
 
-Skyve supports UTF-8 characters in metadata declarations and for application data, provided the database chosen by the developer is configured correctly.
+Skyve supports building apps for local languages, including both left-to-right and right-to-left lanagues, as well as building applications for multiple languages (internationalisation)
 
-You can also build Skyve applications for multi-language/internationalisation using a traditional resource-file based approach.
+Skyve metadata declarations can include UTF-8 characters and applications can store UTF-8 data (provided the database chosen by the developer is configured correctly).
 
 Skyve provides a basic internationalisation resource file as a starting point for non-English usage. The file is named according to the ISO 639-1 two-letter language code in the `project/resources` folder.
 
 ![Location of resource files](../assets/images/internationalisation/location-of-language-resource-files.png "Location of resource files")
 
-The resource file contains key value pairs for the basic fixed Skyve messages, however you can expand these files for your own tokens (tokens you declare in your application metadata declaration).
+The resource file contains key value pairs for the basic fixed Skyve messages, however you can expand these files for your own tokens (tokens you declare in your application metadata).
 
 #### Setting a default language for a customer
 
 Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute
-, and Skyve supports both left-to-right and right-to-left languages.
+, .
 
 ![Example Arabic with right-to-left](../assets/images/customers/arabic-detail.png "Example Arabic view with right-to-left")
 

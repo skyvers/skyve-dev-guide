@@ -40,10 +40,11 @@ accordion pane), and assumes the file is located within the customer's
 resources folder.
 
 #### Internationalisation
-Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute
-, and Skyve supports both left-to-right and right-to-left languages.
+Skyve supports building apps for local language support and multi-language support (internationalisation) and both left-to-right and right-to-left languages.
 
 ![Example Arabic with right-to-left](../assets/images/customers/arabic-detail.png "Example Arabic view with right-to-left")
+
+To set a default language for a customer, include the language property in the customer.xml declaration as follows. 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
