@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-### Internationalisation and language support
+## Internationalisation and language support
 
 Skyve supports building apps for local languages, including both left-to-right and right-to-left lanagues, as well as building applications for multiple languages (internationalisation)
 
@@ -20,7 +20,7 @@ Skyve provides a basic internationalisation resource file as a starting point fo
 
 The resource file contains key value pairs for the basic fixed Skyve messages, however you can expand these files for your own tokens (tokens you declare in your application metadata).
 
-#### Setting a default language for a customer
+### Setting a default language for a customer
 
 Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute
 , .
@@ -43,27 +43,29 @@ If the language is not specified in the `customer.xml`, Skyve will detect the lo
 
 ![Language resource files](../assets/images/customers/image38-1.png "Language resource files")
 
-#### UTF-8 Data
+### UTF-8 Data
 
 To ensure the database can store UTF-8 characters, ensure you have set the character set and collation.
 
 For example, whereas H2 supports UTF-8 with default settings, for MySQL, ensure that the database is created with the correct character set and collation: 
+
 ```sql
-CREATE DATABASE tpl CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE myDatabase CHARACTER SET utf8 COLLATE utf8_general_ci;
 ```
 
 Additionally for MySQL, ensure your datasource connection string includes Unicode and UTF-8 encoding, for example:
+
 ``` 
 jdbc:mysql://myServer:3306/myDatabase?useUnicode=true&amp;characterEncoding=UTF-8&amp;useCursorFetch=true&amp;defaultFetchSize=100
 ```
 
-#### Local language support
+### Local language support
 
 You can use UTF-8 characters for display attributes in Skyve metadata
 
 ![Local language support](../assets/images/internationalisation/local-language.png "Local language support")
 
-#### Building apps for multiple languages
+### Building apps for multiple languages
 
 To create an application which is available in more than one language, you can use the token-replacement feature to add tokens for the metadata declaration and matching key-value pairs in internationalisation resource files.
 
