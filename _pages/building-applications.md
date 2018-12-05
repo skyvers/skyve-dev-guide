@@ -13,7 +13,7 @@ sidebar:
 
 The skyve project contains a Readme at [github.com/skyvers/skyve](https://github.com/skyvers/skyve) with useful information for getting started, configuring Spring security and other steps to get you started.
 
-We strongly recommend you follow the instructions provided in the video at the Skyve Foundry - Skyve Project Creator
+You can also follow the instructions provided in the video at the Skyve Foundry - Skyve Project Creator
 
 <div style="margin: 0 auto; text-align: center">
 	<a href="https://youtu.be/Ar7y1y1xhHg" target="_blank">
@@ -43,9 +43,9 @@ To get started, go to the project creation page (at foundry.skyve.org/foundry/pr
 * From your development environment, import the project as a maven project.
 
 ### Configuring your new project
-First, add the project to your server.
+Add the project to your Wildfly server (in the Eclipse server window).
 
-The project contains two configuration files - a data source xml and a project properties json file. Copy these into the Wildfly standalone deployment folder.
+The project contains two configuration files - a data source xml and a project properties json file (for example `myApplication.json` and `myApplication-ds.xml`. Copy these into the Wildfly standalone deployment folder.
 
 Now, create a folder for your noSQL data store - which will hold your content attachments and images. Skyve backups will also be placed here. You can place it anywhere, but its best to place it outside of your project, so that Eclipse doesn't waste time scanning it for changes. Then update the project json configuration to match that location.
 

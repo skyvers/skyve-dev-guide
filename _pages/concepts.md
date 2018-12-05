@@ -228,7 +228,7 @@ The advanced filter is applied using the filter tool
 ![](../assets/images/concepts/image15.png) which is available in the construction
 area.
 
-#### Nested style
+#### Nested style advanced search
 
 Nested style allows complex and sophisticated filter criteria.
 
@@ -249,7 +249,7 @@ The advanced filter is applied using the filter tool
 ![](../assets/images/concepts/image15.png) which is available in the construction
 area.
 
-#### Inline style
+#### Inline style advanced search
 
 Inline style is a simplified version of the Nested style, which allows
 the ***AND*** and ***OR*** operators to be specified for each criteria,
@@ -339,7 +339,7 @@ list, and so on.
 ![Override levels for a document widget declaration](../assets/images/concepts/image27.png "Override levels for a document widget declaration")
 _Override levels for a document widget declaration_
 
-### BizKey - the business key concept
+### bizKey - the business key concept
 
 To enable the application to display references simply, each document
 must define a business key (*bizKey*) definition (similar to a Java
@@ -365,6 +365,7 @@ The bizKey can be expressed as an expression in XML, or can be refer to a static
 ```xml
 <bizKey expression="{user} - {weekEndingDate}" />
 ```
+_bizKey as an expression_
 
 ```xml
 <bizKey>
@@ -373,6 +374,7 @@ The bizKey can be expressed as an expression in XML, or can be refer to a static
 	]]>
 </bizKey>
 ```
+_bizKey as a method in Java_
 
 ### Zoom
 

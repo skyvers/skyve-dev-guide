@@ -36,7 +36,7 @@ A Bizlet class may override bean-lifecycle methods.
 
 Lifecycle event timing is as follows:
 
-#### Bean level:
+#### Bean level lifecycle
 
   Event | Description
   ----- | -----------
@@ -49,7 +49,7 @@ Lifecycle event timing is as follows:
 
 _Bean level events_
 
-#### User Interface level:
+#### User Interface level lifecycle
 
   Event | Description
   ----- | -----------
