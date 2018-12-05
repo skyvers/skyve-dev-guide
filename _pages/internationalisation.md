@@ -74,7 +74,7 @@ We suggest using the _module.document.attribute(.property)_ naming convention fo
 ![Building apps for multiple languages](../assets/images/internationalisation/configuring_for_internationalisation.png "Building apps for multiple languages")
 
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#internationalisation-and-language-support)**
 
 ---
 **Next [Bizlets](./../_pages/bizlets.md)**  
