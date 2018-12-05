@@ -22,8 +22,7 @@ The resource file contains key value pairs for the basic fixed Skyve messages, h
 
 ### Setting a default language for a customer
 
-Internationalisation and language support can also be specified when declaring the customer using the _language_ attribute
-, .
+Internationalisation and language support can also be specified by declaring the customer _language_ attribute.
 
 ![Example Arabic with right-to-left](../assets/images/customers/arabic-detail.png "Example Arabic view with right-to-left")
 
@@ -39,13 +38,13 @@ To set the default language for a customer, include the language setting as foll
 </customer>
 ```
 
-If the language is not specified in the `customer.xml`, Skyve will detect the locale set in the browser, provided there is a matching internationalisation resource file provided.
+If the language is not specified in the `customer.xml`, Skyve will detect the locale from the browser, provided there is a matching internationalisation resource file provided.
 
 ![Language resource files](../assets/images/customers/image38-1.png "Language resource files")
 
 ### UTF-8 Data
 
-To ensure the database can store UTF-8 characters, ensure you have set the character set and collation.
+To ensure the database can store UTF-8 characters, ensure you have set the correct character set and collation.
 
 For example, whereas H2 supports UTF-8 with default settings, for MySQL, ensure that the database is created with the correct character set and collation: 
 
@@ -65,14 +64,17 @@ You can use UTF-8 characters for display attributes in Skyve metadata
 
 ![Local language support](../assets/images/internationalisation/local-language.png "Local language support")
 
+Using this approach you can mix languages on the same view.
+
+![Mixed language](../assets/images/internationalisation/smart_client_in_progress.png "Mixed language")
+
 ### Building apps for multiple languages
 
 To create an application which is available in more than one language, you can use the token-replacement feature to add tokens for the metadata declaration and matching key-value pairs in internationalisation resource files.
 
-We suggest using the _module.document.attribute(.property)_ naming convention for your tokens, as shown.
+We suggest using the naming convention _module.document.attribute(.property)_ for your tokens, as shown.
 
 ![Building apps for multiple languages](../assets/images/internationalisation/configuring_for_internationalisation.png "Building apps for multiple languages")
-
 
 **[⬆ back to top](#contents)**
 
