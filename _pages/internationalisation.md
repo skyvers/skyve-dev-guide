@@ -16,7 +16,7 @@ You can also build Skyve applications for multi-language/internationalisation us
 
 Skyve provides a basic internationalisation resource file as a starting point for non-English usage. The file is named according to the ISO 639-1 two-letter language code in the `project/resources` folder.
 
-![Location of resource files](../assets/images/internationalisation/location-of-language-resource-files.png)
+![Location of resource files](../assets/images/internationalisation/location-of-language-resource-files.png "Location of resource files")
 
 The resource file contains key value pairs for the basic fixed Skyve messages, however you can expand these files for your own tokens (tokens you declare in your application metadata declaration).
 
@@ -66,6 +66,8 @@ You can use UTF-8 characters for display attributes in Skyve metadata
 #### Building apps for multiple languages
 
 To create an application which is available in more than one language, you can use the token-replacement feature to add tokens for the metadata declaration and matching key-value pairs in internationalisation resource files.
+
+We suggest using the _module.document.attribute(.property)_ naming convention for your tokens, as shown.
 
 ![Building apps for multiple languages](../assets/images/internationalisation/configuring_for_internationalisation.png "Building apps for multiple languages")
 
