@@ -287,25 +287,21 @@ for operation or deployment, or recommended.
 
 These include:
 
-- Hibernate™ Object Relational Mapping framework -
-    <http://www.hibernate.org/>
-- Spring Security - <https://spring.io/projects/spring-security>
-- SmartClient Ajax Framework - <http://www.smartclient.com/>
-- Elastic™ content repository - <https://www.elastic.co/>
-- Google maps - <http://www.google.com>
-- Jasper Reports™ report library -
-    <http://www.jaspersoft.com/jasperreports>
-- Apache Lucene™ textual indexing engine - <http://lucene.apache.org/>
-- iText and PDFBox generation and content libraries,
-- Apache POI and JXL office interoperability support,and
-- JBoss™ Wildfly Application Server - <http://www.jboss.org/>
-- Eclipse™ Integrated Development Environment -
-    <http://www.eclipse.org/>
-- iReport report designer - <http://jasperforge.org/projects/ireport>
-- Eve lightweight JVM for mobile platforms- <http://www.ewesoft.com>
+- Java™ EE - [Java Platform, Enterprise Edition (Java EE)](https://www.oracle.com/technetwork/java/javaee/overview/index.html)
+- Hibernate™ [Object Relational Mapping framework](http://www.hibernate.org)
+- Spring - [Spring Framework](https://spring.io/)
+- SmartClient - [SmartClient Ajax Framework](http://www.smartclient.com/)
+- PrimeFaces - [PrimeFaces](https://www.primefaces.org/)
+- React - [React javascript library](https://reactjs.org/)
+- Elastic™ - [Elastic content repository](https://www.elastic.co/)
+- JasperReports™ - [JasperReports library](http://www.jaspersoft.com/jasperreports)
+- Apache Lucene™ - [Lucene textual indexing engine](http://lucene.apache.org/)
+- iText and PDFBox generation and content libraries
+- Apache POI and JXL office interoperability support
+- JBoss™ Wildfly - [Wildfly Application Server](http://www.jboss.org/)
+- Eclipse™ - [Eclipse Integrated Development Environment](http://www.eclipse.org/)
 
-Because Skyve is open-source, developers are at liberty to create customised versions of the platform to integrate
-deeply with other 3rd party packages or custom architectural elements.
+Because Skyve is open-source, developers are at liberty to create customised versions of the platform to integrate deeply with other 3rd party packages or custom architectural elements.
 
 **[⬆ back to top](#contents)**
 
