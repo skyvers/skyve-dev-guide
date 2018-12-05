@@ -309,7 +309,7 @@ If no _defaultQuery_ is declared, Skyve will populate all document instance resu
 (according to the document scope). For example, if the document privilege has been declared for the user role as 'CRUDC'
 then Skyve will return all results for the customer.
 
-By contrast, if the document privelege has been declared for the user role as 'CRUDU', the all results owned by the user
+By contrast, if the document privilege has been declared for the user role as 'CRUDU', the all results owned by the user
 will be returned (normally the instances created by the user - where the bizUserId = the user Id)
 
 The _query_ source type will populate results based on the specified module query.

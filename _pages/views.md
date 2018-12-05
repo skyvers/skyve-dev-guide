@@ -563,23 +563,24 @@ _newParameters section_
 The action section of the view declares which actions will be available
 to the user and under what conditions.
 
-Skyve will automatically hide actions which are declared in the view, but are no appropriate for the user or sitauation (for example, if the *new* action is declared, 
-but a user's privileges do not include the _create_ privelege for the relevant document).
-
-Typically, scaffolded views contain the _<defaults/>_ action which represents the group of actions Skyve deems to be valid in the specific context given the user's privileges. Alternatively, default actions can be declared individually (e.g. *OK*,
+Typically, scaffolded views contain the _<defaults/>_ tag - this represents the group of actions Skyve deems to be valid in the specific context given the user's privileges. Alternatively, default actions can be declared individually (e.g. *OK*,
 *Save*, *Cancel* etc.).
 
-Note that actions can be located either in the *ActionPanel* or using the _<button/>_ widget within a view _form_, however the action is declared
-in the _<actions/>_ section, whether or not the action
-button will be displayed in the *ActionPanel* or elsewhere .
+Skyve will automatically hide actions that are not appropriate for the user or situation (for example, if the *new* action is declared, 
+but a user's privileges do not include the _create_ privilege for the relevant document).
+
+Note that action buttons can be located either in the *ActionPanel* or using the _<button/>_ widget within a view _form_, however the action itself must be declared
+in the _<actions/>_ section of the view.
+
+***Tip:*** You must declare all actions in the action section even if
+they will not appear in the ActionPanel.
 
 *Report* actions (described below) provide access to defined report
 objects (for example Jasper reports) and must also be declared in the actions section of the view.
 
 ![ActionPanel ](../assets/images/views/image132.png "ActionPanel including Implicit, Custom and Report actions")
 
-***Tip:*** You must declare all actions in the action section even if
-they will not appear in the ActionPanel.
+The following table lists the properties for each action declaration.
 
   Property      | Description
   ------------- | -----------
@@ -595,8 +596,6 @@ they will not appear in the ActionPanel.
   name          | where multiple actions may refer to the same action but with different options, the name property distinguishes which property set declaration to use (for example, to send different parameters to the same report)
   toolTip       | tooltip help to be displayed for the button
   visible       | whether the action button is visible
-
-_View declaration Action properties_
 
 ![Action declaration](../assets/images/views/image133.png "Action declaration including _default_, _custom_ and _report_ actions")
 
