@@ -268,11 +268,11 @@ named corresponding to the document, for example:
 
 ![](../assets/images/bizlets/extension-class-location.png "Location and naming of an extension class within the document package")
 
-#### Preparing values for display
+### Preparing values for display
 
 Where values need to be prepared or modified for display, there are a number of options about how to proceed that further clarify the distinction between domain events, Bizlet overrides and Extensions classes.
 
-##### Default values
+#### Default values example
 
 To set a default value for an attribute (rather than null) when the bean is created you can set the default value when declaring the attribute:
 ```xml
@@ -328,7 +328,7 @@ You can avoid this prompt (if appropriate) by clearing the _bean.originalValues(
 
 We suggest for literal values, using the *<defaultValue>* method is preferred because it both more clearly describes the domain concept and also means less developer code to manage.
 
-##### postLoad
+#### Calculated value example
 
 You can override the _postLoad()_ Bizlet method to change attribute values after the bean is retrieved from the persistent store/database.
 
