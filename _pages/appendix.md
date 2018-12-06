@@ -43,13 +43,13 @@ Where an instance has already been configured, to deploy a new application versi
 
 If the server has multiple Skyve application deployments, you can replace one of these without impacting on other deployments by signalling an undeployment and deployment as follows:
 
-To undeploy, create an `myApplication.war.undeploy` file in the `wildfly/standalone/deployment/` folder corresponding to the name of your application (an empty text file with that name is all that is required), for example `myApplication.war.undeploy`. After approximately 30s, Wildlfly will replace this file with a file named `myApplication.war.undeployed`. 
+To undeploy, create an `myApplication.war.undeploy` file in the `wildfly/standalone/deployment/` folder corresponding to the name of your application (an empty text file with that name is all that is required). After about a minute, Wildlfly will replace this file with a file named `myApplication.war.undeployed`. 
 
-To redeploy, create a `myApplication.war.dodeploy` file in the `wildfly/standalone/deployment/` folder corresponding to the name of your application (an empty text file with that name is all that is required). After approximately 30s, Wildfly will replace this file with `myApplication.war.isdeploying` and once deployment is successful, Wildfly will replace this with either `myApplication.war.deployed` (if successful) or `myApplication.war.failed` (if unsuccesful).
+To redeploy, create a `myApplication.war.dodeploy` file in the `wildfly/standalone/deployment/` folder corresponding to the name of your application (again - an empty text file with that name is all that is required). Wildfly will replace this file with `myApplication.war.isdeploying` and once deployment is successful, Wildfly will replace this with either `myApplication.war.deployed` (if successful) or `myApplication.war.failed` (if unsuccesful).
 
 See [Configuring Wildfly](#configuring-wildfly) for more detailed Wildfly setup 
-instructions. Additional steps may be required for single sign-on configuration, 
-and the creation of service user accounts, SPNs and port configuration as required.
+instructions. Additional steps are required for Single Sign-On configuration, 
+the creation of service user accounts, SPNs and port configuration.
 
 ## Installing and configuring the Skyve Development Environment
 

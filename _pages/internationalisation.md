@@ -10,21 +10,23 @@ sidebar:
 
 ## Internationalisation and language support
 
-Skyve supports building apps for local languages, including both left-to-right and right-to-left lanagues, as well as building applications for multiple languages (internationalisation)
+Skyve supports building apps for local languages, including both left-to-right and right-to-left lanagues, as well as building applications for multiple languages (internationalisation).
 
 Skyve metadata declarations can include UTF-8 characters and applications can store UTF-8 data (provided the database chosen by the developer is configured correctly).
 
-Skyve provides a basic internationalisation resource file as a starting point for non-English usage. The file is named according to the ISO 639-1 two-letter language code in the `project/resources` folder.
+![Example Arabic with right-to-left](../assets/images/customers/arabic-detail.png "Example Arabic view with right-to-left")
+
+Skyve provides a basic internationalisation resource file as a starting point for non-English usage. The file is named according to the ISO 639-1 two-letter language code and placed into the `project/resources` folder.
+
+e.g. `i18n_ar.properties` 
 
 ![Location of resource files](../assets/images/internationalisation/location-of-language-resource-files.png "Location of resource files")
 
-The resource file contains key value pairs for the basic fixed Skyve messages, however you can expand these files for your own tokens (tokens you declare in your application metadata).
+The resource file contains key value pairs for the basic fixed Skyve messages, however you can add your own tokens (tokens you declare in your application metadata).
 
 ### Setting a default language for a customer
 
-Internationalisation and language support can also be specified by declaring the customer _language_ attribute.
-
-![Example Arabic with right-to-left](../assets/images/customers/arabic-detail.png "Example Arabic view with right-to-left")
+It is often the case that a business operates in one (default) language irrespective of the locales of their users and so Skyve allows you to declare the language for a customer.
 
 To set the default language for a customer, include the language setting as follows (in this example, "ar"=Arabic).
 
@@ -60,7 +62,7 @@ jdbc:mysql://myServer:3306/myDatabase?useUnicode=true&amp;characterEncoding=UTF-
 
 ### Local language support
 
-You can use UTF-8 characters for display attributes in Skyve metadata
+You can use UTF-8 characters for display attributes in Skyve metadata.
 
 ![Local language support](../assets/images/internationalisation/local-language.png "Local language support")
 
