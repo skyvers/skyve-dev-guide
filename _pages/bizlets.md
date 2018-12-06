@@ -221,7 +221,7 @@ Or use the Binder.formatMessage() message as follows:
 
 To read more about the Binder utility class, see [Utility Classes](./../_pages/utility_classes.md "Utility Classes"). 
 
-### Extension classes
+## Extension classes
 
 Skyve allows for extension of the automatically generated domain classes for each document, 
 enabling developers to extend default skyve code generation.
