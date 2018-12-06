@@ -72,7 +72,7 @@ Using this approach you can mix languages on the same view.
 
 ### Building apps for multiple languages
 
-To create an application which is available in more than one language, you can use the token-replacement feature to add tokens for the metadata declaration and matching key-value pairs in internationalisation resource files.
+To create a true international application, you can use the traditional token-replacement approach - add tokens for the metadata declaration and matching key-value pairs in internationalisation resource files.
 
 We suggest using the naming convention _module.document.attribute(.property)_ for your tokens, as shown.
 
