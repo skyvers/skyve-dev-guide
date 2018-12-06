@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Deploying a Skyve Application
+## Deploying a Skyve application
 
 Skyve builds applications as a single web archive (`.war`) folder, containing the application metadata and Skyve platform components. By default, Skyve `.war` folders are deployed 'exploded' or 'unzipped'.
 
@@ -22,7 +22,7 @@ myApplication-ds.xml
 myApplication.json
 ```
 
-Where 
+where 
 * `myApplication.war` is the self-contained web archive containing application metadata and Skyve platform libraries
 * `myApplication-ds.xml` is the datasource file containing the jdbc connection string and credentials
 * `myApplication.json` is the instance-specific settings file, containing all of the settings specific to the particular instance.
@@ -51,7 +51,7 @@ See [Configuring Wildfly](#configuring-wildfly) for more detailed Wildfly setup
 instructions. Additional steps are required for Single Sign-On configuration, 
 the creation of service user accounts, SPNs and port configuration.
 
-## Installing and configuring the Skyve Development Environment
+## Installing and configuring the Skyve development environment
 
 These instructions describe the process required to install and configure the 
 development environment for Skyve. These instructions assume that you are 
@@ -333,7 +333,7 @@ Note that
 * You need to manually remove the previous `myApplication.war` if you didn't in the preparation stage. 
 * If you didn't rename the previous `myApplication.json` and `myApplication-ds.xml`, you should these files to avoid confusion (for example if the datasource name is the same for both the old `myApplication-ds.xml` and `tax_management-ds.xml`).
 
-## Example Deployment Instructions with Single Sign-on
+## Example deployment instructions for Single Sign-on
 
 The following steps are to install an instance of XXX onto a vanilla
 Windows 10.
@@ -421,10 +421,10 @@ if error - check that you have an account in XXX, check
 `C:\wildfly\standalone\log\server.log` to see your user
 principal is being recognised
 
-## Example Deployment Problems caused by problems in the .json file
+## Example deployment problems
 Key problems in the `myApplication.json` configuration file block your project from deploying successfully and sometime yield non-obvious errors or stack output. The following provides three common examples.
 
-### Example Output for incorrect Content folder
+### Example output for incorrect content folder
 Incorrect content folder - the folder doesn't exist:
 
 ```json
@@ -528,9 +528,9 @@ Attempting to deploy in this case yields results such as the following:
 15:48:03,817 ERROR [stderr] (ServerService Thread Pool -- 68) 	... 25 more
 ```
 
-### Missing comma or badly formed .json file
+### Missing comma or badly formed json file
 
-Missing comma or badly formed .json file:
+Missing comma or badly formed json file:
 
 ```json
 	// bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
@@ -579,11 +579,11 @@ Caused by: java.lang.ClassCastException: java.lang.Long cannot be cast to java.u
 	... 8 more
 ```
 
-## Installing Skyve in Production
+## Installing Skyve in production
 
 The following are our personal instructions for deploying a Skyve application in a production environment. You may need to tweak these to suit your personal situation, and feel free to submit a pull request to update these instructions if you find something better or they become out of date.
 
-### Wildfly Standalone Production Install (Windows)
+### Wildfly standalone production install (Windows)
 
 These instructions apply to a standalone server installation of Wildfly 10 on Windows server connecting to Microsoft SQL Server.
 
@@ -735,7 +735,7 @@ then check that your JNDI name in the standalone.xml (`<module-option name="dsJn
   <datasource jndi-name="java:/{projectNameDB}" pool-name="skyve" enabled="true" jta="true" use-ccm="false">
   ```
 
-### Wildfly Bitnami Production Install (Windows)
+### Wildfly Bitnami production install (Windows)
 
 These instructions apply to Bitnami Wildfly 10 stack installation on Windows server modified to connect to Microsoft SQL Server.
 	
@@ -839,7 +839,7 @@ ProxyPassReverse / http://localhost:8080/
 * Start the wildfly service and make sure the datasources deploy successfully
 * Deploy `{projectName}.war`
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#deploying-a-skyve-application)**
 
 ---
 **Previous [Automated Unit Testing](./../_pages/automated-unit-testing.md)**

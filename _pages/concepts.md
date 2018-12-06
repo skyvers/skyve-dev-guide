@@ -9,7 +9,7 @@ sidebar:
 ---
 ## Concepts
 
-### Rendering Modes
+### Rendering
 Skyve has two rendering modes to suit different user agents/device types. 
 Skyve applications will (by default) automatically switch to use the most suitable
 rendering for the user agent or device type it detects.
@@ -42,7 +42,7 @@ each time the domain model metadata is modified.
 The aim of Skyve is to allow, as far as possible, the entire domain
 model to be declared in metadata rather than code.
 
-### Module and Document
+### Module and document
 
 Modules are self-contained reusable segments of application capability.
 In Skyve, modules are presented to the user as separate accordion menus.
@@ -79,12 +79,12 @@ Skyve validates application metadata to ensure types are consistently
 and correctly applied throughout the application, while Java compilation
 ensures that typing is correctly implemented in developer code.
 
-### List and Edit
+### List and edit
 
 Most applications present data in both list and detail views. Skyve
 assumes this fact and provides rich features for each type of view.
 
-#### List Views
+#### List views
 
 Typically, users of applications begin with a list view of all document
 instances and then select a document instance to edit. This pattern of
@@ -137,7 +137,7 @@ large data sets:
 -   Simple Filter line, and
 -   Advanced Filter constructor.
 
-#### Simple Filter line
+#### Simple filter line
 
 The simple filter lines provides rapid ability to filter the list of
 data accessible from List View. Driven from the underlying metadata
@@ -163,7 +163,7 @@ controls, or by using the clear filter tool
 
 ![](../assets/images/concepts/image14.png)
 
-#### Advanced Filter constructor
+#### Advanced filter constructor
 
 The Advanced Filter constructor operates in three styles:
 
@@ -265,7 +265,7 @@ The advanced filter is applied using the filter tool
 ![](../assets/images/concepts/image15.png) which is available in the construction
 area.
 
-#### Edit Views
+#### Edit views
 
 Edit views provide detailed access to document attributes within the
 context of the document instance.
@@ -425,7 +425,7 @@ automatically limits all user interactions to data within the same
 customer context (except where developers intentionally use insecure SQL
 methods).
 
-### Customer Overriding
+### Customer overriding
 
 Any individual piece of Skyve application metadata can be overridden for
 tenants within a multi-tenant environment, enabling comprehensively
@@ -449,7 +449,7 @@ _(By vanilla module, we mean the module which is in the main module package rath
 
 Each customers get their corresponding properties and any behaviour in the overridden package uses the overridden class.
 
-### Role Privileges
+### Role privileges
 
 Skyve allows developers to specify application security roles in terms
 of access permissions on a per-document basis.
@@ -465,7 +465,7 @@ If users are assigned multiple roles, their access to documents
 represents the highest level of access across all roles assigned to
 them.
 
-### Document Scoping
+### Document scoping
 
 Skyve allows document privileges to be scoped either as *Global* `(G)`,
 *Customer* `(C)`, *Data Group* `(D)` or *User* `(U)` level.
@@ -481,9 +481,9 @@ The use of insecure SQL bypasses the inbuilt scoping of Skyve, so
 developers using insecure SQL must take responsibility to ensure they
 respect data contexts.
 
-### Data Group
+### DataGroup
 
-Data Groups roughly correspond to the concept of a department or
+DataGroups roughly correspond to the concept of a department or
 business group, where most users only interact with data relevant to
 their organisational context, but administration/managing users work
 with a federated collection of the organisation's data.
@@ -567,7 +567,7 @@ Skyve will automatically include the Java *enum* in the generated domain
 classes and provide a combo with the values by default wherever
 required.
 
-### Domain Values and Types
+### Domain values and types
 
 Domain values are groups of values applicable for a particular
 situation.
@@ -601,7 +601,7 @@ Variant domain values are guaranteed to be evaluated each request-response cycle
 Dynamic domain values are guaranteed to be evaluated as for variant values, except
 that the bean is provided to the method for value generation.
 
-#### Performance Implications of Domain Types
+#### Performance implications of domain types
 
 *Constant* domains are generated into *Javascript* code (for Web 2) and
 into *html* (for Web 1). A *constant* domain represents the least
@@ -669,7 +669,7 @@ icon, the application will specify the icon filename within a resource
 context. The absolute location of the file will be resolved at run-time
 depending on the user's context.
 
-#### Resource Hierarchy
+#### Resource hierarchy
 
 Skyve provides icons for default action buttons - *Add*, *Save*,
 *Cancel*, *Delete* etc. A customer may require a different icon set and
@@ -714,7 +714,9 @@ validation rules specified in metadata and *Bizlet* code.
 Bizport is fully extensible, and developers can override and extend the
 *Bizport* behaviour as required.
 
-**[⬆ back to top](#contents)**
+For more information, see [Bizport](./../_pages/bizport.md "Bizport")
+
+**[⬆ back to top](#concepts)**
 
 ---
 **Next [Security, Persistence and Access control](./../_pages/security-persistence-and-access-control.md)**  

@@ -40,7 +40,7 @@ some tips to get you started.
   visible       | whether the action button is visible 
  
 
-### Custom Reports
+### Custom reports
 
 You can of course use any reporting solution to create reports on your SQL data base, however to integrate
 reporting into your Skyve application, by default, Skyve allows inclusion of Jasper reports.
@@ -91,7 +91,7 @@ catered for.
 
 Alternatively, a report format can be specified in the report action declaration, avoiding the need for a user to select a format.
 
-#### Automatic Customer Resource Parameter
+#### Automatic customer resource parameter
 
 Skyve automatically passes a contextual parameter named *RESOURCE\_DIR*
 containing the location of the customer resource folder to the reporting
@@ -124,7 +124,7 @@ the basis for grouped detail rows, as with SQL data sources.
 
 ![Object data source report](../assets/images/reports/image141.png "Example report query using the object data source declared in iReport")
 
-### Ad-hoc Reports
+### Ad-hoc reports
 
 Ad-hoc reports, created by the user from the *listGrid* *export table
 data* function tool, are created on-the-fly by Skyve.
@@ -133,12 +133,12 @@ The report title will be the query *displayName*. Ad-hoc report
 definitions are generated in code and passed directly to the reporting
 engine.
 
-### Offline Reporting Jobs
+### Offline reporting jobs
 
 Jobs can be declared to create reports offline, including bulk report
 generation. Jobs are described in the next section.
 
-#### Skyve Report Designer
+#### Skyve report designer
 
 Skyve provides an automated report designer which generates a .jrxml template file. 
 
@@ -149,7 +149,7 @@ The report designer is available in the DevOps tools in the admin module->devOps
 This will create a Jasper template based on an existing view, document or query.
 
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#reports)**
 
 ---
 **Next [Jobs](./../_pages/jobs.md)**  

@@ -12,7 +12,7 @@ sidebar:
 
 Skyve offers the following action types:
 
-  Action Type | Description
+  Action type | Description
   ----------- | -----------------------------------------------
   action      | a custom action created by the developer which implements org.skyve.metadata.controller.ServerSideAction
   add         | the implicit Skyve action to add a member to the dataGrid/collection (deprecated)
@@ -107,7 +107,7 @@ OnChange events can trigger custom actions using the `<server/>` tag.
 _Example: the combo for *orgName* will call the custom action *UpdateModule* when changed_
 
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#actions)**
 
 ---
 **Next [Reports](./../_pages/reports.md)**  

@@ -107,7 +107,7 @@ If a query name is not supplied Skyve will generate a default or
 *generic* query which will include all columns for all document
 attributes.
 
-### Generic Queries
+### Generic queries
 
 When Skyve generates a query (in the situation where a query is required
 but none has been specified), this *generic* query will contain all
@@ -116,7 +116,7 @@ for all references. Columns will be in the order of document attributes
 (as specified in the *document.xml*) with ascending ordering applied to
 the first column. All columns will be non-editable inline in the list.
 
-### Declaring Queries
+### Declaring queries
 
 Skyve metadata queries use object references, rather than SQL.
 
@@ -130,9 +130,9 @@ listGrid will zoom to the *driving document*.
 
 ![Query based list](../assets/images/modules/image44.png "Query based list")
 
-#### Query Column Definition
+#### Query column definition
 
-  Query Column Attributes | Description
+  Query column attributes | Description
   ----------------------- | -----------
   binding                 | The document value to be shown in the query column.<br>A compound binding can be used where the value to be shown is in a related document.
   displayName             | An alias for the query column.<br>If no displayName is specified in the query, the list column title will be the displayName specified for the document attribute.
@@ -157,7 +157,7 @@ attribute associations and collections. When used in this way, the query
 determines eligible references for membership in the association or
 collection.
 
-#### Queries for Reference Attributes
+#### Queries for reference attributes
 
 If a query is specified for an association attribute, Skyve will use
 that query for association selections in the application user interface.
@@ -213,7 +213,7 @@ developer code (except for insecure SQL). The benefit of this is that
 developer code does not have to handle security issues and therefore the
 developer is not able to make inadvertent security holes.
 
-#### Document Scope
+#### Document scope
 
 While document privileges define what type of activities a role may
 perform on a document, the document scope defines which document
@@ -274,7 +274,7 @@ If a user is given both roles, the privileges are added and result in
 Administrator users, if they also require personal preferences, are
 assigned both roles.
 
-### Role Documentation
+### Role documentation
 
 Role definition can include documentation within a &lt;doc&gt; tag which
 is available to the application and to the documentation generation
@@ -410,7 +410,7 @@ While a horizontal behaviour is declared as follows:
 
 For more information and other options refer to the PrimeFaces documentation.
 
-### Module Documentation
+### Module documentation
 
 Module definition can include detailed documentation about the module
 within the *&lt;doc&gt;* tag. This documentation is used by the
@@ -418,7 +418,7 @@ documentation generation module (Doctor).
 
 ![Module documentation](../assets/images/modules/image52.png "Module documentation")
 
-### Overriding Modules
+### Overriding modules
 
 Module definitions can be overridden to provide a bespoke experience of
 the application.
@@ -443,7 +443,7 @@ simply the components that differ. This is because the module override
 can be subtractive, by not including elements contained within the
 generic module.
 
-### Java Implementation
+### Java implementation
 
 Java classes are contained within the domain folder situated within the
 module package.
@@ -463,7 +463,7 @@ should not be modified in any way by developers. However, inspection of
 the domain classes can be a useful process to analyse validation
 problems within the module.
 
-### The Skyve Administration admin Module
+### The Skyve administration (admin) module
 
 The Skyve admin (administration) module is a module provided as part of the Skyve platform, however
 it is able to be customised if required according to the methods described above (as for any other 
@@ -496,7 +496,7 @@ however for specific details of privileges, view the admin module xml declaratio
 
 ![Admin privileges by document](../assets/images/modules/image31b.png "Admin module privileges by document")
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#modules)**
 
 ---
 **Next [Documents](./../_pages/documents.md)**  

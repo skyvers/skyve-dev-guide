@@ -49,7 +49,7 @@ Lifecycle event timing is as follows:
 
 _Bean level events_
 
-#### User Interface level lifecycle
+#### User interface level lifecycle
 
   Event | Description
   ----- | -----------
@@ -61,7 +61,7 @@ _Bean level events_
 
 _User Interface level events_
 
-### Implicit Actions
+### Implicit actions
 
 Skyve provides a number of implicit actions which do not require
 developer code.

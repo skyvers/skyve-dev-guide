@@ -79,7 +79,7 @@ because the source data was deleted. Even though your workbook may have
 UUIDs in the *bizId* columns, these UUIDs will not be recognised and new
 UUIDs will be created as the data is imported.
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#bizport)**
 
 ---
 **Next [WILDCAT Conversion Tool](./../_pages/wildcat-conversion-tool.md)**<br>

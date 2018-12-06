@@ -7,7 +7,7 @@ sidebar:
   title: "Index"
   nav: docs
 ---
-## Exception Handling
+## Exception handling
 
 Skyve provides powerful error management capabilities extending general
 Java Exception handling.
@@ -51,7 +51,7 @@ Developer API code may extend the native lifecycle event (validate
 method) or be handled in other lifecycle event extensions (including
 preExecute events).
 
-### Concurrent Multiple Validation
+### Concurrent multiple validation
 
 Skyve supports concurrent multiple validation in the user interface
 display.
@@ -140,7 +140,7 @@ throws Exception {
 _The BeanValidator utility class provides access to the native
 Validation capability_
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#exception-handling)**
 
 ---
 **Next [Building Applications](./../_pages/building-applications.md)**  

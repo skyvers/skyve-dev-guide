@@ -121,7 +121,7 @@ Note that if you only ever want to use a single customer, you can specify a defa
 
 ![Signing in with a default customer](../assets/images/customers/skyve_default_customer_sign_in.png "Signing in with a default customer")
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#customers)**
 
 ---
 **Next [Modules](./../_pages/modules.md)**  

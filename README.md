@@ -34,7 +34,7 @@ Skyve supports spatial concepts natively with MySQL, SQL Server and H2 - Oracle 
 
 For more details on the framework and its capabilities, please check out the platform homepage - [www.skyve.org](https://skyve.org/).
 
-## Note to Readers
+## Note to readers
 
 This reference guide assumes familiarity with Web technology and
 architecture, Java EE concepts, the Java language and the use of common
@@ -59,7 +59,7 @@ The Skyve Cookbook is available at [github.com/skyvers/skyve-cookbook](https://g
 
 The skyve project contains a Readme at [github.com/skyvers/skyve](https://github.com/skyvers/skyve) with useful information for getting started, configuring Spring security and other steps to get you started.
 
-## Architectural Overview
+## Architectural overview
 
 Skyve is an open-source low-code Enterprise Platform both for
 development and runtime.
@@ -161,7 +161,7 @@ consistency.
 Skyve is developed in Java and integrates a range of open-source
 frameworks including Hibernate and Jasper reports.
 
-### General Approach and Design Principles
+### General approach and design principles
 
 The Skyve Enterprise Platform was created in reaction to problems
 experienced with applications built using traditional approaches, and
@@ -170,7 +170,7 @@ problems.
 
 Skyve is created from the following design principles:
 
-  Principle | Description | In Simple Terms
+  Principle | Description | In simple terms
   --------- | ----------- | ----------------
   Parsimony | Only the minimum amount of information required to declare a system should be required to build the system. <br>This principle implies the provision of implicit functionality and features - but with the ability for developers to override these without restriction where required. | Developers shouldn't need to spend effort to create aspects of the system which are implicit.
   Authority | Each element of system declaration should be authoritative.<br>This principle implies that each element of declaration must be in only one location. | Developers should be able to declare each system concept once, without the possibility of contradiction or confusion.
@@ -236,7 +236,7 @@ That way, searches for identifiers within the IDE workspace won't
 inadvertently miss references within SQL artefacts, supporting the
 common tasks of refactoring, deprecation and change impact analysis.
 
-### Multi-tenant Mass-Customisation
+### Multi-tenant mass-customisation
 
 Skyve supports multi-tenant applications concepts out of the box- when a
 Skyve application is created, it is ready to support multiple customers
@@ -279,7 +279,7 @@ interfaces are generated on-the-fly using Web 2.0 with piecemeal
 downloads for improved performance. Web, Mobile/PDA or exe type clients
 can be generated without additional development effort.
 
-### Open-source Inclusions
+### Open-source inclusions
 
 Skyve takes advantage of a number of open-source and LGPL frameworks
 which are either distributed with the platform, required to be present

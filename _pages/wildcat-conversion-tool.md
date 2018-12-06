@@ -45,7 +45,7 @@ Migration | WCT either migrates the data directly from the source DB to the dest
 
 _Detailed Conversion Process and Artefacts_
 
-### Development Approach and Roundtripping
+### Development approach and roundtripping
 
 Generally, a number of cycles are completed to establish an application
 baseline.
@@ -82,7 +82,7 @@ Data loading from legacy tuples to new tuples and data cleansing tasks
 need to be recorded to be re-run after the final data migration and
 go-live, but don't impact WTC artefacts.
 
-### Report Conversion
+### Report conversion
 
 WCT includes capability for conversion of MS Access report templates to
 iReport template files, including basic conversion of MS Access via
@@ -93,7 +93,7 @@ SQL from MS Access to SQL in the selected destination dialect.
 Report conversion is a separate process and can happen in parallel with
 application development and Skyve round-tripping.
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#wildcat-conversion-tool)**
 
 ---  
 **Next [Automated Unit Testing](./../_pages/automated-unit-testing.md)**<br>

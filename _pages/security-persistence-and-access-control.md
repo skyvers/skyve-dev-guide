@@ -1,15 +1,15 @@
 ---
-title: "Security, Persistence and Access control"
+title: "Security, persistence and access control"
 permalink: /security-persistence-and-access-control/
-excerpt: "Security, Persistence and Access control"
+excerpt: "Security, persistence and access control"
 toc: true
 sidebar:
   title: "Index"
   nav: docs
 ---
-## Security, Persistence and Access control
+## Security, persistence and access control
 
-### Transaction Control
+### Transaction control
 
 Skyve implements consistent transaction control pervasively and provides
 a Persistence utility class for specific transaction management where
@@ -51,7 +51,7 @@ does not match the persisted version value Skyve determines that another
 conversation has modified the record, and therefore the current
 conversation cannot commit without loss of information.
 
-#### Authorisation model - Summary of Options and Discussion
+#### Authorisation model - summary of options and discussion
 
 There are three common authorisation models:
 
@@ -59,7 +59,7 @@ There are three common authorisation models:
 * Trusted subsystem model
 * Hybrid model
 
-***Impersonation Model***
+***Impersonation model***
 
 The impersonation model offers the most granular authorisation, however
 “the approach suffers from poor application scalability because
@@ -107,7 +107,7 @@ persistence layer. This model was selected for GPS because:
 
 ![Trusted subsystem model](../assets/images/security-persistence-and-access-control/image31.png "Trusted subsystem model that supports database connection pooling")
 
-***Hybrid Model***
+***Hybrid model***
 
 Under the hybrid model, a combination of both of the above models is
 implemented. Skyve does not adopt this method natively because:
@@ -128,7 +128,7 @@ Additionally, Skyve supports sophisticated declarative group, row and
 column level security modelling and enforces these declarations
 pervasively and consistently throughout any Skyve application.
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#security-persistence-and-access-control)**
 
 ---
 **Next [Exception Handling](./../_pages/exception-handling.md)**  

@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Automated Unit Testing
+## Automated unit testing
 
 
 Along with the ability to generate domain files for [Documents](./../_pages/documents.md), Skyve also generates CRUD unit tests against these documents as well as tests for any defined actions.
@@ -137,7 +137,7 @@ For example:
 Contact c = new DataBuilder().fixture(FixtureType.crud).build(Contact.MODULE_NAME, Contact.DOCUMENT_NAME);
 ```
 
-#### Fixture Factories
+#### Fixture factories
 
 Factories are useful for customising a DataBuilder to specify specific test data for a certain fixture type, or if the randomly selected data from the DataBuilder does not pass validation, or for defining different fixtures for different types, e.g. crud vs sail. By convention, a document can have a corresponding factory by defining a class called `<Document-Name>Factory`, similar to Bizlets. DataBuilder will find these classes when it needs to construct an instance of the document. It looks for public static or instance methods that take no arguments and returns the domain object type required. If there is more than one candidate method that can be called, DataBuilder will randomly call one of the methods.
 
@@ -171,7 +171,7 @@ Any combination of these can be provided, but if `testAction` is set to false, `
 
 After annotating a Factory in the document package of the module you are testing, you will need to run generate domain again for Skyve to detect the factory and update the generated tests. Any skipped domain or action tests should be removed from the generated test directory automatically. If they aren't, check the output log file from generate domain for any warnings or errors.
 
-#### Data Files
+#### Data files
 `DataBuilder()` will construct random data based on the metadata type of the attribute, e.g. random text or integers. It will also look at format masks and validators to attempt to create compliant tests values. However, some fields require more sensible test data, e.g. a phone number field, or a suburb name. If you would like to seed an attribute with specific random data, Skyve will automatically look in the `/src/test/resources/data` directory and read any text file whose filename matches the attribute name.
 
 For example, a firstName field would look for `/src/test/resources/data/firstName.txt`. If it finds this file, it will randomly select a value from its content, where each value should be separated by a line break. Example test files are included with new projects.
@@ -242,7 +242,7 @@ Let's break this test down:
 * we invoke the method we are testing
 * we then assert the expected outcomes
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#automated-unit-testing)**
 
 ---
 **Next [Appendix](./../_pages/appendix.md)**<br>

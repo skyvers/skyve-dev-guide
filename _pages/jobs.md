@@ -32,7 +32,7 @@ executed.
 Scheduling Jobs from the *admin* module requires the *JobMaintainer*
 role.
 
-### Job Classes
+### Job classes
 
 Job classes must extend the `org.skyve.job.Job` abstract class. Custom job code is located in the `execute()` method.
 
@@ -88,7 +88,7 @@ comprehensive security model can be enforced.
 Developers must consider whether a user context will have sufficient
 privileges for the Job to be executed.
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#jobs)**
 
 ---
 **Next [Utility Classes](./../_pages/utility-classes.md)**  
