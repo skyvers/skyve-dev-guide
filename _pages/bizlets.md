@@ -206,17 +206,17 @@ The advantage of this approach is that application metadata display values can b
 
 To provide a value-specific message, access the bean value directly:
 ```java
-			sb.append("You can't add a ").append(document.getSingularAlias());
-			sb.append(" for the future ").append(document.getAttribute(WeeklyTimesheet.weekEndingDatePropertyName).getDisplayName());
-			sb.append(" date");
-			sb.append(bean.getWeekEndingDate());
+	sb.append("You can't add a ").append(document.getSingularAlias());
+	sb.append(" for the future ").append(document.getAttribute(WeeklyTimesheet.weekEndingDatePropertyName).getDisplayName());
+	sb.append(" date");
+	sb.append(bean.getWeekEndingDate());
 ```
 
 Or use the Binder.formatMessage() message as follows:
 ```java
-		sb.append("You can't add a ").append(document.getSingularAlias());
-		sb.append(" for the future ").append(document.getAttribute(WeeklyTimesheet.weekEndingDatePropertyName).getDisplayName());
-		sb.append(Binder.formatMessage(customer, " date {" + WeeklyTimesheet.weekEndingDatePropertyName + "}", bean));
+	sb.append("You can't add a ").append(document.getSingularAlias());
+	sb.append(" for the future ").append(document.getAttribute(WeeklyTimesheet.weekEndingDatePropertyName).getDisplayName());
+	sb.append(Binder.formatMessage(customer, " date {" + WeeklyTimesheet.weekEndingDatePropertyName + "}", bean));
 ```	
 
 To read more about the Binder utility class, see [Utility Classes](./../_pages/utility_classes.md "Utility Classes"). 
@@ -258,8 +258,9 @@ public class ControlPanelExtension extends ControlPanel {
 		return Boolean.valueOf(UtilImpl.BIZLET_TRACE);
 	}
 ```
-
-_Example of convenience and overridden methods in an Extension class_
+<figure>
+  <figcaption>Example of convenience and overridden methods in an Extension class</figcaption>
+</figure>
 
 Domain generation uses the extension class (if it exists).
 
@@ -276,11 +277,11 @@ Where values need to be prepared or modified for display, there are a number of 
 
 To set a default value for an attribute (rather than null) when the bean is created you can set the default value when declaring the attribute:
 ```xml
-		<decimal5 name="totalBillableHours">
-			<displayName>Total Billable (Hours)</displayName>
-			<defaultValue>0</defaultValue>
-			<converterName>Decimal5TimeDuration</converterName>
-		</decimal5>
+	<decimal5 name="totalBillableHours">
+		<displayName>Total Billable (Hours)</displayName>
+		<defaultValue>0</defaultValue>
+		<converterName>Decimal5TimeDuration</converterName>
+	</decimal5>
 ```		
 
 The generated domain class (created by calling the *GenerateDomain* target) will construct an appropriately typed value as follows:
@@ -399,7 +400,7 @@ In this situation (i.e. unless there are extenuating circumstances), overriding 
 * the _overdueDays_ will be recalculated whenever it is viewed or used in subsequent calculation 
 
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#bizlets)**
 
 ---
 **Next [Views](./../_pages/views.md)**  
