@@ -154,7 +154,7 @@ public void validate(WeeklyTimesheetExtension bean, ValidationException e) throw
 
 In the above example, if the validation fails, the user will be prompted with a modal dialog containing the message as supplied, because the *Message* was created without a binding. 
 
-![Modal validation message](../asset/images/bizlets/validation_modal_error_example.png "Modal validation message") 
+![Modal validation message](../assets/images/bizlets/validation_modal_error_example.png "Modal validation message") 
 
 Supplying a binding to the *Message* will direct the user to the attribute which requires attention. 
 
