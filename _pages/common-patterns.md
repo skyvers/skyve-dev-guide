@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Common Patterns
+## Common patterns
 
 ### Singleton documents
 There are a variety of situations where (from the User perspective) there is only ever 1 record they deal with.
@@ -67,7 +67,7 @@ Alternatively, if the singleton document is transient and not persisted, then th
 rely on the implicit creation of a new bean, and override the _newInstance()_ to set bean default values.
 
 
-### Identify Current User Contact
+### Identify the current user's Contact
 
 To identify the current user in Bizlet code, instantiate the Persistence
 class. The Persistence class provides the *getUser*() method.
@@ -86,17 +86,25 @@ public static Contact getCurrentUserContact() throws MetadataException, DomainEx
 }
 ```
 
-_Example code to retrieve the current user contact_
-
 In the example above, the method first obtains the Persistence
 mechanism, then the current user, the customer context in which that
 user is logged in, and the application module and document of the
-Contact to be retrieved.
-
-When the bean is retrieved from the persistence layer, the bean is
+Contact to be retrieved. When the bean is retrieved from the persistence layer, the bean is
 correctly typed.
 
-### Identify if Current User has Role
+Note the distinction here between *org.skyve.metadata.user.User* and *modules.admin.domain.User*
+
+The Contact is declared in the application domain - in the admin module, and *modules.admin.domain.User* is similarly the modules.admin.domain.User is part of the declared application, not the Skyve platform itself.
+
+*org.skyve.metadata.user.User* is a different type used internally by the Skyve platform and Persistence. 
+
+An alternative to this approach is to use the convenience method provided in *ModulesUtil* as follows:
+```java
+	Contact contact = ModulesUtil.currentAdminUser().getContact();
+```	
+
+
+### Identify if current User has a role
 
 ```java
 @Override
@@ -110,7 +118,7 @@ _Example of isUserInRole_
 The above example establishes whether the current user has the role of
 TimesheetManager in the time module.
 
-### Save a Document Instance
+### Save a document instance
 
 To save a document instance, you can identify the module and document
 of the bean, or optionally save any subclass of `PersistentBean` directly.
@@ -130,7 +138,7 @@ bean = persistence.save(bean);
 
 _Example code to save a bean_
 
-### Instantiate a New Document Instance
+### Instantiate a new document instance
 
 ```java
 ContactInteraction interaction = ContactInteraction.newInstance();
@@ -140,7 +148,7 @@ _Example code to instantiate a new document instance_
 
 Note that the developer can override the default Skyve *newInstance()* behaviour in the corresponding *Bizlet* class.
 
-### Building a Variant Domain List
+### Building a variant domain list
 
 ![Create a variant domain set](../assets/images/common-patterns/image150.png "Example code to create a variant domain set")
 
@@ -152,7 +160,7 @@ automatically by specifying a relationship and relying on the
 defaultQuery. However in some circumstances it may be useful to generate
 domain lists via code (as above).
 
-### Schedule an Offline Job
+### Schedule an offline Job
 
 Declare the Job within the `module.xml` file and the Job class
 (extending `org.skyve.job.Job`).
@@ -182,7 +190,7 @@ Note when scheduling a Job, the customer and user context must be
 established so that the job will run correctly within the specified
 security architecture.
 
-### Persist Scalar Values Without Traversing Bean Structure
+### Persist scalar values without traversing the bean structure
 
 Usually, when saving beans, Skyve traverses the entire structure of the
 bean to enforce specified validation rules. However for performance
@@ -203,7 +211,7 @@ for(Subscription sub : subsToUpdate) {
 
 _Example upsertBeanTuple()_
 
-### Retrieve and Iterate Through Beans
+### Retrieve and iterate through beans
 
 ```java
 DocumentQuery q = CORE.getPersistence().newDocumentQuery(FileCategory.MODULE_NAME, FileCategory.DOCUMENT_NAME);
@@ -217,7 +225,7 @@ for(FileCategory cat : categories) {
 
 _Example code to retrieve and iterate through a list of beans_
 
-### Singleton Documents (Parameter / Configuration Documents)
+### Singleton documents (user, parameter and configuration documents)
 
 A singleton document is a document of which there should only ever be
 one instance within the current scope or context.
@@ -264,7 +272,7 @@ from a list), the view should not offer the OK action as this implies
 "save and return to the list". The developer must consider whether each
 action is sensible in the particular context.
 
-### User-scoped Documents (Personal preferences Documents)
+### User-scoped documents (personal preferences documents)
 
 Create a singleton document (as described above), but additionally scope
 the document to User scope in the `module.xml`.
@@ -282,7 +290,7 @@ For example, a Timesheet module may have a User-scoped preference
 document allowing users to set their default task (which could be set
 during newInstance in the Timesheet *Bizlet* class).
 
-### Customise Document and Document Attribute Names
+### Customise document and document attribute names
 
 To customise document attribute names, place an override of the
 *document.xml* file into the customer package and modify the document
@@ -298,7 +306,7 @@ _Example of customer override of the Contact document, Bizlet and view_
 Validation will ensure that both the "vanilla" and overridden artefacts
 are consistent with the rest of the application module.
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#common-patterns)**
 
 ---
 **Next [Skyve Persistence Mechanisms](./../_pages/skyve-persistence-mechanisms.md)**  

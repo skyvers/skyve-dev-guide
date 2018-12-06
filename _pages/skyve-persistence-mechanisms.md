@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Skyve Persistence Mechanisms
+## Skyve persistence mechanisms
 
 The Skyve Enterprise Platform mandates support for a number of
 best-practice Web design features on every logical table within the
@@ -22,7 +22,7 @@ application persistence model including:
 -   Enterprise-wide consistent reference representation, and
 -   Collaborative record flagging.
 
-### Generic Naming Conventions
+### Generic naming conventions
 
 As a general principle Skyve adopts generic naming conventions wherever
 possible particularly with respect to mandated persistence mechanisms.
@@ -34,7 +34,7 @@ prefixed "biz".
 Skyve mandates the existence of the following named columns on all
 primary data rows in a Skyve managed database:
 
-Column Name | Purpose | Comments
+Column name | Purpose | Comments
 ------------|---------|----------
 bizId       | Enterprise wide unique identifier  | The use of UUID guarantees consistency and means no performance costs for assigning IDs, also means that IDs can be generated in external source applications without the need for re-keying when importing into a Skyve application store.
 bizVersion  | Optimistic lock concurrency control | Skyve compares the persisted version number at the time the bean is loaded with the version number when attempting to save. If the numbers are different, the bean has been changed by another conversation.
@@ -65,7 +65,7 @@ the semantic nature of each relationship.
 
 #### Ordering and bizOrdinal
 
-Column Name | Purpose   | Comments
+Column name | Purpose   | Comments
 ----------- | --------- | -----------
 bizOrdinal  | Generic collection ordinal position | bizOrdinal is used for implicit ordering where collections are declared "ordered".
 
@@ -86,7 +86,7 @@ data has bizOrdinals of 2,5,5 and 11 and there are only 4 rows, Skyve
 will still order them for presentation, but the next time the collection
 is saved, they will be reset to 0,1,2 and 3.
 
-### UUID Enterprise-level Guaranteed Uniqueness
+### UUID enterprise-level guaranteed uniqueness
 
 To guarantee enterprise-wide uniqueness, Skyve generally uses
 Universally Unique Identifier (UUID) for all key identifiers named
@@ -114,7 +114,7 @@ system ID can be placed into the bizId field, provided it will be unique
 in the table context under all circumstances and provided it is up to 36
 characters.
 
-### Optimistic Lock concurrency controls
+### Optimistic lock concurrency controls
 
 Skyve supports multi-conversation interactions allowing each user to
 maintain multiple conversational interactions with the application,
@@ -199,7 +199,7 @@ within that data group context. User-role combinations without a
 specified data group are interpreted as having authority to interact
 across data group contexts.
 
-## Configuring Skyve For A Specific DBMS 
+## Configuring Skyve for a specific DBMS 
 (e.g. mysql, mssql, oracle, postgres, h2 etc)
 
 ### Before you start
@@ -265,7 +265,7 @@ across data group contexts.
 4. For older versions of the demo (prior to Feb 2018), you'll need to run a bootstrap sql to insert your first user into the database. To do this follow the instructions as per Adding a setup user in [Chapter 6: Customers](./../chapters/customers.md)
 - for versions of Skyve after 1 Jan 2018, set the setup user in the .json file to log in the first time.
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#skyve-persistence-mechanisms)**
 
 ---
 **Next [Maven targets](./../_pages/maven-targets.md)**  

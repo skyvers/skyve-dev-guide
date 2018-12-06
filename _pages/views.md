@@ -41,7 +41,7 @@ Containers share basic properties:
 
 _Container properties_
 
-#### Autofit Behaviour
+#### Autofit behaviour
 
 Rendering behaviour is specific to browsers, however Skyve will attempt
 to render the view as declared. Unless pixel sizes are specified, Skyve
@@ -53,7 +53,7 @@ the view will render with scroll bars. Containers may overflow if the
 view definition doesn't adequately take account of the number and nature
 of items contained.
 
-Container | Description | Specific Properties | Example
+Container | Description | Specific properties | Example
 ----------|-------------|---------------------|----------
 hbox | Elements are laid out horizontally in the view and may contain other containers. | <li>border - whether a border is displayed<li>borderTitle - the text to be displayed as a border title <li> pixelMemberPadding - padding (in pixels) between members <li>pixelPadding - padding (in pixels) around all members <li> | ![](../assets/images/views/image94.png)
 vbox | Elements are laid out vertically in the view and may contain other containers. | <li>border - whether a border is visible <li> borderTitle - the text to be displayed as a border title <li>pixelMemberPadding - padding (in pixels) between members <li>pixelPadding - padding (in pixels) around all members | ![](../assets/images/views/image95.png)
@@ -168,7 +168,7 @@ will be displayed in bold type if the attribute is required.
   textArea | basic data entry field for long text<br><br>textArea provides a *wrap* property to control whether the contained text is word wrapped. |![](../assets/images/views/image119.png)
   textField | provides basic data entry for text attributes <br><br> *textField* responds to the type of the bound attribute, and will display converter hint if the value is null.<br><br>For *date* and *dateTime* types, a calendar selector is displayed.| ![](../assets/images/views/image120.png) <br> This example is a *textField* widget bound to a text type attribute. <br> ![](../assets/images/views/image121.png) <br> This example is a *textField* widget bound to a time attribute using the *HH\_MM* converter. <br> ![](../assets/images/views/image122.png) <br> This example is a *textField* widget bound to a *date* or *dateTime* attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.
 
-### OnChange Event Action (Client-side Events)
+### OnChange event action (client-side events)
 
 *OnChange* event actions can be defined for the change of value of
 widgets defined within a view.
@@ -209,7 +209,7 @@ limit rerendering to a specified container.
 
 In the above example, only the container with a widgetId of 'citizenship' will be rerendered when the value of the _combo_ is changed.
 
-### The lookupDescription Widget in Detail
+### The lookupDescription widget in detail
 
 The *lookupDescription* widget is unique to Skyve and provides
 comprehensive ability to display and select document references.
@@ -231,7 +231,7 @@ _Properties of the lookupDescription_
 
 ![lookupDescription](../assets/images/views/image125.png "Rendering of the lookupDescription")
 
-#### Multi-column Drop-down/Combo lookupDescription
+#### Multi-column drop-down/combo lookupDescription
 
 By default the *lookupDescription* will display only the *bizKey* for
 each row returned by the effective query in the drop-down. However,
@@ -295,7 +295,7 @@ then the attribute called *codeListSchemeCode* in the new
 
 Note that any number of *filterParameters* can be declared.
 
-#### OnChange Handlers for lookupDescription
+#### OnChange handlers for lookupDescription
 
 Rather than a generic *OnChange* action event, the *lookupDescription*
 provides the ability to define actions for each type of event which the
@@ -493,7 +493,7 @@ Where a *model* is declared, population of list rows is handled by the *model* c
 List models support paging, summaries and filtering
 , where filter controls can manipulate predicates to impact on the list results.
 
-#### Filter Parameters for listGrid
+#### Filter parameters for listGrid
 
 Filter parameters can be applied to the *listGrid* widget which will
 apply additional filtering (over and above any filtering defined in the
@@ -527,7 +527,7 @@ The listGrid widget offers the following event handlers:
 * onEditedHandler - what events to perform after a row is edited
 * onSelectedHandler - what events to perform after a row is selected
 
-### New Parameter
+### newParameter
 
 The *newParameter* section enables the context of one view to be passed
 to another view, when new documents are being created.
@@ -632,7 +632,7 @@ Report actions are not declared within role definitions in the
 *module.xml*.
 
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#views)**
 
 ---
 **Next [Actions](./../_pages/actions.md)**  

@@ -22,7 +22,7 @@ The Skyve approach is to declare
 that an attribute uses a converter - allowing Skyve to enforce the format
 conversion automatically and pervasively throughout the application.
 
-### Defined Converters
+### Converters
 
 Skyve provides a number of generic type converters.
 
@@ -49,7 +49,7 @@ empty.
 
 ![Format hints for data entry](../assets/images/converters/image88.png "Format hints for data entry")
 
-### Worked Example
+### Worked example
 
 #### Requirement
 
@@ -157,7 +157,7 @@ However, supports the use of regular expressions for validation and custom messa
 </text>
 ```
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#converter-validator-and-format)**
 
 ---
 **Next [Internationalisation](./../_pages/internationalisation.md)**  

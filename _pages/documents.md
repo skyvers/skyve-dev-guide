@@ -53,7 +53,7 @@ orphaned, the *document.xml* will nominate the parent document.
 
 ![Document declaration](../assets/images/documents/image55.png "Document declaration")
 
-### Document.xml Sections
+### Document.xml sections
 
 #### Metadata
 
@@ -69,7 +69,7 @@ Each document.xml includes the following metadata:
 
 _Document.xml sections_
 
-#### BizKey
+#### bizKey
 To enable the application to display references simply, each document
 must define a business key (*bizKey*) definition (similar to a Java
 *toString*() method for the document). The *bizKey* is the default
@@ -135,7 +135,7 @@ If an attribute includes a *description*, this will be rendered as
 tool-tip help button in the detail view. The *description* can
 contain simple markup as it will be rendered as HTML.
 
-#### Attribute Types
+#### Attribute types
 
 Developers should note that database specific implementations of each
 type are defined by Hibernate™ mapping settings and not by the Skyve
@@ -143,7 +143,7 @@ specification.
 
 The following attribute types are available:
 
-  Attribute Type | Description | Default Widget | Example
+  Attribute type | Description | Default widget | Example
   -------------- | ----------- | -------------- | -------
   association    | A reference to another document.<br>Associations may be either an aggregation or composition and must include the name of the document which is the subject of the association.<br>Associations may optionally include queryName - the name of a metadata query defined in the *module.xml* which provides eligible document instances.<br>Associations of type composition will cascade delete. | lookup | ![](../assets/images/documents/image57.png)<br>In this example, the document has a reference to the Contact document called Contact.<br>If the association above was type composition (rather than aggregation), deletion of the document would cascade and delete referenced Contacts.<br>Note that specifying a *queryName* is optional. If no *queryName* is specified, Skyve will supply the default or generic inferred query for the associated document.
   boolean         | True or False<br>If a boolean attribute is not marked as required, the value may also be null. | checkBox | ![](../assets/images/documents/image58.png)<br>In this example, the attribute is not required. Non-requiredness means that null is a valid value for the attribute.
@@ -269,7 +269,7 @@ specific documentation to be included with the document definition.
 
 _documentation tag for a document_
 
-### Overriding Documents
+### Overriding documents
 Documents may be overridden for customers, to allow customised variants
 of the document definition including:
 
@@ -304,12 +304,12 @@ Note also that the implementation (*Impl*) class for Contact is also
 overridden however this override is generated automatically by Skyve
 using the *generateDomain* ant task.
 
-### Database Persistence of Relationships and Key Constraints
+### Database persistence of relationships and key constraints
 
 To ensure referential integrity, Skyve (via Hibernate™) persists foreign
 key constraints in the data tier, as follows:
 
-  Relationship           | Description | Logical Types
+  Relationship           | Description | Logical types
   ---------------------- | ----------- | -------------
   aggregation association | When an aggregated association is declared from A to B, the database table for document A will have a UUID field created named according to the name declared on the association in document A, suffixed \_id.<br>For example, if Invoice has an aggregated association to Employee, typically the name of the association might also be employee (camelCase). If the persistent name of the Invoice document (i.e. the name of the database table) is `INV_Invoice`, then this table will have a field called employee\_id which holds the UUID key for the Employee record.<br>In this example, Invoice.employee would be a reference to Employee.bizId and would be stored in the database as Invoice.employee\_id.<br>Hibernate will ensure that a Foreign Key constraint is created on `INV_Invoice` table to ensure referential integrity and the Employee record will not be able to be deleted until the relationship is nulled or changed or the corresponding Invoice record is deleted. | Many-to-one
   composition association | As for aggregation association except with cascade delete.<br>For example, if an Employee is a Contact, then Employee will have a composition association to Contact. If the Employee is deleted, the referred Contact will be deleted automatically (i.e. cascade). | Many-to-one
@@ -317,7 +317,7 @@ key constraints in the data tier, as follows:
   composition collection  | As for aggregation collection except with cascade delete.<br>For example, if Depot has a collection of Taxi which is of type composition, then deletion of the Depot will result in cascade deletion of the associated Taxis and therefore also the tuples in the joining table will be deleted. | Many-to-many
   parent-child collection | When a parent child relationship is declared from A to B, document B will have a parent property (with corresponding .getParent() and .setParent() methods) and the table for document B will have a `parent_id` field created.<br>For example, if the Invoice document is declared as parent to InvoiceLine and the persistent name of the InvoiceLine document is `INV_Invoice`Line then this table will have a column `parent_id` which holds the UUID key of the parent Invoice. | One-to-many
 
-#### Database Indexes
+#### Database indexes
 
 Hibernate™ ensures that all primary keys are indexed unique and that all
 tables have a primary key defined.
@@ -339,7 +339,7 @@ or turn off the default indexing behaviour where it is not required, as follows:
 		</memo>
 ```
 
-### Java Classes
+### Java classes
 
 Skyve provides a *generateDomain* ant task which generates java classes
 as required for each document. These classes are located in the module
@@ -360,7 +360,7 @@ Each document class extends the *Bean* interface.
 Beans include a number of attributes to support Skyve interactions,
 specifically:
 
-  Attribute      | Description                                                                             | Logical Type
+  Attribute      | Description                                                                             | logical type
   -------------- | --------------------------------------------------------------------------------------- | ------------------------------------
   bizId          | A guaranteed unique primary identifier for the instance of the bean                     | UUID (universally unique identifier)
   bizKey         | A simple scalar representation of the bean.                                             | String
@@ -379,7 +379,7 @@ Each generated document interface class implements either
 *PersistentBean* or *TransientBean* and represents the intersection of
 all customer-overrides.
 
-### Persistent Bean
+### PersistentBean
 
 In addition to the basic attributes required for beans,
 *PersistentBeans* contain attributes required for persistence (including
@@ -396,7 +396,7 @@ for secure multi-user interactions.
 
 _PersistentBean attributes_
 
-### Persistence and Locking
+### Persistence and locking
 
 Persistent Skyve documents are persisted as tables in the data tier, and
 document instances as data rows or tuples. Document attributes
@@ -422,7 +422,7 @@ database connections open while users interact with the system would
 severely impact on performance and infrastructure requirements for
 multi-user systems.
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#documents)**
 
 ---
 **Next [Converter, validator and format](./../_pages/converters.md)**  

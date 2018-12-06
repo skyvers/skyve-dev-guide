@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Utility Classes
+## Utility classes
 
 Skyve provides the following utility classes:
 
@@ -96,7 +96,7 @@ The use of DocumentFilter allows for correct enforcement of types at
 compile-time to reduce the possibility of errors arising from implicit
 type conversion which may arise if SQL strings were used.
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#utility-classes)**
 
 ---
 **Next [Common Patterns](./../_pages/common-patterns.md)**<br>

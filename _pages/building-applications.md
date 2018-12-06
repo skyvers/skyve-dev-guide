@@ -7,9 +7,9 @@ sidebar:
   title: "Index"
   nav: docs
 ---
-# Building Applications
+# Building applications
 
-### Skyve Readme
+### Skyve readme
 
 The skyve project contains a Readme at [github.com/skyvers/skyve](https://github.com/skyvers/skyve) with useful information for getting started, configuring Spring security and other steps to get you started.
 
@@ -65,7 +65,7 @@ Once your project is running, go to your local context and login in.
 
 Detailed instructions are available in the Skyve Readme at [github.com/skyvers/skyve](https://github.com/skyvers/skyve).
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#building-applications)**
 
 ---
 **Next [Customers](./../_pages/customers.md)**  
