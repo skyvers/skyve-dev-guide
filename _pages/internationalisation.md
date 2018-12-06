@@ -48,7 +48,7 @@ If the language is not specified in the `customer.xml`, Skyve will detect the lo
 
 To ensure the database can store UTF-8 characters, ensure you have set the correct character set and collation.
 
-For example, whereas H2 supports UTF-8 with default settings, for MySQL, ensure that the database is created with the correct character set and collation: 
+For example, whereas H2 supports UTF-8 with default settings, for MySQL, ensure that the database is created with the correct character set and collation:
 
 ```sql
 CREATE DATABASE myDatabase CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -56,7 +56,7 @@ CREATE DATABASE myDatabase CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 Additionally for MySQL, ensure your datasource connection string includes Unicode and UTF-8 encoding, for example:
 
-``` 
+```
 jdbc:mysql://myServer:3306/myDatabase?useUnicode=true&amp;characterEncoding=UTF-8&amp;useCursorFetch=true&amp;defaultFetchSize=100
 ```
 
@@ -78,7 +78,8 @@ We suggest using the naming convention _module.document.attribute(.property)_ fo
 
 ![Building apps for multiple languages](../assets/images/internationalisation/configuring_for_internationalisation.png "Building apps for multiple languages")
 
-**[⬆ back to top](#contents)**
+
+**[⬆ back to top](#internationalisation-and-language-support)**
 
 ---
 **Next [Bizlets](./../_pages/bizlets.md)**  
