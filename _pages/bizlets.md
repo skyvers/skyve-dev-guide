@@ -214,6 +214,9 @@ public void validate(WeeklyTimesheetExtension bean, ValidationException e) throw
 }
 ```
 
+Adding the attribute binding to the message yields context-sensitive indications in the view.
+![Context validation indications](../assets/images/bizlets/validate-with-binding.png "Context validation indications")
+
 Note that when supplying the binding name we use static constant property name for the attribute binding name WeeklyTimesheet.weekEndingDatePropertyName - this is to ensure consistency and so that if this attribute is renamed during a refactor, we can rely on the compiler to ensure we also update it here.
 
 We recommend utilising the metadata directly - to retrieve specific names - e.g. for the singular alias of _"timesheet"_ and the displayname for the *weekending* attribute, as follows:
