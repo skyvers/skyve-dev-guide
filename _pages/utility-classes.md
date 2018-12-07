@@ -15,13 +15,55 @@ Skyve provides the following utility classes:
   Class/Library | Description
   ------------- | -----------
   Util          | Bean-level generic utilities, including generic bean methods e.g. *cloneToTransientBySerialisation*().
-  Binder        | Provides methods for generic bean binding manipulations, including: <br><br><li>generic get() and set() methods for a bean with nominated binding, <li>*createCompoundBinding*() for correctly constructing compound bindings (i.e. across document references), and <li>read and interpret the nature of bean properties.
-  ModulesUtil   |  Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><li>*getNextDocumentNumber*() to create unique formatted serial document identifiers, <li> methods for working with business periods (month, quarter, half-year etc.) and frequency, <li> *currentAdminUser*() which identifies the current conversation user as an admin module user, <li> coalesce methods, and <li> basic Tax and loan calculation methods.
+  Binder        | Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li>*formatMessage()* for using binding substitutions in string outputs using the correct converter</li><li>*convertAndSet()* for setting a converted string value using the correct converter</li><li>*createCompoundBinding()* for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul>
+  ModulesUtil   |  Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li>*getNextDocumentNumber*() to create unique formatted serial document identifiers, </li><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li> *currentAdminUser*() which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul>
   JobScheduler  |  Provides methods to schedule declared jobs, e.g. *runOneShotJob*().
   Persistence   |  Provides access to interact directly with the singleton persistence mechanism (detailed below).
   DocumentQuery | Provides methods for constructing object queries without resorting to constructing OQL or SQL strings.
 
 _Utility classes and libraries_
+
+### Binder
+
+Binder is a utility class which handles beans in a generic way, taking into account customer default settings and customer overriding.
+
+#### formatMessage() and convertAndSet()
+
+Developers can take advantage of the *formatMessage()* to construct valid String output using the correct converter, as declared in customer or document metadata. Similarly *convertAndSet()* takes a String argument and sets the bean attribute using the correct converter *fromDisplayValue()* method.
+
+*formatMessage()* allows bean varargs, and the binding substitution will occur in the order in which the beans are supplied.
+```java
+Binder.formatMessage(CORE.getCustomer()
+	, "The timesheet for {employeeCode} ({contact.name}) weekending {weekEndingDate} is overdue"
+	, timesheet
+	, employee);
+```
+
+In the above example, *formatMessage()* will attempt to substitute bindings from *timesheet*, then *employee*. The *{weekEndingDate}* binding will be substituted using the correct converter either as specified as the customer default conversion (for example `DD_MMM_YYYY`), or as specified in the document attribute declaration (which may be different).
+
+Skyve takes advantage of *formatMessage* as the basis of *bizKey* expressions in the metadata, supplying the bean as parameter implicitly. For example:
+
+```xml
+<bizKey expression="{employeeCode} ({contact.name})"/>
+```
+
+Similarly, *convertAndSet()* takes a String, applies the correct converter *fromDisplayValue()* method and sets the binding with the result value.
+
+```java
+Binder.convertAndSet(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, "12-Dec-2019");
+```
+
+#### generic get() and set()
+
+Using the Binder for generic approaches to getting and setting attribute values provides a powerful way to manipulate beans.
+
+```java		
+		DateOnly weekEndingDate = Binder.get(timesheet, WeeklyTimesheet.weekEndingDatePropertyName);
+```
+
+``` java		
+		Binder.set(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, weekEndingDate);		
+```
 
 ### Persistence
 
@@ -58,7 +100,7 @@ with care. Unlike object query methods, SQL is implementation specific,
 but more importantly, the Skyve platform cannot assert automatic
 customer scoping and other platform features in insecure SQL.
 
-### DocumentQuery
+#### DocumentQuery
 
 *DocumentQuery* extends *ProjectionQuery* and provides the ability to
 retrieve persisted beans in a type-safe and secure way, without building
