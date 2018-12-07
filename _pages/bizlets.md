@@ -47,8 +47,6 @@ Lifecycle event timing is as follows:
   postSave() | called after flushing values to the data store and after all integrity and validation checks have been performed<br><br>The *postSave()* method might be overridden to perform an action only on a successful save of the bean, e.g. to send a confirmation email.<br><br>If an exception occurs at this stage, the transaction will roll back and changes will not be saved.
   preDelete() | called before deletion from the data store<br><br>The *preDelete()* method might be overridden to perform a logical check that the record can be deleted, according to rules which cannot be enforced by a simple constraint.<br><br>If an exception occurs at this stage, the transaction will roll back and the data will not be deleted.
 
-_Bean level events_
-
 #### User interface level lifecycle
 
   Event | Description
@@ -58,8 +56,6 @@ _Bean level events_
   getDynamicDomainValues() | called when rendering the pertinent field (including in list view) - Dynamic domain values are guaranteed to be evaluated as for variant values, except that the bean is provided to the method for value generation.
   preExecute() | called before an implicit action is executed
   preRerender() | called before the rerender action is executed (immediately before a view is re-rendered after another action)
-
-_User Interface level events_
 
 ### Implicit actions
 
@@ -92,8 +88,6 @@ Download | Create and stream a file for Download
 Upload | Upload and process a file
 Print |	Prints the current view
 
-_ImplictActionName enumerated values_
-
 #### preExecute() versus preSave()
 
 Using the _preExecute()_ method provides a level of control to the developer
@@ -101,8 +95,7 @@ to perform specific code only when the user initiates an action, as opposed to
 the code being performed as part of the bean lifecycle.
 
 For example, if code is added to the _preSave()_ method, the code will be performed
-every time the bean is persisted, whether as the result of a user interaction, a job
-, or as the result of cascading saves within the context of another document.
+every time the bean is persisted, whether as the result of a user interaction, a job, or as the result of cascading saves within the context of another document.
 
 Using the _preExecute(ImplicitActionName.Save)_ however will only execute when the user
 initiates the _Save_ action (presses the _Save_ button in the view). Note - this will not include 
@@ -127,9 +120,57 @@ public Configuration preExecute(ImplicitActionName actionName, Configuration bea
 }
 ```	
 
-#### Overriding the validation() method
+#### Tracing Bizlet callbacks
 
-Validation is handled automatically by Skyve according to the metadata declaration, including:
+To assist developers to understand the implications of event code, you can turn on tracing of Bizlet callback in the project json settings.
+
+```json
+// bizlet callbacks
+bizlet: true,
+```
+
+With this option set, Skyve will trace out all Bizlet callbacks to the Wildfly `server.log` file.
+
+#### Dirty tracking - _isChanged()_ and _originalValues()_
+
+Skyve tracks whether a bean has been changed, and what attributes have been modified, within the current conversation context, until the bean saved or otherwise reset.
+
+When a bean property is set (using the setter), the attribute binding name will be added to the bean.originalValues() map and `bean.isChanged()` will return *true*. 
+
+You can manually clear the `bean.originalValues()` map to reset `bean.isChanged()`.
+
+```java
+//starting from a clean bean
+Util.Logger.info(bean.isChanged()); //returns false
+bean.setMyValue("Hello");
+Util.Logger.info(bean.isChanged()); //returns true
+for(String s: bean.originalValues().keySet()) {
+	Util.Logger.info(s + " - " +  bean.originalValues().get(s));
+}
+//returns myValue - <whatever the original value of myValue was>
+bean.originalValues().clear();
+Util.Logger.info(bean.isChanged()); //returns false
+```
+
+If `bean.isChanged()` returns true when the user presses _Cancel_, they will be prompted accordingly:
+![Unsaved changes notification](../assets/images/bizlets/unsaved-changes.png "Unsaved changes notification"
+
+This can be useful for example when you are preparing transient values for a user view - you want to manipulate values, but you don't want the user to be prompted to save their changes if they _Cancel_.
+
+#### Tracing dirty
+
+To assist developers, you can turn on tracing of bean mutations in the project json settings.
+
+```json
+// mutations in domain objects
+dirty: true
+```
+
+With this option set, Skyve will trace out all bean mutations to the Wildfly `server.log` file.
+
+### Overriding the validate() method
+
+Validation is a bean lifecycle event handled automatically by Skyve according to the metadata declaration, including:
 * whether a user has privileges to _Create_, _Update_, _Read_ or _Delete_ the record
 * whether a value for an attribute is _Required_
 * whether a value is of the correct type
