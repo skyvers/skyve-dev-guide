@@ -692,6 +692,25 @@ Documentation (*doc*) tags within the xml metadata hold basic HTML style
 documentation. *Doc* tags are also used by the javadoc *doclet* provided
 by Skyve, but are also accessible to developers via the Skyve *API*.
 
+### Interceptor
+
+Skyve provides a flexible interceptor concept to allow generic interception of 
+bean lifecycle events.
+
+Skyve provides the _RDBMSAuditInterceptor_ which tracks _Create_, _Update_ and _Delete_ bean lifecycle events to compile the Audit/user interaction history available in the admin module.
+
+Developers can modify, extend or add additional interceptors as required (or remove the _RDBMSInterceptor_ if this is not required) and declare these in the customer declaration (`customer.xml`). 
+
+```xml
+	<interceptors>
+		<interceptor className="modules.RDBMSAuditInterceptor" />
+		<interceptor className="modules.businesscentre.HistoryInterceptor" />
+		<interceptor className="modules.flow.FlowInterceptor" />
+	</interceptors>
+```
+
+Where multiple interceptors are declared, the interceptors are processed in the order they are declared.
+
 ### Bizport
 
 *Bizport* is a unique feature which allows the user to import and export
