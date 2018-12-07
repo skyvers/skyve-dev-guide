@@ -702,11 +702,11 @@ Skyve provides the _RDBMSAuditInterceptor_ which tracks _Create_, _Update_ and _
 Developers can modify, extend or add additional interceptors as required (or remove the _RDBMSInterceptor_ if this is not required) and declare these in the customer declaration (`customer.xml`). 
 
 ```xml
-	<interceptors>
-		<interceptor className="modules.RDBMSAuditInterceptor" />
-		<interceptor className="modules.businesscentre.HistoryInterceptor" />
-		<interceptor className="modules.flow.FlowInterceptor" />
-	</interceptors>
+<interceptors>
+	<interceptor className="modules.RDBMSAuditInterceptor" />
+	<interceptor className="modules.businesscentre.HistoryInterceptor" />
+	<interceptor className="modules.flow.FlowInterceptor" />
+</interceptors>
 ```
 
 Where multiple interceptors are declared, the interceptors are processed in the order they are declared.

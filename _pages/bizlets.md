@@ -153,7 +153,7 @@ Util.Logger.info(bean.isChanged()); //returns false
 ```
 
 If `bean.isChanged()` returns true when the user presses _Cancel_, they will be prompted accordingly:
-![Unsaved changes notification](../assets/images/bizlets/unsaved-changes.png "Unsaved changes notification"
+![Unsaved changes notification](../assets/images/bizlets/unsaved-changes.png "Unsaved changes notification")
 
 This can be useful for example when you are preparing transient values for a user view - you want to manipulate values, but you don't want the user to be prompted to save their changes if they _Cancel_.
 
