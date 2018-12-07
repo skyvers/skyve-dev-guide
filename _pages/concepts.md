@@ -343,7 +343,7 @@ _Override levels for a document widget declaration_
 
 To enable the application to display references simply, each document
 must define a business key (*bizKey*) definition (similar to a Java
-*toString*() method for the document). The *bizKey* is the default
+`toString()` method for the document). The *bizKey* is the default
 representation of the entire document instance.
 
 For example, a contact might have a *bizKey* of `<name>` and a
@@ -619,8 +619,8 @@ valid. *Dynamic* domains represent the greatest performance cost and
 should only be used where necessary.
 
 Domain value generation is specified in Bizlet code by overriding the
-methods *getConstantDomainValues*(), *getVariantDomainValues*() and/or
-*getDynamicDomainValues*().
+methods `getConstantDomainValues()`, `getVariantDomainValues()` and/or
+`getDynamicDomainValues()`.
 
 ### Converters
 

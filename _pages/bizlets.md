@@ -40,12 +40,12 @@ Lifecycle event timing is as follows:
 
   Event | Description
   ----- | -----------
-  newInstance() | called after instantiation through the *document.newInstance()*<br><br>The *newInstance()* method is commonly overridden to set application default values for the document.<br><br>If an exception occurs the bean will not be instantiated.
-  postLoad() | called after instantiation and population of data store values<br><br>The *postLoad()* method can be called to recalculate values which are visible in a document list or detail view.<br><br>If an exception occurs, the associated view will open with an error dialog.
-  preSave() | called before flushing the values to the data store or User press of \[Save\] button (before document validation)<br><br>The *preSave()* method can be overridden to ensure application rules or calculated fields are up to date before the bean is persisted.<br><br>If an exception occurs at this stage, the transaction will roll back and the change will not be saved.
-  validate() | called after *preSave()* (and after document validation) but before flushing the values to the data store<br><br>The *validate()* method is commonly overridden to include additional complex document validation (other than implicit validation of requiredness etc.).<br><br>If an exception occurs at this stage, the transaction will roll back and changes will not be saved.
-  postSave() | called after flushing values to the data store and after all integrity and validation checks have been performed<br><br>The *postSave()* method might be overridden to perform an action only on a successful save of the bean, e.g. to send a confirmation email.<br><br>If an exception occurs at this stage, the transaction will roll back and changes will not be saved.
-  preDelete() | called before deletion from the data store<br><br>The *preDelete()* method might be overridden to perform a logical check that the record can be deleted, according to rules which cannot be enforced by a simple constraint.<br><br>If an exception occurs at this stage, the transaction will roll back and the data will not be deleted.
+  newInstance() | called after instantiation through the `document.newInstance()`<br><br>The `newInstance()` method is commonly overridden to set application default values for the document.<br><br>If an exception occurs the bean will not be instantiated.
+  postLoad() | called after instantiation and population of data store values<br><br>The `postLoad()` method can be called to recalculate values which are visible in a document list or detail view.<br><br>If an exception occurs, the associated view will open with an error dialog.
+  preSave() | called before flushing the values to the data store or User press of \[Save\] button (before document validation)<br><br>The `preSave()` method can be overridden to ensure application rules or calculated fields are up to date before the bean is persisted.<br><br>If an exception occurs at this stage, the transaction will roll back and the change will not be saved.
+  validate() | called after `preSave()` (and after document validation) but before flushing the values to the data store<br><br>The `validate()` method is commonly overridden to include additional complex document validation (other than implicit validation of requiredness etc.).<br><br>If an exception occurs at this stage, the transaction will roll back and changes will not be saved.
+  postSave() | called after flushing values to the data store and after all integrity and validation checks have been performed<br><br>The `postSave()` method might be overridden to perform an action only on a successful save of the bean, e.g. to send a confirmation email.<br><br>If an exception occurs at this stage, the transaction will roll back and changes will not be saved.
+  preDelete() | called before deletion from the data store<br><br>The `preDelete()` method might be overridden to perform a logical check that the record can be deleted, according to rules which cannot be enforced by a simple constraint.<br><br>If an exception occurs at this stage, the transaction will roll back and the data will not be deleted.
 
 #### User interface level lifecycle
 
@@ -62,7 +62,7 @@ Lifecycle event timing is as follows:
 Skyve provides a number of implicit actions which do not require
 developer code.
 
-In each case overriding the *preExecute*() method for an
+In each case overriding the `preExecute()` method for an
 *ImplicitActionName* gives the developer the opportunity to add business
 logic in anticipation of each action type.
 

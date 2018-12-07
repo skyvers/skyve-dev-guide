@@ -72,7 +72,7 @@ _Document.xml sections_
 #### bizKey
 To enable the application to display references simply, each document
 must define a business key (*bizKey*) definition (similar to a Java
-*toString*() method for the document). The *bizKey* is the default
+`toString()` method for the document). The *bizKey* is the default
 representation of the entire document instance.
 
 For example, a contact might have a *bizKey* of `{name}` whereas a
@@ -100,11 +100,11 @@ An example *bizKey* referencing a coded method might be:
 </bizKey>
 ```
 
-In this example, method *myBizKey()* is a method created by the developer in the ContactBizlet class. 
+In this example, method `myBizKey()` is a method created by the developer in the ContactBizlet class. 
 
 When the class is generated, the code included in the *bizKey* section
 is placed verbatim in the generated implementation (*Impl*) class in the
-*myBizKey()* method. This means that the bizKey code must be compilable
+`myBizKey()` method. This means that the bizKey code must be compilable
 within the context of that class.
 
 If the *bizKey* section contains invalid or uncompilable code, the

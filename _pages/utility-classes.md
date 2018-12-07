@@ -20,19 +20,19 @@ Skyve provides the following utility classes:
 <tbody>
 <tr>
 	<td>Util</td>
-	<td>Bean-level generic utilities, including generic bean methods e.g. *cloneToTransientBySerialisation*().</td>
+	<td>Bean-level generic utilities, including generic bean methods e.g. <code>cloneToTransientBySerialisation()</code>.</td>
 </tr>
 <tr>
 	<td>Binder</td>
-	<td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li>*formatMessage()* for using binding substitutions in string outputs using the correct converter</li><li>*convertAndSet()* for setting a converted string value using the correct converter</li><li>*createCompoundBinding()* for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul></td>
+	<td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li><code>formatMessage()</code> for using binding substitutions in string outputs using the correct converter</li><li><code>convertAndSet()</code> for setting a converted string value using the correct converter</li><li><code>createCompoundBinding()</code> for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul></td>
 </tr>
 <tr>
 	<td>ModulesUtil</td>
-	<td>Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li>*getNextDocumentNumber*() to create unique formatted serial document identifiers, </li><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li> *currentAdminUser*() which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul></td>
+	<td>Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li><code>getNextDocumentNumber()</code> to create unique formatted serial document identifiers, </li><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li><code>currentAdminUser()</code> which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul></td>
 </tr>
 <tr>
 	<td>JobScheduler</td>
-	<td>Provides methods to schedule declared jobs, e.g. *runOneShotJob*().</td>
+	<td>Provides methods to schedule declared jobs, e.g. <code>runOneShotJob()</code>.</td>
 </tr>
 <tr>
 	<td>Persistence</td>
@@ -51,9 +51,9 @@ Binder is a utility class which handles beans in a generic way, taking into acco
 
 #### formatMessage() and convertAndSet()
 
-Developers can take advantage of the *formatMessage()* to construct valid String output using the correct converter, as declared in customer or document metadata. Similarly *convertAndSet()* takes a String argument and sets the bean attribute using the correct converter *fromDisplayValue()* method.
+Developers can take advantage of the `formatMessage()` to construct valid String output using the correct converter, as declared in customer or document metadata. Similarly `convertAndSet()` takes a String argument and sets the bean attribute using the correct converter `fromDisplayValue()` method.
 
-*formatMessage()* allows bean varargs, and the binding substitution will occur in the order in which the beans are supplied.
+`formatMessage()` allows bean varargs, and the binding substitution will occur in the order in which the beans are supplied.
 ```java
 Binder.formatMessage(CORE.getCustomer()
 	, "The timesheet for {employeeCode} ({contact.name}) weekending {weekEndingDate} is overdue"
@@ -61,15 +61,15 @@ Binder.formatMessage(CORE.getCustomer()
 	, employee);
 ```
 
-In the above example, *formatMessage()* will attempt to substitute bindings from *timesheet*, then *employee*. The *{weekEndingDate}* binding will be substituted using the correct converter either as specified as the customer default conversion (for example `DD_MMM_YYYY`), or as specified in the document attribute declaration (which may be different).
+In the above example, `formatMessage()` will attempt to substitute bindings from *timesheet*, then *employee*. The `{weekEndingDate}` binding will be substituted using the correct converter either as specified as the customer default conversion (for example `DD_MMM_YYYY`), or as specified in the document attribute declaration (which may be different).
 
-Skyve takes advantage of *formatMessage* as the basis of *bizKey* expressions in the metadata, supplying the bean as parameter implicitly. For example:
+Skyve takes advantage of `formatMessage()` as the basis of *bizKey* expressions in the metadata, supplying the bean as parameter implicitly. For example:
 
 ```xml
 <bizKey expression="{employeeCode} ({contact.name})"/>
 ```
 
-Similarly, *convertAndSet()* takes a String, applies the correct converter *fromDisplayValue()* method and sets the binding with the result value.
+Similarly, `convertAndSet()` takes a String, applies the correct converter `fromDisplayValue()` method and sets the binding with the result value.
 
 ```java
 Binder.convertAndSet(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, "12-Dec-2019");
@@ -80,11 +80,11 @@ Binder.convertAndSet(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, "12-
 Using the Binder for generic approaches to getting and setting attribute values provides a powerful way to manipulate beans.
 
 ```java		
-		DateOnly weekEndingDate = Binder.get(timesheet, WeeklyTimesheet.weekEndingDatePropertyName);
+DateOnly weekEndingDate = Binder.get(timesheet, WeeklyTimesheet.weekEndingDatePropertyName);
 ```
 
 ``` java		
-		Binder.set(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, weekEndingDate);		
+Binder.set(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, weekEndingDate);		
 ```
 
 ### Persistence

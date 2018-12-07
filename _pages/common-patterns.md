@@ -70,7 +70,7 @@ rely on the implicit creation of a new bean, and override the _newInstance()_ to
 ### Identify the current user's Contact
 
 To identify the current user in Bizlet code, instantiate the Persistence
-class. The Persistence class provides the *getUser*() method.
+class. The Persistence class provides the `getUser()` method.
 
 ```java
 public static Contact getCurrentUserContact() throws MetadataException, DomainException {
@@ -92,13 +92,13 @@ user is logged in, and the application module and document of the
 Contact to be retrieved. When the bean is retrieved from the persistence layer, the bean is
 correctly typed.
 
-Note the distinction here between *org.skyve.metadata.user.User* and *modules.admin.domain.User*
+Note the distinction here between `org.skyve.metadata.user.User` and `modules.admin.domain.User`
 
-The Contact is declared in the application domain - in the admin module, and *modules.admin.domain.User* is similarly the modules.admin.domain.User is part of the declared application, not the Skyve platform itself.
+The Contact is declared in the application domain - in the admin module, and `modules.admin.domain.User` is similarly the modules.admin.domain.User is part of the declared application, not the Skyve platform itself.
 
-*org.skyve.metadata.user.User* is a different type used internally by the Skyve platform and Persistence. 
+`org.skyve.metadata.user.User` is a different type used internally by the Skyve platform and Persistence. 
 
-An alternative to this approach is to use the convenience method provided in *ModulesUtil* as follows:
+An alternative to this approach is to use the convenience method provided in `ModulesUtil` as follows:
 ```java
 	Contact contact = ModulesUtil.currentAdminUser().getContact();
 ```	
@@ -146,7 +146,7 @@ ContactInteraction interaction = ContactInteraction.newInstance();
 
 _Example code to instantiate a new document instance_
 
-Note that the developer can override the default Skyve *newInstance()* behaviour in the corresponding *Bizlet* class.
+Note that the developer can override the default Skyve `newInstance()` behaviour in the corresponding `Bizlet` class.
 
 ### Building a variant domain list
 
@@ -196,7 +196,7 @@ Usually, when saving beans, Skyve traverses the entire structure of the
 bean to enforce specified validation rules. However for performance
 reasons, this may not be required.
 
-Use the *upsertBeanTuple*() method to save the values of the top-most
+Use the `upsertBeanTuple()` method to save the values of the top-most
 attributes of the bean, without traversing the entire bean structure.
 This is useful if the task requires updates of trivial nature to beans
 with substantial complexity, or if bean validation needs to be bypassed for some reason.
@@ -246,7 +246,7 @@ has an element type of _edit_.
 
 _Example edit menu_
 
-Next, override the *newInstance*() method in the document *Bizlet* to
+Next, override the `newInstance()` method in the document *Bizlet* to
 set the bean to be the first bean returned from *DocumentQuery*. Using
 *DocumentQuery* will ensure that appropriate document scoping and
 permissions will automatically be applied, restricting the beans
@@ -288,7 +288,7 @@ _Figure 85 - Example of user scoped document permission_
 
 For example, a Timesheet module may have a User-scoped preference
 document allowing users to set their default task (which could be set
-during newInstance in the Timesheet *Bizlet* class).
+during newInstance in the Timesheet `Bizlet` class).
 
 ### Customise document and document attribute names
 
