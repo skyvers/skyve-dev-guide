@@ -12,16 +12,38 @@ sidebar:
 
 Skyve provides the following utility classes:
 
-  Class/Library | Description
-  ------------- | -----------
-  Util          | Bean-level generic utilities, including generic bean methods e.g. *cloneToTransientBySerialisation*().
-  Binder        | Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li>*formatMessage()* for using binding substitutions in string outputs using the correct converter</li><li>*convertAndSet()* for setting a converted string value using the correct converter</li><li>*createCompoundBinding()* for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul>
-  ModulesUtil   |  Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li>*getNextDocumentNumber*() to create unique formatted serial document identifiers, </li><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li> *currentAdminUser*() which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul>
-  JobScheduler  |  Provides methods to schedule declared jobs, e.g. *runOneShotJob*().
-  Persistence   |  Provides access to interact directly with the singleton persistence mechanism (detailed below).
-  DocumentQuery | Provides methods for constructing object queries without resorting to constructing OQL or SQL strings.
-
-_Utility classes and libraries_
+<table>
+<thead>
+	<th>Class/Library</th
+	<th>Description<th>
+</thead>
+<tbody>
+<tr>
+	<td>Util</td>
+	<td>Bean-level generic utilities, including generic bean methods e.g. *cloneToTransientBySerialisation*().</td>
+</tr>
+<tr>
+	<td>Binder</td>
+	<td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li>*formatMessage()* for using binding substitutions in string outputs using the correct converter</li><li>*convertAndSet()* for setting a converted string value using the correct converter</li><li>*createCompoundBinding()* for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul></td>
+</tr>
+<tr>
+	<td>ModulesUtil</td>
+	<td>Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li>*getNextDocumentNumber*() to create unique formatted serial document identifiers, </li><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li> *currentAdminUser*() which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul></td>
+</tr>
+<tr>
+	<td>JobScheduler</td>
+	<td>Provides methods to schedule declared jobs, e.g. *runOneShotJob*().</td>
+</tr>
+<tr>
+	<td>Persistence</td>
+	<td>Provides access to interact directly with the singleton persistence mechanism (detailed below).</td>
+</tr>
+<tr>
+	<td>DocumentQuery</td>
+	<td>Provides methods for constructing object queries without resorting to constructing OQL or SQL strings.</td>
+</tr>
+</tbody>
+</table>
 
 ### Binder
 
