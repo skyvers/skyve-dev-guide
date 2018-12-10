@@ -142,16 +142,16 @@ type conversion which may arise if SQL strings were used.
 ### Ext
 
 The Ext class provides developers access to additional APIs as follows:
-Method | Description/Usage
--------|-------
-`checkPassword()`, `hashPassword()` | check a password against a hash, or hash a password
-`clearTag()`, `createTag()`, `deleteTag()`, `getTagId()`,`getTags()`, `iterateTagged()`,` tag()`, `untag()` | developer access to Skyve's Tag function, allowing the developer to create methods which respond to the user selection
-`getCustomerRunningJobs()`, `runOneShotJob()`, `scheduleOneShotJob()` | manage jobs
-`sendMail()`, `writeMail()`, `getMailAttachmentFromContent()`, `getMailAttachmentFromReport()` | send or write mail items and produce mime-typed attachments from content or reports
-`getDataStoreConnection()`, `newSQLDataAccess()` | access connections
-`runBeanReport()`, `runSQLReport()`, `runReport()` | run reports
-`newContentManager()` | access Skyve's content repository
-`newBizPortStandardGenerator`, `newBizPortWorkbook()`, `newBizPortSheet()` | developer access to customise Skyve's BizPort feature.
+  Method | Description/Usage
+  -------|-------
+  `checkPassword()`, `hashPassword()` | check a password against a hash, or hash a password
+  `clearTag()`, `createTag()`, `deleteTag()`, `getTagId()`,`getTags()`, `iterateTagged()`,` tag()`, `untag()` | developer access to Skyve's Tag function, allowing the developer to create methods which respond to the user selection
+  `getCustomerRunningJobs()`, `runOneShotJob()`, `scheduleOneShotJob()` | manage jobs
+  `sendMail()`, `writeMail()`, `getMailAttachmentFromContent()`, `getMailAttachmentFromReport()` | send or write mail items and produce mime-typed attachments from content or reports
+  `getDataStoreConnection()`, `newSQLDataAccess()` | access connections
+  `runBeanReport()`, `runSQLReport()`, `runReport()` | run reports
+  `newContentManager()` | access the content repository to work with content items
+  `newBizPortStandardGenerator`, `newBizPortWorkbook()`, `newBizPortSheet()` | developer access to customise Skyve's BizPort feature.
 
 ### ModulesUtil
 
