@@ -19,28 +19,32 @@ Skyve provides the following utility classes:
 </thead>
 <tbody>
 <tr>
-	<td>Util</td>
-	<td>Bean-level generic utilities, including generic bean methods e.g. <code>cloneToTransientBySerialisation()</code>.</td>
-</tr>
-<tr>
 	<td>Binder</td>
 	<td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li><code>formatMessage()</code> for using binding substitutions in string outputs using the correct converter</li><li><code>convertAndSet()</code> for setting a converted string value using the correct converter</li><li><code>createCompoundBinding()</code> for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul></td>
+</tr>
+<tr>
+	<td>CORE</td>
+	<td>Utility class for the core Skyve API.</td>
+</tr>
+<tr>
+	<td>DocumentQuery</td>
+	<td>Provides methods for constructing object queries without resorting to constructing OQL or SQL strings.</td>
+</tr>
+<tr>
+	<td>Ext</td>
+	<td>External and extra dependency APIs (Bizport and POI, mail, reporting, jobs and developer access to the Skyve tagging feature).</td>
 </tr>
 <tr>
 	<td>ModulesUtil</td>
 	<td>Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li><code>getNextDocumentNumber()</code> to create unique formatted serial document identifiers, </li><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li><code>currentAdminUser()</code> which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul></td>
 </tr>
 <tr>
-	<td>JobScheduler</td>
-	<td>Provides methods to schedule declared jobs, e.g. <code>runOneShotJob()</code>.</td>
-</tr>
-<tr>
 	<td>Persistence</td>
 	<td>Provides access to interact directly with the singleton persistence mechanism (detailed below).</td>
 </tr>
 <tr>
-	<td>DocumentQuery</td>
-	<td>Provides methods for constructing object queries without resorting to constructing OQL or SQL strings.</td>
+	<td>Util</td>
+	<td>Bean-level generic utilities, including generic bean methods e.g. <code>cloneToTransientBySerialisation()</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -87,42 +91,17 @@ DateOnly weekEndingDate = Binder.get(timesheet, WeeklyTimesheet.weekEndingDatePr
 Binder.set(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, weekEndingDate);		
 ```
 
-### Persistence
+### CORE
 
-Skyve's Persistence mechanism is described in detail in
-* [Skyve Persistence Mechanisms](./../_pages/skyve-persistence-mechanisms.md)
+CORE offers a number of key convenience methods.
+Method | Description/Usage
+-------|------------
+`getUser()` | returns the metadata user/user principal (as distinct from the current `modules.admin.domainUser`)
+`getCustomer()` | returns the current customer in for the current metadata user/user principal
+`getPersistence()` | See Persistence below
+`getStash()` | returns a convenience Map for the current conversation available to the developer
 
-The following is specific to the use of the Persistence utility class.
-
-The *Persistence* class provides access to persistence-specific
-functionality which may be required by developers, while ensuring that
-developer code will comply with security and threading mandates.
-
-Key persistence methods are:
-
-  Method           | Description
-  ---------------- | ------------------
-  get              | Instantiates a *Persistence* object
-  getUser          | Gets the current conversation *metadata.user*
-  begin, rollback, commit |   Control the state of the current transaction
-  evictAllCached, <br><br>evitCached | Evict beans from cached memory.<br><br>These methods are useful where code interactions with *persistentBeans* may be in contention with default actions resulting from user activity (like pressing the Save button). <br><br>For example, if a user executes an action which impacts on the bean displayed in the view, and modified beans are not evicted, the user's action will be in contention with the action. In this case, the user's subsequent attempt to Save the bean will be met with a message stating that the current bean has already been modified by the user and can't be saved. <br><br>Evicting cached beans at the conclusion of the action will avoid such a contention issue.
-  delete | deletes a bean instance
-  executeDML, <br><br>executeInsecureSQLDML | Execute persistence data manipulation language queries, either object DML or Insecure SQL DML.
-  flush | pushes all pending DML statements to the database (without _commit_)
-  upsertBeanTuple, <br><br>upsertCollectionTuples | Persists values only within the top-most level of the bean structure. <br><br>During an *upsert*, no bean validation is performed, and reference ID values are persisted without traversing into the related bean.
-  retrieve(ProjectionQuery), <br><br>retrieveInsecureSQL |  Retrieve a bean or collection of beans using a project query or via Insecure SQL
-  retrieve(Bean)    | Retrieve the current bean as it was last persisted.
-
-_Key methods of the Persistence utility class_
-
-#### Insecure SQL
-
-Methods using SQL are provided, but not recommended and are to be used
-with care. Unlike object query methods, SQL is implementation specific,
-but more importantly, the Skyve platform cannot assert automatic
-customer scoping and other platform features in insecure SQL.
-
-#### DocumentQuery
+### DocumentQuery
 
 *DocumentQuery* extends *ProjectionQuery* and provides the ability to
 retrieve persisted beans in a type-safe and secure way, without building
@@ -159,6 +138,122 @@ enforced by Skyve.
 The use of DocumentFilter allows for correct enforcement of types at
 compile-time to reduce the possibility of errors arising from implicit
 type conversion which may arise if SQL strings were used.
+
+### Ext
+
+The Ext class provides developers access to additional APIs as follows:
+Method | Description/Usage
+-------|-------
+`checkPassword()`, `hashPassword()` | check a password against a hash, or hash a password
+`clearTag()`, `createTag()`, `deleteTag()`, `getTagId()`,`getTags()`, `iterateTagged()`,` tag()`, `untag()` | developer access to Skyve's Tag function, allowing the developer to create methods which respond to the user selection
+`getCustomerRunningJobs()`, `runOneShotJob()`, `scheduleOneShotJob()` | manage jobs
+`sendMail()`, `writeMail()`, `getMailAttachmentFromContent()`, `getMailAttachmentFromReport()` | send or write mail items and produce mime-typed attachments from content or reports
+`getDataStoreConnection()`, `newSQLDataAccess()` | access connections
+`runBeanReport()`, `runSQLReport()`, `runReport()` | run reports
+`newContentManager()` | access Skyve's content repository
+`newBizPortStandardGenerator`, `newBizPortWorkbook()`, `newBizPortSheet()` | developer access to customise Skyve's BizPort feature.
+
+### ModulesUtil
+
+ModulesUtil is intended to provide common business focused convenience methods and enumerations and also to provide an introductory reference to Skyve developers for accessing framework concepts and features for real-world applications.
+
+#### Enumerations
+
+Enumeration | Description
+----------|--------
+CalendarMonth | months of the year
+OccurrenceFrequency | Common frequencies (weekly, monthly, quarterly etc)
+OccurrencePeriod | Common periods (week, month, quarter etc)
+DayOfWeek | days of the week
+
+#### Methods
+Method(s) | Description
+----------|-------------
+`addDaysDateOnly()`, `addFrequency()`, `annualFrequencyCount()`, `annualPeriodCount()` | Date manipulation for the specified period or frequency
+`firstDayOfMonth()`, `lastDayOfMonth()`, `firstDayOfYear()`, `lastDayOfYear()` | convenience methods for important dates
+`calendarMonthName()`, `calendarToDay()`, `dayOfWeekToCalendar()`, `sqlDateFormatOnly()` | calendar conversion
+
+#### Comparison and String convenience methods
+Method(s) | Description
+----------|-------------
+`bothNullOrEqual()` | handle nullable value comparison  
+`coalesce()`, `concatWithDelim()`, `enquote()`, `titleCase()` | basic String manipulations
+
+#### Unique document number generation
+Method(s) | Description
+----------|-------------
+`getNextDocumentNumber()`, `getNextLongDocumentNumber()` | thread-safe generation of unique numbers for documents
+`incrementAlpha()` | increment alphanumeric value
+
+#### bean and User
+Method(s) | Description
+----------|-------------
+`currentAdminUser()` | retrieve the modules.admin.domain.User from the user principal
+`getCurrentUserContact()` | retrieve the contact details for the user principal
+`hasModule()` | determine whether a user has access to a specified module
+`lookupBean()` | shorthand way of finding a bean using a legacy key value
+`getConditionName()` | returns a fomatted string representing the condition
+`getPersistentIdentifier()` | returns the database tablename for a given module.document
+`replaceBindingsInString()` | performs binding replacement whether the supplied string has the attribute displayName as the binding
+
+#### BizPort
+Method(s) | Description
+----------|-------------
+`standardBeanBizExport()`, `standardBeanBizImport()` | Code example of BizPort
+
+#### Comparators
+Method(s) | Description
+--------|-------------
+`DomainValueSortByCode`, `DomainValueSortByDescription` | Simple comparators for DomainValue lists.
+
+### Persistence
+
+Skyve's Persistence mechanism is described in detail in
+* [Skyve Persistence Mechanisms](./../_pages/skyve-persistence-mechanisms.md)
+
+The following is specific to the use of the Persistence utility class.
+
+The *Persistence* class provides access to persistence-specific
+functionality which may be required by developers, while ensuring that
+developer code will comply with security and threading mandates.
+
+Key persistence methods are:
+
+  Method           | Description
+  ---------------- | ------------------
+  get              | Instantiates a *Persistence* object
+  getUser          | Gets the current conversation *metadata.user*
+  begin, rollback, commit |   Control the state of the current transaction
+  evictAllCached, <br><br>evitCached | Evict beans from cached memory.<br><br>These methods are useful where code interactions with *persistentBeans* may be in contention with default actions resulting from user activity (like pressing the Save button). <br><br>For example, if a user executes an action which impacts on the bean displayed in the view, and modified beans are not evicted, the user's action will be in contention with the action. In this case, the user's subsequent attempt to Save the bean will be met with a message stating that the current bean has already been modified by the user and can't be saved. <br><br>Evicting cached beans at the conclusion of the action will avoid such a contention issue.
+  delete | deletes a bean instance
+  executeDML, <br><br>executeInsecureSQLDML | Execute persistence data manipulation language queries, either object DML or Insecure SQL DML.
+  flush | pushes all pending DML statements to the database (without _commit_)
+  upsertBeanTuple, <br><br>upsertCollectionTuples | Persists values only within the top-most level of the bean structure. <br><br>During an *upsert*, no bean validation is performed, and reference ID values are persisted without traversing into the related bean.
+  retrieve(ProjectionQuery), <br><br>retrieveInsecureSQL |  Retrieve a bean or collection of beans using a project query or via Insecure SQL
+  retrieve(Bean)    | Retrieve the current bean as it was last persisted.
+
+_Key methods of the Persistence utility class_
+
+#### Insecure SQL
+
+Methods using SQL are provided, but not recommended and are to be used
+with care. Unlike object query methods, SQL is implementation specific,
+but more importantly, the Skyve platform cannot assert automatic
+customer scoping and other platform features in insecure SQL.
+
+### Util
+
+
+### Injection
+
+Skyve supports injection of the following resources (using Contexts and Dependency Injection - CDI) into any into actions, bizlets, extension classes etc.
+* Customer
+* Persistence
+* Repository
+* Stash
+* User 
+
+Injection will survive serialisation. 
 
 **[⬆ back to top](#utility-classes)**
 

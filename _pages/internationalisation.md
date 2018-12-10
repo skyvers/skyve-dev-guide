@@ -24,6 +24,11 @@ e.g. `i18n_ar.properties`
 
 The resource file contains key value pairs for the basic fixed Skyve messages, however you can add your own tokens (tokens you declare in your application metadata).
 
+Skyve also provides the `getLocale()` convenience method.
+```java
+	Locale locale = CORE.getUser().getLocale();
+```
+
 ### Setting a default language for a customer
 
 It is often the case that a business operates in one (default) language irrespective of the locales of their users and so Skyve allows you to declare the language for a customer.
@@ -77,7 +82,6 @@ To create a true international application, you can use the traditional token-re
 We suggest using the naming convention _module.document.attribute(.property)_ for your tokens, as shown.
 
 ![Building apps for multiple languages](../assets/images/internationalisation/configuring_for_internationalisation.png "Building apps for multiple languages")
-
 
 **[⬆ back to top](#internationalisation-and-language-support)**
 

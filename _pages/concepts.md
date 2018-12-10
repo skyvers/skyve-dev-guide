@@ -402,16 +402,22 @@ or transaction context.
 ![Zoom levels and transactions](../assets/images/concepts/image28.png "Zoom levels and transactions")
 _Zoom levels and transactions_
 
-#### Concurrent conversations and transactional demarcation
+#### State management and conversations 
 
-Skyve supports conversation level transaction demarcation, meaning that
-the user can have any number of concurrent browser conversations.
+Skyve supports conversation based interactions, meaning that
+the user can have any number of concurrent browser interactions.
+
+Skyve allows developers to choose whether some gestures will result in 
+new conversations or within the existing conversation.  
+
+#### Transaction demarcation
 
 Conflicting actions between conversations (e.g. two attempts to update
-the same record from within different browser windows, or by different
-users) are handled within the conversation context, and users will be
+the same record from within different browser windows conversations, by different sessions, or by different users) are handled and users will be
 notified if the action they are performing conflicts within an action
-from another conversation. The usual rule of first-in-wins applies; the
+from another conversation.
+
+The usual rule of first-in-wins applies; the
 first conversation to complete a transaction and commit will be
 successful, and any subsequent concurrent transaction involving the same
 record will be notified that their attempts to update the same record
