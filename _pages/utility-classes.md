@@ -142,8 +142,9 @@ type conversion which may arise if SQL strings were used.
 ### Ext
 
 The Ext class provides developers access to additional APIs as follows:
- Method | Description/Usage
- -------|-------
+
+  Method(s)        | Description/Usage
+  ---------------- | ------------------
  `checkPassword()`, `hashPassword()` | check a password against a hash, or hash a password
  `clearTag()`, `createTag()`, `deleteTag()`, `getTagId()`,`getTags()`, `iterateTagged()`,` tag()`, `untag()` | developer access to Skyve's Tag function, allowing the developer to create methods which respond to the user selection
  `getCustomerRunningJobs()`, `runOneShotJob()`, `scheduleOneShotJob()` | manage jobs
@@ -167,27 +168,31 @@ OccurrencePeriod | Common periods (week, month, quarter etc)
 DayOfWeek | days of the week
 
 #### Methods
-  Method(s) | Description
-  ----------|-------------
+
+  Method(s)        | Description/Usage
+  ---------------- | ------------------
   `addDaysDateOnly()`, `addFrequency()`, `annualFrequencyCount()`, `annualPeriodCount()` | Date manipulation for the specified period or frequency
   `firstDayOfMonth()`, `lastDayOfMonth()`, `firstDayOfYear()`, `lastDayOfYear()` | convenience methods for important dates
   `calendarMonthName()`, `calendarToDay()`, `dayOfWeekToCalendar()`, `sqlDateFormatOnly()` | calendar conversion
 
 #### Comparison and String convenience methods
-  Method(s) | Description
-  ----------|-------------
+
+  Method(s)        | Description/Usage
+  ---------------- | ------------------
   `bothNullOrEqual()` | handle nullable value comparison  
   `coalesce()`, `concatWithDelim()`, `enquote()`, `titleCase()` | basic String manipulations
 
 #### Unique document number generation
-  Method(s) | Description
-  ----------|-------------
+
+  Method(s)        | Description/Usage
+  ---------------- | ------------------
   `getNextDocumentNumber()`, `getNextLongDocumentNumber()` | thread-safe generation of unique numbers for documents
   `incrementAlpha()` | increment alphanumeric value
 
 #### bean and User
-  Method(s) | Description
-  ----------|-------------
+
+  Method(s)        | Description/Usage
+  ---------------- | ------------------
   `currentAdminUser()` | retrieve the modules.admin.domain.User from the user principal
   `getCurrentUserContact()` | retrieve the contact details for the user principal
   `hasModule()` | determine whether a user has access to a specified module
@@ -197,13 +202,15 @@ DayOfWeek | days of the week
   `replaceBindingsInString()` | performs binding replacement whether the supplied string has the attribute displayName as the binding
 
 #### BizPort
-  Method(s) | Description
-  ----------|-------------
+
+  Method(s)        | Description/Usage
+  ---------------- | ------------------
   `standardBeanBizExport()`, `standardBeanBizImport()` | Code example of BizPort
 
 #### Comparators
-  Method(s) | Description
-  --------|-------------
+
+  Method(s)        | Description/Usage
+  ---------------- | ------------------
   `DomainValueSortByCode`, `DomainValueSortByDescription` | Simple comparators for DomainValue lists.
 
 ### Persistence
