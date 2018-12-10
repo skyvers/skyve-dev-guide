@@ -94,6 +94,7 @@ Binder.set(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, weekEndingDate
 ### CORE
 
 CORE offers a number of key convenience methods.
+
 Method | Description/Usage
 -------|------------
 `getUser()` | returns the metadata user/user principal (as distinct from the current `modules.admin.domainUser`)
