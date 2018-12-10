@@ -142,16 +142,16 @@ type conversion which may arise if SQL strings were used.
 ### Ext
 
 The Ext class provides developers access to additional APIs as follows:
-  Method | Description/Usage
-  -------|-------
-  `checkPassword()`, `hashPassword()` | check a password against a hash, or hash a password
-  `clearTag()`, `createTag()`, `deleteTag()`, `getTagId()`,`getTags()`, `iterateTagged()`,` tag()`, `untag()` | developer access to Skyve's Tag function, allowing the developer to create methods which respond to the user selection
-  `getCustomerRunningJobs()`, `runOneShotJob()`, `scheduleOneShotJob()` | manage jobs
-  `sendMail()`, `writeMail()`, `getMailAttachmentFromContent()`, `getMailAttachmentFromReport()` | send or write mail items and produce mime-typed attachments from content or reports
-  `getDataStoreConnection()`, `newSQLDataAccess()` | access connections
-  `runBeanReport()`, `runSQLReport()`, `runReport()` | run reports
-  `newContentManager()` | access the content repository to work with content items
-  `newBizPortStandardGenerator`, `newBizPortWorkbook()`, `newBizPortSheet()` | developer access to customise Skyve's BizPort feature.
+ Method | Description/Usage
+ -------|-------
+ `checkPassword()`, `hashPassword()` | check a password against a hash, or hash a password
+ `clearTag()`, `createTag()`, `deleteTag()`, `getTagId()`,`getTags()`, `iterateTagged()`,` tag()`, `untag()` | developer access to Skyve's Tag function, allowing the developer to create methods which respond to the user selection
+ `getCustomerRunningJobs()`, `runOneShotJob()`, `scheduleOneShotJob()` | manage jobs
+ `sendMail()`, `writeMail()`, `getMailAttachmentFromContent()`, `getMailAttachmentFromReport()` | send or write mail items and produce mime-typed attachments from content or reports
+ `getDataStoreConnection()`, `newSQLDataAccess()` | access connections
+ `runBeanReport()`, `runSQLReport()`, `runReport()` | run reports
+ `newContentManager()` | access the content repository
+ `newBizPortStandardGenerator`, `newBizPortWorkbook()`, `newBizPortSheet()` | developer access to customise Skyve's BizPort feature.
 
 ### ModulesUtil
 
@@ -167,44 +167,44 @@ OccurrencePeriod | Common periods (week, month, quarter etc)
 DayOfWeek | days of the week
 
 #### Methods
-Method(s) | Description
-----------|-------------
-`addDaysDateOnly()`, `addFrequency()`, `annualFrequencyCount()`, `annualPeriodCount()` | Date manipulation for the specified period or frequency
-`firstDayOfMonth()`, `lastDayOfMonth()`, `firstDayOfYear()`, `lastDayOfYear()` | convenience methods for important dates
-`calendarMonthName()`, `calendarToDay()`, `dayOfWeekToCalendar()`, `sqlDateFormatOnly()` | calendar conversion
+  Method(s) | Description
+  ----------|-------------
+  `addDaysDateOnly()`, `addFrequency()`, `annualFrequencyCount()`, `annualPeriodCount()` | Date manipulation for the specified period or frequency
+  `firstDayOfMonth()`, `lastDayOfMonth()`, `firstDayOfYear()`, `lastDayOfYear()` | convenience methods for important dates
+  `calendarMonthName()`, `calendarToDay()`, `dayOfWeekToCalendar()`, `sqlDateFormatOnly()` | calendar conversion
 
 #### Comparison and String convenience methods
-Method(s) | Description
-----------|-------------
-`bothNullOrEqual()` | handle nullable value comparison  
-`coalesce()`, `concatWithDelim()`, `enquote()`, `titleCase()` | basic String manipulations
+  Method(s) | Description
+  ----------|-------------
+  `bothNullOrEqual()` | handle nullable value comparison  
+  `coalesce()`, `concatWithDelim()`, `enquote()`, `titleCase()` | basic String manipulations
 
 #### Unique document number generation
-Method(s) | Description
-----------|-------------
-`getNextDocumentNumber()`, `getNextLongDocumentNumber()` | thread-safe generation of unique numbers for documents
-`incrementAlpha()` | increment alphanumeric value
+  Method(s) | Description
+  ----------|-------------
+  `getNextDocumentNumber()`, `getNextLongDocumentNumber()` | thread-safe generation of unique numbers for documents
+  `incrementAlpha()` | increment alphanumeric value
 
 #### bean and User
-Method(s) | Description
-----------|-------------
-`currentAdminUser()` | retrieve the modules.admin.domain.User from the user principal
-`getCurrentUserContact()` | retrieve the contact details for the user principal
-`hasModule()` | determine whether a user has access to a specified module
-`lookupBean()` | shorthand way of finding a bean using a legacy key value
-`getConditionName()` | returns a fomatted string representing the condition
-`getPersistentIdentifier()` | returns the database tablename for a given module.document
-`replaceBindingsInString()` | performs binding replacement whether the supplied string has the attribute displayName as the binding
+  Method(s) | Description
+  ----------|-------------
+  `currentAdminUser()` | retrieve the modules.admin.domain.User from the user principal
+  `getCurrentUserContact()` | retrieve the contact details for the user principal
+  `hasModule()` | determine whether a user has access to a specified module
+  `lookupBean()` | shorthand way of finding a bean using a legacy key value
+  `getConditionName()` | returns a fomatted string representing the condition
+  `getPersistentIdentifier()` | returns the database tablename for a given module.document
+  `replaceBindingsInString()` | performs binding replacement whether the supplied string has the attribute displayName as the binding
 
 #### BizPort
-Method(s) | Description
-----------|-------------
-`standardBeanBizExport()`, `standardBeanBizImport()` | Code example of BizPort
+  Method(s) | Description
+  ----------|-------------
+  `standardBeanBizExport()`, `standardBeanBizImport()` | Code example of BizPort
 
 #### Comparators
-Method(s) | Description
---------|-------------
-`DomainValueSortByCode`, `DomainValueSortByDescription` | Simple comparators for DomainValue lists.
+  Method(s) | Description
+  --------|-------------
+  `DomainValueSortByCode`, `DomainValueSortByDescription` | Simple comparators for DomainValue lists.
 
 ### Persistence
 
