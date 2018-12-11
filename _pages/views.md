@@ -161,11 +161,6 @@ will be displayed in bold type if the attribute is required.
 		<tr><td>default            </td><td> If used in a view, this will render whatever the default widget is.<br><br>Either the <em>defaultWidget</em> declared on the document attribute or the Skyve default control for the attribute type.</td></tr>
 		</td></tr>
 		<tr><td>dialogButton       </td><td> Not yet implemented.</td><td></td></tr>		
-	</tbody>
-</table>
-
-<table>
-	<tbody>
 		<tr><td>geoLocator         </td><td> Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. <br> <br>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br> <br>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding<li>cityBinding<li>stateBinding<li>postcodeBinding<li>countryBinding<li>latitudeBinding<li>longitudeBinding</ul> </td><td> In this example, the Map button is displayed. When clicked, the geolocator (shown below) will be displayed in a modal window. <img src="../assets/images/views/image107.png" alt="geoLocator"/></td></tr>
 	</tbody>
 </table>
