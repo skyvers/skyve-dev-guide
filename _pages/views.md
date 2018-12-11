@@ -165,7 +165,6 @@ will be displayed in bold type if the attribute is required.
 		<tr><td>html </td><td> displays HTML content together with an Edit button <br><br> When the edit button is clicked, a popup HTML editor window is displayed allowing users to create rich HTML. </td><td> <img src="../assets/images/views/image108.png" alt="html"/></td></tr>
 		<tr><td>inject </td><td> allows the inclusion of javascript snippets within the view </td><td> <img src="../assets/images/views/inject.png" alt="inject"/></td></tr>
 		<tr><td>label </td><td> Simple text. </td><td> <img src="../assets/images/views/image109.png" alt="label"/></td></tr>
-			
 	</tbody>
 </table>
 
