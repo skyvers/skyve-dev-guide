@@ -4,7 +4,6 @@ permalink: /views/
 excerpt: "Views"
 toc: true
 toc_label: "Views Contents"
-classes: wide
 sidebar:
   title: "Index"
   nav: docs
