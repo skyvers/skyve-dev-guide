@@ -162,13 +162,13 @@ will be displayed in bold type if the attribute is required.
 		</td></tr>
 		<tr><td>dialogButton       </td><td> Not yet implemented.</td><td></td></tr>		
 		<tr><td>geoLocator         </td><td> Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. <br/> <br/>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br/> <br/>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding</li><li>cityBinding</li><li>stateBinding</li><li>postcodeBinding</li><li>countryBinding</li><li>latitudeBinding</li><li>longitudeBinding</li></ul> </td><td> In this example, the Map button is displayed. When clicked, the geolocator (shown below) will be displayed in a modal window. <img src="../assets/images/views/image107.png" alt="geoLocator"/></td></tr>
-		<tr><td>geometry	         </td><td> displays a Well Known Text (WKT) representation of the geometry, with a map-based selection tool</td></tr>
+		<tr><td>geometry	         </td><td> displays a Well Known Text (WKT) representation of the geometry, with a map-based selection tool</td><td></td></tr>
+		<tr><td>html </td><td> displays HTML content together with an Edit button <br/><br/> When the edit button is clicked, a popup HTML editor window is displayed allowing users to create rich HTML. </td><td> <img src="../assets/images/views/image108.png" alt="html"/></td></tr>
 	</tbody>
 </table>
 		
 <table>
 	<tbody>
-		<tr><td>html </td><td> displays HTML content together with an Edit button <br/><br/> When the edit button is clicked, a popup HTML editor window is displayed allowing users to create rich HTML. </td><td> <img src="../assets/images/views/image108.png" alt="html"/></td></tr>
 		<tr><td>inject </td><td> allows the inclusion of javascript snippets within the view </td><td> <img src="../assets/images/views/inject.png" alt="inject"/></td></tr>
 		<tr><td>label </td><td> Simple text. </td><td> <img src="../assets/images/views/image109.png" alt="label"/></td></tr>
 		<tr><td>link </td><td> provides a _link_ style approach to Skyve platform features (partially implemented)<br/>options include <ul><li>actionReference - perform an action</li><li>contentReference - access a content item</li><li>defaultListViewReference - open a default list view</li><li>editViewReference - open an edit view for a binding</li><li>externalReference - a link to an external resource</li><li>implicitActionReference - perform a Skyve implicit action</li><li>queryListViewReference - open a list view based on a query</li><li>reportReference - perform a report action (view a report)</li><li>resourceReference - view a Skyve resource</li></ul> </td><td> <img src="../assets/images/views/link.png" alt="link"/></td></tr>
