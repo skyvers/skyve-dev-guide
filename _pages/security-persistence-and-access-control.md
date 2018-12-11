@@ -92,8 +92,8 @@ Skyve does not adopt this model for a number of reasons:
 
 ***Trusted subsystem model***
 
-This model uses the application’s process identity to access the
-persistence layer. This model was selected for GPS because:
+This model uses the application's process identity to access the
+persistence layer. This model was selected for Skyve because:
 
 -   Database connection pooling is supported which means that the
     > application is scalable,
