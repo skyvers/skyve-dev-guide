@@ -841,6 +841,68 @@ ProxyPassReverse / http://localhost:8080/
 * Start the wildfly service and make sure the datasources deploy successfully
 * Deploy `{projectName}.war`
 
+## Skyve Renderer Comparison
+
+Skyve features the ability to dynamically change the rendering engine based on criteria specified as part of its routing. By default, it switches renderer based on the user agent of the browser. If it detects the user is using a desktop browser, the SmartClient renderer will be used, otherwise the responsive JSF renderer will be used.
+
+The table below shows the available renderers in Skyve and their level of completion.
+
+*Note: React and React Native are in early stages of development and not available for use in applications yet. This table is not a complete list.*
+
+**High Level Features**
+
+Feature | SmartClient | JSF | JQuery Mobile | React | React Native
+--------| ----------- | --- | ------------- | ----- | ------------
+View Layout    | Y | Y | Y | Y | 
+Data Grid      | Y | Y | Y | Y | 
+File Upload    | Y | Y |   |   | 
+Content Upload | Y | Y |   |   | 
+File Download  | Y | Y |   |   | 
+
+**View Controls**
+
+Feature | SmartClient | JSF | JQuery Mobile | React | React Native
+--------| ----------- | --- | ------------- | ----- | ------------
+Labels            | Y | Y | Y |   | 
+Checkbox          | Y | Y | Y |   | 
+Colour picker     | Y |   |   |   | 
+Content picker    | Y | Y | Y |   | 
+Date picker       | Y | Y | Y |   | 
+Date/time picker  | Y | Y | Y |   | 
+Drop-down list    | Y | Y | Y |   | 
+Geometry picker   | Y |   |   |   | 
+Integer spinner   | Y | Y | Y |   | 
+List membership   | Y | Y |   |   | 
+Text area         | Y | Y | Y |   | 
+Text field        | Y | Y | Y |   | 
+Type-ahead        | Y | Y | Y |   | 
+
+**List Grids**
+
+Feature | SmartClient | JSF | JQuery Mobile | React | React Native
+--------| ----------- | --- | ------------- | ----- | ------------
+List Grid          | Y | Y | Y | Y | 
+Image Thumbnails   | Y | Y |   |   | 
+File Thumbnails    | Y | Y |   |   | 
+Column filtering   | Y | Y |   |   | 
+Column sorting     | Y | Y |   |   | 
+Advanced filtering | Y |   |   |   | 
+Export             | Y |   |   |   | 
+
+**Desktop only features**
+
+The following features are only available for the SmartClient renderer, as they do not provide a good end user experience to try to implement on a touch device or low resolution screen.
+
+* Prompt on expired session
+* Global content search
+* List Grid features
+  * Advanced filtering
+  * Map based filtering
+  * Tagging
+  * Snapshots
+  * Flags
+  * Exporting
+
 **[⬆ back to top](#deploying-a-skyve-application)**
 
 ---
