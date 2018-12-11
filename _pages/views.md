@@ -3,6 +3,7 @@ title: "Views"
 permalink: /views/
 excerpt: "Views"
 toc: true
+classes: wide
 sidebar:
   title: "Index"
   nav: docs
