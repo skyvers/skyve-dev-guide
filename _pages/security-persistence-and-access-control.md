@@ -75,14 +75,14 @@ The impersonation model is shown below.
 
 Skyve does not adopt this model for a number of reasons:
 
--   This model does not suit agile development methods where user access
-    requirements are not well known because identification of the end
-    user set is unclear and an overhead exists in managing authorisation
-    levels in multiple places,
+-   This model does not suit agile development methods where 
+	* user access requirements are not well known 
+	* identification of the end user set is unclear, and 
+	* an overhead exists in managing authorisation levels in multiple places,
 
 -   The method does not scale well (as per the Microsoft quote above),
 
--   This model is not feasible for public web applications and SAAS
+-   This model is not feasible for public web applications and _SaaS_
     environments where user populations are constantly changing and not
     known in advance, and
 
