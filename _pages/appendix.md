@@ -843,7 +843,7 @@ ProxyPassReverse / http://localhost:8080/
 
 ## Skyve Renderer Comparison
 
-Skyve features the ability to dynamically change the rendering engine based on criteria specified as part of its routing. By default, it switches renderer based on the user agent of the browser. If it detects the user is using a desktop browser, the SmartClient renderer will be used, otherwise the responsive JSF renderer will be used.
+Skyve features the ability to dynamically change the rendering engine based on criteria specified as part of its routing. By default, it switches renderer based on the user agent of the browser. If it detects the user is using a desktop browser, the SmartClient renderer will be used, otherwise the responsive PrimeFaces renderer will be used.
 
 The table below shows the available renderers in Skyve and their level of completion.
 
@@ -851,35 +851,52 @@ The table below shows the available renderers in Skyve and their level of comple
 
 **High Level Features**
 
-Feature | SmartClient | JSF | JQuery Mobile | React | React Native
---------| ----------- | --- | ------------- | ----- | ------------
-View Layout    | Y | Y | Y | Y | 
-Data Grid      | Y | Y | Y | Y | 
-File Upload    | Y | Y |   |   | 
-Content Upload | Y | Y |   |   | 
-File Download  | Y | Y |   |   | 
+Feature | SmartClient | PrimeFaces | JQuery Mobile | React | React Native | Description
+--------| ----------- | ---------- | ------------- | ----- | ------------ | -----------
+Session management      | Y | Y | Y | Y |   | Ability to create, associate, expire and propagate a user session and prompt for login
+Conversation management | Y | Y | Y | Y |   | Ability to start, associate, propagate and reclaim conversation states in Skyve views
+Zooming management      | Y | Y | Y | Y |   | Ability to manage _n_ level zooming across the domain’s aggregations, within and outside of view conversations
+Security management     | Y | Y | Y | Y | Y | Guarding against XSS, injection attacks and applying best practice network and application security through sanitisation, escaping etc
+Permission management   | Y | P |   |   |   | Ability for the view to react automatically to the user’s permissions by showing, hiding and altering different view mechanisms
+Scope management        | Y | Y |   |   |   | Ensuring that view elements issue correct data retrievals based on the current user’s scope settings
+Request management      | Y | Y |   |   |   | Ensure requests are issued asynchronously and synchronously as required, orchestrating multiple requests, and managing long running and unresponsive requests
+UI Dirty management     | Y |   |   |   |   | Ability to detect data changes in the UI widgets through all request/responses in a conversation and warn when a user is about to perform a gesture that will discard their unsaved changes
+Routing Management      | Y | Y |   |   |   | Ability to inject front end markup/logic into existing Skyve views through “native” mechanisms and remain integrated with the Skyve view plus the ability to hijack a view completely through the Skyve routing mechanism and generate pieces of the defined Skyve views as an assembly strategy if appropriate.
+View Layout             | Y | Y | Y | Y |   | 
+Data Grid               | Y | Y | Y | Y |   | 
+File Upload             | Y | Y |   |   |   | 
+Content Upload          | Y | Y |   |   |   | 
+File Download           | Y | Y |   |   |   | 
 
 **View Controls**
 
-Feature | SmartClient | JSF | JQuery Mobile | React | React Native
+Feature | SmartClient | PrimeFaces | JQuery Mobile | React | React Native
 --------| ----------- | --- | ------------- | ----- | ------------
 Labels            | Y | Y | Y |   | 
+Blurb             | Y | Y |   |   | 
+Button            | Y | Y | Y |   | 
 Checkbox          | Y | Y | Y |   | 
 Colour picker     | Y |   |   |   | 
 Content picker    | Y | Y | Y |   | 
 Date picker       | Y | Y | Y |   | 
 Date/time picker  | Y | Y | Y |   | 
 Drop-down list    | Y | Y | Y |   | 
+Geolocator        | Y |   |   |   | 
 Geometry picker   | Y |   |   |   | 
+Inject            | Y |   |   |   | 
 Integer spinner   | Y | Y | Y |   | 
 List membership   | Y | Y |   |   | 
+Password          | Y | Y |   |   | 
+Rich text editor  | Y |   |   |   | 
+Radio             | Y | Y |   |   | 
+Spacer            | Y | Y |   |   | 
 Text area         | Y | Y | Y |   | 
 Text field        | Y | Y | Y |   | 
 Type-ahead        | Y | Y | Y |   | 
 
 **List Grids**
 
-Feature | SmartClient | JSF | JQuery Mobile | React | React Native
+Feature | SmartClient | PrimeFaces | JQuery Mobile | React | React Native
 --------| ----------- | --- | ------------- | ----- | ------------
 List Grid          | Y | Y | Y | Y | 
 Image Thumbnails   | Y | Y |   |   | 
