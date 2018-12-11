@@ -62,7 +62,7 @@ defaults:
       path: ""
       type: pages
     values:
-      layout: wide
+      layout: single
   # _docs
   - scope:
       path: ""
