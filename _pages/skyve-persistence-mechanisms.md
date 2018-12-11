@@ -262,8 +262,7 @@ across data group contexts.
  etc
 
 3. Start your app server and ensure your project deploys. If you receive messages that a valid connection can't be obtained, check connection details, credentials, firewall and port settings.
-4. For older versions of the demo (prior to Feb 2018), you'll need to run a bootstrap sql to insert your first user into the database. To do this follow the instructions as per Adding a setup user in [Chapter 6: Customers](./../chapters/customers.md)
-- for versions of Skyve after 1 Jan 2018, set the setup user in the .json file to log in the first time.
+4. For older versions of the demo (prior to Feb 2018), you'll need to run a bootstrap sql to insert your first user into the database. For versions of Skyve after 1 Jan 2018, set the setup user in the .json file to log in the first time.
 
 **[⬆ back to top](#skyve-persistence-mechanisms)**
 
