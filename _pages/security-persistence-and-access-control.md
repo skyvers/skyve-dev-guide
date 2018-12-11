@@ -95,15 +95,11 @@ Skyve does not adopt this model for a number of reasons:
 This model uses the application's process identity to access the
 persistence layer. This model was selected for Skyve because:
 
--   Database connection pooling is supported which means that the
-    > application is scalable,
+-   Database connection pooling is supported which means that the application is scalable,
 
--   This model has the least overhead in terms of permissions management
-    > making it the most effective for agile development where
-    > requirements and the user population is not clearly defined, and
+-   This model has the least overhead in terms of permissions management making it the most effective for agile development where  requirements and the user population is not clearly defined, and 
 
--   This model is widely used and therefore assumed to be acceptable in
-    > an otherwise unknown policy and strategy environment.
+-   This model is widely used and therefore assumed to be acceptable in an otherwise unknown policy and strategy environment.
 
 ![Trusted subsystem model](../assets/images/security-persistence-and-access-control/image31.png "Trusted subsystem model that supports database connection pooling")
 
@@ -112,13 +108,13 @@ persistence layer. This model was selected for Skyve because:
 Under the hybrid model, a combination of both of the above models is
 implemented. Skyve does not adopt this method natively because:
 
--   According (for example) to Microsoft - creating multiple thread
+-   According (for example) to Microsoft - "creating multiple thread
     access tokens used to establish different security contexts for
     downstream resource access using Windows authentication is a
     privileged operation that requires privileged process accounts. This
     is counter to the principle of least privilege.", and
 
--   User access requirements for GPS were not clearly identified so
+-   User access requirements for SaaS are not clearly identified so
     decisions about the specifics of the Trusted service access was not
     able to be ascertained.
 
