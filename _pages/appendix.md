@@ -126,19 +126,25 @@ See additional details in [Setting up a Skyve instance](#setting-up-a-skyve-inst
 
 ## Importing an existing Skyve project from Git
 
-In Eclipse, choose File->Import...>Git->Projects from Git->Next->Clone URI and set the URI (for example type in https://github.com/skyvers/skyve.git as URI), then click the _Next_ button, 
-choose the master and click the _Next_ button. Choose your destination directory, 
-in this example, we have chosen `C:\\_\ directory`. Then click the _Next_ button. 
-The import wizard should be displayed and cloning the Skyve project.
+*Note: These instructions are for the Eclipse IDE, you will need to locate instructions for your IDE if not using Eclipse.*
 
-After cloning the master, go to Project -> Clean - Select clean all projects and press OK - wait for activity to cease in bottom right corner of the eclipse window.
+In Eclipse, 
 
-#### Starting the server
+* choose File->Import...>Git->Projects from Git->Next->Clone URI and set the URI (for example type in https://github.com/skyvers/skyve.git as URI),
+* then click the _Next_ button, 
+* choose the master and click the _Next_ button. 
+* Choose your destination directory, in this example, we have chosen `C:\\_\ directory`.
+* Then click the _Next_ button. 
+* The import wizard should be displayed and cloning the Skyve project.
 
-##### Development environment
+After cloning the master, go to Project -> Clean - Select clean all projects and press OK - wait for activity to cease in bottom right corner of the Eclipse window.
+
+### Starting the server
+
+#### Development environment
 Skyve provides a bootstrap user configuration (specified in the `.json` file) - this will insert a user with all module roles as a way to get started. The bootstrap configuration is disabled if the instance is a production instance.
 
-##### Other environments
+#### Other environments
 In UAT and PROD environments, Wildfly should be configured as a service. Refer to Wildfly documentation for detailed instructions.
 
 ## Setting up a Skyve instance
@@ -169,40 +175,40 @@ For example, for SQL Server:
 - copy the following definition into a new file  wildfy.../modules/system/layers/base/com/microsoft/sqlserver/main/module.xml
 
 ```xml
- 		<?xml version="1.0" encoding="utf-8"?> 
-			<module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 
-  			<resources> 
-    				<resource-root path="sqljdbc42.jar"/> 
-  			</resources> 
-  			<dependencies> 
-    				<module name="javax.api"/> 
-    				<module name="javax.transaction.api"/>
-				<module name="javax.xml.bind.api"/>
-  			</dependencies> 
-		</module>
+    <?xml version="1.0" encoding="utf-8"?> 
+        <module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 
+        <resources> 
+                <resource-root path="sqljdbc42.jar"/> 
+        </resources> 
+        <dependencies> 
+                <module name="javax.api"/> 
+                <module name="javax.transaction.api"/>
+            <module name="javax.xml.bind.api"/>
+        </dependencies> 
+    </module>
 ```
 
-- declare the driver in the wildfly configuration file wildfly/standalone/configuration/standalone.xml <drivers> stanza as follows:
+- declare the driver in the wildfly configuration file wildfly/standalone/configuration/standalone.xml `<drivers>` stanza as follows:
 
 ```xml
-		<driver name="sqlserver" module="com.microsoft.sqlserver">
-                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-                </driver>
+    <driver name="sqlserver" module="com.microsoft.sqlserver">
+        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+    </driver>
 ```
 
 ### Configuring ports
 To configure which ports will be used for accessing the application, modify the <socket-binding-group> section in the wildfly configuration file wildfly/standalone/configuration/standalone.xml for http and https:
 
 ```xml
-        <socket-binding name="http" port="${jboss.http.port:8080}"/>
-        <socket-binding name="https" port="${jboss.https.port:8443}"/>
+    <socket-binding name="http" port="${jboss.http.port:8080}"/>
+    <socket-binding name="https" port="${jboss.https.port:8443}"/>
 ```
 
 For example, for external access, typically you would assign as follows:
 
 ```xml
-	<socket-binding name="http" port="${jboss.http.port:80}"/>
-        <socket-binding name="https" port="${jboss.https.port:443}"/>
+    <socket-binding name="http" port="${jboss.http.port:80}"/>
+    <socket-binding name="https" port="${jboss.https.port:443}"/>
 ```
 
 ### Create a folder for content
@@ -266,7 +272,6 @@ Note that URLs without a specified port will require you to change the Wildlfy p
 However if you need to change the project for a different URL context, like `https://skyve.org/tax_management`, then there's a few simple steps you need to take to make that work.
 
 1. Remove the project from your wildfly server (and ensure the `myApplication.war` is removed from the deployments area). 
-
 2. Edit the project `pom.xml` file to change the name of the `.war` to be built:
 
 change
@@ -292,7 +297,6 @@ to
 ```
 
 3. Rename the `.json` settings file from `myApplication.json` to `tax_management.json`
-
 4. Update the project `.json` file for the new context
 from
 
@@ -322,11 +326,9 @@ to
 	},
 ```
 
-4. Rename the `myApplication-ds.xml` to `tax_management-ds.xml`
-
-5. Maven update the project (for example, in eclipse, right-click the project, choose Maven and update Project)
-
-6. Add the project to your wildfly server
+5. Rename the `myApplication-ds.xml` to `tax_management-ds.xml`
+6. Maven update the project (for example, in eclipse, right-click the project, choose Maven and update Project)
+7. Add the project to your wildfly server
 
 Note that 
 * when deploying, you may need to manually create the `tax_management-ds.xml.dodeploy` and `tax_management.war.dodeploy` signal files. 
