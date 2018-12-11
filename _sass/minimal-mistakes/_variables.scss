@@ -134,15 +134,17 @@ $base0f: #ff5370 !default;
 $small: 600px !default;
 $medium: 768px !default;
 $medium-wide: 900px !default;
-$large: 1024px !default;
-$x-large: 1280px !default;
+/*$large: 1024px !default;*/
+$large: 1200px !default;
+/*$x-large: 1280px !default;*/
+$x-large: 1400px !default;
 
 /*
    Grid
    ========================================================================== */
 
-$right-sidebar-width-narrow: 150px !default;
-$right-sidebar-width: 225px !default;
+$right-sidebar-width-narrow: 175px !default;
+$right-sidebar-width: 250px !default;
 $right-sidebar-width-wide: 300px !default;
 
 /*
