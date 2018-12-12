@@ -1,7 +1,7 @@
 ---
-title: "Building Applications"
+title: "Building applications"
 permalink: /building-applications/
-excerpt: "Building Applications"
+excerpt: "Building applications"
 toc: true
 sidebar:
   title: "Index"

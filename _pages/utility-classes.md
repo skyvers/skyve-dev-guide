@@ -1,7 +1,7 @@
 ---
-title: "Utility Classes"
+title: "Utility classes"
 permalink: /utility-classes/
-excerpt: "Utility Classes"
+excerpt: "Utility classes"
 toc: true
 sidebar:
   title: "Index"

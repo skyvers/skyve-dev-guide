@@ -1,7 +1,7 @@
 ---
-title: "Automated Unit Testing"
+title: "Automated unit testing"
 permalink: /automated-unit-testing/
-excerpt: "Automated Unit Testing"
+excerpt: "Automated unit testing"
 toc: true
 sidebar:
   title: "Index"

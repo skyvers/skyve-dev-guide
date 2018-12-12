@@ -1,7 +1,7 @@
 ---
-title: "Content Repository Tools"
+title: "Content repository tools"
 permalink: /content-repository-tools/
-excerpt: "Content Repository Tools"
+excerpt: "Content repository tools"
 toc: true
 sidebar:
   title: "Index"

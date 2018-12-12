@@ -5,13 +5,13 @@ docs:
         url: /
       - title: "Concepts"
         url: /concepts/
-      - title: "Security, Persistence and Access control"
+      - title: "Security, persistence and access control"
         url: /security-persistence-and-access-control/
-      - title: "Exception Handling"
+      - title: "Exception handling"
         url: /exception-handling/        
-  - title: Building Applications
+  - title: Building applications
     children:
-      - title: "Building Applications"
+      - title: "Building applications"
         url: /building-applications/                
       - title: "Customers"
         url: /customers/                
@@ -33,31 +33,31 @@ docs:
         url: /reports/                                                                
       - title: "Jobs"
         url: /jobs/                                                                
-      - title: "Utility Classes"
+      - title: "Utility classes"
         url: /utility-classes/                                                                                
-      - title: "Common Patterns"
+      - title: "Common patterns"
         url: /common-patterns/                                                                                
       - title: "Skyve persistence mechanisms"
         url: /skyve-persistence-mechanisms/                                                                                
   - title: Platform tools
     children:
-      - title: "Maven Targets"
+      - title: "Maven targets"
         url: /maven-targets/                                                                                
-      - title: "Content Repository Tools"
+      - title: "Content repository tools"
         url: /content-repository-tools/                                                                                
       - title: "Bizport"
         url: /bizport/                                                                                
-      - title: "Wildcat Conversion Tool"
+      - title: "Wildcat conversion tool"
         url: /wildcat-conversion-tool/                                                                                
-      - title: "Automated Unit Testing"
+      - title: "Automated unit testing"
         url: /automated-unit-testing/                                                                                
       - title: "Automated UI testing and SAIL"
         url: /automated-ui-testing/                                                                                
   - title: Appendix
     children:
-      - title: "Deploying a Skyve Application"
+      - title: "Deploying a Skyve application"
         url: /appendix/                  
-      - title: "Installing and configuring the Skyve Development Environment"
+      - title: "Installing and configuring a Skyve development environment"
         url: /appendix/                  
       - title: "Setting up a Skyve instance"
         url: /appendix/                  

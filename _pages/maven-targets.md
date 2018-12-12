@@ -1,7 +1,7 @@
 ---
-title: "Maven Targets"
+title: "Maven targets"
 permalink: /maven-targets/
-excerpt: "Maven Targets"
+excerpt: "Maven targets"
 toc: true
 sidebar:
   title: "Index"

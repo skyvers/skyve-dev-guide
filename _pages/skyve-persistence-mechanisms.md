@@ -1,7 +1,7 @@
 ---
-title: "Skyve Persistence Mechanisms"
+title: "Skyve persistence m"
 permalink: /skyve-persistence-mechanisms/
-excerpt: "Skyve Persistence Mechanisms"
+excerpt: "Skyve persistence mechanisms"
 toc: true
 sidebar:
   title: "Index"

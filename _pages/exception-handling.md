@@ -1,7 +1,7 @@
 ---
-title: "Exception Handling"
+title: "Exception handling"
 permalink: /exception-handling/
-excerpt: "Exception Handling"
+excerpt: "Exception handling"
 toc: true
 sidebar:
   title: "Index"

@@ -1,7 +1,7 @@
 ---
-title: "Common Patterns"
+title: "Common patterns"
 permalink: /common-patterns/
-excerpt: "Common Patterns"
+excerpt: "Common patterns in Skyve applications"
 toc: true
 sidebar:
   title: "Index"
