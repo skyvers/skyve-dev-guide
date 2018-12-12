@@ -147,7 +147,7 @@ For example, if a view has 4 attributes - text, dateOnly, decimal2 and boolean -
 - decimal2 according to the declared converter (if one is declared)
 - boolean as true, false or null (if the attribute is not required)
 
-(This list is not exhaustive - refer to the `DataBuilder()` description in (./../_pages/automated-unit-testing.md "Automated unit testing") 
+(This list is not exhaustive - refer to the `DataBuilder()` description in [Automated Unit Testing](./../_pages/automated-unit-testing.md) 
 
 ### Generating _Selenese_ or _Web Driver_ methods
 
