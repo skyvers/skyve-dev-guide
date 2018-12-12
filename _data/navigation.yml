@@ -51,6 +51,8 @@ docs:
         url: /wildcat-conversion-tool/                                                                                
       - title: "Automated Unit Testing"
         url: /automated-unit-testing/                                                                                
+      - title: "Automated UI testing and SAIL"
+        url: /automated-ui-testing/                                                                                
   - title: Appendix
     children:
       - title: "Deploying a Skyve Application"

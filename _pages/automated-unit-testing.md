@@ -245,5 +245,5 @@ Let's break this test down:
 **[⬆ back to top](#automated-unit-testing)**
 
 ---
-**Next [Appendix](./../_pages/appendix.md)**<br>
+**Next [Automated UI Testing and SAIL](./../_pages/automated-ui-testing.md)**<br>
 **Previous [Wildcat Conversion Tool](./../_pages/wildcat-conversion-tool.md)**
