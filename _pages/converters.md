@@ -157,6 +157,22 @@ However, supports the use of regular expressions for validation and custom messa
 </text>
 ```
 
+#### Using a validator without a bean
+
+You can use the Skyve validators to check a value (even if it is not contained in a bean).
+
+For example to check an email address, create a TextValidator, then use the `validate` method, as follows:
+```java
+		ValidationException ve = new ValidationException();  
+		
+		TextValidator v = new TextValidator();
+        v.setType(ValidatorType.email);
+        v.validate(resolvedSendTo, "email", "Email", null, ve);
+		if(!ve.getMessages().isEmpty()) {
+			throw ve;
+		}
+```
+
 **[⬆ back to top](#converter-validator-and-format)**
 
 ---
