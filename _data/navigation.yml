@@ -37,6 +37,8 @@ docs:
         url: /utility-classes/                                                                                
       - title: "Common patterns"
         url: /common-patterns/                                                                                
+      - title: "Working with content"
+        url: /working-with-content/                                                                                
       - title: "Skyve persistence mechanisms"
         url: /skyve-persistence-mechanisms/                                                                                
   - title: Platform tools

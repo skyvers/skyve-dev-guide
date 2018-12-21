@@ -107,6 +107,12 @@ If a query name is not supplied Skyve will generate a default or
 *generic* query which will include all columns for all document
 attributes.
 
+Queries defined in the `module.xml` are also available to developers in
+*Bizlet* code. Queries can also be declared as the source for document
+attribute associations and collections. When used in this way, the query
+determines eligible references for membership in the association or
+collection.
+
 ### Generic queries
 
 When Skyve generates a query (in the situation where a query is required
@@ -139,7 +145,7 @@ listGrid will zoom to the *driving document*.
   editable                | Whether the column is editable in the list view inline.<br>By default editable is set to false.
   expression              | A valid OQL expression which defines the value to be shown in the list column.
   filterable              | Whether a filter can be applied to this column in the list view.
-  filterExpression        | A literal value or one of a number of expressions.<br>Defined expressions include:<br><ul><li>{CONTACTID} – the id of the contact who is the current user<li>{CUSTOMER} – the name of the customer context in which the current user operates<li>{DATAGROUPID} – the id of the data group of the current user<li>{DATE} - current date<li>{DATETIME} - current date and time<li>{USERID} - bizId of the current user<li>{USER} – the userName of current user<li>{USERNAME} – the name of the current user contact</ul>
+  filterExpression        | A literal value or one of a number of expressions.<br>Defined expressions include:<br><ul><li>{CONTACTID} - the id of the contact who is the current user<li>{CUSTOMER} – the name of the customer context in which the current user operates<li>{DATAGROUPID} – the id of the data group of the current user<li>{DATE} - current date<li>{DATETIME} - current date and time<li>{USERID} - bizId of the current user<li>{USER} – the userName of current user<li>{USERNAME} -  the name of the current user contact</ul>
   filterOperator          | One of the following operators:<ul><li>equal, notEqual,<li>greater, less,<li>greaterEqual, lessEqual,<li>like, notLike,<li>notNull, isNull,<li>nullOrEqual, nullOrNotEqual,<li>nullOrGreater, nullOrLess,<li>nullOrGreaterEqual, nullOrLessEqual,<li>nullOrLike, nullOrNotLike;</ul>
   hidden                  | Whether the query column will be hidden by default in a list view.<br>Hidden columns are hidden by default, but can be un-hidden by the user unless the column has projected=false.
   name                    | You can include calculated or derived values in a query however you must create a non-persistent field in the driving document to hold the value. The *name* is the name of the non-persistent document field which holds the calculated value.<br>Note that the name must correspond to a transient (i.e. non persistent) field in the document which describes other aspects of the expression result (such as type, length, display format etc.).
@@ -151,11 +157,22 @@ _Query column definitions_
 
 Driving documents can be the subject of many queries.
 
-Queries defined in the `module.xml` are also available to developers in
-*Bizlet* code. Queries can also be declared as the source for document
-attribute associations and collections. When used in this way, the query
-determines eligible references for membership in the association or
-collection.
+#### Content query columns
+
+Skyve also provides a `content` column type for content items (images and file attachments). The `content` column type has the following attributes:
+
+ Content column attributes | Description
+ --------------------------|-------------
+ alignment                 | either left, right or centre
+ display | either `thumbnail` or `link` - displays either a thumbnail of the image, or file type icon, or a download linkg for the content item
+ displayName | the column name for the column
+ emptyThumbnailRelativeFile | the relative file to display if the content item produces an empty thumbnail
+ hidden | whether the column is hidden by default
+ pixelHeight | the height of the thumbnail in pixels
+ pixelWidth | the width of the thumbnail in pixels
+ sortOrder | The sorting order (ascending or descending) to use by default when this query is displayed.
+
+![Thumbnail image in list](../assets/images/working-with-content/thumbnail-image-list.png "Thumbnail image in list")
 
 #### Queries for reference attributes
 
@@ -495,6 +512,21 @@ however for specific details of privileges, view the admin module xml declaratio
 ![Admin privileges by role](../assets/images/modules/image31a.png "Admin privileges by role")
 
 ![Admin privileges by document](../assets/images/modules/image31b.png "Admin module privileges by document")
+
+#### Prototype mode
+
+To assist in rapid development and prototyping, Skyve provides a `prototype` option for modules which changes a number of default Skyve behaviours. Developers should note that the `prototype` option is designed to provide indicative results that may not necessarily provide optimal performance.
+
+The two key differences that `prototype` mode introduces are:
+ - inclusion of association/reference columns in *generic* or *default* queries (i.e. where no query is specified, Skyve will include columns for associations, displaying the bizKey value for the associated bean)
+ - inclusion of content items in *generic* or *default* queries as thumbnails
+
+To declare `prototype` mode, add `prototype="true"` to the module declaration as follows:
+```xml
+<module name="admin" title="Admin" xmlns="http://www.skyve.org/xml/module" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	prototype="true">
+```
 
 **[⬆ back to top](#modules)**
 
