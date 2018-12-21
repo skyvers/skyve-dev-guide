@@ -164,13 +164,13 @@ Skyve also provides a `content` column type for content items (images and file a
  Content column attributes | Description
  --------------------------|-------------
  alignment                 | either left, right or centre
- display | either `thumbnail` or `link` - displays either a thumbnail of the image, or file type icon, or a download linkg for the content item
- displayName | the column name for the column
+ display                   | either `thumbnail` or `link` - displays either a thumbnail of the image, or file type icon, or a download link for the content item
+ displayName                | the column name for the column
  emptyThumbnailRelativeFile | the relative file to display if the content item produces an empty thumbnail
- hidden | whether the column is hidden by default
- pixelHeight | the height of the thumbnail in pixels
- pixelWidth | the width of the thumbnail in pixels
- sortOrder | The sorting order (ascending or descending) to use by default when this query is displayed.
+ hidden                     | whether the column is hidden by default
+ pixelHeight                | the height of the thumbnail in pixels
+ pixelWidth                 | the width of the thumbnail in pixels
+ sortOrder                  | The sorting order (ascending or descending) to use by default when this query is displayed.
 
 ![Thumbnail image in list](../assets/images/working-with-content/thumbnail-image-list.png "Thumbnail image in list")
 
