@@ -18,6 +18,8 @@ Skyve integrates the two persistence mechanisms transparently for developers and
 
 Skyve incorporates the Elastic content repository for non-sql storage. Elastic requires access to the file system and a `content` folder must be specified in the application `.json` settings file for the Skyve platform to be able to start, with read and write permissions being assigned to the user credential under which Wildfly runs.
 
+Access to content items is controlled by the privilege declaration in the `module.xml` for the document that contains the content item attribute.
+
 (For the developer environment, we recommend selecting a folder location for content which is outside of the project, to avoid problems with IDEs like Eclipse constantly scanning the folder for changes.)
 
 #### Using content
@@ -34,7 +36,27 @@ email1 | text, 500 | the email address for the contact
 mobile | text, 20 | the mobile or cell number for the contact
 image | content | the photo of the person or organisation logo
 
-For the above example, in the view for a contact, Skyve will provide a content widget (with _upload_ and _clear_ buttons assuming the widget is not disabled), as shown: 
+The content item is declared as follows:
+```xml
+<content name="image">
+	<displayName>Image</displayName>
+</content>
+```
+
+In the above case, the content item is _intended_ to store an image, however unless restricted by the developer, the content attribute can store any kind of digital content.
+
+When a content item is uploaded (for example, from a content widget), the item is indexed automatically, unless the `index` tag declares otherwise. So for the above case, it would make sense to declare _none_ as the index type, as the attribute is intended for image type content.
+
+```xml
+<content name="image">
+	<displayName>Image</displayName>
+	<index>none</index>
+</content>
+```
+
+Note that access to the content item is controlled by the privileges declared for the document (in this case Contact). If a user has _Read_ access to the Contact document, then they have the privelege to access the content item either from the view, or directly using the content servlet.    
+
+In the view for a contact, Skyve will provide a content widget (with _upload_ and _clear_ buttons assuming the widget is not disabled), as shown: 
 
 ![Default view](../assets/images/working-with-content/contact-default-view.png "Default view and associated widgets")
 
@@ -43,6 +65,26 @@ When the user uploads the image, the image item (in this case a `.png` file) wil
 ![Contact database tuple](../assets/images/working-with-content/contact-database-tuple.png "Contact database tuple")
 
 When Skyve retrieves or saves a bean (for example for display in the view), Skyve automatically maintains the content `id` value appropriately for the bean to ensure the integrity of the context. 
+
+#### Federated text search
+
+Skyve provides a federated text search capability for indexed items - which includes text-based content items and other attributes declared with the _index_ tag (including `memo` and where `text` attributes have the _index_ tag declared).
+
+To access the search, switch to desktop mode and use the _Search_ feature as shown.
+
+![Text search](../assets/images/working-with-content/text-search.png "Text search")
+
+Search results will include:
+* the *Document* in which the content attribute exists
+* the *Description* of the content attribute
+* an *Excerpt* or snippet of the match 
+* a *Score* which is a relative measure of the closeness of the match
+* a link to the *Data* or bean context of the content item
+* a link to the *Content* item itself
+
+Note that access privileges (as declared for the document in the `module.xml`) limit the search results for the user.
+
+![Text search results](../assets/images/working-with-content/text-search-results.png "Text search results")
 
 #### Retrieving content items in code
 
@@ -69,6 +111,34 @@ try (ContentManager cm = EXT.newContentManager()) {
 }
 ```
 
+#### Searching content in code
+
+Developers can take advantage of the text search capability in code, however developers need to consider that the indexed items include content and other indexed items.
+
+```java
+try (ContentManager cm = EXT.newContentManager()) {
+	SearchResults matches = cm.google(bean.getFreeSearch(), 50);
+
+	for (SearchResult match : matches.getResults()) {
+
+		String bizId = match.getBizId();
+
+		//if a bizId is returned, the match is with an indexed scalar attribute - not a content item 
+		if (bizId == null) {
+			AttachmentContent ac = cm.get(match.getContentId());
+			int score = match.getScore();
+			String snippet = match.getExcerpt();
+		} 
+	}
+}
+```			
+
+In the above example, the SearchResults contains a list of results, but the SearchResults object also provides the following methods:
+* `getSearchTimeInSecs()` - the search time in seconds
+* `getSuggestion()` - returns the search value suggestion from the search value for auto-complete
+
+Iterating through the `getResults()` collection, if the match has a non-null bizId, this means that the match was found in an indexed scalar attribute (for example, a _memo_ attribute).
+
 #### The content servlet
 
 Skyve provides a content servlet for returning content from a link constructed along the lines of the example above.
@@ -90,7 +160,7 @@ To include a content item image in a documentQuery column (for example in a list
 </column>
 ```
 
-#### Content column type
+#### Content column type for queries
 
 Skyve provides a `content` column type with display options of `link` or `thumbnail` for exactly this purpose, for example:
 
