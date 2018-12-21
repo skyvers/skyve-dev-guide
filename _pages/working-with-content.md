@@ -25,6 +25,7 @@ Skyve incorporates the Elastic content repository for non-sql storage. Elastic r
 Skyve manages content by linking the stored item with the bean context in which it exist - namely, in a `<content>` type document attribute.
 
 For example, the document `Contact` may have the following attributes:
+
 Attribute | Type | Description
 ----------|------| -----
 name | text, 200 | the name of the person or organisation
