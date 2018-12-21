@@ -268,4 +268,4 @@ across data group contexts.
 
 ---
 **Next [Maven targets](./../_pages/maven-targets.md)**  
-**Previous [Common Patterns](./../_pages/common-patterns.md)**
+**Previous [Working with content](./../_pages/working-with-content.md)**

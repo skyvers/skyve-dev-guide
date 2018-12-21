@@ -309,5 +309,5 @@ are consistent with the rest of the application module.
 **[⬆ back to top](#common-patterns)**
 
 ---
-**Next [Skyve Persistence Mechanisms](./../_pages/skyve-persistence-mechanisms.md)**  
+**Next [Working with content](./../_pages/working-with-content.md)**  
 **Previous [Utility Classes](./../_pages/utility-classes.md)**
