@@ -12,7 +12,7 @@ sidebar:
 
 Skyve provides support for n-level hierarchy structures such as organisation structures, work break-down structures, inventory structures, bills of material and other tree structures.
 
-The *desktop* mode renderer includes a lazy-load tree viewer that enables user exploration and search. As the user expands nodes, the child nodes are loaded, enabling support of large complex structures.
+The *desktop* mode renderer includes a lazy-load tree viewer that enables user exploration and navigation. As the user expands nodes, the child nodes are loaded, enabling support of large complex structures.
 
 ### Declaring hierarchic structures
 
