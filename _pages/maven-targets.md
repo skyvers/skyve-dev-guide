@@ -110,4 +110,4 @@ documenting.
 
 ---
 **Next [Content Repository Tools](./../_pages/content-repository-tools.md)**  
-**Previous [Skyve Perstistence Mechanisms](./../_pages/skyve-persistence-mechanisms.md)**
+**Previous [Skyve Perstistence Mechanisms](./../_pages/hierarchies.md)**

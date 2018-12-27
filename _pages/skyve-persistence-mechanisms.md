@@ -267,5 +267,5 @@ across data group contexts.
 **[⬆ back to top](#skyve-persistence-mechanisms)**
 
 ---
-**Next [Maven targets](./../_pages/maven-targets.md)**  
+**Next [Maven targets](./../_pages/hierarchies.md)**  
 **Previous [Working with content](./../_pages/working-with-content.md)**
