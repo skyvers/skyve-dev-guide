@@ -47,7 +47,7 @@ To update your project with a specific Skyve version, you'll need to pull/check-
 **Warning:** before continuing, make sure your project is under source control, and all files are committed locally. Upgrading a project can change lots of files, and will update your admin module and web resources. Any local changes you have made will be overwritten and need to be merged back in manually.
 
 #### Configuring the assemble target
-These instructions apply to projects created using the [Creating a new Skyve Project](#creating-a-new-skyve-project) process above. If you created your project manually, these steps may differ.
+These instructions apply to projects created using the <a href="https://foundry.skyve.org/foundry/project.xhtml">Skyve project creator</a>. If you created your project manually, these steps may differ.
 
 - If using Eclipse, create a new Run Configuration target, setting the base directory to your project's workspace, and setting the goal to `skyve:assemble`. Once setup in your pom this can also be run from the command line with `mvn skyve:assemble`.
 - In your project's `pom.xml`, update the skyve.version property to match the version of Skyve you pulled/checked out
