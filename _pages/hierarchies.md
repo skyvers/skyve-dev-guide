@@ -58,19 +58,19 @@ To use the tree view widget in the *desktop* mode renderer, declare a `tree` men
 
 The above declarations will yield the following tree viewer in the *desktop* mode renderer.
 
-![Tree view](./../assets/images/tree-view.png "Tree view")
+![Tree view](../assets/images/hierarchies/tree-view.png "Tree view")
 
 By default, Skyve will use the declared `bizKey` as the display item for each node in the structure.
 
 Note that currently, a lazy-load hierarchic view widget is not available for *responsive* mode renders, and these will degrade to a simple list view of top-level nodes, as follows:
 
-![Tree view responsive renderer](./../assets/images/tree-view-responsive.png "Tree view responsive renderer")
+![Tree view responsive renderer](./../assets/images/hierarchies/tree-view-responsive.png "Tree view responsive renderer")
 
 Zooming in from the tree view will display the detail view of the node.
 
 ### Context specific hierarchic display
 
-Skyve provides the `treeGrid` widget for showing hierarchic/tree structures within a specified context. The `treeGrid` provides the parameter attribute `rootIdBinding` which will locate the `treeGrid` at the node corresponding to the binding supplied.
+Skyve provides the `treeGrid` widget for showing hierarchic/tree structures within a specific context. The `treeGrid` provides the parameter attribute `rootIdBinding` which will locate the `treeGrid` at the node corresponding to the binding supplied.
 
 To utilise the treeGrid, you must specify a suitable query in the `module.xml`, for example:
 
@@ -123,5 +123,5 @@ Note that the `treeGrid` provides the `continueConversation` parameter attribute
 **[⬆ back to top](#actions)**
 
 ---
-**Next [Reports](./../_pages/reports.md)**  
-**Previous [Views](./../_pages/views.md)**
+**Next [Reports](./../_pages/skyve-persistence-mechanisms.md)**  
+**Previous [Views](./../_pages/maven-targets.md)**
