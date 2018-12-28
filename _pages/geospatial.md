@@ -242,6 +242,8 @@ markup.append("</td></tbody></table>");
 item.setInfoMarkup(markup.toString());
 ```
 
+For more information on the Skyve `content` servlet see [Working with content](./../_pages/working-with-content.md "Working with content).
+
 ### Spatial queries
 
 Provided a geospatial hibernate dialect is selected for the application, Skyve's document query supports combining spatial and other filter criteria for `Bizlet`, Extension class, `action` or other general application code.

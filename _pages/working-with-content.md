@@ -145,9 +145,26 @@ Skyve provides a content servlet for returning content from a link constructed a
 
 The content servlet is accessible from the Skyve context url `/content` and will retrieve the content item specified by the given parameters.
 
-If the content servlet request is provided with height and width parameter values, Skyve will return either an image of the specified size (if the content item is a recognised image type), or an icon representing the MimeType of the content item.
+If the content servlet request is provided with width (w) and height (h) parameter values, Skyve will return either an image of the specified size (if the content item is a recognised image type), or an icon representing the MimeType of the content item.
 
-To include a content item image in a documentQuery column (for example in a list grid), construct a column similar to the following example:
+The content servlet requires the following parameters:
+
+ Parameter | Description
+ ----|----
+ `_n` | the content id of the image (this is the string value stored in the document attribute which references the  content item stored in the content repository)
+ `_doc` | the module.document of the bean containing the content
+ `_b` | the binding of the content attribute relative to the module.document specified in `_doc`
+ `_w` | width (optional, if supplied, the servlet will return an image for image mime-types or a mime-type icon for non-image types)
+ `_h` | height (optional, if supplied, the servlet will return an image for image mime-types or a mime-type icon for non-image types)
+  `_ctim` | time to live (optional, if supplied this informs the browser as to whether a cached version of the image may be used) 
+ 
+For example, a `content` servlet request for the *image* attribute for the document *Staff* in the module *whosin* with content id = *ce49ba4b-89f3-476e-838b-7462d428ea6e* would resolve to a request similar to the following:
+
+```
+content?_n=ce49ba4b-89f3-476e-838b-7462d428ea6e&_doc=whosin.Staff&_b=contact.image&_w=180&_h=180&_ctim=1545998708029
+```
+
+Similarly, to include a content item image in a documentQuery column (for example in a list grid), construct a column similar to the following example:
 
 ```xml
 <column displayName="Image" editable="false" filterable="false" sortable="false" alignment="centre" pixelWidth="70">
