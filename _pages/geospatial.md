@@ -89,11 +89,11 @@ Note that Skyve's list control supports spatial filter criteria used as well as 
 
 ### Geometry and geospatial widgets
 
-The `geometry` are displayed as [Well-known text](https://en.wikipedia.org/wiki/Well-known_text "Well-known text) by the default `geometry` widget.
+The `geometry` values are displayed as <a href="https://en.wikipedia.org/wiki/Well-known_text">Well-known text</a> by the default `geometry` widget.
 
 ![Default geometry widget](./../assets/images/geospatial/default-geometry-widget.png "Default geometry widget")
 
-The `geometry` widget provides a map-based data entry tool option with basic drawing tools. The mapping interfaces are currently only supported in the `desktop` rendering mode and depends on a valid Google maps api key having been specified in the application `.json` settings file.
+The `geometry` widget provides a map-based data entry tool option with basic drawing tools. The mapping interfaces are currently only supported in the `desktop` rendering mode and depends on a valid Google maps API key having been specified in the application `.json` settings file.
 
 [Map-based data entry tool](./../assets/images/geospatial/geometry-map-based-data-entry-tool.png "Map-based data entry tool")
 
@@ -135,7 +135,7 @@ Note that the `map` widget is a first-level container and is not specified withi
 
 A map model is a java class which extends `org.skyve.metadata.view.model.map.MapModel` and must implement a `getResult()` method returning a `org.skyve.metadata.view.model.map.MapResult`.
 
-According to the convention, the `model` java class must be declared within the corresponding document package, as shown:
+According to the convention, the `model` java class must be declared within the corresponding document package, and located in a `models` package as shown:
 
 ![Model class location](../assets/images/geospatial/document-model-structure.png "Model class location")
 
@@ -224,9 +224,27 @@ public class OfficeMap extends MapModel<Office> {
 
 The above example constructs a `List` of `MapItem` based on the boundary of the Office bean and the staff associated with that office.
 
+The `MapItem.infoMarkup` allows html markup for the map info-window popups such as the example shown below:
+
+![Markup info-window](../assets/images/geospatial/markup-info-window.png "Markup info-window")
+
+The example above takes advantage of the Skyve `content` servlet to include an image into the info-window display, similar to the following:
+
+```java
+StringBuilder markup = new StringBuilder();
+markup.append("<table><tbody><tr><td>");
+markup.append("<p><h2>").append(bean.getName()).append("</h2></p>");
+markup.append("<p><i>").append(bean.getDescription()).append("</i></p>");
+markup.append("</td><td>");
+markup.append("<img src=\"content?_n=', image), '&_doc=sites.Site&_b=image&_w=32&_h=32\"/>");
+markup.append("</td></tbody></table>");
+
+item.setInfoMarkup(markup.toString());
+```
+
 ### Spatial queries
 
-Provided a geospatial hibernate dialect is selected for the application, Skyve's document query supports combining spatial and other filter criteria for `Bizlet`, `action` or other general application code.
+Provided a geospatial hibernate dialect is selected for the application, Skyve's document query supports combining spatial and other filter criteria for `Bizlet`, Extension class, `action` or other general application code.
 
 ```java
 /**
