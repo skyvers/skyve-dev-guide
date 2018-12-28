@@ -242,7 +242,7 @@ markup.append("</td></tbody></table>");
 item.setInfoMarkup(markup.toString());
 ```
 
-For more information on the Skyve `content` servlet see [Working with content](./../_pages/working-with-content.md "Working with content").
+For more information on the Skyve `content` servlet see [Working with content](./../_pages/working-with-content.md).
 
 ### Spatial queries
 
