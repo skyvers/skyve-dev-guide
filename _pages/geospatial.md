@@ -69,13 +69,13 @@ The info-window will display the record bizKey (by default) with a `Zoom` action
 
 The map menu item supports the following options:
 
-Option | Description
--------------------
-document | all records will be displayed based on the user permissions, based on the specified `geometryBinding` attribute
-query | all records will be displayed based on the user permissions and query declaration included in the `module.xml`
-model | all records will be displayed based on the user permissions and model code
-refreshTimeInSeconds | not yet implemented - the time in seconds to automatically refresh the map
-showRefreshControls | not yet implemented - whether to include the refresh controls as provided by the map service
+ Option | Description
+ -------------------
+ document | all records will be displayed based on the user permissions, based on the specified `geometryBinding` attribute
+ query | all records will be displayed based on the user permissions and query declaration included in the `module.xml`
+ model | all records will be displayed based on the user permissions and model code
+ refreshTimeInSeconds | not yet implemented - the time in seconds to automatically refresh the map
+ showRefreshControls | not yet implemented - whether to include the refresh controls as provided by the map service
 
 Note that to customise the map display options, including the info-window, requires a developer to create a map *model* (see below). 
 
