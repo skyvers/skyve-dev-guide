@@ -205,5 +205,5 @@ The associated `meta.json` includes the identity of the bean context in which th
 **[⬆ back to top](#working-with-content)**
 
 ---
-**Next [Working with hierarchies](./../_pages/working-with-hierarchies.md)**  
+**Next [Working with hierarchies](./../_pages/hierarchies.md)**  
 **Previous [Skyve persistence](./../_pages/skyve-persistence-mechanisms.md)**
