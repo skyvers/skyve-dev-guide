@@ -236,7 +236,7 @@ markup.append("<table><tbody><tr><td>");
 markup.append("<p><h2>").append(bean.getName()).append("</h2></p>");
 markup.append("<p><i>").append(bean.getDescription()).append("</i></p>");
 markup.append("</td><td>");
-markup.append("<img src=\"content?_n=', image), '&_doc=sites.Site&_b=image&_w=32&_h=32\"/>");
+markup.append("<img src=\"content?_n='").append(bean.getImage()).append("'&_doc=sites.Site&_b=image&_w=32&_h=32\"/>");
 markup.append("</td></tbody></table>");
 
 item.setInfoMarkup(markup.toString());
