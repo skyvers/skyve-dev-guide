@@ -45,6 +45,8 @@ docs:
         url: /working-with-content/                                                                                
       - title: "Working with hierarchies"
         url: /hierarchies/                                                                                        
+      - title: "Working with geometry and geospatial"
+        url: /geospatial/                                                                                        
   - title: Platform tools
     children:
       - title: "Maven targets"
