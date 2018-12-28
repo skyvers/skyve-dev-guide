@@ -147,7 +147,7 @@ The content servlet is accessible from the Skyve context url `/content` and will
 
 If the content servlet request is provided with width (w) and height (h) parameter values, Skyve will return either an image of the specified size (if the content item is a recognised image type), or an icon representing the MimeType of the content item.
 
-The content servlet requires the following parameters:
+The content servlet allows the following parameters:
 
  Parameter | Description
  ----|----
