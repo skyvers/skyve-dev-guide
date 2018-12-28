@@ -70,7 +70,7 @@ The info-window will display the record bizKey (by default) with a `Zoom` action
 The map menu item supports the following options:
 
  Option | Description
- -------------------
+ ---------|---------
  document | all records will be displayed based on the user permissions, based on the specified `geometryBinding` attribute
  query | all records will be displayed based on the user permissions and query declaration included in the `module.xml`
  model | all records will be displayed based on the user permissions and model code
