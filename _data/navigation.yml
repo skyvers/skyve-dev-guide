@@ -36,11 +36,13 @@ docs:
       - title: "Utility classes"
         url: /utility-classes/                                                                                
       - title: "Common patterns"
-        url: /common-patterns/                                                                                
+        url: /common-patterns/     
+      - title: "Skyve persistence"
+        url: /skyve-persistence-mechanisms/   
+  - title: Key capability areas
+    children:                                                                                   
       - title: "Working with content"
         url: /working-with-content/                                                                                
-      - title: "Skyve persistence mechanisms"
-        url: /skyve-persistence-mechanisms/   
       - title: "Working with hierarchies"
         url: /hierarchies/                                                                                        
   - title: Platform tools

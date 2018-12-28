@@ -1,14 +1,14 @@
 ---
-title: "Skyve persistence m"
+title: "Skyve persistence"
 permalink: /skyve-persistence-mechanisms/
-excerpt: "Skyve persistence mechanisms"
+excerpt: "Skyve persistence"
 toc: true
 sidebar:
   title: "Index"
   nav: docs
 ---
 
-## Skyve persistence mechanisms
+## Skyve persistence
 
 The Skyve Enterprise Platform mandates support for a number of
 best-practice Web design features on every logical table within the
@@ -264,8 +264,8 @@ across data group contexts.
 3. Start your app server and ensure your project deploys. If you receive messages that a valid connection can't be obtained, check connection details, credentials, firewall and port settings.
 4. For older versions of the demo (prior to Feb 2018), you'll need to run a bootstrap sql to insert your first user into the database. For versions of Skyve after 1 Jan 2018, set the setup user in the `.json` file to log in the first time.
 
-**[⬆ back to top](#skyve-persistence-mechanisms)**
+**[⬆ back to top](#skyve-persistence)**
 
 ---
-**Next [Maven targets](./../_pages/hierarchies.md)**  
-**Previous [Working with content](./../_pages/working-with-content.md)**
+**Next [Working with content](./../_pages/working-with-content.md)**  
+**Previous [Common patterns](./../_pages/common-patterns.md)**
