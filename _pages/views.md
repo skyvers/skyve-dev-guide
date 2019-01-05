@@ -187,51 +187,62 @@ will be displayed in bold type if the attribute is required.
 
 User interactions can be customised via the use of change event handlers declared on view widgets. For example, a `textField` widget provides handlers for `blur`, `change` and `focus` events.
 
+A change handler can be included in a widget declaration as follows:
+```xml
+<textField binding="name">
+	<onBlurHandler>
+		<server action="recalculate" />
+	</onBlurHandler>
+</textField>
+```
+
+The above declaration will call the custom `recalculate` server-side action when the *blur* event occurs on the `textField` (i.e. as the focus moves *from* the textField).
+
 The availability of change event handlers is specific to the type of widget. For example, a *blur* event is relevant for an input widget, but a *remove* event is not relevant for a textField.
 
-The following table shows which change hanlders are available for each type of view widget.  
+The following tables shows which change handlers are available for each type of view widget.  
 
 Widget | onBlurHandler | onChangeHandler | onFocusHandler | onAdded | onCleared | onDeleted | onEdited | onPicked | onRemoved | onSelected
 -------|---------------|-----------------|----------------|---------|-----------|-----------|----------|----------|-----------|-----------
 blurb  |               |                 |                |         |           |           |          |          |           |
 button  |              |                 |                |         |           |           |          |          |           |
-checkBox |      X      |     X           |        X       |         |           |           |          |          |           |
-checkMembership |  X   |     X           |        X       |         |           |           |          |          |           |          
-colourPicker |  X      |     X           |        X       |         |           |           |          |          |           |
-combo |      X         |     X           |        X       |         |           |           |          |          |           |
+checkBox |      Y      |     Y           |        Y       |         |           |           |          |          |           |
+checkMembership |  Y   |     Y           |        Y       |         |           |           |          |          |           |          
+colourPicker |  Y      |     Y           |        Y       |         |           |           |          |          |           |
+combo |      Y         |     Y           |        Y       |         |           |           |          |          |           |
 comparison |           |                 |                |         |           |           |          |          |           |
 component  |           |                 |                |         |           |           |          |          |           |
 contentImage  |        |                 |                |         |           |           |          |          |           |
 contentLink   |        |                 |                |         |           |           |          |          |           |
-dataGrid   |           |                 |                |  X      |           |   X       |          |   X      |  X        | X
+dataGrid   |           |                 |                |  Y      |           |   Y       |          |   Y      |  Y        | Y
 dataGridRepeater |     |                 |                |         |           |           |          |          |           |
 default   |            |                 |                |         |           |           |          |          |           |
 dialogButton  |        |                 |                |         |           |           |          |          |           |
 dynamicImage|          |                 |                |         |           |           |          |          |           |
 geoLocator    |        |                 |                |         |           |           |          |          |           |
-geometry     |  X      |     X           |        X       |         |           |           |          |          |           |
+geometry     |  Y      |     Y           |        Y       |         |           |           |          |          |           |
 html          |        |                 |                |         |           |           |          |          |           |
 inject        |        |                 |                |         |           |           |          |          |           |
 label         |        |                 |                |         |           |           |          |          |           |
 link          |        |                 |                |         |           |           |          |          |           |
-listGrid |             |                 |                |         |           |   X       |   X      |          |           | X
-listMembership |       |      X          |                |         |           |           |          |          |           |
+listGrid |             |                 |                |         |           |   Y       |   Y      |          |           | Y
+listMembership |       |      Y          |                |         |           |           |          |          |           |
 listRepeater|          |                 |                |         |           |           |          |          |           |
-lookup |               |                 |                | X       | X         |           | X        |  X       |           |
-lookupDescription |    |                 |                | X       | X         |           | X        |  X       |           |
+lookup |               |                 |                | Y       | Y         |           | Y        |  Y       |           |
+lookupDescription |    |                 |                | Y       | Y         |           | Y        |  Y       |           |
 map        |           |                 |                |         |           |           |          |          |           |
-password     |  X      |     X           |        X       |         |           |           |          |          |           |
+password     |  Y      |     Y           |        Y       |         |           |           |          |          |           |
 progressBar   |        |                 |                |         |           |           |          |          |           |
-radio       |  X       |     X           |        X       |         |           |           |          |          |           |
-richText    |  X       |     X           |        X       |         |           |           |          |          |           |
-slider      |  X       |     X           |        X       |         |           |           |          |          |           |
+radio       |  Y       |     Y           |        Y       |         |           |           |          |          |           |
+richText    |  Y       |     Y           |        Y       |         |           |           |          |          |           |
+slider      |  Y       |     Y           |        Y       |         |           |           |          |          |           |
 spacer        |        |                 |                |         |           |           |          |          |           |
-spinner     |  X       |     X           |        X       |         |           |           |          |          |           |
+spinner     |  Y       |     Y           |        Y       |         |           |           |          |          |           |
 staticImage   |        |                 |                |         |           |           |          |          |           |
 staticLink   |         |                 |                |         |           |           |          |          |           |
-textField   |  X       |     X           |        X       |         |           |           |          |          |           |
-textArea    |  X       |     X           |        X       |         |           |           |          |          |           |
-treeGrid    |          |                 |                |         |           |     X     |  X       |          |           | X
+textField   |  Y       |     Y           |        Y       |         |           |           |          |          |           |
+textArea    |  Y       |     Y           |        Y       |         |           |           |          |          |           |
+treeGrid    |          |                 |                |         |           |     Y     |  Y       |          |           | Y
 
 View containers (vbox, hbox, tabPane, form etc) do not provide change handlers.
 
