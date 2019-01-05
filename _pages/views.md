@@ -172,7 +172,7 @@ will be displayed in bold type if the attribute is required.
 		<tr><td>contentLink        </td><td> displays a hyperlink to open the content in a new browers window together with an upload action </td><td> <img src="../assets/images/views/image105.png" alt="contentLink"/></td><td>Form</td></tr>
 		<tr><td>dataGrid</td><td></td><td></td><td>Non-form</td></tr>
 		<tr><td>dataGridRepeater</td><td></td><td></td><td>Non-form</td></tr>
-		<tr><td>default            </td><td> If used in a view, this will render whatever the default widget is.<br/><br/>Either the <em>defaultWidget</em> declared on the document attribute or the Skyve default control for the attribute type.
+		<tr><td>default            </td><td> If used in a view, this will render whatever the default widget is.<br/><br/>Either the <em>defaultWidget</em> declared on the document attribute or the Skyve default control for the attribute type.</td><td></td>
 		</td><td>Form</td></tr>
 		<tr><td>dialogButton       </td><td> Not yet implemented.</td><td></td><td>All</td></tr>		
 		<tr><td>geoLocator         </td><td> Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. <br/> <br/>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br/> <br/>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding</li><li>cityBinding</li><li>stateBinding</li><li>postcodeBinding</li><li>countryBinding</li><li>latitudeBinding</li><li>longitudeBinding</li></ul> </td><td> When the Map button is clicked, the geolocator (shown) will be displayed in a modal window. <img src="../assets/images/views/image107.png" alt="geoLocator"/></td><td>All</td></tr>
@@ -758,26 +758,26 @@ File Download           | Y | Y |   |   |   |
 
 Feature | SmartClient | PrimeFaces | JQuery Mobile | React | React Native
 --------| ----------- | --- | ------------- | ----- | ------------
-Labels            | Y | Y | Y |   | 
-Blurb             | Y | Y |   |   | 
-Button            | Y | Y | Y |   | 
-Checkbox          | Y | Y | Y |   | 
-Colour picker     | Y |   |   |   | 
+label            | Y | Y | Y |   | 
+blurb             | Y | Y |   |   | 
+button            | Y | Y | Y |   | 
+checkBox          | Y | Y | Y |   | 
+colourPicker     | Y |   |   |   | 
 Content picker    | Y | Y | Y |   | 
 Date picker       | Y | Y | Y |   | 
 Date/time picker  | Y | Y | Y |   | 
 Drop-down list    | Y | Y | Y |   | 
-Geolocator        | Y |   |   |   | 
-Geometry picker   | Y |   |   |   | 
-Inject            | Y |   |   |   | 
-Integer spinner   | Y | Y | Y |   | 
-List membership   | Y | Y |   |   | 
-Password          | Y | Y |   |   | 
-Rich text editor  | Y |   |   |   | 
-Radio             | Y | Y |   |   | 
-Spacer            | Y | Y |   |   | 
-Text area         | Y | Y | Y |   | 
-Text field        | Y | Y | Y |   | 
+geolocator        | Y |   |   |   | 
+geometry   | Y |   |   |   | 
+inject            | Y |   |   |   | 
+spinner   | Y | Y | Y |   | 
+listMembership   | Y | Y |   |   | 
+password          | Y | Y |   |   | 
+richText  | Y |   |   |   | 
+radio             | Y | Y |   |   | 
+spacer            | Y | Y |   |   | 
+textArea         | Y | Y | Y |   | 
+textField        | Y | Y | Y |   | 
 Type-ahead        | Y | Y | Y |   | 
 
 **List Grids**
