@@ -153,9 +153,12 @@ will be displayed in bold type if the attribute is required.
 		<tr><td>  button             </td><td> can be placed within the view when the <em>inActionPanel</em> flag for an Action is set to <code>false</code><br/><br/>If the Action is declared to be in the Action Panel, then no button widget is required to be declared.</td><td> <img src="../assets/images/views/image99.png" alt="button"/>
 		</td></tr>
 		<tr><td>checkBox           </td><td> Tri-state check box (null/true/false) </td><td> <img src="../assets/images/views/image100.png" alt="checkBox"/></td></tr>
+		<tr><td>checkMembership </td><td>Providing for checkbox multiselection</td><td></td></tr>
 		<tr><td>colourPicker       </td><td> displays a text box containing the colour code value together with a sample square of the colour<br/><br/>Clicking on the sample square activates a colour selector popup. </td><td> <img src="../assets/images/views/image101.png" alt="colourPicker"/> In this example, the colour button at the RHS will open a colour selector as shown below:<br/> <img src="../assets/images/views/image102.png" alt="colourPicker"/></td></tr>
 		<tr><td>  combo              </td><td> drop-down selector for enumerations or where a domain type is specified for the document attribute </td><td> <img src="../assets/images/views/image103.png" alt="combo"/>
 		</td></tr>
+		<tr><td>comparison</td><td></td><td></td></tr>
+		<tr><td>component</td><td></td><td></td></tr>
 		<tr><td>  contentImage       </td><td> displays the loaded image along with an upload action </td><td> <img src="../assets/images/views/image104.png" alt="contentImage"/>
 		</td></tr>
 		<tr><td>contentLink        </td><td> displays a hyperlink to open the content in a new browers window together with an upload action </td><td> <img src="../assets/images/views/image105.png" alt="contentLink"/></td></tr>
