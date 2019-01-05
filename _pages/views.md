@@ -183,21 +183,57 @@ will be displayed in bold type if the attribute is required.
 		<tr><td>  textField </td><td> provides basic data entry for text attributes <br/><br/> <code>textField</code> responds to the type of the bound attribute, and will display converter hint if the value is null.<br/><br/>For <code>date</code> and <code>dateTime</code> types, a calendar selector is displayed.</td><td> <img src="../assets/images/views/image120.png" alt="textField calendar"/> <br/> This example is a <code>textField</code> widget bound to a text type attribute. <br/> <img src="../assets/images/views/image121.png" alt="textField"/> <br/> This example is a <code>textField</code> widget bound to a time attribute using the <code>HH_MM</code> converter. <br/> <img src="../assets/images/views/image122.png" alt="textField time"/> <br/> This example is a <code>textField</code> widget bound to a <code>date</code> or <code>dateTime</code> attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.</td></tr>	</tbody>
 </table>
 
-### OnChange event action (client-side events)
+### Change event action (client-side events)
 
-*OnChange* event actions can be defined for the change of value of
-widgets defined within a view.
+User interactions can be customised via the use of change event handlers declared on view widgets. For example, a `textField` widget provides handlers for `blur`, `change` and `focus` events.
 
-  Event Action    | Description
-  --------------- | -----------
-  rerender        | hits the server, reevaluates the UI conditions, but maintains user edits.
-  server          | executes a server-side action.
-  setDisabled     | sets the widget to disabled based on a condition (SmartClient renderer only)
-  toggleDisabled  | checks the state of the widget pointed to by the binding and toggles the disabled state. (SmartClient renderer only)
-  setInvisible    | sets the widget to invisible based on a condition. (SmartClient renderer only)
-  toggleInvisible | checks the state of the widget pointed to by the binding and toggles the disabled state. (SmartClient renderer only)
+The availability of change event handlers is specific to the type of widget. For example, a *blur* event is relevant for an input widget, but a *remove* event is not relevant for a textField.
 
-_OnChange Event Actions_
+The following table shows which change hanlders are available for each type of view widget.  
+
+Widget | onBlurHandler | onChangeHandler | onFocusHandler | onAdded | onCleared | onDeleted | onEdited | onPicked | onRemoved | onSelected
+-------|---------------|-----------------|----------------|---------|-----------|-----------|----------|----------|-----------|-----------
+blurb  |               |                 |                |         |           |           |          |          |           |
+button  |              |                 |                |         |           |           |          |          |           |
+checkBox |      X      |     X           |        X       |         |           |           |          |          |           |
+checkMembership |  X   |     X           |        X       |         |           |           |          |          |           |          
+colourPicker |  X      |     X           |        X       |         |           |           |          |          |           |
+combo |      X         |     X           |        X       |         |           |           |          |          |           |
+comparison |           |                 |                |         |           |           |          |          |           |
+component  |           |                 |                |         |           |           |          |          |           |
+contentImage  |        |                 |                |         |           |           |          |          |           |
+contentLink   |        |                 |                |         |           |           |          |          |           |
+dataGrid   |           |                 |                |  X      |           |   X       |          |   X      |  X        | X
+dataGridRepeater |     |                 |                |         |           |           |          |          |           |
+default   |            |                 |                |         |           |           |          |          |           |
+dialogButton  |        |                 |                |         |           |           |          |          |           |
+dynamicImage|          |                 |                |         |           |           |          |          |           |
+geoLocator    |        |                 |                |         |           |           |          |          |           |
+geometry     |  X      |     X           |        X       |         |           |           |          |          |           |
+html          |        |                 |                |         |           |           |          |          |           |
+inject        |        |                 |                |         |           |           |          |          |           |
+label         |        |                 |                |         |           |           |          |          |           |
+link          |        |                 |                |         |           |           |          |          |           |
+listGrid |             |                 |                |         |           |   X       |   X      |          |           | X
+listMembership |       |      X          |                |         |           |           |          |          |           |
+listRepeater|          |                 |                |         |           |           |          |          |           |
+lookup |               |                 |                | X       | X         |           | X        |  X       |           |
+lookupDescription |    |                 |                | X       | X         |           | X        |  X       |           |
+map        |           |                 |                |         |           |           |          |          |           |
+password     |  X      |     X           |        X       |         |           |           |          |          |           |
+progressBar   |        |                 |                |         |           |           |          |          |           |
+radio       |  X       |     X           |        X       |         |           |           |          |          |           |
+richText    |  X       |     X           |        X       |         |           |           |          |          |           |
+slider      |  X       |     X           |        X       |         |           |           |          |          |           |
+spacer        |        |                 |                |         |           |           |          |          |           |
+spinner     |  X       |     X           |        X       |         |           |           |          |          |           |
+staticImage   |        |                 |                |         |           |           |          |          |           |
+staticLink   |         |                 |                |         |           |           |          |          |           |
+textField   |  X       |     X           |        X       |         |           |           |          |          |           |
+textArea    |  X       |     X           |        X       |         |           |           |          |          |           |
+treeGrid    |          |                 |                |         |           |     X     |  X       |          |           | X
+
+View containers (vbox, hbox, tabPane, form etc) do not provide change handlers.
 
 Multiple event actions can be defined for the single event, and the
 order of execution will follow the order in which the handlers are
@@ -214,6 +250,21 @@ declared.
 ```
 
 _Example of multiple onChangeHandlers_
+
+*Change* event actions can be defined for the change of value of
+widgets defined within a view.
+
+  Event Action    | Description
+  --------------- | -----------
+  rerender        | hits the server, reevaluates the UI conditions, but maintains user edits.
+  server          | executes a server-side action.
+  setDisabled     | sets the widget to disabled based on a condition (SmartClient renderer only)
+  toggleDisabled  | checks the state of the widget pointed to by the binding and toggles the disabled state. (SmartClient renderer only)
+  setInvisible    | sets the widget to invisible based on a condition. (SmartClient renderer only)
+  toggleInvisible | checks the state of the widget pointed to by the binding and toggles the disabled state. (SmartClient renderer only)
+
+_OnChange Event Actions_
+
 
 #### Update property
 

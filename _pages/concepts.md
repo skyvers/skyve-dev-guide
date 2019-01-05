@@ -6,7 +6,6 @@ toc: true
 sidebar:
   title: "Index"
   nav: docs
----
 ## Concepts
 
 ### Rendering
@@ -524,10 +523,9 @@ each customer override.
 
 ### Actions
 
-An action is how a Java method will be represented to the user within a
-given view.
+Skyve *Actions* represent behaviours which impact on the state of data within the application. 
 
-Actions are presented as buttons or hyperlinks in the user interface.
+Skyve uses the term *Action* as a generic approach to defining actions the user may take in the application, however they may appear to the user. They may be represented to the user as buttons, hyperlinks or called via web API interactions depending on a specific context.
 
 Default actions include *Create*, *Delete*, *Save*, *Cancel*, *Zoom In*
 and *Zoom Out*. Default actions require no code or code stubs in Skyve

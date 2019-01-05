@@ -517,7 +517,7 @@ however for specific details of privileges, view the admin module xml declaratio
 
 To assist in rapid development and prototyping, Skyve provides a `prototype` option for modules which changes a number of default Skyve behaviours. Developers should note that the `prototype` option is designed to provide indicative results that may not necessarily provide optimal performance.
 
-The two key differences that `prototype` mode introduces are:
+The two key differences `prototype` mode introduces are:
  - inclusion of association/reference columns in *generic* or *default* queries (i.e. where no query is specified, Skyve will include columns for associations, displaying the bizKey value for the associated bean)
  - inclusion of content items in *generic* or *default* queries as thumbnails
 
