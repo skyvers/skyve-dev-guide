@@ -14,11 +14,7 @@ Skyve Backup
 listModel
 Modelling with Skyve - collection, association types, extension types, inverse
 generating test data
-Skyve script
+Generating documents Skyve script
 Report generator
 Tag management
 Snapshot management
-Add dev guide toggleVisibility and update tag
-
-
-

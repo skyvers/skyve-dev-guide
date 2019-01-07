@@ -206,7 +206,16 @@ The `content` column type using display option `link` will provide a download li
 
 _NOTE_ the following information is provided for information only - manipulating the content storage area directly may result in loss of data. 
 
-When Skyve starts, the platform will create (if it doesn't already exist) a folder (within the specified `content` folder) called `SKYVE_CONTENT`. As content items are saved in a Skyve application, the platform will save these in a folder (within the specified `content` folder) called `SKYVE_STORE`.
+The content folder (specified in the application `.json` settings file) will typically contain two folders for the storage and indexing of content items:
+
+Folder | Description
+----|-----
+SKYVE_CONTENT | the indexing information for content items
+SKYVE_STORE | the content items and associated metadata
+
+When Skyve starts, the platform will create (if it doesn't already exist) a folder (within the specified `content` folder) called `SKYVE_CONTENT` - containing the index information for content items. 
+
+As content items are saved in a Skyve application, these are saved to a folder (within the specified `content` folder) called `SKYVE_STORE`.
 
 The `SKYVE_STORE` folder contains the content items (file attachments, images etc) in their original format and with associated metadata saved in a co-located file called `meta.json` as shown. 
 
