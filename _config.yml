@@ -27,6 +27,13 @@ social:
   links: # An array of links to social media profiles
     - "https://twitter.com/skyveframework"
 
+# Analytics
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-112747296-4"
+    anonymize_ip: true
+
 # Site Footer
 footer:
   links:
