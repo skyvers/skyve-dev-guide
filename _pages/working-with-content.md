@@ -1,5 +1,5 @@
 ---
-title: "Working with content"
+title: "Content"
 permalink: /working-with-content/
 excerpt: "Working with content attachments and images in Skyve"
 toc: true
@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Working with content
+## Content
 
 ### Content attachments and images
 
@@ -227,8 +227,11 @@ The associated `meta.json` includes the identity of the bean context in which th
 {"attribute":"contentItem","bizCustomer":"cit","bizDataGroupId":null,"bizDocument":"ContentContainer","bizId":"97685d51-2746-426b-949c-0754509d7438","bizModule":"myModule","bizUserId":"6568db1f-be43-444b-a62a-b4468cabba0b","content_type":"application\/pdf","filename":"Skyve Developer Guide.pdf","last_modified":"2018-11-30T03:28:51.773+00:00"}
 ```
 
+### Content tools
 
-**[⬆ back to top](#working-with-content)**
+For details about Skyve platform content management tools, see [Content repository tools](./../_pages/content-repository-tools.md)
+
+**[⬆ back to top](#content)**
 
 ---
 **Next [Working with hierarchies](./../_pages/hierarchies.md)**  

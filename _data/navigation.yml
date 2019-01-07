@@ -43,13 +43,13 @@ docs:
         url: /skyve-persistence-mechanisms/   
   - title: Key capability areas
     children:                                                                                   
-      - title: "Working with content"
+      - title: "Content"
         url: /working-with-content/                                                                                
-      - title: "Working with hierarchies"
+      - title: "Hierarchies"
         url: /hierarchies/                                                                                        
-      - title: "Working with geometry and geospatial"
+      - title: "Geometry and geospatial"
         url: /geospatial/                                                                                        
-      - title: "Working with communication"
+      - title: "Communication"
         url: /communication/                                                                                        
   - title: Platform tools
     children:

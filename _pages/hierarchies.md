@@ -1,5 +1,5 @@
 ---
-title: "Working with Hierarchies"
+title: "Hierarchies"
 permalink: /hierarchies/
 excerpt: "Working with hierarchies and recursive relationships"
 toc: true

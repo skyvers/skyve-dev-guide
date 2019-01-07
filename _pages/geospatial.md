@@ -1,5 +1,5 @@
 ---
-title: "Working with geometries and geospatial"
+title: "Geometry and geospatial"
 permalink: /geospatial/
 excerpt: "Working with geometries, geospatial and maps in Skyve"
 toc: true
@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Working with geometries and geospatial
+## Geometry and geospatial
 
 ### Before you begin - things to consider
 
@@ -284,7 +284,7 @@ addTouches(binding, geometry), addNullOrTouches(binding, geometry) | filter for 
 addWithin(binding, geometry), addNullOrWithin(binding, geometry) | filter for beans where the attribute specified by the `binding` is contained within the specified `geometry`
 
 
-**[⬆ back to top](#working-with-geometries-and-geospatial)**
+**[⬆ back to top](#geometry-and-geospatial)**
 
 ---
 **Next [Working with communication](./../_pages/communication.md)**  

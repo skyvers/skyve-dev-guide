@@ -1,5 +1,5 @@
 ---
-title: "Working with communication"
+title: "Communication"
 permalink: /communication/
 excerpt: "Working with communication in Skyve"
 toc: true
@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Working with communication
+## Communication
 
 Detailed instructions to send email messages from within a Skyve application are provided in the <a href="https://skyvers.github.io/skyve-user-guide/communication/">Skyve User Guide</a>.
 
@@ -30,7 +30,7 @@ The Skyve admin module provides the *Communication* and *Communication Template*
 
 A *Communication* is the definition of a message and how it is bound to application data. The *Communication Template* contains generic header and footer details for communications - to enable consistent styling - while the *Communication* contains the binding expressions, body contents and other aspects of the specific message.
 
-![Communication contents tab](./../assets/images/communication/contents.png "Communication contents tab")
+![Communication contents tab](./../assets/images/communication/special-offer-contents.png "Communication contents tab")
 
 For example, a timesheet application may be required to notify a manager when an employee submits a timesheet. The developer creates a *Communication* called "Timesheet submitted" that provides the subject and body text for an email notification, with binding expressions to substitute for the employee details and the date of the timesheet. The *Communication* may also include attachments derived from the employee details or the timesheet record. For bound data from the timesheet or employee details, the *Communication* must specify the relevant *module* and *document* so that binding expressions can be resolved.
 
@@ -71,10 +71,9 @@ Send Now | run a Job to immediately send all generated email messages.
 
 If communications are marked as *Used for system communications*, deleting the *Communication* is blocked as are changes to the description, module and document settings. (To re-enable these, the *Communication* must first be saved with the system communications setting turned off.)
 
-![Communication contents tab](./../assets/images/communication/special-offer-contents.png "Communication contents tab")
-
 The contents tab allows the user to specify the message subject & body.
 
+![Communication contents tab](./../assets/images/communication/contents.png "Communication contents tab")
 
 ### CommunicationUtil
 
@@ -130,7 +129,7 @@ CommunicationUtil.sendFailSafeSystemCommunication(
 
 If a communication of the same name has been created prior to the method being called, (and for example styled by a graphic designer), then the existing communication will be used for the method call.
 
-**[⬆ back to top](#working-with-communication)**
+**[⬆ back to top](#communication)**
 
 ---
 **Next [Maven targets](./../_pages/maven-targets.md)**  
