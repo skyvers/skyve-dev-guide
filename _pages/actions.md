@@ -10,7 +10,7 @@ sidebar:
 
 ## Actions
 
-*Actions* represent behaviours that impact the state of application data but the *Action* concept is independent of the way the user interacts to effect the change, whether that is via a button, a hyperlink, an API method call, via a change event (e.g. blur) on an input widget or as the result of a job.
+*Actions* represent behaviours that impact the application state or data - but the *Action* concept is independent of the way the user interacts to effect the change, whether that is via a button, a hyperlink, an API method call, via a change event (e.g. blur) on an input widget or as the result of a job.
 
 Skyve offers *default* actions and developers can add to or override these as required.
 

@@ -447,5 +447,5 @@ In this situation (i.e. unless there are extenuating circumstances), overriding 
 **[⬆ back to top](#bizlets)**
 
 ---
-**Next [Views](./../_pages/views.md)**  
+**Next [Views, widgets and layout](./../_pages/views.md)**  
 **Previous [Internationalisation](./../_pages/internationalisation.md)**

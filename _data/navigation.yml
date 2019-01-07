@@ -25,10 +25,12 @@ docs:
         url: /internationalisation/                                
       - title: "Bizlet and extension classes"
         url: /bizlets/                                        
-      - title: "Views"
+      - title: "Views, widgets and layout"
         url: /views/                                                
       - title: "Actions"
         url: /actions/                                                
+      - title: "Routing and rendering"
+        url: /routing/                                                
       - title: "Reports"
         url: /reports/                                                                
       - title: "Jobs"
