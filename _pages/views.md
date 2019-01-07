@@ -1,7 +1,7 @@
 ---
-title: "Views"
+title: "Views, widgets and layout"
 permalink: /views/
-excerpt: "Views"
+excerpt: "Views, widgets and layout"
 toc: true
 toc_label: "Views Contents"
 sidebar:
@@ -166,7 +166,7 @@ will be displayed in bold type if the attribute is required.
 		<tr><td>  combo              </td><td> drop-down selector for enumerations or where a domain type is specified for the document attribute </td><td> <img src="../assets/images/views/image103.png" alt="combo"/>
 		</td><td>Form</td></tr>
 		<tr><td>comparison</td><td>displays the differences between two beans instances and the ability for the users to apply differences between the instances (for an example, see the *Audits* function in the Skyve admin module </td><td><img src="../assets/images/views/comparison.png" alt="comparison"/></td><td>Non-form</td></tr>
-		<tr><td>component</td><td>generic widget for developer override</td><td></td><td>Non-form</td></tr>
+		<tr><td>component</td><td>a component declares the inclusion of other view declarations, or sections of view declarations, allowing re-use of view declaration</td><td></td><td>Non-form</td></tr>
 		<tr><td>  contentImage       </td><td> displays the loaded image along with an upload action </td><td> <img src="../assets/images/views/image104.png" alt="contentImage"/>
 		</td><td>Form</td></tr>
 		<tr><td>contentLink        </td><td> displays a hyperlink to open the content in a new browers window together with an upload action </td><td> <img src="../assets/images/views/image105.png" alt="contentLink"/></td><td>Form</td></tr>
@@ -303,7 +303,7 @@ limit rerendering to a specified container.
 
 ![Update property for change handlers](../assets/images/views/update-property.png "Update property for change handlers")
 
-In the above example, only the container with a widgetId of 'citizenship' will be rerendered when the value of the _combo_ is changed.
+In the above example, only the container with a `widgetId` of _citizenship_ will be rerendered when the value of the _combo_ is changed.
 
 ### The lookupDescription widget in detail
 
@@ -727,6 +727,177 @@ template file relative to the *module.document* package.
 Report actions are not declared within role definitions in the
 *module.xml*.
 
+## View components
+
+Skyve allows for reuse of view sections via the `component` widget.
+
+The view component must be declared according to the convention, with the file name matching the declared name. The `component` widget then refers to that name, with the addition of a `module` and `document` if the referenced component declaration resides in another document package.
+
+![Naming view components](./../assets/images/views/naming-view-components.png "Naming view components")
+
+In the above example, a complex view declaration has been broken up into sections and named accordingly.
+
+The general view declaration `edit.xml` may include multiple components and mix these with specific widgets and layouts as appropriate.
+
+```xml
+<tabPane>
+	<tab title="Details">
+		<component name="_details" />
+	</tab>
+	<tab title="Interactions">
+		<component name="_interactions" />
+	</tab>
+	<tab title="Processes">
+		<component name="_processes" />
+	</tab>
+	<tab title="Seafood">
+		<hbox>
+			<vbox>
+				<map modelName="HarvestAreaMapModel" />
+			</vbox>
+			<component name="_seafood" />
+		</hbox>
+	</tab>
+</tabPane>
+```
+
+In the above example, the view declaration includes components on each of the tabs, with the final tab mixing a component and other widgets.
+
+The component widget has the following attributes:
+
+Attribute | Description
+----------|------------
+binding | the binding name of the association attribute which corresponds to the driving document of the component - see the association example below for more details. 
+document | the document package where the referenced component declaration resides - it is not necessary to specify the *document* attribute here if the component resides within the same document
+invisible | whether the component is invisible
+module | the module package where the referenced component declaration resides - it is not necessary to specify the *module* attribute here if the component resides within the same module
+name | the name of the component declaration being referenced
+visible | whether the component is visible
+widgetId | a specific `id` for the widget so that the widget can be directly referenced (e.g. `xhtml`)
+
+### Using a component for an associated document
+
+Consider the example where the *Contact* document has more than one association to the *Address* document - for *homeAddress* and *workAddress* - the component concept provides an alternative to the default Skyve approach of the *lookupDescription* and *Zoom* navigation. In this case, the view declaration for the *Address* document can be re-used within the *Contact* view.
+
+```xml
+<vbox border="true" borderTitle="Home Address">
+	<component bining="homeAddress"/>
+</vbox>
+<vbox border="true" borderTitle="Work Address">
+	<component bining="workAddress"/>
+</vbox>
+```
+
+In the above declaration, the component `binding` specifies the association attribute to which the included component will be bound.
+
+Note that in this case, it is not necessary to specify the `module` and `document` since these are inferred from the declaration of the association attributes.
+
+The alternative approach is to use widgets with compound bindings similar to the following:
+
+```xml
+<form border="true" borderTitle="Home Address">
+	<column/>
+	<column/>
+	<row>
+		<item>
+			<default binding="homeAddress.streetAddress"/>
+		</item>
+	</row>
+	<row>
+		<item>
+			<default binding="homeAddress.suburb"/>
+		</item>
+	</row>
+	<row>
+		<item>
+			<default binding="homeAddress.postCode"/>
+		</item>
+	</row>
+</form>
+<form border="true" borderTitle="Work Address">
+	<column/>
+	<column/>
+	<row>
+		<item>
+			<default binding="workAddress.streetAddress"/>
+		</item>
+	</row>
+	<row>
+		<item>
+			<default binding="workAddress.suburb"/>
+		</item>
+	</row>
+	<row>
+		<item>
+			<default binding="workAddress.postCode"/>
+		</item>
+	</row>
+</form>
+```
+
+Not only is the component approach more succinct, but it also means that if the *Address* document is alterered or refactored, there is a single place where view layout changes can be made.
+
+#### Component substitution
+
+A view component can be used in another document even where the component refers to conditions or other aspects which are specific to one particular document.
+
+The component widget may declare a number of `name` mappings. These specify the mapping of condition names from the original document to the document in which the component is used.
+
+Name mappings can be used to substitute:
+- condition names
+- server action names
+- selectedIdBinding names
+
+Consider an example where the *Address* document declares a `condition` called `showCountry` and this is used in the *Address* view to control visibility of a `country` attribute. In this case, the *Contact* document view using the *Address* view component may not have that condition declared, or may have a different condition to satisfy the same basic requirement.
+
+To map conditions from the source document to the document using the component, specify the names as follows:
+
+```xml
+<component binding="homeAddress">
+	<names>
+		<name fromComponent="showCountry" mappedTo="foreignSupplier"/>
+	</names>
+</component>
+```
+
+In the above example, the value of the `foreignSupplier` condition from the *Contact* document will be mapped to where ever the name `showCountry` exists in the original view declaration (in the *Address* document package).
+
+Similarly, the names substitution may be required where the view component declares an action - in this case, the action would be declared within the document package where the component is declared (i.e. with the path to the action class being inferred by the convention of being located in the same document package). 
+
+If the component is then used in the view of another document, and it is necessary to map the action name to an action declared in the document package where the component is used.
+
+### View tags (see Routing)
+
+JSF (xhtml) pages can take advantage of Skyve view declarations through view tags. The view tag can render whole views, or portions of views as identified by a `widgetId`. 
+
+For more information see [Routing](./../_pages/routing.md).
+
+## Create views
+
+In some situations, the way a document instance is created requires a different view declaration to normal editing - for example, if there is a *wizard* or stepped approach to creating the instance. 
+
+This situation can be handled in a variety of ways, however Skyve also supports the declaration of a view specific to the creation stage.
+
+![Create view](./../assets/images/views/create-view.png "Create view")
+
+In the above example, the User document has a `create.xml` view declared as well as a general `edit.xml`.
+
+Whether the `create.xml` view is served depends on the existence of a condition named `created` being declared in the corresponding `document.xml`.
+
+For the above example, the create view will not be served unless the *User* document includes the created condition similar to the following:
+
+```xml
+<condition name="created">
+	<description>Created</description>
+	<expression>
+		<![CDATA[isPersisted()]]>
+	</expression>
+</condition>
+```
+
+In the simple case, the condition uses the `isPersisted()` method - as a bean is considered to have been *created* once it has been *persisted* , however the specific logic can be determined by the developer as required.
+
+
 ## Skyve Renderer Comparison
 
 Skyve features the ability to dynamically change the rendering engine based on criteria specified as part of its routing. By default, it switches renderer based on the user agent of the browser. If it detects the user is using a desktop browser, the SmartClient renderer will be used, otherwise the responsive PrimeFaces renderer will be used.
@@ -743,8 +914,8 @@ Session management      | Y | Y | Y | Y |   | Ability to create, associate, expi
 Conversation management | Y | Y | Y | Y |   | Ability to start, associate, propagate and reclaim conversation states in Skyve views
 Zooming management      | Y | Y | Y | Y |   | Ability to manage _n_ level zooming across the domain's aggregations, within and outside of view conversations
 Security management     | Y | Y | Y | Y | Y | Guarding against XSS, injection attacks and applying best practice network and application security through sanitisation, escaping etc
-Permission management   | Y | P |   |   |   | Ability for the view to react automatically to the user’s permissions by showing, hiding and altering different view mechanisms
-Scope management        | Y | Y |   |   |   | Ensuring that view elements issue correct data retrievals based on the current user’s scope settings
+Permission management   | Y | P |   |   |   | Ability for the view to react automatically to the user permissions by showing, hiding and altering different view mechanisms
+Scope management        | Y | Y |   |   |   | Ensuring that view elements issue correct data retrievals based on the current user scope settings
 Request management      | Y | Y |   |   |   | Ensure requests are issued asynchronously and synchronously as required, orchestrating multiple requests, and managing long running and unresponsive requests
 UI Dirty management     | Y |   |   |   |   | Ability to detect data changes in the UI widgets through all request/responses in a conversation and warn when a user is about to perform a gesture that will discard their unsaved changes
 Routing Management      | Y | Y |   |   |   | Ability to inject front end markup/logic into existing Skyve views through 'native' mechanisms and remain integrated with the Skyve view plus the ability to hijack a view completely through the Skyve routing mechanism and generate pieces of the defined Skyve views as an assembly strategy if appropriate.
@@ -809,5 +980,5 @@ The following features are only available for the SmartClient renderer, as they 
 **[⬆ back to top](#views)**
 
 ---
-**Next [Actions](./../_pages/actions.md)**  
+**Next [Routing and rendering](./../_pages/routing.md)**  
 **Previous [Bizlets](./../_pages/bizlets.md)**

@@ -9,6 +9,7 @@ sidebar:
 ## Concepts
 
 ### Rendering
+
 Skyve has two rendering modes to suit different user agents/device types. 
 Skyve applications will (by default) automatically switch to use the most suitable
 rendering for the user agent or device type it detects.
@@ -523,7 +524,7 @@ each customer override.
 
 ### Actions
 
-Skyve *Actions* represent behaviours which impact on the state of data within the application. 
+Skyve *Actions* represent behaviours which impact on application state or data. 
 
 Skyve uses the term *Action* as a generic approach to defining actions the user may take in the application, however they may appear to the user. They may be represented to the user as buttons, hyperlinks or called via web API interactions depending on a specific context.
 

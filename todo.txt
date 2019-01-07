@@ -1,0 +1,24 @@
+where are we at?
+
+Javadoc
+Map on PF
+Git 
+SAIL tests for admin
+Update Apps
+
+
+For Dev Guide
+--------------------
+Communication
+Skyve Backup
+listModel
+Modelling with Skyve - collection, association types, extension types, inverse
+generating test data
+Skyve script
+Report generator
+Tag management
+Snapshot management
+Add dev guide toggleVisibility and update tag
+
+
+
