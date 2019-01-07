@@ -133,4 +133,4 @@ If a communication of the same name has been created prior to the method being c
 
 ---
 **Next [Maven targets](./../_pages/maven-targets.md)**  
-**Previous [Working with geometries and geospatial](./../_pages/geospatial.md)**
+**Previous [Geometry and geospatial](./../_pages/geospatial.md)**

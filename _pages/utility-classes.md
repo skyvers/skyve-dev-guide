@@ -157,7 +157,7 @@ The Ext class provides developers access to additional APIs as follows:
 
 ### CommunicationUtil
 
-For details of the CommunicationUtil class, see [Working with communication](./../_pages/communication.md)
+For details of the CommunicationUtil class, see [Communication](./../_pages/communication.md)
 
 ### ModulesUtil
 

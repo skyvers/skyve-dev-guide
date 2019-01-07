@@ -234,5 +234,5 @@ For details about Skyve platform content management tools, see [Content reposito
 **[⬆ back to top](#content)**
 
 ---
-**Next [Working with hierarchies](./../_pages/hierarchies.md)**  
+**Next [Hierarchies](./../_pages/hierarchies.md)**  
 **Previous [Skyve persistence](./../_pages/skyve-persistence-mechanisms.md)**

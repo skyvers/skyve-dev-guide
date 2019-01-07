@@ -242,7 +242,7 @@ markup.append("</td></tbody></table>");
 item.setInfoMarkup(markup.toString());
 ```
 
-For more information on the Skyve `content` servlet see [Working with content](./../_pages/working-with-content.md).
+For more information on the Skyve `content` servlet see [Content](./../_pages/working-with-content.md).
 
 ### Spatial queries
 
@@ -287,5 +287,5 @@ addWithin(binding, geometry), addNullOrWithin(binding, geometry) | filter for be
 **[⬆ back to top](#geometry-and-geospatial)**
 
 ---
-**Next [Working with communication](./../_pages/communication.md)**  
-**Previous [Working with hierarchies](./../_pages/hierarchies.md)**
+**Next [Communication](./../_pages/communication.md)**  
+**Previous [Hierarchies](./../_pages/hierarchies.md)**

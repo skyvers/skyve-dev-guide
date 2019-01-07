@@ -123,5 +123,5 @@ Note that the `treeGrid` provides the `continueConversation` parameter attribute
 **[⬆ back to top](#hierarchies)**
 
 ---
-**Next [Working with geometry and geospatial](./../_pages/geospatial.md)**  
-**Previous [Working with content](./../_pages/working-with-content.md)**
+**Next [Geometry and geospatial](./../_pages/geospatial.md)**  
+**Previous [Content](./../_pages/working-with-content.md)**

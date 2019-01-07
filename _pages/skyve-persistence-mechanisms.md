@@ -267,5 +267,5 @@ across data group contexts.
 **[⬆ back to top](#skyve-persistence)**
 
 ---
-**Next [Working with content](./../_pages/working-with-content.md)**  
+**Next [Content](./../_pages/working-with-content.md)**  
 **Previous [Common patterns](./../_pages/common-patterns.md)**

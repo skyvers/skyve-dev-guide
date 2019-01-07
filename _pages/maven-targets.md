@@ -110,4 +110,4 @@ documenting.
 
 ---
 **Next [Content Repository Tools](./../_pages/content-repository-tools.md)**  
-**Previous [Working with communication](./../_pages/communication.md)**
+**Previous [Communication](./../_pages/communication.md)**
