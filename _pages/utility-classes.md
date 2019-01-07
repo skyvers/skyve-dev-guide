@@ -155,6 +155,10 @@ The Ext class provides developers access to additional APIs as follows:
  `newContentManager()` | access the content repository
  `newBizPortStandardGenerator`, `newBizPortWorkbook()`, `newBizPortSheet()` | developer access to customise Skyve's BizPort feature.
 
+### CommunicationUtil
+
+For details of the CommunicationUtil class, see [Working with communication](./../_pages/communication.md)
+
 ### ModulesUtil
 
 ModulesUtil is intended to provide common business focused convenience methods and enumerations and also to provide an introductory reference to Skyve developers for accessing framework concepts and features for real-world applications.

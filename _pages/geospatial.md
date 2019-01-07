@@ -287,5 +287,5 @@ addWithin(binding, geometry), addNullOrWithin(binding, geometry) | filter for be
 **[⬆ back to top](#working-with-geometries-and-geospatial)**
 
 ---
-**Next [Maven targets](./../_pages/maven-targets.md)**  
+**Next [Working with communication](./../_pages/communication.md)**  
 **Previous [Working with hierarchies](./../_pages/hierarchies.md)**

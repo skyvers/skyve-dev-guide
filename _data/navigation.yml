@@ -49,6 +49,8 @@ docs:
         url: /hierarchies/                                                                                        
       - title: "Working with geometry and geospatial"
         url: /geospatial/                                                                                        
+      - title: "Working with communication"
+        url: /communication/                                                                                        
   - title: Platform tools
     children:
       - title: "Maven targets"

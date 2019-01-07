@@ -9,10 +9,9 @@ Update Apps
 
 For Dev Guide
 --------------------
-Communication
 Skyve Backup
 listModel
-Modelling with Skyve - collection, association types, extension types, inverse
+Modelling relationships with Skyve - collection, association types, extension types, inverse
 generating test data
 Generating documents Skyve script
 Report generator
