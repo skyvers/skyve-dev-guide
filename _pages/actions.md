@@ -227,4 +227,4 @@ In this way, the `preRerender()` method can be used by the developer as a centra
 
 ---
 **Next [Reports](./../_pages/reports.md)**  
-**Previous [Views](./../_pages/views.md)**
+**Previous [Routing and rendering](./../_pages/routing.md)**

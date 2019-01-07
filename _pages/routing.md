@@ -67,7 +67,7 @@ Developers can customise how these are used within their application, how a UXUI
 
 #### The DefaultUxUiSelector class
 
-The DefaultUxUiSelector class is the default implementation of the UXUI selector interface.
+The `DefaultUxUiSelector` class is the default implementation of the `UxUiSelector` interface.
 
 The class declares the UXUI result types (by default these are *desktop*, *tablet*, *phone* and *external*) and uses the UserAgentType and HTTPServletRequest to determine which UXUI is selected, prior to routing.
 
@@ -78,6 +78,7 @@ Developers can customise this class, or create their own (remembering to set the
 The following are examples of valid Skyve requests for `myApplication` served via the domain `mydomain`.
 
 Example 1 - edit view for module and document
+
 `https://mydomain/myApplication/?a=e&m=invoice&d=InvoiceParameter`
 
  Fragment | Description/interpretation
@@ -87,6 +88,7 @@ Example 1 - edit view for module and document
 `d=InvoiceParameter` | the `d` (*document*) named `InvoiceParameter`
 
 Example 2 - list view for module and document 
+
  `https://mydomain/myApplication/?a=l&m=invoice&q=Invoice`
 
  Fragment | Description/interpretation
@@ -96,6 +98,7 @@ Example 2 - list view for module and document
 `q=Invoice` | the `q` (*query*) named `Invoice` - in the case where there is no query named `Invoice`, Skyve will infer that this is the document name and attempt to resolve the default or implicit query for the document
 
 Example 3 - list view for module and named query
+
  `https://mydomain/myApplication/?a=l&m=invoice&q=qAllInvoices`
 
  Fragment | Description/interpretation
@@ -180,13 +183,13 @@ View declarations can provide either highly specific sizing declarations (for ex
 
 If no *responsive* specific declaration is provided, Skyve will attempt to interpret the view definition according to the *responsive* approach. However, developers may wish to provide view declarations specific to particular UXUI results. To do this, the declaration must be contained within a folder named corresponding to the relevant UXUI.
 
-![Tablet view declaration](./../assets/images/routing/tablet-specific-view-declaration.png "Tablet view declaration)
+![Tablet view declaration](./../assets/images/routing/tablet-specific-view-declaration.png "Tablet view declaration")
 
 In the above example, a specific `edit.xml` has been declared for the *tablet* UXUI and a general `edit.xml` is provided for other UXUIs.
 
 Inverting this approach, it may be that the views for *phone*, *tablet* and *external* UXUIs are common, while the *desktop* UXUI result may include a design and widgets not suitable for touch-screen devices.
 
-![Desktop view declaration](./../assets/images/routing/desktop-specific-view-declaration.png "Desktop view declaration]
+![Desktop view declaration](./../assets/images/routing/desktop-specific-view-declaration.png "Desktop view declaration")
 
 In the above example, a tailored view is declared for the *desktop* UXUI result, with a general `edit.xml` for all other UXUI results. Note that in the above example, a view component `_emailNotConfiguredBanner.xml` is also declared - which allows re-use to ensure a common experience across multiple view declarations.
 
@@ -196,27 +199,27 @@ Multiple UXUIs may be catered for if required, including for UXUIs defined by th
 
 As mentioned above, developers may also create their own UXUI results and declare views accordingly.
 
-[Custom UXUI and components](./../assets/images/routing/tailored-uxui-and-components.png "Custom UXUI and components")
+![Custom UXUI and components](./../assets/images/routing/tailored-uxui-and-components.png "Custom UXUI and components")
 
 In the above example, the application declaration includes a custom UXUI definition `fsp`. As the view is complex, multiple view components have been declared separately to simplify management and allow flexible re-use across multiple view declarations.
 
 ### View tags
 
-JSF (xhtml) pages can take advantage of Skyve view declarations through view tags. The view tag can render whole views, or portions of views as identified by a `widgetId` and this allows for heavy customisation of applications while relying on Skyve's security, persistence and layout mechanisms and metadata driven approach. 
+JSF (xhtml) pages can take advantage of Skyve view declarations through view tags. The view tag can render whole views, or portions of views as identified by a `widgetId` - allowing for heavy customisation of applications while relying on Skyve's security, persistence and layout mechanisms and metadata driven approach. 
 
 The Faces view renderer class (called by the view tag) renders a PrimeFaces component tree corresponding to the Skyve view declaration.
 
-The view tag can take a managed Bean name, which can either be a Faces bean or if left blank will default to the Faces view bean that facilitates binding, security, and actions handled by the Skyve platform.
+The view tag can take a `managedBean` name, which can either be a Faces bean or (if left blank or set to `"skyve"`) the Skyve view bean that facilitates binding, security, and actions handled by the Skyve platform.
 
 For example, if the user does not have privileges to access a Skyve *action*, then the view tag will not render the component associated with the action (i.e. the button) in the Faces component tree - and any other PrimeFaces components associated with rendering that action will not be included in the served result.
 
 Additionally, *component builder* and *layout builder* can be specified in the view tag, allowing the developer to override default Skyve rendering behaviour with their own builder chain.
 
-The Skyve archetype page for edit views (edit.xhtml) uses the view tag:
+As an example, the Skyve archetype page for edit views (edit.xhtml) uses the view tag:
 
 ![View tag in the `edit.xhtml`](./../assets/images/routing/view-tag-in-edit.png "View tag in the `edit.xhtml`")
 
-The view tag offers the following parameters:
+The view tag has the following parameters:
 
 Parameter | Description
 ----|-----
@@ -231,12 +234,14 @@ process | the default expression to specify which parts of the page will be proc
 rendered | whether the view tag is rendered
 widgetId | (optional) - if the view tag is using a fragment of the original view declaration, this specifies the `widgetId` of the layout item (e.g. the *form*, *vbox*, *hbox*, *tabPane*, *dataGrid*, *dataRepeater*, or the actions stanza)
 
+The following view tag 
+
 ```xml
 <s:view module="#{skyve.bizModuleParameter}"
-								document="#{skyve.bizDocumentParameter}" 
-								managedBean="skyve"
-								update="@form" 
-								componentBuilderClass="org.skyve.impl.web.faces.pipeline.component.AdminFacesComponentBuilderChain" />
+	document="#{skyve.bizDocumentParameter}" 
+	managedBean="skyve"
+	update="@form" 
+	componentBuilderClass="org.skyve.impl.web.faces.pipeline.component.AdminFacesComponentBuilderChain" />
 ```
 
 In the above example, no `widgetId` is specified in the view tag, meaning that the entire view is to be included.
@@ -246,5 +251,5 @@ The `managedBean="skyve"` means that the view tag will use the bean provided by 
 **[⬆ back to top](#routing-and-rendering)**
 
 ---
-**Next [Reports](./../_pages/reports.md)**  
+**Next [Actions](./../_pages/actions.md)**  
 **Previous [Views, widgets and layout](./../_pages/views.md)**

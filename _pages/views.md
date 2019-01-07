@@ -731,13 +731,13 @@ Report actions are not declared within role definitions in the
 
 Skyve allows for reuse of view sections via the `component` widget.
 
-The view component must be declared according to the convention, with the file name matching the declared name. The `component` widget then refers to that name, with the addition of a `module` and `document` if the referenced component declaration resides in another document package.
+The view component must be declared according to the convention, with the file name matching the declared name. The `component` widget then refers to that name, with the addition of a `module` and `document` (if the referenced component declaration resides in another document package).
 
 ![Naming view components](./../assets/images/views/naming-view-components.png "Naming view components")
 
-In the above example, a complex view declaration has been broken up into sections and named accordingly.
+In the above example, a complex view declaration has been broken up into sections - with each section defined as a component - allowing flexible re-use of the view sections.
 
-The general view declaration `edit.xml` may include multiple components and mix these with specific widgets and layouts as appropriate.
+A view declaration `edit.xml` may include multiple components and mix these with specific widgets and layouts as appropriate.
 
 ```xml
 <tabPane>
@@ -761,9 +761,9 @@ The general view declaration `edit.xml` may include multiple components and mix 
 </tabPane>
 ```
 
-In the above example, the view declaration includes components on each of the tabs, with the final tab mixing a component and other widgets.
+In the above example, the view declaration includes components on each of the tabs, with the final tab mixing a component and a *map* widgets.
 
-The component widget has the following attributes:
+The component has the following attributes:
 
 Attribute | Description
 ----------|------------
@@ -777,7 +777,9 @@ widgetId | a specific `id` for the widget so that the widget can be directly ref
 
 ### Using a component for an associated document
 
-Consider the example where the *Contact* document has more than one association to the *Address* document - for *homeAddress* and *workAddress* - the component concept provides an alternative to the default Skyve approach of the *lookupDescription* and *Zoom* navigation. In this case, the view declaration for the *Address* document can be re-used within the *Contact* view.
+Consider the example where the *Contact* document has more than one association to the *Address* document - for *homeAddress* and *workAddress* - the component concept provides an alternative to the default Skyve approach of the *lookupDescription* and *Zoom* navigation. 
+
+In this case, the view declaration for the *Address* document can be re-used within the *Contact* view.
 
 ```xml
 <vbox border="true" borderTitle="Home Address">
@@ -835,13 +837,13 @@ The alternative approach is to use widgets with compound bindings similar to the
 </form>
 ```
 
-Not only is the component approach more succinct, but it also means that if the *Address* document is alterered or refactored, there is a single place where view layout changes can be made.
+Not only is the component approach more succinct, but it also means that if the *Address* document is alterered or refactored, view layout changes can be managed in a single authoritative location.
 
 #### Component substitution
 
 A view component can be used in another document even where the component refers to conditions or other aspects which are specific to one particular document.
 
-The component widget may declare a number of `name` mappings. These specify the mapping of condition names from the original document to the document in which the component is used.
+The component widget may declare a number of `name` mappings. These specify the mapping of names from the original document to the document in which the component is used.
 
 Name mappings can be used to substitute:
 - condition names
@@ -864,7 +866,7 @@ In the above example, the value of the `foreignSupplier` condition from the *Con
 
 Similarly, the names substitution may be required where the view component declares an action - in this case, the action would be declared within the document package where the component is declared (i.e. with the path to the action class being inferred by the convention of being located in the same document package). 
 
-If the component is then used in the view of another document, and it is necessary to map the action name to an action declared in the document package where the component is used.
+If the component is then used in the view of another document, it is necessary to map the action name to an action declared in the document package where the component is used.
 
 ### View tags (see Routing)
 

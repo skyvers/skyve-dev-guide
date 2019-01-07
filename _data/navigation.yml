@@ -27,10 +27,10 @@ docs:
         url: /bizlets/                                        
       - title: "Views, widgets and layout"
         url: /views/                                                
-      - title: "Actions"
-        url: /actions/                                                
       - title: "Routing and rendering"
         url: /routing/                                                
+      - title: "Actions"
+        url: /actions/                                                
       - title: "Reports"
         url: /reports/                                                                
       - title: "Jobs"
