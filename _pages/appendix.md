@@ -47,8 +47,7 @@ To undeploy, create an `myApplication.war.undeploy` file in the `wildfly/standal
 
 To redeploy, create a `myApplication.war.dodeploy` file in the `wildfly/standalone/deployment/` folder corresponding to the name of your application (again - an empty text file with that name is all that is required). Wildfly will replace this file with `myApplication.war.isdeploying` and once deployment is successful, Wildfly will replace this with either `myApplication.war.deployed` (if successful) or `myApplication.war.failed` (if unsuccesful).
 
-See [Configuring Wildfly](#configuring-wildfly) for more detailed Wildfly setup 
-instructions. Additional steps are required for Single Sign-On configuration, 
+Additional steps are required for Single Sign-On configuration, 
 the creation of service user accounts, SPNs and port configuration.
 
 ## Installing and configuring the Skyve development environment
@@ -844,4 +843,4 @@ ProxyPassReverse / http://localhost:8080/
 **[⬆ back to top](#deploying-a-skyve-application)**
 
 ---
-**Previous [Automated Unit Testing](./../_pages/automated-unit-testing.md)**
+**Previous [Backup and restore](./../_pages/backup-restore.md)**

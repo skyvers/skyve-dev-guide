@@ -9,7 +9,6 @@ Update Apps
 
 For Dev Guide
 --------------------
-Skyve Backup
 listModel
 Modelling relationships with Skyve - collection, association types, extension types, inverse
 generating test data
