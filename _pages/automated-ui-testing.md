@@ -238,8 +238,8 @@ Automated User Interface testing impacts the persisted data and content of your 
 
 The _admin_ module distributed as part of the Skyve framework is tested as part of the Skyve release process, however, as developers can customise this module, they may need to test it, and Developers must consider carefully the implications of the UI tests they create.
 
-**[⬆ back to top](#automated-ui-testing)**
+**[⬆ back to top](#automated-ui-testing-and-sail)**
 
 ---
-**Next [Appendix](./../_pages/appendix.md)**<br>
+**Next [Backup and restore](./../_pages/backup-restore.md)**<br>
 **Previous [Automated Unit Testing](./../_pages/automated-unit-testing.md)**

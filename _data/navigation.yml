@@ -64,7 +64,9 @@ docs:
       - title: "Automated unit testing"
         url: /automated-unit-testing/                                                                                
       - title: "Automated UI testing and SAIL"
-        url: /automated-ui-testing/                                                                                
+        url: /automated-ui-testing/       
+      - title: "Backup and restore"
+        url: /backup-restore/                                                                                        
   - title: Appendix
     children:
       - title: "Deploying a Skyve application"
