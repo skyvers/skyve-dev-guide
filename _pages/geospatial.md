@@ -59,7 +59,7 @@ To provide map-based navigation, declare a `map` menu item in your application `
 </map>
 ```
 
-Because map-based interactions are currently only supported via the `desktop` rendering mode, specifying the `uxui` limit for `desktop` mode means this menu option will not be available for other renders (as is appropriate).
+Because map-based interactions are currently only supported via the `desktop` rendering mode (i.e the SmartClient renderer), specifying the `desktop` `uxui` menu option means the map will not be available for other renders (as is appropriate).
 
 The `geometryBinding` parameter specifies which document attribute is being displayed. In the above example, the map will display `geometry` data for the *location* attribute of the *Staff* document.
 

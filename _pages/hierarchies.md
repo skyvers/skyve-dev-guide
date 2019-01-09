@@ -120,6 +120,10 @@ In the above example, the rootIdBinding is set to be the `id` of the node which 
 
 Note that the `treeGrid` provides the `continueConversation` parameter attribute to allow the developer to decide the transactional demarcation of changes the user may make when zooming into subordinate tree nodes.
 
+### Customising the way treeGrids work
+
+Skyve's `treeGrid` implementation is a special case of the `listGrid` and the `treeGrid` can be customised using a `model`. For more information on this, refer to <a href="https://skyvers.github.io/skyve-dev-guide/lists/">Lists</a>.
+
 **[⬆ back to top](#hierarchies)**
 
 ---

@@ -50,7 +50,9 @@ docs:
       - title: "Geometry and geospatial"
         url: /geospatial/                                                                                        
       - title: "Communication"
-        url: /communication/                                                                                        
+        url: /communication/
+      - title: "Lists"
+        url: /lists/                                                                                                
   - title: Platform tools
     children:
       - title: "Maven targets"

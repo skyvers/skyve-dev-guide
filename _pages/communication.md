@@ -132,5 +132,5 @@ If a communication of the same name has been created prior to the method being c
 **[⬆ back to top](#communication)**
 
 ---
-**Next [Maven targets](./../_pages/maven-targets.md)**  
+**Next [Lists](./../_pages/lists.md)**  
 **Previous [Geometry and geospatial](./../_pages/geospatial.md)**

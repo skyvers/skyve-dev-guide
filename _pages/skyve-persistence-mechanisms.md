@@ -133,6 +133,12 @@ Skyve keeps the timestamp and user principal of the last successful
 transaction as the bizLock column. This is useful for a range of
 auditing and process inspection requirements.
 
+`OptimisticLock` is implemented as a domain type in Skyve. 
+
+```java
+OptimisticLock lock = new OptimisticLock(CORE.getUser().getName(), new Date());
+```
+
 ### Enterprise-wide consistent reference representation
 
 

@@ -9,7 +9,9 @@ Update Apps
 
 For Dev Guide
 --------------------
-listModel
+Overriding Bizport
+Charts
+Dynamic images
 Modelling relationships with Skyve - collection, association types, extension types, inverse
 generating test data
 Generating documents Skyve script
