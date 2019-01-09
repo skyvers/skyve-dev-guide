@@ -53,9 +53,9 @@ public class ProcessCommunicationForTagJob extends Job {
 		Communication communication = (Communication) getBean();
 ```
 
-The Skyve Job method getLog() retrieves the corresponding job log object, allowing the developer to log job activity (viewable for a suitably privileged user in the Job view in the admin module).
+The Skyve Job method `getLog()` retrieves the corresponding job log object, allowing the developer to log job activity (viewable for a suitably privileged user in the Job view in the admin module).
 
-The Skyve Job method getBean() returns the corresponding bean instance where applicable (where a job has been instantiated 
+The Skyve Job method `getBean()` returns the corresponding bean instance where applicable (where a job has been instantiated 
 within a bean context or action).
 
 Jobs can be scheduled in action or *Bizlet* code using the
@@ -66,17 +66,17 @@ Jobs can be scheduled in action or *Bizlet* code using the
  * Kick off the annual returns job
  */
 @Override
-public ServerSideActionResult<GrowerSearchCriteria> execute(GrowerSearchCriteria search, WebContext WebContext) throws Exception {
+public ServerSideActionResult<GrowerSearchCriteria> execute(GrowerSearchCriteria bean, WebContext WebContext) throws Exception {
   User user = CORE.getPersistence().getUser();
   Customer customer = user.getCustomer();
   Module module = customer.getModule(Grower.MODULE_NAME);
-  Job job = module.getJob("jAnnualReturns");
+  JobMetaData job = module.getJob("jAnnualReturns");
 
-  EXT.runOneShotJob(job, search, user);
+  EXT.runOneShotJob(job, bean, user);
 
-  search.setReturnResults("The generation job has commenced.");
+  bean.setReturnResults("The generation job has commenced.");
 
-  return new ServerSideActionResult<>(search);
+  return new ServerSideActionResult<>(bean);
 }
 ```
 
