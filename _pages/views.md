@@ -295,6 +295,53 @@ widgets defined within a view.
 
 _OnChange Event Actions_
 
+#### List selection and refresh
+
+A common gesture is to select a row in a list as the basis of some action.
+
+To achieve this, set the `onSelectedHandler` on the widget as shown below.
+
+```xml
+<listGrid query="qTimesheets" 
+	selectedIdBinding="selectedTimesheetId" 
+	postRefresh="refreshTimesheetList">
+	<onSelectedHandlers>
+		<server action="TimesheetSelected" />
+	</onSelectedHandlers>
+</listGrid>
+```
+
+The `selectedIdBinding` is the binding name of a document attribute that holds the `bizId` of the selected row - so that you can use the result of the selection gesture in server-side code.
+
+In this case, the document would include an attribute declared as follows:
+```xml
+<id name="selectedTimesheetId" persistent="false" trackChanges="false">
+	<displayName>Selected Timesheet</displayName>
+</id>
+```
+
+Typically the result of the user selection is not persisted (`persistent="false"`) and the bean would not normally be considered to be dirty because of the selection (`trackChanges="false"`).
+
+The result of the selection can then be used in server-side code as a normal bean attribute:
+
+```java
+	//retrieve the timesheet selected in the list by the ser
+	Timesheet t = CORE.getPersistence().retrieve(Timesheet.MODULE_NAME
+		, Timesheet.DOCUMENT_NAME
+		, bean.getSelectedTimesheetId()
+		, false);
+		
+	//do some processing with the selected timesheet t
+	...
+```
+
+Lists are refreshed lazily and only when they are accessible to the user. For example, if a `listGrid` is on a `tab` which is not currently selected, the `listGrid` will not be refreshed until the `tab` is active. However, lists will be refreshed after server-side activity, and so developers need to consider the impact using the `selected` event may have.
+
+`postRefresh` allows you to specify refreshing of the list conditionally - to guard against situations where the results of the `onSelectedHandler` causes a continuous list refresh.
+
+Note that with `postRefresh="false"`, the list will still be refreshed the first time it is made available to the user, so that an empty list isn't returned.
+
+Also note that lists will be refreshed if the list is accessible by the user from scrolling - so if the list is outside of the area currently visible but still on the active part of the view, the list will be triggered for refresh unless controlled by a `postRefresh` condition.
 
 #### Update property
 
