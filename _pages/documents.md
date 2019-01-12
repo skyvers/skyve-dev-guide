@@ -138,7 +138,7 @@ contain simple markup as it will be rendered as HTML.
 #### Attribute types
 
 Developers should note that database specific implementations of each
-type are defined by Hibernate™ mapping settings and not by the Skyve
+type are defined by *Hibernate* mapping settings and not by the Skyve
 specification.
 
 The following attribute types are available:
@@ -155,7 +155,7 @@ The following attribute types are available:
   decimal2       | Decimal number rounded to 2 decimal places, commonly used for currency and percentages.<br>Note that if a converter has been declared, the representation within the *textField* component will reflect that conversion. | textField | ![](../assets/images/documents/image65.png)<br>In this example, the converter DollarsAndCents is automatically applied wherever this attribute is displayed.
   decimal5       | Decimal number rounded to 5 decimal places.<br>Note that if a converter has been declared, the representation within the *textField* component will reflect that conversion. | textField | ![](../assets/images/documents/image66.png)
   decimal10      | Decimal number rounded to 10 decimal places.<br>Note that if a converter has been declared, the representation within the *textField* component will reflect that conversion. | textField | ![](../assets/images/documents/image67.png)
-  enum           | An enumeration is a text field which is constrained to be one of a set of values.<br>If enumerations are not marked required, they may be set to null.<br>Each enumeration value must have a code, the value which is persisted when this value is selected.<br>Values may optionally also have a description, which is how the value is displayed to the user, and a name, which is how the value is referred to in developer code and metadata. If description or name is not supplied, the code will be used.<br>Value descriptions may contain spaces while names must be compilable as Java identifiers.<br>The value stored in the persistence mechanism is the code. | combo | ![](../assets/images/documents/image68.png)<br>In this example, an enumeration will, by default, be represented as a simple combo box, with the four nominated descriptions in the combo list.<br>Because descriptions have been supplied, the codes will never be seen by the user, but will be persisted in the database.<br>Because name attributes have not been supplied for the values, the domain class for the document will include a Java enumeration with elements named as valid Java identifiers based on the description values, as shown:<br>![](../assets/images/documents/image69.png)
+  enum           | A declared value set of static values for user selection (see full description below) | combo | ![](../assets/images/documents/image68.png)<br>In this example, an enumeration will, by default, be represented as a simple combo box, with the four nominated descriptions in the combo list.<br>Because descriptions have been supplied, the codes will never be seen by the user, but will be persisted in the database.<br>Because name attributes have not been supplied for the values, the domain class for the document will include a Java enumeration with elements named as valid Java identifiers based on the description values, as shown:<br>![](../assets/images/documents/image69.png)
   geometry       | Used for storing location and geographical features in the Skyve platform (using a "flat-earth" cartesian approach - i.e. a non-geodetic feature on a 2-dimensional plane). | geometry | ![](../assets/images/documents/declaration_geometry.png) 
   integer        | An integer between the values of 2\^31-1 and -2\^31-1.<br>Note that if a converter has been declared, the representation within the *textField* component will reflect that conversion. | textField | ![](../assets/images/documents/image70.png)<br>In this example the attribute has a *description* containing markup to provide expansive formatted tool-tip help.<br>The defaultValue setting in this case will yield a default value in the generated domain class as follows:<br>![](../assets/images/documents/image71.png)
   longInteger    | A large integer.<br>Note that if a converter has been declared, the representation within the *textField* component will reflect that conversion. | textField | ![](../assets/images/documents/image72.png)
@@ -166,6 +166,163 @@ The following attribute types are available:
   timestamp      | Date with time (hours, minutes, seconds).<br>Note that if a converter has been declared, the representation within the *textField* component will reflect that conversion. | textField | ![](../assets/images/documents/image77.png)
 
 _Document attribute types_
+
+#### Declaring `enum`
+
+An enumeration is a text field which is constrained to be one of a set of values, and can either declare values or refer to another attribute value set.
+
+If enumerations are not marked required, they may be set to null.
+
+Value attribute | Description | Required
+----------------|-------------|----------
+`code` | the value stored when this value is selected & the value stored in the persistence mechanism | *required*
+`description` | how the value is displayed to the user - if the `description` is not explicitly declared it will be inferred from the `code` | *optional*
+`name` | how the value is referred to in developer code and metadata - if the `name` is not explicitly declared it will be inferred from `description` | *optional*
+
+`name` must be compilable as a Java identifier. 
+
+Skyve will infer the `name` if it is not explicitly declared and if inference from the `code` or `description` does not lead to a satisfactory Java identifier, compile errors may result from the domain generation. In this case, declare a preferred `name` explicitly. 
+
+When declaring an enumeration note that the `defaultValue` must correspond to the `name` of the value.
+
+```xml
+<enum name="loadAction">
+	<displayName>Action</displayName>
+	<defaultValue>lookupLike</defaultValue>
+	<values>
+		<value code="set" name="setValue" description="Always set this value"/>
+		<value code="equals" name="lookupEquals" description="Look for exact match"/>
+		<value code="like" name="lookupLike" description="Look for like match"/>
+		<value code="contains" name="lookupContains" description="Look for matches containing this value"/>
+		<value code="confirm" name="confirmValue" description="Fail if this value doesn't match"/>
+	</values>
+</enum>
+```
+
+In the above example, when the first value is selected from by the user, the code `set` will be stored (in the persistence mechanism), while the `description` *Always set this value* will be presented to the user.
+
+To determine which value has been set can take advantage of the `switch` operator using the attribute `getter` as follows:
+
+```java
+switch(getLoadAction()) {
+case confirmValue:
+	//user code
+	break;
+case lookupContains:
+	//user code
+	break;
+case lookupEquals:
+	//user code
+	break;
+case lookupLike:
+	//user code
+	break;
+case setValue:
+	//user code
+	break;
+default:
+	break;
+}
+```
+
+To declare additional attributes using the same value set, use the `attributeRef` option in the `enum` declaration. If the value set is declared on an attribute in a different `document`, use the `attributeRef` *and* `documentRef` to specify the source. If the source is in a different `module`, use the `attributeRef` *and* `moduleRef` *and* `documentRef`.  
+
+```xml
+<enum name="otherAction" attributeRef="loadAction">
+	<displayName>Action</displayName>
+</enum>
+```
+
+When the domain is generated, the enum will result as follows:
+
+```java
+/**
+ * Action
+ **/
+@XmlEnum
+public static enum LoadAction implements Enumeration {
+	setValue("set", "Always set this value"),
+	lookupEquals("equals", "Look for exact match"),
+	lookupLike("like", "Look for like match"),
+	lookupContains("contains", "Look for matches containing this value"),
+	confirmValue("confirm", "Fail if this value doesn't match");
+
+	private String code;
+	private String description;
+
+	/** @hidden */
+	private DomainValue domainValue;
+
+	/** @hidden */
+	private static List<DomainValue> domainValues;
+
+	private LoadAction(String code, String description) {
+		this.code = code;
+		this.description = description;
+		this.domainValue = new DomainValue(code, description);
+	}
+
+	@Override
+	public String toCode() {
+		return code;
+	}
+
+	@Override
+	public String toDescription() {
+		return description;
+	}
+
+	@Override
+	public DomainValue toDomainValue() {
+		return domainValue;
+	}
+
+	public static LoadAction fromCode(String code) {
+		LoadAction result = null;
+
+		for (LoadAction value : values()) {
+			if (value.code.equals(code)) {
+				result = value;
+				break;
+			}
+		}
+
+		return result;
+	}
+
+	public static LoadAction fromDescription(String description) {
+		LoadAction result = null;
+
+		for (LoadAction value : values()) {
+			if (value.description.equals(description)) {
+				result = value;
+				break;
+			}
+		}
+
+		return result;
+	}
+
+	public static List<DomainValue> toDomainValues() {
+		if (domainValues == null) {
+			LoadAction[] values = values();
+			domainValues = new ArrayList<>(values.length);
+			for (LoadAction value : values) {
+				domainValues.add(value.domainValue);
+			}
+		}
+
+		return domainValues;
+	}
+}
+```
+Note that to set the value of the `enum` attribute from a String, use the `fromCode` or `fromDescription` as is appropriate.
+
+The `Binder.formatMessage()` method will return the declared (or inferred) `description`, as follows (using the example attribute declaration above):
+
+```java
+String output = Binder.formatMessage("You have selected the action `{loadAction}`.");
+```
 
 #### Conditions
 Document conditions are code snippets which return a Java `boolean` value,
