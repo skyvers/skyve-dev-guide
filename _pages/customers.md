@@ -121,6 +121,60 @@ Note that if you only ever want to use a single customer, you can specify a defa
 
 ![Signing in with a default customer](../assets/images/customers/skyve_default_customer_sign_in.png "Signing in with a default customer")
 
+### Customer roles
+
+For background on the security group concept, see [Security groups](./../_pages/building-applications.md).
+
+The customer declaration may include customer roles - named combinations of module roles into coherent usage profiles.
+
+Security groups are created at runtime by users with the role `admin.SecurityAdministator`. If the option `<roles allowModuleRoles="true">` then administrators will be able to mix their own combinations of roles from those declared in each module. If this option is set to `false` then only the declared customer roles will be available through the user interface.
+
+An example customer declaration with customer roles is as follows:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customer name="myClient" xmlns="http://www.skyve.org/xml/customer"
+	xsi:schemaLocation="http://www.skyve.org/xml/customer ../../schemas/customer.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<uiResources logo="client_logo.png" />
+	<defaultDateConverter>DD_MM_YYYY</defaultDateConverter>
+	<defaultTimeConverter>HH24_MI</defaultTimeConverter>
+	<defaultDateTimeConverter>DD_MM_YYYY_HH24_MI</defaultDateTimeConverter>
+	<defaultTimestampConverter>DD_MM_YYYY_HH24_MI_SS</defaultTimestampConverter>
+	<modules homeModule="tasks">
+		<module name="admin" />
+		<module name="tasks" />
+		<module name="projects" />
+	</modules>
+	<roles allowModuleRoles="false">
+		<role name="Basic User">
+			<description>Basic access to the system to log in and maintain own settings.</description>
+			<roles>
+				<role module="admin" name="BasicUser" />
+			</roles>
+		</role>
+		<role name="External Client access">
+			<description>Basic role for all external users</description>
+			<roles>
+				<role module="admin" name="AppUser" />
+				<role module="tasks" name="ExternalTask" />
+			</roles>
+		</role>
+		<role name="Internal client manager">
+			<description>Access to create and maintain JAGS applications and claims</description>
+			<roles>
+				<role module="admin" name="SecurityAdministrator" />
+				<role module="tasks" name="Task Manager" />
+				<role module="projects" name="Project Manager" />
+			</roles>
+		</role>
+	</roles>
+	<interceptors/>
+</customer>
+```	
+
+In the above example, the option `<roles allowModuleRoles="false">` means that only the roles declared above can be selected at runtime.  
+
 **[⬆ back to top](#customers)**
 
 ---

@@ -8,7 +8,9 @@ sidebar:
   nav: docs
 ---
 
-## Skyve Readme
+## Building applications
+
+### Skyve Readme
 
 The skyve project contains a Readme at [github.com/skyvers/skyve](https://github.com/skyvers/skyve) with useful information for getting started, configuring Spring security and other steps to get you started.
 
@@ -63,6 +65,37 @@ Right click your project in the server tree and publish - Skyve will automatical
 Once your project is running, go to your local context and login in.
 
 Detailed instructions are available in the Skyve Readme at [github.com/skyvers/skyve](https://github.com/skyvers/skyve).
+
+## Security groups
+
+### Background
+
+A group is a combination of module-specific roles typically combined to represent a user access profile related to a business access profile.
+
+Typically (not always) users will require a combination of roles to be able to access Skyve applications, for example, a back-end (staff) user may require:
+- basic user privileges to the admin module to be able to manage their own user account, change password and contact details and view contact details of other back end users
+- a role declared in the module(s) for your custom application.
+
+The <a href="https://skyvers.github.io/skyve-user-guide/users/#security-groups">Skyve User Guide</a> provides detailed steps for creating groups and users.
+
+The roles configured by default for the Skyve admin module are as follows:
+
+Role | Explanation | Description
+---|---|---
+*Anonymous* |  | Access anonymous (not logged in) public features
+*AppUser | The App User role is intended for retail and public users interacting through the "front office". These users are assumed to operate within their own scope and have only visibility to their own data. App Users can create their own contacts, and change their own passwords. | Manage own contact details and password
+*AuditManager* |  | Manage the activity audit log
+*BasicUser * | The intention of Basic User role is to provide basic capability to back-office users. The role is for a typical office situation where users collaborate within the "Customer" scope on key application areas. For example, shared contact management, common document number serials and the ability to use Skyve's basic personal efficiency and automation capabilities, Tags, Snapshots, Communication and view dashboards. | General access to the administration module
+*ContactManager* | Allows atomic control over management of, and interaction with, contacts. | Manage contact details and interactions
+*ContactViewer* | Allows atomic control over visibility of contacts. | View-only access to contact details
+*DevOps* | | Generate Skyve designs and metadata and administer technical aspects of the Skyve runtime
+*JobMaintainer* | Allows atomic control over the ability to schedule jobs and review job progress. | Maintain Jobs
+*SecurityAdministrator* | Administration of users and permissions. | Allows administration of Users and Groups
+*ViewUser* | The view user is intended as a read-only office user, with visibility as per Basic User role. | View-only access to the administration module
+
+Groups can be further combined on a per user basis and user creation provides for selection of groups.
+
+Roles can also be combined for customer-specific combinations, however these combinations are set at design-time by the developer. For more information see the <a href="https://skyvers.github.io/skyve-dev-guide/customers/#customer-roles">developer guide</a>. 
 
 **[⬆ back to top](#building-applications)**
 
