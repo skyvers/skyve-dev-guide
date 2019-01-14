@@ -195,7 +195,7 @@ For example, for SQL Server:
     </driver>
 ```
 
-#### Special datasource options
+#### Other datasource options
 
 There are a number of optional settings for the application data source file `myApplication-ds.xml`. The file provided from the Skyve project creator is usually satisfactory, however the following describes other options which you may need to consider.
 
@@ -215,14 +215,14 @@ A typical validation stanza is as follows:
 
 ```xml                
 <validation>
-		<check-valid-connection-sql>select 1</check-valid-connection-sql>
-        <validate-on-match>true</validate-on-match>
-        <background-validation>false</background-validation>
-        <background-validation-millis>0</background-validation-millis>
+  <check-valid-connection-sql>select 1</check-valid-connection-sql>
+  <validate-on-match>true</validate-on-match>
+  <background-validation>false</background-validation>
+  <background-validation-millis>0</background-validation-millis>
 </validation>
 <statement>        
-		<prepared-statement-cache-size>0</prepared-statement-cache-size>
-       <share-prepared-statements>false</share-prepared-statements>
+  <prepared-statement-cache-size>0</prepared-statement-cache-size>
+  <share-prepared-statements>false</share-prepared-statements>
 </statement>
 ```
 
