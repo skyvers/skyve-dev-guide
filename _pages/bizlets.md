@@ -263,7 +263,29 @@ Or use the Binder.formatMessage() message as follows:
 	sb.append(Binder.formatMessage(customer, " date {" + WeeklyTimesheet.weekEndingDatePropertyName + "}", bean));
 ```	
 
-To read more about the Binder utility class, see [Utility Classes](./../_pages/utility_classes.md "Utility Classes"). 
+To read more about the Binder utility class, see [Utility Classes](./../_pages/utility_classes.md "Utility Classes").
+
+### Overriding the `resolve()` method for transient documents
+
+The term *transient document* refers to documents which are not persisted, and accordingly are declared without a `persistentName` (for more information see [Documents](./../_pages/documents.md "Documents").
+
+The Bizlet `resolve()` method is called when a view sends a `bizId` representing an object and the object needs to be supplied and set on a binding. This occurs when selection widgets (e.g. `combo` or `listMembership`) are used to allow selection of associations (`combo`) or collection items (`listMembership`).
+
+If the `resolve()` method returns `null`, Skyve will try to retrieve the bean from the first level cache and then from the database (the default behaviour). However if the `resolve()` method is called for a binding which represents a *transient document*, the developer can override the `resolve()` method to supply the appropriate instance.
+
+#### Worked example
+
+For example, where a bean has an association to a transient document, a `combo` widget may be used to allow the user to select between a number of bean instances. 
+
+In this case, the developer will need to override either the `getVariantDomainValues()` or `getDynamicDomainValues()` to provide a `List<DomainValue>` as the basis of the values available in the `combo` - where each value available for selection in the `combo` is a `DomainValue` representing one of the beans appropriate for selection, created as (for example) follows:
+
+```java
+DomainValue v = new DomainValue(bean.bizId, bean.bizKey);
+```
+
+When the user selects a value from the list, the code from the selected `DomainValue` has to be resolved to a bean for the association represented by the `combo` widget.  
+
+The `resolve()` method provides the opportunity for the developer to return the bean corresponding to the selected `DomainValue`.
 
 ## Extension classes
 

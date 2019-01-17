@@ -575,9 +575,17 @@ required.
 ### Domain values and types
 
 Domain values are groups of values applicable for a particular
-situation.
+situation. 
 
-Skyve includes a number of domain value concepts to allow the developer
+Skyve provides a `DomainValue` class to allow developers to specify meaningful descriptions in the UI representing each value used in the application. 
+
+```java
+DomainValue value = new DomainValue(code, description);
+```
+
+`DomainValue` is used as the basis for value selection for a number of user widgets.
+
+Skyve also includes a number of domain value concepts to allow the developer
 to optimise application performance.
 
 There are three domain types - *constant*, *variant* (depending on the
