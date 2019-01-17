@@ -10,7 +10,6 @@ sidebar:
 
 ## Automated unit testing
 
-
 Along with the ability to generate domain files for [Documents](./../_pages/documents.md), Skyve also generates CRUD unit tests against these documents as well as tests for any defined actions.
 
 This is intended to give developers:
@@ -197,7 +196,7 @@ After performing the typical upgrade steps to update your project to the latest 
 - AbstractH2Test.java from Skyve-ee
 - AbstractActionTest
 - AbstractDomainTest
-- _src.modules.admin.Factory*_ into your source path configured in your [ant configuration](#build-xml-parameters) or your [maven configuration](#maven-configuration)
+- _src.modules.admin.Factory*_ into your source path configured in your [build parameters](#build-xml-parameters) or your [maven parameters](#maven-parameters)
 - test data files from _src.test.resources.data_ into your _src.test.resources.data_ directory
 - Update your build file following the relevant configuration depending on whether you are using maven or ant
 

@@ -7,7 +7,9 @@ sidebar:
   title: "Index"
   nav: docs
 ---
+
 ## Documents
+
 Skyve uses the term document to indicate the business-focused nature of
 application objects.
 

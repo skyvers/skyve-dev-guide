@@ -7,6 +7,7 @@ sidebar:
   title: "Index"
   nav: docs
 ---
+
 ## Security, persistence and access control
 
 ### Transaction control

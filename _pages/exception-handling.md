@@ -7,6 +7,7 @@ sidebar:
   title: "Index"
   nav: docs
 ---
+
 ## Exception handling
 
 Skyve provides powerful error management capabilities extending general

@@ -7,6 +7,7 @@ sidebar:
   title: "Index"
   nav: docs
 ---
+
 ## Customers
 
 ### Customer declaration

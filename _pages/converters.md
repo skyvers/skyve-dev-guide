@@ -7,7 +7,9 @@ sidebar:
   title: "Index"
   nav: docs
 ---
+
 ## Converter, validator and format
+
 In certain circumstances, data of the same type may need to be
 represented in differing ways.
 
