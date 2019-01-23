@@ -104,7 +104,7 @@ Method | Description/Usage
 
 #### Session and conversation storage
 
-Skyve offers a temporary cache/stash at both the conversation and session context level. Use of the stash can impact performance and developers must consider the implications carefully .
+Skyve offers a temporary cache/stash at both the conversation and session context level. Use of the stash can impact performance and developers must consider the implications carefully. Minimizing the overheads in keeping the conversation and session state increases application scaleability.
 
 `Core.getStash()` provides conversation-level storage for developer use. The stash is a `Map` that developers can use to store objects for later recall within the conversation context.
 
