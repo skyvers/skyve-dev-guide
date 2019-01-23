@@ -102,6 +102,36 @@ Method | Description/Usage
 `getPersistence()` | See Persistence below
 `getStash()` | returns a convenience Map for the current conversation available to the developer
 
+#### Session and conversation storage
+
+Skyve offers a temporary cache/stash at both the conversation and session context level. Use of the stash can impact performance and developers must consider the implications carefully .
+
+`Core.getStash()` provides conversation-level storage for developer use. The stash is a `Map` that developers can use to store objects for later recall within the conversation context.
+
+```java
+CORE.getStash().put("someKey", someObject);
+```
+
+and then to retrieve
+
+```java
+someOtherObject = CORE.getStash().get("someKey");
+```
+
+The conversation stash exists for the duration of the conversation. Developers are responsible for managing the stash for the duration of the conversation, including removing objects no longer required.
+
+Similarly, the `User` attributes `Map` is available for session-level storage.
+
+```java
+CORE.getPersistence().getUser().getAttributes().put("someKey", someObject);
+```
+
+and then to retrieve
+
+```java
+someOtherObject = CORE.getPersistence().getUser().getAttributes().get("someKey");
+```
+
 ### DocumentQuery
 
 *DocumentQuery* extends *ProjectionQuery* and provides the ability to
