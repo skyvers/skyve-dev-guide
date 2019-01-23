@@ -412,6 +412,16 @@ the user can have any number of concurrent browser interactions.
 Skyve allows developers to choose whether some gestures will result in 
 new conversations or within the existing conversation.  
 
+```java
+CORE.getStash().put("someKey", someObject);
+```
+
+and then at some later date
+
+```java
+someOtherObject = CORE.getStash().get("someKey");
+```
+
 #### Transaction demarcation
 
 Conflicting actions between conversations (e.g. two attempts to update

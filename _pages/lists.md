@@ -104,6 +104,68 @@ ListModel | Description/comments
 `DocumentQueryListModel` | this approach takes advantage of the inbuilt handling of `DocumentQuery` and allows the developer to customise or construct the `DocumentQuery` and filters with minimal effort (rather than specifying the `DrivingDocument`, `Projections`, `Columns` and a `fetch()` method)
 `InMemoryListModel` | intended to provide a basis for complete implementation of all listGrid functions - advanced filtering, tags, flags, snapshot, summary etc.
 
+### Calculated columns and aggregate queries
+
+There are a number of approaches to included calculated column values in lists, and developers should consider which is most appropriate.
+
+#### Aggregate queries
+
+The assumed behaviour of lists is to represent document instances in their context, primarily for navigation to a detail view of a document bean instance.
+
+However, in some circumstances it may be required to provide an interactive list of aggregated values for the purpose of display and supporting Skyve's built-in data export features.
+
+Aggregate queries are metadata queries with `aggregate="true"`. This flag means that the list is not being used for navigation to a specific bean, and as such, the query does not need to include the Skyve attributes `bizId` etc. The aggregate query can therefore perform grouping so that each row can represent aggregate values rather than represent a single instance.
+
+Aggregate queries take advantage of column expressions for aggregate functions.
+
+The columns representing expression results are not able to be ordered, filtered or editable. If the `aggreate="true"` flag is set, Skyve will automatically disable list features appropriately.
+
+Examples of aggregate functions are available for review as part of the Skyve admin module.
+
+```xml
+        <query name="qContactsByContactType" documentName="Contact" aggregate="true">
+            <description>Number of Contacts by Contact Type</description>
+            <from>
+                <![CDATA[
+                    {admin.Contact} as bean group by bean.contactType
+                ]]>
+            </from>
+            <columns>
+                <column binding="contactType" sortOrder="ascending" />
+                <column displayName="Count">
+                    <name>count</name>
+                    <expression>
+                        <![CDATA[
+                            count(1)
+                        ]]>
+                    </expression>
+                </column>
+            </columns>
+        </query>	
+```
+
+In the above example, the query counts the number of `Contacts` of each `ContactType`. The query takes advantage of the `<from>` clause specify that results be grouped by the `contactType` attribute. The expression for the column `Count` in this case counts 1 for each `Contact` instance, however this expression could instead use an aggregate function on some other attribute as required.
+
+In this mode, editing the column would be meaningless, as would `Zoom` into a row. Similarly, Skyve's `Tag` and `Flag` features (referencing specific bean instances) are invalid, and Skyve hides features of lists that are not appropriate.
+
+![Aggregate query](./../assets/images/lists/aggregate-query-list.png "Aggregate query in admin System Dashboard")
+
+#### Other approaches to calculated columns
+
+The `<from>` clause and column `<expression>` features can be used where `aggregate="false"` (the default setting for queries), however in the default mode each row needs to be resolvable to a single bean instance for navigation.
+
+Alternatively, the developer can either utilise the `postLoad()` event to calculate _transient_ attribute result values for display in the list, or override an attribute `getter` method in an `Extension` class. In both of these cases, the column should be set as follows:
+
+```xml
+<column name="myTransientAttribute" sortable="false" editable="false" filterable="false"/>
+```
+
+Skyve lists are designed to support large numbers of rows for scalable applications, with paging and lazy loading controls to ensure prompt interactions. To deliver a paged result where filtering or sorting is applied in the client would not be practical (or at least scaleable) unless the value is persisted. (This is the same rationale for persisting the Skyve `bizKey` concept.)
+
+If sorting, filtering and editing is required, then there are two further options. The simples is to declare the attribute as a _persistent_ attribute and calculate the value as part of `preSave()` or `preExecute()` methods to ensure the value is kept up to date. 
+
+Finally, developers can avail themselves of the `listModel` approach for total control. In this case the developer can decide how paging, filtering and sorting can interact as they require.
+
 **[⬆ back to top](#lists-and-models)**
 
 **Next [Maven targets](./../_pages/maven-targets.md)**  
