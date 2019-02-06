@@ -273,7 +273,7 @@ The Bizlet `resolve()` method is called when a view sends a `bizId` representing
 
 If the `resolve()` method returns `null`, Skyve will try to retrieve the bean from the first level cache and then from the database (the default behaviour). However if the `resolve()` method is called for a binding which represents a *transient document*, the developer can override the `resolve()` method to supply the appropriate instance.
 
-#### Worked example
+#### Worked example - DomainValue for bean
 
 For example, where a bean has an association to a transient document, a `combo` widget may be used to allow the user to select between a number of bean instances. 
 
@@ -283,9 +283,23 @@ In this case, the developer will need to override either the `getVariantDomainVa
 DomainValue v = new DomainValue(bean.bizId, bean.bizKey);
 ```
 
-When the user selects a value from the list, the code from the selected `DomainValue` has to be resolved to a bean for the association represented by the `combo` widget.  
+When the user selects a value from the list, the code from the selected `DomainValue` has to be resolved to a bean for the association represented by the `combo` widget.
 
 The `resolve()` method provides the opportunity for the developer to return the bean corresponding to the selected `DomainValue`.
+
+#### Worked example - DomainValues from results of a DocumentQuery
+
+To create a `List` of `DomainValue` from the results of a `DocumentQuery`, you can take advantage of the Java 8 stream construct as follows:
+
+```java
+DocumentQuery q = pers.newDocumentQuery(CommunicationTemplate.MODULE_NAME, CommunicationTemplate.DOCUMENT_NAME);
+List<CommunicationTemplate> templates = q.beanResults();
+result.addAll(templates.stream()
+		.map(t -> new DomainValue(t.getBizId(), t.getBizKey()))
+		.collect(Collectors.toList()));
+```
+
+In the above example, the `List<DomainValue>` will be displayed in a `combo` - allowing the user to select a bean for the association to _CommunicationTemplate_ (this example taken from the Skyve admin module - _CommunicationBizlet_).
 
 ## Extension classes
 
