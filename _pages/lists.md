@@ -150,6 +150,35 @@ In this mode, editing the column would be meaningless, as would `Zoom` into a ro
 
 ![Aggregate query](./../assets/images/lists/aggregate-query-list.png "Aggregate query in admin System Dashboard")
 
+The following example shows a query to total an attribute, ordered by the resulting total.
+
+```java
+<query documentName="Account" name="qTotalFundsByAccount" aggregate="true">
+	<description>Funds by Account</description>
+	<from>
+		<![CDATA[
+			{myApp.Fund} as fund
+			inner join fund.account as bean
+			group by bean.description
+		]]>
+	</from>
+	<columns>
+		<column binding="description" />
+		<column displayName="Total Balance" sortOrder="descending">
+			<name>totalBalance</name>
+			<expression>
+				<![CDATA[
+					sum(fund.curBal)
+				]]>
+			</expression>
+		</column>
+	</columns>        	
+</query>
+```
+
+In the above example, the calculated column `sum(fund.curBal)` will be bound to a column `totalBalance` if it exists in the _driving document_ (in this example the _Account_ document). You don't need to declare an attribute called `totalBalance` for the list to work, however if you want the calculated column to display using a specific converter, declare a transient (i.e. `persistent="false"`) attribute called `totalBalance` in the driving document with the required converter. 
+
+
 #### Other approaches to calculated columns
 
 The `<from>` clause and column `<expression>` features can be used where `aggregate="false"` (the default setting for queries), however in the default mode each row needs to be resolvable to a single bean instance for navigation.
