@@ -17,7 +17,7 @@ The skyve project contains a Readme at [github.com/skyvers/skyve](https://github
 You can also follow the instructions provided in the video at the Skyve Foundry - Skyve Project Creator
 
 <div style="margin: 0 auto; text-align: center">
-	<a href="https://youtu.be/Ar7y1y1xhHg" target="_blank">
+	<a href="https://youtu.be/sxFXbpKM97k" target="_blank">
 		<img src="../assets/images/building-applications/skyve-project-creator.png" alt="Skyve Project Creator" width="500" border="10" />
 	</a>
 </div>
