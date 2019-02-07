@@ -124,6 +124,50 @@ Note that the `treeGrid` provides the `continueConversation` parameter attribute
 
 Skyve's `treeGrid` implementation is a special case of the `listGrid` and the `treeGrid` can be customised using a `model`. For more information on this, refer to <a href="https://skyvers.github.io/skyve-dev-guide/lists/">Lists</a>.
 
+#### RelationTreeModel
+
+A RelationTreeModel is a tree displaying related entities and can be used as the basis for an exploration tree to show how an entity relates to its constituent parts.
+
+A basic RelationTreeModel is implemented as follows:
+
+```java
+package modules.admin.User.models;
+
+import org.skyve.metadata.view.model.list.RelationTreeModel;
+
+import modules.admin.domain.GroupRole;
+import modules.admin.domain.User;
+
+public class RelationsModel extends RelationTreeModel<User> {
+    private static final long serialVersionUID = 3035762173664181592L;
+
+    public RelationsModel() throws Exception {
+        super(GroupRole.DOCUMENT_NAME);
+    }
+
+    @Override
+    public String getDescription() {
+        return "References";
+    }
+}
+```
+
+In this case, the model will show all entities related to a `User` - stopping (i.e. going no deeper) than `GroupRole`.
+
+The `RelationTreeModel` is heterogenous - that is, displays a tree of related entities of different types in a single structure.
+
+The treeGrid is declared in the view, referring to the model as follows:
+
+```xml
+<treeGrid model="RelationsModel" continueConversation="true" />
+```
+
+Note the `continueConversation` is required to be declared but can be either `true` or `false` depending on the use-case.
+
+The result is a `treeGrid` displaying all relations from the `User` instance:
+
+![RelationTreeModel example](./../assets/images/hierarchies/RelationTreeModel.png "RelationTreeModel")
+
 **[⬆ back to top](#hierarchies)**
 
 ---
