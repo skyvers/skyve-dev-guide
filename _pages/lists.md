@@ -103,6 +103,68 @@ ListModel | Description/comments
 ----------|--------------
 `DocumentQueryListModel` | this approach takes advantage of the inbuilt handling of `DocumentQuery` and allows the developer to customise or construct the `DocumentQuery` and filters with minimal effort (rather than specifying the `DrivingDocument`, `Projections`, `Columns` and a `fetch()` method)
 `InMemoryListModel` | intended to provide a basis for complete implementation of all listGrid functions - advanced filtering, tags, flags, snapshot, summary etc.
+`RelationTreeModel` | as the basis of exploratory tree showing all entities related to the bean
+`ReferenceListModel` | used to show references/collections from the bean as a list
+
+##### ReferenceListModel example
+
+The following example demonstrates using the ReferenceListModel to list references from a bean - in this case the `User` showing specific `Role`s assigned to them.
+
+The model class is declared within the `models` subpackage in the document package.
+
+```java
+package modules.admin.User.models;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.skyve.impl.metadata.module.query.MetaDataQueryProjectedColumnImpl;
+import org.skyve.metadata.module.query.MetaDataQueryColumn;
+import org.skyve.metadata.view.model.list.ReferenceListModel;
+
+import modules.admin.domain.User;
+import modules.admin.domain.UserRole;
+
+public class RolesModel extends ReferenceListModel<User> {
+    private static final long serialVersionUID = 6762565294576709168L;
+
+    private List<MetaDataQueryColumn> columns = null;
+    
+    public RolesModel() throws Exception {
+        super(UserRole.MODULE_NAME, UserRole.DOCUMENT_NAME, User.rolesPropertyName);
+    }
+    
+    @Override
+    public String getDescription() {
+        return "Roles";
+    }
+
+    @Override
+    public List<MetaDataQueryColumn> getColumns() {
+        if (columns == null) {
+            MetaDataQueryProjectedColumnImpl column = new MetaDataQueryProjectedColumnImpl();
+            column.setBinding(UserRole.roleNamePropertyName);
+            column.setDisplayName("Role");
+            columns = Collections.singletonList(column);
+        }
+        
+        return columns;
+    }
+}
+```
+
+In this case, only one `Column` is displayed in the constructed list.
+
+The listGrid is declared in the view as follows:
+
+```xml
+<listGrid model="RolesModel" continueConversation="false" />
+```
+
+Note that `continueConversation` is required but can be either "true" or "false" depending on the use-case.
+
+![RelationsModel](./../assets/images/lists/RelationsModel.png "RelationsModel")
+
 
 ### Calculated columns and aggregate queries
 
