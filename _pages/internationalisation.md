@@ -65,6 +65,8 @@ Additionally for MySQL, ensure your datasource connection string includes Unicod
 jdbc:mysql://myServer:3306/myDatabase?useUnicode=true&amp;characterEncoding=UTF-8&amp;useCursorFetch=true&amp;defaultFetchSize=100
 ```
 
+More detail are available in the [Appendix](./../appendix.md#problems-with-utf8-character-sets-for-other-languages-mysql)
+
 ### Local language support
 
 You can use UTF-8 characters for display attributes in Skyve metadata.
