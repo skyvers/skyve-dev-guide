@@ -191,8 +191,8 @@ If multiple attribute mappings are required, they need to be specified as part o
 @SkyveFactory(excludedActions = { Check.class, Next.class }, value = {
 		@DataMap(attributeName = User.userNamePropertyName, fileName = "lastName.txt"),
 		@DataMap(attributeName = User.homeModulePropertyName, fileName = "firstName.txt")
-public class UserFactory {
 })
+public class UserFactory {
 ```
 
 ## Extending automated tests
