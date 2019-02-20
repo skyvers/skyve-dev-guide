@@ -8,9 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Building applications
-
-### Skyve Readme
+## Skyve Readme
 
 The skyve project contains a Readme at [github.com/skyvers/skyve](https://github.com/skyvers/skyve) with useful information for getting started, configuring Spring security and other steps to get you started.
 
@@ -31,7 +29,7 @@ Install Eclipse or an alternative Java based Integrated Development Environment 
 1. Use the Project Creator [https://foundry.skyve.org/foundry/project.xhtml](https://foundry.skyve.org/foundry/project.xhtml) to create a Skyve project download and receive the link to the file via email.
 2. Import the project as a maven project and run the Generate Domain run configuration.
 3. Configure your application server security domain, create an empty database, and deploy your application.
-4. Log into your application at localhost:8080/<projectName> with your bootstrap credentials and begin using the no-code application.
+4. Log into your application at `localhost:8080/<projectName>` with your bootstrap credentials and begin using the no-code application.
 
 ### Steps
 To get started, go to the project creation page (at foundry.skyve.org/foundry/project.xhtml). The project creator will create a configured Java project, set up for maven dependency management, for common development environments like Eclipse and IntelliJ.
@@ -83,9 +81,9 @@ The roles configured by default for the Skyve admin module are as follows:
 Role | Explanation | Description
 ---|---|---
 *Anonymous* |  | Access anonymous (not logged in) public features
-*AppUser | The App User role is intended for retail and public users interacting through the "front office". These users are assumed to operate within their own scope and have only visibility to their own data. App Users can create their own contacts, and change their own passwords. | Manage own contact details and password
+*AppUser* | The App User role is intended for retail and public users interacting through the "front office". These users are assumed to operate within their own scope and have only visibility to their own data. App Users can create their own contacts, and change their own passwords. | Manage own contact details and password
 *AuditManager* |  | Manage the activity audit log
-*BasicUser * | The intention of Basic User role is to provide basic capability to back-office users. The role is for a typical office situation where users collaborate within the "Customer" scope on key application areas. For example, shared contact management, common document number serials and the ability to use Skyve's basic personal efficiency and automation capabilities, Tags, Snapshots, Communication and view dashboards. | General access to the administration module
+*BasicUser* | The intention of Basic User role is to provide basic capability to back-office users. The role is for a typical office situation where users collaborate within the "Customer" scope on key application areas. For example, shared contact management, common document number serials and the ability to use Skyve's basic personal efficiency and automation capabilities, Tags, Snapshots, Communication and view dashboards. | General access to the administration module
 *ContactManager* | Allows atomic control over management of, and interaction with, contacts. | Manage contact details and interactions
 *ContactViewer* | Allows atomic control over visibility of contacts. | View-only access to contact details
 *DevOps* | | Generate Skyve designs and metadata and administer technical aspects of the Skyve runtime
