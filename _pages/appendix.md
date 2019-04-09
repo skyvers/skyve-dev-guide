@@ -14,6 +14,15 @@ sidebar:
 
 #### Problems building your app
 
+* Check that you have Java 8 (jdk1.8) available in your IDE.
+
+For example, in Eclipse, right-click your project and choose _Properties_->_Java Build Path_
+Change to the _Libraries_ tab, select the JRE Library and click _Edit_
+Click _Installed JREs_
+Add or select Java 8 (jdk1.8)
+
+[Installed JRE](../assets/images/appendix/installed-jre.png "Installed JRE")
+
 * Check that you have Java 8 (jdk1.8) selected for compiler compliance in your IDE.
 
 For example, in Eclipse, right-click your project and choose _Properties_->_Java Compiler_->_Configure Workspace Settings_
@@ -65,9 +74,15 @@ Then you can access your app at
 
 See more at [Changing the project URL context](#changing-the-project-url-context)
 
-#### Problems logging in for the first time
+#### Problems signing in for the first time
 
-Skyve inserts a bootstrap user for your very first log in, however this is disabled if you're running your app in a _Production_ environment. 
+As a way to get started with a new environment, Skyve provides a bootstrap capability that inserts a user credential into your database for your first sign in (normally into an empty database). 
+
+If the bootstrap option is used, the user record will be inserted into your database so that you can sign in, however this will only occur if the username does NOT already exist, and if the environment identifier indicates that the environment is NOT a _Production_ environment.
+
+You can change the bootstrap settings in the project `.json` file, however, once the username exists in the database, changing the bootstrap user or password will have no effect unless a different username is used or the user record is removed.
+
+To ensure the bootstrap user is inserted for your first sign in:
 
 * Check the _environment identifier_ setting in the project `.json` file, and check that it is not `null`.
 
@@ -143,7 +158,12 @@ For example, if you have the following:
 	}
 ```
 
+If you set the `environment.customer` to null, the Skyve sign in page will require you to specify the _customer_ as well as the _username_ and _password_.
+
+If you specify an `environment.customer`, make sure it matches the `bootstrap.customer` or your sign in will fail.
+
 #### Still having problems?
+
 
 Join us on [Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LWNjMTBlMTMzNTA4YzBlMzFhYzE0ZmRhOWIzMWViODY4ZTE1N2QzYWM1MTdlMTliNDIyYTBkOWZhZDAxOGQyYjQ) and ask our friendly team. 
 
@@ -353,7 +373,7 @@ character-set-server = utf8
 
 To keep an existing database once this change has been made, export the schema from MySQL workbench, use text edit change latin1 to utf8, then drop your schema and import the edited one.
 
-If you don't need to keep existing data, then after the my.cnf changes above, drop your schema, create a new one, then use Skyve bootstrap (in the json settings file) to log in and let Skyve create the new schema for you.
+If you don't need to keep existing data, then after the my.cnf changes above, drop your schema, create a new one, then use Skyve bootstrap (in the json settings file) to sign in and let Skyve create the new schema for you.
 
 ##### Other datasource options
 
