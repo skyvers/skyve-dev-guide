@@ -58,9 +58,7 @@ url: {
 
 Then you can access your app at
 
-```
-http://localhost:8080/helloWorld
-```
+[http://localhost:8080/helloWorld](http://localhost:8080/helloWorld)
 
 See more at [Changing the project URL context](#changing-the-project-url-context)
 
