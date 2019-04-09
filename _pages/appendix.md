@@ -36,7 +36,7 @@ In your project _config_ folder, right-click the _MyAppName - Generate Domain.la
 
 If your project has a _paid theme_ selected we can't provide the theme files for your other environments.
 
-You should change your theme to the free `Default` theme on the <em>Customise</em> tab in Foundry before you start collaboration or, you can proceed and collaborate with this theme selected, but we can't include the theme files in your download. You will need to purchase your own licence to use the paid theme for local development.
+You should change your theme to the free `Default` theme on the <em>Customise</em> tab in Foundry before you start collaboration (or export), OR you can proceed and collaborate (or export) with this theme selected, but we can't include the theme files in your code repository (or download). You will need to purchase your own licence to use the paid theme for local development.
 
 #### Problems finding your app
 
