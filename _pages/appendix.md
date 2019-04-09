@@ -16,9 +16,11 @@ sidebar:
 
 * Check that you have Java 8 (jdk1.8) selected for compiler compliance in your IDE.
 
-For example, in Eclipse, right-click your project and choose _Properties_
+For example, in Eclipse, right-click your project and choose _Properties_->_Java Compiler_->_Configure Workspace Settings_
 
 ![Workspace compiler compliance](../assets/images/appendix/configure-workspace-settings-compiler-compliance.png "Workspace compiler compliance")
+
+Alternatively, select _Enable project specific settings_ and set the project compliance level.
 
 * Check that you have the Java 8 (jdk1.8) selected for the Runtime JRE.
 
