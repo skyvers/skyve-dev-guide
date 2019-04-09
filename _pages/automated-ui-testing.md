@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-## Automated UI testing and SAIL
-
 The Skyve platform provides the ability to generate a suite of automated User Interface tests via the _Skyve Abstract Interaction Language_ (SAIL).
 
 _SAIL_ is a high level language for describing interactions with applications, specified in a format which can be used to generate _Selenese_ or _Web Driver_ interactions. 
@@ -30,7 +28,7 @@ _SAIL_ test generation builds on Skyve's automated unit testing infrastructure, 
 
 NOTE Automated User Interface testing impacts the persisted data and content of your application, and does not use an in-memory database (like automated unit testing). 
 
-### Generating SAIL
+## Generating SAIL
 
 To access the _DevOps_ menu in your Skyve application, ensure that your user has the DevOps role granted to them. 
 
@@ -47,7 +45,7 @@ Steps to generate the _SAIL_ test cases:
 
 Note that while the UX/UI and User Agent Type are specified, this is only so that the _SAIL_ generation will include only menu items and actions which would be available to that combination - _SAIL_ itself is independent of these.
 
-#### Test strategies
+### Test strategies
 
 Strategy | Description | Usage
 ---------|-------------|------
@@ -55,13 +53,13 @@ _Assert_ | the test will be abandoned as soon as a test case fails | used as the
 _Verify_ | the test will continue if a test case fails | used by developers to analyse what further development/remediation activity is required
 _None_ | not testing | used for automated interactions which are not tests
 
-#### Generation options
+### Generation options
 
 The _Menu SAIL_ generation option will generate _SAIL_ test cases for every menu option available to the specified user/UX/UI combination.
 
 _Module SAIL_ generation option will generate _SAIL_ test cases for every document accessible by the user/UX/UI combination which could possibly be accessed, irrespective of the menu items declared in the module. This option may be useful where the system uses other menuing mechanisms not declared in the usual way.
 
-### Understanding SAIL
+## Understanding SAIL
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -135,7 +133,7 @@ Item | Description | Example(s)
 `testValue` | test that the widget with binding has the specified value | `<testValue value="123.5" binding="total"/>`
 `zoomOut` | press the _zoomOut_ implicit action button | `<zoomOut/>`
 
-##### Using `<testDataEnter/>` for _Happy_ paths
+### Using `<testDataEnter/>` for _Happy_ paths
 
 The `<testDataEnter/>` step is a high-level step which sets focus into each available data entry widget (in tab order) and enters randomly generated character sequences which are valid according to the attribute declaration of type, converter, format and validator.
 
@@ -149,7 +147,7 @@ For example, if a view has 4 attributes - text, dateOnly, decimal2 and boolean -
 
 (This list is not exhaustive - refer to the `DataBuilder()` description in [Automated Unit Testing](./../_pages/automated-unit-testing.md) 
 
-### Generating _Selenese_ or _Web Driver_ methods
+## Generating _Selenese_ or _Web Driver_ methods
 
 Steps to generate methods:
 - With the settings as specified above for generating SAIL, paste the contents of your _SAIL_ xml file into the _SAIL_ text area on the _Control Panel_ 
@@ -230,7 +228,7 @@ public class TestAdminModule extends TestAdminMenuExternalTabletAsAdmininstrator
 
 When running the test, use a `JUnit` run configuration, ensuring that the `test\modules\test` and `lib` jars are on the classpath.
 
-#### Note on testing the _admin_ module
+### Note on testing the _admin_ module
 
 A number of features in the _admin_ module can have major effects on your data store and so testing the _admin_ module should be performed with care. For example, the _admin_ module gives a suitably credentialled user the ability to backup, restore, or truncate all database data, change passwords, delete users etc.
 
