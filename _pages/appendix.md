@@ -28,7 +28,8 @@ For example, in Eclipse, right-click your project and choose _Run As_->_Run Conf
 
 * Check that you have successfully built your project using the Generate Domain task.
 
-In your project _config_ folder, right-click the _MyAppName - Generate Domain.launch_ task.
+In your project _config_ folder, right-click the _MyAppName - Generate Domain.launch_ task and choose 
+_Run As_->_MyAppName - Generate Domain_
 
 #### Problems deploying your app
 
