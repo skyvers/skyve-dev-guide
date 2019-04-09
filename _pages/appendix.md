@@ -14,25 +14,25 @@ sidebar:
 
 #### Problems building your app
 
-1. Check that you have Java 8 (jdk1.8) selected for compiler compliance in your IDE.
+* Check that you have Java 8 (jdk1.8) selected for compiler compliance in your IDE.
 
 For example, in Eclipse, right-click your project and choose _Properties_
 
 ![Workspace compiler compliance](../assets/images/appendix/configure-workspace-settings-compiler-compliance.png "Workspace compiler compliance")
 
-2. Check that you have the Java 8 (jdk1.8) selected for the Runtime JRE.
+* Check that you have the Java 8 (jdk1.8) selected for the Runtime JRE.
 
 For example, in Eclipse, right-click your project and choose _Run As_->_Run Configurations..._
 
 ![Runtime JRE](../assets/images/appendix/configure-run-configuration-runtime-jre.png "Runtime JRE")
 
-3. Check that you have successfully built your project using the Generate Domain task.
+* Check that you have successfully built your project using the Generate Domain task.
 
 In your project _config_ folder, right-click the _MyAppName - Generate Domain.launch_ task.
 
 #### Problems deploying your app
 
-1. If you're using the collaboration option in Skyve Foundry, or have exported your project, check that you selected the `Default` theme first. 
+* If you're using the collaboration option in Skyve Foundry, or have exported your project, check that you selected the `Default` theme first. 
 
 If your project has a _paid theme_ selected we can't provide the theme files for your other environments.
 
@@ -40,7 +40,7 @@ You should change your theme to the free `Default` theme on the <em>Customise</e
 
 #### Problems finding your app
 
-1. Check the URL settings in the project `.json` file for the URL and context. 
+* Check the URL settings in the project `.json` file for the URL and context. 
 
 For example, if you project has the following:
 
@@ -68,7 +68,7 @@ See more at [Changing the project URL context](#changing-the-project-url-context
 
 Skyve inserts a bootstrap user for your very first log in, however this is disabled if you're running your app in a _Production_ environment. 
 
-1. Check the _environment identifier_ setting in the project `.json` file, and check that it is not `null`.
+* Check the _environment identifier_ setting in the project `.json` file, and check that it is not `null`.
 
 For example, if you have the following:
 
@@ -94,7 +94,7 @@ Then restart your app server (e.g. Wildfly).
 
 When you are ready to go live into Production, change the identifier value back to `null` and restart Wildfly.
 
-2. Check that you are using the bootstrap credentials as set in the project `.json` properties file.
+* Check that you are using the bootstrap credentials as set in the project `.json` properties file.
 
 For example, if you have the following:
 
@@ -112,7 +112,7 @@ Then your bootstrap credentials will be:
 user: `setup`
 password: `setup`
 
-3. If you still have problems, ensure that the bootstrap `customer` setting matches the environment default `customer` setting.
+* If you still have problems, ensure that the bootstrap `customer` setting matches the environment default `customer` setting.
 
 For example, if you have the following:
 
@@ -138,7 +138,7 @@ For example, if you have the following:
 	}
 ```
 
-#### Still having problems
+#### Still having problems?
 
 Join us on [Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LWNjMTBlMTMzNTA4YzBlMzFhYzE0ZmRhOWIzMWViODY4ZTE1N2QzYWM1MTdlMTliNDIyYTBkOWZhZDAxOGQyYjQ) and ask our friendly team. 
 
