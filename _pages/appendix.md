@@ -132,6 +132,7 @@ For example, if you have the following:
 	bootstrap: {
 		customer: "skve",
 		user: "setup",
+		email: "info@skyve.org",
 		password: "setup"
 	}
 ```
