@@ -21,7 +21,7 @@ Change to the _Libraries_ tab, select the JRE Library and click _Edit_
 Click _Installed JREs_
 Add or select Java 8 (jdk1.8)
 
-[Installed JRE](../assets/images/appendix/installed-jre.png "Installed JRE")
+![Installed JRE](../assets/images/appendix/installed-jre.png "Installed JRE")
 
 * Check that you have Java 8 (jdk1.8) selected for compiler compliance in your IDE.
 
