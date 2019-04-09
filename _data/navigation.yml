@@ -71,6 +71,8 @@ docs:
         url: /backup-restore/                                                                                        
   - title: Appendix
     children:
+      - title: "Quick tips for Developers"
+        url: /appendix/
       - title: "Deploying a Skyve application"
         url: /appendix/                  
       - title: "Installing and configuring a Skyve development environment"
