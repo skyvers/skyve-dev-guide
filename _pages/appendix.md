@@ -32,11 +32,11 @@ In your project _config_ folder, right-click the _MyAppName - Generate Domain.la
 
 #### Problems deploying your app
 
-* If you're using the collaboration option in Skyve Foundry, or have exported your project, check that you selected the `Default` theme first. 
+* If you're using the collaboration option in [Skyve Foundry](https://foundry.skyve.org/foundry), or have exported your project, check that you selected the `Default` theme first. 
 
 If your project has a _paid theme_ selected we can't provide the theme files for your other environments.
 
-You should change your theme to the free `Default` theme on the <em>Customise</em> tab in Foundry before you start collaboration (or export), OR you can proceed and collaborate (or export) with this theme selected, but we can't include the theme files in your code repository (or download). You will need to purchase your own licence to use the paid theme for local development.
+You should change your theme to the free `Default` theme on the <em>Customise</em> tab in [Skyve Foundry](https://foundry.skyve.org/foundry) before you start collaboration (or export), OR you can proceed and collaborate (or export) with this theme selected, but we can't include the theme files in your code repository (or download). You will need to purchase your own licence to use the paid theme for local development.
 
 #### Problems finding your app
 
