@@ -108,8 +108,11 @@ For example, if you have the following:
 ```
 
 Then your bootstrap credentials will be:
+
 user: `setup`
+
 password: `setup`
+
 
 * If you still have problems, ensure that the bootstrap `customer` setting matches the environment default `customer` setting.
 
