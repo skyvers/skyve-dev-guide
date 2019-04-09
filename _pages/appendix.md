@@ -10,6 +10,138 @@ sidebar:
 
 ## Appendix
 
+### Quick tips 
+
+#### Problems building your app
+
+1. Check that you have Java 8 (jdk1.8) selected for compiler compliance in your IDE.
+
+For example, in Eclipse, right-click your project and choose _Properties_
+
+![Workspace compiler compliance](../assets/images/appendix/configure-workspace-settings-compiler-compliance.png "Workspace compiler compliance")
+
+2. Check that you have the Java 8 (jdk1.8) selected for the Runtime JRE.
+
+For example, in Eclipse, right-click your project and choose _Run As_->_Run Configurations..._
+
+![Runtime JRE](../assets/images/appendix/configure-run-configuration-runtime-jre.png "Runtime JRE")
+
+3. Check that you have successfully built your project using the Generate Domain task.
+
+In your project _config_ folder, right-click the _MyAppName - Generate Domain.launch_ task.
+
+#### Problems deploying your app
+
+1. If you're using the collaboration option in Skyve Foundry, or have exported your project, check that you selected the `Default` theme first. 
+
+If your project has a _paid theme_ selected we can't provide the theme files for your other environments.
+
+You should change your theme to the free `Default` theme on the <em>Customise</em> tab in Foundry before you start collaboration or, you can proceed and collaborate with this theme selected, but we can't include the theme files in your download. You will need to purchase your own licence to use the paid theme for local development.
+
+#### Problems finding your app
+
+1. Check the URL settings in the project `.json` file for the URL and context. 
+
+For example, if you project has the following:
+
+```json
+	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
+url: {
+        // server URL
+        server: "${SKYVE_URL:http://localhost:8080}",
+        // web context path
+        context: "${SKYVE_CONTEXT:/helloWorld}",
+        // home path
+        home: "/"
+    },
+```
+
+Then you can access your app at
+
+```
+http://localhost:8080/helloWorld
+```
+
+See more at [Changing the project URL context](#changing-the-project-url-context)
+
+#### Problems logging in for the first time
+
+Skyve inserts a bootstrap user for your very first log in, however this is disabled if you're running your app in a _Production_ environment. 
+
+1. Check the _environment identifier_ setting in the project `.json` file, and check that it is not `null`.
+
+For example, if you have the following:
+
+```json
+	// Environment settings
+	environment: {
+		// test, sit, uat, dev etc: null = prod
+		identifier: null,
+	...
+```
+
+Change this to a specific environment setting such as 
+
+```json
+	// Environment settings
+	environment: {
+		// test, sit, uat, dev etc: null = prod
+		identifier: "dev",
+	...
+```
+
+Then restart your app server (e.g. Wildfly).
+
+When you are ready to go live into Production, change the identifier value back to `null` and restart Wildfly.
+
+2. Check that you are using the bootstrap credentials as set in the project `.json` properties file.
+
+For example, if you have the following:
+
+```json
+	// bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
+	bootstrap: {
+        customer: "skyve",
+        user: "${BOOTSTRAP_USERNAME:setup}",
+        email: "info@skyve.org",
+        password: "${BOOTSTRAP_PASSWORD:setup}"
+    }
+```
+
+Then your bootstrap credentials will be:
+user: `setup`
+password: `setup`
+
+3. If you still have problems, ensure that the bootstrap `customer` setting matches the environment default `customer` setting.
+
+For example, if you have the following:
+
+```json
+	// Environment settings
+	environment: {
+		// test, sit, uat, dev etc: null = prod
+		identifier: "dev",
+		// Dev Mode does not cache the view metadata allowing the effects of view changes to be observed without redeploying
+		devMode: true,
+		// Customer Default
+		customer: "skyve",
+		// Run the jobs scheduled in the data store or not - set false for slave skyve instances
+		jobScheduler: true,
+		// Password hashing algorithm - usually MD5 (obsolete) or SHA1 etc
+		passwordHashingAlgorithm: "MD5"
+	},
+	// bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
+	bootstrap: {
+		customer: "skve",
+		user: "setup",
+		password: "setup"
+	}
+```
+
+#### Still having problems
+
+Join us on [Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LWNjMTBlMTMzNTA4YzBlMzFhYzE0ZmRhOWIzMWViODY4ZTE1N2QzYWM1MTdlMTliNDIyYTBkOWZhZDAxOGQyYjQ) and ask our friendly team. 
+
 ### Deploying a Skyve application
 
 Skyve builds applications as a single web archive (`.war`) folder, containing the application metadata and Skyve platform components. By default, Skyve `.war` folders are deployed 'exploded' or 'unzipped'.
