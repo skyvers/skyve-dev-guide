@@ -83,7 +83,7 @@ public ServerSideActionResult<Topic> execute(Topic bean, WebContext webContext) 
 
 To avoid disrupting ongoing user data entry (another user entering their next chat item), you can take advantage of PrimeFaces `remoteCommand` tag and `update` property in a custom xhtml page, as follows:
 
-```xhtml
+```xml
 <p:remoteCommand name="pushRerender" actionListener="#{skyve.rerender('push', false)}" process="@this" update="msgHistory" />
 
 <s:view module="#{skyve.bizModuleParameter}"
