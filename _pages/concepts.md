@@ -409,6 +409,12 @@ _Zoom levels and transactions_
 Skyve supports conversation based interactions, meaning that
 the user can have any number of concurrent browser interactions.
 
+Each time a request comes from a UI it is either a new conversation or a continuation of an existing conversation. Because the web is _stateless_, Skyve keeps the state of the current conversation's bean (this can change and there can be more than 1 in the conversation but only 1 current one), and the Hibernate level-1 cache. Skyve disconnects the database and serializes these in an EHCache.
+
+On the next request (if continuing the conversation), the conversation is fetched, reconnected to the DB and things continue on from where they were. The conversation is only cached if there were no errors feeding back to the UI.
+
+If there are errors, it is just as if the previous request never happened (although for rendering purposes Skyve renders the current state reached in the UI and then throws away that state). The error may be resolved by the user and then the UI state will be reapplied from the prior base state - still in the conversation cache.
+
 Skyve allows developers to choose whether some gestures will result in 
 new conversations or within the existing conversation.  
 
