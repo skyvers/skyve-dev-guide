@@ -8,6 +8,8 @@ sidebar:
   nav: docs
 ---
 
+## Automated UI testing and SAIL
+
 The Skyve platform provides the ability to generate a suite of automated User Interface tests via the _Skyve Abstract Interaction Language_ (SAIL).
 
 _SAIL_ is a high level language for describing interactions with applications, specified in a format which can be used to generate _Selenese_ or _Web Driver_ interactions. 

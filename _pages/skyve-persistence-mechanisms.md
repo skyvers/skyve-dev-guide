@@ -273,5 +273,5 @@ across data group contexts.
 **[⬆ back to top](#skyve-persistence)**
 
 ---
-**Next [Content](./../_pages/working-with-content.md)**  
+**Next [Push and asynchronous methods](./../_pages/push-and-asynchronous-methods.md)**  
 **Previous [Common patterns](./../_pages/common-patterns.md)**

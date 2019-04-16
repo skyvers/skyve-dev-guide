@@ -41,6 +41,8 @@ docs:
         url: /common-patterns/     
       - title: "Skyve persistence"
         url: /skyve-persistence-mechanisms/   
+      - title: "Push and asynchronous methods"
+        url: /push-and-asynchronous-methods/
   - title: Key capability areas
     children:                                                                                   
       - title: "Content"
