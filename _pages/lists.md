@@ -14,8 +14,6 @@ The Skyve list capability is core to most Skyve applications, and while much of 
 
 This is particularly useful where a developer needs to drive a list or tree from non-database data, or to customise the way filtering or summary features work.
 
-The `treeGrid` feature (see <a href="https://skyvers.github.io/skyve-dev-guide/hierarchies/">Hierarchies</a>) is a special case of the list feature, where a filter is applied to return only nodes with a designated parent (representing that part of the tree), and therefore treeGrids can be customised in the same way as `listGrid`s.
-
 Some situations where a developer may want to consider customising the feature:
 * showing a list of files or folders from the file system
 * listing content items from the content repository
@@ -24,6 +22,25 @@ Some situations where a developer may want to consider customising the feature:
 * using a non-SQL datasource
 * showing an email list from the SMTP server
 * changing the way the `<filterParameter>` works for a `listGrid`
+
+The `treeGrid` feature (see <a href="https://skyvers.github.io/skyve-dev-guide/hierarchies/">Hierarchies</a>) is a special case of the list feature, where a filter is applied to return only nodes with a designated parent (representing that part of the tree), and therefore treeGrids can be customised in the same way as `listGrid`s.
+
+### Difference between list grid and data grid
+
+Skyve assumes a `dataGrid` control will be used to represent collections that are formally/explicitly modelled - where a document has a collection of another document, the Skyve default view will include a `dataGrid` control.
+
+A `dataGrid`:
+1. operates within the same conversation as the owning bean view 
+2. is aware of collections
+3. the data is not saved until the save or ok button on the outermost UI of the conversation is saved, same with remove
+4. should only be for up to 100-200 records as the entire collection will be loaded in memory 
+
+A `listGrid`:
+5) is usually based on a metadata query declared in the `module.xml` file 
+1) is a data island, refreshed (by default) on every response
+2) is used to show data which may or may not be formally/explicitly related - can be filtered
+3) can be driven by a model created by the developer in code (described further below)
+4) includes all the export and filtering UI mechanisms available (in desktop mode)
 
 ### Example reference list models
 
