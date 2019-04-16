@@ -36,11 +36,11 @@ A `dataGrid`:
 4. should only be for up to 100-200 records as the entire collection will be loaded in memory 
 
 A `listGrid`:
-5) is usually based on a metadata query declared in the `module.xml` file 
-1) is a data island, refreshed (by default) on every response
-2) is used to show data which may or may not be formally/explicitly related - can be filtered
-3) can be driven by a model created by the developer in code (described further below)
-4) includes all the export and filtering UI mechanisms available (in desktop mode)
+1. is usually based on a metadata query declared in the `module.xml` file 
+2. is a data island, refreshed (by default) on every response
+3. is used to show data which may or may not be formally/explicitly related - can be filtered
+4. can be driven by a model created by the developer in code (described further below)
+5. includes all the export and filtering UI mechanisms available (in desktop mode)
 
 ### Example reference list models
 
