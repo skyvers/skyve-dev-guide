@@ -100,10 +100,11 @@ In the above extract, the customised view contains two view tags - each with a u
 
 Note that the `Ext.push` method does not specify a user - and so is effectively a broadcast push to all user conversations.
 
-For more information on `view` declaration and `update`, see [View update property (./../pages/views.md#update-property "View update property").
+For more information on `view` declaration and `update`, see 
+[View update property](./../pages/views.md#update-property "View update property").
 
 **[⬆ back to top](#push-and-asynchronous-methods)**
 
 ---
-**Next [Working with content](./../_pages/working-with-content.md)**
+**Next [Working with content](./../_pages/working-with-content.md)**   
 **Previous [Skyve persistence mechanisms](./../_pages/skyve-persistence-mechanisms.md)**
