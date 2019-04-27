@@ -13,7 +13,7 @@ sidebar:
 Specific to the Java implementation of Skyve, Skyve projects a number of Maven target utilities to assist
 developers. The Maven targets provided can be customised where required.
 
-The maven targets are located in your project `config/` folder. To run the target, right click the target.
+The maven targets are located in your project `config/` folder. To run the target, right click the target and choose `Run As`.
 
 ![Running targets](../assets/images/maven-targets/running targets.png "Running targets")
 
