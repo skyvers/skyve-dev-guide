@@ -23,19 +23,28 @@ Two detail views can be declared for each document.
   View        | Description
   -----------|-----------
   edit.xml    | The basic view declaration for detail editing of a bean (normally accessed by zooming into a row from a list).<br/><br/>Menu items can also target edit views directly. In this case the menu item will trigger `newInstance()` and a new document instance will be returned (and therefore displayed). To show a singleton (a document instance which is the only applicable existing instance within the context), the `newInstance()` method can be overridden to select and return an existing bean in place of the newly created instance.<br/><br/>If a *create.xml* is supplied, the *edit.xml* file is only used after the document is created.
-  
   create.xml  | A special case of edit view which is used if *create.xml* supplied and if `isCreated()` is false similar to the following
   
-  ```xml
-  		<condition name="created">
-			<description>Created</description>
-			<expression>
-				<![CDATA[isPersisted()]]>
-			</expression>
-		</condition>
-  ```
-
 _View declaration_
+
+### Create view
+
+The `create` view concept is useful in cases where a several-step wizard type view is required specifically for the creation of a new record where this is signficantly different to the typical data entry view, though in most cases, the edit view is satisfactory.
+
+To use a separate create view, create a view called `create.xml` and ensure the `name` property within the view file is `create`.
+
+Skyve will use the create view if the document declares a `created` condition.
+
+```xml
+<condition name="created">
+	<description>Created</description>
+	<expression>
+		<![CDATA[isPersisted()]]>
+	</expression>
+</condition>
+```
+
+An example of a create view can be found in the Skyve `admin` module for the `User` document. In this case, a create view is useful because creating a new User involves several steps not normally required for simple data entry. Compare this with the `admin.Contact` document - where the basic edit view is sufficient for creating new Contacts and a `create` view is not required.
 
 ### Containers
 
