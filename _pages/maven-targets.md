@@ -13,15 +13,29 @@ sidebar:
 Specific to the Java implementation of Skyve, Skyve projects a number of Maven target utilities to assist
 developers. The Maven targets provided can be customised where required.
 
+The maven targets are located in your project `config/` folder. To run the target, right click the target.
+
+![Running targets](../assets/images/maven-targets/running targets.png "Running targets")
+
+Once the target has been run, it will be available in the `Run` menu.
+
+![Re-running targets](../assets/images/maven-targets/running targets 2.png "Re-running targets") 
+
 #### generateDomain
 `mvn skyve:generateDomain`
 Generate domain validates and compiles the metadata (XML files) in your project and checks that the application domain is in a valid state. Errors for the developer to fix are written to your console, and if generate is successful, the domain will be compiled to produce Java domain files and unit tests.
 
 #### generateEditView
 `mvn skyve:generateEditView`
-Generate edit view requires to additional parameters, a `module` and `document` key value pair. If no edit.xml is specified for a document, Skyve will create a scaffolded view automatically using the attributes specified in the document. When customising a view, it is useful to start from that scaffolded view and extend it. This command will write a `generatedEdit.xml` file within the _views_ package of the module and document specified by the parameters.
+Generate edit view requires to additional parameters, a `module` and `document` key value pair. 
+
+If no edit.xml is declared for a document, Skyve will create a scaffolded view automatically using the attributes specified in the document. When customising a view, it is useful to start from that scaffolded view and extend it. 
 
 The target will prompt for the customer, module and document parameters. If no document is specified, the target will generate edit views for all documents within the module.
+
+![Console prompt](../assets/images/maven-targets/console prompt.png "Console prompt")
+
+This target will write a file within the _views_ package of the module and document specified by the parameters called `generatedEdit.xml` . Once created, rename this file to `edit.xml` (or, if using this file as a view component, the name of the component). 
 
 #### generateDefaultQueries
 `mvn skyve:generateDefaultQueries`
