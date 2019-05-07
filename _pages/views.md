@@ -850,10 +850,10 @@ In this case, the view declaration for the *Address* document can be re-used wit
 
 ```xml
 <vbox border="true" borderTitle="Home Address">
-	<component bining="homeAddress"/>
+	<component binding="homeAddress"/>
 </vbox>
 <vbox border="true" borderTitle="Work Address">
-	<component bining="workAddress"/>
+	<component binding="workAddress"/>
 </vbox>
 ```
 
