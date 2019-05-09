@@ -138,6 +138,26 @@ Contact c = new DataBuilder().fixture(FixtureType.crud).build(Contact.MODULE_NAM
 
 Please be careful when calling other methods within a Factory class as you may inadvertently create a recursive loop if the method you are calling from is not annotated as a SkyveFixture. Make sure if you annotate a method with a fixture type you don’t instantiate a builder of the same type.
 
+For example, never call
+
+```@SkyveFixture(types = FixtureType.crud)
+    public static AccountSetup crudInstance() throws Exception {
+        AccountSetup bean = new DataBuilder().fixture(FixtureType.crud).build(AccountSetup.MODULE_NAME, AccountSetup.DOCUMENT_NAME);
+```
+
+or the new DataBuilder() call will call the `crudInstance` method
+
+you need to write
+
+```
+	@SkyveFixture(types = FixtureType.crud)
+    public static AccountSetup crudInstance() throws Exception {
+        AccountSetup bean = AccountSetup.newInstance();
+```
+        
+or use a databuilder without a fixture type.
+
+
 ### Fixture factories
 
 Factories are useful for customising a DataBuilder to specify specific test data for a certain fixture type, or if the randomly selected data from the DataBuilder does not pass validation, or for defining different fixtures for different types, e.g. CRUD vs [SAIL](./../_pages/automated-ui-testing.md). By convention, a document can have a corresponding factory by defining a class called `<Document-Name>Factory`, similar to Bizlets. DataBuilder will find these classes when it needs to construct an instance of the document. It looks for `public static` or instance methods that take no arguments and returns the domain object type required. If there is more than one candidate method that can be called, DataBuilder will randomly call one of the methods.
