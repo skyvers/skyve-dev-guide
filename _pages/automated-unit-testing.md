@@ -136,7 +136,7 @@ For example:
 Contact c = new DataBuilder().fixture(FixtureType.crud).build(Contact.MODULE_NAME, Contact.DOCUMENT_NAME);
 ```
 
-Please be careful when calling other methods within a Factory class as you may inadvertently create a recursive loop if the method you are calling from is not annotated as a SkyveFixture. Make sure if you annotate a method with a fixture type you don’t instantiate a builder of the same type.
+Please be careful when calling other methods within a Factory class as you may inadvertently create a recursive loop if the method you are calling from is not annotated as a SkyveFixture. Make sure if you annotate a method with a fixture type you don't instantiate a builder of the same type.
 
 For example, never call
 
@@ -156,7 +156,6 @@ you need to write
 ```
         
 or use a databuilder without a fixture type.
-
 
 ### Fixture factories
 
