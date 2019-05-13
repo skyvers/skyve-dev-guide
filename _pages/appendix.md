@@ -552,6 +552,20 @@ Note that
 * You need to manually remove the previous `myApplication.war` if you didn't in the preparation stage. 
 * If you didn't rename the previous `myApplication.json` and `myApplication-ds.xml`, you should these files to avoid confusion (for example if the datasource name is the same for both the old `myApplication-ds.xml` and `tax_management-ds.xml`).
 
+### Protecting the ds.xml credentials
+
+The ds.xml password is clear text. While it is possible to use an encrypted password for the datasource connection, this is of limited use.
+
+Instructions are available if this is required, for example [Encrypt password for Wildfly](https://stackoverflow.com/questions/33538117/wildfly-encrypt-password-and-username-for-database).
+
+This approach has limited use as it is really just a level of indirection. The credentials need to be decrypted and so a key needs to be stored. This means the file containing the key then needs to be protected on the file system - and if this is possible, it would seem reasonable to simply apply that level of protection to the ds.xml file (and other config) directly.
+
+### Configuring Wildfly for virtual hosts
+
+It is possible to configure several applications to use the base context of different URLs on the same machine, by configuring virtual hosts.
+
+Instructions are available, for example [Virtual hosts](http://www.mastertheboss.com/jboss-web/jbosswebserver/jboss-as-virtual-host-configuration).
+
 ### Example deployment instructions for Single Sign-on
 
 The following steps are to install an instance of XXX onto a vanilla
@@ -965,11 +979,13 @@ These instructions apply to Bitnami Wildfly 10 stack installation on Windows ser
 * Install the SqlServer module into Wildfly:
   * Edit `standalone.xml` in Bitnami\wildfly-10.1.0-1\wildfly\standalone\configuration
   * Find the Drivers section in the document and add the following:
+  
   ```xml
   <driver name="sqlserver" module="com.microsoft.sqlserver">
       <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</xa-datasource-class>
   </driver>
   ```
+  
 * Copy the files into Bitnami\wildfly-10.1.0-1\wildfly\modules\system\layers\base\com\microsoft\sqlserver\main
   * `module.xml` (below)
   * [download](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-2017) the latest SQL Server JDBC driver and copy the jbbc jar
