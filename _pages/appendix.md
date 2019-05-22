@@ -305,6 +305,32 @@ Skyve provides a bootstrap user configuration (specified in the `.json` file) - 
 ##### Other environments
 In UAT and PROD environments, Wildfly should be configured as a service. Refer to Wildfly documentation for detailed instructions.
 
+##### Connecting to your local instance from a mobile device
+
+It is useful to be able to test your Skyve application from your own mobile devices as you develop locally. For example, if you connect your developer PC and mobile device to the same network (for example, your phone's hotspot) use IP address assigned to your PC for the URL in your `.json` settings file - then connect from your phone to your developer PC.
+
+To find the IP address assigned to your dveloper PC in Windows, in a `cmd` window, run:
+
+```
+ipconfig
+```
+
+![Local IP Configuration](./../assets/images/appendix/local_ip_config.png "Local IP Configuration")
+
+Then set the `server url` setting in the `.json` properties file to match the assigned address, for example `http://192.168.43.182:8080/` (matching your port settings etc) and keep your existing context setting, e.g. `/myapp`.
+
+You will also need to set Wildfly to be able to serve clients other than localhost. To do this double click on your Wildfly server from eclipse to open the configuration and change the standalone arguments to include `-b 0.0.0.0` (note this can also be done directly in the `standalone.xml` file).
+
+![Setting Wildfly for external access](./../assets/images/appendix/wildfly_external_access.png "Setting Wildfly for external access)
+
+Restart Wildfly so the changes take effect.
+
+You can then use the browser on your mobile device to connect to the local Skyve instance using the ural:
+
+```
+http://192.168.43.182:8080/myapp
+```
+
 ### Setting up a Skyve instance
 
 #### Recommended requirements 
