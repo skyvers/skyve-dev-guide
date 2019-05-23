@@ -223,7 +223,7 @@ Before you begin, ensure you have the following:
 * Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)), JDK 1.8
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)), so that the installation
 is in `C:\eclipse\`
-* Wildfly 13 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
+* Wildfly 16 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
 * A RDBMS which is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
   administrator username and password. 
 
@@ -272,11 +272,11 @@ press 'Apply' - press Yes for full build, and then press OK.
   * Open the server explorer window if it is not already in your workspace (Window -> Show View -> Servers)
   * Right click inside the server explorer and select New
   * Expand JBoss Community
-  * If WildFly 13.x is not in the list of adapters, you will need to download them:
+  * If WildFly 14.x is not in the list of adapters, you will need to download them:
     * Choose JBoss, WildFly & EAP Server Tools and click Next
     * Accept the licence terms and click Finish
     * Restart Eclipse when prompted
-  * Select WildFly 13.x and click _Next_
+  * Select WildFly 14.x and click _Next_
   * Accept the defaults and click _Next_
   * Click _Finish_
   
@@ -336,18 +336,18 @@ http://192.168.43.182:8080/myapp
 #### Recommended requirements 
 We recommend the following:
 - 4GB RAM for Linux and 8GB RAM for Windows
-- Java JDK 8u191 (this is the JDK for Java 8)
-- Wildfly 13
+- Java JDK 8u211 (this is the JDK for Java 8)
+- Wildfly 16
 - Disk space requirements depend on the nature of the application especially if the database and content repository are located on the same drive, however, for most common applications, 50GB drive space will probably be sufficient.
 
 ### Installation of prerequisites
 To run a Skyve application, the server requires:
 
 Java 8 (also called 1.8) - while the JRE is sufficient, the JDK is recommended.
- - Download the Java JDK 8u191 from https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html 
+ - Download the Java JDK 8u211 from https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html 
  - These instructions may assist for linux - https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html#BJFGGEFG (though note that this mentions an slightly older version of Java)
 
-Wildfly 13 
+Wildfly 16
  - Download from http://wildfly.org/downloads/   
  - This link may assist - https://linuxtechlab.com/wildfly-10-10-1-0-installation/ 
 
@@ -844,11 +844,11 @@ The following are our personal instructions for deploying a Skyve application in
 
 #### Wildfly standalone production install (Windows)
 
-These instructions apply to a standalone server installation of Wildfly 10 on Windows server connecting to Microsoft SQL Server.
+These instructions apply to a standalone server installation of Wildfly 16 on Windows server connecting to Microsoft SQL Server.
 
 - [download](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and install the latest JDK 
-- create a SYSTEM "JAVA_HOME" system environment variable and set it to where you installed the JDK to (`C:\Program Files\Java\jdk1.8.0_45` by default, substitute with correct Java version path)
-- [download](http://wildfly.org/downloads/) Wildfly 10.1 Final 
+- create a SYSTEM "JAVA_HOME" system environment variable and set it to where you installed the JDK to (`C:\Program Files\Java\jdk1.8.0_211` by default, substitute with correct Java version path)
+- [download](http://wildfly.org/downloads/) Wildfly 16.x Final 
   - extract to C:\wildfly
 - [download](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-2017) and copy the sql server driver jar and module.xml (below) to `C:\wildfly\modules\system\layers\base\com\microsoft\sqlserver\main`
 
