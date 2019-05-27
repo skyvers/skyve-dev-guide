@@ -102,7 +102,7 @@ Skyve includes documentation attributes at every level of application
 metadata.
 
 Users can include basic html-style documentation within the metadata
-"doc" attributes. The utility assembles this html and combines it with
+`documentation` attributes. The utility assembles this html and combines it with
 self-describing metadata (like tool-tip definitions already embedded in
 the metadata), according to the concepts inherent in the platform.
 
