@@ -221,7 +221,7 @@ to *Create*, *Read*, *Update*, *Delete* the document,
 and that the document is scoped C (i.e. *Customer*) so for that role,
 the document is available to all users within the customer context.
 
-A document privilege of *\_R\_\_\_U* means that the role will only have
+A document privilege of *\_R\_\_U* means that the role will only have
 access to *Read* the document. In this case, the
 document is scoped U (i.e. *User*), which means that for this role, each
 document instance will only be accessible to the user who created it.
