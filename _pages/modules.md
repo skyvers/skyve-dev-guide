@@ -210,19 +210,19 @@ the admin module at run-time.
 ![Assigning roles](../assets/images/modules/image46.png "Assigning roles")
 
 For each document, the privilege level is specified in terms of C
-(Create) R (Read) U (Update) D (Delete) L (List) P (Pick) and the
+(Create) R (Read) U (Update) D (Delete) and the
 document scope access level, either G, C, D or U. The underscore
 character (`_`) means no permission is granted.
 
 ![Example role declaration](../assets/images/modules/image47.png "Example role declaration")
 
-For example, a document privilege of CRUDLPC means the role has access
-to *Create*, *Read*, *Update*, *Delete*, *List* and *Pick* the document,
+For example, a document privilege of CRUDC means the role has access
+to *Create*, *Read*, *Update*, *Delete* the document,
 and that the document is scoped C (i.e. *Customer*) so for that role,
 the document is available to all users within the customer context.
 
-A document privilege of *\_R\_\_LPU* means that the role will only have
-access to *Read*, *List* and *Pick* the document. In this case, the
+A document privilege of *\_R\_\_\_U* means that the role will only have
+access to *Read* the document. In this case, the
 document is scoped U (i.e. *User*), which means that for this role, each
 document instance will only be accessible to the user who created it.
 
@@ -273,11 +273,9 @@ The `module.xml` declares two roles, User and Administrator:
 
 ![Scope example](../assets/images/modules/image48.png "Worked document scope example: role declaration in the module.xml")
 
-The user is assigned privileges (CRU\_LPU) to create, read, update, list
-and pick their own (i.e user-scoped) personal preference document.
+The user is assigned privileges (CRU\_U) to create, read and update their own (i.e user-scoped) personal preference document.
 
-The administrator role has privileges (\_RUDLPC) to documents within the
-customer scope.
+The administrator role has privileges (\_RUDC) to documents within the customer scope.
 
 #### Results
 
@@ -289,7 +287,7 @@ administrators have access to all personal preference document instances
 within the customer context.
 
 If a user is given both roles, the privileges are added and result in
-(CRUDLPC) which equates to all privileges within the customer context.
+(CRUDC) which equates to all privileges within the customer context.
 Administrator users, if they also require personal preferences, are
 assigned both roles.
 
