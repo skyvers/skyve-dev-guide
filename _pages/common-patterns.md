@@ -92,7 +92,7 @@ user is logged in, and the application module and document of the
 Contact to be retrieved. When the bean is retrieved from the persistence layer, the bean is
 correctly typed.
 
-Note the distinction here between `org.skyve.metadata.user.User` and `modules.admin.domain.User`
+Note the distinction here between `org.skyve.metadata.user.User` and `modules.admin.domain.User` (see more below).
 
 The Contact is declared in the application domain - in the admin module, and `modules.admin.domain.User` is similarly the modules.admin.domain.User is part of the declared application, not the Skyve platform itself.
 
@@ -117,6 +117,25 @@ _Example of isUserInRole_
 
 The above example establishes whether the current user has the role of
 TimesheetManager in the time module.
+
+Note that there is a distinction between
+* `modules.admin.domain.User` (or 'admin User') is the instance of the User document as declared in the Skyve 'admin' module.
+* `org.skyve.metadata.user.User` (or 'MetaData User') which relates to the current session/conversation.
+
+#### User convenience methods
+
+`toMetaDataUser()` (in the UserExtension class) convenience method to retrieve the 'MetaDataUser User' from the 'admin User'.
+`isInRole()` method returns if the metadata user has been assigned a module role.
+`ModulesUtil.currentAdminUser()` returns the admin user associated with the conversation user.
+
+
+```java
+modules.admin.domain.User user = bean.getUser();
+if(user.toMetaDataUser().isInRole("module","rolename")){ 
+...
+}
+```
+
 
 ### Save a document instance
 
