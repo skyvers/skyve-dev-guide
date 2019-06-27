@@ -124,17 +124,23 @@ Note that there is a distinction between
 
 #### User convenience methods
 
-`toMetaDataUser()` (in the UserExtension class) convenience method to retrieve the 'MetaDataUser User' from the 'admin User'.
+`toMetaDataUser()` (in the UserExtension class) convenience method to retrieve the 'MetaDataUser User' from the 'admin User'. `toMetaDataUser()` will return `null` if the user has not yet been persisted.
 
 `isInRole()` method returns if the metadata user has been assigned a module role.
 
 `ModulesUtil.currentAdminUser()` returns the admin user associated with the conversation user.
 
+For example, if a bean has an association to admin.User called myUser, to perform some steps if that user has been assigned the role 'Manager' in the module 'crm':
 
 ```java
-modules.admin.domain.User user = bean.getUser();
-if(user.toMetaDataUser().isInRole("module","rolename")){ 
+// check if the user has been assigned the role 'Manager' in module 'crm'
+modules.admin.domain.User user = bean.getMyUser();
+if(user!=null 
+	&& user.toMetaDataUser()!=null 
+	&& user.toMetaDataUser().isInRole("crm","Manager")){ 
+	
 ...
+
 }
 ```
 
