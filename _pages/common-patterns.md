@@ -125,7 +125,9 @@ Note that there is a distinction between
 #### User convenience methods
 
 `toMetaDataUser()` (in the UserExtension class) convenience method to retrieve the 'MetaDataUser User' from the 'admin User'.
+
 `isInRole()` method returns if the metadata user has been assigned a module role.
+
 `ModulesUtil.currentAdminUser()` returns the admin user associated with the conversation user.
 
 
