@@ -326,6 +326,59 @@ The `Binder.formatMessage()` method will return the declared (or inferred) `desc
 String output = Binder.formatMessage("You have selected the action `{loadAction}`.");
 ```
 
+#### Enum with domain
+
+You can conditionally restrict the list of enum values available to the user by declaring an enum attribute with a domain. This means that from the full list of values declared within the document (being generated into a proper Java enum for compile time checks), you can restrict the values available to the user at run time to those that are relevant. 
+
+By declaring a domain, the values available to the user will be constrained to those resulting from the Bizlet domain method.
+
+For example, the admin Data Maintenance function provides a number of restore types to handle restoring a database from a previous or later version of the same application:
+
+```java
+<!-- Restore parameters -->
+<enum name="restorePreProcess">
+	<displayName>Pre-Process</displayName>
+	<domain>constant</domain>
+	<values>
+		<value code="noProcessing" description="No Processing" />
+		<value code="dropUsingMetadataAndCreateUsingBackup" description="Drop tables using metadata &amp; recreate tables from backup create.sql" />
+		<value code="dropUsingBackupAndCreateUsingBackup" description="Drop tables using backup drop.sql &amp; recreate tables from backup create.sql" />
+		<value code="dropUsingMetadataAndCreateUsingMetadata" description="Drop tables using metadata &amp; recreate tables from metadata" />
+		<value code="dropUsingBackupAndCreateUsingMetadata" description="Drop tables using backup drop.sql &amp; recreate tables from metadata" />
+		<value code="createUsingBackup" description="Create tables from backup" />
+		<value code="createUsingMetadata" description="Create tables from metadata" />
+		<value code="deleteData" description="Delete existing table data using metadata" />
+	</values>
+</enum>
+```
+
+In this case, the document declares all valid enum values, but also declares a constant domain. In this case, the values available to the user will be limited by the `getConstantDomainValues()` Bizlet method as follows:
+
+```java
+@Override
+public List<DomainValue> getConstantDomainValues(String attributeName) throws Exception {
+	List<DomainValue> result = null;
+	
+
+	...
+	else if(DataMaintenance.restorePreProcessPropertyName.equals(attributeName)){
+		result = new ArrayList<>();
+		result.add(RestorePreProcess.noProcessing.toDomainValue());
+		if(UtilImpl.CUSTOMER!=null){
+			result.add(RestorePreProcess.dropTablesUsingMetadataRecreateTablesFromBackupCreatesql.toDomainValue());
+			result.add(RestorePreProcess.dropTablesUsingBackupDropsqlRecreateTablesFromBackupCreatesql.toDomainValue());
+			result.add(RestorePreProcess.dropTablesUsingMetadataRecreateTablesFromMetadata.toDomainValue());
+			result.add(RestorePreProcess.dropTablesUsingBackupDropsqlRecreateTablesFromMetadata.toDomainValue());
+			result.add(RestorePreProcess.createTablesFromBackup.toDomainValue());
+			result.add(RestorePreProcess.createTablesFromMetadata.toDomainValue());
+		}
+		result.add(RestorePreProcess.deleteExistingTableDataUsingMetadata.toDomainValue());
+	}
+}
+``` 
+
+  
+
 #### Conditions
 Document conditions are code snippets which return a Java `boolean` value,
 and which can be used by view declarations.
