@@ -323,7 +323,7 @@ Note that to set the value of the `enum` attribute from a String, use the `fromC
 The `Binder.formatMessage()` method will return the declared (or inferred) `description`, as follows (using the example attribute declaration above):
 
 ```java
-String output = Binder.formatMessage("You have selected the action `{loadAction}`.");
+String output = Binder.formatMessage(CORE.getCustomer(), "You have selected the action `{loadAction}`.", bean);
 ```
 
 #### Enum with domain
