@@ -489,7 +489,7 @@ Finally, ensure that the user credential that will run the wildfly service has r
 
 ### Configuring Recaptcha for the sign in page 
 
-#### Sign up for a Google Recaptcha Key
+First, sign up for a Google Recaptcha key as follows:
 1. Visit [Google Recaptcha](https://www.google.com/recaptcha/intro/v3.html) console and sign in
 2. Click Admin console in the top right corner
 3. Click the + button in the toolbar to create a new site
@@ -498,7 +498,14 @@ Finally, ensure that the user credential that will run the wildfly service has r
 6. Enter the URL of your Skyve application
 7. Read and accept the terms of use
 8. Click Submit
-9. Copy your key into your JSON file under `api` -> `googleRecaptchaSiteKey:`
+
+Once you have received your key, copy your key into your JSON file under `api` -> `googleRecaptchaSiteKey:` 
+
+```
+	// API Settings
+	api: {
+		googleRecaptchaSiteKey: "xxxxxxxxxxx",
+```
 
 ### Changing the project URL context
 
