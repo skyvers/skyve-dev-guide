@@ -487,6 +487,19 @@ Ensure the '.json' properties file has been updated for the specific instance in
 
 Finally, ensure that the user credential that will run the wildfly service has read/write permissions to the wildfly folder and the content folder created above.
 
+### Configuring Recaptcha for the sign in page 
+
+#### Sign up for a Google Recaptcha Key
+1. Visit [Google Recaptcha](https://www.google.com/recaptcha/intro/v3.html) console and sign in
+2. Click Admin console in the top right corner
+3. Click the + button in the toolbar to create a new site
+4. Enter a label to identify what this key will be for (the name of your Application)
+5. Select reCAPTCHA v2 and select the type of challenge (the default is fine)
+6. Enter the URL of your Skyve application
+7. Read and accept the terms of use
+8. Click Submit
+9. Copy your key into your JSON file under `api` -> `googleRecaptchaSiteKey:`
+
 ### Changing the project URL context
 
 Normally, the project name will be the name of the `.war` - which will be the context on the URL for example `https://skyve.org/myApplication` where `myApplication` is also the name of the project.
