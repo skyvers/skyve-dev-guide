@@ -208,12 +208,18 @@ MSSQL_2014 | "SQL Server up to 2014" | true | true | 0 | 900 // SQL Server 2014 
 MSSQL_2016 | "SQL Server 2016+" | true | true | 0 | 1024
 POSTGRESQL | "PostgreSQL" | true | true | 63 | 1024
 
-For the `json` file `dialect` setting, choose the matching dialect class:
+For the `json` file `dialect` setting, choose the appropriate dialect class:
  
-`org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.H2SpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.MySQL5InnoDBSpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.MySQL56InnoDBSpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.PostgreSQL9SpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.PostgreSQL91SpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.PostgreSQL92SpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.PostgreSQL93SpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.PostgreSQL94SpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.PostgreSQL95SpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect`
 
 _Note: as mentioned above, if you require support for Oracle or other dialects, please contact us._
 
