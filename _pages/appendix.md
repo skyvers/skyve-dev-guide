@@ -167,6 +167,89 @@ If you specify an `environment.customer`, make sure it matches the `bootstrap.cu
 
 Join us on [Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LWNjMTBlMTMzNTA4YzBlMzFhYzE0ZmRhOWIzMWViODY4ZTE1N2QzYWM1MTdlMTliNDIyYTBkOWZhZDAxOGQyYjQ) and ask our friendly team. 
 
+### Changing database dialect
+
+One of the great things about Skyve is how easy it is to change between different database providers AND KEEP YOUR DATA. Skyve provides a platform-independent Backup format that can be restored to a different database technology without issue.
+
+_NOTE: Before you begin - backup your data (using the Skyve backup feature in the admin module->Dev Ops->Data Maintenance)_
+
+The steps are:
+1. Ensure you have loaded and configured Wildfly for the new database dialect (detailed instructions are below)
+2. Update the datasource connection in the `-ds.xml` file (in ../wildfly/standalone/deployments/)
+3. Update the dialect in the `json` settings file for the new dialect (in ../wildfly/standalone/deployments/)
+4. Update the dialect setting in the pom.xml, and use the `generate domain` target to update your project for the new dialect
+5. If you are changing to MySQL, MSSQL, POSTGRES you will need to create a new empty database schema for your project
+
+Then, to restore your data to the new environment:
+* Set the environment identifier to a non-null value (e.g. "dev"), deploy and log in with the bootstrap user
+* Restore your backup - from the admin module->Dev Ops->Data Maintenance. (Select the backup zip, and choose the appropriate pre-process setup - usually "Delete existing table data using metadata").
+* Once the restore is complete, change the instance identifier in the `json` settings file back to the previous value and redeploy your application.	
+
+More information on backup and restore are available at the [User Guide](https://skyvers.github.io/skyve-user-guide/backup-restore/)
+
+#### Available dialects
+
+The currently supported dialects are:
+* H2
+* MySQL
+* MSSQL
+* POSTGRES
+
+The Oracle dialect is not currently available as part of the open-source platform. Please contact us if you require Oracle support.
+
+For project generation (i.e. the setting in the `pom.xml`), there are some additional options:
+
+Dialect Option | Description (String) | dataStoreIndexForeignKeys (boolean) | dataStoreIndexNamesInGlobalNamespace (boolean) | dataStoreIdentifierCharacterLimit (int) | dataStoreBizKeyLength (int)
+-------|--------|-------------|------------|-----------------|----------------------------------
+H2 | "H2" | true | false | 0 | 1024  
+H2_NO_INDEXES | "H2 without indexes" | false | false | 0 | 1024 //Indexes in H2 generate warnings, this option gives you a cleaner log but no indexes  
+MYSQL_5 | "MySQL 5" | true | false | 64 | 1024 // Should support MySQL 8 also 
+MSSQL_2014 | "SQL Server up to 2014" | true | true | 0 | 900 // SQL Server 2014 and below limits indexes to 900
+MSSQL_2016 | "SQL Server 2016+" | true | true | 0 | 1024
+POSTGRESQL | "PostgreSQL" | true | true | 63 | 1024
+
+For the `json` file `dialect` setting, choose the matching dialect class:
+ 
+`org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.H2SpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.MySQL5InnoDBSpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.PostgreSQL9SpatialDialect`
+
+_Note: as mentioned above, if you require support for Oracle or other dialects, please contact us._
+
+#### Configuring Wildfly for different dialects
+
+Refer to other Wildfly documentation for detailed information, but the basic steps are as follows.
+
+1. Place the appropriate jdbc driver into wildfly/modules/system/layers/base/ folder.
+
+For MSSQL you should have the following files:
+In C:\wildfly-x\modules\system\layers\base\com\microsoft\sqlserver\main\
+* module.xml
+* sqljdbc_auth.dll (for windows authentication)
+* sqljdbc42.jar
+
+For MySQL you should have the following files:
+In \wildfly-x\modules\system\layers\base\com\mysql\main\
+* module.xml
+* mysql-connector-java-5.1.33.jar
+
+2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in wildfly/standalone/configuration/standalone.xml 
+
+```xml
+<drivers>
+    <driver name="h2" module="com.h2database.h2">
+        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+    </driver>
+    <driver name="mysql" module="com.mysql">
+        <driver-class>com.mysql.jdbc.Driver</driver-class>
+    </driver>
+    <driver name="sqlserver" module="com.microsoft.sqlserver">
+		<xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+    </driver>
+    ...
+```
+
 ### Deploying a Skyve application
 
 Skyve builds applications as a single web archive (`.war`) folder, containing the application metadata and Skyve platform components. By default, Skyve `.war` folders are deployed 'exploded' or 'unzipped'.
