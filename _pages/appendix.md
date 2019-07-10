@@ -213,6 +213,7 @@ For the `json` file `dialect` setting, choose the appropriate dialect class:
 `org.skyve.impl.persistence.hibernate.dialect.H2SpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.MySQL5InnoDBSpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.MySQL56InnoDBSpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.MySQL8InnoDBSpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.PostgreSQL9SpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.PostgreSQL91SpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.PostgreSQL92SpatialDialect`
@@ -220,6 +221,7 @@ For the `json` file `dialect` setting, choose the appropriate dialect class:
 `org.skyve.impl.persistence.hibernate.dialect.PostgreSQL94SpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.PostgreSQL95SpatialDialect`
 `org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect`
+`org.skyve.impl.persistence.hibernate.dialect.SQLServer2012SpatialDialect`
 
 _Note: as mentioned above, if you require support for Oracle or other dialects, please contact us._
 
