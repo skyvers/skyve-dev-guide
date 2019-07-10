@@ -173,12 +173,12 @@ One of the great things about Skyve is how easy it is to change between differen
 
 _NOTE: Before you begin - backup your data (using the Skyve backup feature in the admin module->Dev Ops->Data Maintenance)_
 
-The steps are:
-1. Ensure you have loaded and configured Wildfly for the new database dialect (detailed instructions are below)
+The steps to change database are:
+1. If you are changing to MySQL, MSSQL, POSTGRES you will need to create a new empty database schema for your project
 2. Update the datasource connection in the `-ds.xml` file (in ../wildfly/standalone/deployments/)
-3. Update the dialect in the `json` settings file for the new dialect (in ../wildfly/standalone/deployments/)
-4. Update the dialect setting in the pom.xml, and use the `generate domain` target to update your project for the new dialect
-5. If you are changing to MySQL, MSSQL, POSTGRES you will need to create a new empty database schema for your project
+3. Ensure you have loaded and configured Wildfly for the new database dialect (detailed instructions are below)
+4. Update the dialect in the `json` settings file for the new dialect (in ../wildfly/standalone/deployments/)
+5. Update the dialect setting in the pom.xml, and use the `generate domain` target to update your project for the new dialect
 
 Then, to restore your data to the new environment:
 * Set the environment identifier to a non-null value (e.g. "dev"), deploy and log in with the bootstrap user
