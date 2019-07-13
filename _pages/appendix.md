@@ -229,6 +229,8 @@ _Note: as mentioned above, if you require support for Oracle or other dialects, 
 
 Refer to other Wildfly documentation for detailed information, but the basic steps are as follows.
 
+##### Wildfly driver configuration for MSSQL
+
 1. Place the appropriate jdbc driver into wildfly/modules/system/layers/base/ folder.
 
 For MSSQL you should have the following files:
@@ -237,25 +239,102 @@ In C:\wildfly-x\modules\system\layers\base\com\microsoft\sqlserver\main\
 * sqljdbc_auth.dll (for windows authentication)
 * sqljdbc42.jar
 
+2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in wildfly/standalone/configuration/standalone.xml
+
+```xml
+<drivers>
+    <driver name="sqlserver" module="com.microsoft.sqlserver">
+        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+    </driver>      
+...
+```
+
+An example module.xml file is:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?> 
+<module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 
+  <resources> 
+    <resource-root path="sqljdbc42.jar"/> 
+  </resources> 
+  <dependencies> 
+    <module name="javax.api"/> 
+    <module name="javax.transaction.api"/>
+	<module name="javax.xml.bind.api"/>
+  </dependencies> 
+</module>
+```
+
+##### Wildfly driver configuration for MySQL
+
+1. Place the appropriate jdbc driver into wildfly/modules/system/layers/base/ folder.
+
 For MySQL you should have the following files:
 In \wildfly-x\modules\system\layers\base\com\mysql\main\
 * module.xml
 * mysql-connector-java-5.1.33.jar
 
-2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in wildfly/standalone/configuration/standalone.xml 
+An example module.xml file is:
+
+```xml
+<module xmlns="urn:jboss:module:1.3" name="com.mysql">
+    <resources>
+        <resource-root path="mysql-connector-java-5.1.33.jar" />
+    </resources>
+    <dependencies>
+        <module name="javax.api"/>
+        <module name="javax.transaction.api"/>
+    </dependencies>
+</module>
+```
+
+2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in wildfly/standalone/configuration/standalone.xml
 
 ```xml
 <drivers>
-    <driver name="h2" module="com.h2database.h2">
-        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
-    </driver>
     <driver name="mysql" module="com.mysql">
         <driver-class>com.mysql.jdbc.Driver</driver-class>
     </driver>
-    <driver name="sqlserver" module="com.microsoft.sqlserver">
-		<xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-    </driver>
-    ...
+...
+```
+
+
+##### Wildfly driver configuration for PostgreSQL 
+
+1. Place the appropriate jdbc driver into wildfly/modules/system/layers/base/ folder.
+
+For PostgreSQL you should have the following files:
+In \wildfly-x\modules\system\layers\base\org\postgresql\main\
+* module.xml
+* postgresql-42.2.6.jar
+
+An example module.xml file is:
+
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+
+<module xmlns="urn:jboss:module:1.1" name="org.postgresql">
+
+    <resources>
+    <!--the name of your driver -->
+        <resource-root path="postgresql-42.2.6.jar"/>
+    </resources>
+
+    <dependencies>
+        <module name="javax.api"/>
+        <module name="javax.transaction.api"/>
+    </dependencies>
+</module>
+```
+
+2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in wildfly/standalone/configuration/standalone.xml
+
+```xml
+<drivers>
+    <driver name="postgresql" module="org.postgresql">
+        <driver-class>org.postgresql.Driver</driver-class>
+    </driver>              
+...
 ```
 
 ### Deploying a Skyve application
