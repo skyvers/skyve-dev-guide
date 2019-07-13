@@ -164,7 +164,6 @@ If you specify an `environment.customer`, make sure it matches the `bootstrap.cu
 
 #### Still having problems?
 
-
 Join us on [Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LWNjMTBlMTMzNTA4YzBlMzFhYzE0ZmRhOWIzMWViODY4ZTE1N2QzYWM1MTdlMTliNDIyYTBkOWZhZDAxOGQyYjQ) and ask our friendly team. 
 
 ### Changing database dialect
@@ -231,23 +230,13 @@ Refer to other Wildfly documentation for detailed information, but the basic ste
 
 ##### Wildfly driver configuration for MSSQL
 
-1. Place the appropriate jdbc driver into wildfly/modules/system/layers/base/ folder.
+1. Place the appropriate jdbc driver into your `\wildfly-x\modules\system\layers\base\` folder.
 
-For MSSQL you should have the following files:
-In C:\wildfly-x\modules\system\layers\base\com\microsoft\sqlserver\main\
+For MSSQL you should have the following files in `\wildfly-x\modules\system\layers\base\com\microsoft\sqlserver\main\`:
+
 * module.xml
-* sqljdbc_auth.dll (for windows authentication)
-* sqljdbc42.jar
-
-2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in wildfly/standalone/configuration/standalone.xml
-
-```xml
-<drivers>
-    <driver name="sqlserver" module="com.microsoft.sqlserver">
-        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-    </driver>      
-...
-```
+* sqljdbc_auth.dll (if you use windows authentication)
+* sqljdbc{version}.jar
 
 An example module.xml file is:
 
@@ -265,18 +254,35 @@ An example module.xml file is:
 </module>
 ```
 
+Ensure that the driver matches the version of your jar 
+
+```xml    
+<resource-root path="sqljdbc{version}.jar"/>
+``` 
+
+2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in `\wildfly-x\standalone\configuration/standalone.xml`
+
+```xml
+<drivers>
+    <driver name="sqlserver" module="com.microsoft.sqlserver">
+        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+    </driver>      
+...
+```
+
 ##### Wildfly driver configuration for MySQL
 
-1. Place the appropriate jdbc driver into wildfly/modules/system/layers/base/ folder.
+1. Place the appropriate jdbc driver into your `/wildfly-x/modules/system/layers/base/` folder.
 
-For MySQL you should have the following files:
-In \wildfly-x\modules\system\layers\base\com\mysql\main\
+For MySQL you should have the following files in `/wildfly-x/modules/system/layers/base/com/mysql/main/`:
+
 * module.xml
-* mysql-connector-java-5.1.33.jar
+* mysql-connector-java-5.{version}.jar
 
 An example module.xml file is:
 
 ```xml
+<?xml version="1.0" encoding="utf-8"?> 
 <module xmlns="urn:jboss:module:1.3" name="com.mysql">
     <resources>
         <resource-root path="mysql-connector-java-5.1.33.jar" />
@@ -288,35 +294,39 @@ An example module.xml file is:
 </module>
 ```
 
-2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in wildfly/standalone/configuration/standalone.xml
+Ensure that the driver matches the version of your jar 
+
+```xml    
+<resource-root path="mysql-connector-java-{version}.jar"/>
+``` 
+
+2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in `/wildfly-x/standalone/configuration/standalone.xml`
 
 ```xml
 <drivers>
-    <driver name="mysql" module="com.mysql">
-        <driver-class>com.mysql.jdbc.Driver</driver-class>
-    </driver>
+	<driver name="mysql" module="com.mysql">
+	    <driver-class>com.mysql.jdbc.Driver</driver-class>
+	</driver>
 ...
 ```
 
-
 ##### Wildfly driver configuration for PostgreSQL 
 
-1. Place the appropriate jdbc driver into wildfly/modules/system/layers/base/ folder.
+1. Place the appropriate jdbc driver into your `/wildfly-x/modules/system/layers/base/` folder.
 
-For PostgreSQL you should have the following files:
-In \wildfly-x\modules\system\layers\base\org\postgresql\main\
+For Postgres, you should have the following files in `/wildfly-x/modules/system/layers/base/org/postgresql/main/`:
+
+* postgresql-{version}.jar
 * module.xml
-* postgresql-42.2.6.jar
 
 An example module.xml file is:
 
 ```xml
-<?xml version='1.0' encoding='UTF-8'?>
-
+<?xml version="1.0" encoding="utf-8"?> 
 <module xmlns="urn:jboss:module:1.1" name="org.postgresql">
 
     <resources>
-    <!--the name of your driver -->
+    	<!--the name of your driver -->
         <resource-root path="postgresql-42.2.6.jar"/>
     </resources>
 
@@ -327,7 +337,13 @@ An example module.xml file is:
 </module>
 ```
 
-2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in wildfly/standalone/configuration/standalone.xml
+Ensure that the driver matches the version of your jar 
+
+```xml    
+<resource-root path="postgresql-{version}.jar"/>
+```
+
+2. Add the driver to the `drivers` stanza in the wildfly configuration, for example in `/wildfly-x/standalone/configuration/standalone.xml`
 
 ```xml
 <drivers>
