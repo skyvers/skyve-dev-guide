@@ -15,7 +15,7 @@ The skyve project contains a Readme at [github.com/skyvers/skyve](https://github
 You can also follow the instructions provided in the video at the Skyve Foundry - Skyve Project Creator
 
 <div style="margin: 0 auto; text-align: center">
-	<a href="https://youtu.be/sxFXbpKM97k" target="_blank">
+	<a href="https://youtu.be/jcwk6pFnErg" target="_blank">
 		<img src="../assets/images/building-applications/skyve-project-creator.png" alt="Skyve Project Creator" width="500" border="10" />
 	</a>
 </div>
@@ -95,7 +95,7 @@ Groups can be further combined on a per user basis and user creation provides fo
 
 Roles can also be combined for customer-specific combinations, however these combinations are set at design-time by the developer. For more information see the <a href="https://skyvers.github.io/skyve-dev-guide/customers/#customer-roles">developer guide</a>. 
 
-**[⬆ back to top](#building-applications)**
+**[⬆ back to top](#skyve-readme)**
 
 ---
 **Next [Customers](./../_pages/customers.md)**  
