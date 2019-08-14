@@ -198,14 +198,17 @@ The Oracle dialect is not currently available as part of the open-source platfor
 
 For project generation (i.e. the setting in the `pom.xml`), there are some additional options:
 
-Dialect Option | Description (String) | dataStoreIndexForeignKeys (boolean) | dataStoreIndexNamesInGlobalNamespace (boolean) | dataStoreIdentifierCharacterLimit (int) | dataStoreBizKeyLength (int)
+Dialect Option | Description | dataStoreIndexForeignKeys (boolean) | dataStoreIndexNamesInGlobalNamespace (boolean) | dataStoreIdentifierCharacterLimit (int) | dataStoreBizKeyLength (int)
 -------|--------|-------------|------------|-----------------|----------------------------------
-H2 | "H2" | true | false | 0 | 1024  
-H2_NO_INDEXES | "H2 without indexes" | false | false | 0 | 1024 //Indexes in H2 generate warnings, this option gives you a cleaner log but no indexes  
-MYSQL_5 | "MySQL 5" | true | false | 64 | 1024 // Should support MySQL 8 also 
-MSSQL_2014 | "SQL Server up to 2014" | true | true | 0 | 900 // SQL Server 2014 and below limits indexes to 900
-MSSQL_2016 | "SQL Server 2016+" | true | true | 0 | 1024
-POSTGRESQL | "PostgreSQL" | true | true | 63 | 1024
+H2 | H2 | true | false | 0 | 1024  
+H2_NO_INDEXES | H2 without indexes | false | false | 0 | 1024 //Indexes in H2 generate warnings, this option gives you a cleaner log but no indexes
+MYSQL_5 | MySQL 5 | true | false | 64 | 1024
+MYSQL_5_4_BYTE_CHARSET | MySQL 5 | true | false | 64 | 768
+MYSQL_5 | MySQL 8 | true | false | 64 | 1024
+MYSQL_8_4_BYTE_CHARSET | MySQL 8 | true | false | 64 | 768
+MSSQL_2014 | SQL Server up to 2014 | true | true | 0 | 900 // SQL Server 2014 and below limits indexes to 900
+MSSQL_2016 | SQL Server 2016+ | true | true | 0 | 1024
+POSTGRESQL | PostgreSQL | true | true | 63 | 1024
 
 For the `json` file `dialect` setting, choose the appropriate dialect class:
  
