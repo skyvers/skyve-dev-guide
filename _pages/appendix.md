@@ -1204,6 +1204,35 @@ then check that your JNDI name in the standalone.xml (`<module-option name="dsJn
   <datasource jndi-name="java:/{projectNameDB}" pool-name="skyve" enabled="true" jta="true" use-ccm="false">
   ```
 
+#### Managing Wildfly Server log file size
+
+To manage/(limit) the fize size for logging, modify the `standalone.xml` file as follows:
+
+```xml
+<periodic-size-rotating-file-handler name="FILESIZE" autoflush="true" rotate-on-boot="true">
+               <formatter>
+                   <named-formatter name="PATTERN"/>
+               </formatter>
+               <file relative-to="jboss.server.log.dir" path="server.log"/>
+               <rotate-size value="400m"/>
+               <max-backup-index value="20"/>
+            <suffix value=".yyyy-MM-dd"/>
+               <append value="true"/>
+</periodic-size-rotating-file-handler>
+```
+
+In root logger 
+```xml
+<root-logger>
+               <level name="INFO"/>
+               <handlers>
+                   <handler name="CONSOLE"/>
+                   <handler name="FILE"/>
+                <handler name="FILESIZE"/>
+               </handlers>
+           </root-logger>
+```
+
 #### Wildfly Bitnami production install (Windows)
 
 These instructions apply to Bitnami Wildfly 10 stack installation on Windows server modified to connect to Microsoft SQL Server.
@@ -1309,6 +1338,55 @@ ProxyPassReverse / http://localhost:8080/
 * Set the system account that should be running the wildfly service
 * Start the wildfly service and make sure the datasources deploy successfully
 * Deploy `{projectName}.war`
+
+## Common Wildfly settings
+
+### Managing Wildfly server logs
+
+You can either use the periodic rotating file handler:
+
+```xml
+<periodic-rotating-file-handler name="FILE" autoflush="true">
+    <formatter>
+        <named-formatter name="PATTERN"/>
+    </formatter>
+    <file relative-to="jboss.server.log.dir" path="server.log"/>
+    <suffix value=".yyyy-MM-dd"/>
+    <append value="true"/>
+</periodic-rotating-file-handler>
+```
+
+or the size rotating file handler:
+
+```xml
+<size-rotating-file-handler name="FILE" autoflush="true" rotate-on-boot="true">
+   <formatter>
+       <named-formatter name="PATTERN"/>
+   </formatter>
+   <file relative-to="jboss.server.log.dir" path="server.log"/>
+   <rotate-size value="40m"/>
+   <max-backup-index value="5"/>
+   <append value="true"/>
+</size-rotating-file-handler>
+```
+
+### Managing Post Size (large file upload)
+
+Add the `max-post-size` setting to the http-listener as follows:
+
+```xml
+<subsystem xmlns="urn:jboss:domain:undertow:3.1">
+    <buffer-cache name="default"/>
+    <server name="default-server">
+        <http-listener name="default" socket-binding="http" max-post-size="4294967296" redirect-socket="https" enable-http2="true"/>
+        <https-listener name="https" socket-binding="https" security-realm="ApplicationRealm" enable-http2="true"/>
+        <host name="default-host" alias="localhost">
+            <location name="/" handler="welcome-content"/>
+            <filter-ref name="server-header"/>
+            <filter-ref name="x-powered-by-header"/>
+        </host>
+	</server>
+```
 
 **[⬆ back to top](#deploying-a-skyve-application)**
 

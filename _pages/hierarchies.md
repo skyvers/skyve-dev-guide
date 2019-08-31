@@ -171,5 +171,5 @@ The result is a `treeGrid` displaying all relations from the `User` instance:
 **[⬆ back to top](#hierarchies)**
 
 ---
-**Next [Geometry and geospatial](./../_pages/geospatial.md)**  
+**Next [Images](./../_pages/images.md)**  
 **Previous [Content](./../_pages/working-with-content.md)**

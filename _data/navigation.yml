@@ -49,6 +49,8 @@ docs:
         url: /working-with-content/                                                                                
       - title: "Hierarchies"
         url: /hierarchies/                                                                                        
+      - title: "Images"
+        url: /images/                                                                                        
       - title: "Geometry and geospatial"
         url: /geospatial/                                                                                        
       - title: "Communication"

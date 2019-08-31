@@ -10,21 +10,59 @@ sidebar:
 
 ## Geometry and geospatial
 
-### Before you begin - things to consider
+Skyve requires rich map and geospatial features, including the ability to use mapping and combined scalar data and geospatial filtering - without requiring developer code. Developers can then provide additional code to extend applications to achieve genuinely sophisticated capabilities.
 
-#### The default Google maps API
+Your application configuration `.json` file allows you to customise behaviour for your region and typical use case, including 
+* the default map centre lat-long,
+* zoom level, and
+* map layer(s) to load for each map implementation.
 
-Skyve provides a Google maps API by default, however it is your responsibility to consider usage, licencing and billing implications when used in your application. Refer to [Google](https://cloud.google.com/maps-platform/terms/) terms. 
+By default, spatial information is represented using <a href="https://en.wikipedia.org/wiki/Well-known_text">Well Known Text</a>
 
-#### Alternative map APIs
+### Map APIs
+
+Skyve provides two map API options - OpenStreetMap (leaflet) and Google Maps. 
+
+Skyve applications default to using OpenStreetMaps (leaflet).
+
+You can switch between the two APIs at any time by changing the application properties .json file settings and redeploying your application - without requiring any changes to developer code. 
+
+NOTE: _Whichever technology you choose, it is *your* responsibility to ensure you comply with accreditation and licencing requirements within your application._
+
+#### OepnStreetMap (Leaflet)
+
+OpenStreetMap® is open data, licensed under the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF).
+
+You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full legal code explains your rights and responsibilities. 
 
 Skyve applications can take advantage of other map APIs (for example [Leaflet](https://leafletjs.com/), [OpenStreetMap](https://www.openstreetmap.org/) etc) however these APIs are not included in the open-source Skyve distribution. For assistance, contact us at skyve.org to discuss detailed steps for other integration options.
 
-#### Configuring Skyve for map-based interactions
+```json
+// Map Settings
+map: {
+	type: "leaflet",
+	layers: "[L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19})]",
+	centre: "POINT(0 0)",
+	zoom: 1
+},
+```
+
+#### Google Maps
+
+Skyve provides a Google maps API integration option, however it is your responsibility to consider usage, licencing and billing implications when used in your application. Refer to [Google](https://cloud.google.com/maps-platform/terms/) terms.
+
+If you use google maps you should obtain an API key (googleMapsV3Key) and specify that key in the api section of the `.json` application configuration file.
 
 To take advantage of Skyve's inbuilt map features with the default Google maps API, you must provide a valid [Google maps API key](https://developers.google.com/maps/documentation/javascript/get-api-key) in the Skyve application `.json` file.
 
 ```json
+// Map Settings
+map: {
+	type: "gmap",
+	layers: "google.maps.MapTypeId.ROADMAP",
+	centre: "POINT(0 0)",
+	zoom: 1
+},
 // API Settings
 api: {
 	googleMapsV3Key: "AIzaaaaaDDDDAAA-CMqvI0TIAPlye9g4Wr4Dg",
@@ -33,9 +71,44 @@ api: {
 },
 ```
 
+### Overview
+
+Skyve provides 3 map widgets, 2 are for geo-spatial input and 1 is for display only:
+* `geometry` widget is a text field that has a map popup via a button. This widget has focus, blur and changed event handling. The widget can be disabled.
+* `geometryMap` widget is an inline map that can be used for input. This widget has changed event handling. The widget can be disabled and this removes the geolocation and drawing controls.
+
+Both of these widgets can constrain the type of geometry input allowed via the "type" property. 
+
+Both of these widgets have a geo-locate tool on the map for marking the current GPS position (if HTML5 Navigation services are available).
+
+* the `map` widget is a widget that allows rendering of map data. This widget can be utilised from the map menu item where a query with a geometry binding can be displayed on one of these widgets in a map view. 
+
+This widget can also be used with a map _model_.
+
+Attributes of interest include:-
+* `showRefreshControls` - shows a spinner with number of seconds to automatically refresh and a checkbox to switch refreshing on and off.
+* `refreshTimeInSeconds` - The refresh frequency in seconds
+* `eager` loading (default) - In `eager` mode, the world extents are sent to the map `model` and the map expects to receive all data back to display. Zooming and panning display data stored on the client. 
+* `lazy` loading - In `lazy` mode, the map viewport extents are sent to the map `model` so the `model` can return just the data that is contained in the current view. After the map is zoomed or panned, the `model` is called to get new data, whereas, in `eager` mode, the map `model` code won't be re-called.
+
+A map model has one method to implement which takes a geometry called `mapBounds` that is either the world extents for an `eager` loading map, or the viewport bounds for a `lazy` loading map. If the bounds cross over the anti meridian line, the geometry will be a multi-geometry with 2 polygons representing the bounds intersected by the anti meridian line.
+
+It is routine to use a query with an intersects filter operator to allow the persistence layer to return only the features that are relevant to the `mapBounds`, or to use the geometry methods to test - e.g. `mapBounds.intersects(myGeometry)`.
+
+It is usually prudent to test both ways if using a `Persistence.filter` as some databases will include false positives in their results depending on the size of their quad-tree indexes, but the geometry methods test geometrically.
+
+The map result has a list of map items with `bizId`, `bizModule`, `bizDocument` included for zooming in on a feature from the map and each map item contains a list of Map Features that will represent the item on the map. Icons, stroke and fill colours/opacity can be set for each feature within the model.
+
+A click on any feature in an item will zoom into that item and display information from the item in the balloon on the map.
+
+There are a couple of implementations of MapModel:
+* `DefaultMapModel` includes addItem method that creates an item with 1 feature from a geometry from a geometry derived from a binding in a bean, only if it is within the mapBounds.
+* `DocumentQueryMapModel` displays map items from a document query.
+* `ReferenceMapModel` displays map items from a document reference - association, collection, inverses.
+
 ### Geometry attribute type
 
-Skyve provides a native `geometry` attribute type for geometrical and geospatial objects, shapes and locations and takes advantage of hibernate spatial dialects for storage and searching of spatial items.
+Skyve provides a native `geometry` attribute type for geometrical and geospatial objects, shapes and locations. The `geometry` attribute takes advantage of Hibernate spatial dialects for storage and searching of spatial items.
 
 Attributes storing geometric or geospatial points (locations) or shapes are declared in the `document.xml` as follows:
 
@@ -89,34 +162,13 @@ Note that Skyve's list control supports spatial filter criteria used as well as 
 
 ### Geometry and geospatial widgets
 
-The `geometry` values are displayed as <a href="https://en.wikipedia.org/wiki/Well-known_text">Well-known text</a> by the default `geometry` widget.
+The `geometry` values are displayed as <a href="https://en.wikipedia.org/wiki/Well-known_text">Well Known Text</a> by the default `geometry` widget.
 
 ![Default geometry widget](./../assets/images/geospatial/default-geometry-widget.png "Default geometry widget")
 
 The `geometry` widget provides a map-based data entry tool option with basic drawing tools. The mapping interfaces are currently only supported in the `desktop` rendering mode and depends on a valid Google maps API key having been specified in the application `.json` settings file.
 
 [Map-based data entry tool](./../assets/images/geospatial/geometry-map-based-data-entry-tool.png "Map-based data entry tool")
-
-### Geolocator widget
-
-The `geolocator` widget is a geocoding/reverse geocoding tool to set address related attributes, based on map-based interactions. 
-
-Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.
-
-The Geolocator Widget has multiple bindings which interact with the map
-* addressBinding
-* cityBinding 
-* stateBinding 
-* postcodeBinding
-* countryBinding
-* latitudeBinding
-* longitudeBinding
-
-When the Map button is clicked, the geolocator (shown below) will be displayed in a modal window. 
-
-![Geolocator map](../assets/images/views/image107.png "Geolocator map")
-
-When the map tools are used to specify a geometry location (or shape), the specified `addressBinding`, `cityBinding`, etc. will be set correspondingly. The widget supports the use of any or all binding options.
 
 ### Map widget
 
@@ -142,6 +194,8 @@ According to the convention, the `model` java class must be declared within the 
 MapModel provides the `getBean()` which returns the context bean (the bean for the view in which the model will be displayed) - if a bean context has been set. If a MapModel is specified as the `model` for a map menu item, `getBean()` will return null.
 
 ```java
+package modules.whosinIntegrate.Office.models;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,6 +203,7 @@ import modules.whosinIntegrate.domain.Office;
 import modules.whosinIntegrate.domain.Staff;
 import modules.whosinIntegrate.domain.Staff.Status;
 
+import org.locationtech.jts.geom.Geometry;
 import org.skyve.CORE;
 import org.skyve.metadata.view.model.map.MapFeature;
 import org.skyve.metadata.view.model.map.MapItem;
@@ -157,63 +212,67 @@ import org.skyve.metadata.view.model.map.MapResult;
 import org.skyve.persistence.DocumentQuery;
 import org.skyve.persistence.Persistence;
 
-import com.vividsolutions.jts.geom.Envelope;
-import com.vividsolutions.jts.geom.Geometry;
-
 public class OfficeMap extends MapModel<Office> {
 	private static final long serialVersionUID = 7880044512360465355L;
 
 	@Override
-	public MapResult getResult(Envelope mapExtents) throws Exception {
+	public MapResult getResult(Geometry mapBounds) throws Exception {
 		Office office = getBean();		
 		
 		List<MapItem> items = new ArrayList<>();
 
-			// add the office feature
+		// add the office feature
 		Geometry boundary = office.getBoundary();
 		if (boundary != null) {
-			MapItem item = new MapItem();
-			item.setBizId(office.getBizId());
-			item.setModuleName(office.getBizModule());
-			item.setDocumentName(office.getBizDocument());
-			item.setInfoMarkup(office.getBizKey());
-			
-			MapFeature feature = new MapFeature();
-			feature.setGeometry(office.getBoundary());
-			feature.setFillColour("#009900");
-			feature.setFillOpacity("0.6");
-			feature.setStrokeColour("#00FF00");
-			item.getFeatures().add(feature);
-			items.add(item);
+			if (mapBounds.intersects(office.getBoundary())) {
+				MapItem item = new MapItem();
+				item.setBizId(office.getBizId());
+				item.setModuleName(office.getBizModule());
+				item.setDocumentName(office.getBizDocument());
+				item.setInfoMarkup(office.getBizKey());
+				
+				MapFeature feature = new MapFeature();
+				feature.setGeometry(office.getBoundary());
+				feature.setFillColour("#FFFF00"); //yellow
+				feature.setFillOpacity("0.8");
+				feature.setStrokeColour("#BDB76B"); //dark khaki
+				item.getFeatures().add(feature);
+
+				items.add(item);
+			}
 		}
 		
 		// add the staff features
 		if (office.isPersisted()) {
-			
 			Persistence p = CORE.getPersistence();
 			DocumentQuery q = p.newDocumentQuery(Staff.MODULE_NAME, Staff.DOCUMENT_NAME);
 			q.getFilter().addEquals(Staff.baseOfficePropertyName, office);
-			
+
 			List<Staff> staff = q.beanResults();
 			for (Staff member : staff) {
-				MapItem item = new MapItem();
-				item.setBizId(member.getBizId());
-				item.setModuleName(member.getBizModule());
-				item.setDocumentName(member.getBizDocument());
-				
-				Status memberStatus = member.getStatus();
-				StringBuilder markup = new StringBuilder(64);
-				markup.append(member.getContact().getName());
-				if (memberStatus != null) {
-					markup.append("<br/>").append(memberStatus.toDescription());
+				if (mapBounds.intersects(member.getLocation())) {
+					MapItem item = new MapItem();
+					item.setBizId(member.getBizId());
+					item.setModuleName(member.getBizModule());
+					item.setDocumentName(member.getBizDocument());
+					
+					Status memberStatus = member.getStatus();
+					StringBuilder markup = new StringBuilder(64);
+					markup.append(member.getContact().getName());
+					if (memberStatus != null) {
+						markup.append("<br/>").append(memberStatus.toDescription());
+					}
+					item.setInfoMarkup(markup.toString());
+					
+					MapFeature feature = new MapFeature();
+					feature.setGeometry(member.getLocation());
+					feature.setIconRelativeFilePath("icons/document/user16.png");
+					feature.setIconAnchorX(Integer.valueOf(8));
+					feature.setIconAnchorY(Integer.valueOf(8));
+					item.getFeatures().add(feature);
+					
+					items.add(item);
 				}
-				item.setInfoMarkup(markup.toString());
-				
-				MapFeature feature = new MapFeature();
-				feature.setGeometry(member.getLocation());
-				item.getFeatures().add(feature);
-				
-				items.add(item);
 			}
 		}
 		
