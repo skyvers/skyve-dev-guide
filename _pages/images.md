@@ -57,8 +57,7 @@ Consider, for example, if your application was to provide a list of _Staff_ reco
 <query name="qStaff" documentName="Staff">
 	<description>All Staff</description>
 	<columns>
-		<content display="thumbnail" binding="contact.image" displayName="Image"
-			 emptyThumbnailRelativeFile="shared/images/UnknownContact.jpg"/>
+		<content display="thumbnail" binding="contact.image" displayName="Image" emptyThumbnailRelativeFile="shared/images/UnknownContact.jpg"/>
 		<column binding="contact.name" sortOrder="ascending"/>
 		<column binding="roleTitle" />
 		<column binding="status" />
@@ -87,4 +86,5 @@ SVG file type icons are served when a file or content is not an image. If an ima
 **[⬆ back to top](#images)**
 
 ---
-**Next [Geometry and geospatial](./../_pages/geospatial.md)**  **Previous [Hierarchies](./../_pages/hierarchies.md)**
+**Next [Geometry and geospatial](./../_pages/geospatial.md)**  
+**Previous [Hierarchies](./../_pages/hierarchies.md)**
