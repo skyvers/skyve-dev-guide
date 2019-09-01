@@ -347,4 +347,4 @@ addWithin(binding, geometry), addNullOrWithin(binding, geometry) | filter for be
 
 ---
 **Next [Communication](./../_pages/communication.md)**  
-**Previous [Hierarchies](./../_pages/hierarchies.md)**
+**Previous [Images](./../_pages/images.md)**
