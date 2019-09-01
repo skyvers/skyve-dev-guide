@@ -43,7 +43,7 @@ thumbnail: {
 },
 ```
 
-The thumbnail JSON entry/stanza/object isn’t required though - so if this section is not included, your Skyve application will default to 40MB usage across 10 concurrent threads using `<content.directory>/SKYVE_THUMBNAILS/`. 
+The thumbnail JSON entry/stanza/object isn't required though - so if this section is not included, your Skyve application will default to 40MB usage across 10 concurrent threads using `<content.directory>/SKYVE_THUMBNAILS/`. 
 
 ### Automatic caching and management
 
