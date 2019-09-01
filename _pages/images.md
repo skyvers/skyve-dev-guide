@@ -51,7 +51,9 @@ In Skyve, images are stored as content (see [Working with content](./../_pages/w
 
 Skyve's automatic subsampling occurs if the source image is too big. As images are resized, the resized version _thumbnail_ is automatically cached for re-use. By storing a _thumbnail_ of the right size (assuming the same size is requested again) then there's no resizing cost on memory for subsequent requests.
 
-Consider, for example, if your application was to provide a list of _Staff_ records, each with an image of a user - where the module query for the list used the `content` column type:
+Consider, for example, if your application was to provide a list of _Staff_ records, each with an image of a user. 
+
+The module query for the list might use the `content` column type as follows:
 
 ```xml
 <query name="qStaff" documentName="Staff">
@@ -67,12 +69,14 @@ Consider, for example, if your application was to provide a list of _Staff_ reco
 		<column binding="location" hidden="true"/>
 	</columns>
 </query>
-``` 
+ 
+```
 
 The list of staff members would show as follows:
+
 ![Image list example](./../assets/images/images/ImageList.png "Image list example")
 
-Skyve automatically pages list results with between 50-75 requests per page (unless its been visited before and then it'll be cached).
+Skyve automatically pages list results with between 50-75 requests per page (unless its been visited before and cached).
 
 Assuming the settings above, initially 10 threads will be handled at a time (with the other 65 waiting and checking every 10 milliseconds if they are allowed to go or not). The first 10 threads write a thumbnail image (to the `SKYVE_THUMBNAIL` folder) and any subsequent requests will just serve the image. This means the processing is serialised 10 images at a time so that memory doesn't blow out - until the 75 requests are processed.
 
@@ -81,6 +85,7 @@ A thumbnail is requested with a width and height - if there is already a thumbna
 Files are keyed on the SHA-1 hash of their canonical path, content is keyed by its content ID using the same balanced folder structure as the SKYVE_STORE.
 
 SVG file type icons are served when a file or content is not an image. If an image cannot be made (the content isn't an image - for example if the content field contains a PDF document) a marker file is placed on the FS so that next time it serves the file type SVG and the file type icon for that file type.
+
 ![Thumbnail content](./../assets/images/working-with-content/thumbnail-content-list.png "Thumbnail content")
 
 **[⬆ back to top](#images)**
