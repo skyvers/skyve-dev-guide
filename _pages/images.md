@@ -10,9 +10,9 @@ sidebar:
 
 ## Images
 
-Working with images can introduce performance and memory issues - especially where applications use large numbers or high quality images and show these frequently and resizing these per on the fly. Whereas the browser will cache static images, for images which are part of your dynamic application data, resizing and serving these images can impact application performance and degrade the user experience.
+Skyve provides automatic image caching and _thumbnail_ capabilities to avoid the potential of performance and memory issues - especially where applications use large numbers of high quality images and show these frequently, resizing these on the fly. Whereas the browser will cache static images, for images which are part of your dynamic application data, without Skyve's automatic image management features, resizing and serving these images could impact application performance and degrade the user experience.
 
-To avoid these problems, Skyve provides automatic image caching and _thumbnail_ capabilities. Developers can configure how this feature works to fine-tune performance for their application. Cached files are stored within Skyve's content folder, in a folder called `SKYVE_THUMBNAILS`.
+To avoid these problems, Developers can configure how this feature works to fine-tune performance for their application. Cached files are stored within Skyve's content folder, in a folder called `SKYVE_THUMBNAILS`.
 
 Skyve's automatic caching and management also works for files served through Skyve's resource mechanism.
 

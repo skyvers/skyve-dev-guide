@@ -33,7 +33,7 @@ NOTE: _Whichever technology you choose, it is *your* responsibility to ensure yo
 
 OpenStreetMap&reg; is open data, licensed under the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF).
 
-You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full legal code explains your rights and responsibilities. 
+According to OpenStreetMap - "you are free to copy, distribute, transmit and adapt our (i.e. _their) data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full legal code explains your rights and responsibilities." 
 
 ```json
 // Map Settings
