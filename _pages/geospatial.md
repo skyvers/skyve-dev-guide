@@ -331,12 +331,12 @@ The document query filter object provides the following spatial criteria options
 Option | Description
 -------|------------
 addContains(binding, geometry), addNullOrContains(binding, geometry) | where the attribute specified by the `binding` is completely enclosed within the specified `geometry`  
-addCrosses(binding, geometry), addNullOrCrosses(binding, geometry) | where the attribute specified by the `binding` is crosses the specified `geometry`
-addDisjoint(binding, geometry), addNullOrDisjoint(binding, geometry) | where the attribute specified by the `binding` is does not cross, intersect nor is contained by the specified `geometry`
+addCrosses(binding, geometry), addNullOrCrosses(binding, geometry) | where the attribute specified by the `binding` crosses the specified `geometry`
+addDisjoint(binding, geometry), addNullOrDisjoint(binding, geometry) | where the attribute specified by the `binding` does not cross, intersect nor is contained by the specified `geometry`
 addEquals(binding, geometry), addNullOrEquals(binding, geometry) | where the attribute specified by the `binding` is concurrent or the same as the specified `geometry`
 addIntersects(binding, geometry), addNullOrIntersects(binding, geometry) | where the attribute specified by the `binding` intersects the specified `geometry`
 addOverlaps(binding, geometry), addNullOrOverlaps(binding, geometry) | where the attribute specified by the `binding` overlaps the specified `geometry`
-addTouches(binding, geometry), addNullOrTouches(binding, geometry) | where the attribute specified by the `binding` is touches some part of the specified `geometry`
+addTouches(binding, geometry), addNullOrTouches(binding, geometry) | where the attribute specified by the `binding` touches some part of the specified `geometry`
 addWithin(binding, geometry), addNullOrWithin(binding, geometry) | where the attribute specified by the `binding` is contained within the specified `geometry`
 
 
