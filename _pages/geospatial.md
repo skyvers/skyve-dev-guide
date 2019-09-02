@@ -31,7 +31,7 @@ NOTE: _Whichever technology you choose, it is *your* responsibility to ensure yo
 
 #### OepnStreetMap (Leaflet)
 
-OpenStreetMap® is open data, licensed under the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF).
+OpenStreetMap&reg; is open data, licensed under the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF).
 
 You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full legal code explains your rights and responsibilities. 
 
@@ -77,7 +77,7 @@ Skyve provides 3 map widgets, 2 are for geo-spatial input and 1 is for display o
 * `geometry` widget is a text field that has a map popup via a button. This widget has focus, blur and changed event handling. The widget can be disabled.
 * `geometryMap` widget is an inline map that can be used for input. This widget has changed event handling. The widget can be disabled and this removes the geolocation and drawing controls.
 
-Both of these widgets can constrain the type of geometry input allowed via the "type" property. 
+Both of these widgets can constrain the type of geometry input allowed via the `type` property. 
 
 Both of these widgets have a geo-locate tool on the map for marking the current GPS position (if HTML5 Navigation services are available).
 
