@@ -47,7 +47,7 @@ The thumbnail JSON entry/stanza/object isn't required though - so if this sectio
 
 ### Automatic caching and management
 
-In Skyve, images are stored as content (see [Working with content](./../_pages/working-with-content.md). When content, images and resources are served to the user, images are resized for the specific layout context as required. 
+In Skyve, images are stored as content (see [Working with content](./../_pages/working-with-content.md) ). When content, images and resources are served to the user, images are resized for the specific layout context as required. 
 
 Skyve's automatic subsampling occurs if the source image is too big. As images are resized, the resized version _thumbnail_ is automatically cached for re-use. By storing a _thumbnail_ of the right size (assuming the same size is requested again) then there's no resizing cost on memory for subsequent requests.
 

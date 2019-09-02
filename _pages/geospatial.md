@@ -10,7 +10,7 @@ sidebar:
 
 ## Geometry and geospatial
 
-Skyve requires rich map and geospatial features, including the ability to use mapping and combined scalar data and geospatial filtering - without requiring developer code. Developers can then provide additional code to extend applications to achieve genuinely sophisticated capabilities.
+Skyve provides rich map and geospatial features, including the ability to use mapping and combined scalar data and geospatial filtering - without requiring developer code. Developers can then provide additional code to extend applications to achieve genuinely sophisticated capabilities.
 
 Your application configuration `.json` file allows you to customise behaviour for your region and typical use case, including 
 * the default map centre lat-long,
@@ -21,21 +21,19 @@ By default, spatial information is represented using <a href="https://en.wikiped
 
 ### Map APIs
 
-Skyve provides two map API options - OpenStreetMap (leaflet) and Google Maps. 
+Skyve provides two map API options - Leaflet (OpenStreetMap) and Google Maps. 
 
-Skyve applications default to using OpenStreetMaps (leaflet).
+Skyve applications default to using Leaflet (OpenStreetMap).
 
 You can switch between the two APIs at any time by changing the application properties .json file settings and redeploying your application - without requiring any changes to developer code. 
 
 NOTE: _Whichever technology you choose, it is *your* responsibility to ensure you comply with accreditation and licencing requirements within your application._
 
-#### OepnStreetMap (Leaflet)
+#### Leaflet (OpenStreetMap)
 
 OpenStreetMap&reg; is open data, licensed under the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF).
 
 You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full legal code explains your rights and responsibilities. 
-
-Skyve applications can take advantage of other map APIs (for example [Leaflet](https://leafletjs.com/), [OpenStreetMap](https://www.openstreetmap.org/) etc) however these APIs are not included in the open-source Skyve distribution. For assistance, contact us at skyve.org to discuss detailed steps for other integration options.
 
 ```json
 // Map Settings
@@ -46,6 +44,8 @@ map: {
 	zoom: 1
 },
 ```
+
+You can customise Skyve applications to take advantage of other map APIs however these APIs are not included in the open-source Skyve distribution. For assistance, contact us at skyve.org to discuss detailed steps for other integration options.
 
 #### Google Maps
 
@@ -102,7 +102,7 @@ The map result has a list of map items with `bizId`, `bizModule`, `bizDocument` 
 A click on any feature in an item will zoom into that item and display information from the item in the balloon on the map.
 
 There are a couple of implementations of MapModel:
-* `DefaultMapModel` includes addItem method that creates an item with 1 feature from a geometry from a geometry derived from a binding in a bean, only if it is within the mapBounds.
+* `DefaultMapModel` includes addItem method that creates an item with 1 feature from a geometry derived from a binding in a bean, only if it is within the mapBounds.
 * `DocumentQueryMapModel` displays map items from a document query.
 * `ReferenceMapModel` displays map items from a document reference - association, collection, inverses.
 
@@ -126,13 +126,10 @@ To provide map-based navigation, declare a `map` menu item in your application `
 
 ```xml
 <map name="Staff Locations" document="Staff" geometryBinding="location" >
-	<uxui name="desktop" />
 	<role name="Manager" />
 	<role name="StaffMember" />
 </map>
 ```
-
-Because map-based interactions are currently only supported via the `desktop` rendering mode (i.e the SmartClient renderer), specifying the `desktop` `uxui` menu option means the map will not be available for other renders (as is appropriate).
 
 The `geometryBinding` parameter specifies which document attribute is being displayed. In the above example, the map will display `geometry` data for the *location* attribute of the *Staff* document.
 
@@ -154,7 +151,7 @@ Note that to customise the map display options, including the info-window, requi
 
 ### Spatial filters in the list menu item
 
-Where `geometry` attributes are included in a list menu item, Skyve will provide suitable filters for that attribute (currently only supported in the `desktop` rendering mode). The simple filter line allows input of WKT strings as the filter criteria, however the advanced filter options provide map-based rubber-band selection tool. 
+Where `geometry` attributes are included in a list menu item, Skyve will provide suitable filters for that attribute (currently only supported in the `desktop` rendering mode). The simple filter line provides the geometry input widget, however the advanced filter options provide map-based rubber-band selection tool. 
 
 ![Spatial filtering in lists](../assets/images/geospatial/spatial-filter-for-lists.png "Spatial filtering in lists")
 
@@ -166,7 +163,7 @@ The `geometry` values are displayed as <a href="https://en.wikipedia.org/wiki/We
 
 ![Default geometry widget](./../assets/images/geospatial/default-geometry-widget.png "Default geometry widget")
 
-The `geometry` widget provides a map-based data entry tool option with basic drawing tools. The mapping interfaces are currently only supported in the `desktop` rendering mode and depends on a valid Google maps API key having been specified in the application `.json` settings file.
+The `geometry` widget provides a map-based data entry tool option with basic drawing tools. 
 
 [Map-based data entry tool](./../assets/images/geospatial/geometry-map-based-data-entry-tool.png "Map-based data entry tool")
 
@@ -333,14 +330,14 @@ The document query filter object provides the following spatial criteria options
 
 Option | Description
 -------|------------
-addContains(binding, geometry), addNullOrContains(binding, geometry) | filter for beans where the attribute specified by the `binding` is completely enclosed within the specified `geometry`  
-addCrosses(binding, geometry), addNullOrCrosses(binding, geometry) | filter for beans where the attribute specified by the `binding` is crosses the specified `geometry`
-addDisjoint(binding, geometry), addNullOrDisjoint(binding, geometry) | filter for beans where the attribute specified by the `binding` is does not cross, intersect nor is contained by the specified `geometry`
-addEquals(binding, geometry), addNullOrEquals(binding, geometry) | filter for beans where the attribute specified by the `binding` is concurrent or the same as the specified `geometry`
-addIntersects(binding, geometry), addNullOrIntersects(binding, geometry) | filter for beans where the attribute specified by the `binding` intersects the specified `geometry`
-addOverlaps(binding, geometry), addNullOrOverlaps(binding, geometry) | filter for beans where the attribute specified by the `binding` overlaps the specified `geometry`
-addTouches(binding, geometry), addNullOrTouches(binding, geometry) | filter for beans where the attribute specified by the `binding` is touches some part of the specified `geometry`
-addWithin(binding, geometry), addNullOrWithin(binding, geometry) | filter for beans where the attribute specified by the `binding` is contained within the specified `geometry`
+addContains(binding, geometry), addNullOrContains(binding, geometry) | where the attribute specified by the `binding` is completely enclosed within the specified `geometry`  
+addCrosses(binding, geometry), addNullOrCrosses(binding, geometry) | where the attribute specified by the `binding` is crosses the specified `geometry`
+addDisjoint(binding, geometry), addNullOrDisjoint(binding, geometry) | where the attribute specified by the `binding` is does not cross, intersect nor is contained by the specified `geometry`
+addEquals(binding, geometry), addNullOrEquals(binding, geometry) | where the attribute specified by the `binding` is concurrent or the same as the specified `geometry`
+addIntersects(binding, geometry), addNullOrIntersects(binding, geometry) | where the attribute specified by the `binding` intersects the specified `geometry`
+addOverlaps(binding, geometry), addNullOrOverlaps(binding, geometry) | where the attribute specified by the `binding` overlaps the specified `geometry`
+addTouches(binding, geometry), addNullOrTouches(binding, geometry) | where the attribute specified by the `binding` is touches some part of the specified `geometry`
+addWithin(binding, geometry), addNullOrWithin(binding, geometry) | where the attribute specified by the `binding` is contained within the specified `geometry`
 
 
 **[⬆ back to top](#geometry-and-geospatial)**
