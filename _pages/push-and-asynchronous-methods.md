@@ -45,14 +45,14 @@ The `WebContext` also provides a `growl` convenience method, for example:
 webContext.growl(MessageSeverity.info, SENT_SUCCESSFULLY_MESSAGE);
 ```
 
-The `WebContext` `growl()` method will only provide a growl to the webContext, whereas `Ext.push` can provide a growl to all currently logged in users (or a specified user). 
+The `WebContext` `growl()` method will only provide a growl to the webContext, whereas `EXT.push` can provide a growl to all currently logged in users (or a specified user). 
 
 #### Broadcast message
 
 The Push method can be used to broadcast messages, growls or rerender to all current conversations, for example:
 
 ```java
-Ext.push(new PushMessage().growl(MessageSeverity.warn, "System will be offline for maintenance in 5 minutes..."));
+EXT.push(new PushMessage().growl(MessageSeverity.warn, "System will be offline for maintenance in 5 minutes..."));
 ```
 
 ### Rerender considerations
@@ -98,7 +98,7 @@ To avoid disrupting ongoing user data entry (another user entering their next ch
 In the above extract, the customised view contains two view tags - each with a unique `widgetId` drawn from the view declaration in the document view `edit.xml`. The `remoteCommand` tag specifies that push messages will only `update` the component with id=`msgHistory`. This would allow the user to continue entering data in the `topicAdd` view component without disruption while the `topicHistory` section of the view is updated.
 
 
-Note that the `Ext.push` method does not specify a user - and so is effectively a broadcast push to all user conversations.
+Note that the `EXT.push` method does not specify a user - and so is effectively a broadcast push to all user conversations.
 
 For more information on `view` declaration and `update`, see 
 [View update property](./../pages/views.md#update-property "View update property").

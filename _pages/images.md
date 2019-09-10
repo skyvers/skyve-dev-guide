@@ -88,6 +88,60 @@ SVG file type icons are served when a file or content is not an image. If an ima
 
 ![Thumbnail content](./../assets/images/working-with-content/thumbnail-content-list.png "Thumbnail content")
 
+#### Alternative approach (and for dataGrid)
+
+The equivalent code option (for comparison) would be to declare a `markup` attribute (e.g. in this case called 'Thumbnail').
+
+```xml
+<markup name="thumbnail">
+	<displayName>Thumbnail</displayName>
+</markup>
+```
+
+Create an extension class, and override the getter for 'Thumbnail' to generate HTML to retrieve the thumbnail using the Skyve content servlet as follows:
+
+```java
+@Override
+public String getThumbnail() {
+    if (getPerson()!=null && getPerson().getContact()!=null) {
+        StringBuilder sb = new StringBuilder();
+
+        if(getPerson().getContact().getImage()== null) {
+        	sb.append("<img src='resources");
+        	sb.append("?_n=shared/images/UnknownContact.jpg");
+        	sb.append("&amp;_doc=")
+        		.append(People.MODULE_NAME).append(".").append(People.DOCUMENT_NAME)
+                .append("&amp;_w=64&amp;_h=64' />");
+    	} else {
+            sb.append("<img src='content"); 
+            sb.append("?_n=").append(getPerson().getContact().getImage());
+            sb.append("&amp;_doc=")
+                .append(People.MODULE_NAME).append(".").append(People.DOCUMENT_NAME)
+                .append("&amp;_b=")
+                .append(Binder.createCompoundBinding(People.contactPropertyName, Contact.imagePropertyName))
+                .append("&amp;_w=64&amp;_h=64' />");
+    	}
+        return sb.toString();
+    }
+
+    return super.getThumbnail();
+}	
+```  
+
+Then include the 'thumbnail' attribute in the view `dataGrid`  as a `containerColumn` as follows:
+
+```xml
+<containerColumn alignment="centre">
+    <blurb>
+        <![CDATA[
+            {thumbnail}
+        ]]>
+    </blurb>
+</containerColumn>
+```
+
+This approach provides the option to use an image thumbnail in a dataGrid (Skyve's automatic caching is still managed by the servlet).
+
 **[⬆ back to top](#images)**
 
 ---

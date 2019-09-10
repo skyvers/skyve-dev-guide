@@ -88,7 +88,7 @@ Note that access privileges (as declared for the document in the `module.xml`) l
 
 #### Retrieving content items in code
 
-Using the `getter` in code for the `content` attribute will return only the `id` of the content as a `String`, and not the content item itself. To retrieve the content item, Skyve provides `Ext.newContentManager()`.
+Using the `getter` in code for the `content` attribute will return only the `id` of the content as a `String`, and not the content item itself. To retrieve the content item, Skyve provides `EXT.newContentManager()`.
 
 In the example of the Contact document above, the following code retrieves a byte array `byte[]` for the content item, and constructs a link to the item
 
