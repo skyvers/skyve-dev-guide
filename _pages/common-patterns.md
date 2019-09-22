@@ -19,53 +19,65 @@ For example:
 * a personal details page (for personal/private details)
 * a systems settings page (where these contain settings or controls for the system - admin.DataMaintenance is an example of this)
 
-The Skyve _edit_ view allows a user to interact with a single bean instance and normally, a user will
-navigate to the _edit_ view from a _list_ view which sets the context.
+The Skyve _edit_ view allows a user to interact with a single bean instance and normally, a user will navigate to the _edit_ view from a _list_ view which sets the context. However, with the above examples, the usual gesture of _list-then-edit_ makes little sense, and instead, there will almost always be a single record which is the one the user wants to interact with.
 
-However, with the above examples, the usual gesture of _list-then-edit_ makes little sense, and instead, there will almost always be a single record which is the one the user wants to interact with.
-
-When the `edit` view is provided as a menu item, the user has no way of setting the context, as they
-do not navigate to the view from a list, and so Skyve implicitly creates a new bean instance for the view.
-
-This implicit behaviour can be ambushed for the _singleton_ pattern, by overriding the _newInstance()_ Bizlet method - by retrieving the desired bean instance and returning this, instead of the instance implicitly created by Skyve.
+When the `edit` view is provided as a menu item, the user has no way of setting the context, as they do not navigate to the view from a list, and so Skyve implicitly creates a new bean instance for the view.
 
 ![User dashboard example of an edit menu item](../assets/images/modules/user-dashboard.png "User dashboard example of an edit menu item")
-_The User dashboard (admin module) is an example of a singleton pattern_
+_The User dashboard (admin module) is an example of an edit menu item_
 
-To achieve this:
-* set the scope of the document appropriately 
+This implicit behaviour can be ambushed for the _singleton_ pattern, by overriding the `newInstance()` Bizlet method - by retrieving the desired bean instance and returning this, instead of the instance implicitly created by Skyve.
+
+Skyve offers two Bizlet implementations for Singletons: SingletonBizlet and SingletonCachedBizlet.
+
+The *SingletonBizlet* retrieves the first (and presumably only) instance. The *SingletonCachedBizlet* caches the retrieved instance for subsequent `.newInstance()` calls - until the instance is evicted (called automatically by `postSave()` for this implementation).
+
+To create a Singleton:
+* set the scope of the document appropriately  (normally _User_ or _Customer_ scope - e.g. setting the document privelege in your module.xml to "CRUD*U*" for User-scoped)
 * add an `edit` menu item to the `module.xml` for the document
-* override the `newInstance()` Bizlet method to search for the relevant record and return that, instead of the new bean
+* override the `newInstance()` Bizlet method to set any transient default values.
 
-For a _User_ scoped document permission, of the singleton pattern is followed, there will only ever be one retrievable record (if it has been created), and so the newInstance() override code is trivial, for example:
+An example SingletonCachedBizlet is as follows:
 
 ```java
+
+public class GeneralBizlet extends SingletonCachedBizlet<General> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1617067133911972551L;
+
 	@Override
-	public PersonalDetails newInstance(PersonalDetails bean) 
-		throws Exception {
+	public General newInstance(General bean) throws Exception {
+	
+		General result = super.newInstance(bean);
+		
+		result.setFeeTerm(result.getCurrentTerm());
+		result.setFeeDate(new DateOnly());
 
-			// find the only retrievable instance if it exists
-			Persistence pers = CORE.getPersistence();
-			DocumentQuery q = pers.newDocumentQuery(PersonalDetails.MODULE_NAME, PersonalDetails.DOCUMENT_NAME);
-			q.setMaxResults(1); //defensively ensure only one result is returned
-
-			PersonalDetails found = q.beanResult();
-
-			if (found != null) {
-				// we have found our singleton, 
-				// return this instead of the new bean
-				bean = found;
-			} else {
-				// set bean defaults in the usual way...
-			}
-
-			return super.newInstance(bean);
-		}
+		return result;
+	}
+}
 ```
 
-Alternatively, if the singleton document is transient and not persisted, then the developer can
-rely on the implicit creation of a new bean, and override the _newInstance()_ to set bean default values.
+In this example, there is assumed to be one and only one (i.e. singleton) persisted _General_ instance which the user has access to retrieve. The call to `super.newInstance(bean)` will retrieve the singleton instance of General, and the `newInstance()` method is overridden to set default values for the attributes `feeTerm` and `feeDate`.
 
+Elsewhere in the application, to retrieve the singleton General, call `General.newInstance()` to retrieve the cached instance as follows:
+
+```java
+
+public static calculate(Transaction bean){
+
+	General general = General.newInstance(); //retrieves the cached singleton instance and sets any default values
+
+	bean.setTransactionTerm(general.getFeeTerm());
+	bean.setTransactionDate(general.getFeeDate());
+
+}
+```
+
+For another example, see admin.Configuration as an example of a _Customer-scoped_ singleton that overrides the `newInstance()` method to set default values.
 
 ### Identify the current user's Contact
 
