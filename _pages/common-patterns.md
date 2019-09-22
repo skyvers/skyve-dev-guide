@@ -26,7 +26,7 @@ When the `edit` view is provided as a menu item, the user has no way of setting 
 ![User dashboard example of an edit menu item](../assets/images/modules/user-dashboard.png "User dashboard example of an edit menu item")
 _The User dashboard (admin module) is an example of an edit menu item_
 
-This implicit behaviour can be ambushed for the _singleton_ pattern, by overriding the `newInstance()` Bizlet method - by retrieving the desired bean instance and returning this, instead of the instance implicitly created by Skyve.
+This implicit behaviour can be ambushed for the _singleton_ pattern, by retrieving the desired bean instance and returning that, instead of the instance implicitly created by Skyve.
 
 Skyve offers two Bizlet implementations for Singletons: SingletonBizlet and SingletonCachedBizlet.
 
