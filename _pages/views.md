@@ -719,8 +719,6 @@ target document.
 </newParameters>
 ```
 
-_newParameters section_
-
 ### Action declaration
 
 The action section of the view declares which actions will be available
