@@ -420,6 +420,8 @@ For example, the default menu behaviour is declared as:
 
 ![Static menu](../assets/images/modules/prime-faces-static-menu.png "Static/vertical menu (PrimeFaces renderer)
 
+As opposed to the `static-menu`, the `layout-menu-overlay` menu option will leave the menu collapsed at the left until called upon.
+
 While a horizontal behaviour is declared as follows:
 ```<div class="#{leftMenu ? 'layout-wrapper layout-menu-horizontal layout-menu-light' : 'layout-wrapper layout-menu-light'}">```
 
