@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-## Skyve persistence
-
 The Skyve Enterprise Platform mandates support for a number of
 best-practice Web design features on every logical table within the
 application persistence model including:
@@ -22,7 +20,7 @@ application persistence model including:
 -   Enterprise-wide consistent reference representation, and
 -   Collaborative record flagging.
 
-### Generic naming conventions
+## Generic naming conventions
 
 As a general principle Skyve adopts generic naming conventions wherever
 possible particularly with respect to mandated persistence mechanisms.
@@ -45,7 +43,7 @@ Column name | Purpose | Comments
 `bizDataGroupId` | Document scoping - declarative row level security | For sub-organisational row-level security, bizDataGroupId records the data group context in which the record was created.
 `bizUserId`  | Document scoping - source identification |For individual user security, bizUserId maintains the user context in which the record was created.
 
-#### Relationship naming convention
+### Relationship naming convention
 
 In Skyve, relationships are declared as attributes within the document
 declaration. To make clear the special nature of the attribute within
@@ -63,7 +61,7 @@ For many-many relationships a separate joining table is used which will
 always have columns `owner_id` and `entity_id` where these represent
 the semantic nature of each relationship.
 
-#### Ordering and bizOrdinal
+### Ordering and bizOrdinal
 
 Column name | Purpose   | Comments
 ----------- | --------- | -----------
@@ -86,7 +84,7 @@ data has bizOrdinals of 2,5,5 and 11 and there are only 4 rows, Skyve
 will still order them for presentation, but the next time the collection
 is saved, they will be reset to 0,1,2 and 3.
 
-### UUID enterprise-level guaranteed uniqueness
+## UUID enterprise-level guaranteed uniqueness
 
 To guarantee enterprise-wide uniqueness, Skyve generally uses
 Universally Unique Identifier (UUID) for all key identifiers named
@@ -114,7 +112,7 @@ system ID can be placed into the `bizId` field, provided it will be unique
 in the table context under all circumstances and provided it is up to 36
 characters.
 
-### Optimistic lock concurrency controls
+## Optimistic lock concurrency controls
 
 Skyve supports multi-conversation interactions allowing each user to
 maintain multiple conversational interactions with the application,
@@ -139,7 +137,7 @@ auditing and process inspection requirements.
 OptimisticLock lock = new OptimisticLock(CORE.getUser().getName(), new Date());
 ```
 
-### Enterprise-wide consistent reference representation
+## Enterprise-wide consistent reference representation
 
 
 In Object Oriented applications, most classes will implement a
@@ -160,7 +158,7 @@ The bizKey is persisted to allow performant scaling of large data sets
 so that the more complex key representation can be used in common ad-hoc
 searching, filtering and sorting.
 
-### Multi-tenant Support
+## Multi-tenant Support
 
 Skyve supports multi-tenant security. Each row is owned by a customer
 and created within a customer context.
@@ -174,7 +172,7 @@ In a simple standalone application the bizCustomer column is technically
 unnecessary, but to enforce the portability principle is still mandated
 by the platform in case requirements change.
 
-### Collaborative record flagging
+## Collaborative record flagging
 
 To support ad-hoc collaboration of data users, Skyve provides a
 text-based flag for every entity/record within the application.
@@ -183,7 +181,7 @@ hover gesture displaying the persisted comment.
 
 ![Hover over the flag icon](../assets/images/skyve-persistence-mechanisms/image158.png "Example of the result of hover action over the flag icon")
 
- ### Document scoping row-level security and source identification
+### Document scoping row-level security and source identification
 
 Skyve supports declarative row-level security which is enforced
 pervasively and implicitly across all development contexts. Documents
@@ -209,7 +207,7 @@ across data group contexts.
 (e.g. mysql, mssql, oracle, postgres, h2 etc)
 
 ### Before you start
-1. Install the preferred DBMS and management studio (e.g. mysql and mysql workbench)
+1. Install the preferred DBMS and management tools (e.g. mysql and mysql workbench)
  - there are some specific options to avoid depending on vendor, for example with mysql, choose the option to ignore case sensitivity to save yourself some hassle
  - create a new database, schema or (for oracle) user - you do not need to create any tables at this stage - Skyve will create these for you (provide DDL Sync is enabled in the '.json' properties file)
 2. Ensure you have a valid jdbc driver that can connect to your DBMS
@@ -219,56 +217,53 @@ across data group contexts.
  - for example, if you run multiple projects with different DBMS, your drivers stanza may look something like this:
  
  ```xml
-                 <drivers>
-                    <driver name="h2" module="com.h2database.h2">
-                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
-                    </driver>
-                    <driver name="mysql" module="com.mysql"/>
-                    <driver name="sqlserver" module="com.microsoft.sqlserver">
-                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-                    </driver>
-                    <driver name="oracle" module="com.oracle">
-                        <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
-                    </driver>
-                </drivers>
+<drivers>
+    <driver name="h2" module="com.h2database.h2">
+        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+    </driver>
+    <driver name="mysql" module="com.mysql"/>
+    <driver name="sqlserver" module="com.microsoft.sqlserver">
+        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+    </driver>
+    <driver name="oracle" module="com.oracle">
+        <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+    </driver>
+</drivers>
 ```		
 
 ### Changing the Skyve configuration
-1. Update the connection string and credentials in the datasource xml file (e.g. `/demo/skyve/javaee/skyve-ds.xml`)
+1. Update the connection string and credentials in the datasource xml file (e.g. `/wildfly/standalone/deployments/skyve-ds.xml`)
  - Example connection strings
  - for mysql 
  
  ```xml
 <connection-url>jdbc:mysql://localhost:3306/skyve?useCursorFetch=true&amp;defaultFetchSize=100</connection-url> 
-		<driver>mysql</driver> 
+    <driver>mysql</driver> 
   ```
   
  - for sqlserver
  
  ```xml
- 		<connection-url>jdbc:sqlserver://Laptop\SQLEXPRESS:1433;databaseName=skyve;sendStringParametersAsUnicode=false;</connection-url>
-                <driver>sqlserver</driver>
+<connection-url>jdbc:sqlserver://Laptop\SQLEXPRESS:1433;databaseName=skyve;sendStringParametersAsUnicode=false;</connection-url>
+    <driver>sqlserver</driver>
 ```
 
 - for h2
 
 ```xml
-		<connection-url>jdbc:h2:file:C:/_/skyve/skyve/content/demo;IFEXISTS=TRUE;IGNORECASE=TRUE;AUTO_SERVER=TRUE</connection-url>
-		<driver>h2</driver>
+<connection-url>jdbc:h2:file:C:/_/skyve/skyve/content/demo;IFEXISTS=TRUE;IGNORECASE=TRUE;AUTO_SERVER=TRUE</connection-url>
+    <driver>h2</driver>
 ```
 
-2. Update the '.json' instance settings dataStores section (i.e. in `/demo/skyve/javaee/skyve.json`) with the corresponding hibernate dialect class 
+2. Update the '.json' instance settings dataStores section (i.e. in `/wildfly/standalone/deployments/skyve.json`) with the corresponding hibernate dialect class for your database version
  - for h2
 ``` dialect: "org.skyve.impl.persistence.hibernate.dialect.H2SpatialDialect" ```
  - for mysql
 ``` dialect: "org.skyve.impl.persistence.hibernate.dialect.MySQL5InnoDBSpatialDialect" ```
  - for mssql
 ``` dialect: "org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect" ```
-
- etc
-
 3. Start your app server and ensure your project deploys. If you receive messages that a valid connection can't be obtained, check connection details, credentials, firewall and port settings.
-4. For older versions of the demo (prior to Feb 2018), you'll need to run a bootstrap sql to insert your first user into the database. For versions of Skyve after 1 Jan 2018, set the setup user in the `.json` file to log in the first time.
+4. Set the setup user in the bootstrap section of the project `.json` file to log in the first time.
 
 **[⬆ back to top](#skyve-persistence)**
 
