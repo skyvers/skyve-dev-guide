@@ -58,7 +58,7 @@ Report actions must be declared in a view for reports to be accessible to the us
 ```xml
         <report reportName="WeeklyTimeSheet" moduleName="time" documentName="WeeklyTimesheet" displayName="Preview Timesheet"
             reportFormat="pdf" >
-            <parameter name="ID" binding="bizId" />
+            <parameter name="ID" valueBinding="bizId" />
         </report>
 ```
 
