@@ -191,14 +191,14 @@ According to the convention, the `model` java class must be declared within the 
 MapModel provides the `getBean()` which returns the context bean (the bean for the view in which the model will be displayed) - if a bean context has been set. If a MapModel is specified as the `model` for a map menu item, `getBean()` will return null.
 
 ```java
-package modules.whosinIntegrate.Office.models;
+package modules.whosin.Office.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import modules.whosinIntegrate.domain.Office;
-import modules.whosinIntegrate.domain.Staff;
-import modules.whosinIntegrate.domain.Staff.Status;
+import modules.whosin.domain.Office;
+import modules.whosin.domain.Staff;
+import modules.whosin.domain.Staff.Status;
 
 import org.locationtech.jts.geom.Geometry;
 import org.skyve.CORE;

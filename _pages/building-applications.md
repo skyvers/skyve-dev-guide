@@ -28,8 +28,9 @@ Install Eclipse or an alternative Java based Integrated Development Environment 
 ### Overview
 1. Use the Project Creator [https://foundry.skyve.org/foundry/project.xhtml](https://foundry.skyve.org/foundry/project.xhtml) to create a Skyve project download and receive the link to the file via email.
 2. Import the project as a maven project and run the Generate Domain run configuration.
-3. Configure your application server security domain, create an empty database, and deploy your application.
-4. Log into your application at `localhost:8080/<projectName>` with your bootstrap credentials and begin using the no-code application.
+3. Configure your application instance via the `.json` properties file, ensure you identify a file location for _content_, nominate an environment identifier (e.g. "dev")
+4. Configure the application `-ds.xml` file for connection properties to your preferred database.
+5. Log into your application at `localhost:8080/<projectName>` with your bootstrap credentials and begin using the no-code application.
 
 ### Steps
 To get started, go to the project creation page (at foundry.skyve.org/foundry/project.xhtml). The project creator will create a configured Java project, set up for maven dependency management, for common development environments like Eclipse and IntelliJ.
@@ -58,7 +59,7 @@ Finally, run the Generate Domain target to build your project and resolve all de
 
 Start your wildfly server. 
 
-Right click your project in the server tree and publish - Skyve will automatically create all the tables your database needs for you. Your project properties json file includes a bootstrap user - this is a user credential which will be automatically injected into your database so you can log in. Note that the bootstrap user is disabled if you're in a production environment, it's only for getting started.
+Right click your project in the server tree and publish - Skyve will automatically create all the tables your database needs for you. Your project properties `.json` file includes a bootstrap user - this is a user credential which will be automatically injected into your database so you can log in. Note that the bootstrap user is disabled if you're in a production environment (i.e. if the setting is environment `identifier: null`) - the bootstrap user is only for getting started.
 
 Once your project is running, go to your local context and login in.
 

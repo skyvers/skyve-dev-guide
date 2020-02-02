@@ -18,14 +18,30 @@ View files are located within the *views* folder in the document
 package. Typically, users interact with a detail view after zooming into
 the document from a list.
 
-Two detail views can be declared for each document.
+Two views can be declared for each document, and views can contain combinations of view components.
 
   View        | Description
   -----------|-----------
   edit.xml    | The basic view declaration for detail editing of a bean (normally accessed by zooming into a row from a list).<br/><br/>Menu items can also target edit views directly. In this case the menu item will trigger `newInstance()` and a new document instance will be returned (and therefore displayed). To show a singleton (a document instance which is the only applicable existing instance within the context), the `newInstance()` method can be overridden to select and return an existing bean in place of the newly created instance.<br/><br/>If a *create.xml* is supplied, the *edit.xml* file is only used after the document is created.
   create.xml  | A special case of edit view which is used if *create.xml* supplied and if `isCreated()` is false similar to the following
   
-_View declaration_
+### View declaration attributes
+
+Attribute | Description
+----------|------------
+name (required) | the name of the view - usually *edit* or *create*, or for a view component, the name of the component
+title (required) | the title shown in the view title bar - this can be a binding expression including/or static text, e.g. "Details of Transaction {transactionId}"
+helpRelativeFileName,helpURL | the location for help resources, e.g. "https://skyvers.github.io/skyve-dev-guide/views/"
+icon32x32RelativeFileName, iconStyleClass | allows overriding of the icon displayed in the view title bar (by default this will be the icon associated with the document for which the view is declared), e.g. "fa fa-car"
+refreshAction, refreshIf, refreshTimeInSeconds | allows control over automatic or conditional refresh of the view
+xsi:schemaLocation (required) | the relative location of the Skyve view schema information (for validation of the view in the developer environment)
+xmlns, xmlns:xsi (required) | name-space
+
+### Online help resources
+
+In desktop rendering mode (the SmartClient renderer), the application tool bar provides a *Help* icon button. To provide context-sensitive help, the view can declare *helpRelativeFileName* or *helpURL* locations for view-specific help information.
+
+Don't forget, that you can also provide attribute level help using the `<description>` attribute metadata.
 
 ### Create view
 
@@ -403,7 +419,7 @@ for display in the drop-down.
 
 ```xml
 <lookupDescription binding="bankAccount" descriptionBinding="bizKey" query="docQueryBankAccount" >
-    <filterParameter operator="equal" name="active" value="true"/>
+    <filterParameter operator="equal" filterBinding="active" value="true"/>
     <dropDown>
         <column>bsb.bsb</column>
         <column>accountNumber</column>
@@ -423,7 +439,7 @@ the value of a binding from the document being viewed).
 
 ```xml
 <lookupDescription binding="contact" descriptionBinding="bizKey" disabled="notManager">
-  <filterParameter name="contactType" value="Person" />
+  <filterParameter filterBinding="contactType" value="Person" />
 </lookupDescription>
 ```
 
@@ -437,7 +453,7 @@ have the *filterParameter* values set by default.
 <row>
   <item>
     <lookupDescription binding="codeListAllocationCode" descriptionBinding="bizKey">
-      <filterParameter name="codeListSchemeCode" binding="parent.codeListSchemeRound.codeListSchemeCode" />
+      <filterParameter filterBinding="codeListSchemeCode" valueBinding="parent.codeListSchemeRound.codeListSchemeCode" />
     </lookupDescription>
   </item>
 </row>
@@ -476,7 +492,7 @@ The available event handlers are:
   <onAddedHandlers>
     <server action="applyRules" />
   </onAddedHandlers>
-  <filterParameter name="contactType" value="Person" />
+  <filterParameter filterBinding="contactType" value="Person" />
 </lookupDescription>
 ```
 
@@ -714,8 +730,8 @@ target document.
 
 ```xml
 <newParameters>
-  <parameter name="model" />
-  <parameter name="type" />
+  <parameter fromBinding="model" boundTo="model"/>
+  <parameter fromBinding="type" boundTo="type"/>
 </newParameters>
 ```
 
@@ -781,7 +797,7 @@ matched using the name attribute with parameters declared in the report.
 
 ```xml
 <report reportName="PaySheet" moduleName="time" documentName="PaySheet" displayName="Print PaySheet" visible="saved">
-	<parameter name="ID" binding="bizId" />
+	<parameter name="ID" valueBinding="bizId" />
 </report>
 ```		
 

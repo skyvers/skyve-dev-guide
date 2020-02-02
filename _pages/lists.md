@@ -1,5 +1,5 @@
 ---
-title: "Lists"
+title: "Lists, Grids, queries and models"
 permalink: /lists/
 excerpt: "Working with lists in Skyve"
 toc: true
@@ -8,7 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Lists and models
+## Lists, Grids, queries and models
 
 The Skyve list capability is core to most Skyve applications, and while much of the behaviour is usually implicit (just presenting a list of bean tuples from the database), Skyve allows overriding and customisation of the feature.
 
@@ -274,7 +274,7 @@ If sorting, filtering and editing is required, then there are two further option
 
 Finally, developers can avail themselves of the `listModel` approach for total control. In this case the developer can decide how paging, filtering and sorting can interact as they require.
 
-**[⬆ back to top](#lists-and-models)**
+**[⬆ back to top](#lists-grids-queries-and-models)**
 
 **Next [Maven targets](./../_pages/maven-targets.md)**  
 **Previous [Communication](./../_pages/communication.md)**  

@@ -126,12 +126,6 @@ Example route for a *phone* UXUI:
 
 ```xml
 <uxui name="phone">
-	<route outcome="/whosinIntegrate/inout.xhtml">
-		<criteria webAction="e" module="whosinIntegrate" document="Office" />
-	</route>
-	<route outcome="/whosinIntegrate/mystatus.xhtml">
-		<criteria webAction="e" module="whosinIntegrate" document="MyStatus" />
-	</route>
 	<route outcome="/mobile/list.xhtml">
 		<criteria webAction="l" />
 	</route>

@@ -8,6 +8,8 @@ sidebar:
   nav: docs
 ---
 
+## Skyve persistence
+
 The Skyve Enterprise Platform mandates support for a number of
 best-practice Web design features on every logical table within the
 application persistence model including:
@@ -36,7 +38,7 @@ Column name | Purpose | Comments
 ------------|---------|----------
 `bizId`       | Enterprise wide unique identifier  | The use of UUID guarantees consistency and means no performance costs for assigning IDs, also means that IDs can be generated in external source applications without the need for re-keying when importing into a Skyve application store.
 `bizVersion`  | Optimistic lock concurrency control | Skyve compares the persisted version number at the time the bean is loaded with the version number when attempting to save. If the numbers are different, the bean has been changed by another conversation.
-`bizLock`     | Optimistic lock concurrency control | Skyve keeps the timestamp and user principal of the last successful transaction.
+`bizLock`     | Optimistic lock concurrency control | Skyve keeps the timestamp and user principal of the last successful transaction. For example (Skyve does this automatically), to generate a bizLock value in T-SQL would be as follows: `DECLARE @bizLock varchar(271) = CONCAT(FORMAT(getdate(), 'yyyyMMddhhmmss000'), '<username>')`
 `bizKey`      | Enterprise-wide consistent reference representation   bizKey is an enterprise wide way of representing an entire tuple as a string - similar to the ".toString" concept available for most OO classes and suitable for displaying relationships particularly where multi-column display is not possible in the UI.
 `bizCustomer` | Multi-tenancy | Skyve supports multi-tenant security. Each row is owned by a customer.
 `bizFlagComment` | Collaborative record flagging | Used in the generic list capability allows collaboration between users to flag issues or reminders on specific rows.
@@ -181,7 +183,7 @@ hover gesture displaying the persisted comment.
 
 ![Hover over the flag icon](../assets/images/skyve-persistence-mechanisms/image158.png "Example of the result of hover action over the flag icon")
 
-### Document scoping row-level security and source identification
+ ### Document scoping row-level security and source identification
 
 Skyve supports declarative row-level security which is enforced
 pervasively and implicitly across all development contexts. Documents
@@ -217,18 +219,18 @@ across data group contexts.
  - for example, if you run multiple projects with different DBMS, your drivers stanza may look something like this:
  
  ```xml
-<drivers>
-    <driver name="h2" module="com.h2database.h2">
-        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
-    </driver>
-    <driver name="mysql" module="com.mysql"/>
-    <driver name="sqlserver" module="com.microsoft.sqlserver">
-        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-    </driver>
-    <driver name="oracle" module="com.oracle">
-        <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
-    </driver>
-</drivers>
+                 <drivers>
+                    <driver name="h2" module="com.h2database.h2">
+                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    </driver>
+                    <driver name="mysql" module="com.mysql"/>
+                    <driver name="sqlserver" module="com.microsoft.sqlserver">
+                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+                    </driver>
+                    <driver name="oracle" module="com.oracle">
+                        <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+                    </driver>
+                </drivers>
 ```		
 
 ### Changing the Skyve configuration
@@ -238,21 +240,21 @@ across data group contexts.
  
  ```xml
 <connection-url>jdbc:mysql://localhost:3306/skyve?useCursorFetch=true&amp;defaultFetchSize=100</connection-url> 
-    <driver>mysql</driver> 
+		<driver>mysql</driver> 
   ```
   
  - for sqlserver
  
  ```xml
-<connection-url>jdbc:sqlserver://Laptop\SQLEXPRESS:1433;databaseName=skyve;sendStringParametersAsUnicode=false;</connection-url>
-    <driver>sqlserver</driver>
+ 		<connection-url>jdbc:sqlserver://Laptop\SQLEXPRESS:1433;databaseName=skyve;sendStringParametersAsUnicode=false;</connection-url>
+                <driver>sqlserver</driver>
 ```
 
 - for h2
 
 ```xml
-<connection-url>jdbc:h2:file:C:/_/skyve/skyve/content/demo;IFEXISTS=TRUE;IGNORECASE=TRUE;AUTO_SERVER=TRUE</connection-url>
-    <driver>h2</driver>
+		<connection-url>jdbc:h2:file:C:/_/skyve/skyve/content/demo;IFEXISTS=TRUE;IGNORECASE=TRUE;AUTO_SERVER=TRUE</connection-url>
+		<driver>h2</driver>
 ```
 
 2. Update the '.json' instance settings dataStores section (i.e. in `/wildfly/standalone/deployments/skyve.json`) with the corresponding hibernate dialect class for your database version

@@ -45,6 +45,8 @@ docs:
         url: /push-and-asynchronous-methods/
   - title: Key capability areas
     children:                                                                                   
+      - title: "Charts"
+        url: /charts/                                                                                
       - title: "Content"
         url: /working-with-content/                                                                                
       - title: "Hierarchies"
@@ -55,7 +57,7 @@ docs:
         url: /geospatial/                                                                                        
       - title: "Communication"
         url: /communication/
-      - title: "Lists"
+      - title: "Lists, Grids, queries and models"
         url: /lists/                                                                                                
   - title: Platform tools
     children:

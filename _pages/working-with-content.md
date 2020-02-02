@@ -235,4 +235,4 @@ For details about Skyve platform content management tools, see [Content reposito
 
 ---
 **Next [Hierarchies](./../_pages/hierarchies.md)**  
-**Previous [Push and asynchronous methods](./../_pages/push-and-asynchronous-methods.md)**
+**Previous [Charts](./../_pages/charts.md)**

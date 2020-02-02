@@ -106,5 +106,5 @@ For more information on `view` declaration and `update`, see
 **[⬆ back to top](#push-and-asynchronous-methods)**
 
 ---
-**Next [Working with content](./../_pages/working-with-content.md)**   
+**Next [Charts](./../_pages/charts.md)**   
 **Previous [Skyve persistence mechanisms](./../_pages/skyve-persistence-mechanisms.md)**

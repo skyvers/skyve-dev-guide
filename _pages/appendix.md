@@ -84,7 +84,7 @@ You can change the bootstrap settings in the project `.json` file, however, once
 
 To ensure the bootstrap user is inserted for your first sign in:
 
-* Check the _environment identifier_ setting in the project `.json` file, and check that it is not `null`.
+* Check the _environment identifier_ setting in the project `.json` file, and check that it is not `null` (i.e. this is not _Production_ environment).
 
 For example, if you have the following:
 
@@ -131,7 +131,7 @@ user: `setup`
 password: `setup`
 
 
-* If you still have problems, ensure that the bootstrap `customer` setting matches the environment default `customer` setting.
+* If you still have problems, ensure that the bootstrap `customer` setting matches the environment default `customer` setting and that the environment identifier is not `null` (for example, you may switch the identifier to `config` to indicate the system is being configured, or `dev` for developer mode etc.)
 
 For example, if you have the following:
 
@@ -804,6 +804,38 @@ This approach has limited use as it is really just a level of indirection. The c
 It is possible to configure several applications to use the base context of different URLs on the same machine, by configuring virtual hosts.
 
 Instructions are available, for example [Virtual hosts](http://www.mastertheboss.com/jboss-web/jbosswebserver/jboss-as-virtual-host-configuration).
+
+For example, if you have 3 applications hosted on the same server, but you want to access them via different urls (rather than different contexts on the same url):
+
+Declare the hosts in the standalone configuration.xml file as follows:
+
+```xml
+<host name="project1" alias="project1.skyve.org" default-web-module="project1.war" >
+    <access-log prefix="project1"/>
+</host>
+<host name="project2" alias="project2.skyve.org" default-web-module="project2.war" >
+    <access-log prefix="project2"/>
+</host>
+<host name="project3" alias="project3.skyve.org" default-web-module="project3.war" >
+    <access-log prefix="project3"/>
+</host>
+```
+
+To access your projects from the root context of the above URLs, specify the root context for each project in 
+
+`.../WEB-INF/jboss-web.xml`
+
+as follows:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web xmlns="http://www.jboss.com/xml/ns/javaee"
+		   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/j2ee/schema/jboss-web_5_1.xsd">
+	<context-root>/</context-root>
+</jboss-web>
+```
+
 
 ### Example deployment instructions for Single Sign-on
 
