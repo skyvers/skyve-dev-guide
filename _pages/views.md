@@ -103,6 +103,72 @@ of items contained.
 
 _View containers_
 
+#### Containers Example #1 - Two side by side vboxes
+
+![Containers Example 1 Wireframe](../assets/images/views/ViewsPic1.PNG 
+"Wireframe example of 1 hbox and 2 vboxes")
+
+```xml
+<hbox>
+    	<vbox>
+    		<form>
+	    		<column/>
+	    		<row>
+	    			<item>
+	    				<default binding="text1"/>
+	    			</item>
+	    		</row>
+	    		<row>
+	    			<item>
+	    				<default binding="date1"/>
+	    			</item>
+	    		</row>
+	    		<row>
+	    			<item>
+	    				<default binding="boolean1"/>
+	    			</item>
+	    		</row>
+	    		<row>
+	    			<item>
+	    				<default binding="time1"/>
+	    			</item>
+	    		</row>
+	    	</form>
+    	</vbox>
+    	<vbox>
+	    	<form>
+	    		<column/>
+	    		<row>
+	    			<item>
+	    				<default binding="text2"/>
+	    			</item>
+	    		</row>
+	    		<row>
+	    			<item>
+	    				<default binding="date2"/>
+	    			</item>
+			</row>
+			<row>
+				<item>
+					<default binding="time2"/>
+				</item>
+			</row>
+			<row>
+				<item>
+					<default binding="dateTime1"/>
+				</item>
+			</row>
+	    	</form>
+    	</vbox>
+</hbox>
+```
+In the above example, a single hbox is declared, two vboxes are then
+declared inside the hbox mentioned. A form with items is then placed inside each 
+vbox. 
+
+![Containers Example 1](../assets/images/views/ContainerExample1.PNG 
+"Example containers with 1 hbox and 2 vboxes")
+
 ### Form
 
 Forms contain columns and rows. Rows may only contain items.
