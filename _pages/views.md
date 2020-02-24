@@ -108,6 +108,9 @@ _View containers_
 ![Containers Example 1 Wireframe](../assets/images/views/ViewsPic1.PNG 
 "Wireframe example of 1 hbox and 2 vboxes")
 
+The above Container Layout is acheived through a pair of vboxes 
+inside a hbox:
+
 ```xml
 <hbox>
     	<vbox>
