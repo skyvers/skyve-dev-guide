@@ -209,7 +209,7 @@ it required within the edit view as shown:
 
 ```xml
 	
-<item labelAlign="left" required="true">
+<item required="true">
 	<default binding="date2"/>
 </item>
 
@@ -221,7 +221,7 @@ view this like:
 
 ```xml
 
-<item labelAlign="left" label="SECOND TIME FIELD">
+<item label="SECOND TIME FIELD">
 	<default binding="time2"/>
 </item>
 	
@@ -253,18 +253,18 @@ a third form:
 		<column responsiveWidth="2"/>
 		<column responsiveWidth="4"/>
 		<row>
-			<item labelAlign="left">
+			<item>
 				<default binding="text3"/>
 			</item>
-			<item labelAlign="left">
+			<item>
 				<default binding="boolean2"/>
 			</item>
 		</row>
 		<row>
-			<item labelAlign="left">
+			<item>
 				<default binding="time3"/>
 			</item>
-			<item labelAlign="left">
+			<item>
 				<default binding="dateTime2"/>
 			</item>
 		</row>
@@ -286,7 +286,7 @@ is populated, we can use visibility on ‘Date/time field 2’ like so:
 
 ```xml
 
-<item labelAlign="left">
+<item>
 	<textField binding="dateTime2" visible="hasSecondTime"/>
 </item>
 
@@ -363,27 +363,27 @@ the desired sections in separate tab. The edit view will now look like so:
 			    	<form border="true" borderTitle="Right vbox">
 			    		<column/>
 			    		<row>
-			    			<item labelAlign="left">
+			    			<item>
 			    				<default binding="text2"/>
 			    			</item>
 			    		</row>
 			    		<row>
-			    			<item labelAlign="left" required="true">
+			    			<item required="true">
 			    				<default binding="date2"/>
 			    			</item>
 					</row>
 					<row>
-						<item labelAlign="left" label="SECOND TIME FIELD">
+						<item label="SECOND TIME FIELD">
 							<default binding="time2"/>
 						</item>
 					</row>
 					<row>
-						<item labelAlign="left">
+						<item>
 							<default binding="dateTime1"/>
 						</item>
 					</row>
 					<row>
-						<item labelAlign="left">
+						<item>
 							<textField binding="dateTime2" visible="hasSecondTime"/>
 						</item>
 					</row>
@@ -398,22 +398,22 @@ the desired sections in separate tab. The edit view will now look like so:
 		    	<column responsiveWidth="2"/>
 		    	<column responsiveWidth="4"/>
 		    	<row>
-		    		<item labelAlign="left">
+		    		<item>
 		    			<default binding="text3"/>
 		    		</item>
-		    		<item labelAlign="left">
-		    			<default binding="boolean2"/>
+		    		<item>
+					<default binding="boolean2"/>
 		    		</item>
 		    	</row>
 		    	<row>
-		    		<item labelAlign="left">
+		    		<item>
 		    			<default binding="time3"/>
 		    		</item>
-		    		<item labelAlign="left">
+		    		<item>
 		    			<default binding="dateTime2"/>
 		    		</item>
 		    	</row>
-		    </form>
+		</form>
     	</tab>
     </tabPane>
     <actions>
