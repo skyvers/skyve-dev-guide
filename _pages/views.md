@@ -181,7 +181,7 @@ distinguish each form
 <form border="true" borderTitle="Left vbox"> 
 
 <!-- second form (right vbox) -->
-<form border="true" borderTitle="Right vbox"> for the right vbox
+<form border="true" borderTitle="Right vbox">
 
 ```	
 	
@@ -190,9 +190,41 @@ These borders and titles produce the following view:
 ![Containers Example 2](../assets/images/views/ContainerExample2.PNG 
 "Example containers with 1 hbox and 2 vboxes, with added borders and titles")
 
+If decided that the labels should be aligned differently, the alignLabel option
+allows for different label positions
+
+```xml
+	
+<row>
+	<item labelAlign="left">
+		<default binding="text2"/>
+	</item>
+</row>
+<row>
+	<item labelAlign="centre">
+		<default binding="date2"/>
+	</item>
+</row>
+<row>
+	<item>
+		<default binding="time2"/>
+	</item>
+</row>
+<row>
+	<item>
+		<default binding="dateTime1"/>
+	</item>
+</row>	
+
+```
+
+These label alignments will change the position of the labels as such:
+
+![Align Labels](../assets/images/views/LabelAlign.PNG "Aligning Labels")
+	
 If ‘Text field 2’ and ‘Date field 2’ are required, we can make them required one of 
 two ways. As Text field 2 is always required, we can make it required within the 
-‘DocumentName.xml’ (need to mention this file name earlier) file like so:
+‘DocumentName.xml’ file like so:
 	
 ```xml
 	
@@ -275,20 +307,37 @@ a third form:
 
 The first hbox is declared, two vboxes are then declared inside the 
 hbox mentioned. A form with items is then placed inside each 
-vbox. A second hbox is then added with a form inside to create the 
-necessary view:
+vbox. A second hbox is then added (this hbox could be skipped and a
+form could be placed directly after the top hbox as the view would not
+change) with a form inside to create the necessary view. 
+
+Multiple items in a row can be seen in this last form, each item takes 
+up two columns; one for the Display Name, and one for the field
+
+These changes come together to edit the view like so:
 
 ![Containers Example 3](../assets/images/views/ContainerExample3.PNG 
 "Example containers with 1 hbox and 2 vboxes, and a hbox underneath")
 
-If we only want ‘Date/time field 2’ to be seen when ‘Second time field’ 
-is populated, we can use visibility on ‘Date/time field 2’ like so:
+If we want a new field called ‘Date/time field 2’ and for it to only be seen when ‘Second time field’ from
+the Right vbox is populated, we can use visibility on ‘Date/time field 2’ 
+and a rerender when 'Time field 2' is populated like so:
 
 ```xml
 
 <item>
 	<textField binding="dateTime2" visible="hasSecondTime"/>
 </item>
+
+```
+
+```xml
+
+<textField binding="time2">
+	<onChangedHandlers>
+		<rerender clientValidation="false" />
+	</onChangedHandlers>
+</textField>
 
 ```
 
@@ -335,7 +384,7 @@ the desired sections in separate tab. The edit view will now look like so:
     	<tab title="First Tab">
     		<hbox>
 		    	<vbox>
-		    		<form>
+		    		<form border="true" borderTitle="Left vbox">
 					<column/>
 					<row>
 						<item>
@@ -374,7 +423,11 @@ the desired sections in separate tab. The edit view will now look like so:
 					</row>
 					<row>
 						<item label="SECOND TIME FIELD">
-							<default binding="time2"/>
+							<textField binding="time2">
+								<onChangedHandlers>
+									<rerender clientValidation="false" />
+								</onChangedHandlers>
+							</textField>
 						</item>
 					</row>
 					<row>
