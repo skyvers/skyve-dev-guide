@@ -108,7 +108,7 @@ _View containers_
 ![Containers Example 1 Wireframe](../assets/images/views/ViewsPic1.PNG 
 "Wireframe example of 1 hbox and 2 vboxes")
 
-The above Container Layout is acheived through a pair of vboxes 
+The above Container Layout is achieved through a pair of vboxes 
 inside a hbox:
 
 ```xml
@@ -989,6 +989,38 @@ The dataGrid widget offers the following event handlers:
 * onRemovedHandler - what events to perform after a row is removed/deleted
 * onSelectedHandler - what events to perform after a row is selected
 
+#### dataGrid Example
+
+For a dataGrid, there must be a collection of the document you want to show 
+inside the document you want to show them from. 
+
+```xml
+
+<collection type="aggregation" name="example" persistent="false">
+	<displayName>Example</displayName>
+	<documentName>Example</documentName>
+	<minCardinality>0</minCardinality>
+</collection>
+
+```
+
+Once your collection is in, you can add in the dataGrid and it's columns into
+your edit view:
+
+```xml 
+
+<dataGrid binding="example">
+	<boundColumn binding="textExample"/>
+	<boundColumn binding="dateExample"/>
+</dataGrid>	
+
+```
+
+The dataGrid binding is the document you wish to display from, and the 
+boundColumns are the fields from your chosen document that you wish to show:
+
+![DataGrid Example](../assets/images/views/DataGrid.PNG "DataGrid Example")
+
 
 ### listGrid
 
@@ -1090,6 +1122,38 @@ The listGrid widget offers the following event handlers:
 * onDeletedHandler - what events to perform after a row is deleted
 * onEditedHandler - what events to perform after a row is edited
 * onSelectedHandler - what events to perform after a row is selected
+
+#### listGrid Example
+
+For a listGrid, there must be an association to the document you want to show 
+inside the document you want to show them from. 
+
+```xml
+
+<association name="contact" type="aggregation" required="true">
+	<displayName>Contact</displayName>
+	<description>The contact details for the user.</description>
+	<documentName>Contact</documentName>
+	<queryName>qContacts</queryName>
+</association>
+
+```
+
+Once your association has been added in, you can add in the listGrid
+into your edit view (the columns shown in the listGrid are decided by 
+the fields shown in the query):
+
+```xml 
+
+<listGrid continueConversation="true" query="qContacts"/>	
+
+```
+
+The listGrid query binding is the query you wish to display, the columns 
+are changed by editing the query directly:
+
+![ListGrid Example](../assets/images/views/ListGrid.PNG "DataGrid Example")
+
 
 ### newParameter
 
