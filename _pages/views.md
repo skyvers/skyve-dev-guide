@@ -113,43 +113,43 @@ inside a hbox:
 
 ```xml
 <hbox>
-    	<vbox>
-    		<form>
-	    		<column/>
-	    		<row>
-	    			<item>
-	    				<default binding="text1"/>
-	    			</item>
-	    		</row>
-	    		<row>
-	    			<item>
-	    				<default binding="date1"/>
-	    			</item>
-	    		</row>
-	    		<row>
-	    			<item>
-	    				<default binding="boolean1"/>
-	    			</item>
-	    		</row>
-	    		<row>
-	    			<item>
-	    				<default binding="time1"/>
-	    			</item>
-	    		</row>
-	    	</form>
-    	</vbox>
-    	<vbox>
-	    	<form>
-	    		<column/>
-	    		<row>
-	    			<item>
-	    				<default binding="text2"/>
-	    			</item>
-	    		</row>
-	    		<row>
-	    			<item>
-	    				<default binding="date2"/>
-	    			</item>
+	<vbox>
+		<form>
+			<column/>
+			<row>
+				<item>
+					<default binding="text1"/>
+				</item>
+			</row>
+			<row>
+				<item>
+					<default binding="date1"/>
+				</item>
+			</row>
+			<row>
+				<item>
+					<default binding="boolean1"/>
+				</item>
+			</row>
+			<row>
+				<item>
+					<default binding="time1"/>
+				</item>
+			</row>
+		</form>
+	</vbox>
+	<vbox>
+		<form>
+			<column/>
+			<row>
+				<item>
+					<default binding="text2"/>
+				</item>
+			</row>
+			<row>
+				<item>
+					<default binding="date2"/>
+				</item>
 			</row>
 			<row>
 				<item>
@@ -161,8 +161,8 @@ inside a hbox:
 					<default binding="dateTime1"/>
 				</item>
 			</row>
-	    	</form>
-    	</vbox>
+		</form>
+	</vbox>
 </hbox>
 ```
 In the above example, a single hbox is declared, two vboxes are then
@@ -173,16 +173,14 @@ vbox.
 "Example containers with 1 hbox and 2 vboxes")
 
 Borders and Border Titles on the forms can help further separate and
-distinguish each form 
+distinguish each form:
 
 ```xml
-
 <!-- first form (left vbox) -->
 <form border="true" borderTitle="Left vbox"> 
 
 <!-- second form (right vbox) -->
 <form border="true" borderTitle="Right vbox">
-
 ```	
 	
 These borders and titles produce the following view:
@@ -190,11 +188,10 @@ These borders and titles produce the following view:
 ![Containers Example 2](../assets/images/views/ContainerExample2.PNG 
 "Example containers with 1 hbox and 2 vboxes, with added borders and titles")
 
-If decided that the labels should be aligned differently, the alignLabel option
-allows for different label positions
+If decided that the labels should be aligned differently, the `alignLabel` option
+allows for different label positions:
 
 ```xml
-	
 <row>
 	<item labelAlign="left">
 		<default binding="text2"/>
@@ -215,7 +212,6 @@ allows for different label positions
 		<default binding="dateTime1"/>
 	</item>
 </row>	
-
 ```
 
 These label alignments will change the position of the labels as such:
@@ -224,39 +220,33 @@ These label alignments will change the position of the labels as such:
 	
 If ‘Text field 2’ and ‘Date field 2’ are required, we can make them required one of 
 two ways. As Text field 2 is always required, we can make it required within the 
-‘DocumentName.xml’ file like so:
+`<DocumentName>.xml` file like so:
 	
 ```xml
-	
 <text name="text2" required="true">
 	<displayName>Text field 2</displayName>
-    	<description>This is our second text field</description>
+	<description>This is our second text field</description>
   	<length>20</length>
 </text>
-	
 ```	
 
 And as ‘Date field 2’ is only required when being used in this view, we can make 
 it required within the edit view as shown:
 
 ```xml
-	
 <item required="true">
 	<default binding="date2"/>
 </item>
-
 ```
 
 If we decide that ‘Time field 2’ should be renamed, we can change the Display Name 
-inside 'DocumentName.xml', or we can use a label inside the ‘time2’ binding within the edit 
+inside `<DocumentName>.xml`, or we can use a label inside the ‘time2’ binding within the edit 
 view this like: 
 
 ```xml
-
 <item label="SECOND TIME FIELD">
 	<default binding="time2"/>
 </item>
-	
 ```
 
 These recent changes have altered the edit view like so:
@@ -274,7 +264,6 @@ inside a hbox, a second hbox is then added beneath to make room for
 a third form:
 
 ```xml
-
 <hbox>
 	Top two vboxes in here
 </hbox>
@@ -302,7 +291,6 @@ a third form:
 		</row>
 	</form>
 </hbox>
-	
 ```
 
 The first hbox is declared, two vboxes are then declared inside the 
@@ -324,36 +312,30 @@ the Right vbox is populated, we can use visibility on ‘Date/time field 2’
 and a rerender when 'Time field 2' is populated like so:
 
 ```xml
-
 <item>
 	<textField binding="dateTime2" visible="hasSecondTime"/>
 </item>
-
 ```
 
 ```xml
-
 <textField binding="time2">
 	<onChangedHandlers>
 		<rerender clientValidation="false" />
 	</onChangedHandlers>
 </textField>
-
 ```
 
 With the visibility condition ‘hasSecondTime’ coming from a condition 
-in the ‘DocumentName.xml’ file, this condition will be inside the 
-Conditions section at the end of your Attributes section:
+in the `<DocumentName>.xml` file, this condition will be inside the 
+`conditions` section at the end of your `attributes` section:
 
 ```xml
-
 <conditions>
-    	<condition name="hasSecondTime">
-    	<description>True when this field has a second time field</description>
-    	<expression><![CDATA[(time2 != null)]]></expression>
-    	</condition>
+	<condition name="hasSecondTime">
+		<description>True when this field has a second time field</description>
+		<expression><![CDATA[(time2 != null)]]></expression>
+	</condition>
 </conditions>
-
 ```
 
 Now, without 'Time field 2' being populated, 'Date/Time field 2' is 
@@ -374,7 +356,6 @@ vbox) and our second hbox underneath, we could use a tabpane, and place
 the desired sections in separate tab. The edit view will now look like so:
 
 ```xml
-
 <?xml version="1.0" encoding="UTF-8"?>
 <view xmlns="http://www.skyve.org/xml/view" 
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -385,28 +366,28 @@ the desired sections in separate tab. The edit view will now look like so:
     		<hbox>
 		    	<vbox>
 		    		<form border="true" borderTitle="Left vbox">
-					<column/>
-					<row>
-						<item>
-							<default binding="text1"/>
-						</item>
-					</row>
-					<row>
-						<item>
-							<default binding="date1"/>
-						</item>
-					</row>
-					<row>
-						<item>
-							<default binding="boolean1"/>
-						</item>
-					</row>
-					<row>
-						<item>
-							<default binding="time1"/>
-						</item>
-					</row>
-				</form>
+						<column/>
+						<row>
+							<item>
+								<default binding="text1"/>
+							</item>
+						</row>
+						<row>
+							<item>
+								<default binding="date1"/>
+							</item>
+						</row>
+						<row>
+							<item>
+								<default binding="boolean1"/>
+							</item>
+						</row>
+						<row>
+							<item>
+								<default binding="time1"/>
+							</item>
+						</row>
+					</form>
 		    	</vbox>
 		    	<vbox>
 			    	<form border="true" borderTitle="Right vbox">
@@ -420,29 +401,29 @@ the desired sections in separate tab. The edit view will now look like so:
 			    			<item required="true">
 			    				<default binding="date2"/>
 			    			</item>
-					</row>
-					<row>
-						<item label="SECOND TIME FIELD">
-							<textField binding="time2">
-								<onChangedHandlers>
-									<rerender clientValidation="false" />
-								</onChangedHandlers>
-							</textField>
-						</item>
-					</row>
-					<row>
-						<item>
-							<default binding="dateTime1"/>
-						</item>
-					</row>
-					<row>
-						<item>
-							<textField binding="dateTime2" visible="hasSecondTime"/>
-						</item>
-					</row>
-				</form>
+						</row>
+						<row>
+							<item label="SECOND TIME FIELD">
+								<textField binding="time2">
+									<onChangedHandlers>
+										<rerender clientValidation="false" />
+									</onChangedHandlers>
+								</textField>
+							</item>
+						</row>
+						<row>
+							<item>
+								<default binding="dateTime1"/>
+							</item>
+						</row>
+						<row>
+							<item>
+								<textField binding="dateTime2" visible="hasSecondTime"/>
+							</item>
+						</row>
+					</form>
 		    	</vbox>
-		</hbox>		
+			</hbox>		
     	</tab>
     	<tab title="Second Tab">
     		<form border="true" borderTitle="Third form">
@@ -466,7 +447,7 @@ the desired sections in separate tab. The edit view will now look like so:
 		    			<default binding="dateTime2"/>
 		    		</item>
 		    	</row>
-		</form>
+			</form>
     	</tab>
     </tabPane>
     <actions>
@@ -474,7 +455,6 @@ the desired sections in separate tab. The edit view will now look like so:
     </actions>
     <newParameters/>
 </view>
-
 ```
 
 This leaves the first tab with the following view:
@@ -486,7 +466,6 @@ And the second tab with the following view:
 
 ![TabPane Example 2](../assets/images/views/TabPane2.PNG 
 "Tab Pane Example - Second tab")
-
 
 ### Form
 
@@ -574,7 +553,7 @@ will be displayed in bold type if the attribute is required.
 
 <table>
 	<thead>
-		<td>Widget </td><td> Description </td><td> Example</td><td>Allowed containers</td>
+		<td>Widget</td><td>Description</td><td>Example</td><td>Allowed containers</td>
 	</thead>
 	<tbody>
 		<tr><td>  blurb              </td><td> displays the contained markup inside a <code>div</code> with binding substitutions<br/>Unlike other widgets, the blurb is not required to be contained within a <code>form</code> container </td><td> <img src="../assets/images/views/blurb-binding-substitution.png" alt="blurb"/>
@@ -723,9 +702,7 @@ A common gesture is to select a row in a list as the basis of some action.
 To achieve this, set the `onSelectedHandler` on the widget as shown below.
 
 ```xml
-<listGrid query="qTimesheets" 
-	selectedIdBinding="selectedTimesheetId" 
-	postRefresh="refreshTimesheetList">
+<listGrid query="qTimesheets" selectedIdBinding="selectedTimesheetId" postRefresh="refreshTimesheetList">
 	<onSelectedHandlers>
 		<server action="TimesheetSelected" />
 	</onSelectedHandlers>
