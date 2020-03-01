@@ -103,6 +103,391 @@ of items contained.
 
 _View containers_
 
+#### Containers Example #1 - Two side by side vboxes
+
+![Containers Example 1 Wireframe](../assets/images/views/ViewsPic1.PNG 
+"Wireframe example of 1 hbox and 2 vboxes")
+
+The above Container Layout is achieved through a pair of vboxes 
+inside a hbox:
+
+```xml
+<hbox>
+    	<vbox>
+    		<form>
+	    		<column/>
+	    		<row>
+	    			<item>
+	    				<default binding="text1"/>
+	    			</item>
+	    		</row>
+	    		<row>
+	    			<item>
+	    				<default binding="date1"/>
+	    			</item>
+	    		</row>
+	    		<row>
+	    			<item>
+	    				<default binding="boolean1"/>
+	    			</item>
+	    		</row>
+	    		<row>
+	    			<item>
+	    				<default binding="time1"/>
+	    			</item>
+	    		</row>
+	    	</form>
+    	</vbox>
+    	<vbox>
+	    	<form>
+	    		<column/>
+	    		<row>
+	    			<item>
+	    				<default binding="text2"/>
+	    			</item>
+	    		</row>
+	    		<row>
+	    			<item>
+	    				<default binding="date2"/>
+	    			</item>
+			</row>
+			<row>
+				<item>
+					<default binding="time2"/>
+				</item>
+			</row>
+			<row>
+				<item>
+					<default binding="dateTime1"/>
+				</item>
+			</row>
+	    	</form>
+    	</vbox>
+</hbox>
+```
+In the above example, a single hbox is declared, two vboxes are then
+declared inside the hbox mentioned. A form with items is then placed inside each 
+vbox. 
+
+![Containers Example 1](../assets/images/views/ContainerExample1.PNG 
+"Example containers with 1 hbox and 2 vboxes")
+
+Borders and Border Titles on the forms can help further separate and
+distinguish each form 
+
+```xml
+
+<!-- first form (left vbox) -->
+<form border="true" borderTitle="Left vbox"> 
+
+<!-- second form (right vbox) -->
+<form border="true" borderTitle="Right vbox">
+
+```	
+	
+These borders and titles produce the following view:
+	
+![Containers Example 2](../assets/images/views/ContainerExample2.PNG 
+"Example containers with 1 hbox and 2 vboxes, with added borders and titles")
+
+If decided that the labels should be aligned differently, the alignLabel option
+allows for different label positions
+
+```xml
+	
+<row>
+	<item labelAlign="left">
+		<default binding="text2"/>
+	</item>
+</row>
+<row>
+	<item labelAlign="centre">
+		<default binding="date2"/>
+	</item>
+</row>
+<row>
+	<item>
+		<default binding="time2"/>
+	</item>
+</row>
+<row>
+	<item>
+		<default binding="dateTime1"/>
+	</item>
+</row>	
+
+```
+
+These label alignments will change the position of the labels as such:
+
+![Align Labels](../assets/images/views/LabelAlign.PNG "Aligning Labels")
+	
+If ‘Text field 2’ and ‘Date field 2’ are required, we can make them required one of 
+two ways. As Text field 2 is always required, we can make it required within the 
+‘DocumentName.xml’ file like so:
+	
+```xml
+	
+<text name="text2" required="true">
+	<displayName>Text field 2</displayName>
+    	<description>This is our second text field</description>
+  	<length>20</length>
+</text>
+	
+```	
+
+And as ‘Date field 2’ is only required when being used in this view, we can make 
+it required within the edit view as shown:
+
+```xml
+	
+<item required="true">
+	<default binding="date2"/>
+</item>
+
+```
+
+If we decide that ‘Time field 2’ should be renamed, we can change the Display Name 
+inside 'DocumentName.xml', or we can use a label inside the ‘time2’ binding within the edit 
+view this like: 
+
+```xml
+
+<item label="SECOND TIME FIELD">
+	<default binding="time2"/>
+</item>
+	
+```
+
+These recent changes have altered the edit view like so:
+
+![Required/Renamed Fields](../assets/images/views/RequiredRenamedFields.PNG "Renamed and Required fields")
+
+
+#### Containers Example #2 - Two side by side vboxes and one hbox underneath
+
+![Containers Example 2 Wireframe](../assets/images/views/ViewsPic2.PNG 
+"Wireframe example of 2 vboxes with one hbox underneath")
+
+The above Container Layout is acheived through a pair of vboxes 
+inside a hbox, a second hbox is then added beneath to make room for 
+a third form:
+
+```xml
+
+<hbox>
+	Top two vboxes in here
+</hbox>
+<hbox>
+	<form border="true" borderTitle="Third form">
+		<column responsiveWidth="2"/>
+		<column responsiveWidth="4"/>
+		<column responsiveWidth="2"/>
+		<column responsiveWidth="4"/>
+		<row>
+			<item>
+				<default binding="text3"/>
+			</item>
+			<item>
+				<default binding="boolean2"/>
+			</item>
+		</row>
+		<row>
+			<item>
+				<default binding="time3"/>
+			</item>
+			<item>
+				<default binding="dateTime2"/>
+			</item>
+		</row>
+	</form>
+</hbox>
+	
+```
+
+The first hbox is declared, two vboxes are then declared inside the 
+hbox mentioned. A form with items is then placed inside each 
+vbox. A second hbox is then added (this hbox could be skipped and a
+form could be placed directly after the top hbox as the view would not
+change) with a form inside to create the necessary view. 
+
+Multiple items in a row can be seen in this last form, each item takes 
+up two columns; one for the Display Name, and one for the field
+
+These changes come together to edit the view like so:
+
+![Containers Example 3](../assets/images/views/ContainerExample3.PNG 
+"Example containers with 1 hbox and 2 vboxes, and a hbox underneath")
+
+If we want a new field called ‘Date/time field 2’ and for it to only be seen when ‘Second time field’ from
+the Right vbox is populated, we can use visibility on ‘Date/time field 2’ 
+and a rerender when 'Time field 2' is populated like so:
+
+```xml
+
+<item>
+	<textField binding="dateTime2" visible="hasSecondTime"/>
+</item>
+
+```
+
+```xml
+
+<textField binding="time2">
+	<onChangedHandlers>
+		<rerender clientValidation="false" />
+	</onChangedHandlers>
+</textField>
+
+```
+
+With the visibility condition ‘hasSecondTime’ coming from a condition 
+in the ‘DocumentName.xml’ file, this condition will be inside the 
+Conditions section at the end of your Attributes section:
+
+```xml
+
+<conditions>
+    	<condition name="hasSecondTime">
+    	<description>True when this field has a second time field</description>
+    	<expression><![CDATA[(time2 != null)]]></expression>
+    	</condition>
+</conditions>
+
+```
+
+Now, without 'Time field 2' being populated, 'Date/Time field 2' is 
+not visible:
+
+![Visibility Example 1](../assets/images/views/Visibility.PNG 
+"Visibility example with field not showing")
+
+But once 'Time field 2' is populated and saved, 'Date/Time field 2' is visible:
+
+![Visibility Example 2](../assets/images/views/Visibility2.PNG 
+"Visibility example with field showing")
+
+#### Containers Example #3 - Tab Pane
+
+If we now wanted to further separate our top half (Left vbox and Right 
+vbox) and our second hbox underneath, we could use a tabpane, and place 
+the desired sections in separate tab. The edit view will now look like so:
+
+```xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<view xmlns="http://www.skyve.org/xml/view" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		name="edit" title="DocumentName" 
+		xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd">
+    <tabPane>
+    	<tab title="First Tab">
+    		<hbox>
+		    	<vbox>
+		    		<form border="true" borderTitle="Left vbox">
+					<column/>
+					<row>
+						<item>
+							<default binding="text1"/>
+						</item>
+					</row>
+					<row>
+						<item>
+							<default binding="date1"/>
+						</item>
+					</row>
+					<row>
+						<item>
+							<default binding="boolean1"/>
+						</item>
+					</row>
+					<row>
+						<item>
+							<default binding="time1"/>
+						</item>
+					</row>
+				</form>
+		    	</vbox>
+		    	<vbox>
+			    	<form border="true" borderTitle="Right vbox">
+			    		<column/>
+			    		<row>
+			    			<item>
+			    				<default binding="text2"/>
+			    			</item>
+			    		</row>
+			    		<row>
+			    			<item required="true">
+			    				<default binding="date2"/>
+			    			</item>
+					</row>
+					<row>
+						<item label="SECOND TIME FIELD">
+							<textField binding="time2">
+								<onChangedHandlers>
+									<rerender clientValidation="false" />
+								</onChangedHandlers>
+							</textField>
+						</item>
+					</row>
+					<row>
+						<item>
+							<default binding="dateTime1"/>
+						</item>
+					</row>
+					<row>
+						<item>
+							<textField binding="dateTime2" visible="hasSecondTime"/>
+						</item>
+					</row>
+				</form>
+		    	</vbox>
+		</hbox>		
+    	</tab>
+    	<tab title="Second Tab">
+    		<form border="true" borderTitle="Third form">
+		    	<column responsiveWidth="2"/>
+		    	<column responsiveWidth="4"/>
+		    	<column responsiveWidth="2"/>
+		    	<column responsiveWidth="4"/>
+		    	<row>
+		    		<item>
+		    			<default binding="text3"/>
+		    		</item>
+		    		<item>
+					<default binding="boolean2"/>
+		    		</item>
+		    	</row>
+		    	<row>
+		    		<item>
+		    			<default binding="time3"/>
+		    		</item>
+		    		<item>
+		    			<default binding="dateTime2"/>
+		    		</item>
+		    	</row>
+		</form>
+    	</tab>
+    </tabPane>
+    <actions>
+        <defaults/>
+    </actions>
+    <newParameters/>
+</view>
+
+```
+
+This leaves the first tab with the following view:
+
+![TabPane Example 1](../assets/images/views/TabPane1.PNG 
+"Tab Pane Example - First tab")
+
+And the second tab with the following view:
+
+![TabPane Example 2](../assets/images/views/TabPane2.PNG 
+"Tab Pane Example - Second tab")
+
+
 ### Form
 
 Forms contain columns and rows. Rows may only contain items.
@@ -604,6 +989,38 @@ The dataGrid widget offers the following event handlers:
 * onRemovedHandler - what events to perform after a row is removed/deleted
 * onSelectedHandler - what events to perform after a row is selected
 
+#### dataGrid Example
+
+For a dataGrid, there must be a collection of the document you want to show 
+inside the document you want to show them from. 
+
+```xml
+
+<collection type="aggregation" name="example">
+	<displayName>Example</displayName>
+	<documentName>Example</documentName>
+	<minCardinality>0</minCardinality>
+</collection>
+
+```
+
+Once your collection is in, you can add in the dataGrid and it's columns into
+your edit view:
+
+```xml 
+
+<dataGrid binding="example">
+	<boundColumn binding="textExample"/>
+	<boundColumn binding="dateExample"/>
+</dataGrid>	
+
+```
+
+The dataGrid binding is the document you wish to display from, and the 
+boundColumns are the fields from your chosen document that you wish to show:
+
+![DataGrid Example](../assets/images/views/DataGrid.PNG "DataGrid Example")
+
 
 ### listGrid
 
@@ -705,6 +1122,24 @@ The listGrid widget offers the following event handlers:
 * onDeletedHandler - what events to perform after a row is deleted
 * onEditedHandler - what events to perform after a row is edited
 * onSelectedHandler - what events to perform after a row is selected
+
+#### listGrid Example
+
+You can add in the listGrid into your edit view as such (the columns shown 
+in the listGrid are decided by the fields shown in the query):
+
+```xml 
+
+<listGrid continueConversation="true" query="qContacts"/>	
+
+```
+
+The listGrid query binding is the query you wish to display, if you wish to 
+filter the listGrid, an association to the required field can be used. 
+The columns are changed by editing the query directly:
+
+![ListGrid Example](../assets/images/views/ListGrid.PNG "DataGrid Example")
+
 
 ### newParameter
 
