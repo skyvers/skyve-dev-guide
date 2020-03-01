@@ -996,7 +996,7 @@ inside the document you want to show them from.
 
 ```xml
 
-<collection type="aggregation" name="example" persistent="false">
+<collection type="aggregation" name="example">
 	<displayName>Example</displayName>
 	<documentName>Example</documentName>
 	<minCardinality>0</minCardinality>
@@ -1125,23 +1125,8 @@ The listGrid widget offers the following event handlers:
 
 #### listGrid Example
 
-For a listGrid, there must be an association to the document you want to show 
-inside the document you want to show them from. 
-
-```xml
-
-<association name="contact" type="aggregation" required="true">
-	<displayName>Contact</displayName>
-	<description>The contact details for the user.</description>
-	<documentName>Contact</documentName>
-	<queryName>qContacts</queryName>
-</association>
-
-```
-
-Once your association has been added in, you can add in the listGrid
-into your edit view (the columns shown in the listGrid are decided by 
-the fields shown in the query):
+You can add in the listGrid into your edit view as such (the columns shown 
+in the listGrid are decided by the fields shown in the query):
 
 ```xml 
 
@@ -1149,8 +1134,9 @@ the fields shown in the query):
 
 ```
 
-The listGrid query binding is the query you wish to display, the columns 
-are changed by editing the query directly:
+The listGrid query binding is the query you wish to display, if you wish to 
+filter the listGrid, an association to the required field can be used. 
+The columns are changed by editing the query directly:
 
 ![ListGrid Example](../assets/images/views/ListGrid.PNG "DataGrid Example")
 
