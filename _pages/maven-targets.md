@@ -120,6 +120,16 @@ application specification, it encourages developers and technical
 writers to be thorough and cover all aspects of the application they are
 documenting.
 
+_Graphviz Install_
+
+1. Navigate to `https://www.graphviz.org/download/`
+2. Find the install package that suits your system requirements and click on the link
+3. Choose your method of install (this guide will cover installation for Windows OS from a .msi file) and click the link
+4. The download will start, once downloaded, navigate to where the file downloaded and double click the file
+5. The Graphviz installer will open, click `Next` to follow onto the next page
+6. Designate your Installation folder and click `Next`, then again click `Next` to start your install
+7. Once Graphviz has completed installing, click `Close` to exit the wizard
+
 **[⬆ back to top](#maven-targets)**
 
 ---
