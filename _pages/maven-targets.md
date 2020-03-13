@@ -87,7 +87,7 @@ incorporating:
 ![](../assets/images/maven-targets/image164.png)
 
 To ensure that graphviz can generate model graphs, ensure that
-..\\Graphviz\\bin is in your environment path.
+..\\Graphviz\\bin is in your OS Environment variables path.
 
 Custom javadoc can also be created using the usual doclet interface.
 
