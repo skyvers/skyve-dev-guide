@@ -131,7 +131,9 @@ Fixtures are named groupings of methods, that when executed together can collabo
 For example:
 
 ```java
-Contact c = new DataBuilder().fixture(FixtureType.crud).build(Contact.MODULE_NAME, Contact.DOCUMENT_NAME);
+Contact c = new DataBuilder()
+	.fixture(FixtureType.crud)
+	.build(Contact.MODULE_NAME, Contact.DOCUMENT_NAME);
 ```
 
 Please be careful when calling other methods within a Factory class as you may inadvertently create a recursive loop if the method you are calling from is not annotated as a SkyveFixture. Make sure if you annotate a method with a fixture type, you specify the `factoryBuild` method.
@@ -140,10 +142,10 @@ For example, never call
 
 ```java
 @SkyveFixture(types = FixtureType.crud)
-    public static Account crudInstance() throws Exception {
-        Account bean = new DataBuilder()
-			.fixture(FixtureType.crud)
-			.build(Account.MODULE_NAME, Account.DOCUMENT_NAME);
+public static Account crudInstance() throws Exception {
+	Account bean = new DataBuilder()
+		.fixture(FixtureType.crud)
+		.build(Account.MODULE_NAME, Account.DOCUMENT_NAME);
 ```
 
 or the new DataBuilder() call will call the `crudInstance` method
@@ -151,11 +153,11 @@ or the new DataBuilder() call will call the `crudInstance` method
 you need to write
 
 ```java
-	@SkyveFixture(types = FixtureType.crud)
-    public static Account crudInstance() throws Exception {
-        Account bean = new DataBuilder()
-			.fixture(FixtureType.crud)
-			.factoryBuild(Account.MODULE_NAME, Account.DOCUMENT_NAME);
+@SkyveFixture(types = FixtureType.crud)
+public static Account crudInstance() throws Exception {
+	Account bean = new DataBuilder()
+		.fixture(FixtureType.crud)
+		.factoryBuild(Account.MODULE_NAME, Account.DOCUMENT_NAME);
 ```
         
 or use a databuilder without a fixture type.
@@ -170,7 +172,6 @@ For example:
 
 ```java
 public class CommunicationFactory {
-
 	@SkyveFixture(types = FixtureType.crud)
 	public static Communication crudInstance() {
 		Communication bean = new DataBuilder()
