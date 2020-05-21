@@ -198,7 +198,7 @@ After annotating a Factory in the document package of the module you are testing
 
 For example, a firstName field would look for `/src/main/java/resources/data/firstName.txt`. If it finds this file, it will randomly select a value from its content, where each value should be separated by a line break. Example test files are included with new projects.
 
-Note: The data files are incldued in `src/main/java` so that they can be used to create test data in a running application, e.g. in an Action. If they were in `src/test`, they would be excluded from the build at runtime.
+Note: The data files are included in `src/main/java` so that they can be used to create test data in a running application, e.g. in an Action. If they were in `src/test`, they would be excluded from the build at runtime.
 
 ### The `@DataMap` annotation
 A `Factory` can also be annotated with `@DataMap` when the test file to use does not match the attribute name, e.g. 
