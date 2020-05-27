@@ -16,14 +16,14 @@ Skyve has two rendering modes to suit different user agents/device types.
 Skyve applications will (by default) automatically switch to use the most suitable
 rendering for the user agent or device type it detects.
 
-![Rendering Modes](../assets/images/concepts/concepts_rendering_modes.png "Rendering Modes")
+![Rendering Modes](../assets/images/concepts/RenderingModes.png "Rendering Modes")
 
-The SmartClient AJAX framework rendering mode provides a feature rich user experience, mimicking thick-client
+The SmartClient AJAX framework rendering mode (desktop mode) provides a feature rich user experience, mimicking thick-client
 applications. This mode is suitable for office environments and users who regularly use the software
 on desktop or laptop devices.
 
-The PrimeFaces rendering mode is a responsive renderer suitable for phones and tablet devices. 
-The responsive renderer offers a reduced capability set (compared with the SmartClient rendering mode) 
+The PrimeFaces rendering mode (responsive mode) is a responsive renderer suitable for phones and tablet devices. 
+The responsive renderer offers a reduced capability set (compared with the desktop mode) 
 as a simplified mode suitable for mobile devices and occasional use.
 
 Skyve's powerful routing capability gives developers the ability to override Skyve's default activity 
@@ -55,8 +55,11 @@ within the list view. Documents may contain collections of, and
 references to, other documents, with each instance persisted as a tuple
 in the database.
 
-![Basic UI Layout](../assets/images/concepts/image8.png "Basic UI layout")
-_Basic UI layout_
+![Basic UI Layout (DM)](../assets/images/concepts/BasicUILayout_DM.png "Basic UI Layout (DM)")
+_Basic UI Layout (Desktop Mode)_
+
+![Basic UI Layout (RM)](../assets/images/concepts/BasicUILayout_RM.png "Basic UI Layout (RM)")
+_Basic UI Layout (Responsive Mode)_
 
 Both module and document objects are implemented in the Skyve API and
 are available to developers. Using the API, developers can create
@@ -103,8 +106,11 @@ document attributes for searching and review. Each row of the list
 corresponds to a document instance however the list may represent data
 from related documents within the document's object hierarchy.
 
-![List view](../assets/images/concepts/image9.png "List view")
-_List view_
+![List view (DM)](../assets/images/concepts/ListView_DM.png "List view (DM)")
+_List View (Desktop Mode)_
+
+![List view (RM)](../assets/images/concepts/ListView_RM.png "List view (RM)")
+_List View (Responsive Mode)_
 
 List views are provided by a generic list component (called a
 *listGrid*) which offers searching, filtering, tagging, exporting,
