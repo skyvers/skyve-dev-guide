@@ -153,7 +153,11 @@ query (or implicit query), columns are defined as either filterable or
 not. If a column is defined as filterable, a filter widget will be
 available above the column header in the list.
 
-![](../assets/images/concepts/image10.png)
+![Simple Filter Line](../assets/images/concepts/SimpleFilter_DM.png "Simple Filter Line (DM)")
+_Simple Filter Line (Desktop Mode)_
+
+![Simple Filter Line](../assets/images/concepts/SimpleFilter_RM.png "Simple Filter Line (RM)")
+_Simple Filter Line (Responsive Mode)_
 
 The simple filter line provides basic filtering capability. Values
 entered in the filter line are the basis of an inclusive "Like" filter
@@ -169,7 +173,7 @@ The filter is cleared by either clearing the values from the filter line
 controls, or by using the clear filter tool
 ![](../assets/images/concepts/image13.png).
 
-![](../assets/images/concepts/image14.png)
+![](../assets/images/concepts/RefreshFilter_DM.png)
 
 #### Advanced filter constructor
 
@@ -188,7 +192,7 @@ The Advanced Filter constructor operates in three styles:
     selection of a wide range of filtering operators pertinent to the
     specific data type of the attribute (column) being filtered.
 
-    ![](../assets/images/concepts/image16.png)
+    ![](../assets/images/concepts/AdvancedFilterConstructor.png)
 
 The red minus tool ![](../assets/images/concepts/image17.png) allows for criteria to be removed.
 
@@ -205,8 +209,8 @@ In flat style search, any number of criteria can be applied to filter the list.
 In flat style the criteria are applied according to the method selected
 (either "Match All", "Match Any" or "Match None").
 
-![Flat style advanced filter](../assets/images/concepts/image19.png "Flat style advanced filter")
-_Flat style advanced filter_
+![Flat Style Advanced Filter](../assets/images/concepts/FlatStyleFilter_DM.png "Flat Style Advanced Filter")
+_Flat Style Advanced Filter_
 
 Using the "Match All" method will apply all criteria specified to the
 resulting data. In the example above, the list will be filtered for
@@ -238,15 +242,11 @@ area.
 
 #### Nested style advanced search
 
-Nested style allows complex and sophisticated filter criteria.
+Nested style allows complex and sophisticated filter criteria. In this style, ***AND*** an ***OR*** operators are explicitly selected
+with logical subclauses. The scope of each subclause is indicated by the square bracket.
 
-![](../assets/images/concepts/image21.png)
-
-In Nested style, ***AND*** an ***OR*** operators are explicitly selected
-with logical subclauses. The scope of each subclause is indicated by the
-square bracket.
-
-![](../assets/images/concepts/image22.png)
+![Nested Style Advanced Filter](../assets/images/concepts/NestedStyleFilter_DM.png "Nested Style Advanced Filter")
+_Nested Style Advanced Filter_
 
 The red minus tool ![](../assets/images/concepts/image17.png) allows for criteria to be removed.
 
@@ -263,7 +263,8 @@ Inline style is a simplified version of the Nested style, which allows
 the ***AND*** and ***OR*** operators to be specified for each criteria,
 however without the complexity of nesting.
 
-![](../assets/images/concepts/image23.png)
+![Inline Style Advanced Filter](../assets/images/concepts/InlineStyleFilter_DM.png "Inline Style Advanced Filter")
+_Inline Style Advanced Filter_
 
 The red minus tool ![](../assets/images/concepts/image17.png) allows for criteria to be removed.
 
