@@ -42,6 +42,8 @@ For example, in Eclipse, right-click your project and choose _Run As_->_Run Conf
 In your project _config_ folder, right-click the _MyAppName - Generate Domain.launch_ task and choose 
 _Run As_->_MyAppName - Generate Domain_
 
+* When downloading Eclipse, ensure you have selected Eclipse for Java EE (Enterprise Edition) Developers as the non-Enterprise Edition is missing libraries that Skyve utilises, as well as plugins that are used for local deployment. 
+
 #### Problems deploying your app
 
 * If you're using the collaboration option in [Skyve Foundry](https://foundry.skyve.org/foundry), or have exported your project, check that you selected the `Default` theme first. 
