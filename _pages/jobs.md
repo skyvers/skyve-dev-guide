@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-## Jobs
-
 Skyve provides a mechanism for executing and scheduling offline Jobs
 (i.e. Jobs processed irrespective of the state of the conversation or
 session).
@@ -32,7 +30,7 @@ executed.
 Scheduling Jobs from the *admin* module requires the *JobMaintainer*
 role.
 
-### Job classes
+## Job Classes
 
 Job classes must extend the `org.skyve.job.Job` abstract class. Custom job code is located in the `execute()` method.
 
@@ -90,7 +88,51 @@ comprehensive security model can be enforced.
 Developers must consider whether a user context will have sufficient
 privileges for the Job to be executed.
 
-### Job transactions
+### Other Job Subclasses
+
+While most jobs can be defined by extending `org.skyve.job.Job`, there are two useful Job subclasses available which can be useful in certain scenarios:
+
+#### CancellableJob
+
+Extending `org.skyve.job.CancellableJob` provides the job with an `isCancelled()` method. This is useful for long running jobs which can be interrupted. This can be called in a `for` or `while` loop for example by checking during each iteration which allows the job to complete early:
+
+```java
+	if (isCancelled()) {
+		getLog().add("Job cancelled...");
+		return;
+	}
+```
+
+#### IteratingJob
+
+Extending `org.skyve.job.IteratingJob` is useful when the job is primarily responsible for processing a collection of the same type records. This defines two abstact methods which much be extended to tell the job which elements to iterate over (`getElements()`) and what operation to perform on each element (`operation()`). When the job executes, it will keep track of updating the progress percentage of the job and logging how many successful and unsucsessful records were processed.
+
+An example of using this job is shown below:
+
+```java
+import org.skyve.job.IteratingJob;
+
+public class ExpirePasswordJob extends IteratingJob<UserExtension> {
+
+	@Override
+	protected Collection<UserExtension> getElements() {
+		// select all users to update
+		return CORE.getPersistence().newDocumentQuery(User.MODULE_NAME, User.DOCUMENT_NAME)
+				.beanResults();
+	}
+
+	@Override
+	protected void operation(UserExtension element) throws Exception {
+		// perform an operation on each user
+		element.setPasswordExpired(Boolean.TRUE);
+
+		// save the changes
+		CORE.getPersistence().save(element);
+	}
+}
+```
+
+## Job Transactions
 
 Unless specified by the developer, a job will run in a single transaction and roll-back if an exception is thrown. This may be suitable especially for jobs dealing with small numbers of beans. 
 
@@ -163,7 +205,7 @@ For further examples, review the following classes in the Skyve admin module:
 * admin.Tag.PerformDocumentActionForTagJob 
 * admin.UserList.BulkUserCreationJob
 
-### Logging
+## Logging
 
 The Job class provides the `List<String> log` for developer logging.
 
