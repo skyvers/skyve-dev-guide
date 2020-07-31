@@ -16,14 +16,14 @@ Skyve has two rendering modes to suit different user agents/device types.
 Skyve applications will (by default) automatically switch to use the most suitable
 rendering for the user agent or device type it detects.
 
-![Rendering Modes](../assets/images/concepts/concepts_rendering_modes.png "Rendering Modes")
+![Rendering Modes](../assets/images/concepts/RenderingModes.png "Rendering Modes")
 
-The SmartClient AJAX framework rendering mode provides a feature rich user experience, mimicking thick-client
+The SmartClient AJAX framework rendering mode (desktop mode) provides a feature rich user experience, mimicking thick-client
 applications. This mode is suitable for office environments and users who regularly use the software
 on desktop or laptop devices.
 
-The PrimeFaces rendering mode is a responsive renderer suitable for phones and tablet devices. 
-The responsive renderer offers a reduced capability set (compared with the SmartClient rendering mode) 
+The PrimeFaces rendering mode (responsive mode) is a responsive renderer suitable for phones and tablet devices. 
+The responsive renderer offers a reduced capability set (compared with the desktop mode) 
 as a simplified mode suitable for mobile devices and occasional use.
 
 Skyve's powerful routing capability gives developers the ability to override Skyve's default activity 
@@ -55,8 +55,11 @@ within the list view. Documents may contain collections of, and
 references to, other documents, with each instance persisted as a tuple
 in the database.
 
-![Basic UI Layout](../assets/images/concepts/image8.png "Basic UI layout")
-_Basic UI layout_
+![Basic UI Layout (DM)](../assets/images/concepts/BasicUILayout_DM.png "Basic UI Layout (DM)")
+_Basic UI Layout (Desktop Mode)_
+
+![Basic UI Layout (RM)](../assets/images/concepts/BasicUILayout_RM.png "Basic UI Layout (RM)")
+_Basic UI Layout (Responsive Mode)_
 
 Both module and document objects are implemented in the Skyve API and
 are available to developers. Using the API, developers can create
@@ -103,8 +106,11 @@ document attributes for searching and review. Each row of the list
 corresponds to a document instance however the list may represent data
 from related documents within the document's object hierarchy.
 
-![List view](../assets/images/concepts/image9.png "List view")
-_List view_
+![List view (DM)](../assets/images/concepts/ListView_DM.png "List view (DM)")
+_List View (Desktop Mode)_
+
+![List view (RM)](../assets/images/concepts/ListView_RM.png "List view (RM)")
+_List View (Responsive Mode)_
 
 List views are provided by a generic list component (called a
 *listGrid*) which offers searching, filtering, tagging, exporting,
@@ -147,7 +153,11 @@ query (or implicit query), columns are defined as either filterable or
 not. If a column is defined as filterable, a filter widget will be
 available above the column header in the list.
 
-![](../assets/images/concepts/image10.png)
+![Simple Filter Line](../assets/images/concepts/SimpleFilter_DM.png "Simple Filter Line (DM)")
+_Simple Filter Line (Desktop Mode)_
+
+![Simple Filter Line](../assets/images/concepts/SimpleFilter_RM.png "Simple Filter Line (RM)")
+_Simple Filter Line (Responsive Mode)_
 
 The simple filter line provides basic filtering capability. Values
 entered in the filter line are the basis of an inclusive "Like" filter
@@ -163,7 +173,7 @@ The filter is cleared by either clearing the values from the filter line
 controls, or by using the clear filter tool
 ![](../assets/images/concepts/image13.png).
 
-![](../assets/images/concepts/image14.png)
+![](../assets/images/concepts/RefreshFilter_DM.png)
 
 #### Advanced filter constructor
 
@@ -182,7 +192,7 @@ The Advanced Filter constructor operates in three styles:
     selection of a wide range of filtering operators pertinent to the
     specific data type of the attribute (column) being filtered.
 
-    ![](../assets/images/concepts/image16.png)
+    ![](../assets/images/concepts/AdvancedFilterConstructor.png)
 
 The red minus tool ![](../assets/images/concepts/image17.png) allows for criteria to be removed.
 
@@ -199,8 +209,8 @@ In flat style search, any number of criteria can be applied to filter the list.
 In flat style the criteria are applied according to the method selected
 (either "Match All", "Match Any" or "Match None").
 
-![Flat style advanced filter](../assets/images/concepts/image19.png "Flat style advanced filter")
-_Flat style advanced filter_
+![Flat Style Advanced Filter](../assets/images/concepts/FlatStyleFilter_DM.png "Flat Style Advanced Filter")
+_Flat Style Advanced Filter_
 
 Using the "Match All" method will apply all criteria specified to the
 resulting data. In the example above, the list will be filtered for
@@ -232,15 +242,11 @@ area.
 
 #### Nested style advanced search
 
-Nested style allows complex and sophisticated filter criteria.
+Nested style allows complex and sophisticated filter criteria. In this style, ***AND*** an ***OR*** operators are explicitly selected
+with logical subclauses. The scope of each subclause is indicated by the square bracket.
 
-![](../assets/images/concepts/image21.png)
-
-In Nested style, ***AND*** an ***OR*** operators are explicitly selected
-with logical subclauses. The scope of each subclause is indicated by the
-square bracket.
-
-![](../assets/images/concepts/image22.png)
+![Nested Style Advanced Filter](../assets/images/concepts/NestedStyleFilter_DM.png "Nested Style Advanced Filter")
+_Nested Style Advanced Filter_
 
 The red minus tool ![](../assets/images/concepts/image17.png) allows for criteria to be removed.
 
@@ -257,7 +263,8 @@ Inline style is a simplified version of the Nested style, which allows
 the ***AND*** and ***OR*** operators to be specified for each criteria,
 however without the complexity of nesting.
 
-![](../assets/images/concepts/image23.png)
+![Inline Style Advanced Filter](../assets/images/concepts/InlineStyleFilter_DM.png "Inline Style Advanced Filter")
+_Inline Style Advanced Filter_
 
 The red minus tool ![](../assets/images/concepts/image17.png) allows for criteria to be removed.
 

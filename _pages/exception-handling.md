@@ -63,8 +63,11 @@ using the .getSubordinates().add pattern. If the subordinates do not
 have valid bindings supplied, Skyve will automatically list all
 validation messages in a `<ul>`.
 
-![Concurrent multiple validation](../assets/images/exception-handling/image33.png "Concurrent multiple validation")
-_Concurrent multiple validation_
+![Concurrent multiple validation](../assets/images/exception-handling/ConcurrentValidation_DM.png "Concurrent multiple validation - Desktop Mode")
+_Concurrent Multiple Validation (Desktop Mode)_
+
+![Concurrent multiple validation](../assets/images/exception-handling/ConcurrentValidation_RM.png "Concurrent multiple validation - Responsive Mode")
+_Concurrent Multiple Validation (Responsive Mode)_
 
 ### Data type validation
 
@@ -83,9 +86,11 @@ Skyve employs the following methods for data type validation:
 -   Native Server side validation which can be extended by the
     developer.
 
-![Data type validation](../assets/images/exception-handling/image34.png "Data type validation is handled automatically by Skyve both client side and server side.")
-_Data type validation is handled automatically by Skyve both
-client side and server side._
+![Data type validation](../assets/images/exception-handling/InvalidDate_DM.png "Data type validation - Desktop Mode.")
+_Data Type Validation (Desktop Mode)._
+
+![Data type validation](../assets/images/exception-handling/InvalidDate_RM.png "Data type validation - Responsive Mode")
+_Data Type Validation (Responsive Mode)._
 
 The automatic data type validation occurs before any API validation to
 ensure that the developer does not have to code against obvious
@@ -105,8 +110,11 @@ Requiredness is automatically validated in the client and server side
 before developer API validation overrides so that the developer is not
 required to duplicate obvious and implicit validations.
 
-![Requiredness violations](../assets/images/exception-handling/image35.png "Requiredness violations are displayed consistently within the UI")
-_Requiredness violations are displayed consistently within the UI_
+![Requiredness violations](../assets/images/exception-handling/Requiredness_DM.png "Requiredness violations - Desktop Mode")
+_Requiredness Violations (Desktop Mode)._
+
+![Requiredness violations](../assets/images/exception-handling/Requiredness_RM.png "Requiredness violations - Responsive Mode")
+_Requiredness Violations (Responsive Mode)._
 
 ### Business rule validation
 
