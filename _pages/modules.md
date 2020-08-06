@@ -105,9 +105,8 @@ the metadata query to use by default wherever lists of document
 instances may be required (e.g. lists and lookups for document
 references).
 
-If a query name is not supplied Skyve will generate a default or
-*generic* query which will include all columns for all document
-attributes.
+If a query name is not supplied Skyve will generate a *default* query which 
+will include all columns for all document attributes.
 
 Queries defined in the `module.xml` are also available to developers in
 *Bizlet* code. Queries can also be declared as the source for document
@@ -115,14 +114,22 @@ attribute associations and collections. When used in this way, the query
 determines eligible references for membership in the association or
 collection.
 
-### Generic queries
+### Default Queries
 
 When Skyve generates a query (in the situation where a query is required
-but none has been specified), this *generic* query will contain all
+but none has been specified), this *default* query will contain all
 document attributes for the *driving document* and the *bizKey* value
 for all references. Columns will be in the order of document attributes
 (as specified in the *document.xml*) with ascending ordering applied to
 the first column. All columns will be non-editable inline in the list.
+
+The *default* query for a Document can be specified by setting the 
+`defualtQueryName` when specifying documents for your module (the default query 
+to use needs to be defined in the queries section for the module). For example:
+
+```xml
+<document ref="DocumentNumber" defaultQueryName="qDocumentNumbers"/>
+```
 
 ### Declaring queries
 
@@ -520,8 +527,8 @@ however for specific details of privileges, view the admin module xml declaratio
 To assist in rapid development and prototyping, Skyve provides a `prototype` option for modules which changes a number of default Skyve behaviours. Developers should note that the `prototype` option is designed to provide indicative results that may not necessarily provide optimal performance.
 
 The two key differences `prototype` mode introduces are:
- - inclusion of association/reference columns in *generic* or *default* queries (i.e. where no query is specified, Skyve will include columns for associations, displaying the bizKey value for the associated bean)
- - inclusion of content items in *generic* or *default* queries as thumbnails
+ - inclusion of association/reference columns in *default* queries (i.e. where no `defaultQueryName` is specified, Skyve will include columns for associations, displaying the bizKey value for the associated bean)
+ - inclusion of content items in *default* queries as thumbnails
 
 To declare `prototype` mode, add `prototype="true"` to the module declaration as follows:
 ```xml
