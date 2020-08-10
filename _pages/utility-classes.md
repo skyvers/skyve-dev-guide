@@ -27,6 +27,8 @@ Skyve provides the following utility classes:
 			<li><code>validateBeanPropertyAgainstAttribute()</code> - Validate a document attribute against its metadata</li>
 		</ul>
 	</td>
+</tr>
+<tr>
 	<td>Binder</td>
 	<td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li><code>formatMessage()</code> for using binding substitutions in string outputs using the correct converter</li><li><code>convertAndSet()</code> for setting a converted string value using the correct converter</li><li><code>createCompoundBinding()</code> for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul></td>
 </tr>
