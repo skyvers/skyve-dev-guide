@@ -22,7 +22,7 @@ Code in the domain folder is never manipulated by the developer
 directly; all application changes are done via metadata and API-level
 code.
 
-![Skyve Project structure](../assets/images/modules/image39.png "Skyve Project Structure")
+![Skyve Project structure](../assets/images/modules/xmlView.png "Skyve Project Structure")
 
 The `module.xml` file is located in the top level directory of the
 module and defines the following:
@@ -89,7 +89,7 @@ Documents listed in the `module.xml` may reference documents from other
 modules (*moduleRef*) or are matched with document packages within the
 module folder.
 
-![Document packages](../assets/images/modules/image42.png "Document packages")
+![Document packages](../assets/images/modules/documentPackages.png "Document packages")
 
 ## Queries
 
@@ -132,9 +132,9 @@ document which is the subject of the query.
 If the query is the basis of a *listGrid*, then double-clicking in the
 listGrid will zoom to the *driving document*.
 
-![Query definition](../assets/images/modules/image43.png "Query definition")
+![Query definition](../assets/images/modules/documentQuery.png "Query definition")
 
-![Query based list](../assets/images/modules/image44.png "Query based list")
+![Query based list](../assets/images/modules/listTitle.png "Query based list")
 
 ### Query column definition
 
@@ -189,7 +189,7 @@ list of the *bizKeys* of the driving document instances in the same
 order as the default query (or ordered by the first column if no query
 is specified).
 
-![Queries as a source for record selection](../assets/images/modules/image45.png "Queries as a source for record selection")
+![Queries as a source for record selection](../assets/images/modules/lookupDescription.png "Queries as a source for record selection")
 
 However, *lookupDescription* combos can display multiple columns (as
 above) if a query is specified for the *lookupDescription* in the view.
@@ -205,14 +205,14 @@ when assigning roles to user security groups in the admin module.
 Roles specified within the `module.xml` are available for selection within
 the admin module at run-time.
 
-![Assigning roles](../assets/images/modules/image46.png "Assigning roles")
+![Assigning roles](../assets/images/modules/roleName.png "Assigning roles")
 
 For each document, the privilege level is specified in terms of C
 (Create) R (Read) U (Update) D (Delete) and the
 document scope access level, either G, C, D or U. The underscore
 character (`_`) means no permission is granted.
 
-![Example role declaration](../assets/images/modules/image47.png "Example role declaration")
+![Example role declaration](../assets/images/modules/roles.png "Example role declaration")
 
 For example, a document privilege of CRUDC means the role has access
 to *Create*, *Read*, *Update*, *Delete* the document,
