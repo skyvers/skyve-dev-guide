@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-## Exception handling
-
 Skyve provides powerful error management capabilities extending general
 Java Exception handling.
 
@@ -22,7 +20,7 @@ including:
 -   data type violations, and
 -   requiredness violations.
 
-### ValidationException
+## ValidationException
 
 In addition, the Skyve API provides the `ValidationException` class. A
 ValidationException occurs when validation fails of data against the
@@ -52,7 +50,7 @@ Developer API code may extend the native lifecycle event (validate
 method) or be handled in other lifecycle event extensions (including
 preExecute events).
 
-### Concurrent multiple validation
+## Concurrent multiple validation
 
 Skyve supports concurrent multiple validation in the user interface
 display.
@@ -69,7 +67,7 @@ _Concurrent Multiple Validation (Desktop Mode)_
 ![Concurrent multiple validation](../assets/images/exception-handling/ConcurrentValidation_RM.png "Concurrent multiple validation - Responsive Mode")
 _Concurrent Multiple Validation (Responsive Mode)_
 
-### Data type validation
+## Data type validation
 
 Data type validation is handled automatically and natively by Skyve.
 
@@ -96,7 +94,7 @@ The automatic data type validation occurs before any API validation to
 ensure that the developer does not have to code against obvious
 violations.
 
-### Mandatory field validation
+## Mandatory field validation
 
 Mandatory fields (i.e. requiredness) are specified within the
 document.xml to ensure the requiredness is handled pervasively within
@@ -116,7 +114,7 @@ _Requiredness Violations (Desktop Mode)._
 ![Requiredness violations](../assets/images/exception-handling/Requiredness_RM.png "Requiredness violations - Responsive Mode")
 _Requiredness Violations (Responsive Mode)._
 
-### Business rule validation
+## Business rule validation
 
 Developers may extend the native Skyve lifecycle validation method, or
 throw validation exceptions in any other class, however if the
