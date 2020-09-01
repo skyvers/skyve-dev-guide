@@ -20,7 +20,7 @@ including:
 -   data type violations, and
 -   requiredness violations.
 
-## ValidationException
+## Validation Exception
 
 In addition, the Skyve API provides the `ValidationException` class. A
 ValidationException occurs when validation fails of data against the
