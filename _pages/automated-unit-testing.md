@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-# Automated unit-testing
-
 Along with the ability to generate domain files for [Documents](./../_pages/documents.md), Skyve also generates CRUD unit tests against these documents as well as tests for any defined actions.
 
 This is intended to give developers:
@@ -133,26 +131,33 @@ Fixtures are named groupings of methods, that when executed together can collabo
 For example:
 
 ```java
-Contact c = new DataBuilder().fixture(FixtureType.crud).build(Contact.MODULE_NAME, Contact.DOCUMENT_NAME);
+Contact c = new DataBuilder()
+	.fixture(FixtureType.crud)
+	.build(Contact.MODULE_NAME, Contact.DOCUMENT_NAME);
 ```
 
-Please be careful when calling other methods within a Factory class as you may inadvertently create a recursive loop if the method you are calling from is not annotated as a SkyveFixture. Make sure if you annotate a method with a fixture type you don't instantiate a builder of the same type.
+Please be careful when calling other methods within a Factory class as you may inadvertently create a recursive loop if the method you are calling from is not annotated as a SkyveFixture. Make sure if you annotate a method with a fixture type, you specify the `factoryBuild` method.
 
 For example, never call
 
-```@SkyveFixture(types = FixtureType.crud)
-    public static AccountSetup crudInstance() throws Exception {
-        AccountSetup bean = new DataBuilder().fixture(FixtureType.crud).build(AccountSetup.MODULE_NAME, AccountSetup.DOCUMENT_NAME);
+```java
+@SkyveFixture(types = FixtureType.crud)
+public static Account crudInstance() throws Exception {
+	Account bean = new DataBuilder()
+		.fixture(FixtureType.crud)
+		.build(Account.MODULE_NAME, Account.DOCUMENT_NAME);
 ```
 
 or the new DataBuilder() call will call the `crudInstance` method
 
 you need to write
 
-```
-	@SkyveFixture(types = FixtureType.crud)
-    public static AccountSetup crudInstance() throws Exception {
-        AccountSetup bean = AccountSetup.newInstance();
+```java
+@SkyveFixture(types = FixtureType.crud)
+public static Account crudInstance() throws Exception {
+	Account bean = new DataBuilder()
+		.fixture(FixtureType.crud)
+		.factoryBuild(Account.MODULE_NAME, Account.DOCUMENT_NAME);
 ```
         
 or use a databuilder without a fixture type.
@@ -167,10 +172,10 @@ For example:
 
 ```java
 public class CommunicationFactory {
-
 	@SkyveFixture(types = FixtureType.crud)
 	public static Communication crudInstance() {
-		Communication bean = new DataBuilder().build(Communication.MODULE_NAME, Communication.DOCUMENT_NAME);
+		Communication bean = new DataBuilder()
+			.build(Communication.MODULE_NAME, Communication.DOCUMENT_NAME);
 		bean.setSystem(Boolean.FALSE);
 		bean.setTag(new DataBuilder().fixture(FixtureType.crud).build(Tag.MODULE_NAME, Tag.DOCUMENT_NAME));
 
@@ -204,18 +209,18 @@ Note: The data files are included in `src/main/java` so that they can be used to
 A `Factory` can also be annotated with `@DataMap` when the test file to use does not match the attribute name, e.g. 
 
 ```java
-@DataMap(attributeName = User.homeModulePropertyName, fileName = "firstName.txt")
-public class UserFactory {
+@DataMap(attributeName = Contact.namePropertyName, fileName = "personName.txt")
+public class ContactFactory {
 ```
 
 If multiple attribute mappings are required, they need to be specified as part of a `@SkyveFactory` definition to allow repetition, e.g. 
 
 ```java
-@SkyveFactory(excludedActions = { Check.class, Next.class }, value = {
-		@DataMap(attributeName = User.userNamePropertyName, fileName = "lastName.txt"),
-		@DataMap(attributeName = User.homeModulePropertyName, fileName = "firstName.txt")
+@SkyveFactory(value = {
+		@DataMap(attributeName = Contact.namePropertyName, fileName = "personName.txt"),
+		@DataMap(attributeName = Contact.email1PropertyName, fileName = "email.txt")
 })
-public class UserFactory {
+public class ContactFactory {
 ```
 
 ## Extending automated tests

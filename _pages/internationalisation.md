@@ -29,6 +29,23 @@ Skyve also provides the `getLocale()` convenience method.
 	Locale locale = CORE.getUser().getLocale();
 ```
 
+For example, the System Dashboard uses this feature for the status settings
+```java
+
+	@Override
+	public SystemDashboard newInstance(SystemDashboard bean) throws Exception {
+
+		// generate status information for display
+		Locale locale = CORE.getUser().getLocale();
+		String valTrue = Util.i18n("ui.true.valueIconStyleClass", locale);
+		String valFalse = Util.i18n("ui.false.valueIconStyleClass", locale);
+		String valDisabled = Util.i18n("ui.disabled.value", locale);
+		String valNo = Util.i18n("ui.no.value", locale);
+		String valUnavailable = Util.i18n("ui.unavailable.value", locale);
+...
+```
+
+
 ### Setting a default language for a customer
 
 It is often the case that a business operates in one (default) language irrespective of the locales of their users and so Skyve allows you to declare the language for a customer.

@@ -204,7 +204,7 @@ H2 | H2 | true | false | 0 | 1024
 H2_NO_INDEXES | H2 without indexes | false | false | 0 | 1024 //Indexes in H2 generate warnings, this option gives you a cleaner log but no indexes
 MYSQL_5 | MySQL 5 | true | false | 64 | 1024
 MYSQL_5_4_BYTE_CHARSET | MySQL 5 | true | false | 64 | 768
-MYSQL_5 | MySQL 8 | true | false | 64 | 1024
+MYSQL_8 | MySQL 8 | true | false | 64 | 1024
 MYSQL_8_4_BYTE_CHARSET | MySQL 8 | true | false | 64 | 768
 MSSQL_2014 | SQL Server up to 2014 | true | true | 0 | 900 // SQL Server 2014 and below limits indexes to 900
 MSSQL_2016 | SQL Server 2016+ | true | true | 0 | 1024
@@ -416,6 +416,7 @@ Before you begin, ensure you have the following:
 * Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)), JDK 1.8
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)), so that the installation
 is in `C:\eclipse\`
+* NOTE - When downloading Eclipse, ensure you have selected Eclipse for Java EE (Enterprise Edition) Developers as the non-Enterprise Edition is missing libraries that Skyve utilises, as well as plugins that are used for local deployment. 
 * Wildfly 16 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
 * A RDBMS which is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
   administrator username and password. 

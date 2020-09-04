@@ -19,6 +19,16 @@ Skyve provides the following utility classes:
 </thead>
 <tbody>
 <tr>
+	<td>BeanValidator</td>
+	<td>Various methods for validation
+		<ul>
+			<li><code>validateBeanAgainstBizlet()</code> - Validate a bean against its bizlet .validate() - NB This validation method does NOT recursively validate using bizlets through the base document hierarchy as the bizlet class should be arranged in such a way as to extend the bizlet methods required of the base bizlet classes through the standard java extension mechanism.</li>
+			<li><code>validateBeanAgainstDocument()</code> - Validate a document instance against its metadata.</li>
+			<li><code>validateBeanPropertyAgainstAttribute()</code> - Validate a document attribute against its metadata</li>
+		</ul>
+	</td>
+</tr>
+<tr>
 	<td>Binder</td>
 	<td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li><code>formatMessage()</code> for using binding substitutions in string outputs using the correct converter</li><li><code>convertAndSet()</code> for setting a converted string value using the correct converter</li><li><code>createCompoundBinding()</code> for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul></td>
 </tr>

@@ -393,7 +393,9 @@ in one language.
 
 ```xml
 <condition name="personType">
-  <![CDATA[ContactType.person.equals(getContactType())]]>
+	<expression>
+  		<![CDATA[ContactType.person.equals(getContactType())]]>
+  	</expression>
 </condition>
 ```
 _Although available to client-side views, conditions can take advantage of strongly typed compiled code._
