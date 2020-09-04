@@ -8,9 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Security, persistence and access control
-
-### Transaction control
+## Transaction control
 
 Skyve implements consistent transaction control pervasively and provides
 a Persistence utility class for specific transaction management where
@@ -22,7 +20,7 @@ is the document instance at the lowest zoom level (usually from the list
 view), i.e. the starting document. Skyve automatically modifies default
 actions depending on the zoom level or transaction context.
 
-#### Concurrent conversations and transactional demarcation
+### Concurrent conversations and transactional demarcation
 
 Skyve supports conversation level transaction demarcation, meaning that
 the user can have any number of concurrent browser conversations.
@@ -52,7 +50,7 @@ does not match the persisted version value Skyve determines that another
 conversation has modified the record, and therefore the current
 conversation cannot commit without loss of information.
 
-#### Authorisation model - summary of options and discussion
+### Authorisation model - summary of options and discussion
 
 There are three common authorisation models:
 

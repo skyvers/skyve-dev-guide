@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-## Documents
-
 Skyve uses the term document to indicate the business-focused nature of
 application objects.
 
@@ -35,7 +33,7 @@ behaviours and document bean lifecycle events (e.g. *newInstance*,
 Other java class files can be located within the document package if
 required.
 
-### Document.xml
+## Document.xml
 
 Inside the document package, the *document.xml* file defines aspects of
 a document, including:
@@ -55,9 +53,9 @@ orphaned, the *document.xml* will nominate the parent document.
 
 ![Document declaration](../assets/images/documents/image55.png "Document declaration")
 
-### Document.xml sections
+## Document.xml sections
 
-#### Metadata
+### Metadata
 
 Each document.xml includes the following metadata:
 
@@ -71,7 +69,7 @@ Each document.xml includes the following metadata:
 
 _Document.xml sections_
 
-#### bizKey
+### bizKey
 To enable the application to display references simply, each document
 must define a business key (*bizKey*) definition (similar to a Java
 `toString()` method for the document). The *bizKey* is the default
@@ -112,7 +110,7 @@ within the context of that class.
 If the *bizKey* section contains invalid or uncompilable code, the
 domain *Impl* class will not compile.
 
-#### Attributes
+### Attributes
 
 Documents may have any number of attributes which can be scalar (simple
 value) or complex (references to other documents etc).
@@ -137,7 +135,7 @@ If an attribute includes a *description*, this will be rendered as
 tool-tip help button in the detail view. The *description* can
 contain simple markup as it will be rendered as HTML.
 
-#### Attribute types
+### Attribute types
 
 Developers should note that database specific implementations of each
 type are defined by *Hibernate* mapping settings and not by the Skyve
@@ -169,7 +167,7 @@ The following attribute types are available:
 
 _Document attribute types_
 
-#### Declaring `enum`
+### Declaring `enum`
 
 An enumeration is a text field which is constrained to be one of a set of values, and can either declare values or refer to another attribute value set.
 
@@ -326,7 +324,7 @@ The `Binder.formatMessage()` method will return the declared (or inferred) `desc
 String output = Binder.formatMessage(CORE.getCustomer(), "You have selected the action `{loadAction}`.", bean);
 ```
 
-#### Enum with domain
+### Enum with domain
 
 You can conditionally restrict the list of enum values available to the user by declaring an enum attribute with a domain. This means that from the full list of values declared within the document (being generated into a proper Java enum for compile time checks), you can restrict the values available to the user at run time to those that are relevant. 
 
@@ -379,7 +377,7 @@ public List<DomainValue> getConstantDomainValues(String attributeName) throws Ex
 
   
 
-#### Conditions
+### Conditions
 Document conditions are code snippets which return a Java `boolean` value,
 and which can be used by view declarations.
 
@@ -425,7 +423,7 @@ public boolean isNotPersonType() {
 ```
 _Generated condition method pairs._
 
-#### Constraints
+### Constraints
 Uniqueness constraints can be defined within the *document.xml*.
 
 Constraints are checked using row locking (where available, e.g. using
@@ -449,7 +447,7 @@ _The message is displayed to the user when the constraint is violated, and may c
 
 In the above example, the constraint will ensure uniqueness of the system communications per customer.
 
-#### Documentation
+### Documentation
 
 The *document.xml* includes a `<documentation>` tag to allow document
 specific documentation to be included with the document definition.
@@ -483,7 +481,7 @@ specific documentation to be included with the document definition.
 
 _documentation tag for a document_
 
-### Overriding documents
+## Overriding documents
 Documents may be overridden for customers, to allow customised variants
 of the document definition including:
 
@@ -518,7 +516,7 @@ Note also that the implementation (*Impl*) class for Contact is also
 overridden however this override is generated automatically by Skyve
 using the *generateDomain* ant task.
 
-### Database persistence of relationships and key constraints
+## Database persistence of relationships and key constraints
 
 To ensure referential integrity, Skyve (via Hibernate™) persists foreign
 key constraints in the data tier, as follows:
@@ -531,7 +529,7 @@ key constraints in the data tier, as follows:
   composition collection  | As for aggregation collection except with cascade delete.<br>For example, if Depot has a collection of Taxi which is of type composition, then deletion of the Depot will result in cascade deletion of the associated Taxis and therefore also the tuples in the joining table will be deleted. | Many-to-many
   parent-child collection | When a parent child relationship is declared from A to B, document B will have a parent property (with corresponding .getParent() and .setParent() methods) and the table for document B will have a `parent_id` field created.<br>For example, if the Invoice document is declared as parent to InvoiceLine and the persistent name of the InvoiceLine document is `INV_Invoice`Line then this table will have a column `parent_id` which holds the UUID key of the parent Invoice. | One-to-many
 
-#### Database indexes
+### Database indexes
 
 Hibernate™ ensures that all primary keys are indexed unique and that all
 tables have a primary key defined.
@@ -553,7 +551,7 @@ or turn off the default indexing behaviour where it is not required, as follows:
 		</memo>
 ```
 
-### Java classes
+## Java classes
 
 Skyve provides a *generateDomain* ant task which generates java classes
 as required for each document. These classes are located in the module
@@ -567,7 +565,7 @@ inconsistent with the application specification metadata.
 An *Impl* class is also generated for each customer-override of the
 document (located in the customer's *module.document* override package).
 
-### Bean
+## Bean
 
 Each document class extends the *Bean* interface.
 
@@ -593,7 +591,7 @@ Each generated document interface class implements either
 *PersistentBean* or *TransientBean* and represents the intersection of
 all customer-overrides.
 
-### PersistentBean
+## PersistentBean
 
 In addition to the basic attributes required for beans,
 *PersistentBeans* contain attributes required for persistence (including
@@ -610,7 +608,7 @@ for secure multi-user interactions.
 
 _PersistentBean attributes_
 
-### Persistence and locking
+## Persistence and locking
 
 Persistent Skyve documents are persisted as tables in the data tier, and
 document instances as data rows or tuples. Document attributes
