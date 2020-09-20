@@ -693,7 +693,7 @@ First, sign up for a Google Recaptcha key as follows:
 7. Read and accept the terms of use
 8. Click Submit
 
-Once you have received your key, copy your key into your JSON file under `api` -> `googleRecaptchaSiteKey:` 
+Once you have received your key, copy your *site* key into your JSON file under `api` -> `googleRecaptchaSiteKey:` 
 
 ```
 	// API Settings
