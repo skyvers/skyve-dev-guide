@@ -693,7 +693,12 @@ First, sign up for a Google Recaptcha key as follows:
 7. Read and accept the terms of use
 8. Click Submit
 
-Once you have received your key, copy your key into your JSON file under `api` -> `googleRecaptchaSiteKey:` 
+Once you have received your key, copy your key into the Startup Configuration section of the Admin menu of your Skyve application:
+1. From the Admin menu, open Configuration
+2. Change tabs to the Startup Configuration tab
+3. Scroll down to the Security Settings section, enter the Key and then press Save at the top of the form.
+
+Alternatively, you can place the API key in the project JSON file under `api` -> `googleRecaptchaSiteKey:` 
 
 ```
 	// API Settings
