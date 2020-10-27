@@ -8,9 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Concepts
-
-### Rendering
+## Rendering
 
 Skyve has two rendering modes to suit different user agents/device types. 
 Skyve applications will (by default) automatically switch to use the most suitable
@@ -29,7 +27,7 @@ as a simplified mode suitable for mobile devices and occasional use.
 Skyve's powerful routing capability gives developers the ability to override Skyve's default activity 
 and decide which rendering options suit their applications best.
 
-### Domain Model
+## Domain Model
 An application domain model can be thought of as a conceptual model
 which describes the various entities, attributes, roles, relationships
 and constraints that constitute the application.
@@ -44,7 +42,7 @@ each time the domain model metadata is modified.
 The aim of Skyve is to allow, as far as possible, the entire domain
 model to be declared in metadata rather than code.
 
-### Module and document
+## Module and document
 
 Modules are self-contained reusable segments of application capability.
 In Skyve, modules are presented to the user as separate accordion menus.
@@ -66,7 +64,7 @@ are available to developers. Using the API, developers can create
 module-level classes and document-level classes (called *Bizlets*) to
 supplement application capability.
 
-### Types
+## Types
 
 Skyve provides developers with a range of high-level business types
 (e.g. *DateOnly*, *DateTime*, *Decimal5*, *Text*, etc.). Each type
@@ -84,12 +82,12 @@ Skyve validates application metadata to ensure types are consistently
 and correctly applied throughout the application, while Java compilation
 ensures that typing is correctly implemented in developer code.
 
-### List and edit
+## List and edit
 
 Most applications present data in both list and detail views. Skyve
 assumes this fact and provides rich features for each type of view.
 
-#### List views
+### List views
 
 Typically, users of applications begin with a list view of all document
 instances and then select a document instance to edit. This pattern of
@@ -137,7 +135,7 @@ Skyve provides a Tag management tools for set-based operations
 intersection, union etc on tags, and the ability to export Tag
 selections or import (i.e. load) Tags from external sources.
 
-### Filtering
+## Filtering
 
 The List View (*ListGrid*) feature provides two methods for filtering
 large data sets:
@@ -145,7 +143,7 @@ large data sets:
 -   Simple Filter line, and
 -   Advanced Filter constructor.
 
-#### Simple filter line
+### Simple filter line
 
 The simple filter lines provides rapid ability to filter the list of
 data accessible from List View. Driven from the underlying metadata
@@ -175,7 +173,7 @@ controls, or by using the clear filter tool
 
 ![](../assets/images/concepts/RefreshFilter_DM.png)
 
-#### Advanced filter constructor
+### Advanced filter constructor
 
 The Advanced Filter constructor operates in three styles:
 
@@ -202,7 +200,7 @@ The advanced filter is applied using the filter tool
 ![](../assets/images/concepts/image15.png) which is available in the construction
 area.
 
-#### Flat style advanced search
+### Flat style advanced search
 
 In flat style search, any number of criteria can be applied to filter the list.
 
@@ -240,7 +238,7 @@ The advanced filter is applied using the filter tool
 ![](../assets/images/concepts/image15.png) which is available in the construction
 area.
 
-#### Nested style advanced search
+### Nested style advanced search
 
 Nested style allows complex and sophisticated filter criteria. In this style, ***AND*** an ***OR*** operators are explicitly selected
 with logical subclauses. The scope of each subclause is indicated by the square bracket.
@@ -257,7 +255,7 @@ The advanced filter is applied using the filter tool
 ![](../assets/images/concepts/image15.png) which is available in the construction
 area.
 
-#### Inline style advanced search
+### Inline style advanced search
 
 Inline style is a simplified version of the Nested style, which allows
 the ***AND*** and ***OR*** operators to be specified for each criteria,
@@ -274,7 +272,7 @@ The advanced filter is applied using the filter tool
 ![](../assets/images/concepts/image15.png) which is available in the construction
 area.
 
-#### Edit views
+### Edit views
 
 Edit views provide detailed access to document attributes within the
 context of the document instance.
@@ -303,7 +301,7 @@ Edit views also set the context for instance-specific behaviours
 Apart from providing custom actions, developers can also extend default
 behaviours for each document.
 
-### Overriding
+## Overriding
 
 Skyve offers developers the option of using default options and
 behaviours for their applications unless they specifically override that
@@ -311,7 +309,7 @@ part of the application. The purpose of this is to try to encourage
 developers to use consistent approaches except where absolutely
 necessary.
 
-#### Example - overriding data entry widgets
+### Example - overriding data entry widgets
 
 For example, in Skyve an Invoice document may have a Quantity attribute.
 Once the attribute is declared as type *Integer*, the developer can rely
@@ -333,7 +331,7 @@ the option to rely on the default characteristic or override this with
 for the particular context. This means that the developer only needs to
 be specific where required.
 
-#### Example - overriding query definitions for lists of documents
+### Example - overriding query definitions for lists of documents
 
 Similarly, wherever Invoices are presented in a list, the developer can
 rely on Skyve to provide all attributes of the Invoice in the list by
@@ -348,7 +346,7 @@ list, and so on.
 ![Override levels for a document widget declaration](../assets/images/concepts/image27.png "Override levels for a document widget declaration")
 _Override levels for a document widget declaration_
 
-### bizKey - the business key concept
+## bizKey - the business key concept
 
 To enable the application to display references simply, each document
 must define a business key (*bizKey*) definition (similar to a Java
@@ -385,7 +383,7 @@ _bizKey as an expression_
 ```
 _bizKey as a method in Java_
 
-### Zoom
+## Zoom
 
 Zoom is a core concept for the management of logical relationships.
 
@@ -411,7 +409,7 @@ or transaction context.
 ![Zoom levels and transactions](../assets/images/concepts/image28.png "Zoom levels and transactions")
 _Zoom levels and transactions_
 
-#### State management and conversations 
+### State management and conversations 
 
 Skyve supports conversation based interactions, meaning that
 the user can have any number of concurrent browser interactions.
@@ -435,7 +433,7 @@ and then at some later date
 someOtherObject = CORE.getStash().get("someKey");
 ```
 
-#### Transaction demarcation
+### Transaction demarcation
 
 Conflicting actions between conversations (e.g. two attempts to update
 the same record from within different browser windows conversations, by different sessions, or by different users) are handled and users will be
@@ -448,7 +446,7 @@ successful, and any subsequent concurrent transaction involving the same
 record will be notified that their attempts to update the same record
 are no longer valid.
 
-### Customer
+## Customer
 
 Because Skyve is intended and designed for multi-tenancy, data is
 assumed to exist within a customer (i.e. tenant) context. Skyve
@@ -456,7 +454,7 @@ automatically limits all user interactions to data within the same
 customer context (except where developers intentionally use insecure SQL
 methods).
 
-### Customer overriding
+## Customer overriding
 
 Any individual piece of Skyve application metadata can be overridden for
 tenants within a multi-tenant environment, enabling comprehensively
@@ -480,7 +478,7 @@ _(By vanilla module, we mean the module which is in the main module package rath
 
 Each customers get their corresponding properties and any behaviour in the overridden package uses the overridden class.
 
-### Role privileges
+## Role privileges
 
 Skyve allows developers to specify application security roles in terms
 of access permissions on a per-document basis.
@@ -496,7 +494,7 @@ If users are assigned multiple roles, their access to documents
 represents the highest level of access across all roles assigned to
 them.
 
-### Document scoping
+## Document scoping
 
 Skyve allows document privileges to be scoped either as *Global* `(G)`,
 *Customer* `(C)`, *Data Group* `(D)` or *User* `(U)` level.
@@ -512,7 +510,7 @@ The use of insecure SQL bypasses the inbuilt scoping of Skyve, so
 developers using insecure SQL must take responsibility to ensure they
 respect data contexts.
 
-### DataGroup
+## DataGroup
 
 DataGroups roughly correspond to the concept of a department or
 business group, where most users only interact with data relevant to
@@ -524,7 +522,7 @@ Group can interact only with data which was created for that group,
 whilst users who have no group specified (i.e. managers or
 administrators) have access across all Data Groups.
 
-### Bean
+## Bean
 
 Skyve implements document instances as Enterprise Java Beans.
 
@@ -533,7 +531,7 @@ methods. Utility classes are provided as part of the API to allow
 developers to manipulate beans securely and within proper transactional
 boundaries.
 
-### Bizlet
+## Bizlet
 
 Skyve allows developers to expand on default *CRUD* and validation
 behaviours with document-specific Java classes called *Bizlets*.
@@ -547,7 +545,7 @@ lifecycle.
 compilation will ensure that *Bizlet* code is valid and compilable for
 each customer override.
 
-### Actions
+## Actions
 
 Skyve *Actions* represent behaviours which impact on application state or data. 
 
@@ -568,7 +566,7 @@ icon, visibility, confirmation text, tool-tip text etc. Skyve will not
 allow an action to be displayed on a view unless the user's role
 declares execute privileges for the action.
 
-### Enumerations
+## Enumerations
 
 Skyve provides an *enum* attribute type which allows the developer to
 declare the set of values applicable for the attribute. Enumerations
@@ -597,7 +595,7 @@ Skyve will automatically include the Java *enum* in the generated domain
 classes and provide a combo with the values by default wherever
 required.
 
-### Domain values and types
+## Domain values and types
 
 Domain values are groups of values applicable for a particular
 situation. 
@@ -631,7 +629,7 @@ submitted and the manager's review has been completed, then the
 application would declare a *dynamic* domain type (calculated based on
 the current state of the timesheet bean).
 
-#### Domain types and caching implications
+### Domain types and caching implications
 Constant domain values may be baked into the view and remain invariant for the system life.
 
 Variant domain values are guaranteed to be evaluated each request-response cycle.
@@ -639,7 +637,7 @@ Variant domain values are guaranteed to be evaluated each request-response cycle
 Dynamic domain values are guaranteed to be evaluated as for variant values, except
 that the bean is provided to the method for value generation.
 
-#### Performance implications of domain types
+### Performance implications of domain types
 
 *Constant* domains are generated into *Javascript* code (for Web 2) and
 into *html* (for Web 1). A *constant* domain represents the least
@@ -660,7 +658,7 @@ Domain value generation is specified in Bizlet code by overriding the
 methods `getConstantDomainValues()`, `getVariantDomainValues()` and/or
 `getDynamicDomainValues()`.
 
-### Converters
+## Converters
 
 Applications typically require some data types to be represented in
 specific ways, e.g. time, date, currency, etc. Skyve provides a number
@@ -697,7 +695,7 @@ sb.append(customer.getDefaultDateConverter().toDisplayValue(bean.getActDate()));
 ```
 _The use of converters ensures consistent representation_
 
-### Resources
+## Resources
 
 Skyve provides access to resources in a generic way to allow multiple
 levels of overriding.
@@ -707,7 +705,7 @@ icon, the application will specify the icon filename within a resource
 context. The absolute location of the file will be resolved at run-time
 depending on the user's context.
 
-#### Resource hierarchy
+### Resource hierarchy
 
 Skyve provides icons for default action buttons - *Add*, *Save*,
 *Cancel*, *Delete* etc. A customer may require a different icon set and
@@ -720,7 +718,7 @@ module *resources* folder. To override these module-specific icons for a
 specific customer, files with matching names are placed in the resources
 folder of the module override in the customer package, and so on.
 
-### Documentation
+## Documentation
 
 Skyve encourages developers to include documentation snippets as part of
 the application metadata with the intention that documentation should be
@@ -730,7 +728,7 @@ Documentation (*doc*) tags within the xml metadata hold basic HTML style
 documentation. *Doc* tags are also used by the javadoc *doclet* provided
 by Skyve, but are also accessible to developers via the Skyve *API*.
 
-### Interceptor
+## Interceptor
 
 Skyve provides a flexible interceptor concept to allow generic interception of 
 bean lifecycle events.
@@ -749,7 +747,7 @@ Developers can modify, extend or add additional interceptors as required (or rem
 
 Where multiple interceptors are declared, the interceptors are processed in the order they are declared.
 
-### Bizport
+## Bizport
 
 *Bizport* is a unique feature which allows the user to import and export
 bulk data. *Bizport* generates a subset of the underlying normalised

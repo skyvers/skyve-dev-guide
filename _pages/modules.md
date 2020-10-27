@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-## Modules
-
 Modules define self-contained application pieces and correspond to menus
 within the system accordion menu pane. The repository/apps folder
 contains all application metadata and code, organised as application
@@ -24,7 +22,7 @@ Code in the domain folder is never manipulated by the developer
 directly; all application changes are done via metadata and API-level
 code.
 
-![Skyve Project structure](../assets/images/modules/image39.png "Skyve Project Structure")
+![Skyve Project structure](../assets/images/modules/xmlView.png "Skyve Project Structure")
 
 The `module.xml` file is located in the top level directory of the
 module and defines the following:
@@ -42,9 +40,9 @@ module and defines the following:
 
 _Module.xml sections_
 
-### Defining the `module.xml`
+## Defining the `module.xml`
 
-#### Module header
+### Module header
 
 An example module header is provided below. Note the key attributes of
 *schemaLocation*, name, title *homeRef* and *homeDocument*.
@@ -61,7 +59,7 @@ _Figure 18 - Module definition header_
 
 _In this example, the home (or default) target for the module is the edit view of the Welcome document._
 
-### Documents
+## Documents
 
 The `module.xml` includes declarations for each document.
 
@@ -91,9 +89,9 @@ Documents listed in the `module.xml` may reference documents from other
 modules (*moduleRef*) or are matched with document packages within the
 module folder.
 
-![Document packages](../assets/images/modules/image42.png "Document packages")
+![Document packages](../assets/images/modules/documentPackages.png "Document packages")
 
-### Queries
+## Queries
 
 The `module.xml` file can include definitions of queries used in the
 application. Queries declared in the `module.xml` are called *metadata
@@ -114,7 +112,8 @@ attribute associations and collections. When used in this way, the query
 determines eligible references for membership in the association or
 collection.
 
-### Default Queries
+
+## Default Queries
 
 When Skyve generates a query (in the situation where a query is required
 but none has been specified), this *default* query will contain all
@@ -131,7 +130,7 @@ to use needs to be defined in the queries section for the module). For example:
 <document ref="DocumentNumber" defaultQueryName="qDocumentNumbers"/>
 ```
 
-### Declaring queries
+## Declaring queries
 
 Skyve metadata queries use object references, rather than SQL.
 
@@ -141,11 +140,11 @@ document which is the subject of the query.
 If the query is the basis of a *listGrid*, then double-clicking in the
 listGrid will zoom to the *driving document*.
 
-![Query definition](../assets/images/modules/image43.png "Query definition")
+![Query definition](../assets/images/modules/documentQuery.png "Query definition")
 
-![Query based list](../assets/images/modules/image44.png "Query based list")
+![Query based list](../assets/images/modules/listTitle.png "Query based list")
 
-#### Query column definition
+### Query column definition
 
   Query column attributes | Description
   ----------------------- | -----------
@@ -166,7 +165,7 @@ _Query column definitions_
 
 Driving documents can be the subject of many queries.
 
-#### Content query columns
+### Content query columns
 
 Skyve also provides a `content` column type for content items (images and file attachments). The `content` column type has the following attributes:
 
@@ -183,7 +182,7 @@ Skyve also provides a `content` column type for content items (images and file a
 
 ![Thumbnail image in list](../assets/images/working-with-content/thumbnail-image-list.png "Thumbnail image in list")
 
-#### Queries for reference attributes
+### Queries for reference attributes
 
 If a query is specified for an association attribute, Skyve will use
 that query for association selections in the application user interface.
@@ -198,12 +197,12 @@ list of the *bizKeys* of the driving document instances in the same
 order as the default query (or ordered by the first column if no query
 is specified).
 
-![Queries as a source for record selection](../assets/images/modules/image45.png "Queries as a source for record selection")
+![Queries as a source for record selection](../assets/images/modules/lookupDescription.png "Queries as a source for record selection")
 
 However, *lookupDescription* combos can display multiple columns (as
 above) if a query is specified for the *lookupDescription* in the view.
 
-### Roles
+## Roles
 
 The `module.xml` declares roles for the module.
 
@@ -214,14 +213,14 @@ when assigning roles to user security groups in the admin module.
 Roles specified within the `module.xml` are available for selection within
 the admin module at run-time.
 
-![Assigning roles](../assets/images/modules/image46.png "Assigning roles")
+![Assigning roles](../assets/images/modules/roleName.png "Assigning roles")
 
 For each document, the privilege level is specified in terms of C
 (Create) R (Read) U (Update) D (Delete) and the
 document scope access level, either G, C, D or U. The underscore
 character (`_`) means no permission is granted.
 
-![Example role declaration](../assets/images/modules/image47.png "Example role declaration")
+![Example role declaration](../assets/images/modules/roles.png "Example role declaration")
 
 For example, a document privilege of CRUDC means the role has access
 to *Create*, *Read*, *Update*, *Delete* the document,
@@ -239,7 +238,7 @@ developer code (except for insecure SQL). The benefit of this is that
 developer code does not have to handle security issues and therefore the
 developer is not able to make inadvertent security holes.
 
-#### Document scope
+### Document scope
 
 While document privileges define what type of activities a role may
 perform on a document, the document scope defines which document
@@ -266,15 +265,15 @@ within the same *DataGroup* context as the user.
 A *User* scope means that for that role, only data created within a
 user's context can be viewed by that user.
 
-### Worked Example
+## Worked Example
 
-#### Requirement
+### Requirement
 
 An application must allow each user to create and manage but not delete
 their personal preferences securely, while allowing administrators to
 maintain read, update and delete but not create preferences.
 
-#### Implementation
+### Implementation
 
 The `module.xml` declares two roles, User and Administrator:
 
@@ -284,7 +283,7 @@ The user is assigned privileges (CRU\_U) to create, read and update their own (i
 
 The administrator role has privileges (\_RUDC) to documents within the customer scope.
 
-#### Results
+### Results
 
 Skyve will guarantee the no user activity or developer code can bypass
 the declared permissions.
@@ -298,7 +297,7 @@ If a user is given both roles, the privileges are added and result in
 Administrator users, if they also require personal preferences, are
 assigned both roles.
 
-### Role documentation
+## Role documentation
 
 Role definition can include documentation within a &lt;doc&gt; tag which
 is available to the application and to the documentation generation
@@ -306,7 +305,7 @@ module (Doctor).
 
 ![Role definition](../assets/images/modules/image49.png "Role definition")
 
-### Menus
+## Menus
 
 The application menu is declared in terms of groups and items. A menu
 group is an expandable menu (submenu).
@@ -317,7 +316,7 @@ Roles included in the menu item stanza have access to that menu item. If
 the menu item specifies a role, then users with that role will see the
 menu item.
 
-#### Menu item types
+### Menu item types
 Skyve supports a number of multiple-result menu items - _list_, _calendar_, _map_, _tree_.
 
 These item types provide the user with the ability to understand their information within the context it exists. 
@@ -340,7 +339,7 @@ The _query_ source type will populate results based on the specified module quer
 
 The _model_ source type will populate results based on the specified model.   
 
-##### calendar
+#### calendar
 Partially implemented.
 
 Represents each result instance as a time-period bar within a calendar layout.
@@ -353,7 +352,7 @@ Properties:
 * _startBinding_ - the date/dateTime attribute binding which represents the start of the time period to be displayed in the calendar for each result
 * _endBinding_ - the date/dateTime attribute binding which represents the end of the time period to be displayed in the calendar for each result
 
-##### edit
+#### edit
 Navigates the user to a new instance of the specified document.
 
 The Skyve _edit_ view allows a user to interact with a single bean instance and normally, a user will
@@ -368,7 +367,7 @@ Properties:
 * _document_ -  if populating instances for all 
 * _name_ - the display name of the menu item is it appears in the menu
 
-##### group
+#### group
 A group is an expandable menu (submenu).
 
 ![Group menu item](../assets/images/modules/group-menu-item.png "Group menu item")
@@ -376,13 +375,13 @@ A group is an expandable menu (submenu).
 Properties:
 * _name_ - the display name of the menu item is it appears in the menu
 
-##### item
+#### item
 This is the abstract type for menu items - not applicable for declaration in the module declaration. 
 
-##### link
+#### link
 Not yet implemented
 
-##### list
+#### list
 Represents a list/grid of instances.
 
 Properties:
@@ -393,7 +392,7 @@ Properties:
 
 ![SmartClient list menu](../assets/images/modules/smart-client-menu.png "SmartClient list menu item")
 
-##### map
+#### map
 Represents instances spatially on a map.
 
 Properties:
@@ -407,7 +406,7 @@ Properties:
 
 ![SmartClient map menu](../assets/images/modules/smart-client-menu-map.png "SmartClient map menu item")
 
-##### tree
+#### tree
 SmartClient render only.
 Represents hierarchical information in a lazy-loaded tree structure.
 
@@ -420,7 +419,7 @@ Properties:
 
 ![SmartClient tree menu](../assets/images/modules/smart-client-menu-tree.png "SmartClient tree menu item")
 
-#### Other menu options
+### Other menu options
 For the PrimeFaces render, you can take advantage of PrimeFaces options for menu arrangement within the _template.xhtml_ component.
 For example, the default menu behaviour is declared as:
 ```<div class="#{leftMenu ? 'layout-wrapper layout-menu-static layout-menu-light' : 'layout-wrapper layout-menu-light'}">```
@@ -436,7 +435,7 @@ While a horizontal behaviour is declared as follows:
 
 For more information and other options refer to the PrimeFaces documentation.
 
-### Module documentation
+## Module documentation
 
 Module definition can include detailed documentation about the module
 within the *&lt;doc&gt;* tag. This documentation is used by the
@@ -444,7 +443,7 @@ documentation generation module (Doctor).
 
 ![Module documentation](../assets/images/modules/image52.png "Module documentation")
 
-### Overriding modules
+## Overriding modules
 
 Module definitions can be overridden to provide a bespoke experience of
 the application.
@@ -469,7 +468,7 @@ simply the components that differ. This is because the module override
 can be subtractive, by not including elements contained within the
 generic module.
 
-### Java implementation
+## Java implementation
 
 Java classes are contained within the domain folder situated within the
 module package.
@@ -489,7 +488,7 @@ should not be modified in any way by developers. However, inspection of
 the domain classes can be a useful process to analyse validation
 problems within the module.
 
-### The Skyve administration (admin) module
+## The Skyve administration (admin) module
 
 The Skyve admin (administration) module is a module provided as part of the Skyve platform, however
 it is able to be customised if required according to the methods described above (as for any other 
@@ -498,7 +497,7 @@ Skyve module).
 In particular the admin module provides basic roles for common user profiles who interact with admin
 module features, such as managing contacts and users.
 
-#### Admin module roles
+### Admin module roles
 
   Role | Description | Comments
   -----|-------------|-----------
@@ -522,7 +521,7 @@ however for specific details of privileges, view the admin module xml declaratio
 
 ![Admin privileges by document](../assets/images/modules/image31b.png "Admin module privileges by document")
 
-#### Prototype mode
+### Prototype mode
 
 To assist in rapid development and prototyping, Skyve provides a `prototype` option for modules which changes a number of default Skyve behaviours. Developers should note that the `prototype` option is designed to provide indicative results that may not necessarily provide optimal performance.
 

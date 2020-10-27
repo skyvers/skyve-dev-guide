@@ -8,9 +8,7 @@ sidebar:
   nav: docs
 ---
 
-## Customers
-
-### Customer declaration
+## Customer declaration
 Skyve supports multi-tenant Software-As-A-Service (SAAS) applications
 with extensive ability to customise the application for each
 tenant/customer.
@@ -40,7 +38,7 @@ file (displayed in the top left hand corner of the UI above the
 accordion pane), and assumes the file is located within the customer's
 resources folder.
 
-#### Internationalisation
+### Internationalisation
 Skyve supports building apps for local language support and multi-language support (internationalisation) and both left-to-right and right-to-left languages.
 
 ![Example Arabic with right-to-left](../assets/images/customers/arabic-detail.png "Example Arabic view with right-to-left")
@@ -63,7 +61,7 @@ If the language (in this case "ar") is not specified in the `customer.xml`, Skyv
 
 For more details, see [Internationalisation](./../_pages/internationalisation.md)
 
-### Resources
+## Resources
 
 Skyve provides a resource hierarchy to allow for the inclusion of
 additional resources in a generic way.
@@ -85,7 +83,7 @@ So that report templates can references resources in a generic way, the
 absolute file location of the customer resources folder is resolved at
 run-time and included automatically as a report parameter.
 
-### Modules
+## Modules
 
 The `customer.xml` file lists all modules accessible to the customer.
 
@@ -98,7 +96,7 @@ customer.
 The home or default module is declared here but can be overridden per
 user from within the user functionality (within the admin module).
 
-### Adding a new customer
+## Adding a new customer
 
 Skyve is designed around the ability to build applications, then re-sell them to multiple _customers_ or _tennants_ as Software-as-a-Service (SaaS). 
 The _customer_ concept allows you to share and reuse the code you create for your application, 
@@ -111,7 +109,7 @@ In a multi-tenanted environment, each user must specify the customer scope in wh
 In Skyve the term _Customer_ connotes customisation. If there's no (or only trivial) customisation required,
  you might resell the software to millions of users under the one Skyve customer context.
 
-### Setting a default customer
+## Setting a default customer
 
 Note that if you only ever want to use a single customer, you can specify a default customer in the .json file of your instance. This will also avoid having to enter a customer name at the sign in prompt.
 
@@ -122,7 +120,7 @@ Note that if you only ever want to use a single customer, you can specify a defa
 
 ![Signing in with a default customer](../assets/images/customers/skyve_default_customer_sign_in.png "Signing in with a default customer")
 
-### Customer roles
+## Customer roles
 
 For background on the security group concept, see [Security groups](./../_pages/building-applications.md).
 
