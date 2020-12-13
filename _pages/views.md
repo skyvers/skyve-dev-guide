@@ -1433,8 +1433,8 @@ Content picker    | Y | Y | Y |   |
 Date picker       | Y | Y | Y |   | 
 Date/time picker  | Y | Y | Y |   | 
 Drop-down list    | Y | Y | Y |   | 
-geolocator        | Y |   |   |   | 
-geometry   | Y |   |   |   | 
+geolocator        | Y | Y |   |   | 
+geometry   | Y | Y |   |   | 
 inject            | Y |   |   |   | 
 spinner   | Y | Y | Y |   | 
 listMembership   | Y | Y |   |   | 
