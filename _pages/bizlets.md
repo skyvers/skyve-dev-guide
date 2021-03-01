@@ -289,7 +289,7 @@ The `resolve()` method provides the opportunity for the developer to return the 
 
 #### Worked example - DomainValues from results of a DocumentQuery
 
-To create a `List` of `DomainValue` from the results of a `DocumentQuery`, you can take advantage of the Java 8 stream construct as follows:
+To create a `List` of `DomainValue` from the results of a `DocumentQuery`, you can take advantage of the Java stream construct as follows:
 
 ```java
 DocumentQuery q = pers.newDocumentQuery(CommunicationTemplate.MODULE_NAME, CommunicationTemplate.DOCUMENT_NAME);

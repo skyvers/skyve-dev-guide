@@ -14,16 +14,16 @@ sidebar:
 
 #### Problems building your app
 
-* Check that you have Java 8 (jdk1.8) available in your IDE.
+* Check that you have Java 11+ (jdk11) available in your IDE.
 
 For example, in Eclipse, right-click your project and choose _Properties_->_Java Build Path_
 Change to the _Libraries_ tab, select the JRE Library and click _Edit_
 Click _Installed JREs_
-Add or select Java 8 (jdk1.8)
+Add or select Java 11 (jdk11)
 
 ![Installed JRE](../assets/images/appendix/installed-jre.png "Installed JRE")
 
-* Check that you have Java 8 (jdk1.8) selected for compiler compliance in your IDE.
+* Check that you have Java 11 (jdk11) selected for compiler compliance in your IDE.
 
 For example, in Eclipse, right-click your project and choose _Properties_->_Java Compiler_->_Configure Workspace Settings_
 
@@ -31,7 +31,7 @@ For example, in Eclipse, right-click your project and choose _Properties_->_Java
 
 Alternatively, select _Enable project specific settings_ and set the project compliance level.
 
-* Check that you have the Java 8 (jdk1.8) selected for the Runtime JRE.
+* Check that you have the Java 11 (jdk11) selected for the Runtime JRE.
 
 For example, in Eclipse, right-click your project and choose _Run As_->_Run Configurations..._
 
@@ -413,7 +413,7 @@ different operating system or database.
 
 Before you begin, ensure you have the following:
 
-* Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)), JDK 1.8
+* Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/)), JDK 11
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)), so that the installation
 is in `C:\eclipse\`
 * NOTE - When downloading Eclipse, ensure you have selected Eclipse for Java EE (Enterprise Edition) Developers as the non-Enterprise Edition is missing libraries that Skyve utilises, as well as plugins that are used for local deployment. 
@@ -441,13 +441,13 @@ For this example, to use MS SQL Server as the database for the Skyve project:
   again, remember the port number you've entered.
 
 #### Configuring Java
-* Download jdk1.8.0 (if you haven't already) 
-  (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 
+* Download jdk11 (if you haven't already) 
+  (http://www.oracle.com/technetwork/java/javase/downloads/) 
   and install it to your machine.
 * Go your Control Panel->System and Security->System (for Windows). Now select 
   'Advanced system settings' and click the "Environment Variables..." button.
 * Locate 'Path' under System variables double click it, click the _New_ button and 
-  enter this (with the semicolon) `;<jdk1.8.0_xxx installation folder>\bin\` and 
+  enter this (with the semicolon) `;<jdk11 installation folder>\bin\` and 
   click the _OK_ button and _OK_, again _OK_ to close the System Properties 
   dialog box.
 
@@ -460,7 +460,7 @@ any issues with Java paths and spaces.
 * Start Eclipse using Eclipse.exe and select `C:\\_\` as workspace, tick 'Use as 
 default option - do not ask again', Cancel the welcome wizard and Close the welcome 
 tab in the editor frame.
-* Change compiler compliance level to 1.8 (Window -> Preferences -> Java -> Compiler) 
+* Change compiler compliance level to 11 (Window -> Preferences -> Java -> Compiler) 
 press 'Apply' - press Yes for full build, and then press OK.
 * To manage the Wildfly application server from Eclipse:
   * Open the server explorer window if it is not already in your workspace (Window -> Show View -> Servers)
@@ -530,18 +530,17 @@ http://192.168.43.182:8080/myapp
 #### Recommended requirements 
 We recommend the following:
 - 4GB RAM for Linux and 8GB RAM for Windows
-- Java JDK 8u211 (this is the JDK for Java 8)
+- Java JDK 11 (this is the JDK for Java 11)
 - Wildfly 16
 - Disk space requirements depend on the nature of the application especially if the database and content repository are located on the same drive, however, for most common applications, 50GB drive space will probably be sufficient.
 
 ### Installation of prerequisites
 To run a Skyve application, the server requires:
 
-Java 8 (also called 1.8) - while the JRE is sufficient, the JDK is recommended.
- - Download the Java JDK 8u211 from https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html 
- - These instructions may assist for linux - https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jdk.html#BJFGGEFG (though note that this mentions an slightly older version of Java)
+Java 11 - while the JRE is sufficient, the JDK is recommended.
+ - Download the Java JDK 11 from https://www.oracle.com/technetwork/java/javase/downloads 
 
-Wildfly 16
+Wildfly 16+
  - Download from http://wildfly.org/downloads/   
  - This link may assist - https://linuxtechlab.com/wildfly-10-10-1-0-installation/ 
 
@@ -649,6 +648,30 @@ For example, for external access, typically you would assign as follows:
 
 #### Create a folder for content
 Skyve includes the elastic content repository - the repository requires a dedicated folder to persist files. The user credential running wildfly (for example) will need read-write permissions to this folder.
+
+### Create a folder for addins
+Typically, it's easiest to add one add-ins subfolder for all your projects, and refer to it directly in all project JSON settings files:
+
+```json
+	// Add-ins settings
+	addins: {
+		// Where to look for add-ins - defaults to <content.directory>/addins/
+		directory: "C:/_/content/addins/"
+	},	
+```
+(Note the trailing slash.)
+
+Load the skyve-content.zip (this manages content locally) into the addins by:
+* right-click your project and run as Maven clean
+* the skyve-content.zip will be downloaded to your target folder - the results of the maven clean will include this location, usually <project>\target\
+
+```
+[INFO] --- maven-dependency-plugin:2.8:copy (copy-content-addin-dependency) @ elixan ---
+[INFO] Configured Artifact: org.skyve:skyve-content:7.0.2:zip
+[INFO] Copying skyve-content-7.0.2.zip to C:\_\j11\elixan\target\skyve-content.zip
+```
+
+* copy the skyve-content.zip to the directory specified in the JSON settings file above.
 
 #### Install the wildfly service
 So that the Skyve application will be always available, install the wildfly service, ensuring that the service will have read/write access to the content folder.
@@ -853,9 +876,9 @@ Windows 10.
 Install Java JDK
 
 Set `JAVA\_HOME` to location of the Java root directory - e.g.
-`C:\Java\jdk1.8.0_181`
+`C:\Java\jdk11...`
 
-Set `PATH` to include `Java\bin` - e.g. `C:\Java\jdk1.8.0_181\bin`
+Set `PATH` to include `Java\bin` - e.g. `C:\Java\jdk11...\bin`
 
 copy `sqljdbc4.jar` and `sqljdbc\_auth.dll` to `java\jdk\jre\lib\ext`
 
@@ -1097,8 +1120,8 @@ The following are our personal instructions for deploying a Skyve application in
 
 These instructions apply to a standalone server installation of Wildfly 16 on Windows server connecting to Microsoft SQL Server.
 
-- [download](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and install the latest JDK 
-- create a SYSTEM "JAVA_HOME" system environment variable and set it to where you installed the JDK to (`C:\Program Files\Java\jdk1.8.0_211` by default, substitute with correct Java version path)
+- [download](http://www.oracle.com/technetwork/java/javase/downloads/) and install the JDK 11+
+- create a SYSTEM "JAVA_HOME" system environment variable and set it to where you installed the JDK to (`C:\Program Files\Java\jdk11` by default, substitute with correct Java version path)
 - [download](http://wildfly.org/downloads/) Wildfly 16.x Final 
   - extract to C:\wildfly
 - [download](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-2017) and copy the sql server driver jar and module.xml (below) to `C:\wildfly\modules\system\layers\base\com\microsoft\sqlserver\main`
@@ -1333,7 +1356,7 @@ These instructions apply to Bitnami Wildfly 10 stack installation on Windows ser
 ```
 
 * rename folder `Bitnami\wildfly-10.1.0-1\java` to `Bitnami\wildfly-10.1.0-1\javaold`
-* Download latest Java 8 64 runtime but select to change destination folder during install to `Bitnami\wildfly-10.1.0-1\java`
+* Download latest Java 11 64 runtime but select to change destination folder during install to `Bitnami\wildfly-10.1.0-1\java`
 * Add java_home env variable and append `%JAVA_HOME%\bin` to path env variable eg `JAVA_HOME=D:\Bitnami\wildfly-10.1.0-1\java`, `Path=%JAVA_HOME%\bin`
 * Add env variable:
   * name: `JAVA_OPTS`
