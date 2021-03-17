@@ -123,13 +123,11 @@ Note that the `treeGrid` provides the `continueConversation` parameter attribute
 
 To add child nodes to the tree, you need to set the new node bizParentId to the bizId of the parent node.
 
-You can do this with an action in the Position as follows:
-
-Firstly, add data-entry attributes to the Position document:
+You can do this with an action in the Position as follows - firstly, add data-entry attributes to the Position document:
 
 ```xml
 		<!-- For adding child nodes / reporting staff -->
-		<!-- These attributes are transient as they are only required for the action of adding new reports -->
+		<!-- These attributes are transient as they are only required for the action of adding new staff reports -->
 		<!-- The new nodes will be created as separate instances of the document -->
 		<text name="newReportPositionTitle"  persistent="false" trackChanges="false" audited="false">
 			<displayName>New Report Position Title</displayName>
@@ -143,7 +141,7 @@ Firstly, add data-entry attributes to the Position document:
 
 (At this point, generate domain so that the new attributes can be referenced).
 
-Add an action to create a New Report, in the actions package within the Position document package.
+Add an action to create a new staff report, in the actions package within the Position document package.
 
 ```java
 package modules.myModule.Position.actions;
@@ -155,7 +153,7 @@ import org.skyve.web.WebContext;
 
 import modules.myModule.domain.Position;
 
-public class AddNewReport implements ServerSideAction<Position> {
+public class AddNewReportStaff implements ServerSideAction<Position> {
 
 	@Override
 	public ServerSideActionResult<Position> execute(Position bean, WebContext webContext) throws Exception {
@@ -179,11 +177,11 @@ public class AddNewReport implements ServerSideAction<Position> {
 }
 ```
 
-Ensure that you have declared the privilege to use the new `AddNewReport` action in the module xml
+Ensure that you have declared the privilege to use the new `AddNewReportStaff` action in the module xml
 
 ```xml
 		<document name="Position" permission="CRUDC" >
-			<action name="AddNewReport"/>
+			<action name="AddNewReportStaff"/>
 		</document>
 ```		
 
@@ -226,14 +224,14 @@ Update the Position view to include the new action and data entry fields
 				<spacer/>
 			</item>
 			<item>
-				<button action="AddNewReport"/>
+				<button action="AddNewReportStaff"/>
 			</item>
 		</row>
 	</form>
 	<treeGrid continueConversation="true" rootIdBinding="bizId" query="qPositions" />
 	<actions>
 		<defaults />
-		<action className="AddNewReport" clientValidation="true" displayName="Add New Report Node" inActionPanel="false"></action>
+		<action className="AddNewReportStaff" clientValidation="true" displayName="Add New Report Node" inActionPanel="false"></action>
 	</actions>
 	<newParameters />	
 </view>
