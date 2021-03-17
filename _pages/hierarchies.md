@@ -23,7 +23,7 @@ To declare a document to support hierarchic structures, set the `parentDocument`
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<documentation>
 		<![CDATA[
-			Staff position.
+			The Position document holds the hierarchical relationship between staff at the organisation.
 		]]>
 	</documentation>
 	<persistent name="WHO_Position" />
@@ -47,12 +47,11 @@ To declare a document to support hierarchic structures, set the `parentDocument`
 
 In the above example, the "Position" document declares it's `parentDocument` as "Position". Each position node of the hierarchy has an association to a `Staff` document which has the specific employee details for each employee. 
 
-To use the tree view widget in the *desktop* mode renderer, declare a `tree` menu item as follows:
+To use the tree view widget in the *desktop* mode renderer, declare a `tree` menu item as follows: 
 
 ```xml
 <tree name="Organisation Structure" document="Position" >
-	<role name="Manager" />
-	<role name="StaffMember" />
+	<role name="MyRoleName" />
 </tree>
 ```  
 
@@ -75,7 +74,7 @@ Skyve provides the `treeGrid` widget for showing hierarchic/tree structures with
 To utilise the treeGrid, you must specify a suitable query in the `module.xml`, for example:
 
 ```xml
-<query name="qPosition" documentName="Position">
+<query name="qPositions" documentName="Position">
 	<description>Organisation Structure</description>
 	<columns>
 		<column binding="bizKey" sortOrder="ascending"/>
@@ -119,6 +118,126 @@ In the above example, the rootIdBinding is set to be the `id` of the node which 
 ![Tree grid widget](./../assets/images/hierarchies/treeGrid-widget.png "Tree grid widget")
 
 Note that the `treeGrid` provides the `continueConversation` parameter attribute to allow the developer to decide the transactional demarcation of changes the user may make when zooming into subordinate tree nodes.
+
+### Adding child nodes to the tree
+
+To add child nodes to the tree, you need to set the new node bizParentId to the bizId of the parent node.
+
+You can do this with an action in the Position as follows:
+
+Firstly, add data-entry attributes to the Position document:
+
+```xml
+		<!-- For adding child nodes / reporting staff -->
+		<!-- These attributes are transient as they are only required for the action of adding new reports -->
+		<!-- The new nodes will be created as separate instances of the document -->
+		<text name="newReportPositionTitle"  persistent="false" trackChanges="false" audited="false">
+			<displayName>New Report Position Title</displayName>
+			<length>200</length>
+		</text>
+		<association type="aggregation" name="newReportStaff"  persistent="false" trackChanges="false" audited="false">
+			<displayName>New Report Staff Person</displayName>
+			<documentName>Staff</documentName>
+		</association>
+```
+
+(At this point, generate domain so that the new attributes can be referenced).
+
+Add an action to create a New Report, in the actions package within the Position document package.
+
+```java
+package modules.myModule.Position.actions;
+
+import org.skyve.CORE;
+import org.skyve.metadata.controller.ServerSideAction;
+import org.skyve.metadata.controller.ServerSideActionResult;
+import org.skyve.web.WebContext;
+
+import modules.myModule.domain.Position;
+
+public class AddNewReport implements ServerSideAction<Position> {
+
+	@Override
+	public ServerSideActionResult<Position> execute(Position bean, WebContext webContext) throws Exception {
+
+		if(bean.getPositionTitle()!=null ){
+			Position p = Position.newInstance();
+			p.setPositionTitle(bean.getNewReportPositionTitle()); // values for the new child node
+			p.setStaff(bean.getNewReportStaff()); // values for the new child node
+	
+			p.setBizParentId(bean.getBizId()); // this will attach the new node as a child
+			p = CORE.getPersistence().save(p);
+			
+			// and reset the data entry fields 
+			bean.setNewReportPositionTitle(null);
+			bean.setNewReportStaff(null);
+		}
+		
+		return new ServerSideActionResult<Position>(bean);
+	}
+
+}
+```
+
+Ensure that you have declared the privilege to use the new `AddNewReport` action in the module xml
+
+```xml
+		<document name="Position" permission="CRUDC" >
+			<action name="AddNewReport"/>
+		</document>
+```		
+
+Update the Position view to include the new action and data entry fields
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<view title="Position" name="edit" xmlns="http://www.skyve.org/xml/view"
+	xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<form border="true" percentageWidth="50">
+		<column percentageWidth="20" />
+		<column />
+		<row>
+			<item>
+				<default binding="staff" />
+			</item>
+		</row>
+		<row>
+			<item>
+				<default binding="positionTitle" />
+			</item>
+		</row>
+	</form>	
+	<form  percentageWidth="50" border="true" borderTitle="Add a new report">
+		<column percentageWidth="20" />
+		<column/>
+		<row>
+			<item>
+				<default binding="newReportTitle"/>
+			</item>
+		</row>
+		<row>
+			<item>
+				<default binding="newReportStaff"/>
+			</item>
+		</row>
+		<row>
+			<item>
+				<spacer/>
+			</item>
+			<item>
+				<button action="AddNewReport"/>
+			</item>
+		</row>
+	</form>
+	<treeGrid continueConversation="true" rootIdBinding="bizId" query="qPositions" />
+	<actions>
+		<defaults />
+		<action className="AddNewReport" clientValidation="true" displayName="Add New Report Node" inActionPanel="false"></action>
+	</actions>
+	<newParameters />	
+</view>
+```
 
 ### Customising the way treeGrids work
 
