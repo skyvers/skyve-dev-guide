@@ -93,10 +93,12 @@ SVG file type icons are served when a file or content is not an image. If an ima
 The equivalent code option (for comparison) would be to declare a `markup` attribute (e.g. in this case called 'Thumbnail').
 
 ```xml
-<markup name="thumbnail">
-	<displayName>Thumbnail</displayName>
-</markup>
+		<markup name="thumbnail" persistent="false" audited="false" trackChanges="false">
+			<displayName>Thumbnail</displayName>
+		</markup>        
 ```
+
+The thumbnail attribute is only used for display, so there is no reason to persist, audit or trackChanges on this attribute.
 
 Create an extension class, and override the getter for 'Thumbnail' to generate HTML to retrieve the thumbnail using the Skyve content servlet as follows:
 
