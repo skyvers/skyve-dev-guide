@@ -228,7 +228,7 @@ Update the Position view to include the new action and data entry fields
 			</item>
 		</row>
 	</form>
-	<treeGrid continueConversation="true" rootIdBinding="bizId" query="qPositions" />
+	<treeGrid continueConversation="true" rootIdBinding="bizId" query="qPositions" showAdd="false"/>
 	<actions>
 		<defaults />
 		<action className="AddNewReportStaff" clientValidation="true" displayName="Add New Report Node" inActionPanel="false"></action>
@@ -236,6 +236,8 @@ Update the Position view to include the new action and data entry fields
 	<newParameters />	
 </view>
 ```
+
+Since adding nodes is now handled by the action AddNewReportStaff, the inbuilt add feature on the tree grid should be disabled by setting `showAdd="false"`.
 
 ### Customising the way treeGrids work
 
