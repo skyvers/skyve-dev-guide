@@ -129,6 +129,32 @@ CommunicationUtil.sendFailSafeSystemCommunication(
 
 If a communication of the same name has been created prior to the method being called, (and for example styled by a graphic designer), then the existing communication will be used for the method call.
 
+#### Typical usage pattern
+
+A common (suggested) pattern for usage, is to create a method that uses the `initialiseSystemCommunication()` method to retrieve the Communication (or instantiate it if it does not already exist), then send it.
+
+```java
+	/**
+	 * Example email and notification
+	 */
+	public void sendNotification() throws Exception {
+		try {
+			// send notification email
+			Communication c = CommunicationUtil.initialiseSystemCommunication(
+				MyUtil.NOTIFICATION_DESCRIPTION, 
+				MyUtil.NOTIFICATION_SEND_TO, 
+				null,
+				MyUtil.NOTIFICATION_SUBJECT, 
+				MyUtil.NOTIFICATION_BODY);
+				
+			CommunicationUtil.send(c, RunMode.ACTION, ResponseMode.EXPLICIT, null, this.getParent(), this);
+		} catch (Exception e) {
+			String err = "Notification email FAILED";
+			Util.LOGGER.warning(err);
+		}
+	}
+```
+
 **[⬆ back to top](#communication)**
 
 ---
