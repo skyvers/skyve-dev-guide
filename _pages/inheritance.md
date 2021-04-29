@@ -14,7 +14,9 @@ Skyve supports inheritance between documents, to maximise re-use, and improve qu
 
 If you have a number of documents that have a subset of common attributes, you can declare an abstract document with the common attributes, and then other documents that extend this, inheriting behaviours and taking advantage of reusable view components.
 
-The abstract document is declared with a persistence strategy - this defines the way in which the data will be persisted for the abstract, and inheriting documents.
+The abstract document is declared with the `abstract` attribute in the document, and with a persistence strategy - this defines the way in which the data will be persisted for the abstract, and inheriting documents.
+
+Note that you can also inherit from documents that are not declared as `abstract` using a persistence strategy.
 
 There are three persistence strategies available:
 * _joined_ - inherited attributes will be in one table - and subtype documents will join to this table (handled automatically by Skyve)
@@ -155,12 +157,12 @@ public class AbstractFinanceItemExtension extends AbstractFinanceItem {
 	private static final Decimal2 TAX_RATE = new Decimal2("0.1");
 
 	public void calculate() {
-		if (getAmountExcludingTax() == null) {
+		if (getAmountIncludingTax() == null) {
 			if (getAmountExcludingTax() != null) {
 				setAmountOfTax(getAmountExcludingTax().multiply(TAX_RATE));
 				setAmountIncludingTax(getAmountExcludingTax().add(getAmountOfTax()));
 			}
-		} else if (getAmountIncludingTax() == null) {
+		} else if (getAmountExcludingTax() == null) {
 			if (getAmountIncludingTax() != null) {
 				setAmountOfTax(getAmountIncludingTax().divide(Decimal2.ONE.add(TAX_RATE)));
 				setAmountExcludingTax(getAmountIncludingTax().subtract(getAmountOfTax()));
@@ -190,12 +192,10 @@ To inherit the same preSave behaviour in the subtype (inheriting) documents, cre
 
 While the specific behaviour is defined in the abstract Bizlet class, the behaviour won't be inherited unless you create a Bizlet class that extends the abstract Bizlet (even if the subtype Bizlet class is empty) - so that Skyve can call the correct super class.
 
-Note, at this point this is pure Java, Skyve only defines Bizlet as <T extends Bean> , so if one of the subclasses defines a Bizlet, there is no built in extension happening. But, by extending the abstract Bizlet, the behaviour is inherited.
-
 For example, for _FeeItem_:
 
 ```java
-public class FeeItemBizlet extends AbstractFinanceItemBizlet<AbstractFinanceItemExtension>{
+public class FeeItemBizlet extends AbstractFinanceItemBizlet<FeeItem>{
 
 }
 ```
@@ -203,7 +203,7 @@ public class FeeItemBizlet extends AbstractFinanceItemBizlet<AbstractFinanceItem
 And for _InvoiceItem_:
 
 ```java
-public class InvoiceItemBizlet extends AbstractFinanceItemBizlet<AbstractFinanceItemExtension> {
+public class InvoiceItemBizlet extends AbstractFinanceItemBizlet<InvoiceItem> {
 
 }
 ```
