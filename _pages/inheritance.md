@@ -99,25 +99,23 @@ Similarly _FeeItem_ will have all of the attributes of _AbstractFinanceItem_ as 
 
 ### Persistence
 
-Using the `mapped` strategy, the database tables will have the following columns:
+Using the `mapped` strategy, the database tables will have the following columns (for clarity other implicit columns are not shown here):
 
-FIN_InvoiceItem | FIN_FeeItem
----|---
-description | description
-amountExcludingTax | amountExcludingTax
-amountOfTax | amountOfTax
-amountIncludingTax | amountIncludingTax
-quantity | feeType
-
-*Note - for clarity implicit columns are not shown here.
+ FIN_InvoiceItem | FIN_FeeItem
+ ---|---
+ description | description
+ amountExcludingTax | amountExcludingTax
+ amountOfTax | amountOfTax
+ amountIncludingTax | amountIncludingTax
+ quantity | feeType
 
 If the `joined` strategy had been selected, a persistence name (e.g. _FIN_FinanceItem_) would be declared for the abstract document as well as the subtype documents, the following tables would be created:
-FIN_FinanceItem | FIN_InvoiceItem | FIN_FeeItem
----|---|---
-description |  | 
-amountExcludingTax |  |
-amountOfTax |  | 
-amountIncludingTax |  |
+ FIN_FinanceItem | FIN_InvoiceItem | FIN_FeeItem
+ --- | --- | ---
+ description |  | 
+ amountExcludingTax |  |
+ amountOfTax |  | 
+ amountIncludingTax |  |
  | quantity | 
   |  | feeType
 
@@ -125,15 +123,15 @@ In the `joined` strategy, corresponding rows in the participating tables will ha
 
 If the `single` strategy had been selected, the following tables would be created, a persistence name is only declared for the abstract document:
 
-FIN_FinanceItem
---------
-bizDiscriminator
-description
-amountExcludingTax
-amountOfTax
-amountIncludingTax
-quantity 
-feeType
+ FIN_FinanceItem | 
+ -------- | ---
+ bizDiscriminator
+ description
+ amountExcludingTax
+ amountOfTax
+ amountIncludingTax
+ quantity 
+ feeType
 
 
 ### Module permissions
