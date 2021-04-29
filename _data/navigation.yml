@@ -26,7 +26,9 @@ docs:
       - title: "Bizlet and extension classes"
         url: /bizlets/                                        
       - title: "Views, widgets and layout"
-        url: /views/                                                
+        url: /views/        
+      - title: "Inheritance"
+        url: /inheritance/                                                                                        
       - title: "Routing and rendering"
         url: /routing/                                                
       - title: "Actions"

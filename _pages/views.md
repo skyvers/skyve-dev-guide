@@ -1470,10 +1470,8 @@ The following features are only available for the SmartClient renderer, as they 
   * Tagging
   * Snapshots
   * Flags
-  * Exporting
-
-**[⬆ back to top](#views)**
+  * Exporting**[⬆ back to top](#views)**
 
 ---
-**Next [Routing and rendering](./../_pages/routing.md)**  
+**Next [Inheritance](./../_pages/inheritance.md)**  
 **Previous [Bizlets](./../_pages/bizlets.md)**

@@ -246,4 +246,4 @@ The `managedBean="skyve"` means that the view tag will use the bean provided by 
 
 ---
 **Next [Actions](./../_pages/actions.md)**  
-**Previous [Views, widgets and layout](./../_pages/views.md)**
+**Previous [Inheritance](./../_pages/inheritance.md)**
