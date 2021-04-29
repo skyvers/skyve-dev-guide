@@ -16,7 +16,43 @@ Skyve includes both structured database persistence and a non-sql/content reposi
 
 Skyve integrates the two persistence mechanisms transparently for developers and users for no-code and low-code applications. Additionally, Skyve provides a platform independent and consolidated backup and restore capability for both stores. However, developers can take advantage of understanding the distinction between the two types of persistence to produce sophisticated and rich solutions. 
 
-Skyve incorporates the Elastic content repository for non-sql storage. Elastic requires access to the file system and a `content` folder must be specified in the application `.json` settings file for the Skyve platform to be able to start, with read and write permissions being assigned to the user credential under which Wildfly runs.
+Skyve incorporates automatic content management with non-sql storage. 
+
+There are two options for content management:
+* lucene based simple content manager addin (bundled with Skyve)
+* use others (like Elastic) in the cloud
+
+To use the free Skyve content management addin, retrieve the addin zip using maven install or maven compile and check the target folder in your project. Copy the downloaded skyve-content.zip to a file location, and specify that location for the `addins` section in the application `.json` settings file. 
+
+The same content management addin can be referenced by multiple projects on the same instance, provided the version is compatible with the version of Skyve your project is using, you do not need to have a separate addin for each project.
+
+e.g.
+
+```xml
+	// Add-ins settings
+	addins: {
+		// Where to look for add-ins - defaults to <content.directory>/addins/
+		directory: "C:/_/content/addins/"
+	},
+```
+
+The addin content manager requires access to the file system and a `content` folder must be specified in the application `.json` settings file `content` section for the Skyve platform to be able to start, with read and write permissions being assigned to the user credential under which Wildfly runs.
+
+e.g.
+
+```xml
+	// Content settings
+	content: {
+		// Directory path to the location for storage of content, caching and working files
+		// Note that if you are running on Windows do not use backslashes
+		// The value must be terminated with a slash - e.g. "C:/Workspace/content/"
+		directory: "C:/_/content/myApplication/",
+		// CRON Expression for CMS Garbage Collection job - run at 7 past the hour every hour
+		gcCron: "0 7 0/1 1/1 * ? *",
+		// Attachments stored on file system or inline
+		fileStorage: true
+	},
+```
 
 Access to content items is controlled by the privilege declaration in the `module.xml` for the document that contains the content item attribute.
 

@@ -417,7 +417,7 @@ Before you begin, ensure you have the following:
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)), so that the installation
 is in `C:\eclipse\`
 * NOTE - When downloading Eclipse, ensure you have selected Eclipse for Java EE (Enterprise Edition) Developers as the non-Enterprise Edition is missing libraries that Skyve utilises, as well as plugins that are used for local deployment. 
-* Wildfly 16 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
+* Wildfly 20+ (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
 * A RDBMS which is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
   administrator username and password. 
 
@@ -466,11 +466,11 @@ press 'Apply' - press Yes for full build, and then press OK.
   * Open the server explorer window if it is not already in your workspace (Window -> Show View -> Servers)
   * Right click inside the server explorer and select New
   * Expand JBoss Community
-  * If WildFly 14.x is not in the list of adapters, you will need to download them:
+  * If WildFly 20+ is not in the list of adapters, you will need to download them:
     * Choose JBoss, WildFly & EAP Server Tools and click Next
     * Accept the licence terms and click Finish
     * Restart Eclipse when prompted
-  * Select WildFly 14.x and click _Next_
+  * Select WildFly 20+ and click _Next_
   * Accept the defaults and click _Next_
   * Click _Finish_
   
@@ -531,7 +531,7 @@ http://192.168.43.182:8080/myapp
 We recommend the following:
 - 4GB RAM for Linux and 8GB RAM for Windows
 - Java JDK 11 (this is the JDK for Java 11)
-- Wildfly 16
+- Wildfly 20+
 - Disk space requirements depend on the nature of the application especially if the database and content repository are located on the same drive, however, for most common applications, 50GB drive space will probably be sufficient.
 
 ### Installation of prerequisites
@@ -540,9 +540,9 @@ To run a Skyve application, the server requires:
 Java 11 - while the JRE is sufficient, the JDK is recommended.
  - Download the Java JDK 11 from https://www.oracle.com/technetwork/java/javase/downloads 
 
-Wildfly 16+
+Wildfly 20+
  - Download from http://wildfly.org/downloads/   
- - This link may assist - https://linuxtechlab.com/wildfly-10-10-1-0-installation/ 
+ - This link may assist (even though it is for an older version of Wildfly)- https://linuxtechlab.com/wildfly-10-10-1-0-installation/ 
 
 ### Installing database driver
 For database access, load the appropriate driver and declare this driver in the Wildfly standalone.xml configuration file.
@@ -647,7 +647,7 @@ For example, for external access, typically you would assign as follows:
 ```
 
 #### Create a folder for content
-Skyve includes the elastic content repository - the repository requires a dedicated folder to persist files. The user credential running wildfly (for example) will need read-write permissions to this folder.
+Skyve includes content management - for file uploads and images - the repository requires a dedicated folder to persist files. The user credential running wildfly (for example) will need read-write permissions to this folder.
 
 ### Create a folder for addins
 Typically, it's easiest to add one add-ins subfolder for all your projects, and refer to it directly in all project JSON settings files:
@@ -1118,11 +1118,11 @@ The following are our personal instructions for deploying a Skyve application in
 
 #### Wildfly standalone production install (Windows)
 
-These instructions apply to a standalone server installation of Wildfly 16 on Windows server connecting to Microsoft SQL Server.
+These instructions apply to a standalone server installation of Wildfly 20+ on Windows server connecting to Microsoft SQL Server.
 
 - [download](http://www.oracle.com/technetwork/java/javase/downloads/) and install the JDK 11+
 - create a SYSTEM "JAVA_HOME" system environment variable and set it to where you installed the JDK to (`C:\Program Files\Java\jdk11` by default, substitute with correct Java version path)
-- [download](http://wildfly.org/downloads/) Wildfly 16.x Final 
+- [download](http://wildfly.org/downloads/) Wildfly 20+ 
   - extract to C:\wildfly
 - [download](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-2017) and copy the sql server driver jar and module.xml (below) to `C:\wildfly\modules\system\layers\base\com\microsoft\sqlserver\main`
 
@@ -1355,17 +1355,17 @@ These instructions apply to Bitnami Wildfly 10 stack installation on Windows ser
 </security-domain>
 ```
 
-* rename folder `Bitnami\wildfly-10.1.0-1\java` to `Bitnami\wildfly-10.1.0-1\javaold`
-* Download latest Java 11 64 runtime but select to change destination folder during install to `Bitnami\wildfly-10.1.0-1\java`
-* Add java_home env variable and append `%JAVA_HOME%\bin` to path env variable eg `JAVA_HOME=D:\Bitnami\wildfly-10.1.0-1\java`, `Path=%JAVA_HOME%\bin`
+* rename folder `Bitnami\wildfly-20.x\java` to `Bitnami\wildfly-20.x\javaold`
+* Download latest Java 11 64 runtime but select to change destination folder during install to `Bitnami\wildfly-20.x\java`
+* Add java_home env variable and append `%JAVA_HOME%\bin` to path env variable eg `JAVA_HOME=D:\Bitnami\wildfly-20.x\java`, `Path=%JAVA_HOME%\bin`
 * Add env variable:
   * name: `JAVA_OPTS`
   * value: `-Xms4G -Xmx4G -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=2G`
 * Ensure the following...
   * `ErrorDocument 503 /static/index.html` is in Bitnami\wildfly-10.1.0-1\apache2\conf\bitnami\bitnami.conf
-* Copy static.zip to `Bitnami\wildfly-10.1.0-1\apache2\htdocs\`
-* Copy static.zip to `Bitnami\wildfly-10.1.0-1\wildfly\welcome-content\`
-* Change Bitnami\wildfly-10.1.0-1\wildfly\conf\wildfly.conf that contains
+* Copy static.zip to `Bitnami\wildfly-20.x\apache2\htdocs\`
+* Copy static.zip to `Bitnami\wildfly-20.x\wildfly\welcome-content\`
+* Change Bitnami\wildfly-20.x\wildfly\conf\wildfly.conf that contains
   ```xml
   <Location />
   ProxyPass http://localhost:8080/
@@ -1382,7 +1382,7 @@ ProxyPassReverse / http://localhost:8080/
 ```
 (literally replace the whole lot exactly as shown - so that there are no <Location/> tags)
 
-* Change the path of the `welcome-content` path attribute in the file handler to point to `welcome-content\static\` in `Bitnami\wildfly-10.1.0-1\wildfly\standalone\configuration\standalone.xml` like so
+* Change the path of the `welcome-content` path attribute in the file handler to point to `welcome-content\static\` in `Bitnami\wildfly-20.x\wildfly\standalone\configuration\standalone.xml` like so
   ```xml
   <file name="welcome-content" path="${jboss.home.dir}/welcome-content/static/"/>
   ```
