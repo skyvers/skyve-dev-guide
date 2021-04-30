@@ -110,6 +110,7 @@ Using the `mapped` strategy, the database tables will have the following columns
  quantity | feeType
 
 If the `joined` strategy had been selected, a persistence name (e.g. _FIN_FinanceItem_) would be declared for the abstract document as well as the subtype documents, the following tables would be created:
+
  FIN_FinanceItem | FIN_InvoiceItem | FIN_FeeItem
  --- | --- | ---
  description |  | 
