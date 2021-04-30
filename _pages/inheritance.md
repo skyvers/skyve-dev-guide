@@ -113,10 +113,10 @@ If the `joined` strategy had been selected, a persistence name (e.g. _FIN_Financ
  FIN_FinanceItem | FIN_InvoiceItem | FIN_FeeItem
  --- | --- | ---
  description |  | 
- amountExcludingTax |  |
+ amountExcludingTax |  | 
  amountOfTax |  | 
- amountIncludingTax |  |
- | quantity | 
+ amountIncludingTax |  | 
+  | quantity | 
   |  | feeType
 
 In the `joined` strategy, corresponding rows in the participating tables will have the same `bizId` value.
