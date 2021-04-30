@@ -123,15 +123,17 @@ In the `joined` strategy, corresponding rows in the participating tables will ha
 
 If the `single` strategy had been selected, the following tables would be created, a persistence name is only declared for the abstract document:
 
- FIN_FinanceItem | 
+ FIN_FinanceItem |  
  -------- | ---
- bizDiscriminator
- description
- amountExcludingTax
- amountOfTax
- amountIncludingTax
- quantity 
- feeType
+ bizDiscriminator |
+ description | 
+ amountExcludingTax |
+ amountOfTax | 
+ amountIncludingTax |
+ quantity | 
+ feeType | 
+
+Note - if you change persistence strategies after deploying, depending on the database dialect, automatic DDL may not be able to manage the change, so you may need to drop your tables and let the automatic DDL recreate them.
 
 
 ### Module permissions
