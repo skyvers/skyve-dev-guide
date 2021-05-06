@@ -131,7 +131,7 @@ This example demonstrates how to chart the top 3 documents being most utilised i
 
 ![Top example](../assets/images/charts/top-example-pie.PNG "Top example")
 
-Note that this chart requires your user has no privileges for Audit records.
+Note that this chart requires your user has privileges to at least read Audit records.
 
 ## Extending ChartModel
 
