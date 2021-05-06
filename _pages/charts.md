@@ -8,15 +8,13 @@ sidebar:
   nav: docs
 ---
 
-## Charts
+Skyve provides a no-code and low-code charting capability, integrating both client-side charts via [chart.js](https://www.chartjs.org) and server-side charts are possible via [JFreeChart](https://www.jfree.org/jfreechart/).
 
-Skyve provides no-code and low-code charting capability integrating both client-side charts <a href="https://www.chartjs.org">via chart.js</a> and server-side charts are possible <a href="https://www.jfree.org/jfreechart/">via JFreeChart</a>).
+For most applications, we recommend the Chart.js chart options, as the Skyve implementation is significantly simpler and can be created without programming code. However, JFreeChart is a useful option, especially where server-side generation or more customisation is required (for example, inclusion in a PDF report).
 
-For most applications, we recommend the Chart.js chart options, as the Skyve implementation is significantly simpler and can be created without programming code. However, JFreeChart is a useful option, especially where server-side generation or more customisation is required. 
+No-code charts can be extended by creating a java class that extends `ChartModel` and referring to this model within the chart widget declaration. Skyve intends to also provide an option to generate an image using JFreeChart and the simplified ChartModel concept (in progress).
 
-No code charts can be extended by creating a java class that extends `ChartModel` and referring to this model within the chart widget declaration. Skyve intends to also provide an option to generate an image using JFreeChart and the simplified ChartModel concept (in progress).
-
-### Chart concepts
+## Chart concepts
 
 ![Chart.js options](../assets/images/charts/chart-options.png "Chart.js Options")
 
@@ -49,29 +47,29 @@ Within the model stanza:
 
 ![Simple example of no code chart](../assets/images/charts/simple-example.png "Simple example of no code chart")
 
-The chart `type` is independent of the `model` allowing the designer to try different chart types to see which best visualises the model data (i.e. the available charts are all category based chart types).
+The chart `type` is independent of the `model`, allowing the designer to try different chart types to see which best visualises the model data (i.e. the available charts are all category based chart types).
 
-The model stanza has a number of options to control the chart data.
+The model stanza has a number of options to control the chart data:
 * value functions
 * bucketing (or `bins`)
 * order
 
-#### Value functions
+### Value functions
 
-Available value functions match the AggregateFunction concept used elsewhere in Skyve (including for the Summary options in Skyve lists):
+Available value functions match the `AggregateFunction` concept used elsewhere in Skyve (including for the Summary options in Skyve lists):
 * Avg - Average
 * Count - Count
 * Max - Maximum
 * Min - Minimum
 * Sum - Sum or total
 
-Developers may use other value functions extending a ChartModel, and by preparing data for the model.
+Developers may use other value functions extending a `ChartModel`, and by preparing data for the model.
 
-#### Bucketing (bins)
+### Bucketing (bins)
 
 Bucketing is a way to bucket or group the chart data.
 
-For example, if charting user activity, based on records of timestamped user activity from the Skyve `Audit` document, to better visualise the data requires bucketing the data to day/month/year rather than charting each millisecond.
+For example, if charting user activity based on records of timestamped user activity from the Skyve `Audit` document, visualising the data would benefit from bucketing (grouping) the data by day/month/year rather than charting each millisecond.
 
 Bucket | Description | Example use case
 ---|---|---
@@ -82,7 +80,7 @@ TextLengthBucket | bucket data based on the length of text in the valueBinding f
 TemporalBucket.DAY_MONTH_YEAR | bucket temporal data by day, month and year | chart user activity by date
 TemporalBucket.DAY | bucket temporal data by day (day number, not weekday name) | chart sales data by day for this month
 TemporalBucket.MONTH | bucket temporal data by month  | chart rainfall by month
-TemporalBucket.YEAR | bucket temporal data by year | chart year of birth of clients
+TemporalBucket.YEAR | bucket temporal data by year | chart year of birth of customers
 TemporalBucket.MONTH_YEAR | bucket temporal data by month and year | chart sales results by month spanning more than 1 year bound
 TemporalBucket.HOUR | bucket temporal data by hour | chart entries to the building for each hour of the day
 TemporalBucket.HOUR_DAY | bucket temporal data by hour and day | chart client purchases per each hour during a multi-day sale period
@@ -92,7 +90,7 @@ TemporalBucket.SECOND_MINUTE_HOUR | bucket temporal data by second, minute and h
 
 Skyve will automatically generate a chart label based on the selected bucket.
 
-##### Numeric range bucket example
+#### Numeric range bucket example
 
 ```xml
 <chart type="bar">
@@ -113,7 +111,7 @@ Skyve will automatically generate a chart label based on the selected bucket.
 
 ![Numeric range bucket example](../assets/images/charts/numeric-range-bucket-example.PNG "Numeric range bucket example")
 
-#### Top
+### Top
 
 The `top` option specifies how many series will be shown in the chart, based on what ordering, and whether an `others` series will be included.
 
@@ -135,15 +133,15 @@ This example demonstrates how to chart the top 3 documents being most utilised i
 
 Note that this chart requires your user has no privileges for Audit records.
 
-### Extending ChartModel
+## Extending ChartModel
 
-`ChartModel` that yields a `ChartData` and mirrors the metadata declaration for a chart widget. 
+`ChartModel` yields a `ChartData` and mirrors the metadata declaration for a chart widget. 
 
 `ChartData` is an encapsulation of the categories, the values and the colours to use. Skyve provides a `ChartBuilder` class that can quickly implement the `ChartModel.getChartData()` method. A category can have a bucket and a value has an `AggregateFunction`, where `AggregateFunction` is the same used in `DocumentQuery` and exposed in the `ListGrid` summary row (Count, Sum, Avg, Min, Max).
 
-In this example, the ChartModel is extended so that user privileges can be temporarily elevated, so that the chart can be visible for users who do not ordinarily have access to the application Audit records. ChartBuilder is used to specify the bucketing, top and order of data for the chart.
+In this example, the `ChartModel` is extended so that user privileges can be temporarily elevated, so that the chart can be visible for users who do not ordinarily have access to the application Audit records. `ChartBuilder` is used to specify the bucketing, top and order of data for the chart.
 
-The `with` method specifies the source of the data for the ChartModel, and options include:
+The `with` method specifies the source of the data for the `ChartModel`, and options include:
 * ChartBuilder.with(moduleName, documentName)
 * ChartBuilder.with(MetaDataQuery)
 * ChartBuilder.with(DocumentQuery)
@@ -154,9 +152,6 @@ The `with` method specifies the source of the data for the ChartModel, and optio
 ```java
 public class ActivityModel extends ChartModel<SystemDashboard> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4775794889575080733L;
 
 	@Override
@@ -186,73 +181,72 @@ public class ActivityModel extends ChartModel<SystemDashboard> {
 }
 ```
 
-The ChartBuilder can also take a ColourSeries implementation for generating colours for the categories.
+The `ChartBuilder` can also take a `ColourSeries` implementation for generating colours for the categories.
 
-Examples of ChartBuilders:
+Examples of `ChartBuilders`:
 
 ```java
-       return new ChartBuilder().with(Contact.MODULE_NAME, Contact.DOCUMENT_NAME)
-                                    .category(Contact.contactTypePropertyName)
-                                    .value(Bean.DOCUMENT_ID, AggregateFunction.Count)
-                                    .build("Contacts By Type");
+	return new ChartBuilder().with(Contact.MODULE_NAME, Contact.DOCUMENT_NAME)
+							.category(Contact.contactTypePropertyName)
+							.value(Bean.DOCUMENT_ID, AggregateFunction.Count)
+							.build("Contacts By Type");
 ```
 
 ```java
-        return new ChartBuilder().with(Audit.MODULE_NAME, Audit.DOCUMENT_NAME)
-                                    .category(Audit.operationPropertyName, new NumericMultipleBucket(100))
-                                    .value(Bean.DOCUMENT_ID, AggregateFunction.Count)
-                                    .topCategories(2, SortDirection.ascending)
-                                    .build("Audits By Operation");
+	return new ChartBuilder().with(Audit.MODULE_NAME, Audit.DOCUMENT_NAME)
+							.category(Audit.operationPropertyName, new NumericMultipleBucket(100))
+							.value(Bean.DOCUMENT_ID, AggregateFunction.Count)
+							.topCategories(2, SortDirection.ascending)
+							.build("Audits By Operation");
 ```
 
 ```java
-        return new ChartBuilder().with(DocumentNumber.MODULE_NAME, DocumentNumber.DOCUMENT_NAME)
-                                    .category(DocumentNumber.documentNumberPropertyName, new NumericMultipleBucket(100))
-                                    .value(Bean.DOCUMENT_ID, AggregateFunction.Count)
-                                    .build("Document Numbers By Multiples");
+	return new ChartBuilder().with(DocumentNumber.MODULE_NAME, DocumentNumber.DOCUMENT_NAME)
+							.category(DocumentNumber.documentNumberPropertyName, new NumericMultipleBucket(100))
+							.value(Bean.DOCUMENT_ID, AggregateFunction.Count)
+							.build("Document Numbers By Multiples");
 ```
 
 ```java
-        return new ChartBuilder().with(DocumentNumber.MODULE_NAME, DocumentNumber.DOCUMENT_NAME)
-                                    .category(DocumentNumber.documentNumberPropertyName, new NumericRangeBucket(0, 100, 150, 200))
-                                    .value(Bean.DOCUMENT_ID, AggregateFunction.Count)
-                                    .build("Document Numbers By Range");
+	return new ChartBuilder().with(DocumentNumber.MODULE_NAME, DocumentNumber.DOCUMENT_NAME)
+							.category(DocumentNumber.documentNumberPropertyName, new NumericRangeBucket(0, 100, 150, 200))
+							.value(Bean.DOCUMENT_ID, AggregateFunction.Count)
+							.build("Document Numbers By Range");
 ```
 
 ```java
-        return new ChartBuilder().with(Audit.MODULE_NAME, Audit.DOCUMENT_NAME)
-                                    .category(Audit.auditBizKeyPropertyName, new StringStartsWithBucket(1, true))
-                                    .value(Bean.DOCUMENT_ID, AggregateFunction.Count)
-                                    .build("Audit BizKey");
+	return new ChartBuilder().with(Audit.MODULE_NAME, Audit.DOCUMENT_NAME)
+							.category(Audit.auditBizKeyPropertyName, new StringStartsWithBucket(1, true))
+							.value(Bean.DOCUMENT_ID, AggregateFunction.Count)
+							.build("Audit BizKey");
 ```
 
 ```java
-        return new ChartBuilder().with(User.MODULE_NAME, User.DOCUMENT_NAME)
-                                    .category(Binder.createCompoundBinding(User.contactPropertyName, Contact.email1PropertyName), new StringLengthBucket())
-                                    .value(Bean.DOCUMENT_ID, AggregateFunction.Count)
-                                    .topValues(20, SortDirection.descending)
-                                    .orderByValue(SortDirection.descending)
-                                    .build("Top 20 User email lengths");
+	return new ChartBuilder().with(User.MODULE_NAME, User.DOCUMENT_NAME)
+							.category(Binder.createCompoundBinding(User.contactPropertyName, Contact.email1PropertyName), new StringLengthBucket())
+							.value(Bean.DOCUMENT_ID, AggregateFunction.Count)
+							.topValues(20, SortDirection.descending)
+							.orderByValue(SortDirection.descending)
+							.build("Top 20 User email lengths");
 ```
 
 ```java
-        return new ChartBuilder().with(User.MODULE_NAME, User.DOCUMENT_NAME)
-                                        .category(Binder.createCompoundBinding(User.contactPropertyName, Contact.contactTypePropertyName))
-                                        .value(Bean.DOCUMENT_ID, AggregateFunction.Count)
-                                        .topValues(20, SortDirection.descending)
-                                        .orderByValue(SortDirection.descending)
-                                        .build("User Contact Types");
+	return new ChartBuilder().with(User.MODULE_NAME, User.DOCUMENT_NAME)
+							.category(Binder.createCompoundBinding(User.contactPropertyName, Contact.contactTypePropertyName))
+							.value(Bean.DOCUMENT_ID, AggregateFunction.Count)
+							.topValues(20, SortDirection.descending)
+							.orderByValue(SortDirection.descending)
+							.build("User Contact Types");
 ```
 
-### Server side charts (JFree Chart)
+## Server side charts (JFreeChart)
 
-To generate and show charts using JFree Chart, create a class that implements `DynamicImage` and place this into the `images` package within the document package, for example:
+To generate and show charts using JFreeChart, create a class that implements `DynamicImage` and place this into the `images` package within the document package, for example:
 
 ```java
 public class SpiderChart implements DynamicImage<SurveyExtension> {
 
 	private static final long serialVersionUID = -7167907371272427864L;
-
 	private static final String EMPTY_STRING = "";
 	
 	@Override
@@ -263,7 +257,6 @@ public class SpiderChart implements DynamicImage<SurveyExtension> {
 		Font FONT = Font.createFont(Font.TRUETYPE_FONT, classLoader.getResourceAsStream("fonts/" + fontName));
 		// update font size, defaults to size 1
 		FONT = FONT.deriveFont(24.0f);
-		
 		
 		// Create dataset
 		CategoryDataset dataset = createDataset(bean);
@@ -320,43 +313,38 @@ public class SpiderChart implements DynamicImage<SurveyExtension> {
 
 	@Override
 	public ImageFormat getFormat() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Float getCompressionQuality() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
 ```
 
 Then, use the `dynamicImage` widget in the view to show the chart, for example:
 
 ```xml
-			<vbox border="true" borderTitle="Survey summary scores">
-				<dynamicImage name="SpiderChart" />
-			</vbox>
+	<vbox border="true" borderTitle="Survey summary scores">
+		<dynamicImage name="SpiderChart" />
+	</vbox>
 ```
 
-#### ThemeCharter
+### ThemeCharter
 
-Skyve provides a ThemeCharter class to simplify the use of JFree Chart for common chart types. ThemeCharter can be extended as required, but also provides worked examples of common JFree Charts, including:
+Skyve provides a `ThemeCharter` class with the admin module to simplify the use of JFreeChart for common chart types. `ThemeCharter` can be extended as required, but also provides worked examples of common JFree Charts, including:
 * Area
 * Bar
 * Line
 * Pie
 * Fabulator
 
-ThemeChart also provides `SectionColouriser` to generate sequence colour gradients for charts to enable a themed colourisation of chart series.
+`ThemeCharter` also provides `SectionColouriser` to generate sequence colour gradients for charts to enable a themed colourisation of chart series.
 
 ```java
 public class InvoiceSummary implements DynamicImage<BusinessDashboardExtension> {
-	/**
-	 * For Serialization
-	 */
+	
 	private static final long serialVersionUID = 920018115413956116L;
 
 	@Override
