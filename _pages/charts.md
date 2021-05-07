@@ -12,7 +12,7 @@ Skyve provides a no-code and low-code charting capability, integrating both clie
 
 For most applications, we recommend the Chart.js chart options, as the Skyve implementation is significantly simpler and can be created without programming code. However, JFreeChart is a useful option, especially where server-side generation or more customisation is required (for example, inclusion in a PDF report).
 
-No-code charts can be extended by creating a java class that extends `ChartModel` and referring to this model within the chart widget declaration. Skyve intends to also provide an option to generate an image using JFreeChart and the simplified ChartModel concept (in progress).
+For more control, developers can create a java class that extends `ChartModel` and refer to this model within the chart widget declaration. Skyve intends to also provide an option to generate an image using JFreeChart and the simplified ChartModel concept (in progress).
 
 ## Chart concepts
 
