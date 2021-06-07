@@ -8,11 +8,9 @@ sidebar:
   nav: docs
 ---
 
-## Appendix
+## Quick tips 
 
-### Quick tips 
-
-#### Problems building your app
+### Problems building your app
 
 * Check that you have Java 11+ (jdk11) available in your IDE.
 
@@ -42,7 +40,7 @@ For example, in Eclipse, right-click your project and choose _Run As_->_Run Conf
 In your project _config_ folder, right-click the _MyAppName - Generate Domain.launch_ task and choose 
 _Run As_->_MyAppName - Generate Domain_
 
-#### Problems deploying your app
+### Problems deploying your app
 
 * If you're using the collaboration option in [Skyve Foundry](https://foundry.skyve.org/foundry), or have exported your project, check that you selected the `Default` theme first. 
 
@@ -50,7 +48,7 @@ If your project has a _paid theme_ selected we can't provide the theme files for
 
 You should change your theme to the free `Default` theme on the <em>Customise</em> tab in [Skyve Foundry](https://foundry.skyve.org/foundry) before you start collaboration (or export), OR you can proceed and collaborate (or export) with this theme selected, but we can't include the theme files in your code repository (or download). You will need to purchase your own licence to use the paid theme for local development.
 
-#### Problems finding your app
+### Problems finding your app
 
 * Check the URL settings in the project `.json` file for the URL and context. 
 
@@ -74,7 +72,7 @@ Then you can access your app at
 
 See more at [Changing the project URL context](#changing-the-project-url-context)
 
-#### Problems signing in for the first time
+### Problems signing in for the first time
 
 As a way to get started with a new environment, Skyve provides a bootstrap capability that inserts a user credential into your database for your first sign in (normally into an empty database). 
 
@@ -162,11 +160,11 @@ If you set the `environment.customer` to null, the Skyve sign in page will requi
 
 If you specify an `environment.customer`, make sure it matches the `bootstrap.customer` or your sign in will fail.
 
-#### Still having problems?
+### Still having problems?
 
 Join us on [Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LWNjMTBlMTMzNTA4YzBlMzFhYzE0ZmRhOWIzMWViODY4ZTE1N2QzYWM1MTdlMTliNDIyYTBkOWZhZDAxOGQyYjQ) and ask our friendly team. 
 
-### Changing database dialect
+## Changing database dialect
 
 One of the great things about Skyve is how easy it is to change between different database providers AND KEEP YOUR DATA. Skyve provides a platform-independent Backup format that can be restored to a different database technology without issue.
 
@@ -186,7 +184,7 @@ Then, to restore your data to the new environment:
 
 More information on backup and restore are available at the [User Guide](https://skyvers.github.io/skyve-user-guide/backup-restore/)
 
-#### Available dialects
+### Available dialects
 
 The currently supported dialects are:
 * H2
@@ -227,7 +225,7 @@ For the `json` file `dialect` setting, choose the appropriate dialect class:
 
 _Note: as mentioned above, if you require support for Oracle or other dialects, please contact us._
 
-#### Configuring Wildfly for different dialects
+### Configuring Wildfly for different dialects
 
 Refer to other Wildfly documentation for detailed information, but the basic steps are as follows.
 
@@ -235,7 +233,7 @@ Refer to other Wildfly documentation for detailed information, but the basic ste
 2. Add the driver to the `drivers` stanza in the wildfly configuration in `\wildfly-x\standalone\configuration/standalone.xml`
 
 
-##### Wildfly driver configuration for MSSQL
+#### Wildfly driver configuration for MSSQL
 
 Place the appropriate jdbc driver into your `\wildfly-x\modules\system\layers\base\` folder.
 
@@ -277,7 +275,7 @@ Add the driver to the `drivers` stanza in the wildfly configuration, for example
 ...
 ```
 
-##### Wildfly driver configuration for MySQL
+#### Wildfly driver configuration for MySQL
 
 Place the appropriate jdbc driver into your `/wildfly-x/modules/system/layers/base/` folder.
 
@@ -317,7 +315,7 @@ Add the driver to the `drivers` stanza in the wildfly configuration, for example
 ...
 ```
 
-##### Wildfly driver configuration for PostgreSQL 
+#### Wildfly driver configuration for PostgreSQL 
 
 Place the appropriate jdbc driver into your `/wildfly-x/modules/system/layers/base/` folder.
 
@@ -360,7 +358,7 @@ Add the driver to the `drivers` stanza in the wildfly configuration, for example
 ...
 ```
 
-### Deploying a Skyve application
+## Deploying a Skyve application
 
 Skyve builds applications as a single web archive (`.war`) folder, containing the application metadata and Skyve platform components. By default, Skyve `.war` folders are deployed 'exploded' or 'unzipped'.
 
@@ -386,7 +384,7 @@ When moving an application from DEV->TEST->PROD, the settings files on each inst
 
 This approach is part of the Skyve risk reduction strategy, to minimise the risk of problems when updating new versions of your application. Once each instance is configured, moving from DEV -> TEST -> PROD becomes a low-risk trivial activity, requiring no reconfiguration (unless the different instance have significantly different set ups).
 
-### Deploying a new application version
+## Deploying a new application version
 Where an instance has already been configured, to deploy a new application version on each instance:
 - undeploy the project (or stop Wildfly)
 - remove the existing `.war` from the deployment area
@@ -402,14 +400,14 @@ To redeploy, create a `myApplication.war.dodeploy` file in the `wildfly/standalo
 Additional steps are required for Single Sign-On configuration, 
 the creation of service user accounts, SPNs and port configuration.
 
-### Installing and configuring the Skyve development environment
+## Installing and configuring the Skyve development environment
 
 These instructions describe the process required to install and configure the 
 development environment for Skyve. These instructions assume that you are 
 using Windows and SQL Server. Some changes will need to be made if using a 
 different operating system or database.
 
-#### Prerequisites checklist
+### Prerequisites checklist
 
 Before you begin, ensure you have the following:
 
@@ -440,7 +438,7 @@ For this example, to use MS SQL Server as the database for the Skyve project:
   database, see instructions [here](https://community.spiceworks.com/how_to/124598-find-the-port-sql-server-is-using-and-change-a-dynamic-port-to-static), 
   again, remember the port number you've entered.
 
-#### Configuring Java
+### Configuring Java
 * Download jdk11 (if you haven't already) 
   (http://www.oracle.com/technetwork/java/javase/downloads/) 
   and install it to your machine.
@@ -451,7 +449,7 @@ For this example, to use MS SQL Server as the database for the Skyve project:
   click the _OK_ button and _OK_, again _OK_ to close the System Properties 
   dialog box.
 
-#### Configuring the IDE (Windows example)
+### Configuring the IDE (Windows example)
 
 * Create `C:\\_\` (go to C:\->right click->New->Folder then type "_" as the 
 folder name). You may use any folder for you workspace in Eclipse, just make sure you remember 
@@ -491,15 +489,15 @@ In Eclipse,
 
 After cloning the master, go to Project -> Clean - Select clean all projects and press OK - wait for activity to cease in bottom right corner of the Eclipse window.
 
-#### Starting the server
+### Starting the server
 
-##### Development environment
+#### Development environment
 Skyve provides a bootstrap user configuration (specified in the `.json` file) - this will insert a user with all module roles as a way to get started. The bootstrap configuration is disabled if the instance is a production instance.
 
-##### Other environments
+#### Other environments
 In UAT and PROD environments, Wildfly should be configured as a service. Refer to Wildfly documentation for detailed instructions.
 
-##### Connecting to your local instance from a mobile device
+#### Connecting to your local instance from a mobile device
 
 It is useful to be able to test your Skyve application from your own mobile devices as you develop locally. For example, if you connect your developer PC and mobile device to the same network (for example, your phone's hotspot) use IP address assigned to your PC for the URL in your `.json` settings file - then connect from your phone to your developer PC.
 
@@ -525,9 +523,9 @@ You can then use the browser on your mobile device to connect to the local Skyve
 http://192.168.43.182:8080/myapp
 ```
 
-### Setting up a Skyve instance
+## Setting up a Skyve instance
 
-#### Recommended requirements 
+### Recommended requirements 
 We recommend the following:
 - 4GB RAM for Linux and 8GB RAM for Windows
 - Java JDK 11 (this is the JDK for Java 11)
@@ -573,7 +571,7 @@ For example, for SQL Server:
     </driver>
 ```
 
-### Problems with utf8 - character sets for other languages - MySQL
+## Problems with utf8 - character sets for other languages - MySQL
 If your Skyve application is not storing utf8 chars correctly, and you're using MySQL, check that MySQL is configured for utf8. Check the charset of the DB and tables, e.g. the default  is 'latin1'.
 
 In the my.cnf file (for MySQL), check that you have the following:
@@ -594,7 +592,7 @@ To keep an existing database once this change has been made, export the schema f
 
 If you don't need to keep existing data, then after the my.cnf changes above, drop your schema, create a new one, then use Skyve bootstrap (in the json settings file) to sign in and let Skyve create the new schema for you.
 
-##### Other datasource options
+### Other datasource options
 
 There are a number of optional settings for the application data source file `myApplication-ds.xml`. The file provided from the Skyve project creator is usually satisfactory, however the following describes other options which you may need to consider.
 
@@ -605,7 +603,7 @@ Option | Values | Description
 
 Additional information is available from a number of sources, for example <a href="https://developer.jboss.org/wiki/ConfigDataSources">for example</a>.
 
-#### Additional configuration
+### Additional configuration
 
 The validation stanza provides Wildfly with the required configuration to create new connections as needed.
 
@@ -631,7 +629,7 @@ From the <a href="https://docs.jboss.org/jbossas/docs/Server_Configuration_Guide
 - `<prepared-statement-cache-size>` - the number of prepared statements per connection to be kept open and reused in subsequent requests. They are stored in a LRU cache. The default is 0 (zero), meaning no cache.
 -  `<share-prepared-statements>` - with prepared statement cache enabled whether two requests in the same transaction should return the same statement
 
-### Configuring ports
+## Configuring ports
 To configure which ports will be used for accessing the application, modify the <socket-binding-group> section in the wildfly configuration file wildfly/standalone/configuration/standalone.xml for http and https:
 
 ```xml
@@ -646,7 +644,7 @@ For example, for external access, typically you would assign as follows:
     <socket-binding name="https" port="${jboss.https.port:443}"/>
 ```
 
-#### Create a folder for content
+## Create a folder for content
 Skyve includes content management - for file uploads and images - the repository requires a dedicated folder to persist files. The user credential running wildfly (for example) will need read-write permissions to this folder.
 
 ### Create a folder for addins
@@ -673,11 +671,13 @@ Load the skyve-content.zip (this manages content locally) into the addins by:
 
 * copy the skyve-content.zip to the directory specified in the JSON settings file above.
 
-#### Install the wildfly service
+## Install Wildfly as a Service
+
 So that the Skyve application will be always available, install the wildfly service, ensuring that the service will have read/write access to the content folder.
+
 The following may be useful for linux installations - https://community.i2b2.org/wiki/display/getstarted/2.4.2.3+Run+Wildfly+as+a+Linux+Service
 
-#### Skyve application configuration
+## Skyve application configuration
 To deploy a Skyve application, there are typically three artefacts:
 - the application '.war' folder
 - the datasource 'ds.xml' file
@@ -704,7 +704,7 @@ Ensure the '.json' properties file has been updated for the specific instance in
 
 Finally, ensure that the user credential that will run the wildfly service has read/write permissions to the wildfly folder and the content folder created above.
 
-### Configuring Recaptcha for the sign in page 
+## Configuring Recaptcha for the sign in page 
 
 First, sign up for a Google Recaptcha key as follows:
 1. Visit [Google Recaptcha](https://www.google.com/recaptcha/intro/v3.html) console and sign in
@@ -729,7 +729,7 @@ Alternatively, you can place the API key in the project JSON file under `api` ->
 		googleRecaptchaSiteKey: "xxxxxxxxxxx",
 ```
 
-### Changing the project URL context
+## Changing the project URL context
 
 Normally, the project name will be the name of the `.war` - which will be the context on the URL for example `https://skyve.org/myApplication` where `myApplication` is also the name of the project.
 
@@ -820,7 +820,7 @@ Note that
 * You need to manually remove the previous `myApplication.war` if you didn't in the preparation stage. 
 * If you didn't rename the previous `myApplication.json` and `myApplication-ds.xml`, you should these files to avoid confusion (for example if the datasource name is the same for both the old `myApplication-ds.xml` and `tax_management-ds.xml`).
 
-### Protecting the ds.xml credentials
+## Protecting the ds.xml credentials
 
 The ds.xml password is clear text. While it is possible to use an encrypted password for the datasource connection, this is of limited use.
 
@@ -828,7 +828,7 @@ Instructions are available if this is required, for example [Encrypt password fo
 
 This approach has limited use as it is really just a level of indirection. The credentials need to be decrypted and so a key needs to be stored. This means the file containing the key then needs to be protected on the file system - and if this is possible, it would seem reasonable to simply apply that level of protection to the ds.xml file (and other config) directly.
 
-### Configuring Wildfly for virtual hosts
+## Configuring Wildfly for virtual hosts
 
 It is possible to configure several applications to use the base context of different URLs on the same machine, by configuring virtual hosts.
 
@@ -865,8 +865,7 @@ as follows:
 </jboss-web>
 ```
 
-
-### Example deployment instructions for Single Sign-on
+## Example deployment instructions for Single Sign-on
 
 The following steps are to install an instance of XXX onto a vanilla
 Windows 10.
@@ -954,25 +953,30 @@ if error - check that you have an account in XXX, check
 `C:\wildfly\standalone\log\server.log` to see your user
 principal is being recognised
 
-### Example deployment problems
+## Example deployment problems
 Key problems in the `myApplication.json` configuration file block your project from deploying successfully and sometime yield non-obvious errors or stack output. The following provides three common examples.
 
-#### Example output for incorrect content folder
+### Example output for incorrect content or addins folder
 Incorrect content folder - the folder doesn't exist:
 
 ```json
 	// Content settings
-	content: {
+	"content": {
 		// directory path
-		directory: "C:/skyve/content/", 
+		"directory": "C:/skyve/content/", 
 		// CRON Expression for CMS Garbage Collection job - run at 7 past the hour every hour
-		gcCron: "0 7 0/1 1/1 * ? *", 
+		"gcCron": "0 7 0/1 1/1 * ? *", 
 		// Attachments stored on file system or inline
-		fileStorage: true
+		"fileStorage": true
+	},
+  // Add-ins settings
+	"addins": {
+		// Where to look for add-ins - defaults to <content.directory>/addins/
+		"directory": null
 	},
 ```
 
-In this case, the folder C:/skyve/content/ doesn't exist or the name is incorrect.
+In this case, the folder `C:/skyve/content/` doesn't exist or the name is incorrect.
 
 Attempting to deploy in this case yields results such as the following:
 ```
@@ -1005,7 +1009,15 @@ Caused by: java.lang.IllegalStateException: content.directory C:/skyve/content/ 
 	... 8 more
 ```
 
-#### Example incorrect/invalid customer in bootstrap stanza
+A similar error occurs if the `addins` directory is not found:
+
+```
+org.jboss.msc.service.StartException in service jboss.deployment.unit."jobManager.war".undertow-deployment: java.lang.RuntimeException: java.lang.IllegalStateException: addins.directory C:/skyve/content/addins/ does not exist.
+```
+
+Manually create an `addins` directory inside the content directory specified for your project. This is where Skyve will look for the addins directory by default if no path is specified in the json.
+
+### Example incorrect/invalid customer in bootstrap stanza
 Incorrect customer in the bootstrap- there is no such customer defined:
 
 ```json
@@ -1061,7 +1073,7 @@ Attempting to deploy in this case yields results such as the following:
 15:48:03,817 ERROR [stderr] (ServerService Thread Pool -- 68) 	... 25 more
 ```
 
-#### Missing comma or badly formed json file
+### Missing comma or badly formed json file
 
 Missing comma or badly formed json file:
 
@@ -1112,11 +1124,11 @@ Caused by: java.lang.ClassCastException: java.lang.Long cannot be cast to java.u
 	... 8 more
 ```
 
-### Installing Skyve in production
+## Installing Skyve in Production
 
 The following are our personal instructions for deploying a Skyve application in a production environment. You may need to tweak these to suit your personal situation, and feel free to submit a pull request to update these instructions if you find something better or they become out of date.
 
-#### Wildfly standalone production install (Windows)
+### Wildfly standalone production install (Windows)
 
 These instructions apply to a standalone server installation of Wildfly 20+ on Windows server connecting to Microsoft SQL Server.
 
@@ -1248,7 +1260,7 @@ or, if using Active Directory authentication:
 - start the wildfly service and make sure the datasources deploy successfully
 - deploy projectName.war
 
-##### Troubleshooting
+### Troubleshooting
 If you receive an error like:
 
 ```
@@ -1268,7 +1280,7 @@ then check that your JNDI name in the standalone.xml (`<module-option name="dsJn
   <datasource jndi-name="java:/{projectNameDB}" pool-name="skyve" enabled="true" jta="true" use-ccm="false">
   ```
 
-#### Managing Wildfly Server log file size
+### Managing Wildfly Server log file size
 
 To manage/(limit) the fize size for logging, modify the `standalone.xml` file as follows:
 
@@ -1297,7 +1309,7 @@ In root logger
            </root-logger>
 ```
 
-#### Wildfly Bitnami production install (Windows)
+### Wildfly Bitnami production install (Windows)
 
 These instructions apply to Bitnami Wildfly 10 stack installation on Windows server modified to connect to Microsoft SQL Server.
 	
@@ -1405,7 +1417,7 @@ ProxyPassReverse / http://localhost:8080/
 
 ## Common Wildfly settings
 
-### Managing Wildfly server logs
+## Managing Wildfly server logs
 
 You can either use the periodic rotating file handler:
 
@@ -1434,7 +1446,7 @@ or the size rotating file handler:
 </size-rotating-file-handler>
 ```
 
-### Managing Post Size (large file upload)
+## Managing Post Size (large file upload)
 
 Add the `max-post-size` setting to the http-listener as follows:
 
@@ -1451,6 +1463,8 @@ Add the `max-post-size` setting to the http-listener as follows:
         </host>
 	</server>
 ```
+
+Specifying a `max-post-size` of `0` will disable the upload limit entirely.
 
 **[⬆ back to top](#deploying-a-skyve-application)**
 
