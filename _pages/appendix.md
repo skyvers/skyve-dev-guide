@@ -660,8 +660,8 @@ Typically, it's easiest to add one add-ins subfolder for all your projects, and 
 (Note the trailing slash.)
 
 Load the skyve-content.zip (this manages content locally) into the addins by:
-* right-click your project and run as Maven clean
-* the skyve-content.zip will be downloaded to your target folder - the results of the maven clean will include this location, usually <project>\target\
+* right-click your project and Run As -> Maven install
+* the skyve-content.zip will be downloaded to your target folder - the results of the maven install will include this location, usually <project>\target\
 
 ```
 [INFO] --- maven-dependency-plugin:2.8:copy (copy-content-addin-dependency) @ elixan ---
