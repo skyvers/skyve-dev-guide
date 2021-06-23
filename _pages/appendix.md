@@ -275,6 +275,19 @@ Add the driver to the `drivers` stanza in the wildfly configuration, for example
 ...
 ```
 
+*NOTE: Also ensure that you have the following settings on your MSSQL database rather than the defaults.*
+
+```sql
+ALTER DATABASE ${projectName} SET ALLOW_SNAPSHOT_ISOLATION ON
+GO
+ALTER DATABASE ${projectName} SET READ_COMMITTED_SNAPSHOT ON
+GO
+ALTER DATABASE ${projectName} SET AUTO_CLOSE OFF WITH NO_WAIT
+GO
+ALTER DATABASE ${projectName} SET RECOVERY SIMPLE WITH NO_WAIT
+GO
+```
+
 #### Wildfly driver configuration for MySQL
 
 Place the appropriate jdbc driver into your `/wildfly-x/modules/system/layers/base/` folder.
