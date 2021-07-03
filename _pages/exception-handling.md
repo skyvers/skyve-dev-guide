@@ -39,7 +39,7 @@ browser.
 The native Skyve validation lifecycle event can be overridden in the
 associated document Bizlet class. Developer validations will occur after
 the native server side validation so that the Developer does not have to
-code against implicit validation failures like requiredness – since this
+code against implicit validation failures like requiredness - since this
 has been handled by Skyve.
 
 Note: Uniqueness constraints are not manifested as database constraints

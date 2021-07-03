@@ -31,7 +31,7 @@ module and defines the following:
   ----------------- | ----------
   name              | The name used by the developer to define and distinguish the module.
   title             | The title of the module as presented in the user interface.<br>The module title will be the label shown on the accordion pane containing the module menu.
-  homeRef           | Whether the homeDocument (see below) will open in list or edit view.<br>This attribute is optional – if not included Skyve assumes a homeRef of *list* (i.e. a list view rather than a detail view).
+  homeRef           | Whether the homeDocument (see below) will open in list or edit view.<br>This attribute is optional - if not included Skyve assumes a homeRef of *list* (i.e. a list view rather than a detail view).
   homeDocument      | The document which will open by default when the module is accessed by the user.
   documents         | The list of documents.<br>Documents may be persistent or transient. Each persistent document maps to a database table. (Transient documents exist only in memory.)
   queries           | The queries referenced within the application metadata.<br>Each list view is based on a metadata query specified in the `module.xml` and any queries referenced within document metadata (e.g. for collections or references) must be declared here. Skyve will generate default queries for each document unless a specific metadata query is declared.
@@ -98,7 +98,7 @@ application. Queries declared in the `module.xml` are called *metadata
 queries* to distinguish them from other queries which may exist as views
 on the database server or as insecure SQL strings within developer code.
 
-Each document can specify a *defaultQueryName* – which is the name of
+Each document can specify a *defaultQueryName* - which is the name of
 the metadata query to use by default wherever lists of document
 instances may be required (e.g. lists and lookups for document
 references).
@@ -153,7 +153,7 @@ listGrid will zoom to the *driving document*.
   editable                | Whether the column is editable in the list view inline.<br>By default editable is set to false.
   expression              | A valid OQL expression which defines the value to be shown in the list column.
   filterable              | Whether a filter can be applied to this column in the list view.
-  filterExpression        | A literal value or one of a number of expressions.<br>Defined expressions include:<br><ul><li>{CONTACTID} - the id of the contact who is the current user<li>{CUSTOMER} – the name of the customer context in which the current user operates<li>{DATAGROUPID} – the id of the data group of the current user<li>{DATE} - current date<li>{DATETIME} - current date and time<li>{USERID} - bizId of the current user<li>{USER} – the userName of current user<li>{USERNAME} -  the name of the current user contact</ul>
+  filterExpression        | A literal value or one of a number of expressions.<br>Defined expressions include:<br><ul><li>{CONTACTID} - the id of the contact who is the current user<li>{CUSTOMER} - the name of the customer context in which the current user operates<li>{DATAGROUPID} - the id of the data group of the current user<li>{DATE} - current date<li>{DATETIME} - current date and time<li>{USERID} - bizId of the current user<li>{USER} - the userName of current user<li>{USERNAME} -  the name of the current user contact</ul>
   filterOperator          | One of the following operators:<ul><li>equal, notEqual,<li>greater, less,<li>greaterEqual, lessEqual,<li>like, notLike,<li>notNull, isNull,<li>nullOrEqual, nullOrNotEqual,<li>nullOrGreater, nullOrLess,<li>nullOrGreaterEqual, nullOrLessEqual,<li>nullOrLike, nullOrNotLike;</ul>
   hidden                  | Whether the query column will be hidden by default in a list view.<br>Hidden columns are hidden by default, but can be un-hidden by the user unless the column has projected=false.
   name                    | You can include calculated or derived values in a query however you must create a non-persistent field in the driving document to hold the value. The *name* is the name of the non-persistent document field which holds the calculated value.<br>Note that the name must correspond to a transient (i.e. non persistent) field in the document which describes other aspects of the expression result (such as type, length, display format etc.).
