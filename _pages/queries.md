@@ -48,7 +48,7 @@ Non-persistent values can be projected (as well as persisted or database values)
   escape				  | Whether the value of the column (which might contain HTML, etc) should be escaped
   expression              | A valid OQL expression which defines the value to be shown in the list column.
   filterable              | Whether a filter can be applied to this column in the list view.
-  filterExpression        | A literal value or one of a number of expressions.<br>Defined expressions include:<br><ul><li>{CONTACTID} - the id of the contact who is the current user<li>{CUSTOMER} - the name of the customer context in which the current user operates<li>{DATAGROUPID} - the id of the data group of the current user<li>{DATE} - current date<li>{DATETIME} - current date and time<li>{USERID} - bizId of the current user<li>{USER} - the userName of current user<li>{USERNAME} -  the name of the current user contact</ul>
+  filterExpression        | A literal value or one of a number of implicit parameter expressions (shown below).
   filterOperator          | One of the following operators:<ul><li>equal, notEqual,<li>greater, less,<li>greaterEqual, lessEqual,<li>like, notLike,<li>notNull, isNull,<li>nullOrEqual, nullOrNotEqual,<li>nullOrGreater, nullOrLess,<li>nullOrGreaterEqual, nullOrLessEqual,<li>nullOrLike, nullOrNotLike;</ul>
   hidden                  | Whether the query column will be hidden by default in a list view.<br>Hidden columns are hidden by default, but can be un-hidden by the user unless the column has projected=false.
   name                    | You can include calculated or derived values in a query however you must create a non-persistent field in the driving document to hold the value. The *name* is the name of the non-persistent document field which holds the calculated value.<br>Note that the name must correspond to a transient (i.e. non persistent) field in the document which describes other aspects of the expression result (such as type, length, display format etc.).
@@ -56,6 +56,14 @@ Non-persistent values can be projected (as well as persisted or database values)
   sanitise				  | Whether the value of the column (which might contain HTML, etc) should be sanitised.
   sortable                | Whether the query can be sorted by this column in the list view.
   sortOrder               | The sorting order (ascending or descending) to use by default when this query is displayed.<br>If the column is sortable, the user will be able to re-sort the list results.
+
+_Implicit parameter expressions_
+
+Skyve provides a number of implicit parameter expressions to be used for filtering.
+
+<ul><li>{CONTACTID} - the id of the contact who is the current user<li>{CUSTOMER} - the name of the customer context in which the current user operates<li>{DATAGROUPID} - the id of the data group of the current user<li>{DATE} - current date<li>{DATETIME} - current date and time<li>{USERID} - bizId of the current user<li>{USER} - the userName of current user<li>{USERNAME} -  the name of the current user contact</ul>
+
+Developers can of course use their own parameters and provide parameter values using the DocumentQuery interface.
 
 _Query column definitions_
 
