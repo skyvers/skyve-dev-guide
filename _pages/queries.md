@@ -16,6 +16,8 @@ If a query name is not supplied Skyve will generate a *default* query which will
 
 However, in some cases it is useful to declare the query in the module so that it can be more tightly customised or parameterised for your application.
 
+Queries are declared in the module to maximise re-use throughout the application.
+
 As described in [Modules](./../pages/modules.md) the `module.xml` file can include definitions of queries used in the application. Queries declared in the `module.xml` are called *metadata queries* to distinguish them from other queries which may exist as views on the database server or as insecure SQL strings within developer code.
 
 Each document can specify a *defaultQueryName* - which is the name of the metadata query to use by default wherever lists of document instances may be required (e.g. lists and lookups for document references).
@@ -37,6 +39,8 @@ The evaluation engine knows when to inner and outer join based on the _requiredn
 To improve performance Skyve will defer instantiation of domain objects unless necessary - producing a list of mapped objects that implement the given domain interface. 
 
 Non-persistent values can be projected (as well as persisted or database values) and the evaluation engine will load the domain objects behind the scenes only if necessary.
+
+However you can also declare queries using bizQL (derived from <a href="https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html">Hibernate Query Language</a> and SQL.
 
 ### Query column definition
 
@@ -61,7 +65,13 @@ _Implicit parameter expressions_
 
 Skyve provides a number of implicit parameter expressions to be used for filtering.
 
-<ul><li>{CONTACTID} - the id of the contact who is the current user<li>{CUSTOMER} - the name of the customer context in which the current user operates<li>{DATAGROUPID} - the id of the data group of the current user<li>{DATE} - current date<li>{DATETIME} - current date and time<li>{USERID} - bizId of the current user<li>{USER} - the userName of current user<li>{USERNAME} -  the name of the current user contact</ul>
+* `{CONTACTID}` - the id of the contact who is the current user
+* `{CUSTOMER}` - the name of the customer context in which the current user operates
+* `{DATAGROUPID}` - the id of the data group of the current user<li>{DATE} - current date
+* `{DATETIME}` - current date and time
+* `{USERID}` - bizId of the current user
+* `{USER}` - the userName of current user
+* `{USERNAME}` -  the name of the current user contact
 
 Developers can of course use their own parameters and provide parameter values using the DocumentQuery interface.
 
@@ -140,7 +150,7 @@ Because the query includes columns with bindings like `contact.name`, Skyve will
 
 The column for _createdDateTime_ is hidden, meaning that by default it will not appear in a list based on this query, but in desktop mode, users can opt to include this column at run-time if required.
 
-#### Basic filtering using 
+#### Basic metadata filtering
 
 To filter the query to only include users that are not _inactive_ you can change the column declaration as follows:
 
@@ -158,9 +168,20 @@ The `filterExpression` is the expression used by the `filterOperator` and in thi
 
 The `projected` element may be optionally included so that the column (which because of the filter will always be either null or false) is not included in the projected columns returned by the query - whereas the `hidden` attribute means that the column is not included in lists by default but can be selected for inclusion by the user at run-time. 
 
+#### Metadata declaration versus other methods
+
+Using Skyve's metadata approach to declaring queries offers a number of advantages. 
+
+* Metadata queries are non-dialect specific, and so applications can be ported across different SQL implementations.
+* Metadata queries are subject to XML validation as well as Skyve's domain validation to prevent simple inadvertent transcription and syntax errors.
+
+However, there are circumstances where more direct query methods are convenient to take advatage of more sophisticated filter expressions and even dialect-specific performance or capability advantages.
+
 #### Including a filter element
 
 You can also include a filter element in the query definition and express your filter directly. 
+
+Filtering expressions and bizQL are based on <a href="https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html">Hibernate Query Language</a>
 
 Using the `filter` element can be useful for convenience and is added to the `where` clause as is, in addition to any implicit filtering performed automatically by Skyve or expressed using other filter operators.
 
@@ -251,6 +272,39 @@ The following example returns the support tickets associated to the current user
 
 In the above example, _SupportTicket_ document in the _support_ module is the driving document and is aliased as `bean`.
 
+#### Using bizQL
+
+In some cases, it may be convenient to specify the query using bizQL directly, rather than XML metadata.
+
+In this example, the query retrieves _ContentAudit_ beans where a specified _instanceId_ is not one of the items in the _syncedInstances_ collection.
+
+```xml
+<bizQL name="bizqlGetNextUnsychronisedContentAudit">
+	<description>Gets all unsynchronised content audits.</description>
+	<query>
+		<![CDATA[
+			SELECT bean
+			FROM {admin.ContentAudit} AS bean
+			WHERE NOT EXISTS (
+				SELECT li
+				FROM {fsp.LocalInstance} AS li
+				WHERE li IN ELEMENTS(bean.syncedInstances) 
+					and li.idinstance = :instanceId
+			)
+			ORDER BY bean.millis
+		]]>
+	</query>
+</bizQL>
+```
+
+The above query can then be referenced by developers as follows:
+
+```java
+BizQL bizQL = CORE.getPersistence().newNamedBizQL(ContentAudit.MODULE_NAME, "bizqlGetNextUnsychronisedContentAudit");
+bizQL.putParameter("instanceId", instanceId);
+bizQL.setMaxResults(1);
+```
+
 #### Using SQL
 
 If required, you can also declare queries using SQL (and a specific SQL dialect). In this case the SQL may be dialect-specific and your application may not function when used on other database types.
@@ -304,8 +358,6 @@ SQL sql = CORE.getPersistence().newNamedSQL(FoodAct.MODULE_NAME, SQL_QUERY_NAME)
 sql.putParameter("inspectionDateFrom", dateFrom);
 sql.putParameter("inspectionDateTo", dateTo);
 ```
-
-### Other examples
 
 #### Using MEMBER OF
 
@@ -393,6 +445,54 @@ The `filter` element below filters for _Agreement_s that are current (_endDate_ 
 	]]>
 </filter>	
 ```
+
+#### Debugging
+
+Where direct expressions like bizQL or SQL are used for queries, Skyve offers trace options to assist developers debug their application queries.
+
+The project `.json` file includes tracing options for `query` and `sql`.
+
+```json
+// Trace settings
+trace: {
+	// XML metadata parsing
+	xml: false,
+	// HTTP request attributes and parameters
+	http: false,
+	// queries performed
+	query: true,
+	// MVC command debug
+	command: false,
+	// JSF inner workings
+	faces: false,
+	// generated SQL statements
+	sql: true,
+	// content manipulation
+	content: false,
+	// application security denials
+	security: false,
+	// bizlet callbacks
+	bizlet: false,
+	// mutations in domain objects
+	dirty: false
+},
+```
+
+`query` tracing will log the HQL generated by Skyve to the server log or developer console, for example:
+
+```SQL
+SELECT count(bean.bizId) as bizId, min(bean.bizFlagComment) as bizFlagComment FROM adminUser as bean 
+```
+
+`sql` tracing will log the SQL generated by Hibernate to the server log or developer console, for example:
+
+```SQL
+select count(adminuser0_.bizId) as col_0_0_, min(adminuser0_.bizFlagComment) as col_1_0_ from apps.ADM_SecurityUser adminuser0_
+```
+
+If `query` tracing was not specified at deploy-time, a user with `DevOps` role can turn it on at run-time via the deskop mode. This will turn on both `query` and `sql` tracing.
+
+![Query logging](./../assets/appendix/control-panel-query-logging.PNG "Query logging")
 
 **[⬆ back to top](#queries)**
 
