@@ -162,7 +162,7 @@ The following query is used to retrieve details of _Users_.
 </query>
 ```
 
-The above query is declared for the _User_ document and is named (according to the convention) `qUser`. 
+The above query is declared for the _User_ document - by convention we suggest naming the query beginning with `q` - `qUser` or `qUsers` etc. 
 
 If this query is used as the basis of a module menu item or a `listGrid`, the resulting list will enable navigation to _User_ records via the double-click/zoom gesture.
 
