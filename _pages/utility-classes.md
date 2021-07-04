@@ -127,7 +127,7 @@ Similarly, `convertAndSet()` takes a String, applies the correct converter `from
 Binder.convertAndSet(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, "12-Dec-2019");
 ```
 
-#### generic get() and set()
+#### Binder generic get() and set()
 
 Using the Binder for generic approaches to getting and setting attribute values provides a powerful way to manipulate beans.
 
@@ -311,25 +311,23 @@ Key persistence methods are:
 
   Method           | Description
   ---------------- | ------------------
-  get              | Instantiates a *Persistence* object
   getUser          | Gets the current conversation *metadata.user*
+  getCustomer	| Gets the current 
   begin, rollback, commit |   Control the state of the current transaction
   evictAllCached, <br><br>evitCached | Evict beans from cached memory.<br><br>These methods are useful where code interactions with *persistentBeans* may be in contention with default actions resulting from user activity (like pressing the Save button). <br><br>For example, if a user executes an action which impacts on the bean displayed in the view, and modified beans are not evicted, the user's action will be in contention with the action. In this case, the user's subsequent attempt to Save the bean will be met with a message stating that the current bean has already been modified by the user and can't be saved. <br><br>Evicting cached beans at the conclusion of the action will avoid such a contention issue.
   delete | deletes a bean instance
-  executeDML, <br><br>executeInsecureSQLDML | Execute persistence data manipulation language queries, either object DML or Insecure SQL DML.
   flush | pushes all pending DML statements to the database (without _commit_)
+  save | saves the bean or beans
   upsertBeanTuple, <br><br>upsertCollectionTuples | Persists values only within the top-most level of the bean structure. <br><br>During an *upsert*, no bean validation is performed, and reference ID values are persisted without traversing into the related bean.
-  retrieve(ProjectionQuery), <br><br>retrieveInsecureSQL |  Retrieve a bean or collection of beans using a project query or via Insecure SQL
-  retrieve(Bean)    | Retrieve the current bean as it was last persisted.
 
 _Key methods of the Persistence utility class_
 
-#### Insecure SQL
+#### Unsecured SQL
 
 Methods using SQL are provided, but not recommended and are to be used
 with care. Unlike object query methods, SQL is implementation specific,
 but more importantly, the Skyve platform cannot assert automatic
-customer scoping and other platform features in insecure SQL.
+customer scoping and other platform features in unsecured SQL.
 
 ### Util
 

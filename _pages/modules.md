@@ -98,7 +98,7 @@ module folder.
 The `module.xml` file can include definitions of queries used in the
 application. Queries declared in the `module.xml` are called *metadata
 queries* to distinguish them from other queries which may exist as views
-on the database server or as insecure SQL strings within developer code.
+on the database server or as unsecured SQL strings within developer code.
 
 Each document can specify a *defaultQueryName* - which is the name of
 the metadata query to use by default wherever lists of document
@@ -200,7 +200,7 @@ document instance will only be accessible to the user who created it.
 
 Role privileges are applied to all select statements generated
 internally by Skyve. This means that privileges automatically apply to
-developer code (except for insecure SQL). The benefit of this is that
+developer code (except for unsecured SQL). The benefit of this is that
 developer code does not have to handle security issues and therefore the
 developer is not able to make inadvertent security holes.
 
@@ -213,7 +213,7 @@ method to provide pervasive row-level security, declaratively.
 
 Document scope criteria are applied to all select statements generated
 internally by Skyve. This means that document scoping applies
-automatically to developer code (except for insecure SQL).
+automatically to developer code (except for unsecured SQL).
 
 Documents may be scoped *Global* (G), *Customer* (C), *DataGroup* (D) or
 *User* (U).
