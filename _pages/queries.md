@@ -18,7 +18,7 @@ However, in some cases it is useful to declare the query in the module so that i
 
 Queries are declared in the module to maximise re-use throughout the application.
 
-As described in [Modules](./../pages/modules.md) the `module.xml` file can include definitions of queries used in the application. Queries declared in the `module.xml` are called *metadata queries* to distinguish them from other queries which may exist as views on the database server or as insecure SQL strings within developer code.
+As described in [Modules](./../pages/modules.md) the `module.xml` file can include definitions of queries used in the application. Queries declared in the `module.xml` are called *metadata queries* to distinguish them from other queries which may exist as views on the database server or as unsecured SQL strings within developer code.
 
 Each document can specify a *defaultQueryName* - which is the name of the metadata query to use by default wherever lists of document instances may be required (e.g. lists and lookups for document references).
 
@@ -48,17 +48,17 @@ However you can also declare queries using bizQL (derived from <a href="https://
   ----------------------- | -----------
   binding                 | The document value to be shown in the query column.<br>A compound binding can be used where the value to be shown is in a related document.
   displayName             | An alias for the query column.<br>If no displayName is specified in the query, the list column title will be the displayName specified for the document attribute.
-  editable                | Whether the column is editable in the list view inline.<br>By default editable is set to false.
+  editable                | Whether the column is editable in the list view inline.<br>By default editable is set to true and must be set false if the column binding points to a non-persistent attribute.
   escape				  | Whether the value of the column (which might contain HTML, etc) should be escaped
-  expression              | A valid OQL expression which defines the value to be shown in the list column.
-  filterable              | Whether a filter can be applied to this column in the list view.
+  expression              | A valid HQL expression which defines the value to be shown in the list column.
+  filterable              | Whether a filter can be applied to this column in the list view. This must be set false if the column binding points to a non-persistent attribute.
   filterExpression        | A literal value or one of a number of implicit parameter expressions (shown below).
-  filterOperator          | One of the following operators:<ul><li>equal, notEqual,<li>greater, less,<li>greaterEqual, lessEqual,<li>like, notLike,<li>notNull, isNull,<li>nullOrEqual, nullOrNotEqual,<li>nullOrGreater, nullOrLess,<li>nullOrGreaterEqual, nullOrLessEqual,<li>nullOrLike, nullOrNotLike;</ul>
+  filterOperator          | The operation to use with the filterExpression (operators shown below).
   hidden                  | Whether the query column will be hidden by default in a list view.<br>Hidden columns are hidden by default, but can be un-hidden by the user unless the column has projected=false.
   name                    | You can include calculated or derived values in a query however you must create a non-persistent field in the driving document to hold the value. The *name* is the name of the non-persistent document field which holds the calculated value.<br>Note that the name must correspond to a transient (i.e. non persistent) field in the document which describes other aspects of the expression result (such as type, length, display format etc.).
   projected               | Whether the column will exist in the result set.<br>By default all query columns are projected unless this attribute is *false*.
   sanitise				  | Whether the value of the column (which might contain HTML, etc) should be sanitised.
-  sortable                | Whether the query can be sorted by this column in the list view.
+  sortable                | Whether the query can be sorted by this column in the list view. This must be set false if the column binding points to a non-persistent attribute.
   sortOrder               | The sorting order (ascending or descending) to use by default when this query is displayed.<br>If the column is sortable, the user will be able to re-sort the list results.
 
 _Implicit parameter expressions_
@@ -68,10 +68,32 @@ Skyve provides a number of implicit parameter expressions to be used for filteri
 * `{CONTACTID}` - the id of the contact who is the current user
 * `{CUSTOMER}` - the name of the customer context in which the current user operates
 * `{DATAGROUPID}` - the id of the data group of the current user<li>{DATE} - current date
+* `{DATE}` - current date
 * `{DATETIME}` - current date and time
 * `{USERID}` - bizId of the current user
 * `{USER}` - the userName of current user
 * `{USERNAME}` -  the name of the current user contact
+
+_Filter operators_
+
+* `equal`
+* `notEqual`
+* `greater`
+* `less`
+* `greaterEqual`
+* `lessEqual`
+* `like`
+* `notLike`
+* `notNull`
+* `isNull`
+* `nullOrEqual`
+* `nullOrNotEqual`
+* `nullOrGreater`
+* `nullOrLess`
+* `nullOrGreaterEqual`
+* `nullOrLessEqual`
+* `nullOrLike`
+* `nullOrNotLike`
 
 Developers can of course use their own parameters and provide parameter values using the DocumentQuery interface.
 
@@ -181,7 +203,7 @@ However, there are circumstances where more direct query methods are convenient 
 
 You can also include a filter element in the query definition and express your filter directly. 
 
-Filtering expressions and bizQL are based on <a href="https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html">Hibernate Query Language</a>
+Filtering expressions and bizQL are based on <a href="https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html">Hibernate Query Language</a>. Also note that ANSII SQL join syntax can be used in HQL.
 
 Using the `filter` element can be useful for convenience and is added to the `where` clause as is, in addition to any implicit filtering performed automatically by Skyve or expressed using other filter operators.
 
@@ -233,6 +255,8 @@ qActiveUser.getFilter().addNullOrEquals(User.inactivePropertyName, Boolean.FALSE
 
 List<User> activeUsers = qActiveUser.beanResults();
 ```
+
+However using the DocumentQuery method loads beans, not MapBeans.
 
 #### Including a from element
 
