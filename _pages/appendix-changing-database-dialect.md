@@ -1,6 +1,6 @@
 ---
 title: "Changing database dialect"
-permalink: /appendix_changing_database_dialect/
+permalink: /appendix-changing-database-dialect/
 excerpt: "Changing database dialect"
 toc: true
 sidebar:
@@ -278,5 +278,5 @@ Add the driver to the `drivers` stanza in the wildfly configuration, for example
 
 ---
 
-**Next [Changing database dialect](./../_pages/appendix_deploying_a_skyve_application.md)**<br>
-**Previous [Changing database dialect](./../_pages/appendix_deployment_problem_solver.md)**
+**Next [Changing database dialect](./../_pages/appendix-deploying-a-skyve-application.md)**<br>
+**Previous [Changing database dialect](./../_pages/appendix-deployment-problem-solver.md)**

@@ -1,6 +1,6 @@
 ---
 title: "Deploying a Skyve application"
-permalink: /appendix_deploying_a_skyve_application/
+permalink: /appendix-deploying-a-skyve-application/
 excerpt: "Deploying a Skyve application"
 toc: true
 sidebar:
@@ -53,5 +53,5 @@ the creation of service user accounts, SPNs and port configuration.
 **[⬆ back to top](#deploying-a-skyve-application)**
 
 ---
-**Next [Installing and configuring a Skyve development environment](./../_pages/appendix_installing_and_configuring.md)**<br>
-**Previous [Changing database dialect](./../_pages/appendix_changing_database_dialect.md)**
+**Next [Installing and configuring a Skyve development environment](./../_pages/appendix-installing-and-configuring.md)**<br>
+**Previous [Changing database dialect](./../_pages/appendix-changing-database-dialect.md)**

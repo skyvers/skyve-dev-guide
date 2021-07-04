@@ -1,6 +1,6 @@
 ---
 title: "Setting up a Skyve instance"
-permalink: /appendix_setting_up_a_skyve_instance/
+permalink: /appendix-setting-up-a-skyve-instance/
 excerpt: "Setting up a Skyve instance"
 toc: true
 sidebar:
@@ -144,5 +144,5 @@ The following may be useful for linux installations - https://community.i2b2.org
 **[⬆ back to top](#setting-up-a-skyve-instance)**
 
 ---
-**Next [Common Wildfly configuration settings](./../_pages/appendix_common_wildfly_configuration_settings.md)**<br>
-**Previous [Installing and configuring a Skyve development environment](./../_pages/appendix_installing_and_configuring.md)**
+**Next [Common Wildfly configuration settings](./../_pages/appendix-common-wildfly-configuration-settings.md)**<br>
+**Previous [Installing and configuring a Skyve development environment](./../_pages/appendix-installing-and-configuring.md)**

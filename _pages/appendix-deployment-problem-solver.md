@@ -1,6 +1,6 @@
 ---
 title: "Deployment Problem Solver"
-permalink: /appendix_deployment_problem_solver/
+permalink: /appendix-deployment-problem-solver/
 excerpt: "Deployment Problem Solver"
 toc: true
 sidebar:
@@ -339,5 +339,5 @@ Join us on [Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDM
 **[⬆ back to top](#deployment-problem-solver)**
 
 ---
-**Next [Changing database dialect](./../_pages/appendix_changing_database_dialect.md)**<br>
+**Next [Changing database dialect](./../_pages/appendix-changing-database-dialect.md)**<br>
 **Previous [Backup and restore](./../_pages/backup-restore.md)**

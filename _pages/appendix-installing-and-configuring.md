@@ -1,6 +1,6 @@
 ---
 title: "Installing and configuring a Skyve development environment"
-permalink: /appendix_installing_and_configuring/
+permalink: /appendix-installing-and-configuring/
 excerpt: "Installing and configuring a Skyve development environment"
 toc: true
 sidebar:
@@ -134,5 +134,5 @@ http://192.168.43.182:8080/myapp
 **[⬆ back to top](#installing-and-configuring-a-skyve-development-environment)**
 
 ---
-**Next [Setting up a Skyve instance](./../_pages/appendix_setting_up_a_skyve_instance.md)**<br>
-**Previous [Deploying a Skyve application](./../_pages/appendix_deploying_a_skyve_application.md)**
+**Next [Setting up a Skyve instance](./../_pages/appendix-setting-up-a-skyve-instance.md)**<br>
+**Previous [Deploying a Skyve application](./../_pages/appendix-deploying-a-skyve-application.md)**

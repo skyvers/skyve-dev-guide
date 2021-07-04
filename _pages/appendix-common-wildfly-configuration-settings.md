@@ -1,6 +1,6 @@
 ---
 title: "Common Wildfly settings"
-permalink: /appendix_common_wildfly_configuration_settings/
+permalink: /appendix-common-wildfly-configuration-settings/
 excerpt: "Common Wildfly settings"
 toc: true
 sidebar:
@@ -99,4 +99,4 @@ Specifying a `max-post-size` of `0` will disable the upload limit entirely.
 **[⬆ back to top](#common-wildfly-configuration-settings)**
 
 ---
-**Previous [Setting up a Skyve instance](./../_pages/appendix_setting_up_a_skyve_instance.md)**
+**Previous [Setting up a Skyve instance](./../_pages/appendix-setting-up-a-skyve-instance.md)**

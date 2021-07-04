@@ -1,6 +1,6 @@
 ---
 title: "Skyve application configuration"
-permalink: /appendix_skyve_application_configuration/
+permalink: /appendix-skyve-application-configuration/
 excerpt: "Skyve application configuration"
 toc: true
 sidebar:
@@ -252,5 +252,5 @@ principal is being recognised
 
 ---
 
-**Next [Changing database dialect](./../_pages/appendix_deploying_a_skyve_application.md)**<br>
-**Previous [Changing database dialect](./../_pages/appendix_changing_database_dialect.md)**
+**Next [Changing database dialect](./../_pages/appendix-deploying-a-skyve-application.md)**<br>
+**Previous [Changing database dialect](./../_pages/appendix-changing-database-dialect.md)**
