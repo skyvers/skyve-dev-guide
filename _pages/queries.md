@@ -8,17 +8,15 @@ sidebar:
   nav: docs
 ---
 
-## Queries
+One of the great things about Skyve is that Skyve's Persistence automatically manages your SQL datastore and automatically issues SQL to retrieve data for basic Create, Read, Update and Delete operations, according to the privileges and scoping declared in your module.xml, even where you have declared complex relationships with references across several documents.
 
-One of the great things about Skyve is that Skyve's Persistence automatically manages your SQL datastore and automatically issue SQL to retrieve data for basic Create, Read, Update and Delete operations, according to the privileges and scoping declared in your module.xml, even where you have declared complex relationships with references across several documents.
-
-If a query name is not supplied Skyve will generate a *default* query which will include all columns for all document attributes.
+If a query name is not supplied, Skyve will generate a *default* query which will include all columns for all document attributes.
 
 However, in some cases it is useful to declare the query in the module so that it can be more tightly customised or parameterised for your application.
 
 Queries are declared in the module to maximise re-use throughout the application.
 
-As described in [Modules](./../pages/modules.md) the `module.xml` file can include definitions of queries used in the application. Queries declared in the `module.xml` are called *metadata queries* to distinguish them from other queries which may exist as views on the database server or as unsecured SQL strings within developer code.
+As described in [Modules](./../pages/modules.md), the `module.xml` file can include definitions of queries used in the application. Queries declared in the `module.xml` are called *metadata queries* to distinguish them from other queries which may exist as views on the database server or as unsecured SQL strings within developer code.
 
 Each document can specify a *defaultQueryName* - which is the name of the metadata query to use by default wherever lists of document instances may be required (e.g. lists and lookups for document references).
 
@@ -36,11 +34,11 @@ If the query is the basis of a *listGrid*, then double-clicking in the listGrid 
 
 The evaluation engine knows when to inner and outer join based on the _requiredness_ as specified in the document metadata.
 
-To improve performance Skyve will defer instantiation of domain objects unless necessary - producing a list of mapped objects that implement the given domain interface. 
+To improve performance, Skyve will defer instantiation of domain objects unless necessary - producing a list of mapped objects that implement the given domain interface. 
 
 Non-persistent values can be projected (as well as persisted or database values) and the evaluation engine will load the domain objects behind the scenes only if necessary.
 
-However you can also declare queries using bizQL (derived from <a href="https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html">Hibernate Query Language</a> and SQL.
+However you can also declare queries using bizQL (derived from [Hibernate Query Language](https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html) and SQL.
 
 ### Query column definition
 
@@ -63,7 +61,7 @@ However you can also declare queries using bizQL (derived from <a href="https://
 
 _Implicit parameter expressions_
 
-Skyve provides a number of implicit parameter expressions to be used for filtering.
+Skyve provides a number of implicit parameter expressions to be used for filtering:
 
 * `{CONTACTID}` - the id of the contact who is the current user
 * `{CUSTOMER}` - the name of the customer context in which the current user operates
@@ -95,7 +93,7 @@ _Filter operators_
 * `nullOrLike`
 * `nullOrNotLike`
 
-Developers can of course use their own parameters and provide parameter values using the DocumentQuery interface.
+Developers can of course use their own parameters and provide parameter values using the `DocumentQuery` interface.
 
 _Query column definitions_
 
@@ -120,7 +118,7 @@ Skyve also provides a `content` column type for content items (images and file a
 
 ### Filter parameters
 
-Remember that in many cases, you do not need to declare any query in the module and Skyve will automatically determine a "default" query for a document to drive lists, grids and lookupDescription selection.
+Remember that in many cases, you do not need to declare any query in the module and Skyve will automatically determine a "default" query for a document to drive lists, grids and `lookupDescription` selection.
 
 You can also then apply `filterParameters` to `listGrid` and `lookupDescription` widgets in views without having to create specific queries for this purpose. 
 
@@ -129,6 +127,7 @@ You can also then apply `filterParameters` to `listGrid` and `lookupDescription`
 	<filterParameter operator="equal" filterBinding="team" valueBinding="selectedTeam"/>
 </listGrid>
 ```
+
 `filterBinding` is the binding expression relative to the driving document of `qCoach` and `valueBinding` is the binding expression relative to the bean on which the view is based.
 
 Here, the `filterParameter` is applied _in addition_ to any filtering declared in the query (or to the default query inferred by Skyve where no query is explicitly declared).
@@ -145,7 +144,7 @@ To filter the `listGrid` in a view using the bean on which the view is based, us
 </listGrid>
 ```
 
-### Basic query example
+## Basic query example
 
 The following query is used to retrieve details of _Users_. 
 
@@ -162,7 +161,7 @@ The following query is used to retrieve details of _Users_.
 </query>
 ```
 
-The above query is declared for the _User_ document - by convention we suggest naming the query beginning with `q` - `qUser` or `qUsers` etc. 
+The above query is declared for the _User_ document - by convention we suggest naming the query beginning with `q` - `qUser` or `qUsers` etc.
 
 If this query is used as the basis of a module menu item or a `listGrid`, the resulting list will enable navigation to _User_ records via the double-click/zoom gesture.
 
@@ -172,9 +171,9 @@ Because the query includes columns with bindings like `contact.name`, Skyve will
 
 The column for _createdDateTime_ is hidden, meaning that by default it will not appear in a list based on this query, but in desktop mode, users can opt to include this column at run-time if required.
 
-#### Basic metadata filtering
+### Basic metadata filtering
 
-To filter the query to only include users that are not _inactive_ you can change the column declaration as follows:
+To filter the query to only include users that are not _inactive_, you can change the column declaration as follows:
 
 ```xml
 <column binding="inactive">
@@ -190,7 +189,7 @@ The `filterExpression` is the expression used by the `filterOperator` and in thi
 
 The `projected` element may be optionally included so that the column (which because of the filter will always be either null or false) is not included in the projected columns returned by the query - whereas the `hidden` attribute means that the column is not included in lists by default but can be selected for inclusion by the user at run-time. 
 
-#### Metadata declaration versus other methods
+### Metadata declaration versus other methods
 
 Using Skyve's metadata approach to declaring queries offers a number of advantages. 
 
@@ -199,11 +198,11 @@ Using Skyve's metadata approach to declaring queries offers a number of advantag
 
 However, there are circumstances where more direct query methods are convenient to take advatage of more sophisticated filter expressions and even dialect-specific performance or capability advantages.
 
-#### Including a filter element
+### Including a filter element
 
 You can also include a filter element in the query definition and express your filter directly. 
 
-Filtering expressions and bizQL are based on <a href="https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html">Hibernate Query Language</a>. Also note that ANSII SQL join syntax can be used in HQL.
+Filtering expressions and bizQL are based on [Hibernate Query Language](https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html).
 
 Using the `filter` element can be useful for convenience and is added to the `where` clause as is, in addition to any implicit filtering performed automatically by Skyve or expressed using other filter operators.
 
@@ -243,7 +242,7 @@ The following queries are equivalent:
 </query>
 ```
 
-Here, the driving document is _aliased_ as `bean` by Skyve and so filter expressions must include that alias (hence `bean.inactive`).
+Here, the driving document is _aliased_ as `bean` by Skyve, and so filter expressions must include that alias (hence `bean.inactive`).
 
 Note that the `filter` element can be used in combination with other filter operators, for example in combination with the column `filterOperator` and `filterExpression`.
 
@@ -258,7 +257,7 @@ List<User> activeUsers = qActiveUser.beanResults();
 
 However using the DocumentQuery method loads beans, not MapBeans.
 
-#### Including a from element
+### Including a from element
 
 You can override the usual query behaviour to include other documents that may or not be directly related to the driving document by including a `from` element in the query declaration, and aliasing the documents. The documents must be declared using the `{module.Document}` naming convention.
 
@@ -296,7 +295,7 @@ The following example returns the support tickets associated to the current user
 
 In the above example, _SupportTicket_ document in the _support_ module is the driving document and is aliased as `bean`.
 
-#### Using bizQL
+### Using bizQL
 
 In some cases, it may be convenient to specify the query using bizQL directly, rather than XML metadata.
 
@@ -329,7 +328,7 @@ bizQL.putParameter("instanceId", instanceId);
 bizQL.setMaxResults(1);
 ```
 
-#### Using SQL
+### Using SQL
 
 If required, you can also declare queries using SQL (and a specific SQL dialect). In this case the SQL may be dialect-specific and your application may not function when used on other database types.
 
@@ -383,7 +382,7 @@ sql.putParameter("inspectionDateFrom", dateFrom);
 sql.putParameter("inspectionDateTo", dateTo);
 ```
 
-#### Using MEMBER OF
+### Using MEMBER OF
 
 In this example, _Provider_ has a collection of _ServiceType_ called `servicesProvided`.
 
@@ -470,7 +469,7 @@ The `filter` element below filters for _Agreement_s that are current (_endDate_ 
 </filter>	
 ```
 
-#### Debugging
+## Debugging
 
 Where direct expressions like bizQL or SQL are used for queries, Skyve offers trace options to assist developers debug their application queries.
 
