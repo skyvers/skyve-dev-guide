@@ -169,6 +169,20 @@ GO
 ALTER DATABASE ${projectName} SET RECOVERY SIMPLE WITH NO_WAIT
 GO
 ```
+##### Updating the JSON file for MS SQL
+
+When changing to MS SQL, ensure that you specify the catalog in the project `.json` file, for example:
+
+```JSON
+...
+catalog: "myApp",
+schema: "dbo",
+...
+```
+
+where `catalog` represents the _database_ name and `schema` is the namespace - this appears to contradict the naming used in the MySQL Workbench however, it corresponds to the JDBC specification - the mismatch is in the databases implementation of the <a href="https://stackoverflow.com/questions/7942520/relationship-between-catalog-schema-user-and-database-instance">JDBC specification</a>.
+
+*NOTE* - don't forget to also update the project `pom.xml` file for the chosen dialect and update the project `-ds.xml` file accordingly.
 
 #### Wildfly driver configuration for MySQL
 
@@ -209,6 +223,21 @@ Add the driver to the `drivers` stanza in the wildfly configuration, for example
 	</driver>
 ...
 ```
+##### Updating the JSON file for MySQL
+
+When changing to MySQL, ensure that you specify the catalog in the project `.json` file, for example:
+
+```JSON
+...
+catalog: "myApp",
+schema: null,
+...
+```
+
+where `catalog` represents the _database_ name and `schema` is the namespace - this appears to contradict the naming used in the MySQL Workbench however, it corresponds to the JDBC specification - the mismatch is in the databases implementation of the <a href="https://stackoverflow.com/questions/7942520/relationship-between-catalog-schema-user-and-database-instance">JDBC specification</a>.
+
+*NOTE* - don't forget to also update the project `pom.xml` file for the chosen dialect and update the project `-ds.xml` file accordingly.
+
 
 #### Problems with utf8 - character sets for other languages - MySQL
 If your Skyve application is not storing utf8 chars correctly, and you're using MySQL, check that MySQL is configured for utf8. Check the charset of the DB and tables, e.g. the default  is 'latin1'.
