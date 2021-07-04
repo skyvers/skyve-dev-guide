@@ -146,43 +146,7 @@ listGrid will zoom to the *driving document*.
 
 ![Query based list](../assets/images/modules/listTitle.png "Query based list")
 
-### Query column definition
-
-  Query column attributes | Description
-  ----------------------- | -----------
-  binding                 | The document value to be shown in the query column.<br>A compound binding can be used where the value to be shown is in a related document.
-  displayName             | An alias for the query column.<br>If no displayName is specified in the query, the list column title will be the displayName specified for the document attribute.
-  editable                | Whether the column is editable in the list view inline.<br>By default editable is set to false.
-  expression              | A valid OQL expression which defines the value to be shown in the list column.
-  filterable              | Whether a filter can be applied to this column in the list view.
-  filterExpression        | A literal value or one of a number of expressions.<br>Defined expressions include:<br><ul><li>{CONTACTID} - the id of the contact who is the current user<li>{CUSTOMER} - the name of the customer context in which the current user operates<li>{DATAGROUPID} - the id of the data group of the current user<li>{DATE} - current date<li>{DATETIME} - current date and time<li>{USERID} - bizId of the current user<li>{USER} - the userName of current user<li>{USERNAME} -  the name of the current user contact</ul>
-  filterOperator          | One of the following operators:<ul><li>equal, notEqual,<li>greater, less,<li>greaterEqual, lessEqual,<li>like, notLike,<li>notNull, isNull,<li>nullOrEqual, nullOrNotEqual,<li>nullOrGreater, nullOrLess,<li>nullOrGreaterEqual, nullOrLessEqual,<li>nullOrLike, nullOrNotLike;</ul>
-  hidden                  | Whether the query column will be hidden by default in a list view.<br>Hidden columns are hidden by default, but can be un-hidden by the user unless the column has projected=false.
-  name                    | You can include calculated or derived values in a query however you must create a non-persistent field in the driving document to hold the value. The *name* is the name of the non-persistent document field which holds the calculated value.<br>Note that the name must correspond to a transient (i.e. non persistent) field in the document which describes other aspects of the expression result (such as type, length, display format etc.).
-  projected               | Whether the column will exist in the result set.<br>By default all query columns are projected unless this attribute is *false*.
-  sortable                | Whether the query can be sorted by this column in the list view.
-  sortOrder               | The sorting order (ascending or descending) to use by default when this query is displayed.<br>If the column is sortable, the user will be able to re-sort the list results.
-
-_Query column definitions_
-
-Driving documents can be the subject of many queries.
-
-### Content query columns
-
-Skyve also provides a `content` column type for content items (images and file attachments). The `content` column type has the following attributes:
-
- Content column attributes | Description
- --------------------------|-------------
- alignment                 | either left, right or centre
- display                   | either `thumbnail` or `link` - displays either a thumbnail of the image, or file type icon, or a download link for the content item
- displayName                | the column name for the column
- emptyThumbnailRelativeFile | the relative file to display if the content item produces an empty thumbnail
- hidden                     | whether the column is hidden by default
- pixelHeight                | the height of the thumbnail in pixels
- pixelWidth                 | the width of the thumbnail in pixels
- sortOrder                  | The sorting order (ascending or descending) to use by default when this query is displayed.
-
-![Thumbnail image in list](../assets/images/working-with-content/thumbnail-image-list.png "Thumbnail image in list")
+More details are provided in [Queries](./../pages/queries.md)
 
 ### Queries for reference attributes
 

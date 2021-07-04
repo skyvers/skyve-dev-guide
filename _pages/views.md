@@ -1473,5 +1473,5 @@ The following features are only available for the SmartClient renderer, as they 
   * Exporting**[⬆ back to top](#views)**
 
 ---
-**Next [Inheritance](./../_pages/inheritance.md)**  
+**Next [Queries](./../_pages/queries.md)**  
 **Previous [Bizlets](./../_pages/bizlets.md)**

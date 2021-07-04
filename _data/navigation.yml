@@ -27,6 +27,8 @@ docs:
         url: /bizlets/                                        
       - title: "Views, widgets and layout"
         url: /views/        
+      - title: "Queries"
+        url: /queries/        
       - title: "Inheritance"
         url: /inheritance/                                                                                        
       - title: "Routing and rendering"
