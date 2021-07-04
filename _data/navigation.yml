@@ -80,7 +80,7 @@ docs:
   - title: Appendix
     children:
       - title: "Problem solver"
-        url: /appendix/#problem-solver
+        url: /appendix/
       - title: "Changing database dialect"
         url: /appendix/                  
       - title: "Deploying a Skyve application"
