@@ -8,6 +8,8 @@ sidebar:
   nav: docs
 ---
 
+## Modules
+
 Modules define self-contained application pieces and correspond to menus
 within the system accordion menu pane. The repository/apps folder
 contains all application metadata and code, organised as application
