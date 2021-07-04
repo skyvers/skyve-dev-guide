@@ -492,7 +492,7 @@ select count(adminuser0_.bizId) as col_0_0_, min(adminuser0_.bizFlagComment) as 
 
 If `query` tracing was not specified at deploy-time, a user with `DevOps` role can turn it on at run-time via the deskop mode. This will turn on both `query` and `sql` tracing.
 
-![Query logging](./../assets/appendix/control-panel-query-logging.PNG "Query logging")
+![Query logging](./../assets/images/appendix/control-panel-query-logging.PNG "Query logging")
 
 **[⬆ back to top](#queries)**
 
