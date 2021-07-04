@@ -79,17 +79,15 @@ docs:
         url: /backup-restore/                                                                                        
   - title: Appendix
     children:
-      - title: "Problem solver"
-        url: /appendix/
+      - title: "Deployment problem solver"
+        url: /appendix-deployment-problem-solver/
       - title: "Changing database dialect"
-        url: /appendix/                  
+        url: /appendix-changing-database-dialect/                  
       - title: "Deploying a Skyve application"
-        url: /appendix/                  
-      - title: "Deploying a new application version"
-        url: /appendix/                  
-	  - title: "Installing and configuring the Skyve development environment"
-		url: /appendix/
-	  - title: "Setting up a Skyve instance"
- 		url: /appendix/
-	  - title: "Common Wildfly configuration settings"                  
-		url: /appendix/
+        url: /appendix-deploying-a-skyve-application/                  
+      - title: "Installing and configuring the Skyve development environment"
+        url: /appendix-installing-and-configuring/                  
+      - title: "Setting up a Skyve instance"
+        url: /appendix-setting-up-a-skyve-instance/
+      - title: "Common Wildfly configuration settings"
+        url: /appendix-common-wildfly-configuration-settings/
