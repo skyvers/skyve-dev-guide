@@ -434,7 +434,7 @@ The following example return users with the selfRegistrationGroup
 </query>		
 ```
 
-#### Other examples
+### Other examples
 
 This example filters the list of _People_ for those who do not have any _Schedule_ in the _currentTerm_, where _currentTerm_ belongs to the _General_ document.
 
@@ -477,27 +477,27 @@ The project `.json` file includes tracing options for `query` and `sql`.
 
 ```json
 // Trace settings
-trace: {
+"trace": {
 	// XML metadata parsing
-	xml: false,
+	"xml": false,
 	// HTTP request attributes and parameters
-	http: false,
+	"http": false,
 	// queries performed
-	query: true,
+	"query": true,
 	// MVC command debug
-	command: false,
+	"command": false,
 	// JSF inner workings
-	faces: false,
+	"faces": false,
 	// generated SQL statements
-	sql: true,
+	"sql": true,
 	// content manipulation
-	content: false,
+	"content": false,
 	// application security denials
-	security: false,
+	"security": false,
 	// bizlet callbacks
-	bizlet: false,
+	"bizlet": false,
 	// mutations in domain objects
-	dirty: false
+	"dirty": false
 },
 ```
 
