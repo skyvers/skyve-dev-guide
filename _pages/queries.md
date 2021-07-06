@@ -469,6 +469,37 @@ The `filter` element below filters for _Agreement_s that are current (_endDate_ 
 </filter>	
 ```
 
+_Users with a role_
+
+This example shows how to retrieve all users with a specific role in the application.
+(Users may have a Role assigned directly, or by being assigned a Group which has the Role.)
+
+```xml
+<query documentName="User" name="qUserWithRole">
+	<description>Users with Basic User role</description>
+	<from>
+		<![CDATA[
+			{admin.User} as bean
+		]]>
+	</from>
+	 <filter>
+    	<![CDATA[
+    		bean.bizId in (select ur.parent.bizId 
+    				from {admin.UserRole} as ur 
+					where ur.roleName = 'admin.BasicUser')
+			or bean.bizId in (select u.bizId
+					from {admin.User} as u, {admin.Group} as g, {admin.GroupRole} as r
+					where r.roleName = 'admin.BasicUser'
+    				AND g MEMBER OF u.groups
+					AND r.parent = g.bizId)
+		]]>
+	</filter>
+	<columns>
+		<column binding="bizKey" sortOrder="ascending" />
+	</columns>
+</query>         
+```
+
 ## Debugging
 
 Where direct expressions like bizQL or SQL are used for queries, Skyve offers trace options to assist developers debug their application queries.
@@ -516,8 +547,6 @@ select count(adminuser0_.bizId) as col_0_0_, min(adminuser0_.bizFlagComment) as 
 If `query` tracing was not specified at deploy-time, a user with `DevOps` role can turn it on at run-time via the deskop mode. This will turn on both `query` and `sql` tracing.
 
 ![Query logging](./../assets/images/appendix/control-panel-query-logging.PNG "Query logging")
-
-**[⬆ back to top](#queries)**
 
 ---
 **Next [Inheritance](./../_pages/inheritance.md)**<br>
