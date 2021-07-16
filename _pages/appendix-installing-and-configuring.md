@@ -15,17 +15,23 @@ development environment for Skyve. These instructions assume that you are
 using Windows and SQL Server. Some changes will need to be made if using a 
 different operating system or database.
 
+If you're new to Java, you may find the instructions in our tutorial easier to follow - [Configure your local environment](https://skyvers.github.io/Aged-care/chapter3/#32-configure-your-local-environment)
+
 ### Prerequisites checklist
 
 Before you begin, ensure you have the following:
 
-* Java ([www.oracle.com](http://www.oracle.com/technetwork/java/javase/downloads/)), JDK 11
+* [AdoptOpenJDK](https://adoptopenjdk.net/installation.html?variant=openjdk11&jvmVariant=hotspot#x86-32_win-jdk) (or an alternative OpenJDK of your choice)
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)), so that the installation
-is in `C:\eclipse\`
-* NOTE - When downloading Eclipse, ensure you have selected Eclipse for Java EE (Enterprise Edition) Developers as the non-Enterprise Edition is missing libraries that Skyve utilises, as well as plugins that are used for local deployment. 
-* Wildfly 20+ (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
+is in `C:\eclipse\` NOTE: do not use the Eclipse EE9 preview, you will need the Jakarta EE Full & Web Distribution 
+* Wildfly 22+ (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
 * A RDBMS which is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
   administrator username and password. 
+  
+We also recommend you
+* register for an account with github or gitlab (or other git-based repository)
+* register for an account on [Skyve Foundry](https://foundry.skyve.org/foundry)
+* register on our [public Slack account in case you have questions](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LTRkMWUxZDBlZmFlMmJkMjQzYWMzYWQxMmQzYWQ1ZTdlODNkNjRlYzVhYjFmMmQ4NTlhYWY4MjNhMGVkZGNlMjY)
 
 For this example, to use MS SQL Server as the database for the Skyve project:
 * If you do not already have SQL Server installed:
@@ -47,9 +53,7 @@ For this example, to use MS SQL Server as the database for the Skyve project:
   again, remember the port number you've entered.
 
 ### Configuring Java
-* Download jdk11 (if you haven't already) 
-  (http://www.oracle.com/technetwork/java/javase/downloads/) 
-  and install it to your machine.
+* Install an OpenJDK 11 version from [AdoptOpenJDK](https://adoptopenjdk.net/installation.html?variant=openjdk11&jvmVariant=hotspot#x86-32_win-jdk) (or an alternative OpenJDK of your choice)
 * Go your Control Panel->System and Security->System (for Windows). Now select 
   'Advanced system settings' and click the "Environment Variables..." button.
 * Locate 'Path' under System variables double click it, click the _New_ button and 
