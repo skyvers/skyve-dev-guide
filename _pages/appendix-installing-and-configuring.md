@@ -24,10 +24,10 @@ Before you begin, ensure you have the following:
 * Java 11 JDK - [AdoptOpenJDK](https://adoptopenjdk.net/installation.html?variant=openjdk11&jvmVariant=hotspot#x86-32_win-jdk) (or an alternative OpenJDK of your choice)
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)) - NOTE: do not use the Eclipse EE9 preview, you will need the Jakarta EE Full & Web Distribution 
 * Wildfly 22+ (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
-* A RDBMS which is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
-  administrator username and password. 
   
 We also recommend you
+* load an RDBMS like MySQL, Postgres or MS SQL that is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
+  administrator username and password (if you're unable to do this, you can use H2 file-based database which requires no install).
 * register for an account with github or gitlab (or other git-based repository)
 * register for an account on [Skyve Foundry](https://foundry.skyve.org/foundry)
 * register on our [public Slack account in case you have questions](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LTRkMWUxZDBlZmFlMmJkMjQzYWMzYWQxMmQzYWQ1ZTdlODNkNjRlYzVhYjFmMmQ4NTlhYWY4MjNhMGVkZGNlMjY)
