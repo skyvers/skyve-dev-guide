@@ -25,7 +25,7 @@ Before you begin, ensure you have the following:
 * Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)) - NOTE: do not use the Eclipse EE9 preview, you will need the Jakarta EE Full & Web Distribution 
 * Wildfly 22+ (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
   
-We also recommend you
+We also recommend you:
 * load an RDBMS like MySQL, Postgres or MS SQL that is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
   administrator username and password (if you're unable to do this, you can use H2 file-based database which requires no install).
 * register for an account with github or gitlab (or other git-based repository)
