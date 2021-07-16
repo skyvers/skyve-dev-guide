@@ -451,7 +451,7 @@ are no longer valid.
 Because Skyve is intended and designed for multi-tenancy, data is
 assumed to exist within a customer (i.e. tenant) context. Skyve
 automatically limits all user interactions to data within the same
-customer context (except where developers intentionally use insecure SQL
+customer context (except where developers intentionally use unsecured SQL
 methods).
 
 ## Customer overriding
@@ -506,8 +506,8 @@ application development with no opportunity for developers to
 inadvertently allow access other than according to the declared scope
 and role.
 
-The use of insecure SQL bypasses the inbuilt scoping of Skyve, so
-developers using insecure SQL must take responsibility to ensure they
+The use of unsecured SQL bypasses the inbuilt scoping of Skyve, so
+developers using unsecured SQL must take responsibility to ensure they
 respect data contexts.
 
 ## DataGroup
