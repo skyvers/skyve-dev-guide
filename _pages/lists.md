@@ -243,7 +243,7 @@ public class UserListModel extends DocumentQueryListModel<SomeDocument> {
 
 In the above example, note that the model manipulates both the `detailQuery` (the rows in the grid) and the `summaryQuery` (the summary line of the grid) the same way, so that the summary is based on the same filter as the rows in the grid.
 
-### Example ReferenceListModel
+#### Example ReferenceListModel
 
 The Skyve admin module contains several use-cases of `ListModel` implementations which are useful for developers to review:
 
