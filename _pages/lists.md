@@ -94,12 +94,13 @@ For example, if you have a module document query using a filter stanza as follow
 		<column binding="employee.employeeCode" />
 		<column binding="totalHours" />
 		<column binding="status"/>
-</query
+	</columns>
+</query>
 ```
 
 The listGrid widget can then pass in value parameters as follows:
 
-```
+```xml
 <form>
 	<column/>
 	<column/>
@@ -126,37 +127,29 @@ Skyve provides the following list model types:
 
 Class | Description
 ------|------------
-ListModel | The basic listModel that other types extend
-`DocumentQueryListModel` | this approach takes advantage of the inbuilt handling of `DocumentQuery` and allows the developer to customise or construct the `DocumentQuery` and filters with minimal effort (rather than specifying the `DrivingDocument`, `Projections`, `Columns` and a `fetch()` method)
-`InMemoryDocumentQueryListModel` |
-`InMemoryListModel` | intended to provide a basis for complete implementation of all listGrid functions - advanced filtering, tags, flags, snapshot, summary etc.
+`ListModel` | The basic listModel that other types extend
+`DocumentQueryListModel` | This approach takes advantage of the inbuilt handling of `DocumentQuery` and allows the developer to customise or construct the `DocumentQuery` and filters with minimal effort (rather than specifying the `DrivingDocument`, `Projections`, `Columns` and a `fetch()` method)
+`InMemoryListModel` | Intended to provide a basis for complete implementation of all listGrid functions - advanced filtering, tags, flags, snapshot, summary etc.
+`InMemoryDocumentQueryListModel` | Similar to the `InMemoryListModel` but provides some out of the box setup for working with an existing DocumentQuery to supply the data for the model.
 `InMemorySQLListModel` | (not yet implemented)
 `ReferenceListModel` | A class to extend to make a quick model based on a collection or an association within the edited bean. Used used to show references/collections from the bean as a list.
 `RelationTreeModel` | A Tree Model that displays any document relations present in the edited document. That is, associations, collections, inverseOnes and inverseManys. The tree grid has one column, the document's bizKey. Used as the basis of exploratory tree showing all entities related to the bean.
-`SQLDocumentQueryListModel` |
+`SQLDocumentQueryListModel` | Similar to `DocumentQueryListModel` but when SQL is required for fetching or summarising the data.
 `SQLWithDrivingDocumentListModel` | (not yet implemented)
 `SQLWithoutDrivingDocumentListModel2` | (not yet implemented)
 
 ### Declaring a list model
 
-A list model is a Java class that extends `ListModel<>()` (or one of the subtypes) and is located in the models subpackage of the document package (as shown below):
+A list model is a Java class that extends `ListModel<>()` (or one of the subtypes) and is located in the `models` subpackage of the document package (as shown below):
 
 !["Model location"](./../assets/images/lists/model-location.png "Model location")
 
-Once the model is declared, it can be referenced using the `listGrid` widget in a view:
+Once the model is declared, it can be referenced using the `model` attribute of the `listGrid` widget in a view:
 
 ```xml
 <listGrid model="BackupsModel" 
 	selectedIdBinding="selectedBackupName" 
 	continueConversation="false" 
-	showAdd="false"
-	showEdit="false" 
-	showExport="false" 
-	showFilter="false" 
-	showRemove="false" 
-	showSnap="false" 
-	showSummary="false"
-	showTag="false" 
 	showZoom="false" 
 	postRefresh="backupsRefreshRequired">
 	<onSelectedHandlers>
@@ -198,6 +191,17 @@ Method | Description
 The general approach for creating a simple list model is:
 * In the constructor, set the drivingDocument, projections and columns - this might be done for special cases of query-based models by specifying or establishing the query on which the list will be based
 * Implement the `fetch()` method to return a `Page` of results for display.
+
+### Example Models
+
+The Skyve admin module contains several use-cases of `ListModel` implementations which are useful for developers to review:
+
+Model | Description
+-------|---------
+`DataMaintenance.BackupsModel` | Lists items from the file system using the list feature 
+`DataMaintenance.ContentModel` | Lists items from the content repository using the list feature
+`Communication.BatchesModel`  | *this is a basic variant of the DataMaintenance.BackupsModel*
+`UserDashboard.FavouritesModel` | An example of a `ReferenceListModel` which turns a non-persistent collection of favourites into a list of tiles for the UserDashboard
 
 #### Example DocumentQueryListModel
 
@@ -244,14 +248,6 @@ public class UserListModel extends DocumentQueryListModel<SomeDocument> {
 In the above example, note that the model manipulates both the `detailQuery` (the rows in the grid) and the `summaryQuery` (the summary line of the grid) the same way, so that the summary is based on the same filter as the rows in the grid.
 
 #### Example ReferenceListModel
-
-The Skyve admin module contains several use-cases of `ListModel` implementations which are useful for developers to review:
-
-Model | Description
--------|---------
-`DataMaintenance.BackupsModel` | lists items from the file system using the list feature 
-`DataMaintenance.ContentModel` | lists items from the content repository using the list feature
-`Communication.BatchesModel`  | *this is a basic variant of the DataMaintenance.BackupsModel*
 
 The following example demonstrates using the ReferenceListModel to list references from a bean - in this case the `User` showing specific `Role`s assigned to them.
 
