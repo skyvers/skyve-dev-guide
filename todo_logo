@@ -1,0 +1,49 @@
+How to change the logo?
+Is it possible to create user record at the same time as creating patient or doctor record?
+Is it possible to create the address record while creating patient information?
+How to send reminders of upcoming and missed schedules?
+How to expose the data for mobile apps? Do we need to create webservice or can directly access the data?
+Is it possible to  collapse the Admin module  by default when  the  admin user logs in?
+
+To customise the logo, you modify this in the customer.xml file. As Skyve supports multi-tenant (can have multiple customers using the same system), the logo is per customer not per app. See this part in the dev guide for the location of the file, https://skyvers.github.io/skyve-dev-guide/customers/
+and change the `<uiResources logo="logo.png"/>`
+
+Yes, it is possible to create the user record at the same time as the patient or doctor, that was my intention but it is not possible to provide that with skyve foundry currently. To enable this, you will need to add all the mandatory User fields to the edit view of the Patient and Doctor. So first start by generating the view for Doctor and Patient using the maven command `mvn skyve:generateEditView` see (https://github.com/skyvers/skyve#skyve-maven-commands). You can then show the User fields in the view directly by using dot notation to access the related field, and Skyve will create a new User record for you automatically.
+
+for example, in your form you might have
+        ```<row>
+            <item>
+                <textField binding="systemUser.contact.name" />
+            </item>
+        </row>
+        <row>
+            <item>
+                <textField binding="systemUser.userName" />
+            </item>
+        </row>
+        <row>
+            <item>
+                <textField binding="systemUser.contact.email1" />
+            </item>
+        </row>```
+
+creating the address will be the same, you just use
+        ```<row>
+            <item>
+                <textField binding="homeAddress.addressLine1" />
+            </item>
+        </row>
+        <row>
+            <item>
+                <textField binding="homeAddress.addressLine2" />
+            </item>
+        </row>```
+
+Sending a reminder would be done using a Job. This allows scheduled tasks to occur, so you could run this once per hour maybe and check the database for any upcoming bookings which need a reminder sent, then send an email or SMS (we haven’t got a SMS connector yet though, but I need to build Twilio integration for another customer). See https://skyvers.github.io/skyve-dev-guide/jobs/ and the `BulkUserCreationJob` in the admin module, that is a little bit similar to what you will need to do.
+
+To access data from a mobile app, you will need to enable Skyve REST services, these are turned off by default for security reasons but can be turned on. Instructions are here: https://github.com/skyvers/skyve-cookbook#creating-rest-services
+
+To collapse the admin module by default when you login, you can change the user’s “home module”. this tells the system which module to open when the user logs in, and all others will be collapsed. So if you go to admin -> users and click on each user, you can change the home module for each user to something other than admin
+
+
+is it possible to include documents from other modules in the menu?

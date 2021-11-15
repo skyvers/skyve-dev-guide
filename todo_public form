@@ -1,0 +1,111 @@
+<route outcome="/external/public.xhtml">
+			<criteria webAction="e" module="covid19Tracker" document="Questionairre" />
+		</route>
+		
+		
+To make a page public...
+Add a route entry for the page with an outcomeUrl of "external/public.xhtml".
+Then /?a=e&m=<mod>&d=<doc> will be a public url and not prompt for login, instead running as the public user defined in admin.Configuration.
+If no public user is set, noPublicUser.jsp is displayed.
+A public page is detected by seeing if the outcomeUrl matches any url defined in the unsecuredUrls from the web.xml, the global router or any module routers defined.
+This means you can create your own generic public page and if you add it to the unsecured URLs and it will act like external/public.xhtml
+The external/public.xhtml is similar to external/edit.xhtml.
+This page uses an extension of FacesBean called PublicFacesBean which overrides preRender() to set the user to the public user set in admin.Configuration or forwards to the noPublicUser.jsp if not set.
+This bean can be used by any public xhtml page you author.
+
+
+Just to clear up public pages a little…
+The mechanism allows for public pages through the router and unsecured URL mechanisms, routed to public.xhtml.
+
+
+
+
+
+3:00
+The URL to hit is the standard URL, like  <server>?a=e&m=<module-name>&d=<document-name>
+3:01
+If you want to navigate to an xhtml page, @rbb555 just did one - see covid19tracker and equineemotionsurvey
+3:01
+Make a page based on the public page
+3:02
+Remote the f:viewParam elements as you’re not accepting the standard parameters most probably
+3:02
+And replace with a bunch of <c:set /> elements
+3:03
+eg in  @rbb555’s example
+3:03
+<c:set target=“#{skyvePublic}” property=“bizModuleParameter” value=“admin” />
+<c:set target=“#{skyvePublic}” property=“bizDocumentParameter” value=“SelfRegistration” />
+3:03
+You have to add the XML schema namespace like
+3:03
+xmlns:c=“http://java.sun.com/jsp/jstl/core”
+
+oracle.comoracle.com
+Oracle Java Technologies | Oracle
+Java can help reduce costs, drive innovation, & improve application services; the #1 programming language for IoT, enterprise architecture, and cloud computing.
+3:08
+Or your other option if you are extending PublicFacesView bean already anyway, is to call
+setBizModuleParameter(poo) & setBizDocumentParameter(wee) in an override of preRender()
+
+SELF REGISTRATION
+1. add register.xhtml to src/main/webapp/
+2. add /register.xhtml to unsecured pages in web.xml
+3. add a route to external
+		<route outcome="/register.xhtml">
+			<criteria module="admin" document="SelfRegistration"/>
+		</route>
+4. create a public user
+5. set public user in admin.ControlPanel
+6. create a self-register group
+7. set the self-register group in Control Panel and enable self-registration
+8. add a menu item for the Self-Register page to admin module.xml
+		<!-- customised, do not overwrite -->
+			<edit name="Register" document="SelfRegistration">
+				<role name="Anonymous"/>
+			</edit>
+			
+--------------------------------------			
+Since Skyve 2.0, you can make a page "anonymously accessible" - i.e. public for things like an application page etc, by:
+adding a route to the public page like this
+<uxui name="external">
+        <route outcome="/external/public.xhtml">
+			<criteria webAction="e" module="myModule" document="MyPublicForm" />
+		</route>
+        ...
+where myModule  and MyPublicForm are the module and document driving the form -
+You can add this route to the router.xml file in the router folder in your project, or you can create a router.xml file within your module if the routes are specific to your module.
+Once this route is in place, there won't be any menu, and the document will open with webAction "e" - i.e. edit view (so there won't be a list view).
+This means, when the user is routed to the page for the first time a new instance will be created automatically.
+2. To enable a public form, you need to create a public user with the appropriate privileges to be able to do what you want them to - AND you need to set this public user in the admin.Configuration settings (when you're logged in as an administration user).
+Then you provide people with a link to access that form like https://mydomain.com/myApp?a=e&m=myApp&d=MyPublicForm
+(For example, I usually create a User called public with a fake email address like public@skyve.org and a fake password.)
+A public page is detected by seeing if the outcomeUrl matches any url defined in the unsecuredUrls from the web.xml, the global router or any module routers defined. This means you can create your own generic public page and if you add it to the unsecured URLs and it will act like external/public.xhtml
+The external/public.xhtml is similar to external/edit.xhtml.
+This page uses an extension of FacesBean called PublicFacesBean which overrides preRender() to set the user to the public user set in admin.Configuration or forwards to the noPublicUser.jsp if not set.
+This bean can be used by any public xhtml page you author. (edited) 			
+
+Alternatively,
+If you want to create a custom .xhtml page that isn't a public page (i.e. users need to log in to get to it) then you can do this too.
+A simple way to get started is to copy an existing .xhtml page like /external/edit.xml - perhaps copying it to /demo.xhtml - (i.e. src/main/webapp/demo.xhtml in your project)
+Then add the route, e.g.
+	<uxui name="external">
+		<route outcome="/demo.xhtml">
+			<criteria webAction="e" module="myModule" document="MyDocument" />
+		</route>
+        ....
+Where MyDocument is a normal Skyve document that will manage the bean that you want to provide access to.
+
+You'll need to add that xhtml as an unsecured xhtml in the router.xml file like this:
+<unsecured>/demo.xhtml</unsecured>
+
+That's it - now when you go to edit MyDocument you'll get your demo.xhtml page and you can begin to customise it - for example, turning
+<ui:param name="showMenu" value="false" />
+to hide the menu etc (which may or may not make sense depending on how users will get there).
+Within that file, the view component
+					<s:view module="#{skyve.bizModuleParameter}"
+								document="#{skyve.bizDocumentParameter}"
+								managedBean="skyve"
+								update="@form" />
+will be the layout generated from the applicable view edit.xml within your MyDocument package - (in the above example, for the external UxUi)
+Also to get started, from within admin.ControlPanel (you have to switch to desktop mode to access this), you can turn on Faces logging to see what is generated by Skyve when you access one of the pages in PF (change the setting then switch back to responsive/PF mode and check the log)

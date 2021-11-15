@@ -1,0 +1,22 @@
+I’ve completed the work getting responsive layout on primeflex.
+So remember it’s controlled in the web.xml and should be on by default now.
+I’ve added vertical and horizontal alignment and fixed pixel layouts controlled by pixelWidth to vbox and hbox.
+Ive also added “sm”, “md”, “lg” & “xl” responsive widths and view widget size
+validation.
+If you wanna override the standard conversions skyve does to determine responsive widths these attributes can be used.
+sm = small
+md = medium
+lg = large
+xl = extra large
+The breakpoints are different for PF responsive grid and prime flex
+ui-sm-* Phones max-width: 40em (640px) ui-sm-6, ui-sm-4
+ui-md-* Tablets min-width: 40.063em (641px) ui-md-2, ui-sm-8
+ui-lg-* Desktops min-width: 64.063em (1025px) ui-lg-6, ui-sm-12
+ui-xl-* Big screen monitors min-width: 90.063em (1441px) ui-xl-2, ui-sm-10
+versus primeflex
+p-sm-* : min-width 576px
+p-md-* : min-width 768px
+p-lg-* : min-width 992px
+p-xl-* : min-width 1200px
+It is now possible to easily centre on very large screens with a combo of horizontalAlignment=“centre” and xl=“9" for instance to take up the middle 3/4 of the page
+and it should be easier to get widget sizes finessed.

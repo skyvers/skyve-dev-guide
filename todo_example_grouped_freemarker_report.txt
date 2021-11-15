@@ -1,0 +1,126 @@
+<#include "headerL.ftlh">
+<!-- report parameters -->
+<#include "Report Parameters.ftlh">
+<section id="numbers" class="items">
+	<#list counts as bean>
+		<#assign showHeader = 1>
+		<#if showHeader==1 >
+			<!-- header -->			
+		    <div class="row">
+				<div class="col-3-12">Total Major Funds: ${(bean.countOfMajFund)!}</div>
+				<div class="col-9-12"></div>
+		    </div>             
+			<div class="row">
+				<div class="col-3-12">Total Minor Funds: ${(bean.countOfMinFund)!}</div>
+				<div class="col-9-12"></div>
+		    </div> 
+        </#if>
+	</#list>
+</section>	
+<section id="fundsBalance" class="items">
+	<!-- initialising variables and setting number format -->
+	<#assign totalCA = 0>
+	<#assign totalJOB = 0>
+	<#assign totalYTD = 0>
+	<#assign totalCB = 0>
+	<#assign grandTotalCA = 0>
+	<#assign grandTotalJOB = 0>
+	<#assign grandTotalYTD = 0>
+	<#assign grandTotalCB = 0>
+	<#setting number_format=",##0.00">
+	<#assign index = 0>
+	<#list funds as bean>
+	<!-- grouping controls -->    	
+    	<#assign showGroupHeader = 0 >
+    	<#assign showDetail = 1 >
+    	<#assign showGroupFooter = 0 >
+		<#assign showFinalFooter = 0 >
+		<#if 0 < index >
+			<#assign prev = funds[index - 1]>
+		</#if>
+		<#if index < funds?size-1>
+			<#assign next = funds[index + 1]>
+		</#if>
+    	<#if prev?? >
+			<#if bean.major_fund_code != prev.major_fund_code>
+				<#assign showGroupHeader = 1 >
+			</#if>
+		<#else >
+			<!-- first detail row -->
+			<#assign showGroupHeader = 1 >
+        </#if>
+        <#if index == funds?size-1 >
+			<!-- end of the detail rows -->
+        	<#assign showGroupFooter = 1 >
+		<#else >
+			<#if next.major_fund_code != bean.major_fund_code>
+				<#assign showGroupFooter = 1 >
+			</#if>
+        </#if>
+		<#if index = funds?size-1>
+			<#assign showFinalFooter = 1 >
+		</#if>
+        <#if showGroupHeader==1 >
+			<#assign totalCA = 0>
+			<#assign totalJOB = 0>
+			<#assign totalYTD = 0>
+			<#assign totalCB = 0>
+			<!-- header -->			
+		    <div class="row">
+				<div class="col-1-12 panel">Major Fund Code</div>
+				<div class="col-1-12 panel">Minor Fund Code</div>
+				<div class="col-6-12 panel">Description</div>
+		        <div class="col-1-12 panel right">Current Accounts</div>
+		        <div class="col-1-12 panel right">July Opening Balance</div>
+		        <div class="col-1-12 panel right">Year-to-date Balance</div>
+		        <div class="col-1-12 panel right">Closing Balance</div>
+		    </div>             
+        </#if>
+		<#if showDetail==1 >
+       		<!--  detail -->
+		    <div class="row">
+				<div class="col-1-12">${(bean.major_fund_code)!}</div>
+				<div class="col-1-12">${(bean.minor_fund_code)!}</div>
+				<div class="col-6-12">${(bean.minor_fund_description)!}</div>
+				<div class="col-1-12 right">${(bean.current_accounts)!?string("0")}</div>
+				<div class="col-1-12 right">${(bean.julOpeningBalance)!}</div>
+				<div class="col-1-12 right">${(bean.yearToDateBalance)!}</div>
+				<div class="col-1-12 right">${(bean.closingBalance)!}</div>
+		    </div>             
+       	</#if>
+		<#assign totalCA += (bean.current_accounts)!0>
+		<#assign totalJOB += (bean.julOpeningBalance)!0>
+		<#assign totalYTD += (bean.yearToDateBalance)!0>
+		<#assign totalCB += (bean.closingBalance)!0>
+		<#assign grandTotalCA += (bean.current_accounts)!0>
+		<#assign grandTotalJOB += (bean.julOpeningBalance)!0>
+		<#assign grandTotalYTD += (bean.yearToDateBalance)!0>
+		<#assign grandTotalCB += (bean.closingBalance)!0>
+		<#if showGroupFooter==1> 
+			<!-- show totals -->
+			<div class="row">
+				<div class="col-1-12"></div>
+				<div class="col-1-12 border-top-dashed right">Major Total:</div>
+		        <div class="col-6-12"></div>
+		        <div class="col-1-12 border-top-dashed right">${(totalCA)!?string("0")}</div>
+		        <div class="col-1-12 border-top-dashed right">${(totalJOB)!0}</div>
+				<div class="col-1-12 border-top-dashed right">${(totalYTD)!0}</div>
+		        <div class="col-1-12 border-top-dashed right">${(totalCB)!0}</div>
+		    </div>
+		</#if>
+		<#if showFinalFooter==1>
+			<div class="row">
+				<div class="col-1-12"></div>
+				<div class="col-1-12 border-top-dashed right">Grand Totals:</div>
+		        <div class="col-6-12"></div>
+		        <div class="col-1-12 border-top-dashed right">${(grandTotalCA)!?string("0")}</div>
+		        <div class="col-1-12 border-top-dashed right">${(grandTotalJOB)!0}</div>
+				<div class="col-1-12 border-top-dashed right">${(grandTotalYTD)!0}</div>
+		        <div class="col-1-12 border-top-dashed right">${(grandTotalCB)!0}</div>
+		    </div>
+		</#if>
+		<#assign index += 1>
+	</#list>
+</section>
+</body>
+</html>

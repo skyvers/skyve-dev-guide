@@ -1,0 +1,51 @@
+Steps to switch to Single Sign On
+1. Change user names to match Windows user names e.g. username rob becomes DESKTOP-QSGR9TG\RBB, or add your own setup user with your windows AD name
+2. Ensure waffle.security.xml is in WEB-INF\spring
+3. Ensure waffle-jna-1.9.0.jar and waffle-spring-security5-1.9.0.jar are in the project classpath (e.g. copy to WEB-INF\lib\)
+4. Update pom.xml to include the waffle plug in dependency (for example after the org.skyve dependency)
+
+		<dependency>
+			<groupId>com.github.waffle</groupId>
+			<artifactId>waffle-spring-security5</artifactId>
+			<version>1.9.0</version>
+		</dependency>
+
+5. Update WEB-INF\spring\spring.xml 
+ - uncomment the waffle section at the end of the file
+ - move the http custom filter to line 34
+ 
+ e.g.
+ 
+ lines 33-41 change from
+
+ 	<!-- Secure everything else -->
+	<http auto-config="false" use-expressions="true">
+		<form-login default-target-url="/" login-page="/login" />
+		<logout logout-success-url="/loggedOut" />
+		<remember-me key="remember"
+						token-validity-seconds="1209600"
+						remember-me-parameter="remember"
+						remember-me-cookie="remember"
+						token-repository-ref="tokenRepository" />
+
+to
+
+	<!-- Secure everything else -->
+	<http auto-config="false" use-expressions="true" entry-point-ref="negotiateSecurityFilterEntryPoint">
+		<custom-filter ref="waffleNegotiateSecurityFilter" position="PRE_AUTH_FILTER" />
+		<form-login default-target-url="/" login-page="/login" />
+		<logout logout-success-url="/loggedOut" />
+		<remember-me key="remember"
+						token-validity-seconds="1209600"
+						remember-me-parameter="remember"
+						remember-me-cookie="remember"
+						token-repository-ref="tokenRepository" />
+						
+after uncommenting the waffle section, remove these lines
+
+	<http auto-config="false" use-expressions="true" entry-point-ref="negotiateSecurityFilterEntryPoint">
+		<custom-filter ref="waffleNegotiateSecurityFilter" position="PRE_AUTH_FILTER" />
+		...
+    </http>
+
+(as the custom filter is now included in the above)

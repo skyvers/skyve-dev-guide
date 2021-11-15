@@ -1,0 +1,30 @@
+Download SAIL runner from http://bizhub.com.au/public/sail.zip
+Unzip
+test run (should show foundry page)
+Generate a jar from Control panel
+place in the sail runner folder
+
+Up to you guys - I guess it really was a shortcut for people editing by hand
+Cant hurt to stay as parsimonious as possible :wink:
+
+So, I've pushed the SAIL client thing
+There is an ant target called sailAssemble in skyve-build.xml
+That will create a sail.zip in /skyve-ee
+Unzip that and either run the sail.sh or sail.bat or sail.exe and you should see chrome start up and point to foundry prod landing page
+If you go into control panel, create some SAIL, use the web driver, press execute as usual, you should see the normal JUnit code.
+Now if you press download, you'll get a sail.jar,
+replace sail.jar in the sail folder you unzipped and run your tests
+(hopefully)
+I put some extra fields on the SAIL UI - baseURL, Login customer & Login password
+The Generator now generates login and logout op-codes
+but only if you specify a password
+Also, I;ve added RuntimeCompiler to skyve
+You can compile from a source folder to a class folder
+You can compile a java string (or Iterable of Strings) to a class folder
+You can compile an Iterable of java code Strings and receive a ClassLoader to load your classes from backed by Map of in-memory byte code
+
+@rbb555, maybe you could have a crack at creating a download option foundry
+
+The sailAssemble creates a compile folder under the content directory that has jars in it.
+
+

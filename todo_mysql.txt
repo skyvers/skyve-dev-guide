@@ -1,0 +1,38 @@
+install MySQL
+create empty catalog/schema
+backup project
+load MySQL driver in Wildfly modules
+		mysql-connector-java-8.0.20.jar
+	example 
+		module.xml
+		
+		<module xmlns="urn:jboss:module:1.3" name="com.mysql">
+			<resources>
+				<resource-root path="mysql-connector-java-8.0.20.jar" />
+			</resources>
+			<dependencies>
+				<module name="javax.api"/>
+				<module name="javax.transaction.api"/>
+			</dependencies>
+		</module>		
+declare mysql driver in standalone/configuration/standalone.xml
+                    <driver name="mysql" module="com.mysql">
+                        <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
+                    </driver>
+
+update pom dialect- generate domain
+		MYSQL_8_4_BYTE_CHARSET
+update .json dialect class and catalog name
+					dialect: "org.skyve.impl.persistence.hibernate.dialect.MySQL8InnoDBSpatialDialect",
+update -ds.xml 
+		<connection-url>jdbc:mysql://localhost:3306/orgManager?useCursorFetch=true&amp;defaultFetchSize=100</connection-url>
+		<driver>mysql</driver>
+		<pool>
+			<min-pool-size>5</min-pool-size>
+			<max-pool-size>10</max-pool-size>
+		</pool>
+		<security>
+			<user-name>root</user-name>
+			<password>root</password>
+		</security>
+restore project backup

@@ -1,0 +1,119 @@
+Proposed add-ins
+
+CRM - Client, Contacts, Interactions, Cases, Categories
+Job
+Timesheet
+
+Booking - room
+ordering - menu and pick and order
+issues
+quoting and invoicing
+Task management
+Simple attendance timesheet - sign in/out phone UI
+Task timesheet - times by a task
+Client tasks - 
+Client timesheet
+Anonymous application form
+Sign in/front desk
+Staff in/out board
+Club and teams
+Simple cashbook (accounts, cashbook)
+Asset management (simple depreciation)
+Inventory management (hierarchy and bill of materials)
+Site management
+Simple social discussion
+
+PAID
+Skyve bot
+Generic checklists?
+Self-registration
+
+For Mike:
+SAIL - remove a dataGrid row
+Free addins - CRM, Timesheet, Job management, inventory management, property management, asset management, welcome app, archetypes - how to do a jar inclusion?
+
+Javadoc
+Map on PF
+Git 
+
+For Dev Guide
+--------------------
+
+Calculated (aggregated columns) in queries and lists
+Dynamic images
+REST
+Modelling relationships with Skyve - collection, association types, extension types, inverse
+Charts
+Report generator
+POIGenerator
+Overriding Bizport
+generating test data
+Generating documents Skyve script
+Tag management
+Snapshot management
+Download
+
+
+
+POLYMORPHIC
+can you remind me what `polymorphic` is for on queries?
+
+polymorphic returns the bean in the MapBean as "THIS"
+
+This means the bean itself can be used to get properties
+
+mike [11:35 AM]
+It is automatically turned on when a query has a driving document that is somewhere is a hiearachy or if a column is required that has dynamic domain values.
+
+the polymorhpic attribute overrides the default behaviour
+
+ben [11:13 AM]
+polymorphic is used when you are returning results for a document, but that result set contains subtypes. this was introduced for the config engine occurrences. so we had an occurrence query, but when you zoomed, it loaded the correct edit view based on the biz discriminator
+
+rbb555 [11:14 AM]
+so polymorphic is for using bizDiscriminator, but if you use joined strategy then you get the same effect and don't need to set polymorphic? (as we did in FSP) (edited) 
+
+ben [11:15 AM]
+@rbb555 that image thing is why i had to create a separate dashboard for PF for DKB
+
+rbb555 [11:15 AM]
+ah- ok
+
+ben [11:15 AM]
+yeah something to do with that, i think setting polymorphic forces return of the bizDiscriminator?
+
+
+PUSH
+I redid push using omnifaces (like @cameronw used in foundry).
+
+use in a job like this
+    ```@Override
+    public void execute() throws Exception {
+        push(newPushMessage().growl(MessageSeverity.info, "wee"));
+    }```
+and in WebContext like this
+    ```@Override
+    public ServerSideActionResult<ChangePassword> execute(ChangePassword bean, WebContext webContext) throws Exception {
+        Map<String, Object> argument = new TreeMap<>();
+        argument.put("POOP", "SHITE");
+        webContext.push(webContext.newPushMessage()
+                            .growl(MessageSeverity.fatal, "POOP")
+                            .growl(MessageSeverity.info, "WEE")
+                            .message(MessageSeverity.error,  "BUNM")
+                            .message(MessageSeverity.info, "COCK")
+                            .rerender()
+                            .execute("alert", argument));```
+there are 4 types of push that can be chained in order
+growl, message, rerender and execute
+rerender is like the event action
+execute allows execution of a javascript function (from window)
+argument is a single argument js object (JSON)
+If you build the push message for the current user with the user() method, it will go to the current user otherwise its a broadcast message to everyone
+```
+        webContext.push(webContext.newPushMessage()
+                            .user()
+                            .growl(MessageSeverity.fatal, "POOP")
+```							
+So there is no dependency on atmnosphere any more since PF push is deprecated and 7 is about to land where it is removed
+mike [5:48 PM]
+(and we will want 7 quick coz of the charts)

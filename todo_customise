@@ -1,0 +1,53 @@
+sign-in background
+create a folder src/main/webapp/<projectname>/img/
+src/main/webapp/pages/fragments/styles.html
+see in the uncomment to add a background to the common pages
+
+logo
+<!-- customised for foundry -->
+<img src="foundry/img/skyve_reversed.png" class="image" alt="Skyve logo">
+
+and place into customer logo
+
+favicon
+look for *.xhtml in the theme folder of your choice and modify
+<link rel="icon" type="image/png" href="favicon.png" />
+
+
+
+Customising the theme colours - needs a licence to download the ecuador theme zip to do this
+# Creating a custom Ecuador theme
+See instructions on https://www.primefaces.org/ecuador/docs.xhtml;jsessionid=node022yfkn9q7wpxrs9pbhchqav2303110.node0
+
+## Pre-requisites:
+Have the ecuador-3.0.0.zip downloaded and extracted
+
+## Steps
+1. Go to the project you want a custom theme for and navigate to `src/main/webapp/resources`
+2. Copy the `ecuador-layout-3.0.0/sass` directory into your project `src/main/resources` directory
+3. From `src/main/resources` go into `Ecuador-layout/css` and find the closest theme to start from for your customisation and duplicate the `scss` file, e.g. so that you have a `Ecuador-layout/css/layout-custom.scss` or whatever you want to call your theme (replace custom with another name)
+4. Open `layout-custom.scss` and change the variables to suit your desired theme
+5. Compile the changes into a css file, e.g. using node-sass from `src/main/resources`
+```
+node-sass ecuador-layout/css/layout-custom.scss ecuador-layout/css/layout-custom.css 
+```
+6. Now create a theme folder matching your layout name below `resources/`, e.g. `src/main/resources/primefaces-ecuador-custom`
+7. Copy the `theme.scss` from the matching closest theme colour in your Ecuador zip, in `tag/src/main/webapp/resource/primefaces-ecuador-colourname`
+8. Open `theme.scss` and change the variables to suit your desired theme
+9. Compile the changes into a css file, e.g. using node-sass from `src/main/resources`
+```
+node-sass primefaces-ecuador-custom/theme.scss primefaces-ecuador-custom/theme.css
+```
+10. Update the DefaultUxUiSelector.java file in your project and change the theme colour variable to match your new theme, e.g. `custom`
+
+Tool to darken colours:
+[Darken color online](https://pinetools.com/darken-color)
+
+
+
+## Customising the PrimeFaces Footer
+* identify the correct template file for the UXUI you are using. This can be identified by the theme you have selected in Foundry, or looking at `router.DefaultUxUiSelector.java`.
+* The PrimeFaces template name is the second parameter for the UXUI you are trying to update. Skyve applications default to using the same template for phone, tablet and external. This will usually be one of Editorial, Ecuador or Ultima depending on your licensing.
+* The default theme is Editorial, so the template file which contains the footer for all pages can be found in `src/main/webapp/WEB-INF/pages/templates/editorial`. There is a corresponding theme folder for Ecuador and Ultima.
+* Open `template.xhtml`
+* The footer can be found towards the bottom of the page. You can use plain HTML to customise and style the footer. Changes made while a Skyve application is running should be able to be refreshed in the browser and tested immediately.

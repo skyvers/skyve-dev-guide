@@ -1,0 +1,29 @@
+hey rob, have we emailed reports according to a schedule before?
+
+
+
+
+
+
+rbb555  1:02 PM
+you mean a schedule job that emails reports - yep
+1:02
+Vinehealth does this
+
+ben  1:03 PM
+how does that work?
+
+rbb555  1:03 PM
+I'll just open the project...
+1:08
+two different methods - one generates a MailAttachment from a byte[] - but there's a method somewhere - just looking
+1:09
+			JasperPrint jp = EXT.runSQLReport(user, document, "InvoiceMaster", parameters, ReportFormat.pdf, out);
+			pages = jp.getPages().size();
+1:10
+where out is a ByteArrayOutputStream
+1:11
+you can put MailAttachments into the the CommunicationUtil methods for sending emails
+1:12
+there's also a
+EXT.runBeanReport(user, document, reportName, parameters, bean, format, out)

@@ -1,0 +1,42 @@
+so i usually create two different test classes, so i can tell if it’s a mock or an integration test
+image.png 
+image.png
+
+
+2:44
+where mocking a skyve bean will just be like this
+public class ApplicationExtensionTest {
+	@Mock
+	private Persistence persistence;
+	@Spy
+	@InjectMocks
+	private ApplicationExtension bean;
+	@Before
+	public void setup() throws Exception {
+		MockitoAnnotations.initMocks(this);
+	}
+2:44
+and creating one with the H2 integration will be
+public class ApplicationExtensionH2Test extends AbstractRufisH2Test {
+	private ApplicationExtension bean;
+	private DataBuilder db;
+	@Before
+	public void setup() throws Exception {
+		db = new DataBuilder().fixture(FixtureType.crud);
+	}
+	@Test
+	public void testCurrentApplicationNoApplicationsReturnsNull() throws Exception {
+		// create the test data
+		bean = save(db.build(Application.MODULE_NAME, Application.DOCUMENT_NAME));
+2:45
+but you could also use .newInstance() here instead of DataBuilder to return an empty one
+2:45
+mockito dependency
+        <dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+2:45
+<mockito.version>2.21.0</mockito.version>

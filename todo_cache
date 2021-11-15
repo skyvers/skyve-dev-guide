@@ -1,0 +1,134 @@
+CACHE
+
+ implemented a write-through cache you can turn on in the metadata per document. this uses an in-memory cache which sits between hibernate and skyve’s persistence, and you already read and write to the cache when it is enabled, and skyve handles keeping hibernate in sync (correct me if i get any of this wrong mike).
+so this has the effect of increasing the memory load on the server but decreasing the load on the database, so in servers where there is a H2 database co-located it will have next to no noticeable performance impact, but if you are accessing a database across a network and you have an expensive document to read from/write to, this could have quite a noticeable impact on application performance.
+i’m not sure if we have a good use case example for it though where it always makes sense to use it
+
+
+Skyve 3.0.0 introduces support for in-memory caching via the metadata and for developers in code. This adds a write-through cache you can turn on in the metadata per document. This uses an in-memory cache which sits between Hibernate and Skyve’s persistence layer, so you always read and write to/from the cache when it is enabled. Skyve handles keeping Hibernate and the persistent datastore in sync.
+
+This has the effect of increasing the memory load on the server but decreasing the load on the database, so in servers where there is a H2 database co-located it will have next to no noticeable performance impact, but if you are accessing a database across a network and you have an expensive document to read from/write to, this could have quite a noticeable impact on application performance.
+
+Caching can be enabled per-document using a new cache element. Specific cache settings can be defined in the project json and referred to by name in the metadata.
+
+<persistent name="ADM_Contact">
+    <cache name="reference" type="readWrite"/>
+</persistent>
+<singularAlias>Contact</singularAlias>
+A new CacheUtil utility class can be invoked by developers and Skyve will handle the management of the cache. A getJCache() and getEHCache() method can be used depending on the type of cache required.
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document name="Contact"
+				xmlns="http://www.skyve.org/xml/document"
+				xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<persistent name="ADM_Contact">
+		<cache name="reference" type="readWrite"/>
+	</persistent>
+```
+
+
+The hibernate stanza needs a new cache section to define the default Skyve caches, and is where any per-project custom cache settings are to be defined:
+
+prettySql: false,
+    caches: {
+        "eternal": {
+            // Max conversations allowed in heap memory before being moved off-heap or to disk
+            heapSizeEntries: 10,
+            // Max off-heap memory size - 0 indicates no usage
+            offHeapSizeMB: 0,
+            expiryPolicy: "eternal" // "timeToLive" or "timeToIdle"
+        },
+        "reference": {
+            // Max conversations allowed in heap memory before being moved off-heap or to disk
+            heapSizeEntries: 1000,
+            // Max off-heap memory size - 0 indicates no usage
+            offHeapSizeMB: 0,
+            expiryPolicy: "timeToIdle", // "timeToLive" or "eternal"
+            // Number of minutes to wait until expiring a hibernate object from the cache
+            expiryTimeMinutes: 10
+        }
+    }
+    
+    
+format has changed now and the autocomplete on the xsd doesn�t give much help, this is in admin.Contact
+	<persistent name="ADM_Contact">
+		<cache>reference</cache>
+	</persistent>
+	
+
+the type is always read-write    
+
+If you change directly in the database - you need to manage the cache manually.
+Caching everything has obvious memory impacts.
+
+
+Persistence provided the following methods for the 2nd level (shared) cache:
+	public boolean sharedCacheCollection(String moduleName, String documentName, String collectionName, String ownerBizId);
+	public boolean sharedCacheCollection(Bean owner, String collectionName);
+	public boolean sharedCacheBean(String moduleName, String documentName, String bizId);
+	public boolean sharedCacheBean(Bean bean);
+	public void evictAllSharedCache();
+	public void evictSharedCacheCollections();
+	public void evictSharedCacheCollections(String moduleName, String documentName, String collectionName);
+	public void evictSharedCacheCollection(String moduleName, String documentName, String collectionName, String ownerBizId);
+	public void evictSharedCacheCollection(Bean owner, String collectionName);
+	public void evictSharedCacheBeans();
+	public void evictSharedCacheBeans(String moduleName, String documentName);
+	public void evictSharedCachedBean(String moduleName, String documentName, String bizId);
+	public void evictSharedCachedBean(Bean bean);
+
+For the first level cache: (conversation etc)	
+	public void evictAllCached();
+	public void evictCached(Bean bean);
+	public boolean cached(Bean bean);
+
+e.g. ADM Contact is referenced by user which is used widely.
+
+e.g. evict cache, upload xlsx of values, save all (they will now be cached)
+e.g. evict cache, upload xlsx of values, upsert all (they will not be cached until used)
+e.g. without the evict, if you upserted, after the load, users would still receive what had been in the cache before the upsert
+
+Q. if I have a document that is using cache - but I do a DocumentQuery in code - will the query hit the DB or return previously cached results?
+A. both - it hits the DB to get the results but the objects are hydrated from the cache
+
+
+Other examples for app maintained caching
+	// app cache definitions
+/*
+	caches: {
+		"exampleEHCache": {
+			type: "ehcache", // "jcache"
+			// Max conversations allowed in heap memory before being moved off-heap or to disk
+			heapSizeEntries: 1,
+			// Max off-heap memory size - 0 indicates no usage
+			offHeapSizeMB: 0,
+			// Max disk size - 0 indicates no usage
+			diskSizeGB: 0,
+			// Whether the cache is persistent - false indicates the cache does not survive JVM restarts
+			persistent: false,
+			// Under what conditions to expire a cache entry
+			expiryPolicy: "timeToLive", // "timeToIdle" or "eternal"
+			// Number of minutes to wait until expiring a conversation from the cache
+			expiryTimeMinutes: 1,
+			keyClass: "java.lang.String",
+			valueClass: "java.lang.String"
+		},
+		"exampleJCache": {
+			type: "jcache", // "ehcache"
+			// Max conversations allowed in heap memory before being moved off-heap or to disk
+			heapSizeEntries: 1,
+			// Max off-heap memory size - 0 indicates no usage
+			offHeapSizeMB: 0,
+			// Under what conditions to expire a cache entry
+			expiryPolicy: "timeToIdle", // "timeToLive" or "eternal"
+			// Number of minutes to wait until expiring a conversation from the cache
+			expiryTimeMinutes: 1,
+			keyClass: "java.lang.String",
+			valueClass: "java.lang.String"
+		}
+	},
+*/
+

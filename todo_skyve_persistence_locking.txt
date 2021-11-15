@@ -1,0 +1,64 @@
+Skyve SQLServer Data Store Management
+Surrogate primary keys.
+No composite keys.
+Primary Keys are clustered.
+Foreign keys indexed.
+Single column indexes specified in Skyve metadata
+Transaction isolation is left to the datastore configuration or the connection pool configuration
+Sequences/Generated Numbers obtained in autonomous transactions.
+Separate timeout values for OLTP and Async workloads.
+Issue updlock, rowlock, holdlock hints when using Persistence.selectAndLock().
+Recommend enabling database snapshot isolation and read committed snapshot
+Skyve escalates locks to ensure consistency during referential integrity and unique constraint checks.
+SQLServer is a Toy
+SQLServer's default locking harks from Sybase days and the 80's - readers block writers, writers block readers
+Enable snapshot isolation - Transaction scoped MVCC (Multi Version Concurrency Control)
+Chance of optimistic lock problem as updates wont block reads for the entire transaction and the merge at commit time could fail.
+Locking hints still apply
+Uses more tempdb
+Updates and deletes take longer
+Reads can take longer if there is a long version chain for a row.
+Enabled read committed snapshot - Statement scoped MVCC
+Reads rarely block on updated rows in other transactions 
+no chance of optimistic lock problem above.
+but potentially increased blocking
+Connections using Read-committed isolation level will use read committed snapshot
+Other isolation levels are unchanged.
+Dirty reads are rarely the answer
+Using the nolock hint to allow dirty reads in general is not a satisfactory solution.
+MVCC should minimize blocking without sacrificing the consistency and isolation of clean reads.
+Ensure sendStringParametersAsUnicode=false in JDBC URLs to ensure indexes are used.
+Coercion between char sets negates index usage.
+Collation affects locking scope
+Joins on tables with different collations will induce a full index scan
+Index usage affects locking scope
+If indexes are used either an index lock or a row lock is issued depending on the scope of change.
+SQLServer's lock strategy and escalation behaviour is dependent on the indexes present in the database.
+Some updates/deletes that do not go in on an index will page or even table lock
+Index range/gap locks and criteria locks
+An escalated lock (larger in scope than row lock) taken on a range of values, or value gap or a set of criteria predicates, not on database rows
+Can have a large scope and represent no data at all
+This is how REV_BusinessUnit can “feature” in blocking emails without having any data in it.
+There is evidence of these types of locks in redgate
+SQLServer increases lock scope at a drop of a hat
+Whilst in Oracle and PostgreSQL (and mostly in MySQL InnoDB) you can think of row locks based on rowids or clustered PK columns,
+SQLServer has a dazzling array of useless locks and modes but once in snapshot isolation mode this settles down to row/key locks when DML execution plans hit an index or clustered PK and page or table locks when no index to cover the criteria.
+Behaviour isn’t altogether deterministic ahead of run-time.
+The internet is littered with rhetoric about this and Microsoft’s litigious responses on people who dare mention it. 
+Of course Oracle shits all over it, but is stoopid expensive, but the free postgresql or mysql/maria innodb shit all over it too; where
+(edited)
+11:25
+Collation doesn’t affect locking
+Indexes don’t affect locking
+Locking occurs mainly at the row level – SQLServer will escalate to page in a heartbeat and up to table in some cases (> 5000 rows locked in a table).
+You don’t need the redgate tool (excellent tool btw) to debug a well-constructed Skyve database as usage rates increase - PKs on everything, FKs indexed. Lack of indexing is just a performance problem not a data contention problem.
+Links
+https://www.sqlservercentral.com/blogs/nolock-vs-snapshot-isolation
+https://www.red-gate.com/simple-talk/sql/t-sql-programming/row-versioning-concurrency-in-sql-server/
+https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/snapshot-isolation-in-sql-server
+https://docs.microsoft.com/en-us/troubleshoot/sql/performance/understand-resolve-blocking
+https://bornsql.ca/blog/locks-blocks-isolation-levels/
+https://www.brentozar.com/archive/2013/01/implementing-snapshot-or-read-committed-snapshot-isolation-in-sql-server-a-guide/
+https://samirbehara.com/2017/08/22/lock-escalations-in-sql-server/ 
+https://www.sqlshack.com/locking-sql-server/
+https://www.sqlshack.com/snapshot-isolation-in-sql-server/

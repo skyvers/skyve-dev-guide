@@ -1,0 +1,18 @@
+public class CertificateTest extends AbstractTrainingH2Test {
+	private DataBuilder crudDataBuilder;
+	@Before
+	public void setup() throws Exception {
+		crudDataBuilder = new DataBuilder().fixture(FixtureType.crud);
+	}
+	@Test
+	public void testCourseCertificate() throws Exception {
+		final Customer customer = CORE.getUser().getCustomer();
+		final Module module = customer.getModule(Course.MODULE_NAME);
+		final Document document = module.getDocument(customer, Course.DOCUMENT_NAME);
+		final Course course = save(crudDataBuilder.build(Course.MODULE_NAME, Course.DOCUMENT_NAME));
+		final Path output = Paths.get("target", "Certificate.pdf");
+		try (final FileOutputStream out = new FileOutputStream(output.toFile())) {
+			EXT.runBeanReport(CORE.getUser(), document, "Certificate", new TreeMap<>(), course, ReportFormat.pdf, out);
+		}
+	}
+}

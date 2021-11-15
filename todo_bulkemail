@@ -1,0 +1,21 @@
+1. Register with SendGrid for the free plan
+2. Verify account when you receive the email
+3. Click your username and in top left and then setup guide
+4. Click Start next to "Integrate using our Web API or SMTP relay"
+5. Click the Choose button below SMTP relay
+6. Enter a name for your application, and click Create Key
+7. Your SMTP details will be populated below with your new API key as the password
+
+
+We’ll need those details for the following test (we do this bit)
+8. Enter these details into your Skyve application
+9. Restart the Skyve application
+10. Test an email by inviting a new user
+ 
+You then do this
+11. Return to SendGrid, check I've updated my settings and click Verify Integration
+
+
+ben...
+looks like i did nothing, just created an api key
+API must let you specify the send from address

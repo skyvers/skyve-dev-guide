@@ -1,0 +1,4 @@
+-check support email in json - this will be public
+-check that environment identifier is null
+-check that setup user is deleted, or name changed and password changed
+

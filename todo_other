@@ -1,0 +1,38 @@
+help file URL and relative path
+
+Binder.convertAndSet(r, k, c.get(k));
+
+
+https://www.whatsmydns.net/#A/commcaresys.dev - to check on DNS propagation
+
+
+---------------
+how to record times in local time 
+you need to change the dockerfile for the project and push it
+update Dockerfile in the docker/h2 directory
+you need to add two lines:
+RUN apk add --no-cache tzdata
+and
+    TZ="Australia/ACT"
+or whatever the timezone name is for Sydney, which will be the same as ACT anyway
+
+
+------
+ACTION to go to a create view
+
+ in PF you can do a redirect - but there won't be any context- so no way to go back
+
+```java	
+	@Override
+	public ServerSideActionResult<MyDocument> execute(MyDocument bean,WebContext webContext) throws Exception {
+		FacesUtil.jsRedirect(<whateverURLYouLike>);
+		return new ServerSideActionResult<>(bean);
+	}
+```	
+
+and the URL could be to the create view, like
+
+```java
+Util.getSkyveContextUrl() + "?a=e&d=" + MyDocument.DOCUMENT_NAME + "&m=" + m=MyDocument.MODULE_NAME
+```
+If you have a document with a create view declared, then navigate to the URL without a specified bizId, you'll get a new record and a create view (edited) 

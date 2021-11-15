@@ -1,0 +1,97 @@
+mike 3:27 PM
+Well yep
+There is dynamic image
+But a contentImage can be made not editable too
+Then there is not picker (edited) 
+ben 3:28 PM
+ok cool
+mike 3:29 PM
+There is also StaticImage which resolves through the Skyve resources shit
+ben 3:30 PM
+yeah i meant one which took a binding for showing a full size image (not thumbnail), so that would be a non-editable contentImage i guess
+mike 3:30 PM
+Nah that shows a thumbnail
+You can open the image in a new tab by clicking on it I think
+Definitely in contentLink you can
+Same with content columns in grids
+ben 3:33 PM
+i was just thinking of a use case with something like the DKB maybe, where an admin user can go in and set the image for a record, but they want everyone else to see the full image without having to specify the size attributes from the resource servlet in a blurb which is what it's doing now i think
+
+new messages
+or you might only pick on create, but never change it on edit so don't need to see the picker again, you would delete since the image basically is synonymous with the record
+mike 3:35 PM
+Yeah - contentImage editable should do the trick
+ben 3:36 PM
+didn't you say above that shows a thumbnail?
+
+mike 3:37 PM
+Yep of at least 100x100
+but whatever size you want
+rbb555 3:38 PM
+or show the image in a blurb @ben
+mike 3:39 PM
+If you dont give the size parameters it’ll be the original image size
+
+Not sure you’d ever want that though coz it could blow out your UI
+
+mike 3:43 PM
+the rotate is a bit weird as well, it rotates within the aspect ratio of the original rotation, so it crops if the image isn’t square
+i think we need to use the crop icon too, this UI is pretty confusing
+(edited)
+
+So defaults to 100x100 now
+The rotate is built in
+You know the image can zoom in and out using wheel or slider yes?
+Tell me how the UI should be?
+new messages
+ben 3:46 PM
+i'm trying to think how someone would do this in low code in studio, that's a pretty crap out of the box way to show an image?
+rbb555
+or show the image in a blurb @ben
+Posted in framework | Today at 3:38 PM | View message
+zoom in and out where, on the upload screen? which screen have we been talking about?
+mike 3:46 PM
+contentImage with editable false?
+mike 4:02 PM
+Yeah the ecommerce thing could be a good idea
+
+Thanks @ben
+Remember I’m using the PF upload control at the top
+I;ve got no control over that
+
+
+---- How to implement your own content upload (so you can do stuff)
+
+	@Override
+	public ClientUpload upload(ClientUpload bean, UploadedFile file, UploadException exception, WebContext webContext)
+			throws Exception {
+
+		try (ContentManager cm = EXT.newContentManager()) {
+			AttachmentContent ac = new AttachmentContent(CORE.getCustomer().getName(), ClientUpload.MODULE_NAME,
+					ClientUpload.DOCUMENT_NAME, null, CORE.getUser().getId(), bean.getBizId(),
+					ClientUpload.uploadDocumentPropertyName, file.getFileName(), IOUtils.toByteArray(file.getInputStream()));
+			cm.put(ac);
+			bean.setUploadDocument(ac.getContentId());
+			bean.setDocumentName(file.getFileName());
+			bean.setDocumentType(ac.getMimeType().name());
+		}
+
+		return bean;
+	}
+
+
+-- How to implement thumbnails in datagrids
+
+	@Override
+	public String getThumbnailExpression() {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<img src='").append(Util.getSkyveContextUrl() + "/content");
+		sb.append("?_n=").append(getUploadDocument());
+		sb.append("&amp;_doc=").append(ClientUpload.MODULE_NAME).append(".").append(ClientUpload.DOCUMENT_NAME)
+				.append("&amp;_b=").append(ClientUpload.uploadDocumentPropertyName)
+				.append("&amp;_w=64&amp;_h=64' />");
+		
+		return sb.toString();
+	}

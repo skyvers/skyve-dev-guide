@@ -1,0 +1,152 @@
+
+James Allen  1:07 PM
+Hey, How would I go about making audio playable within a form?
+
+
+
+
+
+
+rbb555  1:08 PM
+hi @James Allen - are you meaning auto-play, or do you mean which widget to show the audio file in?
+
+James Allen  1:09 PM
+well a widget that lets you play the file, I know you can have the widget that opens a playback in a different tab.
+1:11
+id like to be able to play the audio within the form
+
+cam  1:17 PM
+Hi @James Allen, currently there are no media widgets in the Skyve metadata, this means that you will have to fallback to using the underlying view technologies (SmartClient and Faces)
+1:18
+For Faces you would define your own custom .xhtml view for your document where you could then add a <video></video> widget
+
+James Allen  1:18 PM
+hmmm ok, and there would be no way to do it with js injection?
+
+cam  1:19 PM
+Yeah I believe you would use js injection if you were developing the view in SmartClient
+
+James Allen  1:19 PM
+ok
+
+cam  1:19 PM
+Is your view being rendered in SmartClient or Faces?
+
+James Allen  1:20 PM
+faces I think
+
+cam  1:21 PM
+A good place to start with that would be to look at src/main/webapp/external/edit.xhtml
+1:21
+This is the most basic Faces view for Skyve
+1:21
+This bit here:
+1:21
+<s:view module="#{skyve.bizModuleParameter}"
+								document="#{skyve.bizDocumentParameter}"
+								managedBean="skyve"
+								update="@form" />
+1:22
+Is where the actual Skyve view is rendered based on what is defined in your view metadata (edit.xml)
+1:22
+So you could make a copy of this file and replace the <s:view> with any custom faces code
+1:23
+Then make sure requests are routed to that custom page for your specific document by adding a line like this to the router.xml
+1:23
+<route outcome="/myModule/myCustomView.xhtml">
+			<criteria webAction="e" module="myModule" document="MyDocument" />
+		</route>
+New
+
+James Allen  1:27 PM
+and then i would have to integrate it into the existing form. I that ill be able to treat it like a custom widget?
+
+cam  1:28 PM
+You have a few options
+1:28
+The option I mentioned above is essentially re-writing the form in Faces
+1:29
+But you could just keep the existing form (by leaving in the s:view) and then adding stuff around it (edited) 
+1:29
+I imagine you want the widget to be rendered within the existing form though
+
+James Allen  1:30 PM
+yeah
+
+cam  1:30 PM
+To do this you would need to break up your existing skyve view into separate widgets by giving them widgetIds
+1:31
+You can set the widgetId on forms, hboxes, vboxes etc
+1:32
+Then in your xhtml you can render only those widgets by adding a <s:view widgetId="myWidgetId">
+1:32
+If there is no widgetId on the s:view the entire Skyve view will be rendered
+1:32
+But if you do put the widgetId on it then only that part of the Skyve view will be rendered
+
+James Allen  1:33 PM
+So there would be no way to do it from the edit.xml of the document?
+
+cam  1:35 PM
+There is but you would need to write custom rendering code
+1:35
+Happy to walk you through that but I think this is possibly the easier way
+
+James Allen  1:38 PM
+ok. might be easier in my situation to do the custom rendering code as its to a non persistent document.
+
+cam  1:39 PM
+I'm assuming you are currently using a <contentLink> widget?
+
+James Allen  1:40 PM
+will be for now
+1:40
+./ till I can implement another solution (edited) 
+
+cam  1:42 PM
+Most existing widgets support key value properties
+1:42
+Like this:
+1:42
+<contentLink binding="contentBinding">
+	<properties>
+		<c:property key="videoWidget">videoWidget</c:property>
+	</properties>
+</contentLink>
+1:44
+You will then need to create two Classes
+1:45
+MyCustomComponentBuilderChain extends ComponentBuilderChain
+MyCustomComponentBuilder extends ResponsiveComponentBuilder
+1:45
+You can name them whatever you want
+1:45
+MyCustomComponentBuilderChain
+will look like this:
+1:46
+public class MyCustomComponentBuilderChain extends ComponentBuilderChain {
+	public MyCustomComponentBuilderChain() {
+		super(new MyCustomComponentBuilder(), new UnfilterableListGridBuilder(), new UnsortableListGridBuilder(),
+				new PaginatedListGridBuilder());
+	}
+}
+1:48
+MyCustomComponentBuilder
+will look like this:
+1:48
+public class MyCustomComponentBuilder extends ResponsiveComponentBuilder implements Serializable {
+	private static final String VIDEO_WIDGET_PROPERTY = "videoWidget";
+	@Override
+	public UIComponent contentLink(UIComponent component, String dataWidgetVar, ContentLink link, String formDisabledConditionName, String title, boolean required) {
+		if (link.getProperties().containsKey(VIDEO_WIDGET_PROPERTY)) {
+			// Here goes custom code to create and return a <video> widget.
+		}
+		return super.contentLink(component, dataWidgetVar, link, formDisabledConditionName, title, required);
+	}
+}
+1:49
+Finally in your s:view you will need to tell it to render you view using your custom renderer:
+1:49
+<s:view componentBuilderClass="MyCustomComponentBuilderChain" />
+1:50
+This method allows you to customise how the Skyve widgets are rendered in Faces

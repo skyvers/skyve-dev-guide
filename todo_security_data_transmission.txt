@@ -1,0 +1,5 @@
+Between browser and server is TLS.
+If it is all on the same machine and H2 then it is via the same Java process so no transmission.
+All other databases are via JDBC and have various options to turn on TLS.
+Content Management defaults to in-process as well - no transmission, but there are options for JDBC, EJB or REST. EJB & REST can be configured for TLS.
+Where we have multiple machines communicating in an application we use SOAP, EJB, REST etc with the normal encryption options available with these remoting mechanisms.

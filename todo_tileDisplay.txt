@@ -1,0 +1,130 @@
+	/**
+	 * Construct a grid display of bean tiles with each tile being a link to the
+	 * bean
+	 * 
+	 * @return
+	 */
+	public static String tileLinkDisplay(List<Bean> beans, String tileBinding, int cols) {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("<table style=\"width:100%;padding:10px;\">");
+
+		int col = 0;
+
+		for (Bean bean : beans) {
+			if (col == 0) {
+				sb.append("<tr>");
+			}
+			sb.append("<td>");
+			sb.append("<a href=\"").append(Util.getDocumentUrl(bean)).append("\">").append((String) Binder.get(bean, tileBinding)).append("</a>");
+			sb.append("</td>");
+			col++;
+			if (col == cols) {
+				sb.append("</tr>");
+				col = 0;
+			}
+		}
+		if (col < cols) {
+			sb.append("</tr>");
+		}
+
+		sb.append("</table>");
+		return sb.toString();
+	}	
+	
+	@Override
+	public String getTile() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<div style=\"margin-bottom: 0;\" class=\"ui-messages ui-widget\" aria-live=\"polite\">");
+		if (Status.closed.equals(getStatus())) {
+			sb.append("<div style=\"margin: 0;\" class=\"ui-messages-warn ui-corner-all\">");
+		}
+		if (Status.open.equals(getStatus())) {
+			sb.append("<div style=\"margin: 0;\" class=\"ui-messages-info ui-corner-all\">");
+		}
+
+		sb.append("<ul>");
+		sb.append("<li role=\"alert\" aria-atomic=\"true\">");
+		sb.append("<span class=\"ui-messages-info-detail\">");
+
+		sb.append("<table style=\"width:100%;padding:0px;margin:0px;\"><tr style=\"height:2px;\" >");
+
+		sb.append("<td colspan=\"2\">");
+		// collate data
+		int reviewers = 0;
+		int participantCompleted = 0;
+		int reviewerCompleted = 0;
+		for (ProjectParticipant p : getParticipants()) {
+			if (Boolean.TRUE.equals(p.getSurvey().getSubmitted())) {
+				participantCompleted++;
+			}
+			for (ProjectReviewer r : p.getReviewers()) {
+				reviewers++;
+				if (Boolean.TRUE.equals(r.getSurvey().getSubmitted())) {
+					reviewerCompleted++;
+				}
+			}
+		}
+
+		if (getOrganisation() != null) {
+			sb.append("<h3>Project for ").append(getOrganisation().getName()).append(" (").append(getStatus().toDescription()).append(")").append("</h3>");
+		}
+		sb.append("</td></tr>");
+
+		sb.append("<tr><td>");
+		sb.append("<p><strong>").append(getDaysLeftToComplete()).append("</strong> days remaining</p>");
+		sb.append("<p>Closes ").append(Binder.formatMessage("{reviewerNominationsClose}", this)).append("</p>");
+
+		// participant summary
+		sb.append("<p><strong>").append(getParticipants().size()).append("</strong>");
+		if (getParticipants().size() == 1) {
+			sb.append(" participant");
+		} else {
+			sb.append(" participants");
+		}
+		sb.append(" - <strong>").append(participantCompleted).append("</strong>");
+		if (participantCompleted == 1) {
+			sb.append(" survey");
+		} else {
+			sb.append(" surveys");
+		}
+		sb.append(" submitted");
+		sb.append("</p>");
+
+		// reviewer summary
+		sb.append("<p><strong>").append(reviewers).append("</strong>");
+		if (reviewers == 1) {
+			sb.append(" reviewer");
+		} else {
+			sb.append(" reviewers");
+		}
+		sb.append(" - <strong>").append(reviewerCompleted).append("</strong>");
+		if (reviewerCompleted == 1) {
+			sb.append(" survey");
+		} else {
+			sb.append(" surveys");
+		}
+		sb.append(" submitted");
+
+		sb.append("</p>");
+		sb.append("</td>");
+
+		// percent complete
+		sb.append("<td style=\"text-align:right;\">");
+		int perc = 0;
+		if (getParticipants().size() > 0) {
+			perc = ((participantCompleted + reviewerCompleted) * 100) / (getParticipants().size() + reviewers);
+		}
+		sb.append("<p style=\"font-size:36px;\"><strong>").append(perc).append(" %</strong></p>");
+		sb.append("</td>");
+
+		sb.append("</tr></table>");
+
+		sb.append("</span>");
+		sb.append("</li>");
+		sb.append("</ul>");
+		sb.append("</div>");
+		sb.append("</div>");
+		return sb.toString();
+	}
+	

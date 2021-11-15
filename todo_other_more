@@ -1,0 +1,160 @@
+
+For dev guide
+
+Explain binding expressions!
+
+
+Public pages
+
+This has been implemented.
+router.xml includes "external/public.xhtml" as an unsecured URL.
+A module router.xml can be defined with certain criteria of an edit view to make public by routing it to "/external/public.xhtml".
+Alternatively, PublicFacesView can be extended with a hand-crafted faces page.
+PublicFacesView extends FacesView and establishes the anonymous/public user (as set in admin.Configuration) in the preRender faces event.
+
+Also, introduced in 2.0.0 is that Jobs have an option to not persist the execution in the job log
+You can override Job.persistJobExecutionOnSuccess() to return false if you dont want the job execution logged
+
+Write a class that Extends ViewBackgroundJob.
+Can invoke the from an action with webContext.background().
+There are 3 methods on webCOntext for background jobs.
+1. background()
+2. backgroundWithoutCachingConversation()
+3. cacheConversation()
+Also ViewBackgroundTask has cacheConversation()
+Usually you'd just call background()
+At this call point, the conversation is cached by the action and then the background thread runs
+
+
+
+How would I go about making a field in a form appear depending on the value of say an enum or boolean field?
+Foundry has 2 of them
+deploy and undeploy
+The webContext, the bean and the user are available as member variables in the background task
+And you can use growls and refreshes etc to fuck around with the view.
+You can also use pushes in background tasks
+
+
+        	<from>
+        		<![CDATA[
+        		{swimCare.Person} as bean
+        		{swimCare.Schedule} as schedule 
+        		]]>
+        	</from>
+        	<filter>
+        		<![CDATA[
+        		schedule.person = bean
+        		and count(schedule) =0
+        		]]>
+        	</filter>
+
+        	
+REDIRECT with parameter
+place 
+<meta http-equiv="refresh" content="0; url=https://app.communitysymptomtracker.org/dailyUpdate.xhtml?i=#{param['i']}" />
+into the head section of the xhtml page
+
+
+how to check your ip address
+https://checkip.amazonaws.com/
+
+
+RECOMMENDED FOR USING MSSQL
+
+ALTER DATABASE rufis SET ALLOW_SNAPSHOT_ISOLATION ON
+GO
+ALTER DATABASE rufis SET READ_COMMITTED_SNAPSHOT ON
+GO
+
+
+
+FIRST LEVEL CACHE
+I have a datagrid with inline="true" in PF - the document is transient (as is the datagrid) and the values are retrieved as needed for display and editing.
+Above the datagrid I have a "retrieve" button and a "save" button - which take the transient values and upsert them.
+This arrangement is so that I can control in the UI etc etc
+What I notice is that if I have two browsers (two sessions) and I save in one, then retrieve in the other - the retrieve doesn't refresh the values - unless I hard refresh on the view
+I can resolve this in the "retrieve" button by evicting each item and then retrieving it again
+
+The retrieve - is expected behaviour, if you had loaded the values before saving in the other browser as retrieve will retrieve from the first level cache if already loaded
+The cache and transaction is coherent - its a first level cache isolated to the transaction for that thread
+Same as a DB, the merge has to be controlled
+in our case we just chuck optimistic lock right?
+and its up to the user to reselect and reapply
+
+
+UPDATING Job Progress from another method
+
+with updating job progress -
+setPercentComplete(100);
+etc
+how do I do this within a method that the job calls?
+@FunctionalInterface
+public interface JobProgressListener {
+	void onProgressUpdate(int percentComplete);
+}
+
+Make the method take JobProgressListener as an argument
+Then you can call the method like:
+method(this::setPercentComplete)
+From within the job
+
+
+-------
+Wildfly as a service on windows
+Add a Windows env variable:
+name: JAVA_OPTS
+value: -Xms4G -Xmx4G -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=2G
+ service.bat reads from the environment variable, but you can still set it there
+ 
+ 
+ ---
+ Installing a PF theme
+ To install the ultima theme (>= 2.0.0) on skyve.
+1) Drop ultima-theme-*.jar into WEB-INF/lib/
+2) Drop ultima-layout/ folder into WEB-INF/resources/
+3) Drop primefaces-ultima-*/ folder into WEB-INF/resources/
+4) Drop primefaces-ultima.taglib.xml into WEB-INF/
+5) Change router.DefaultUxUiSelector to use "ultima" for the template name, "ultima" for the theme name and a theme colour matching the theme colour if there is one eg "indigo"
+
+
+--putting a file into content
+		try (ContentManager cm = EXT.newContentManager()) {
+			AttachmentContent ac = new AttachmentContent(CORE.getCustomer().getName(), ClientUpload.MODULE_NAME,
+					ClientUpload.DOCUMENT_NAME, null, CORE.getUser().getId(), bean.getBizId(),
+					ClientUpload.uploadDocumentPropertyName, file.getFileName(), IOUtils.toByteArray(file.getInputStream()));
+			cm.put(ac);
+			bean.setUploadDocument(ac.getContentId());
+			bean.setDocumentName(file.getFileName());
+			bean.setDocumentType(ac.getMimeType().name());
+		}
+		
+		
+		
+----controlling scroll
+Add a line like this to your action code
+		PrimeFaces.current().executeScript("window.scrollBy(0, 100)");
+		
+		
+Inverses
+One-to-one:
+affecting either side of the relationship should have an effect on the other side.
+If it is already assigned, the old assignment should be gotten and its inverse/converse nulled.
+
+
+
+
+
+11:50
+One-to-many
+As for 1-1 except
+11:50
+there’s a collection on one of the ends
+11:51
+and adding the same element to the collection does nothing
+11:51
+Many-to-many as for one-to-many except
+11:51
+collections on both ends
+New
+11:51
+and can allow duplicate elements

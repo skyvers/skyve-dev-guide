@@ -1,0 +1,53 @@
+1) I've added methods to go to and from java.time types and Skyve temporal types.
+	So DateOnly, DateTime, TimeOnly and Timestamp can go from and to
+	LocalDate, LocalDateTime and LocalTime where applicable so that we can use the java.time APIs for
+	manipulation and comparison. (edited) 
+12:37
+2) I've introduced the skyve expression idea.
+	BindUtil.format() now calls ExpressionEvaluator instead of BindUtil.getDisplay().
+	ExpressionEvaluator has 2 methods - evaluate() and format().
+	evaluate() returns the evaluation of a certain expression.
+	format() returns the string representation (or display) of the evaluation of a certain expression.
+	There is also a register method for plugging in more expression evaluator implementations.
+	I think I'll add a validate() method too, so the expressions can be checked by gen domain.
+	I haven't done it yet but I want to replace query and filter parameters and conditions with expressions.
+	There are some default evaluators registered each with a prefix.
+	An expression with no prefix acts as a bean binding expression for back compat.
+	{bean} (or no prefix) = bean binding expression
+	{el} = Java EL expression
+	{i18n} = internationalisation resource bundle key
+	{role} = returns true if user is in the {module.role}, otherwise false
+	{stash} = stashed value by key
+	{user} = user attribute by key
+	Also the Skyve reserved expressions do the same as they do within metadata queries
+		{USER}
+		{USERID}
+		{USERNAME}
+		{DATAGROUPID}
+		{CONTACTID
+		{CUSTOMER}
+		{DATE}
+		{TIME}
+		{DATETIME}
+		{TIMESTAMP}
+	Some other examples {See BindTest.testExpressions()}
+		AllAttributesPersistent bean = Util.constructRandomInstance(u, m, aapd, 2);
+		bean.setText({Test});
+		CORE.getStash().put({text}, {Test});
+		CORE.getUser().getAttributes().put({text}, {Test});
+		{text}
+		{bean:text}
+		(note the EL context contains bean, stash, user, DATE, TIME, DATETIME and TIMESTAMP)
+		{el:bean.text}
+		{el:stash['text']}
+		{el:user.attributes['text']}
+		{el:DATE}
+		{el:TIME}
+		{el:DATETIME}
+		{el:TIMESTAMP}
+		{el:DATE.set(DATE.toLocalDate().plusDays(1))}
+		
+		{i18n:some.bundle.key}
+		{role:admin.BasicUser}
+		{stash:text}
+		{user:text} (edited) 
