@@ -22,6 +22,8 @@ Expression Type Prefix | Description
 `{role}`        | returns true if user is in the {module.role}, otherwise false
 `{stash}`       | stashed value by key
 `{user}`        | user attribute by key
+`{disp}`        | display name of the requested attribute from the document metadata
+`{desc}`        | description of the requested attribute from the document metadata
 
 ## Example Expressions
 
@@ -53,6 +55,8 @@ Expression | Expression Result
 {role:admin.BasicUser} | True if the current user has the `admin.BasicUser` role
 {stash:text} | The value of the `text` key within the stash
 {user:text} | The value of the `text` user attribute
+{disp:text} | The display name of the `text` attribute on the specified bean
+{desc:text} | The description of the `text` attribute on the specified bean
 
 ## Expression Usage
 
