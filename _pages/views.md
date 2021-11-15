@@ -1158,8 +1158,8 @@ Typically, scaffolded views contain the _<defaults/>_ tag - this represents the 
 Skyve will automatically hide actions that are not appropriate for the user or situation (for example, if the *new* action is declared, 
 but a user's privileges do not include the _create_ privilege for the relevant document).
 
-Note that action buttons can be located either in the *ActionPanel* or using the _<button/>_ widget within a view _form_, however the action itself must be declared
-in the _<actions/>_ section of the view.
+Note that action buttons can be located either in the *ActionPanel* or using the `<button>` widget within a view _form_, however the action itself must be declared
+in the `<actions>` section of the view.
 
 ***Tip:*** You must declare all actions in the action section even if
 they will not appear in the ActionPanel.
@@ -1470,7 +1470,9 @@ The following features are only available for the SmartClient renderer, as they 
   * Tagging
   * Snapshots
   * Flags
-  * Exporting**[⬆ back to top](#views)**
+  * Exporting
+  
+**[⬆ back to top](#views)**
 
 ---
 **Next [Queries](./../_pages/queries.md)**  

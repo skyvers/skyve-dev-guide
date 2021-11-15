@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-## Communication
-
 Detailed instructions to send email messages from within a Skyve application are provided in the <a href="https://skyvers.github.io/skyve-user-guide/communication/">Skyve User Guide</a>.
 
 The Skyve platform provides a framework for automated and bulk communication, both for user-initiated communications, and for automated communications (initiated in code). The *Communication* concept is designed to support the design of styling and layout by non-developers even where the the communication is sent by coded or automatic mechanisms. The communication concept is intended to support a variety of communication protocols, with email provided in the open-source distribution.
@@ -22,7 +20,7 @@ The Skyve communication framework can send communications immediately via SMTP, 
 
 The `CommunicationUtil` class provides a variety of methods for code-initiated automated communications and the inclusion of attachment items.
 
-### Skyve Communication
+## Skyve Communication
 
 The Skyve admin module provides the *Communication* and *Communication Template* menu items.
 
@@ -40,7 +38,7 @@ Alternatively, an organisation may wish to send a number of clients an email reg
 
 In this second example, the user may manually initiate the sending step once reviews and checks are complete. The generation of outgoing messages will be managed by a *Job* which will in turn notify the user once all messages have been generated.
 
-### Communication Template
+## Communication Template
 
 Detailed instructions for creating a *Communication Template* are available from the <a href="https://skyvers.github.io/skyve-user-guide/communication-templates/">Skyve User Guide</a>.
 
@@ -52,7 +50,7 @@ You can create any number of *Communication Template*s with each *Communication*
 
 ![Communication template](./../assets/images/communication/communication-template.png "Communication template")
 
-### Communication management
+## Communication management
 
 Detailed instructions to send email messages from within a Skyve application are provided in the <a href="https://skyvers.github.io/skyve-user-guide/communication/">Skyve User Guide</a>.
 
@@ -75,7 +73,7 @@ The contents tab allows the user to specify the message subject & body.
 
 ![Communication contents tab](./../assets/images/communication/contents.png "Communication contents tab")
 
-### CommunicationUtil
+## CommunicationUtil
 
 The `CommunicationUtil` class provides a number of convenience methods for initialising, generating and sending email communications as well as special expressions.
 
@@ -92,7 +90,7 @@ Expression | Description
 `{#url}` | the url for the bean - useful for including a link to the subject bean in the body of the message
 `{#context}` | the application context - useful for including a link to the application in the body of the message
 
-#### Sending a simple bean-based communication
+### Sending a simple bean-based communication
 
 `CommunicationUtil.sendSimpleBeanCommunication()` provides a basic convenience method to send a communication from code for a bean (or beans) using binding expressions.
 
@@ -110,7 +108,7 @@ CommunicationUtil.sendSimpleBeanCommunication(
 
 Using this method, the Communication is not saved for re-use and the method will attempt to send the email immediately.
 
-#### Initialising a communication from code
+### Initialising a communication from code
 
 Because developers create application code before Production data exists, Skyve provides a fail-safe way to initialising a communication record so that methods which send automated communications can be relied upon to succeed (providing configuration of the Production system is valid).
 
@@ -129,7 +127,7 @@ CommunicationUtil.sendFailSafeSystemCommunication(
 
 If a communication of the same name has been created prior to the method being called, (and for example styled by a graphic designer), then the existing communication will be used for the method call.
 
-#### Typical usage pattern
+### Typical usage pattern
 
 A common (suggested) pattern for usage, is to create a method that uses the `initialiseSystemCommunication()` method to retrieve the Communication (or instantiate it if it does not already exist), then send it.
 

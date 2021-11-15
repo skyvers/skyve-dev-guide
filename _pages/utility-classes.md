@@ -60,11 +60,11 @@ Skyve provides the following utility classes:
 </table>
 
 ### Document Number pattern
-The `nextDocumentNumber()` method is design for business focused identifiers (e.g. Purchase order numbers, Quotation numbers, Invoice numbers etc) from a central issuing authority, and handles concurrent use by multiple users.
+The `nextDocumentNumber()` method is designed for business focused identifiers (e.g. Purchase order numbers, Quotation numbers, Invoice numbers etc) from a central issuing authority, and handles concurrent use by multiple users.
 
 Skyve automatically maintains `bizId` as a guaranteed unique identifier which can be generated independently within the client (or from a disconnected device or 3rd party system if required), but this is for internal use only and is not intended to be used for business purposes.
 
-The `nextDocumentNumnber()` is intended for indelible/auditable business processes, where numbers are never reassigned (even if the owning document might be deleted), and as such, would normally be assigned when the owning document is saved (rather than created). If the number is assigned when the document is created, if the user decides not to save the document, that number will have been allocated, but there will be no owning document.
+The `nextDocumentNumber()` is intended for indelible/auditable business processes, where numbers are never reassigned (even if the owning document might be deleted), and as such, would normally be assigned when the owning document is saved (rather than created). If the number is assigned when the document is created, if the user decides not to save the document, that number will have been allocated, but there will be no owning document.
 
 The usual pattern for using `nextDocumentNumber()` is as follows:
 
@@ -94,7 +94,6 @@ if (bean.getPurchaseOrderNumber() == null) {
 	// get the next assistance id
 	bean.setPurchaseOrderNumber("PO",ModulesUtil.getNextDocumentNumber(PurchaseOrder.MODULE_NAME, PurchaseOrder.DOCUMENT_NAME, PurchaseOrder.purchaseOrderPropertyName, 4)));
 }
-
 ```
 
 ### Binder

@@ -62,7 +62,9 @@ docs:
       - title: "Communication"
         url: /communication/
       - title: "Lists, Grids, queries and models"
-        url: /lists/                                                                                                
+        url: /lists/
+      - title: "Expressions"
+        url: /expressions/                                                                                           
   - title: Platform tools
     children:
       - title: "Maven targets"
