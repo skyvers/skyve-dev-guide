@@ -133,7 +133,7 @@ the basis for grouped detail rows, as with SQL data sources.
 
 Skyve applications (from version 8.0.0 onwards) provide an alternative report engine based on the Freemarker tempalte language. While it does not provide the pixel-perfect precision of Jasper, reports can we written in HTML and have much less of a learning curve.
 
-Freemarker reports also have the benefit of being able to be stored and executed in your application's database, so reports can be created or updated on the fly without needing to deploy your application.
+Freemarker reports also have the benefit of being able to be stored and executed in your application's database, so reports can be created or updated on the fly without needing to redeploy your application.
 
 See the [Freemarker Quick Reference Guide](./../_pages/appendix-freemarker-quick-reference.md) for syntax specific help working with Freemarker report templates.
 
@@ -157,7 +157,7 @@ The Report Designer can be found within your application's admin module under `R
 
 From the Report Designer, click the `+` from the list to create a new Report Template. You will be prompted for a name and description for your new report.
 
-If _Jasper_ is selected as the report type, an existing Jasper report difinition within the `reports` folder of a module and document can be executed at runtime alongside other Freemarker reports.
+If _Jasper_ is selected as the report type, an existing Jasper report definition within the `reports` folder of a module and document can be executed at runtime alongside other Freemarker reports.
 
 If _Freemarker_ is selected, Skyve can _generate_ a new report template definition for you based on a provided module and document, or existing markup can be used.
 
@@ -178,7 +178,7 @@ This section of the view is where the Freemarker markup is specified. Depending 
 This defines where your report will aquire its data from. This can be one of:
 
 1. _BizQL_ - The Skyve query language, a starting query will be generated for you if the template was generated
-1. _SQL_ - Can be used to write complex SQL reports against the database direcly
+1. _SQL_ - Can be used to write SQL queries against the database directly
 1. _Constant_ - Can be used to specify a String constant to be merged into the report, for titles or footers for example within a common report template
 1. _Class_ - The fully qualified name of a Java class within your application which supplies data for the report. Classes must implement `BeanReportDataset`
 
@@ -249,7 +249,7 @@ The report designer is available in the DevOps tools in the admin module->devOps
 This will create a Jasper template based on an existing view, document or query. -->
 
 
-**[⬆ back to top](#reports)**
+**[⬆ back to top](#custom-reports)**
 
 ---
 **Next [Jobs](./../_pages/jobs.md)**  
