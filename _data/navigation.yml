@@ -95,5 +95,7 @@ docs:
         url: /appendix-setting-up-a-skyve-instance/
       - title: "Common Wildfly configuration settings"
         url: /appendix-common-wildfly-configuration-settings/
+      - title: "Extending Skyve"
+        url: /appendix-extending-skyve/
       - title: "Freemarker Quick Reference"
         url: /appendix-freemaker-quick-reference/
