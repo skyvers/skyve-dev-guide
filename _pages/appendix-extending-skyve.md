@@ -28,9 +28,7 @@ The cookbook also contains information on working with and consuming 3rd party R
 
 ## Custom Javascript and CSS
 
-Custom javascript libraries and your own javascript can be inserted into a Skyve application at certain points in each renderer.
-
-### Responsive Renderer
+Custom javascript libraries and your own javascript or cascading stylesheets (CSS) can be inserted into a Skyve application at certain points in each renderer.
 
 ### Desktop Renderer
 
@@ -63,11 +61,11 @@ The `inject` tag is not available in the responsive renderer, to use specific ja
 If we wanted to customise an edit view for a document (`edit.xml`), the corresponding responsive template would be located in `/src/main/webapp/external/edit.xhtml`. This is defined by the default route in the root level router: 
 
 ```xml
-	<uxui name="external">
+  <uxui name="external">
     ...
-		<route outcome="/external/edit.xhtml">
-			<criteria webAction="e" />
-		</route>
+    <route outcome="/external/edit.xhtml">
+      <criteria webAction="e" />
+    </route>
     ...
   </uxui>
 ```
@@ -75,14 +73,14 @@ If we wanted to customise an edit view for a document (`edit.xml`), the correspo
 Instead of modifying this file, which would affect all pages, you can duplicate `/external/edit.xhtml` into a new directory, e.g. `myapp` located at the same level within your application hierarchy, i.e. `/src/main/webapp/myapp/custom.xhtml`. To make Skyve route to your new custom page, you need to add a new route with the criteria of when to select this route, e.g.:
 
 ```xml
-	<uxui name="external">
+  <uxui name="external">
     ...
     <route outcome="/myapp/custom.xhtml">
-			<criteria webAction="e" module="myapp" document="MyDocument" />
-		</route>
-		<route outcome="/external/edit.xhtml">
-			<criteria webAction="e" />
-		</route>
+      <criteria webAction="e" module="myapp" document="MyDocument" />
+    </route>
+    <route outcome="/external/edit.xhtml">
+      <criteria webAction="e" />
+    </route>
     ...
   </uxui>
 ```
