@@ -1,0 +1,13 @@
+TLS1 and TLSV1.1 are disabled for jdk in newer versions of the open jdk 11 and you need to manually reenable them if you want to use them e.g. to connect to SQL Server- so jdk-11.0.10+9 has them enabled, but jdk-11.0.13+8 has them disabled.
+solution at https://asyncstream.com/tutorials/java-tlsv10-not-accepted-by-client-preferences/
+
+ In Java 11 and up the security configuratio file is located in the conf/security/ folder under JAVA_HOME. This file contains a configuration property called jdk.tls.disabledAlgorithms which contains the names of all disabled transport layer security algorithms.
+ 
+ The affected applications could re-enable these versions of TLS because they are not completely removed from OpenJDK implementaion. You could follow the below steps to re-enable TLSv1.0 and TLSv1.1 versions at your own risk.
+
+Ensure the security.overridePropertiesFile value in the java.security file is set to true.
+Create a file named enableLegacyTLS.security.
+Copy the propery jdk.tls.disabledAlgorithms and its value from the java.security file and add it to the file enableLegacyTLS.security.
+Remove TLSv1 and/or TLSv1.1 from the copied list.
+Start the application with -Djava.security.properties = path/to/enableLegacyTLS.security.
+You could also simply remove the values TLSv1, TLSv1.1 from the list of values against the property jdk.tls.disabledAlgorithms present in the java.security file. This could permanently enable the vulnerable TLS versions but this is more riskier than the approach using enableLegacyTLS.security file.

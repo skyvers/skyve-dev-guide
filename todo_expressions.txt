@@ -51,3 +51,94 @@
 		{role:admin.BasicUser}
 		{stash:text}
 		{user:text} (edited) 
+		
+I am currently introducing EL expressions to Skyve as part of the dynamic domain work.
+EL is a runtime language with no static analysis which is incongruent with Skyve.
+Skyve aims to determine all problems with the system specification (the metadata) before running it.
+To this end I have implemented static analysis for EL and introduced it into the Skyve expression evaluator.
+I have added 2 prefixes el and bizel. The el is the out of the box reference implementation without validation.
+bizel does syntax checking and ensures the named properties exist, the types are congruent, indexes for lists and arrays are coercible to integer, that sort of thing.
+There are some situations where the JVM (and its backward compatibility) let us down.
+For instance Generic type erasure at runtime, so when one of these situation is encountered, static type analysis ceases at that lexical element but syntax checking continues.
+Problem is the EL  AST doesn’t have a cast operator (its dynamic) so Skyve can’t statically analyse the traversal of polymorphic references. The coder can’t encode the intent of the type usage via a cast.
+Yesterday I implemented it so polymorphism is ignored in static analysis.
+This could lead to blocking errors at gen domain time, which is why I also allowed vanilla EL as an option.
+I was thinking about it further this morning and (coz each customer knows the combination of document dependencies based on their overrides and included modules) Skyve could recursively check each sub document (for the customer) looking for the named lexicon.
+So both options have a gap that can allow runtime typing errors.
+As it is now, a sub-document/subclass property cannot be known at validation time.
+If I implement the above fan-out checking of all subtype hierarchies, it would be possible to use an attribute from a subdocument that the runtime type doesn’t implement from another inheritance hierarchy.
+Both could lead to runtime errors.
+I’m mulling on which way to go.
+Anyone have any comments or things to consider? (edited) 
+
+mike  10:40 AM
+For context....
+
+The EL has the following context objects available 
+		bean - the conversation bean
+		user - CORE.getUser()
+		stash - CORE.getStash()
+		DATE - new DateOnly()
+		TIME - new TimeOnly()
+		DATETIME - new DateTime()
+		TIMESTAMP - new Timestamp()
+
+And some Skyve expression examples...
+
+{USER} - CORE.getUser().getName()
+{USERID} - CORE.getUser().getId()
+{USERNAME} - CORE.getUser().getContactName()
+{DATAGROUPID} - CORE.getUser().getDataGroupId()
+{CONTACTID} - CORE.getUser().getContactId()
+{CUSTOMER} - CORE.getCustomer().getName()
+{DATE} - new DateOnly()
+{TIME} - new TimeOnly()
+{DATETIME} - new DateTime()
+{TIMESTAMP} - new Timestamp()
+{URL} - Util.getDocumentUrl(bean)
+{binding} - Bound value from the conversation bean
+{bean:binding} - Same as above (bean is the default evaluator prefix)
+{disp:binding} - Display Name from the bound document attribute
+{desc:binding} - Description from the bound document attribute
+{bizel:bean.binding}
+{bizel:stash['key']}
+{bizel:user.attributes['key']}
+{bizel:DATE}
+{bizel:DATE.setLocalDate(DATE.toLocalDate().plusDays(1))}
+{bizel:TIME}
+{bizel:DATETIME}
+{bizel:TIMESTAMP}
+{i18n:key} - Internationalisation
+{role:admin.BasicUser} - true if the current user belongs to the role, otherwise false
+{stash:key} - CORE.getStash().get("key")
+{user:key} - CORE.getUser.getAttributes().get("key")
+
+If called within the context of a String, the above values are formatted based on customer/document metadata rules, otherwise the raw type emanates from the above expressions.
+(edited)
+New
+
+ben  4:42 PM
+Can you to provide some more specific usage examples mike where more complex expressions which may fail at runtime would be used?
+
+Can we use these in default values for new dates, next document numbers?
+
+I’m integrating now. Hadn’t considered default values. Is a good idea.
+Not sure about next document numbers?
+There is no extension in the admin module.
+Invoice has a collection of line item.
+Line Item is an abstract class.
+has 2 extensions
+T&M Line Item
+and
+FixedPrice line item.
+T&M line item has hours expended as an attribute, FixedPrice does not.
+imagine an expression on Invoice like (edited) 
+bean.lineItem[0].totalHours
+We cannot statically determine if the expression is valid or not
+Depends if element 0 if a T&MLineItem or a FixedPriceLine Item
+So, at present - the above expression will error.
+I could make it so that totalHours is known (and other attributes on FixedPriceLineItem) so that the follwing expression passes (although it could fail at runtime)
+Now consider a List<Pojo> on the Invoice extension.
+At runtime, the generic Pojo is erased, so the analyser goes into “syntax only” mode and any bean property expression from then on is accepted coz we have no idea what’s going on.
+With skyve domains we can check our metadata to know what the type is (but we don;t know the runtime type exactly until runtime)
+Make snse?		
