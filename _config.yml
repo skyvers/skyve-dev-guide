@@ -9,12 +9,12 @@ baseurl                  : "/skyve-dev-guide"
 
 search                   : true # true, false (default)
 search_full_content      : true # true, false (default)
-search_provider          : algolia # lunr (default), algolia
-algolia:
-  application_id         : T0XNXOIH0O # YOUR_APPLICATION_ID
-  index_name             : skyve-dev-guide # YOUR_INDEX_NAME
-  search_only_api_key    : e21cb0c56e41f18e51cb780ef8b65328 # YOUR_SEARCH_ONLY_API_KEY
-  powered_by             : true # true (default), false
+search_provider          : lunr # lunr (default), algolia
+#algolia:
+  #application_id         : T0XNXOIH0O # YOUR_APPLICATION_ID
+  #index_name             : skyve-dev-guide # YOUR_INDEX_NAME
+  #search_only_api_key    : e21cb0c56e41f18e51cb780ef8b65328 # YOUR_SEARCH_ONLY_API_KEY
+  #powered_by             : true # true (default), false
   #files_to_exclude:
   #  - _posts/2017-11-28-post-exclude-search.md
 
