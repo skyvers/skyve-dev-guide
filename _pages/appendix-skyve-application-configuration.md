@@ -15,17 +15,17 @@ To deploy a Skyve application, there are typically three artefacts:
 - the properties '.json' file
 
 For example, if your Skyve application is called 'myApplication', these will be:
-- 'myApplication.war'
-- 'myApplication-ds.xml'
-- 'myApplication.json'
+- `myApplication.war`
+- `myApplication-ds.xml`
+- `myApplication.json`
 
-The 'ds.xml' and '.json' remain on the server you are deploying to, and are customised for that specific instance, so that when you are  deploying a new version of your Skyve application, the instance settings do not need to be adjusted.
+The `ds.xml` and `.json` remain on the server you are deploying to, and are customised for that specific instance, so that when you are  deploying a new version of your Skyve application, the instance settings do not need to be adjusted.
 
-When deploying the Skyve application web archive 'war', ensure that matching configuration settings are updated in the associated 'ds.xml' and '.json' configuration files. 
+When deploying the Skyve application web archive 'war', ensure that matching configuration settings are updated in the associated `ds.xml` and `.json` configuration files. 
 
-Ensure the 'ds.xml' file uses a connection string and credentials corresponding to the setting for the database driver above
+Ensure the `ds.xml` file uses a connection string and credentials corresponding to the setting for the database driver above
 
-Ensure the '.json' properties file has been updated for the specific instance including:
+Ensure the `.json` properties file has been updated for the specific instance including:
 - content directory
 - context url
 - database dialect
@@ -68,13 +68,13 @@ If you only need to change the base URL (for example, from `https://skyve.org/` 
 
 ```json
 	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
-	url: {
+	"url": {
 		// server URL
-		server: "https://myDomain.com",
+		"server": "https://myDomain.com",
 		// web context path
-		context: "/",
+		"context": "/",
 		// home path
-		home: "/"
+		"home": "/"
 	},
 ```
 

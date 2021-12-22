@@ -8,16 +8,14 @@ sidebar:
   nav: docs
 ---
 
-## Setting up a Skyve instance
-
-### Recommended requirements 
+## Recommended requirements 
 We recommend the following:
 - 4GB RAM for Linux and 8GB RAM for Windows
 - Java JDK 11 (this is the JDK for Java 11)
 - Wildfly 20+
 - Disk space requirements depend on the nature of the application especially if the database and content repository are located on the same drive, however, for most common applications, 50GB drive space will probably be sufficient.
 
-### Installation of prerequisites
+## Installation of prerequisites
 To run a Skyve application, the server requires:
 
 Java 11 - while the JRE is sufficient, the JDK is recommended.
@@ -27,7 +25,7 @@ Wildfly 20+
  - Download from http://wildfly.org/downloads/   
  - This link may assist (even though it is for an older version of Wildfly)- https://linuxtechlab.com/wildfly-10-10-1-0-installation/ 
 
-### Installing database driver
+## Installing database driver
 For database access, load the appropriate driver and declare this driver in the Wildfly standalone.xml configuration file.
 
 For example, for SQL Server:
@@ -56,7 +54,7 @@ For example, for SQL Server:
     </driver>
 ```
 
-### Other datasource options
+## Other datasource options
 
 There are a number of optional settings for the application data source file `myApplication-ds.xml`. The file provided from the Skyve project creator is usually satisfactory, however the following describes other options which you may need to consider.
 
@@ -67,7 +65,7 @@ Option | Values | Description
 
 Additional information is available from a number of sources, for example <a href="https://developer.jboss.org/wiki/ConfigDataSources">for example</a>.
 
-### Additional configuration
+## Additional configuration
 
 The validation stanza provides Wildfly with the required configuration to create new connections as needed.
 
@@ -93,7 +91,7 @@ From the <a href="https://docs.jboss.org/jbossas/docs/Server_Configuration_Guide
 - `<prepared-statement-cache-size>` - the number of prepared statements per connection to be kept open and reused in subsequent requests. They are stored in a LRU cache. The default is 0 (zero), meaning no cache.
 -  `<share-prepared-statements>` - with prepared statement cache enabled whether two requests in the same transaction should return the same statement
 
-### Configuring ports
+## Configuring ports
 To configure which ports will be used for accessing the application, modify the <socket-binding-group> section in the wildfly configuration file wildfly/standalone/configuration/standalone.xml for http and https:
 
 ```xml
@@ -108,38 +106,37 @@ For example, for external access, typically you would assign as follows:
     <socket-binding name="https" port="${jboss.https.port:443}"/>
 ```
 
-### Create a folder for content
+## Create a folder for content
 Skyve includes content management - for file uploads and images - the repository requires a dedicated folder to persist files. The user credential running wildfly (for example) will need read-write permissions to this folder.
 
-### Create a folder for addins
-Typically, it's easiest to add one add-ins subfolder for all your projects, and refer to it directly in all project JSON settings files:
+## Create a folder for addins
+Typically, it's easiest to add one add-ins subfolder for all your projects, and refer to it directly in all project JSON settings files *(note the trailing slash)*:
 
 ```json
 	// Add-ins settings
-	addins: {
+	"addins": {
 		// Where to look for add-ins - defaults to <content.directory>/addins/
-		directory: "C:/_/content/addins/"
+		"directory": "C:/_/content/addins/"
 	},	
 ```
-(Note the trailing slash.)
 
-Load the skyve-content.zip (this manages content locally) into the addins by:
+Load the `skyve-content-<version>.zip` (this manages content locally) into the addins by:
 * right-click your project and Run As -> Maven install
-* the skyve-content.zip will be downloaded to your target folder - the results of the maven install will include this location, usually <project>\target\
+* the `skyve-content-<version>.zip` will be downloaded to your target folder - the results of the maven install will include this location, usually `<project>\target\`
 
 ```
-[INFO] --- maven-dependency-plugin:2.8:copy (copy-content-addin-dependency) @ elixan ---
-[INFO] Configured Artifact: org.skyve:skyve-content:7.0.2:zip
-[INFO] Copying skyve-content-7.0.2.zip to C:\_\j11\elixan\target\skyve-content.zip
+[INFO] --- maven-dependency-plugin:2.8:copy (copy-content-addin-dependency) @ myproject ---
+[INFO] Configured Artifact: org.skyve:skyve-content:8.0.0:zip
+[INFO] Copying skyve-content-8.0.0.zip to C:\_\j11\myproject\target\skyve-content-8.0.0.zip
 ```
 
-* copy the skyve-content.zip to the directory specified in the JSON settings file above.
+* copy the `skyve-content-<version>.zip` to the directory specified in the JSON settings file above.
 
-### Install Wildfly as a Service
+## Install Wildfly as a Service
 
 So that the Skyve application will be always available, install the wildfly service, ensuring that the service will have read/write access to the content folder.
 
-The following may be useful for linux installations - https://community.i2b2.org/wiki/display/getstarted/2.4.2.3+Run+Wildfly+as+a+Linux+Service
+The following [link](https://community.i2b2.org/wiki/display/getstarted/2.4.2.3+Run+Wildfly+as+a+Linux+Service) may be useful for linux installations.
 
 **[⬆ back to top](#setting-up-a-skyve-instance)**
 
