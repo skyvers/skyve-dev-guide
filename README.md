@@ -219,7 +219,7 @@ Skyve provides an object data source which can be used by application
 reports, further reducing the need for SQL. In some situations using
 implementation-specific SQL is necessary for performance or to integrate
 with 3rd party systems and the Skyve API provides an execute method for
-insecure SQL, i.e. SQL which is not within the Skyve security
+unsecured SQL, i.e. SQL which is not within the Skyve security
 architecture.
 
 Remembering that schema object creation is handled automatically by
@@ -305,7 +305,7 @@ For the current complete list see the [skyve-ee pom.xml](https://github.com/skyv
 
 Because Skyve is open-source, developers are at liberty to create customised versions of the platform to integrate deeply with other 3rd party packages or custom architectural elements.
 
-**[⬆ back to top](#contents)**
+**[⬆ back to top](#introduction)**
 
 ---
 **Next [Chapter 2: Concepts](_pages/concepts.md)**  
