@@ -1,0 +1,24 @@
+			<from>
+                <![CDATA[
+                   {newLanguages.Cohort} as bean, {newLanguages.Learner} as t, {admin.UserRole} as r
+                ]]>
+             </from>
+             <filter>
+             	<!-- 
+					bean = t.cohort 
+					or  -->
+				<![CDATA[bean MEMBER OF t.assignedCohort or (bean = t.cohort 
+                    and t.user.bizId = {USERID} )
+                    or  (r.roleName = 'admin.AppUser'
+					and r.parent.bizId = {USERID})
+				]]>
+			</filter>
+			
+			
+			<filter>
+			 	<!-- Safeguard only foundry maintainer can view this query result -->
+				<![CDATA[
+					exists (select r.bizId from {admin.UserRole} r where r.parent.bizId = {USERID} and r.roleName = 'foundry.Maintainer')
+					or exists (select gr.bizId from {admin.GroupRole} gr, {admin.Group} g, {admin.User} u where gr.parent = g and u.bizId = {USERID} and g MEMBER OF u.groups and gr.roleName = 'foundry.Maintainer')
+				]]>
+			</filter>  			

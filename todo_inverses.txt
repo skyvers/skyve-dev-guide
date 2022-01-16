@@ -1,0 +1,34 @@
+so these are the opposite of association and collection
+11:32
+when you need to point back in the other direction
+11:32
+so for example, in the CTP application i will get you to work on soon, we have an Accident table with an association to AccidentDetails
+11:32
+accident is just a root table, doesn’t really have any information on it’s own
+
+Afshin  11:32
+:+1:
+
+
+
+
+
+
+ben  11:33
+so in a list menu from a module query, for accident we can show accidentDetails.accidentNumber in a binding, because accident has an association to AccidentDetails, make sense?
+
+Afshin  11:33
+yeah
+
+ben  11:34
+but if we wanted to include an attribute from Accident in an AccidentDetails query, we can’t, because there is no relationship/binding in Accident details back to accident
+11:34
+so we can create an inverseOne on accident details pointing to accident
+
+Afshin  11:35
+Thanks @ben.
+
+ben  11:36
+does that make sense? then accident binding becomes available in views and queries for AccidentDetail
+11:36
+inverseMany is the same thing, but when there is more than one, so if there is a collection

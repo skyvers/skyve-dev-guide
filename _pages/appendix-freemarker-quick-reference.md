@@ -126,7 +126,7 @@ Skyve also includes some custom Freemarker directives which can be used to use t
 
 BizQL or Bean dataset:
 ```
-<@format bean=account binding=“openDate” />
+<@format bean=account binding="openDate" />
 ```
 Note: do not put quotes around the bean, this is expecting an object to be passed through. This can be a compound binding.
 
@@ -142,15 +142,57 @@ A template can import another template with the `include` directive, e.g.
 ```
 The path needs to be something Freemarker can find on the filesystem or in the database.
 
+### Including images
+Skyve offers a number of directives to include images, including static images, dynamic images, and images from the Skyve content store.
+
+Examples for static images:
+
+```
+<@image filename="logo.png" />
+```
+
+```
+<@image filename="logo.png" module="admin" alt="Corporate logo" height="60" class="logo" />
+``` 
+ 
+
+Examples for dynamic images:
+
+```
+<@dynamicImage bean=bean module="elixan" document="Survey" image="SpiderChart" width=700 height=450 />
+```
+
+ * image: The name of the image
+ * module: The name of the module which contains the DynamicImage
+ * document: The name of the document which contains the DynamicImage
+ * bean: The bean which the image belongs to
+ * height: Height of the image element, can be null
+ * width: Width of the image element, can be null
+
+
+Examples for images from the content store:
+
+```
+<@content bean=content module="admin" document="Contact" attribute="image" />
+```
+
+* filename: The name of the resource
+* module: The name of the module where the resource is located, can be null
+* alt: Alt text for the image element, can be null
+* height: Height of the image element, can be null
+* width: Width of the image element, can be null
+* class: Class(es) for the image element, can be null
+* style: Style(s) for the image element, can be null
+
 ### Macros
-If you’ve mastered the basics, macros defined within a template can be useful for repeating rows within tables, etc.
+Once you have mastered the basics, macros defined within a template can be useful for repeating rows within tables, etc.
 See [macro, nested, return - Apache FreeMarker Manual](https://freemarker.apache.org/docs/ref_directive_macro.html)
 
 The `import` directive can also be used to load a file containing re-usable macros but without outputting anything to the template like `include` does.
 
 For example:
 ```
-<#import “/libs/commons.ftl” as com>
+<#import "/libs/commons.ftl" as com>
 <@com.copyright date="1999-2002"/>
 ```
 See [import - Apache FreeMarker Manual](https://freemarker.apache.org/docs/ref_directive_import.html#ref.directive.import)

@@ -141,4 +141,68 @@ I could make it so that totalHours is known (and other attributes on FixedPriceL
 Now consider a List<Pojo> on the Invoice extension.
 At runtime, the generic Pojo is erased, so the analyser goes into “syntax only” mode and any bean property expression from then on is accepted coz we have no idea what’s going on.
 With skyve domains we can check our metadata to know what the type is (but we don;t know the runtime type exactly until runtime)
-Make snse?		
+Make snse?	
+
+
+
+			result.defineFunction("", "", functions.getMethod("newDateOnly"));
+			result.defineFunction("", "", functions.getMethod("newDateOnlyFromMillis", Long.TYPE));
+			result.defineFunction("", "", functions.getMethod("newDateOnlyFromDate", Date.class));
+			result.defineFunction("", "", functions.getMethod("newDateOnlyFromSerializedForm", String.class));
+			result.defineFunction("", "", functions.getMethod("newDateOnlyFromLocalDate", LocalDate.class));
+			result.defineFunction("", "", functions.getMethod("newDateOnlyFromLocalDateTime", LocalDateTime.class));
+
+			result.defineFunction("", "", functions.getMethod("newDateTime"));
+			result.defineFunction("", "", functions.getMethod("newDateTimeFromMillis", Long.TYPE));
+			result.defineFunction("", "", functions.getMethod("newDateTimeFromDate", Date.class));
+			result.defineFunction("", "", functions.getMethod("newDateTimeFromSerializedForm", String.class));
+			result.defineFunction("", "", functions.getMethod("newDateTimeFromLocalDate", LocalDate.class));
+			result.defineFunction("", "", functions.getMethod("newDateTimeFromLocalDateTime", LocalDateTime.class));
+
+			result.defineFunction("", "", functions.getMethod("newTimeOnly"));
+			result.defineFunction("", "", functions.getMethod("newTimeOnlyFromMillis", Long.TYPE));
+			result.defineFunction("", "", functions.getMethod("newTimeOnlyFromDate", Date.class));
+			result.defineFunction("", "", functions.getMethod("newTimeOnlyFromComponents", Integer.TYPE, Integer.TYPE, Integer.TYPE));
+			result.defineFunction("", "", functions.getMethod("newTimeOnlyFromSerializedForm", String.class));
+			result.defineFunction("", "", functions.getMethod("newTimeOnlyFromLocalTime", LocalTime.class));
+			result.defineFunction("", "", functions.getMethod("newTimeOnlyFromLocalDateTime", LocalDateTime.class));
+			
+			result.defineFunction("", "", functions.getMethod("newTimestamp"));
+			result.defineFunction("", "", functions.getMethod("newTimestampFromMillis", Long.TYPE));
+			result.defineFunction("", "", functions.getMethod("newTimestampFromDate", Date.class));
+			result.defineFunction("", "", functions.getMethod("newTimestampFromSerializedForm", String.class));
+			result.defineFunction("", "", functions.getMethod("newTimestampFromLocalDate", LocalDate.class));
+			result.defineFunction("", "", functions.getMethod("newTimestampFromLocalDateTime", LocalDateTime.class));
+
+			result.defineFunction("", "", functions.getMethod("newDecimal2", Double.TYPE));
+			result.defineFunction("", "", functions.getMethod("newDecimal2FromBigDecimal", BigDecimal.class));
+			result.defineFunction("", "", functions.getMethod("newDecimal2FromDecimal", Decimal.class));
+			result.defineFunction("", "", functions.getMethod("newDecimal2FromString", String.class));
+			
+			result.defineFunction("", "", functions.getMethod("newDecimal5", Double.TYPE));
+			result.defineFunction("", "", functions.getMethod("newDecimal5FromBigDecimal", BigDecimal.class));
+			result.defineFunction("", "", functions.getMethod("newDecimal5FromDecimal", Decimal.class));
+			result.defineFunction("", "", functions.getMethod("newDecimal5FromString", String.class));
+
+			result.defineFunction("", "", functions.getMethod("newDecimal10", Double.TYPE));
+			result.defineFunction("", "", functions.getMethod("newDecimal10FromBigDecimal", BigDecimal.class));
+			result.defineFunction("", "", functions.getMethod("newDecimal10FromDecimal", Decimal.class));
+			result.defineFunction("", "", functions.getMethod("newDecimal10FromString", String.class));
+
+			result.defineFunction("", "", functions.getMethod("newOptimisticLock", String.class, Date.class));
+			result.defineFunction("", "", functions.getMethod("newOptimisticLockFromString", String.class));
+			result.defineFunction("", "", functions.getMethod("newGeometry", String.class));
+
+
+
+
+
+3:11
+Assert.assertEquals(“0.00”, Binder.formatMessage(“{el:Decimal2.ZERO}“, bean));
+		Assert.assertEquals(“100.00”, Binder.formatMessage(“{el:newDecimal2(100)}“, bean));
+3:11
+Assert.assertEquals(currentDate, Binder.formatMessage(“{el:newDateOnly()}“, bean));
+		Assert.assertEquals(tomorrowsDate, Binder.formatMessage(“{el:newDateOnlyFromLocalDate(newDateOnly().toLocalDate().plusDays(1))}“, bean));
+		
+		
+see https://download.oracle.com/otndocs/jcp/el-3_0-fr-eval-spec/index.html	
