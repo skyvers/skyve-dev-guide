@@ -16,7 +16,7 @@ However, in some cases it is useful to declare the query in the module so that i
 
 Queries are declared in the module to maximise re-use throughout the application.
 
-As described in [Modules](../modules.md), the `module.xml` file can include definitions of queries used in the application. Queries declared in the `module.xml` are called *metadata queries* to distinguish them from other queries which may exist as views on the database server or as unsecured SQL strings within developer code.
+As described in [Modules](../modules/), the `module.xml` file can include definitions of queries used in the application. Queries declared in the `module.xml` are called *metadata queries* to distinguish them from other queries which may exist as views on the database server or as unsecured SQL strings within developer code.
 
 Each document can specify a *defaultQueryName* - which is the name of the metadata query to use by default wherever lists of document instances may be required (e.g. lists and lookups for document references).
 
