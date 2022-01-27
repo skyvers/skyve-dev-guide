@@ -207,3 +207,62 @@ To preserve newlines in the HTML report for Freemarker, e.g. from a memo field i
 
 ### Macros
 It is possible to create macros for re-usable sections of logic  within a template. See [macro, nested, return - Apache FreeMarker Manual](https://freemarker.apache.org/docs/ref_directive_macro.html)
+
+### Worked example - exporting filtered CSV data
+
+The following are the steps for creating a simple filtered CSV export using freemarker. 
+
+This example assumes you have a document called *Invoice* which has attributes *invoiceNumber* (text), *sentDate* (date) and *total* (decimal2) and will produce a CSV export of all the Invoices within a specific date range.
+
+1. Create a transient document for the report filter parameters called InvoiceExport with two attributes, `fromDate` (date) and `toDate` (date)
+2. Add a `reports` package to the document package and create a file named `InvoiceExport.ftlh` as follows:
+
+```xml
+<#list invoiceExportData>
+Invoice Number,Sent Date,Total
+	<#items as bean>
+<@format bean=bean binding="invoiceNumber" />,<@format bean=bean binding="sentDate" />,<@format bean=bean binding="total" />
+	</#items>
+<#else>
+		No records.
+</#list>
+```
+
+3. Create an extension class called `InvoiceExportExtension` that extends `InvoiceExport`, and add a method to `InvoiceExportExtension` called generateInvoiceExportDownload() as follows:
+
+```java
+public Download generateInvoiceExportDownload() throws Exception {
+
+	String reportName = "InvoiceExport.ftlh"; // by default skyve will look for this file in the reports package of this document
+	String reportTitle = "Invoice Data"; 
+	Map<String, Object> exportData = new HashMap<>();
+	exportData.put("invoiceExportData", this.getReportData());
+
+	String csvFile = EXT.getReporting().createFreemarkerBeanReport(this, reportName, exportData);
+	return new Download(String.format("%s.csv", reportTitle), csvFile.getBytes(), MimeType.csv);
+}
+
+/**
+ * @return - a List of Invoices for the Invoice Data export
+ * optionally filtered according to the values set in this bean
+ */
+public List<Invoice> getReportData() {
+	DocumentQuery q = CORE.getPersistence().newDocumentQuery(Invoice.MODULE_NAME, Invoice.DOCUMENT_NAME);
+	if (this.getFromDate() != null) {
+		q.getFilter().addGreaterThanOrEqualTo(Invoice.sentDatePropertyName, this.getFromDate());
+	}
+	if (this.getToDate() != null) {
+		q.getFilter().addGreaterThanOrEqualTo(Invoice.sentDatePropertyName, this.getToDate());
+	}
+	return q.beanResults();
+}
+```
+
+4. Add a download action to the document actions package, the view and add privileges for the document and action in the module, and override the download action as follows:
+
+```java
+@Override
+public Download download(DataExportsExtension bean, WebContext webContext) throws Exception {
+	return bean.generateInvoiceExportDownload();
+}
+```
