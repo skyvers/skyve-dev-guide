@@ -138,7 +138,7 @@ So that the Skyve application will be always available, install the wildfly serv
 
 The following [link](https://community.i2b2.org/wiki/display/getstarted/2.4.2.3+Run+Wildfly+as+a+Linux+Service) may be useful for linux installations.
 
-**[⬆ back to top](#setting-up-a-skyve-instance)**
+**[⬆ back to top](#recommended-requirements)**
 
 ---
 **Next [Common Wildfly configuration settings](./../_pages/appendix-common-wildfly-configuration-settings.md)**<br>
