@@ -266,3 +266,9 @@ public Download download(DataExportsExtension bean, WebContext webContext) throw
 	return bean.generateInvoiceExportDownload();
 }
 ```
+
+
+**[⬆ back to top](#testing-for-nulls)**
+
+---
+**Previous [Setting up a Skyve instance](./../_pages/appendix-setting-up-a-skyve-instance.md)**
