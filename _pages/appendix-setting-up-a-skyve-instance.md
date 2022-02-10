@@ -138,6 +138,26 @@ So that the Skyve application will be always available, install the wildfly serv
 
 The following [link](https://community.i2b2.org/wiki/display/getstarted/2.4.2.3+Run+Wildfly+as+a+Linux+Service) may be useful for linux installations.
 
+For Windows:
+1. Configure Wildfly as a Windows service (requires UAC)
+    1. go to the directory `C:\wildfly\docs\contrib\scripts`
+    1. copy the folder "service"
+    1. go to the directory `C:\wildfly\bin`
+    1. paste the service folder there
+    1. Hold down shift and right click on the `C:\wildfly\bin\service` folder
+    1. Select *Open Powershell Window Here*
+    1. Type `.\service.bat install` and press *Enter*
+    1. Click *Yes* to the User Account Control prompt
+    1. The last line of text should say "Service Wildfly installed"
+    1. Close the Powershell window
+    1. Click the Windows key and type services and click the Services control panel
+    1. Find the *Wildfly* service and double click
+    1. Change *Startup Type* to *Automatic (Delayed Start)*
+    1. Click *Apply*
+    1. Click *Start* then *OK*
+    1. Check the service starts and does not stop straight away
+    1. Open Ineternet Explorer and go to http://localhost and check the Wildfly splash screen shows
+
 **[⬆ back to top](#recommended-requirements)**
 
 ---
