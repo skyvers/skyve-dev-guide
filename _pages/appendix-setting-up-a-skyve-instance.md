@@ -156,7 +156,7 @@ For Windows:
     1. Click *Apply*
     1. Click *Start* then *OK*
     1. Check the service starts and does not stop straight away
-    1. Open Ineternet Explorer and go to http://localhost and check the Wildfly splash screen shows
+    1. Open your browser and go to http://localhost:8080 and check the Wildfly splash screen shows
 
 **[⬆ back to top](#recommended-requirements)**
 
