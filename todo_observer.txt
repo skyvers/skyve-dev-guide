@@ -1,0 +1,21 @@
+Interface org.skyve.metadata.controller.Observer created.
+At the moment it has startup and shutdown callbacks on it but could add other methods if they come up.
+Skyve services implement Observer to initialise and finalise themselves.
+AddInManager
+Caching
+ContentManager
+JobScheduler
+Reporting
+Application level Observer implementations are Registered through customer xml similar to interceptors.
+	<observers>
+		<observer className="modules.forms.FormRepositorySkyveObserver" />
+	</observers>
+(edited)
+
+
+
+
+
+2:19
+The order they are defined are the order they are called so you can create dependencies.
+Shutdown is called in the reverse order (similar to interceptors)

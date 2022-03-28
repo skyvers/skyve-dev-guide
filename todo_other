@@ -1,3 +1,7 @@
+Powershell: rename all generatedEdit to edit
+Get-ChildItem -Filter "*generatedEdit*" -Recurse | Rename-Item -NewName {$_.name -replace 'generatedEdit','edit' }
+
+
 help file URL and relative path
 
 Binder.convertAndSet(r, k, c.get(k));
@@ -36,3 +40,58 @@ and the URL could be to the create view, like
 Util.getSkyveContextUrl() + "?a=e&d=" + MyDocument.DOCUMENT_NAME + "&m=" + m=MyDocument.MODULE_NAME
 ```
 If you have a document with a create view declared, then navigate to the URL without a specified bizId, you'll get a new record and a create view (edited) 
+
+
+Serializable
+I am planning a small big change.
+1:19
+I am planning to remove the Serialization interface from the MetaData interface.
+1:19
+This will means that all Skyve metadata wont be Serializable (edited) 
+1:20
+It was fine until eclipse by default started asking for seriaizable Ids on every class.
+1:21
+And given the latest round of repository rework, it seems that any remote skyve repository would remote at the data level - ie XML or database or whatever
+1:21
+and we can now write repositories that interpret that source data instead.
+1:22
+Also, Serialization has gotten a bad rap mostly because of its ability to remote class load. This has been exploited multiple times in the past.
+1:22
+I can imagine devs writing a Bizlet going, why is this Serializable?
+1:22
+So its a small change.
+
+rbb555  1:23 PM
+sounds reasonable
+
+mike  1:23 PM
+But it has wide impact
+
+rbb555  1:23 PM
+yep
+
+mike  1:23 PM
+Does anyone have any objections?
+
+rbb555  1:23 PM
+surely if you use the security buzz word, no one can have any objections...? :wink: (edited) 
+New
+
+mike  1:23 PM
+@Will Tam will be doing the work as part of Skyve upgrade
+:+1:
+1
+
+1:26
+Its really a bit of PR because the generated beans are all Serializable and need to remain so to be cached and participate in EJB and other remoting operations.
+
+rbb555  1:26 PM
+could you maybe write a paragraph of that I can put into the dev guide please
+1:27
+otherwise I'll scrape the above
+
+mike  1:27 PM
+It means if you take 8.1.0-SNAPSHOT you’ll get a bunch of yellow marks prompting you to delete serialVersionUID
+:+1:
+1
+
