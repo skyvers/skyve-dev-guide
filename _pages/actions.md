@@ -50,6 +50,7 @@ If no view has been declared for a document, Skyve will include all actions the 
 Action classes are located within the actions folder in a document package and correlate to action buttons in the user interface. All actions implementing *ServerSideAction* cause the view to be re-rendered.
 
 ![Trivial action example](../assets/images/actions/image135.png "Trivial action example")
+In the example above, the trivial example (stub only) merely causes the view the rerender. 
 
 ### Creating a custom action
 
