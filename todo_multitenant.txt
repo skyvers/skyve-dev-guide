@@ -1,0 +1,4 @@
+Global tables get screwed when restoring backups.
+
+Links to autoset the customer are of the form
+http://localhost:8080/skyve/?customer=demo
