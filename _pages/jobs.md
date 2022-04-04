@@ -8,6 +8,7 @@ sidebar:
   nav: docs
 ---
 
+# Jobs
 Skyve provides a mechanism for executing and scheduling offline Jobs
 (i.e. Jobs processed irrespective of the state of the conversation or
 session).
@@ -70,9 +71,9 @@ public ServerSideActionResult<GrowerSearchCriteria> execute(GrowerSearchCriteria
   Module module = customer.getModule(Grower.MODULE_NAME);
   JobMetaData job = module.getJob("jAnnualReturns");
 
-  EXT.runOneShotJob(job, bean, user);
+  EXT.getJobScheduler().runOneShotJob(job, bean, user);
 
-  bean.setReturnResults("The generation job has commenced.");
+  webContext.growl(MessageSeverity.info, "The generation job has commenced.");
 
   return new ServerSideActionResult<>(bean);
 }
@@ -80,7 +81,7 @@ public ServerSideActionResult<GrowerSearchCriteria> execute(GrowerSearchCriteria
 
 _Example action class code to run a one-shot Job_
 
-In the above example, the call `EXT.runOneShotJob` will schedule the job to run passing in the bean named _search_ under the permissions of the current _user_.
+In the above example, the call `EXT.getJobScheduler().runOneShotJob` will schedule the job to run passing in the bean named _search_ under the permissions of the current _user_.
 
 As Jobs are run within the context of a user so that Skyve's embedded
 comprehensive security model can be enforced.
