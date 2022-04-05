@@ -394,14 +394,25 @@ Once you have the tag manager, the following methods can be accessed:
 
 ## Time
 
-The `Time` utility class provides some frequently used helper methods for working with dates and times.
+The `Time` utility class provides some frequently used helper methods for working with dates and times. A sample of common ones are listed below, there are many more to explore.
 
 Method(s)        | Description/Usage
 ---------------- | ------------------
 `addHours`, `addDays`, `addMonths` | Modifies the time component of an existing date.
 `asDateOnly` | Converts a Java `LocalDate` to a Skyve `DateOnly`.
+`getFinancialYear`, `getFinancialYearString` | Returns the Financial Year in which the given date exists (where financial year begins July 1).
+`min`, `max` | Returns the earliest or latest date from a collection of dates
 `numberOfDaysBetween` | Returns the number of days between two dates.
 `withDate` | Creates a new `DateOnly` with the specified day, month, year.
+
+Working with time is as follows: 
+
+```java
+import org.skyve.util.Time;
+
+  // create a new date a week from today
+  Time.addDaysToNew(new DateOnly(), 7);
+```
 
 **[⬆ back to top](#utility-classes)**
 
