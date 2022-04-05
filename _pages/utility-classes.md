@@ -16,47 +16,48 @@ Skyve provides the following utility classes:
 	<th>Description</th>
 </thead>
 <tbody>
-<tr>
-	<td>BeanValidator</td>
-	<td>Various methods for validation
-		<ul>
-			<li><code>validateBeanAgainstBizlet()</code> - Validate a bean against its bizlet .validate() - NB This validation method does NOT recursively validate using bizlets through the base document hierarchy as the bizlet class should be arranged in such a way as to extend the bizlet methods required of the base bizlet classes through the standard java extension mechanism.</li>
-			<li><code>validateBeanAgainstDocument()</code> - Validate a document instance against its metadata.</li>
-			<li><code>validateBeanPropertyAgainstAttribute()</code> - Validate a document attribute against its metadata</li>
-		</ul>
-	</td>
-</tr>
-<tr>
-	<td>Binder</td>
-	<td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li><code>formatMessage()</code> for using binding substitutions in string outputs using the correct converter</li><li><code>convertAndSet()</code> for setting a converted string value using the correct converter</li><li><code>createCompoundBinding()</code> for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul></td>
-</tr>
-<tr>
-	<td>CORE</td>
-	<td>Utility class for the core Skyve API.</td>
-</tr>
-<tr>
-	<td>DocumentQuery</td>
-	<td>Provides methods for constructing object queries without resorting to constructing OQL or SQL strings.</td>
-</tr>
-<tr>
-	<td>Ext</td>
-	<td>External and extra dependency APIs (Bizport and POI, mail, reporting, jobs and developer access to the Skyve tagging feature).</td>
-</tr>
-<tr>
-	<td>ModulesUtil</td>
-	<td>Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li><code>getNextDocumentNumber()</code> to create unique formatted serial document identifiers, </li><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li><code>currentAdminUser()</code> which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul></td>
-</tr>
-<tr>
-	<td>Persistence</td>
-	<td>Provides access to interact directly with the singleton persistence mechanism (detailed below).</td>
-</tr>
-<tr>
-  <td>Time</td>
-  <td>Helper class to work with Skyve Date and Time classes.
-<tr>
-	<td>Util</td>
-	<td>Bean-level generic utilities, including generic bean methods e.g. <code>cloneToTransientBySerialisation()</code>.</td>
-</tr>
+  <tr>
+    <td>BeanValidator</td>
+    <td>Various methods for validation
+      <ul>
+        <li><code>validateBeanAgainstBizlet()</code> - Validate a bean against its bizlet .validate() - NB This validation method does NOT recursively validate using bizlets through the base document hierarchy as the bizlet class should be arranged in such a way as to extend the bizlet methods required of the base bizlet classes through the standard java extension mechanism.</li>
+        <li><code>validateBeanAgainstDocument()</code> - Validate a document instance against its metadata.</li>
+        <li><code>validateBeanPropertyAgainstAttribute()</code> - Validate a document attribute against its metadata</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>Binder</td>
+    <td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li><code>formatMessage()</code> for using binding substitutions in string outputs using the correct converter</li><li><code>convertAndSet()</code> for setting a converted string value using the correct converter</li><li><code>createCompoundBinding()</code> for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul></td>
+  </tr>
+  <tr>
+    <td>CORE</td>
+    <td>Utility class for the core Skyve API.</td>
+  </tr>
+  <tr>
+    <td>DocumentQuery</td>
+    <td>Provides methods for constructing object queries without resorting to constructing OQL or SQL strings.</td>
+  </tr>
+  <tr>
+    <td>EXT</td>
+    <td>External and extra dependency APIs (Bizport and POI, mail, reporting, jobs and developer access to the Skyve tagging feature).</td>
+  </tr>
+  <tr>
+    <td>ModulesUtil</td>
+    <td>Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li><code>getNextDocumentNumber()</code> to create unique formatted serial document identifiers, </li><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li><code>currentAdminUser()</code> which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul></td>
+  </tr>
+  <tr>
+    <td>Persistence</td>
+    <td>Provides access to interact directly with the singleton persistence mechanism (detailed below).</td>
+  </tr>
+  <tr>
+    <td>Time</td>
+    <td>Helper class to work with Skyve Date and Time classes.</td>
+  </tr>
+  <tr>
+    <td>Util</td>
+    <td>Bean-level generic utilities, including generic bean methods e.g. <code>cloneToTransientBySerialisation()</code>.</td>
+  </tr>
 </tbody>
 </table>
 
