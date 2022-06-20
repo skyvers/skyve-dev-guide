@@ -44,7 +44,7 @@ Skyve provides the following utility classes:
   </tr>
   <tr>
     <td>ModulesUtil</td>
-    <td>Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li><code>getNextDocumentNumber()</code> to create unique formatted serial document identifiers, </li><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li><code>currentAdminUser()</code> which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul></td>
+    <td>Contains a number of business-focused methods and enumerations for cross-module functionality, including: <br><br><ul><li> methods for working with business periods (month, quarter, half-year etc.) and frequency, </li><li><code>currentAdminUser()</code> and <code>currentAdminUserProxy()</code> which identifies the current conversation user as an admin module user, </li><li> coalesce methods, and </li><li> basic Tax and loan calculation methods.</li></ul></td>
   </tr>
   <tr>
     <td>Persistence</td>
@@ -62,13 +62,13 @@ Skyve provides the following utility classes:
 </table>
 
 ## Document Number pattern
-The `nextDocumentNumber()` method is designed for business focused identifiers (e.g. Purchase order numbers, Quotation numbers, Invoice numbers etc) from a central issuing authority, and handles concurrent use by multiple users.
+The Skyve `NumberGenerator` pattern is designed for business focused identifiers (e.g. Purchase order numbers, Quotation numbers, Invoice numbers etc) from a central issuing authority, and handles concurrent use by multiple users.
 
 Skyve automatically maintains `bizId` as a guaranteed unique identifier which can be generated independently within the client (or from a disconnected device or 3rd party system if required), but this is for internal use only and is not intended to be used for business purposes.
 
-The `nextDocumentNumber()` is intended for indelible/auditable business processes, where numbers are never reassigned (even if the owning document might be deleted), and as such, would normally be assigned when the owning document is saved (rather than created). If the number is assigned when the document is created, if the user decides not to save the document, that number will have been allocated, but there will be no owning document.
+The `getNumberGenerator().next()` is intended for indelible/auditable business processes, where numbers are never reassigned (even if the owning document might be deleted), and as such, would normally be assigned when the owning document is saved (rather than created). If the number is assigned when the document is created, if the user decides not to save the document, that number will have been allocated, but there will be no owning document.
 
-The usual pattern for using `nextDocumentNumber()` is as follows:
+The usual pattern for using `next()` is as follows:
 
 First add either a `blurb` or disabled `textField` to the view, with visibility controlled by `persisted` (i.e. there is no number to show until the document is saved).
 
@@ -85,7 +85,7 @@ To assign the numbers during save, place the following code into the `preSave()`
 ```java
 if (bean.getPurchaseOrderNumber() == null) {
 	// get the next assistance id
-	bean.setPurchaseOrderNumber(ModulesUtil.getNextDocumentNumber(PurchaseOrder.MODULE_NAME, PurchaseOrder.DOCUMENT_NAME, PurchaseOrder.purchaseOrderPropertyName)));
+	bean.setPurchaseOrderNumber(CORE.getNumberGenerator().next(PurchaseOrder.MODULE_NAME, PurchaseOrder.DOCUMENT_NAME, PurchaseOrder.purchaseOrderPropertyName)));
 }
 ```
 
@@ -94,7 +94,7 @@ Or alternatively, if you want to have prefixed numbers like 'PO0001', use the al
 ```java
 if (bean.getPurchaseOrderNumber() == null) {
 	// get the next assistance id
-	bean.setPurchaseOrderNumber("PO",ModulesUtil.getNextDocumentNumber(PurchaseOrder.MODULE_NAME, PurchaseOrder.DOCUMENT_NAME, PurchaseOrder.purchaseOrderPropertyName, 4)));
+	bean.setPurchaseOrderNumber(CORE.getNumberGenerator().next("PO", PurchaseOrder.MODULE_NAME, PurchaseOrder.DOCUMENT_NAME, PurchaseOrder.purchaseOrderPropertyName, 4)));
 }
 ```
 
@@ -148,6 +148,7 @@ Method | Description/Usage
 -------|------------
 `getUser()` | returns the metadata user/user principal (as distinct from the current `modules.admin.domainUser`)
 `getCustomer()` | returns the current customer in for the current metadata user/user principal
+`getNumberGenerator()` | returns the Skyve sequence function to create unique formatted serial document identifiers
 `getPersistence()` | See Persistence below
 `getStash()` | returns a convenience Map for the current conversation available to the developer
 
@@ -281,7 +282,6 @@ DayOfWeek | days of the week
 
   Method(s)        | Description/Usage
   ---------------- | ------------------
-  `getNextDocumentNumber()`, `getNextLongDocumentNumber()` | thread-safe generation of unique numbers for documents
   `incrementAlpha()` | increment alphanumeric value
 
 ### bean and User
@@ -289,6 +289,7 @@ DayOfWeek | days of the week
   Method(s)        | Description/Usage
   ---------------- | ------------------
   `currentAdminUser()` | retrieve the modules.admin.domain.User from the user principal
+  `currentAdminUserProxy()` | retrieve the modules.admin.domain.User from the user principal without groups and roles
   `getCurrentUserContact()` | retrieve the contact details for the user principal
   `hasModule()` | determine whether a user has access to a specified module
   `lookupBean()` | shorthand way of finding a bean using a legacy key value
