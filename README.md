@@ -30,7 +30,7 @@ Skyve also provides sophisticated validation and a high-level API so that you ca
 
 At any time, branch out into "traditional" development without restriction, but will all the benefits of the API and integrated platform.
 
-Skyve supports spatial concepts natively with MySQL, SQL Server and H2 - Oracle and Postgres coming soon. Otherwise, pretty much anything supported by Hibernate should work (but we haven't tested them all!).
+Skyve supports spatial concepts natively with MySQL, Postgres, SQL Server and H2 - Oracle coming soon. Otherwise, pretty much anything supported by Hibernate should work (but we haven't tested them all!).
 
 For more details on the framework and its capabilities, please check out the platform homepage - [www.skyve.org](https://skyve.org/).
 
