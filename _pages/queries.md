@@ -8,13 +8,19 @@ sidebar:
   nav: docs
 ---
 
-One of the great things about Skyve is that Skyve's Persistence automatically manages your SQL datastore and automatically issues SQL to retrieve data for basic Create, Read, Update and Delete operations, according to the privileges and scoping declared in your module.xml, even where you have declared complex relationships with references across several documents.
+Retrieving data for your Skyve application can be done using queries declared in the module.xml, directly in a Skyve view and in code extensions.
 
-If a query name is not supplied, Skyve will generate a *default* query which will include all columns for all document attributes.
+Queries declared in modules and views use Skyve's Persistence management to issue SQL to retrieve data for basic Create, Read, Update and Delete operations, according to the privileges and scoping declared in your module.xml, even where you have declared complex relationships with references across several documents.
 
-However, in some cases it is useful to declare the query in the module so that it can be more tightly customised or parameterised for your application.
+For more control, developers can create creates using a range of approaches and languages using Skyve's [DocumentQuery](../utility-classes/#documentquery/) class. Developers can also extend Skyve's ListModel class to drive listGrids for more complex queries and other kinds of data sources. For more information on this see [List models](../lists/#list-models/).
 
-Queries are declared in the module to maximise re-use throughout the application.
+Queries can use expressions, values from the session and conversation stash, parameters and can be extended to maximise re-use throughout your Skyve project.
+
+## No-code queries
+
+When retrieving data for no-code views and lists, if a query name is not supplied, Skyve will generate a *default* query which will include all columns for all document attributes.
+
+However, in some cases it is useful to declare the query in the module so that it can be more tightly customised or parameterised for your application. Queries are declared in the module to maximise re-use throughout the application.
 
 As described in [Modules](../modules/), the `module.xml` file can include definitions of queries used in the application. Queries declared in the `module.xml` are called *metadata queries* to distinguish them from other queries which may exist as views on the database server or as unsecured SQL strings within developer code.
 
@@ -327,6 +333,53 @@ BizQL bizQL = CORE.getPersistence().newNamedBizQL(ContentAudit.MODULE_NAME, "biz
 bizQL.putParameter("instanceId", instanceId);
 bizQL.setMaxResults(1);
 ```
+
+Another alternative approach:
+
+```java
+BizQL bql = CORE.getPersistence().newBizQL("Select bean from {myModule.Customer} as bean "
+				+ "where bean.systemChampion = :loggedInUser or :loggedInUser MEMBER OF bean.relatedUsers");
+		bql.putParameter("loggedInUser", loggedInUser);
+
+		// q.getFilter().addOr(sysChampFilter).addOr(relUserFilter);
+
+		return bql.beanResult();	
+```
+
+### Using Session And Stash Values
+
+Developers can use values from the current Bean, Conversation Stash and Session to influence query behaviour.
+
+In this example, the project allows users to "change context" within the application with menu lists etc responding the context setting.
+
+To achieve this, elsewhere in the project, the developer has stored a value for the current _ContextProgramId_ in the session and wants to use this value to filter query results for various list in the menu.
+
+The value is originally set in the session as follows:
+
+```java
+CORE.getUser().getAttributes().put("ContextProgramId", <some bizId value>);
+```
+
+NOTE: When storing values in the user session, to reduce performance issues, storing id values rather than entire objects is recommended!
+
+Queries can then use this value for filtering, for example:
+
+```xml
+ <query documentName="Grant" name="qGrants">
+            <description><![CDATA[Grants]]></description>
+            <from>
+            	<![CDATA[{myModule.Grant} as bean]]>
+            </from>
+            <filter><![CDATA[bean.program.bizId = {ContextProgramId}]]></filter>
+            <columns>
+                <column binding="grantNumber" sortOrder="ascending"/>
+                <column binding="title"/>
+                ...
+            </columns>
+        </query>
+```
+
+
 
 ### Using SQL
 

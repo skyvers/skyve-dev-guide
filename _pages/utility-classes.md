@@ -8,6 +8,8 @@ sidebar:
   nav: docs
 ---
 
+# Utility Classes
+
 Skyve provides the following utility classes:
 
 <table>
@@ -188,6 +190,26 @@ someOtherObject = CORE.getPersistence().getUser().getAttributes().get("someKey")
 retrieve persisted beans in a type-safe and secure way, without building
 SQL or OQL Strings.
 
+Key benefits of the DocumentQuery approach are:
+1. to abstract the developer from implementation-specific SQL - so that applications can remain database independent, 
+2. to allow compile-time checks on query code, and
+3. to ensure a consistent security and performance via Skyve's Persistence singleton object.
+
+A trivial example of DocumentQuery is to retrieve typed beans using a simple filter:
+
+```java
+// retrieve a list of inactive users
+DocumentQuery q = CORE.getPersistence().newDocumentQuery(User.MODULE_NAME, User.DOCUMENT_NAME);
+q.getFilter().addEquals(User.inactivePropertyName, Boolean.TRUE);
+
+List<UserExtension> inactiveUsers = q.beanResults();
+for(UserExtension u : inactiveUsers) {
+  ...
+}
+```
+
+For more complex queries, developers can construct queries using a range of extended filter features:
+
 ```java
 // collect settlements between range, with area > 0
 // either from or to the current Grower
@@ -219,6 +241,12 @@ enforced by Skyve.
 The use of DocumentFilter allows for correct enforcement of types at
 compile-time to reduce the possibility of errors arising from implicit
 type conversion which may arise if SQL strings were used.
+
+However, where necessary, developers can take advantage of other querying options including:
+1. creating queries using SQL and BizQL (similar to HQL)
+2. re-using and manipulating no-code queries declared in the module.xml
+
+For more querying options, we recommend developers read [Using bizQL](../queries/#using-bizql) and [Using SQL](../queries/#using-sql) and review the other query examples provided in that chapter.
 
 ## EXT
 
