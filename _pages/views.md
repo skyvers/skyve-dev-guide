@@ -608,7 +608,7 @@ The _textField_ widget can be extended to provide suggestions to the user as the
 
 ![Using complete](../assets/images/views/complete1.png "Example text entry using complete")
 
-Here the textField widget provides the user with suggested completions based the the _value_ they have typed.
+Here the textField widget provides the user with suggested completions based on the _value_ they have typed.
 
 To achieve this, declare the _complete_ option in on the textField, and then override the _complete_ method in the bizlet.
 
@@ -616,7 +616,7 @@ To achieve this, declare the _complete_ option in on the textField, and then ove
 <textField binding="suburb" complete="suggest"/>
 ```
 
-In this example, the method uses the convenience method "ModulesUtil.getCompleteSuggestions()" however the developer can generate the list of suggestions by any other method.
+In this example, the method uses the convenience method "ModulesUtil.getCompleteSuggestions()" to generate a list of suggestions, however the developer can generate the list of suggestions using bespoke code for their situation.
 
 ```java
 @Override
