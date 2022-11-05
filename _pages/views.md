@@ -597,10 +597,47 @@ will be displayed in bold type if the attribute is required.
 		<tr><td>  staticImage </td><td> displays a static image </td><td>  <img src="../assets/images/views/image118.png" alt="staticImage"/></td><td>All</td></tr>
 		<tr><td>staticLink </td><td> hyperlink to a static URL<br/><br/>Properties:<ul><li>ref - the URL</li><li>value - the value displayed in the link, this defaults to the URL if not supplied.</li><li>newWindow - whether the target will be displayed in a new window</li></ul></td><td>  Not yet implemented.</td><td>Form</td></tr>
 		<tr><td>  textArea </td><td> basic data entry field for long text<br/><br/>textArea provides a <em>wrap</em> property to control whether the contained text is word wrapped. </td><td><img src="../assets/images/views/image119.png" alt="textArea"/></td><td>Form</td></tr>
-		<tr><td>  textField </td><td> provides basic data entry for text attributes <br/><br/> <code>textField</code> responds to the type of the bound attribute, and will display converter hint if the value is null.<br/><br/>For <code>date</code> and <code>dateTime</code> types, a calendar selector is displayed.</td><td> <img src="../assets/images/views/image120.png" alt="textField calendar"/> <br/> This example is a <code>textField</code> widget bound to a text type attribute. <br/> <img src="../assets/images/views/image121.png" alt="textField"/> <br/> This example is a <code>textField</code> widget bound to a time attribute using the <code>HH_MM</code> converter. <br/> <img src="../assets/images/views/image122.png" alt="textField time"/> <br/> This example is a <code>textField</code> widget bound to a <code>date</code> or <code>dateTime</code> attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.</td><td>Form</td></tr>	
+		<tr><td>  textField </td><td> provides basic data entry for text attributes <br/><br/> <code>textField</code> responds to the type of the bound attribute, and will display converter hint if the value is null.<br/><br/>For <code>date</code> and <code>dateTime</code> types, a calendar selector is displayed.<br/>Use the _complete_ for auto-complete and type-ahead on previous values or suggestions as the user types (see example below)</td><td> <img src="../assets/images/views/image120.png" alt="textField calendar"/> <br/> This example is a <code>textField</code> widget bound to a text type attribute. <br/> <img src="../assets/images/views/image121.png" alt="textField"/> <br/> This example is a <code>textField</code> widget bound to a time attribute using the <code>HH_MM</code> converter. <br/> <img src="../assets/images/views/image122.png" alt="textField time"/> <br/> This example is a <code>textField</code> widget bound to a <code>date</code> or <code>dateTime</code> attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.</td><td>Form</td></tr>	
 		<tr><td>treeGrid</td><td>display and navigate hierarchical structures</td><td><img src="../assets/images/views/treeGrid.png" alt="treeGrid"/></td><td>Non-form</td></tr>
 		</tbody>
 </table>
+
+### Type-ahead and Auto-completion Using _complete_
+
+The _textField_ widget can be extended to provide suggestions to the user as they type via the _complete_ setting.
+
+![Using complete](../assets/images/views/complete1.png "Example text entry using complete")
+
+Here the textField widget provides the user with suggested completions based the the _value_ they have typed.
+
+To achieve this, declare the _complete_ option in on the textField, and then override the _complete_ method in the bizlet.
+
+```xml
+<textField binding="suburb" complete="suggest"/>
+```
+
+In this example, the method uses the convenience method "ModulesUtil.getCompleteSuggestions()" however the developer can generate the list of suggestions by any other method.
+
+```java
+@Override
+public List<String> complete(String attributeName, String value, ControlPanelExtension bean) throws Exception {
+	
+	if(ControlPanel.testTagNamePropertyName.equals(attributeName)) {
+		return ModulesUtil.getCompleteSuggestions(Tag.MODULE_NAME, Tag.DOCUMENT_NAME, Tag.namePropertyName,value);
+	}
+	return super.complete(attributeName, value, bean);
+}
+```
+
+The complete() method parameters are:
+1. attributeName - the binding name of the textField widget
+2. value - the value entered by the user
+3. bean - the bean which is being edited by the user
+
+There are three options for _complete_ :
+1. previous - automatically provide a list of distinct previous values for the same binding (e.g. "suburb") but still allow the user to enter new values not previously used. Previous is a special no-code case (the bizlet "complete()" method is not required to be overridden for this option).
+2. suggest - provide a list of suggested values from some other list provided by the developer but still allow the user to enter new values not in the suggested list.
+3. constrain - provide a list of suggested values from some other list provided by the developer and constrain data entry only to those values.
 
 ### Change event action (client-side events)
 
