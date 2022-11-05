@@ -616,7 +616,7 @@ To achieve this, declare the _complete_ option in on the textField, and then ove
 <textField binding="suburb" complete="suggest"/>
 ```
 
-In this example, the method uses the convenience method "ModulesUtil.getCompleteSuggestions()" to generate a list of suggestions, however the developer can generate the list of suggestions using bespoke code for their situation.
+In this example, the method uses the convenience method _ModulesUtil.getCompleteSuggestions()_ to generate a list of suggestions, however the developer can generate the list of suggestions using bespoke code for their situation.
 
 ```java
 @Override
