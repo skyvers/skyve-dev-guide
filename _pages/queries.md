@@ -12,7 +12,7 @@ Retrieving data for your Skyve application can be done using queries declared in
 
 Queries declared in modules and views use Skyve's Persistence management to issue SQL to retrieve data for basic Create, Read, Update and Delete operations, according to the privileges and scoping declared in your module.xml, even where you have declared complex relationships with references across several documents.
 
-For more control, developers can create creates using a range of approaches and languages using Skyve's [DocumentQuery](../utility-classes/#documentquery/) class. Developers can also extend Skyve's ListModel class to drive listGrids for more complex queries and other kinds of data sources. For more information on this see [List models](../lists/#list-models/).
+For more control, developers can create creates using a range of approaches and languages using Skyve's [DocumentQuery](../utility-classes/#documentquery) class. Developers can also extend Skyve's ListModel class to drive listGrids for more complex queries and other kinds of data sources. For more information on this see [List models](../lists/#list-models).
 
 Queries can use expressions, values from the session and conversation stash, parameters and can be extended to maximise re-use throughout your Skyve project.
 
