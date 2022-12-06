@@ -556,50 +556,278 @@ will be displayed in bold type if the attribute is required.
 		<td>Widget</td><td>Description</td><td>Example</td><td>Allowed containers</td>
 	</thead>
 	<tbody>
-		<tr><td>  blurb              </td><td> displays the contained markup inside a <code>div</code> with binding substitutions<br/>Unlike other widgets, the blurb is not required to be contained within a <code>form</code> container </td><td> <img src="../assets/images/views/blurb-binding-substitution.png" alt="blurb"/>
-</td><td>All</td></tr>
-		<tr><td>  button             </td><td> can be placed within the view when the <em>inActionPanel</em> flag for an Action is set to <code>false</code><br/><br/>If the Action is declared to be in the Action Panel, then no button widget is required to be declared.</td><td> <img src="../assets/images/views/image99.png" alt="button"/>
-		</td><td>All</td></tr>
-		<tr><td>checkBox           </td><td> Tri-state check box (null/true/false)  - for a two-state checkBox set the property `triState="false"`</td><td> <img src="../assets/images/views/image100.png" alt="checkBox"/></td><td>Form</td></tr>
-		<tr><td>checkMembership </td><td>Providing for checkbox multiselection</td><td></td><td>Non-form</td></tr>
-		<tr><td>colourPicker       </td><td> displays a text box containing the colour code value together with a sample square of the colour<br/><br/>Clicking on the sample square activates a colour selector popup. </td><td> <img src="../assets/images/views/image101.png" alt="colourPicker"/> In this example, the colour button at the RHS will open a colour selector as shown below:<br/> <img src="../assets/images/views/image102.png" alt="colourPicker"/></td><td>Form</td></tr>
-		<tr><td>  combo              </td><td> drop-down selector for enumerations or where a domain type is specified for the document attribute </td><td> <img src="../assets/images/views/image103.png" alt="combo"/>
-		</td><td>Form</td></tr>
-		<tr><td>comparison</td><td>displays the differences between two beans instances and the ability for the users to apply differences between the instances (for an example, see the *Audits* function in the Skyve admin module </td><td><img src="../assets/images/views/comparison.png" alt="comparison"/></td><td>Non-form</td></tr>
-		<tr><td>component</td><td>a component declares the inclusion of other view declarations, or sections of view declarations, allowing re-use of view declaration</td><td></td><td>Non-form</td></tr>
-		<tr><td>  contentImage       </td><td> displays the loaded image along with an upload action </td><td> <img src="../assets/images/views/image104.png" alt="contentImage"/>
-		</td><td>Form</td></tr>
-		<tr><td>contentLink        </td><td> displays a hyperlink to open the content in a new browers window together with an upload action </td><td> <img src="../assets/images/views/image105.png" alt="contentLink"/></td><td>Form</td></tr>
-		<tr><td>dataGrid</td><td></td><td></td><td>Non-form</td></tr>
-		<tr><td>dataGridRepeater</td><td></td><td></td><td>Non-form</td></tr>
-		<tr><td>default            </td><td> If used in a view, this will render whatever the default widget is.<br/><br/>Either the <em>defaultWidget</em> declared on the document attribute or the Skyve default control for the attribute type.</td><td></td>
-		</td><td>Form</td></tr>
-		<tr><td>dialogButton       </td><td> Not yet implemented.</td><td></td><td>All</td></tr>		
-		<tr><td>geoLocator         </td><td> Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. <br/> <br/>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br/> <br/>The Geolocator Widget has multiple bindings which interact with the map:<ul><li>addressBinding</li><li>cityBinding</li><li>stateBinding</li><li>postcodeBinding</li><li>countryBinding</li><li>latitudeBinding</li><li>longitudeBinding</li></ul> </td><td> When the Map button is clicked, the geolocator (shown) will be displayed in a modal window. <img src="../assets/images/views/image107.png" alt="geoLocator"/></td><td>All</td></tr>
-		<tr><td>geometry	         </td><td> displays a Well Known Text (WKT) representation of the geometry, with a map-based selection tool</td><td></td><td>Form</td></tr>
-		<tr><td>html </td><td> displays HTML content together with an Edit button (only available for SmartClient renderer) <br/><br/> When the edit button is clicked, a popup HTML editor window is displayed allowing users to create rich HTML. </td><td> <img src="../assets/images/views/imageHTML_SC.png" alt="html"/></td><td>Form</td></tr>
-		<tr><td>inject </td><td> allows the inclusion of javascript snippets within the view </td><td> <img src="../assets/images/views/inject.png" alt="inject"/></td><td>Non-form</td></tr>
-		<tr><td>label </td><td> Simple text. </td><td> <img src="../assets/images/views/image109.png" alt="label"/></td><td>All</td></tr>
-		<tr><td>link </td><td> provides a <code>link</code> style approach to Skyve platform features (partially implemented)<br/>options include <ul><li>actionReference - perform an action</li><li>contentReference - access a content item</li><li>defaultListViewReference - open a default list view</li><li>editViewReference - open an edit view for a binding</li><li>externalReference - a link to an external resource</li><li>implicitActionReference - perform a Skyve implicit action</li><li>queryListViewReference - open a list view based on a query</li><li>reportReference - perform a report action (view a report)</li><li>resourceReference - view a Skyve resource</li></ul> </td><td> <img src="../assets/images/views/link.png" alt="link"/></td><td>All</td></tr>
-		<tr><td>listGrid</td><td>list grid component included in a view - the listGrid provides the same functionality as menu lists within the context of a custom view for the management of unrelated  or informally-related bean instances</td><td><img src="../assets/images/views/listGrid.png" alt="listGrid"/></td><td>Non-form</td></tr>
-		<tr><td>listMembership</td><td>list-based multi-selection tool</td><td><img src="../assets/images/views/listMembership.png" alt="listMembership"/></td><td>Non-form</td></tr>
-		<tr><td>listRepeater</td><td>basic scrollable list for display</td><td><img src="../assets/images/views/listRepeater.png" alt="listRepeater"/></td><td>Non-form</td></tr>
-		<tr><td>lookup </td><td> Deprecated. </td><td> </td><td>Form</td></tr>
-		<tr><td>lookupDescription </td><td> <code>lookupDescription</code> is used to display an association to another document, and combines a combo with a pick button. <br/><br/> Users may select a value from the combo, or type values into the text box which will locate a matching value in the combo drop-down list if found. <br/><br/> When the pick button is pressed, a Pick window containing a listGrid is displayed, showing eligible values as declared in the document association. <br/><br/> Whereas normally double-clicking in a grid will zoom into the row, double-clicking in a Pick grid will select that value, close the popup and set the value of the <code>lookupDescription</code> combo next to the Pick button. <br/><br/> The down-arrow button reveals options to Edit (i.e. Zoom), New or Clear the reference. <br/> More features of the <code>lookupDescription</code> are explained in the next section. </td><td> <img src="../assets/images/views/image110.png" alt="lookupDescription"/> <br/> In this example the <code>bizKey</code> of the currently associated document instance is displayed in the control. To use another attribute change the lookupDescription's <code>descriptionBinding</code> attribute. <br/> If the Pick button is clicked, a listGrid of eligible document instances is shown in a modal window. <br/> <img src="../assets/images/views/image111.png" alt="pick"/> <br/> The down-arrow selector button will display options for Edit (edit the referenced document on-the-fly), New (create a new potential reference on-the-fly) and Clear (clear the reference). <br/> <img src="../assets/images/views/image112.png" alt="lookupDescription actions"/></td><td>Form</td></tr>
-		<tr><td>map</td><td></td><td></td><td>Non-form</td></tr>
-		<tr><td>password </td><td> a textField which obfuscates the entered value </td><td> <img src="../assets/images/views/image113.png" alt="password"/></td><td>Form</td></tr>
-		<tr><td>progressBar </td><td> Not yet implemented.</td><td></td><td>Non-form</td></tr>
-		<tr><td>  radio </td><td> radio selector for enumerations or for document attributes where a domain type is specified <br/> <br/> Radios may be laid out vertically or horizontally, using the property <em>vertical</em>. <br/> Vertical arrangement is the default arrangement for radio selectors when no arrangement is specified. <br/><br/>Radios can also be used for boolean attributes. To do this, declare a constant domain for the attribute, and override the `getConstantDomainValues` Bizlet method to return two domain values<ul><li>`new DomainValue(Boolean.TRUE.toString(), "Yes");`</li><li>`new DomainValue(Boolean.FALSE.toString(), "No");`</li></ul></td><td> <img src="../assets/images/views/image114.png" alt="radio"/> </td><td>Form</td></tr>
-		<tr><td>richText </td><td> provides a rich text area together with formatting toolbar </td><td> <img src="../assets/images/views/image115.png" alt="richText"/></td><td>Form</td></tr>
-		<tr><td>slider </td><td> Numeric slider. <br/><br/> Properties include: <br/> <ul><li> min </li><li> max </li><li> numberOfDiscreteValues </li><li> roundingPrecision </li></ul><br/> May be displayed vertically when <em>vertical</em> is set to <code>true</code>. </td><td> <img src="../assets/images/views/image116.png" alt="slider"/></td><td>Form</td></tr>
-		<tr><td>spacer </td><td> a widget provided to fill a column when no other widget is required <br/><br/> Items within rows always fill from the leftmost available column. The spacer widget is provided to allow items to fill from other than the leftmost column.</td><td> The spacer widget displays nothing.</td><td>All</td></tr>
-		<tr><td>spinner </td><td> numeric spinner allowing users to either type or select a value using the arrows <br/><br/>Properties include:<ul><li>min</li><li>max</li><li>step - the amount to increment/decrement for each arrow button press</li></ul> </td><td> <img src="../assets/images/views/image117.png" alt="spinner"/></td><td>Form</td></tr>
-		<tr><td>  staticImage </td><td> displays a static image </td><td>  <img src="../assets/images/views/image118.png" alt="staticImage"/></td><td>All</td></tr>
-		<tr><td>staticLink </td><td> hyperlink to a static URL<br/><br/>Properties:<ul><li>ref - the URL</li><li>value - the value displayed in the link, this defaults to the URL if not supplied.</li><li>newWindow - whether the target will be displayed in a new window</li></ul></td><td>  Not yet implemented.</td><td>Form</td></tr>
-		<tr><td>  textArea </td><td> basic data entry field for long text<br/><br/>textArea provides a <em>wrap</em> property to control whether the contained text is word wrapped. </td><td><img src="../assets/images/views/image119.png" alt="textArea"/></td><td>Form</td></tr>
-		<tr><td>  textField </td><td> provides basic data entry for text attributes <br/><br/> <code>textField</code> responds to the type of the bound attribute, and will display converter hint if the value is null.<br/><br/>For <code>date</code> and <code>dateTime</code> types, a calendar selector is displayed.</td><td> <img src="../assets/images/views/image120.png" alt="textField calendar"/> <br/> This example is a <code>textField</code> widget bound to a text type attribute. <br/> <img src="../assets/images/views/image121.png" alt="textField"/> <br/> This example is a <code>textField</code> widget bound to a time attribute using the <code>HH_MM</code> converter. <br/> <img src="../assets/images/views/image122.png" alt="textField time"/> <br/> This example is a <code>textField</code> widget bound to a <code>date</code> or <code>dateTime</code> attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.</td><td>Form</td></tr>	
-		<tr><td>treeGrid</td><td>display and navigate hierarchical structures</td><td><img src="../assets/images/views/treeGrid.png" alt="treeGrid"/></td><td>Non-form</td></tr>
-		</tbody>
+		<tr>
+			<td> blurb</td>
+			<td>Displays the contained markup inside a <code>div</code> with binding substitutions<br/>Unlike other widgets, the blurb is not required to be contained within a <code>form</code> container</td>
+			<td><img src="../assets/images/views/blurb-binding-substitution.png" alt="blurb"/></td>
+			<td>All</td>
+		</tr>
+		<tr>
+			<td>button</td>
+			<td>Can be placed within the view when the <em>inActionPanel</em> flag for an Action is set to <code>false</code><br/><br/>If the Action is declared to be in the Action Panel, then no button widget is required to be declared.</td>
+			<td><img src="../assets/images/views/image99.png" alt="button"/></td>
+			<td>All</td>
+		</tr>
+		<tr>
+			<td>checkBox</td>
+			<td>Tri-state check box (null/true/false)  - for a two-state checkBox set the property `triState="false"`</td>
+			<td><img src="../assets/images/views/image100.png" alt="checkBox"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>checkMembership </td><td>Providing for checkbox multiselection</td><td></td><td>Non-form</td></tr>
+		<tr>
+			<td>colourPicker</td>
+			<td>Displays a text box containing the colour code value together with a sample square of the colour<br/><br/>Clicking on the sample square activates a colour selector popup.</td>
+			<td><img src="../assets/images/views/image101.png" alt="colourPicker"/> In this example, the colour button at the RHS will open a colour selector as shown below:<br/> <img src="../assets/images/views/image102.png" alt="colourPicker"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>combo</td>
+			<td>Drop-down selector for enumerations or where a domain type is specified for the document attribute</td>
+			<td><img src="../assets/images/views/image103.png" alt="combo"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>comparison</td>
+			<td>Displays the differences between two beans instances and the ability for the users to apply differences between the instances (for an example, see the <em>Audits</em> function in the Skyve admin module</td>
+			<td><img src="../assets/images/views/comparison.png" alt="comparison"/></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>component</td>
+			<td>A component declares the inclusion of other view declarations, or sections of view declarations, allowing re-use of view declaration</td>
+			<td></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>contentImage</td>
+			<td>Displays the loaded image along with an upload action</td>
+			<td><img src="../assets/images/views/image104.png" alt="contentImage"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>contentLink</td>
+			<td>Displays a hyperlink to open the content in a new browers window together with an upload action</td>
+			<td><img src="../assets/images/views/image105.png" alt="contentLink"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>dataGrid</td>
+			<td>Provides a grid/table for displaying tabular data a view, e.g. from a collection associated to the current document.</td>
+			<td></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>dataRepeater</td>
+			<td>Same as <code>dataGrid</code>, but the borders and headings are not displayed. Useful when combing with <code>markup</code> attributes in the collection for specific display formatting.</td>
+			<td></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>default</td>
+			<td>If used in a view, this will render whatever the default widget is.<br/><br/>Either the <em>defaultWidget</em> declared on the document attribute or the Skyve default control for the attribute type.</td>
+			<td></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>dialogButton</td>
+			<td>Not yet implemented.</td>
+			<td></td>
+			<td>All</td>
+		</tr>		
+		<tr>
+			<td>geoLocator</td>
+			<td>Geolocator will render a Map button, when pressed, a Geolocation window will appear with a pointer to the address or position bound to the Geolocator widget. <br/> <br/>A new address or location can be selected within the Geolocator Map if the Geolocator is not disabled.<br/> <br/>The Geolocator Widget has multiple bindings which interact with the map:
+				<ul>
+					<li>addressBinding</li>
+					<li>cityBinding</li>
+					<li>stateBinding</li>
+					<li>postcodeBinding</li>
+					<li>countryBinding</li>
+					<li>latitudeBinding</li>
+					<li>longitudeBinding</li>
+				</ul>
+			</td>
+			<td>When the Map button is clicked, the geolocator (shown) will be displayed in a modal window. <img src="../assets/images/views/image107.png" alt="geoLocator"/></td>
+			<td>All</td>
+		</tr>
+		<tr>
+			<td>geometry</td>
+			<td>Displays a Well Known Text (WKT) representation of the geometry, with a map-based selection tool</td>
+			<td></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>html</td>
+			<td>Displays HTML content together with an Edit button (only available for SmartClient renderer) <br/><br/> When the edit button is clicked, a popup HTML editor window is displayed allowing users to create rich HTML. </td>
+			<td><img src="../assets/images/views/imageHTML_SC.png" alt="html"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>inject</td>
+			<td>Allows the inclusion of javascript snippets within the view</td>
+			<td><img src="../assets/images/views/inject.png" alt="inject"/></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>label</td>
+			<td>Simple text.</td>
+			<td><img src="../assets/images/views/image109.png" alt="label"/></td>
+			<td>All</td>
+		</tr>
+		<tr>
+			<td>link</td>
+			<td>Provides a <code>link</code> style approach to Skyve platform features (partially implemented)<br/>options include:
+				<ul>
+					<li>actionReference - perform an action</li>
+					<li>contentReference - access a content item</li>
+					<li>defaultListViewReference - open a default list view</li>
+					<li>editViewReference - open an edit view for a binding</li>
+					<li>externalReference - a link to an external resource</li>
+					<li>implicitActionReference - perform a Skyve implicit action</li>
+					<li>queryListViewReference - open a list view based on a query</li>
+					<li>reportReference - perform a report action (view a report)</li>
+					<li>resourceReference - view a Skyve resource</li>
+				</ul>
+			</td>
+			<td><img src="../assets/images/views/link.png" alt="link"/></td>
+			<td>All</td>
+		</tr>
+		<tr>
+			<td>listGrid</td>
+			<td>List grid component included in a view - the listGrid provides the same functionality as menu lists within the context of a custom view for the management of unrelated or informally-related bean instances</td>
+			<td><img src="../assets/images/views/listGrid.png" alt="listGrid"/></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>listMembership</td>
+			<td>List-based multi-selection tool</td>
+			<td><img src="../assets/images/views/listMembership.png" alt="listMembership"/></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>listRepeater</td>
+			<td>Same as <code>listGrid</code>, but the borders and headings are not displayed. Useful when combing with <code>markup</code> attributes in the list for specific display formatting.</td>
+			<td><img src="../assets/images/views/listRepeater.png" alt="listRepeater"/></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>lookup</td>
+			<td>Deprecated.</td>
+			<td></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>lookupDescription</td>
+			<td><code>lookupDescription</code> is used to display an association to another document, and combines a combo with a pick button. <br/><br/> Users may select a value from the combo, or type values into the text box which will locate a matching value in the combo drop-down list if found. <br/><br/> When the pick button is pressed, a Pick window containing a listGrid is displayed, showing eligible values as declared in the document association. <br/><br/> Whereas normally double-clicking in a grid will zoom into the row, double-clicking in a Pick grid will select that value, close the popup and set the value of the <code>lookupDescription</code> combo next to the Pick button. <br/><br/> The down-arrow button reveals options to Edit (i.e. Zoom), New or Clear the reference. <br/> More features of the <code>lookupDescription</code> are explained in the next section.</td>
+			<td><img src="../assets/images/views/image110.png" alt="lookupDescription"/> <br/>
+			In this example the <code>bizKey</code> of the currently associated document instance is displayed in the control. To use another attribute change the lookupDescription's <code>descriptionBinding</code> attribute. <br/> If the Pick button is clicked, a listGrid of eligible document instances is shown in a modal window. <br/> <img src="../assets/images/views/image111.png" alt="pick"/> <br/> The down-arrow selector button will display options for Edit (edit the referenced document on-the-fly), New (create a new potential reference on-the-fly) and Clear (clear the reference). <br/> <img src="../assets/images/views/image112.png" alt="lookupDescription actions"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>map</td>
+			<td>Displays a map centred on the <code>geometry</code> attribute specified in the map's binding. Map controls allow the geometry to be set/updated, which may be a point or a polygon.</td>
+			<td></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>password</td>
+			<td>A textField which obfuscates the entered value</td>
+			<td><img src="../assets/images/views/image113.png" alt="password"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>progressBar</td>
+			<td>Not yet implemented.</td>
+			<td></td>
+			<td>Non-form</td>
+		</tr>
+		<tr>
+			<td>radio</td>
+			<td> radio selector for enumerations or for document attributes where a domain type is specified <br/> <br/> Radios may be laid out vertically or horizontally, using the property <em>vertical</em>. <br/> Vertical arrangement is the default arrangement for radio selectors when no arrangement is specified. <br/><br/>Radios can also be used for boolean attributes. To do this, declare a constant domain for the attribute, and override the `getConstantDomainValues` Bizlet method to return two domain values
+				<ul>
+					<li><code>new DomainValue(Boolean.TRUE.toString(), "Yes");</code></li>
+					<li><code>new DomainValue(Boolean.FALSE.toString(), "No");</code></li>
+				</ul>
+			</td>
+			<td><img src="../assets/images/views/image114.png" alt="radio"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>richText </td>
+			<td>Provides a rich text area together with formatting toolbar.</td>
+			<td> <img src="../assets/images/views/image115.png" alt="richText"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>slider</td>
+			<td>Numeric slider.<br/><br/>Properties include:
+				<ul>
+					<li>min</li>
+					<li>max</li>
+					<li>numberOfDiscreteValues</li>
+					<li>roundingPrecision</li>
+				</ul>
+				<br/> May be displayed vertically when <em>vertical</em> is set to <code>true</code>.</td>
+			<td><img src="../assets/images/views/image116.png" alt="slider"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>spacer</td>
+			<td>A widget provided to fill a column when no other widget is required.<br/><br/>Items within rows always fill from the leftmost available column. The spacer widget is provided to allow items to fill from other than the leftmost column.</td>
+			<td>The spacer widget displays nothing.</td>
+			<td>All</td>
+		</tr>
+		<tr>
+			<td>spinner</td>
+			<td>Numeric spinner allowing users to either type or select a value using the arrows <br/><br/>Properties include:
+				<ul>
+					<li>min</li>
+					<li>max</li>
+					<li>step - the amount to increment/decrement for each arrow button press</li>
+				</ul>
+			</td>
+			<td><img src="../assets/images/views/image117.png" alt="spinner"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>staticImage</td>
+			<td>Displays a static image.</td>
+			<td><img src="../assets/images/views/image118.png" alt="staticImage"/></td>
+			<td>All</td>
+		</tr>
+		<tr>
+			<td>staticLink</td>
+			<td>Hyperlink to a static URL.<br/><br/>Properties:
+				<ul>
+					<li>ref - the URL</li>
+					<li>value - the value displayed in the link, this defaults to the URL if not supplied.</li>
+					<li>newWindow - whether the target will be displayed in a new window</li>
+				</ul>
+			</td>
+			<td>Not yet implemented.</td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>textArea</td>
+			<td>Basic data entry field for long text,<br/><br/>textArea provides a <em>wrap</em> property to control whether the contained text is word wrapped.</td>
+			<td><img src="../assets/images/views/image119.png" alt="textArea"/></td>
+			<td>Form</td>
+		</tr>
+		<tr>
+			<td>textField</td>
+			<td>Provides basic data entry for text attributes <br/><br/> <code>textField</code> responds to the type of the bound attribute, and will display converter hint if the value is null.<br/><br/>For <code>date</code> and <code>dateTime</code> types, a calendar selector is displayed.</td>
+			<td><img src="../assets/images/views/image120.png" alt="textField calendar"/> <br/> This example is a <code>textField</code> widget bound to a text type attribute. <br/> <img src="../assets/images/views/image121.png" alt="textField"/> <br/> This example is a <code>textField</code> widget bound to a time attribute using the <code>HH_MM</code> converter. <br/> <img src="../assets/images/views/image122.png" alt="textField time"/> <br/> This example is a <code>textField</code> widget bound to a <code>date</code> or <code>dateTime</code> attribute. The calendar tool on the right will either include time or not depending on which of these types the attribute is.</td>
+			<td>Form</td>
+		</tr>	
+		<tr>
+			<td>treeGrid</td>
+			<td>Display and navigate hierarchical structures</td>
+			<td><img src="../assets/images/views/treeGrid.png" alt="treeGrid"/></td>
+			<td>Non-form</td>
+		</tr>
+	</tbody>
 </table>
 
 ### Change event action (client-side events)
