@@ -8,6 +8,8 @@ sidebar:
   nav: docs
 ---
 
+# Exception Handling
+
 Skyve provides powerful error management capabilities extending general
 Java Exception handling.
 
@@ -146,6 +148,8 @@ throws Exception {
 
 _The BeanValidator utility class provides access to the native
 Validation capability_
+
+For more information on the BeanValidator - see [Utility Classes](https://skyvers.github.io/skyve-dev-guide/utility-classes/)
 
 **[⬆ back to top](#exception-handling)**
 
