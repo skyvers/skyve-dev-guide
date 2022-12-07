@@ -22,8 +22,10 @@ If you're new to Java, you may find the instructions in our tutorial easier to f
 Before you begin, ensure you have the following:
 
 * Java 11 JDK - [OpenJDK](http://jdk.java.net/java-se-ri/11) (or an alternative OpenJDK of your choice)
-* Eclipse IDE for Java EE developers ([www.eclipse.org](https://www.eclipse.org/downloads/)) - NOTE: do not use the Eclipse EE9 preview, you will need the Jakarta EE Full & Web Distribution 
-* Wildfly 22+ (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
+* Eclipse IDE for Enterprise Java and Web Developers ([www.eclipse.org](https://www.eclipse.org/downloads/packages/))
+    * Note: Do not use the Eclipse IDE for Java Developers
+* Wildfly 20+ (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
+    * Note: Jakarta EE 8 Full & Web Distribution not the EE 9.1 Distribution
   
 We also recommend you:
 * load an RDBMS like MySQL, Postgres or MS SQL that is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
