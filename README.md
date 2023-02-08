@@ -286,24 +286,35 @@ which are either distributed with the platform, required to be present
 for operation or deployment, or recommended.
 
 These include
-- Java™ EE - [Java Platform, Enterprise Edition (Java EE)](https://www.oracle.com/technetwork/java/javaee/overview/index.html)
-- Hibernate™ [Object Relational Mapping framework](http://www.hibernate.org)
+- Java&#8482; EE - [Java Platform, Enterprise Edition (Java EE)](https://www.oracle.com/technetwork/java/javaee/overview/index.html)
+- Hibernate&#8482; [Object Relational Mapping framework](http://www.hibernate.org)
 - Spring - [Spring Framework](https://spring.io/)
 - SmartClient - [SmartClient Ajax Framework](http://www.smartclient.com/)
 - PrimeFaces - [PrimeFaces](https://www.primefaces.org/)
 - React - [React javascript library](https://reactjs.org/)
-- Elastic™ - [Elastic content repository](https://www.elastic.co/)
-- JasperReports™ - [JasperReports library](http://www.jaspersoft.com/jasperreports)
-- Apache™ Lucene - [Lucene textual indexing engine](http://lucene.apache.org/)
+- Elastic&#8482; - [Elastic content repository](https://www.elastic.co/)
+- JasperReports&#8482; - [JasperReports library](http://www.jaspersoft.com/jasperreports)
+- Apache&#8482; Lucene - [Lucene textual indexing engine](http://lucene.apache.org/)
 - iText - [iText PDF Generation](https://itextpdf.com/)
-- PDFBox™ - [Apache PDFBox library](https://pdfbox.apache.org/)
-- Apache™ POI - [Java API for Microsoft Documents](https://poi.apache.org/)
-- JBoss™ Wildfly - [Wildfly Application Server](http://www.jboss.org/)
-- Eclipse™ - [Eclipse Integrated Development Environment](http://www.eclipse.org/)
+- PDFBox&#8482; - [Apache PDFBox library](https://pdfbox.apache.org/)
+- Apache&#8482; POI - [Java API for Microsoft Documents](https://poi.apache.org/)
+- JBoss&#8482; Wildfly - [Wildfly Application Server](http://www.jboss.org/)
+- Eclipse&#8482; - [Eclipse Integrated Development Environment](http://www.eclipse.org/)
 
 For the current complete list see the [skyve-ee pom.xml](https://github.com/skyvers/skyve/blob/master/skyve-ee/pom.xml)
 
 Because Skyve is open-source, developers are at liberty to create customised versions of the platform to integrate deeply with other 3rd party packages or custom architectural elements.
+
+### The Skyve jars
+
+While Skyve takes advantage of > 80 other libraries and open-source project, the key value of Skyve is contained in how these are integrated and pulled together. The prime Skyve libraries are:
+
+- skyve-core - the minimum required to support the skyve metadata, its runtime interpretation and code generation. It has the minimum set of dependencies to allow skyve to execute its metadata, and supplies the skyve-centric APIs and utilities.
+- skyve-ext - adds extension/extra capability such as Caching, Content Management, Hibernate Persistence, Jobs, Reports & Add ins that are dependent on heavier APIs and frameworks such a spring and Java EE.
+- skyve-web - adds the desktop and responsive rendering engines and supports web security and services. The SAIL implementation is housed here also. The generic web resources for the rendering engines are served from this jar.
+- skyve-ee - represents the single dependency point for maven projects and houses changeable (project specific) web resources.
+
+For more information, check out the Skyve open source project, or talk to a friendly Skyve team member via <a href="https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LTRkMWUxZDBlZmFlMmJkMjQzYWMzYWQxMmQzYWQ1ZTdlODNkNjRlYzVhYjFmMmQ4NTlhYWY4MjNhMGVkZGNlMjY">our dedicated Slack channel</a> or by emailing us at info@skyve.org.
 
 **[⬆ back to top](#introduction)**
 
