@@ -50,7 +50,8 @@ Expression | Expression Result
 {el:TIME} | Equivalent to `{TIME}`
 {el:DATETIME} | Equivalent to `{DATETIME}`
 {el:TIMESTAMP} | Equivalent to `{TIMESTAMPE}`
-{el:DATE.set(DATE.toLocalDate().plusDays(1))} | Returns the day after the the current date (tomorrow)
+{el:newDateOnlyFromLocalDate(newDateOnly().toLocalDate().plusDays(1))} | Returns the day after the the current date (tomorrow)
+{el:newDateOnly().toLocalDate().getYear()} | Returns the current year as an integer
 {i18n:some.bundle.key} | The value of the localised key within the resource bundle if one is defined, otherwise the value of the requested key
 {role:admin.BasicUser} | True if the current user has the `admin.BasicUser` role
 {stash:text} | The value of the `text` key within the stash
