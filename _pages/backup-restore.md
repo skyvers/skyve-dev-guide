@@ -114,16 +114,18 @@ From version 6.0 (8.2.2 for multi-tenant applications), Skyve also supports clou
 	* click show keys
 	* copy the Connection string for `key1`
 
-![Access keys](./../assets/images/backup-restore/cloud-access-keys.jpg "Storage accont access keys")
+![Access keys](./../assets/images/backup-restore/cloud-access-keys.jpg "Storage account access keys")
 
 **Update your Skyve application**
 
-* update the appropriate server or docker `.json` files within your project:
+* update the appropriate server or docker `.json` files within your project where:
+    * `ACCOUNT_NAME` is the AccountName in the Storage account name from the Access Keys page
+    * `ACCOUNT_KEY` is a Key from the Access Keys page 
 
 ```json
 "backup": {
     "externalBackupClass": "org.skyve.impl.backup.AzureBlobStorageBackup",
-    "connectionString": "<key1 connection string>",
+    "connectionString": "DefaultEndpointsProtocol=https;AccountName=ACCOUNT_NAME;AccountKey=ACCOUNT_KEY;EndpointSuffix=core.windows.net",
     // name of the top-level backup directory in Azure, e.g. <applicationName>, this will be created if it does not exist
     "containerName": "<backup directory name>"
 },
