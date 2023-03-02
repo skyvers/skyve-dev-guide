@@ -304,8 +304,3 @@ Add the driver to the `drivers` stanza in the wildfly configuration, for example
 ```
 
 **[⬆ back to top](#changing-database-dialect)**
-
----
-
-**Next [Changing database dialect](./../_pages/appendix-deploying-a-skyve-application.md)**<br>
-**Previous [Changing database dialect](./../_pages/appendix-deployment-problem-solver.md)**

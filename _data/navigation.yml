@@ -99,3 +99,5 @@ docs:
         url: /appendix-extending-skyve/
       - title: "Freemarker Quick Reference"
         url: /appendix-freemaker-quick-reference/
+      - title: "Enabling OAuth"
+        url: /appendix-oauth/
