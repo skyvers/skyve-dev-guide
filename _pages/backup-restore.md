@@ -80,20 +80,19 @@ By default, Skyve backups are stored in the content folder in the location speci
 
 ### Cloud Backups
 
-From version 6.0 (8.2.2 for multi-tenant applications), Skyve also supports cloud/offsite backups via Microsoft Azure blob storage. Enabling this requires signing up for a paid Microsoft Azure subscription, and making some minor changes to your application configuration.
+From version 6.0 (8.2.3 for multi-tenant applications), Skyve also supports cloud/offsite backups via Microsoft Azure blob storage. Enabling this requires signing up for a paid Microsoft Azure subscription, and making some minor changes to your application configuration.
 
 *Note: these instructions are current as at February 2023 and the steps and/or screenshots may no longer reflect the Azure portal.*
 
 **Create an Azure storage account**
 
 * visit [portal.azure.com](https://portal.azure.com/)
-* storage accounts
 * start with free trial if you do not already have a subscription
 * follow the steps to verify your identity and enter payment details to create a billing account
 * once complete, click `Home`
 * click `Storage Accounts`
 * click `Create`
-* Create a new Resource group -> Skyve -> Click OK
+* Create a new Resource group -> `Skyve` -> Click `OK`
 * Name your storage account, e.g. `<appname>backup`
 * Select the region for your backup
 * Keep performance and redundancy defaults
