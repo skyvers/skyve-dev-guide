@@ -86,32 +86,43 @@ From version 6.0 (8.2.3 for multi-tenant applications), Skyve also supports clou
 
 **Create an Azure storage account**
 
-* visit [portal.azure.com](https://portal.azure.com/)
-* start with free trial if you do not already have a subscription
-* follow the steps to verify your identity and enter payment details to create a billing account
-* once complete, click `Home`
-* click `Storage Accounts`
+* visit [portal.azure.com](https://portal.azure.com/) and sign in or create an account
+* if you do not already have an active billing subscription
+    * start with free trial if you do not already have a subscription
+    * follow the steps to verify your identity and enter payment details to create a billing account
+    * once complete, click `Home`
+* click `Storage Accounts` under `Azure Services`, or if not listed there, search for it, then select it
+
+![Storage Account search](./../assets/images/backup-restore/storage-account.jpg "Storage Account search")
+
 * click `Create`
-* Create a new Resource group -> `Skyve` -> Click `OK`
-* Name your storage account, e.g. `<appname>backup`
-* Select the region for your backup
+* select your `Subscription` for billing
+* select a Resource group for the backups, or click `Create new` if you do not have one
+    * enter a name, e.g. `SkyveAppBackups`, then click `OK`
+* Enter a `Storage account name`, e.g. `<appname>backup`
+* Select the `Region` for your backup
 * Keep performance and redundancy defaults
 * click `Next`
-* keep defaults on advanced screen and click `Next`
-* keep defaults on networking screen and click `Next`
-* keep defaults on data protection and click `Next`
-* keep defaults on encryption and click `Next`
-* skip tags, click `Review + create`
+* scroll to the bottom of the `Advanced` screen
+    * under Access tier, change from Hot to `Cool`
+    * click `Next`
+
+![Cool storage](./../assets/images/backup-restore/cool-storage.jpg "Cool storage access tier")
+
+* keep defaults on the `Networking` screen and click `Next` (we will change these later)
+* keep defaults on the `Data protection` screen and click `Next`
+* keep defaults on the `Encryption` screen and click `Next`
+* leave tags blank unless you have any you would like to add (used for billing), then click `Review`
 * review all the settings, scroll all the way down, wait for final validation and click `Create`
-* when deployment is complete, click `Go to resource`
-* in the menu on the left, scroll to Security + network -> Networking
-	* change *Public network access* to “Enabled from selected virtual networks and IP addresses”
+* when deployment is complete (this takes a couple of minutes), click `Go to resource`
+* in the menu on the left, scroll to Security + network, then select `Networking`
+	* change *Public network access* to `Enabled from selected virtual networks and IP addresses`
 	* Under *Firewall*, add the IP address of the server(s), e.g. UAT, Prod
-	* Click *Save*
+	* Click `Save`
 	* For further info securing the storage account, see the Azure [docs](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security?tabs=azure-portal)
-* in the menu on the left, scroll to Security + networking -> Access keys
-	* click show keys
-	* copy the Connection string for `key1`
+* in the menu on the left, scroll to Security + networking, then select `Access keys`
+	* under `key1`, click the `Show` button next to `Connection string`
+	* click the `Copy to clipboard` icon at the end of the connection string, we will paste this into our Skyve application in a little bit
 
 ![Access keys](./../assets/images/backup-restore/cloud-access-keys.jpg "Storage account access keys")
 
