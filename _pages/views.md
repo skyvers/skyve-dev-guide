@@ -21,7 +21,7 @@ the document from a list.
 Two views can be declared for each document, and views can contain combinations of view components.
 
   View        | Description
-  -----------|-----------
+  ------------|-----------
   edit.xml    | The basic view declaration for detail editing of a bean (normally accessed by zooming into a row from a list).<br/><br/>Menu items can also target edit views directly. In this case the menu item will trigger `newInstance()` and a new document instance will be returned (and therefore displayed). To show a singleton (a document instance which is the only applicable existing instance within the context), the `newInstance()` method can be overridden to select and return an existing bean in place of the newly created instance.<br/><br/>If a *create.xml* is supplied, the *edit.xml* file is only used after the document is created.
   create.xml  | A special case of edit view which is used if *create.xml* supplied and if `isCreated()` is false similar to the following
   
@@ -1664,64 +1664,64 @@ Skyve features the ability to dynamically change the rendering engine based on c
 
 The table below shows the available renderers in Skyve and their level of completion.
 
-*Note: React and React Native are in early stages of development and not available for use in applications yet. This table is not a complete list.*
+*Note: Flutter is the planned renderer for native mobile applications but is still in early stages of development and not available for use in applications yet. JQuery Mobile is the legacy renderer for mobile, PrimeFaces responsive renderer is now used instead. This table is not a complete list.*
 
 **High Level Features**
 
-Feature | SmartClient | PrimeFaces | JQuery Mobile | React | React Native | Description
---------| ----------- | ---------- | ------------- | ----- | ------------ | -----------
-Session management      | Y | Y | Y | Y |   | Ability to create, associate, expire and propagate a user session and prompt for login
-Conversation management | Y | Y | Y | Y |   | Ability to start, associate, propagate and reclaim conversation states in Skyve views
-Zooming management      | Y | Y | Y | Y |   | Ability to manage _n_ level zooming across the domain's aggregations, within and outside of view conversations
-Security management     | Y | Y | Y | Y | Y | Guarding against XSS, injection attacks and applying best practice network and application security through sanitisation, escaping etc
-Permission management   | Y | P |   |   |   | Ability for the view to react automatically to the user permissions by showing, hiding and altering different view mechanisms
-Scope management        | Y | Y |   |   |   | Ensuring that view elements issue correct data retrievals based on the current user scope settings
-Request management      | Y | Y |   |   |   | Ensure requests are issued asynchronously and synchronously as required, orchestrating multiple requests, and managing long running and unresponsive requests
-UI Dirty management     | Y |   |   |   |   | Ability to detect data changes in the UI widgets through all request/responses in a conversation and warn when a user is about to perform a gesture that will discard their unsaved changes
-Routing Management      | Y | Y |   |   |   | Ability to inject front end markup/logic into existing Skyve views through 'native' mechanisms and remain integrated with the Skyve view plus the ability to hijack a view completely through the Skyve routing mechanism and generate pieces of the defined Skyve views as an assembly strategy if appropriate.
-View Layout             | Y | Y | Y | Y |   | 
-Data Grid               | Y | Y | Y | Y |   | 
-File Upload             | Y | Y |   |   |   | 
-Content Upload          | Y | Y |   |   |   | 
-File Download           | Y | Y |   |   |   | 
+Feature | SmartClient | PrimeFaces | JQuery Mobile | Flutter | Description
+--------| ----------- | ---------- | ------------- | ------- | -----------
+Session management      | Y | Y | Y |   | Ability to create, associate, expire and propagate a user session and prompt for login
+Conversation management | Y | Y | Y |   | Ability to start, associate, propagate and reclaim conversation states in Skyve views
+Zooming management      | Y | Y | Y |   | Ability to manage _n_ level zooming across the domain's aggregations, within and outside of view conversations
+Security management     | Y | Y | Y | Y | Guarding against XSS, injection attacks and applying best practice network and application security through sanitisation, escaping etc
+Permission management   | Y | P |   |   | Ability for the view to react automatically to the user permissions by showing, hiding and altering different view mechanisms
+Scope management        | Y | Y |   |   | Ensuring that view elements issue correct data retrievals based on the current user scope settings
+Request management      | Y | Y |   |   | Ensure requests are issued asynchronously and synchronously as required, orchestrating multiple requests, and managing long running and unresponsive requests
+UI Dirty management     | Y |   |   |   | Ability to detect data changes in the UI widgets through all request/responses in a conversation and warn when a user is about to perform a gesture that will discard their unsaved changes
+Routing Management      | Y | Y |   |   | Ability to inject front end markup/logic into existing Skyve views through 'native' mechanisms and remain integrated with the Skyve view plus the ability to hijack a view completely through the Skyve routing mechanism and generate pieces of the defined Skyve views as an assembly strategy if appropriate.
+View Layout             | Y | Y | Y |   | 
+Data Grid               | Y | Y | Y | Y | 
+File Upload             | Y | Y |   |   | 
+Content Upload          | Y | Y |   |   | 
+File Download           | Y | Y |   |   | 
 
 **View Controls**
 
-Feature | SmartClient | PrimeFaces | JQuery Mobile | React | React Native
---------| ----------- | --- | ------------- | ----- | ------------
-label            | Y | Y | Y |   | 
-blurb             | Y | Y |   |   | 
-button            | Y | Y | Y |   | 
-checkBox          | Y | Y | Y |   | 
-colourPicker     | Y |   |   |   | 
-Content picker    | Y | Y | Y |   | 
-Date picker       | Y | Y | Y |   | 
-Date/time picker  | Y | Y | Y |   | 
-Drop-down list    | Y | Y | Y |   | 
-geolocator        | Y | Y |   |   | 
-geometry   | Y | Y |   |   | 
-inject            | Y |   |   |   | 
-spinner   | Y | Y | Y |   | 
-listMembership   | Y | Y |   |   | 
-password          | Y | Y |   |   | 
-richText  | Y |   |   |   | 
-radio             | Y | Y |   |   | 
-spacer            | Y | Y |   |   | 
-textArea         | Y | Y | Y |   | 
-textField        | Y | Y | Y |   | 
-Type-ahead        | Y | Y | Y |   | 
+Feature | SmartClient | PrimeFaces | JQuery Mobile | Flutter
+--------| ----------- | ---------- | ------------- | -------
+label             | Y | Y | Y | Y
+blurb             | Y | Y |   | 
+button            | Y | Y | Y | 
+checkBox          | Y | Y | Y | 
+colourPicker      | Y |   |   | 
+Content picker    | Y | Y | Y | 
+Date picker       | Y | Y | Y | 
+Date/time picker  | Y | Y | Y | 
+Drop-down list    | Y | Y | Y | 
+geolocator        | Y | Y |   | 
+geometry          | Y | Y |   | 
+inject            | Y |   |   | 
+spinner           | Y | Y | Y | 
+listMembership    | Y | Y |   | 
+password          | Y | Y |   | 
+richText          | Y |   |   | 
+radio             | Y | Y |   | 
+spacer            | Y | Y |   | 
+textArea          | Y | Y | Y | 
+textField         | Y | Y | Y | 
+Type-ahead        | Y | Y | Y | 
 
 **List Grids**
 
-Feature | SmartClient | PrimeFaces | JQuery Mobile | React | React Native
---------| ----------- | --- | ------------- | ----- | ------------
-List Grid          | Y | Y | Y | Y | 
-Image Thumbnails   | Y | Y |   |   | 
-File Thumbnails    | Y | Y |   |   | 
-Column filtering   | Y | Y |   |   | 
-Column sorting     | Y | Y |   |   | 
-Advanced filtering | Y |   |   |   | 
-Export             | Y |   |   |   | 
+Feature | SmartClient | PrimeFaces | JQuery Mobile | Flutter 
+--------| ----------- | ---------- | ------------- | ------- 
+List Grid          | Y | Y | Y | Y 
+Image Thumbnails   | Y | Y |   | 
+File Thumbnails    | Y | Y |   | 
+Column filtering   | Y | Y |   | Y
+Column sorting     | Y | Y |   | Y
+Advanced filtering | Y |   |   | 
+Export             | Y |   |   | 
 
 **Desktop only features**
 
