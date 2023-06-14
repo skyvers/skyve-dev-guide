@@ -95,7 +95,7 @@ See additional details in [Setting up a Skyve instance](./../pages/appendix_sett
 
 In Eclipse, 
 
-* choose File->Import...>Git->Projects from Git->Next->Clone URI and set the URI (for example type in https://github.com/skyvers/skyve.git as URI),
+* choose File -> Import... -> Git -> Projects from Git -> Next -> Clone URI and set the URI (for example type in https://github.com/skyvers/skyve.git as URI),
 * then click the _Next_ button, 
 * choose the master and click the _Next_ button. 
 * Choose your destination directory, in this example, we have chosen `C:\\_\ directory`.
@@ -132,7 +132,7 @@ You will also need to set Wildfly to be able to serve clients other than localho
 
 Restart Wildfly so the changes take effect.
 
-You can then use the browser on your mobile device to connect to the local Skyve instance using the ural:
+You can then use the browser on your mobile device to connect to the local Skyve instance using the URL:
 
 ```
 http://192.168.43.182:8080/myapp
