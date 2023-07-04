@@ -153,8 +153,7 @@ Examples for static images:
 
 ```
 <@image filename="logo.png" module="admin" alt="Corporate logo" height="60" class="logo" />
-``` 
- 
+```
 
 Examples for dynamic images:
 
@@ -168,7 +167,6 @@ Examples for dynamic images:
  * bean: The bean which the image belongs to
  * height: Height of the image element, can be null
  * width: Width of the image element, can be null
-
 
 Examples for images from the content store:
 
@@ -185,7 +183,9 @@ Examples for images from the content store:
 * style: Style(s) for the image element, can be null
 
 ### Macros
-Once you have mastered the basics, macros defined within a template can be useful for repeating rows within tables, etc.
+
+Once you have mastered the basics, macros defined within a template can be useful for adding re-usable sections of logic, e.g. repeating rows within tables.
+
 See [macro, nested, return - Apache FreeMarker Manual](https://freemarker.apache.org/docs/ref_directive_macro.html)
 
 The `import` directive can also be used to load a file containing re-usable macros but without outputting anything to the template like `include` does.
@@ -205,12 +205,9 @@ To preserve newlines in the HTML report for Freemarker, e.g. from a memo field i
 </#noautoesc>
 ```
 
-### Macros
-It is possible to create macros for re-usable sections of logic  within a template. See [macro, nested, return - Apache FreeMarker Manual](https://freemarker.apache.org/docs/ref_directive_macro.html)
-
 ### Worked example - exporting filtered CSV data
 
-The following are the steps for creating a simple filtered CSV export using freemarker. 
+The following are the steps for creating a simple filtered CSV export using Freemarker. 
 
 This example assumes you have a document called *Invoice* which has attributes *invoiceNumber* (text), *sentDate* (date) and *total* (decimal2) and will produce a CSV export of all the Invoices within a specific date range.
 
@@ -221,10 +218,10 @@ This example assumes you have a document called *Invoice* which has attributes *
 <#list invoiceExportData>
 Invoice Number,Sent Date,Total
 	<#items as bean>
-<@format bean=bean binding="invoiceNumber" />,<@format bean=bean binding="sentDate" />,<@format bean=bean binding="total" />
+"<@format bean=bean binding="invoiceNumber" />","<@format bean=bean binding="sentDate" />","<@format bean=bean binding="total" />"
 	</#items>
 <#else>
-		No records.
+No records.
 </#list>
 ```
 
