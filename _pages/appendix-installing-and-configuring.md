@@ -22,8 +22,9 @@ Before you begin, ensure you have the following:
 * Java 11 JDK - [Temurin OpenJDK](https://adoptium.net/temurin/releases/?version=11) (or an alternative OpenJDK of your choice)
 * Eclipse IDE for Enterprise Java and Web Developers ([www.eclipse.org](https://www.eclipse.org/downloads/packages/))
     * Note: Do not use the Eclipse IDE for Java Developers
-* Wildfly 26 (select the last final version available) ([http://wildfly.org](http://wildfly.org/downloads/))
+* Wildfly 26 (select the last final version of Wildfly 26 available) ([http://wildfly.org](http://wildfly.org/downloads/))
     * Note: Select the Jakarta EE 8 Full & Web Distribution not the EE 9.1 Preview Distribution
+    * Note: Versions of Wildfly > 26 are not supported by Skyve at this time
   
 We also recommend you:
 * load an RDBMS like MySQL, Postgres or MS SQL that is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
