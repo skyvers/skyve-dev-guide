@@ -93,8 +93,19 @@ the order of modules defines the compile order. If developers create
 cross-module code, the compile order must be considered for that
 customer.
 
-The home or default module is declared here but can be overridden per
-user from within the user functionality (within the admin module).
+You can specify a `homeModule`, any new users added to this application will 
+have that module be their default module on logging in. This can be overridden 
+at the user level within the admin module.
+
+```xml
+    <modules homeModule="module2">
+        <module name="admin"/>
+        <module name="module2"/>
+    </modules>
+```
+
+_Note: when adding a new module to your Skyve application, you will need to update 
+your customer.xml file to include the new module._
 
 ## Adding a new customer
 
