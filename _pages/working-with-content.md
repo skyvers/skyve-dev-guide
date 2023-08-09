@@ -130,7 +130,7 @@ In the example of the Contact document above, the following code retrieves a byt
 
 ```java
 try (ContentManager cm = EXT.newContentManager()) {
-      AttachmentContent ac = cm.get(bean.getImage());
+      AttachmentContent ac = cm.getAttachment(bean.getImage());
       
 	  if (ac != null) { 
 		String link = String.format("<a href=\"%s/content?_n=%s&_doc=%s.%s&_b=%s" + 
@@ -160,7 +160,7 @@ try (ContentManager cm = EXT.newContentManager()) {
 
 		//if a bizId is returned, the match is with an indexed scalar attribute - not a content item 
 		if (bizId == null) {
-			AttachmentContent ac = cm.get(match.getContentId());
+			AttachmentContent ac = cm.getAttachment(match.getContentId());
 			int score = match.getScore();
 			String snippet = match.getExcerpt();
 		} 
