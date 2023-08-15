@@ -1380,7 +1380,7 @@ The listGrid query binding is the query you wish to display, if you wish to
 filter the listGrid, an association to the required field can be used. 
 The columns are changed by editing the query directly:
 
-![ListGrid Example](../assets/images/views/ListGrid.PNG "DataGrid Example")
+![ListGrid Example](../assets/images/views/listGrid.png "ListGrid Example")
 
 
 ### newParameter
