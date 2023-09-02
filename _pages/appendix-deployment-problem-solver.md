@@ -42,11 +42,27 @@ _Run As_->_MyAppName - Generate Domain_
 
 ### Problems deploying your app
 
-* If you're using the collaboration option in [Skyve Foundry](https://foundry.skyve.org/foundry), or have exported your project, check that you selected the `Default` theme first. 
+* If you're using the collaboration option in [Skyve Foundry](https://foundry.skyve.org/foundry), or have exported your project, check that you selected the `editorial` (free) theme first. 
 
 If your project has a _paid theme_ selected we can't provide the theme files for your other environments.
 
-You should change your theme to the free `Default` theme on the <em>Customise</em> tab in [Skyve Foundry](https://foundry.skyve.org/foundry) before you start collaboration (or export), OR you can proceed and collaborate (or export) with this theme selected, but we can't include the theme files in your code repository (or download). You will need to purchase your own licence to use the paid theme for local development.
+You should change your theme to the free `editorial` theme on the <em>Customise</em> tab in [Skyve Foundry](https://foundry.skyve.org/foundry) before you start collaboration (or export), OR you can proceed and collaborate (or export) with this theme selected, but we can't include the theme files in your code repository (or download). You will need to purchase your own licence to use the paid theme for local development.
+
+### Incorrect hibernate dialect
+
+* If you have overlooked setting the correct dialect in your `.json` file, the application may not be able to deploy because the automatic database table creation feature may not be able to create the tables required for your application.
+
+For example, if you created your application using the `h2` dialect and are attempting to connect to a `MS SQL` database, you have the correct connection string in the `ds.xml` file but have not set the correct dialect in the `.json` file, you will receive an exception like this:
+
+```
+07:59:23,042 ERROR [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentImpl] (ServerService Thread Pool -- 130) Could not fetch the SequenceInformation from the database: com.microsoft.sqlserver.jdbc.SQLServerException: The "variant" data type is not supported.
+```
+
+In this case, check that:
+* the dialect in the `pom.xml` matches your target database and then `Generate Domain` to rebuild you project for that dialect (e.g. `<dialect>MSSQL_2016</dialect>`)
+* the dialect in the `.json` file also matches (e.g. `"dialect": "org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect",`)
+
+See more at [Changing the database dialect](./../_pages/appendix-changing-database-dialect/)
 
 ### Problems finding your app
 
