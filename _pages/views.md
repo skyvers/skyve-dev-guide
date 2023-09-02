@@ -1337,7 +1337,7 @@ Filter parameters can be applied to the *listGrid* widget which will
 apply additional filtering (over and above any filtering defined in the
 applicable query).
 
-Filter parameters can be *value* (for a static value) or *binding*
+Filter parameters can be by `value` (for a static value) or by a `valueBinding`
 (filtering the list of eligible references by the value of a binding
 from the document being viewed).
 
@@ -1345,18 +1345,22 @@ If *filterParameters* have been defined and the user creates a new
 document from the grid (using the grid *Add* action), the created
 document will have the *filterParameter* values set by default.
 
-![listGrid with filterParameters](../assets/images/views/image131.png "listGrid with filterParameters")
+```xml
+<vbox border="true" borderTitle="Communications using this template">
+	<listGrid query="qCommunications" continueConversation="true">
+		<filterParameter operator="equal" filterBinding="template" valueBinding="bizId" />
+	</listGrid>
+</vbox>
+```
 
-In the example shown above, the *filterParameter* name 'supplier'
-corresponds to the binding of the 'qProducts' query column being
-filtered. The *filterParameter* binding 'bizId' refers to the binding in
+In the example shown above, the listGrid in the `CommunicationTemplate` edit view refers to a query in 
+the admin module, `qCommunications`, which when unfiltered returns all `Communication` records. By applying 
+a filterParameter on the `template` binding, only Communications using the current template will be displayed.
+
+The *filterParameter* `valueBinding` 'bizId' refers to the binding in
 the current document view which provides the value for the filter (in
 this case *bizId*). Note that the binding does not need to be included
 in the view declaration to be able to be used for a *filterParameter*.
-
-In the example above, the effect of filtering by binding bizId is that
-the listGrid will only display products from the *qProducts* query where
-the supplier column matches the supplier displayed in the view.
 
 #### Event handlers for listGrid
 
@@ -1376,11 +1380,11 @@ in the listGrid are decided by the fields shown in the query):
 
 ```
 
-The listGrid query binding is the query you wish to display, if you wish to 
-filter the listGrid, an association to the required field can be used. 
-The columns are changed by editing the query directly:
+The listGrid `query` attribute is the query you wish to display. The columns 
+displayed in the listGrid are decided by the fields specified in the query. If 
+you wish to change the columns displayed, update the query in the `module.xml`.
 
-![ListGrid Example](../assets/images/views/ListGrid.PNG "DataGrid Example")
+![ListGrid Example](../assets/images/views/listGrid.png "ListGrid Example")
 
 
 ### newParameter
