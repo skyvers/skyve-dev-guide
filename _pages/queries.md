@@ -301,6 +301,50 @@ The following example returns the support tickets associated to the current user
 
 In the above example, _SupportTicket_ document in the _support_ module is the driving document and is aliased as `bean`.
 
+### Ignoring a filter if the user has a specific role
+
+This example shows how to filter data that is relevant to the current user, or show all data if the if the user has a specific role.
+
+In this example WeeklyTimesheet has an association to Employee called `employee` and Employee has an association to User called `employeeUser`. Normally the query would only show timesheets that belong to the current user, but if the user has been assigned the role `admin.SecurityAdministrator` then they should have visibility to all user timesheets.
+
+The complexity arises from the fact that the User may have the role assigned directly to the UserRole collection, or because the role is a GroupRole for a Group that the User has. 
+
+
+```
+<query documentName="WeeklyTimesheet" name="qTimesheets">
+	<description>Timesheets</description>
+	<from><![CDATA[{time.WeeklyTimesheet} as bean]]></from>
+	<filter>
+		<![CDATA[
+		    bean.employee.employeeUser.bizId = {USERID}
+		    or EXISTS (select ur 
+		    		from {admin.User} as u, {admin.UserRole} as ur
+		    		where ur MEMBER OF u.roles
+		    		and ur.roleName = 'admin.SecurityAdministrator'
+		    		)
+			or EXISTS (select gr 
+					from {admin.User} as u, {admin.Group} as g, {admin.GroupRole} as gr
+					where gr MEMBER OF g.roles
+					and gr.roleName = 'admin.SecurityAdministrator'
+					and g MEMBER OF u.groups
+					and u.bizId = {USERID}
+					)
+		]]>
+	</filter>
+	<columns>
+		<column binding="weekEndingDate" sortOrder="descending" />
+		<column binding="employee.employeeCode" />
+	</columns>
+</query>
+```
+
+The above query will show:
+* all timesheets where the Timesheet.employee.employeeUser is the current user, OR
+* all timesheets if the user has the UserRole = 'admin.SecurityAdministrator', OR
+* all timesheets if the user has the Role 'admin.SecurityAdministrator' as one of the roles in a Group that they have been assigned.
+
+Note that the nomenclature `{admin.UserRole}` reflects the module name and role name as declared in the module XML, and is not the table name in the database.
+
 ### Using bizQL
 
 In some cases, it may be convenient to specify the query using bizQL directly, rather than XML metadata.
