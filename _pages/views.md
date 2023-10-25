@@ -75,8 +75,21 @@ Containers share basic properties:
   percentageWidth   | Percentage of the horizontal visible area over which the container (and contents) will be stretched.
   pixelWidth        | Width of the container in pixels.
   pixelHeight       | Height of the container in pixels.
+  responsiveWidth   | How many columns the container will span in responsive mode. Maximum value is 12.
 
 _Container properties_
+
+Skyve Responsive mode (PrimeFaces) uses a 12 column grid to perform the responsive layout, as is common with many other front end CSS frameworks. To specify the number of columns to use, Skyve exposes a `responsiveWidth`. If a view specifies a responsive and a percentage width, _responsive width will take priority in responsive mode_.
+
+Desktop mode (SmartClient) can use a percentage or absolute pixel width for layout. It does not have any concept of a 12 column grid, if a responsive width is specified, it will be converted to a percentage. If a view specifies a responsive and a percentage width, _percentage width will take priority in desktop mode_.
+
+If you view has specified both, you will see different behaviour in the different modes, for example:
+
+```xml
+<form responsiveWidth="12" percentageWidth="60" border="true">
+```
+
+In responsive mode, a responsive width of 12 will span the width of the entire container it is in (equivalent 100%). However, when you switch this to desktop mode, this will only use 60% of the available container width.
 
 #### Autofit behaviour
 
@@ -1664,7 +1677,7 @@ In the simple case, the condition uses the `isPersisted()` method - as a bean is
 
 ## Skyve Renderer Comparison
 
-Skyve features the ability to dynamically change the rendering engine based on criteria specified as part of its routing. By default, it switches renderer based on the user agent of the browser. If it detects the user is using a desktop browser, the SmartClient renderer will be used, otherwise the responsive PrimeFaces renderer will be used.
+Skyve features the ability to dynamically change the rendering engine based on criteria specified as part of its routing. By default, it switches renderer based on the user agent of the browser. If it detects the user is using a desktop browser, the desktop renderer (SmartClient) will be used, otherwise the responsive renderer (PrimeFaces) will be used.
 
 The table below shows the available renderers in Skyve and their level of completion.
 
