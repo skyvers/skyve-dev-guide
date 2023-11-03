@@ -71,6 +71,83 @@ Each document.xml includes the following metadata:
 
 _Document.xml sections_
 
+### Persistent documents
+
+If the document includes a 	`persistent` declaration, instances of the document will be persisted in the primary data store (database).
+
+An example persistent declaration is:
+
+```xml
+<persistent name="ADM_Contact"/>
+```
+
+In this case the combination of `name`, `catalog` and `schema` describe where rows corresponding to the document instances will be stored in the primary data store. Typically `catalog` and `schema` if the tables are to be in the primary catalog or schema of the primary data store (as per the settings in the deployed `.json` settings file), however these can be specified here if the table is located in another area.
+
+#### Persistent strategy and inheritance
+
+Skyve supports inheritance between documents, to maximise re-use, and improve quality.
+
+If you have a number of documents that have a subset of common attributes, you can declare an abstract document with the common attributes, and then other documents that extend this, inheriting behaviours and taking advantage of reusable view components.
+
+See more details at [Inheritance](./../_pages/inheritance.md)
+
+#### Cache
+
+Skyve 3.0.0 introduced support for in-memory caching via the metadata and for developers in code. This adds a write-through cache option per document using an in-memory cache that sits between Hibernate and Skyve's persistence layer. If declared, the read and write operations are to/from the cache. Skyve handles keeping Hibernate and the persistent datastore in sync.
+
+```xml
+<persistent name="ADM_Contact">
+	<cache>reference</cache>
+</persistent>
+```
+
+Declaring a cache for a persistent document has the effect of increasing the memory load on the server but decreasing the load on the database, so for example, in servers where there is a H2 database co-located it will have minimal noticeable performance impact. However if you are accessing a database across a network and you have an expensive document to read from/write to, this could have quite a noticeable impact on application performance. For developers, the `CacheUtil` utility class can be invoked by developers and Skyve will handle the management of the cache. A `getJCache()` and `getEHCache()` method can be used depending on the type of cache required.
+
+Hibernate caching in Skyve works in tandem with database caching mechanisms. The hibernate second level cache stores an internal representation of the object approximating the tuple rather than the domain object - no non-persistent representation foreign keys, un-related object etc. These are inflated to the first level cache (as domain objects).
+There is one second level cache and multiple first level caches per Skyve conversation. 
+
+If items are in the cache and a DocumentQuery is used to retrieve items, the database is interrogated to get the results of filtering etc, however the objects are hydrated from the cache rather that from the database.
+
+The cache `name` refers to a name that has been declared in the deployed `.json` properties file within the `hibernate` properties stanza as follows:
+
+```json
+The hibernate stanza needs a new cache section to define the default Skyve caches, and is where any per-project custom cache settings are to be defined:
+
+prettySql: false,
+    caches: {
+        "eternal": {
+            // Max conversations allowed in heap memory before being moved off-heap or to disk
+            heapSizeEntries: 10,
+            // Max off-heap memory size - 0 indicates no usage
+            offHeapSizeMB: 0,
+            expiryPolicy: "eternal" // "timeToLive" or "timeToIdle"
+        },
+        "reference": {
+            // Max conversations allowed in heap memory before being moved off-heap or to disk
+            heapSizeEntries: 1000,
+            // Max off-heap memory size - 0 indicates no usage
+            offHeapSizeMB: 0,
+            expiryPolicy: "timeToIdle", // "timeToLive" or "eternal"
+            // Number of minutes to wait until expiring a hibernate object from the cache
+            expiryTimeMinutes: 10
+        }
+    }
+```
+
+The `eternal` and `reference` examples are provided by default, however are merely examples and caches can be declared here as required.
+
+Using the above examples, if the `Contact` document was declared using the `eternal` cache, then the most recent 10 Contacts loaded from the database will remain in the cache while the application runs. If another Contact is loaded, then the oldest cache item is removed and the new item added to the cache and so on.
+
+Similarly, for the `reference` example above, the cache will contain up to 1000 Contacts but in this case each item will only remain in the cache for 10 minutes before being expunged.
+
+#### SingletonCachedBizlet
+
+For documents where there is only one instance per datastore, user, datagroup or customer, you can implement the `SingletonCacheBizlet` class rather than use the `persistent` declaration for the document. 
+
+This approach is described in detail at [Singleton Documents](./../pages/common-patterns)
+
+Note that whereas Hibernate caching is for caching a result set or multiple records, the singleton just holds onto a single object in memory. This would cause memory pressure if you tried to use this strategy for large result sets.
+
 ### bizKey
 To enable the application to display references simply, each document
 must define a business key (*bizKey*) definition (similar to a Java
