@@ -531,7 +531,7 @@ minPixelHeight          | the minimum height (as a number) of the tab pane, used
 responsiveWidth         | the width of the 12-column repsonsive view this tab pane should occupy
 selectedTabIndexBinding | the binding on the document that controls the selected tab index, e.g. `selectedTabIndexBinding="selectedTab"`
 
-### Specifying the selected tab
+#### Specifying the selected tab
 
 Occiasionally it is useful to be able to specify the selected tab in a tab pane after the user performs an action or during a certain stage in the event lifecycle. This can be done by specifying the `selectedTabIndexBinding` attribute on the tab pane. This attribute should be bound to an integer attribute on the document. The integer attribute should be initialised to the index of the tab you wish to be selected by default.
 
