@@ -529,7 +529,7 @@ Attribute               | Description
 ------------------------|------------
 minPixelHeight          | the minimum height (as a number) of the tab pane, used in desktop mode
 responsiveWidth         | the width of the 12-column repsonsive view this tab pane should occupy
-selectedTabIndexBinding | the binding on the document that controls the selected tab index, e.g. `selectedTabIndexBinding="selectedTab"`
+selectedTabIndexBinding | the binding on the document that controls the selected tab index (starting at 0), e.g. `selectedTabIndexBinding="selectedTab"`
 
 #### Specifying the selected tab
 
@@ -538,7 +538,7 @@ Occiasionally it is useful to be able to specify the selected tab in a tab pane 
 For example, you could add the following attribute to your document to hold the selected tab:
 
 ```xml
-	<integer name="selectedTab">
+	<integer name="selectedTab" audited="false" persistent="false" trackChanges="false">
 		<documentation>Used to be able to set which tab is selected when moving around views.</documentation>
 		<displayName>Selected Tab</displayName>
 	</integer>
