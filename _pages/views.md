@@ -18,7 +18,9 @@ View files are located within the *views* folder in the document
 package. Typically, users interact with a detail view after zooming into
 the document from a list.
 
-Two views can be declared for each document, and views can contain combinations of view components.
+![Views package](./../assets/images/views/create-view.png "Views package")
+
+Two types of views can be declared for each document, and views can contain combinations of view components.
 
   View        | Description
   ------------|-----------
@@ -43,26 +45,7 @@ In desktop rendering mode (the SmartClient renderer), the application tool bar p
 
 Don't forget, that you can also provide attribute level help using the `<description>` attribute metadata.
 
-### Create view
-
-The `create` view concept is useful in cases where a several-step wizard type view is required specifically for the creation of a new record where this is signficantly different to the typical data entry view, though in most cases, the edit view is satisfactory.
-
-To use a separate create view, create a view called `create.xml` and ensure the `name` property within the view file is `create`.
-
-Skyve will use the create view if the document declares a `created` condition.
-
-```xml
-<condition name="created">
-	<description>Created</description>
-	<expression>
-		<![CDATA[isPersisted()]]>
-	</expression>
-</condition>
-```
-
-An example of a create view can be found in the Skyve `admin` module for the `User` document. In this case, a create view is useful because creating a new User involves several steps not normally required for simple data entry. Compare this with the `admin.Contact` document - where the basic edit view is sufficient for creating new Contacts and a `create` view is not required.
-
-### Containers
+## Containers
 
 Containers are layout devices which contain other elements.
 
@@ -91,7 +74,7 @@ If you view has specified both, you will see different behaviour in the differen
 
 In responsive mode, a responsive width of 12 will span the width of the entire container it is in (equivalent 100%). However, when you switch this to desktop mode, this will only use 60% of the available container width.
 
-#### Autofit behaviour
+### Autofit behaviour
 
 Rendering behaviour is specific to browsers, however Skyve will attempt
 to render the view as declared. Unless pixel sizes are specified, Skyve
@@ -116,7 +99,7 @@ of items contained.
 
 _View containers_
 
-#### Containers Example #1 - Two side by side vboxes
+### Containers Example #1 - Two side by side vboxes
 
 ![Containers Example 1 Wireframe](../assets/images/views/ViewsPic1.PNG 
 "Wireframe example of 1 hbox and 2 vboxes")
@@ -267,7 +250,7 @@ These recent changes have altered the edit view like so:
 ![Required/Renamed Fields](../assets/images/views/RequiredRenamedFields.PNG "Renamed and Required fields")
 
 
-#### Containers Example #2 - Two side by side vboxes and one hbox underneath
+### Containers Example #2 - Two side by side vboxes and one hbox underneath
 
 ![Containers Example 2 Wireframe](../assets/images/views/ViewsPic2.PNG 
 "Wireframe example of 2 vboxes with one hbox underneath")
@@ -362,7 +345,7 @@ But once 'Time field 2' is populated and saved, 'Date/Time field 2' is visible:
 ![Visibility Example 2](../assets/images/views/Visibility2.PNG 
 "Visibility example with field showing")
 
-#### Containers Example #3 - Tab Pane
+### Containers Example #3 - Tab Pane
 
 If we now wanted to further separate our top half (Left vbox and Right 
 vbox) and our second hbox underneath, we could use a tabpane, and place 
@@ -538,27 +521,47 @@ of the available horizontal space.
 ***Tip:*** To allow the view to autofit and resize correctly, leave at
 least one column unsized.
 
-### Table
+### Tab Pane
 
-Deprecated. This feature is now met by using a disabled dataGrid.
+Tab panes contain tabs. Tabs may also contain other containers.
 
-### Item
+Attribute               | Description
+------------------------|------------
+minPixelHeight          | the minimum height (as a number) of the tab pane, used in desktop mode
+responsiveWidth         | the width of the 12-column repsonsive view this tab pane should occupy
+selectedTabIndexBinding | the binding on the document that controls the selected tab index, e.g. `selectedTabIndexBinding="selectedTab"`
 
-  Property     | Description
-  ------------ | ------------
-  align        | Controls alignment of the item (left, right or centre).
-  colspan      | The number of columns which the item spans.
-  help 		   | tool-tip help text for the item
-  label        | A label to be displayed irrespective of the type of widget the item contains.
-  labelAlign   | Controls the alignment of the item label.
-  required     | Whether the contained widget must have a value set before any actions can be completed.
-  rowspan      | The number of rows which the item spans.
-  showHelp     | Whether the contained widget will include a tool-tip help icon button, for a widget with an attribute which has a *shortDescription* defined.
-  showLabel    | Whether the label of the contained widget will be displayed.
+### Specifying the selected tab
 
-_Item properties_
+Occiasionally it is useful to be able to specify the selected tab in a tab pane after the user performs an action or during a certain stage in the event lifecycle. This can be done by specifying the `selectedTabIndexBinding` attribute on the tab pane. This attribute should be bound to an integer attribute on the document. The integer attribute should be initialised to the index of the tab you wish to be selected by default.
 
-### Widget
+For example, you could add the following attribute to your document to hold the selected tab:
+
+```xml
+	<integer name="selectedTab">
+		<documentation>Used to be able to set which tab is selected when moving around views.</documentation>
+		<displayName>Selected Tab</displayName>
+	</integer>
+```
+
+And declare a tab pane in your view to use this attribute:
+
+```xml
+	<tabPane  selectedTabIndexBinding="selectedTab">
+		<tab title="Details">
+		</tab>
+		<tab title="Notes">
+		</tab>
+	</tabPane>
+```
+
+And in an action, if you wanted to always load the first tab, or return to the first tab after an action, in your code you could specify: 
+
+```java
+setSelectedTab(Integer.valueOf(0));
+```
+
+## Widget
 
 Skyve provides a number of view widgets, which can also be defined as
 document attribute defaultWidget. When widgets contain labels, the label
@@ -1388,9 +1391,7 @@ You can add in the listGrid into your edit view as such (the columns shown
 in the listGrid are decided by the fields shown in the query):
 
 ```xml 
-
 <listGrid continueConversation="true" query="qContacts"/>	
-
 ```
 
 The listGrid `query` attribute is the query you wish to display. The columns 
@@ -1400,7 +1401,7 @@ you wish to change the columns displayed, update the query in the `module.xml`.
 ![ListGrid Example](../assets/images/views/listGrid.png "ListGrid Example")
 
 
-### newParameter
+## newParameter
 
 The *newParameter* section enables the context of one view to be passed
 to another view, when new documents are being created.
@@ -1429,7 +1430,7 @@ target document.
 </newParameters>
 ```
 
-### Action declaration
+## Action declaration
 
 The action section of the view declares which actions will be available
 to the user and under what conditions.
@@ -1542,13 +1543,13 @@ The component has the following attributes:
 
 Attribute | Description
 ----------|------------
-binding | the binding name of the association attribute which corresponds to the driving document of the component - see the association example below for more details. 
-document | the document package where the referenced component declaration resides - it is not necessary to specify the *document* attribute here if the component resides within the same document
+binding   | the binding name of the association attribute which corresponds to the driving document of the component - see the association example below for more details. 
+document  | the document package where the referenced component declaration resides - it is not necessary to specify the *document* attribute here if the component resides within the same document
 invisible | whether the component is invisible
-module | the module package where the referenced component declaration resides - it is not necessary to specify the *module* attribute here if the component resides within the same module
-name | the name of the component declaration being referenced
-visible | whether the component is visible
-widgetId | a specific `id` for the widget so that the widget can be directly referenced (e.g. `xhtml`)
+module    | the module package where the referenced component declaration resides - it is not necessary to specify the *module* attribute here if the component resides within the same module
+name      | the name of the component declaration being referenced
+visible   | whether the component is visible
+widgetId  | a specific `id` for the widget so that the widget can be directly referenced (e.g. `xhtml`)
 
 ### Using a component for an associated document
 
@@ -1657,11 +1658,11 @@ This situation can be handled in a variety of ways, however Skyve also supports 
 
 ![Create view](./../assets/images/views/create-view.png "Create view")
 
-In the above example, the User document has a `create.xml` view declared as well as a general `edit.xml`.
+An example of a create view can be found in the Skyve `admin` module for the `User` document. As displayed above, the `User` document has a `create.xml` view declared as well as a general `edit.xml`. In this case, a create view is useful because creating a new User involves several steps not normally required for simple data entry. Compare this with the `admin.Contact` document - where the basic edit view is sufficient for creating new Contacts and a `create` view is not required.
 
-Whether the `create.xml` view is served depends on the existence of a condition named `created` being declared in the corresponding `document.xml`.
+Whether the `create.xml` view is served by Skyve depends on the existence of a condition named `created` being declared in the corresponding `document.xml`.
 
-For the above example, the create view will not be served unless the *User* document includes the created condition similar to the following:
+For the above example, the create view will not be served unless the `User` document includes the created condition similar to the following:
 
 ```xml
 <condition name="created">
@@ -1673,7 +1674,6 @@ For the above example, the create view will not be served unless the *User* docu
 ```
 
 In the simple case, the condition uses the `isPersisted()` method - as a bean is considered to have been *created* once it has been *persisted* , however the specific logic can be determined by the developer as required.
-
 
 ## Skyve Renderer Comparison
 
