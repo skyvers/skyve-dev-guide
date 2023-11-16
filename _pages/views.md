@@ -533,7 +533,7 @@ selectedTabIndexBinding | the binding on the document that controls the selected
 
 #### Specifying the selected tab
 
-Occiasionally it is useful to be able to specify the selected tab in a tab pane after the user performs an action or during a certain stage in the event lifecycle. This can be done by specifying the `selectedTabIndexBinding` attribute on the tab pane. This attribute should be bound to an integer attribute on the document. The integer attribute should be initialised to the index of the tab you wish to be selected by default.
+Occiasionally it is useful to be able to specify the selected tab in a tab pane after the user performs an action or during a certain stage in the event lifecycle. This can be done by specifying the `selectedTabIndexBinding` attribute on the tab pane. This attribute should be bound to an integer attribute on the document. The integer attribute should be initialised to the index of the tab you wish to be selected by default. The first tab index is 0, then goes up by 1 for each tab declared in order in the view.
 
 For example, you could add the following attribute to your document to hold the selected tab:
 
