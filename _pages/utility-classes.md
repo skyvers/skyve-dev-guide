@@ -206,6 +206,8 @@ for(UserExtension u : inactiveUsers) {
 }
 ```
 
+### Complex Example 
+
 For more complex queries, developers can construct queries using a range of extended filter features:
 
 ```java
@@ -231,12 +233,12 @@ for(VineyardChange settlement : settlements) {
 
 _Example DocumentQuery_
 
-In the example provided in the above example, the DocumentQuery is used to
-retrieve all VineyardChange beans. The beans are returned in a typed
+In the example provided in the above example, the `DocumentQuery` is used to
+retrieve all `VineyardChange` beans. The beans are returned in a typed
 List and document permissions and scoping rules are automatically
 enforced by Skyve.
 
-The use of DocumentFilter allows for correct enforcement of types at
+The use of `DocumentFilter` allows for correct enforcement of types at
 compile-time to reduce the possibility of errors arising from implicit
 type conversion which may arise if SQL strings were used.
 
@@ -244,15 +246,19 @@ However, where necessary, developers can take advantage of other querying option
 1. creating queries using SQL and BizQL (similar to HQL)
 2. re-using and manipulating no-code queries declared in the module.xml
 
+### Aggregate Functions
+
 Another example of using a `DocumentQuery` is performing aggeregate functions. In this example, 
 it returns a count of the number of `Contacts` in the database:
 
 ```java
-		DocumentQuery qCount = persistence.newDocumentQuery(Contact.MODULE_NAME,
-				Contact.DOCUMENT_NAME);
-		qCount.addAggregateProjection(AggregateFunction.Count, Bean.DOCUMENT_ID, "CountOfId");
-		int numberOfContacts = qCount.scalarResult(Number.class).intValue();
+DocumentQuery qCount = persistence.newDocumentQuery(Contact.MODULE_NAME,
+    Contact.DOCUMENT_NAME);
+qCount.addAggregateProjection(AggregateFunction.Count, Bean.DOCUMENT_ID, "CountOfId");
+int numberOfContacts = qCount.scalarResult(Number.class).intValue();
 ```
+
+Other aggregate functions available include `Sum`, `Min`, `Max` and `Avg`.
 
 For more querying options, we recommend developers read [Using bizQL](../queries/#using-bizql) and [Using SQL](../queries/#using-sql) and review the other query examples provided in that chapter.
 
