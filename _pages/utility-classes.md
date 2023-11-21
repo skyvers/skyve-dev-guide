@@ -8,8 +8,6 @@ sidebar:
   nav: docs
 ---
 
-# Utility Classes
-
 Skyve provides the following utility classes:
 
 <table>
@@ -245,6 +243,16 @@ type conversion which may arise if SQL strings were used.
 However, where necessary, developers can take advantage of other querying options including:
 1. creating queries using SQL and BizQL (similar to HQL)
 2. re-using and manipulating no-code queries declared in the module.xml
+
+Another example of using a `DocumentQuery` is performing aggeregate functions. In this example, 
+it returns a count of the number of `Contacts` in the database:
+
+```java
+		DocumentQuery qCount = persistence.newDocumentQuery(Contact.MODULE_NAME,
+				Contact.DOCUMENT_NAME);
+		qCount.addAggregateProjection(AggregateFunction.Count, Bean.DOCUMENT_ID, "CountOfId");
+		int numberOfContacts = qCount.scalarResult(Number.class).intValue();
+```
 
 For more querying options, we recommend developers read [Using bizQL](../queries/#using-bizql) and [Using SQL](../queries/#using-sql) and review the other query examples provided in that chapter.
 
