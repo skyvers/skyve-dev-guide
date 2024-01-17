@@ -457,10 +457,11 @@ public List<DomainValue> getConstantDomainValues(String attributeName) throws Ex
   
 
 ### Conditions
+
 Document conditions are code snippets which return a Java `boolean` value,
 and which can be used by view declarations.
 
-By restricting client-side view conditions to server-side compiled code
+By restricting client-side view conditions to server-side compiled code,
 rather than client-side Javascript (or other client script), the risks
 of developer bugs is significantly reduced. Only the result of the
 condition is passed to the client, so the chance of an invalid or
@@ -477,16 +478,16 @@ in one language.
   	</expression>
 </condition>
 ```
-_Although available to client-side views, conditions can take advantage of strongly typed compiled code._
+_Although available to client-side views, conditions can take advantage of strongly typed compiled code or validated expressions._
 
-_Condition declaration_
+#### Condition declaration
 
-Conditions become methods of the generated document *Impl* classes.
+Conditions become methods of the generated document classes.
 The code within the condition declaration is placed verbatim in the
-method allowing condition methods to be used in developer server-side
-code (including *Bizlet* code).
+method, allowing condition methods to be used in developer server-side
+code (e.g. *Bizlet* or *Extension* code).
 
-For each condition declaration Skyve generates pairs of condition
+For each condition declaration, Skyve generates pairs of condition
 methods (both positive and negative methods are generated).
 
 ```java
@@ -501,6 +502,22 @@ public boolean isNotPersonType() {
 }
 ```
 _Generated condition method pairs._
+
+#### Expression conditions
+
+In addition to declaring conditions using Java, conditions can also make use of [Skyve expressions](./../_pages/expressions.md) 
+for evaluation which can be used to return a boolean. For example, to write a simple condition checking 
+if a boolean attribute is true:
+
+```xml
+<condition name="showExistingGroups">
+	<expression>
+		{el:bean.groupsExist}
+	</expression>
+</condition>
+```
+
+instead of the alternate Java logic which would be defined as `Boolean.TRUE.equals(groupsExist)`.
 
 ### Constraints
 Uniqueness constraints can be defined within the *document.xml*.
