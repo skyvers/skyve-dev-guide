@@ -368,5 +368,4 @@ public class InvoiceSummary implements DynamicImage<BusinessDashboardExtension> 
 
 **[⬆ back to top](#charts)**
 
-**Next [Working with content](./../_pages/working-with-content.md)**  
-**Previous [Push and asynchronous methods](./../_pages/push-and-asynchronous-methods.md)**  
+<div style="padding-bottom: 100px"></div>

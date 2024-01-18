@@ -304,3 +304,5 @@ Add the driver to the `drivers` stanza in the wildfly configuration, for example
 ```
 
 **[⬆ back to top](#changing-database-dialect)**
+
+![Alt text](image.png)
