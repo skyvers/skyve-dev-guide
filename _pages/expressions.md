@@ -63,11 +63,6 @@ Expression  | Expression Result
 {el:bean.text} | Equivalent to `{text}`
 {el:stash['text']} | The value of the `text` key within the stash
 {el:user.attributes['text']} | The value of the `text` user attribute
-{el:DATE} | Equivalent to `{DATE}`
-{DATE.set(DATE.toLocalDate().plusDays(1))} | Returns the day after the the current date (tomorrow)
-{el:TIME} | Equivalent to `{TIME}`
-{el:DATETIME} | Equivalent to `{DATETIME}`
-{el:TIMESTAMP} | Equivalent to `{TIMESTAMPE}`
 {el:newDateOnlyFromLocalDate(newDateOnly().toLocalDate().plusDays(1))} | Returns the day after the the current date (tomorrow)
 {el:newDateOnly().toLocalDate().getYear()} | Returns the current year as an integer
 {i18n:some.bundle.key} | The value of the localised key within the resource bundle if one is defined, otherwise the value of the requested key
@@ -118,7 +113,13 @@ and used within a DataGrid:
 Expressions can be used within conditions within Skyve, as per the following examples:
 
 ```xml
-	<condition>{bean:amount} > 100 || {bean:amount} < 50</condition>
+	<condition>
+		<expression>
+			<![CDATA[
+				{el:bean:amount > 100 || bean:amount < 50}
+			]]>
+		</expression>
+	</condition>
 ```
 
 Read more in the [Conditions](./../_pages/documents.md#expression-conditions) section of the Documents page.
