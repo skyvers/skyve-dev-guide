@@ -116,8 +116,18 @@ Expressions can be used within conditions within Skyve, as per the following exa
 	<condition>
 		<expression>
 			<![CDATA[
-				{el:bean:amount > 100 || bean:amount < 50}
+				{el:bean.amount > 100 || bean.amount < 50}
 			]]>
+		</expression>
+	</condition>
+```
+
+or this can alternatively use `gt` and `lt` operators as substitutes for `>` and `<` and the `CDATA` will not be required.
+
+```xml
+	<condition>
+		<expression>
+			{el:bean.amount gt 100 || bean.amount lt 50}
 		</expression>
 	</condition>
 ```
