@@ -83,8 +83,8 @@ docs:
         url: /backup-restore/                                                                                        
   - title: Appendix
     children:
-      - title: "Deployment problem solver"
-        url: /appendix-deployment-problem-solver/
+      - title: "Troubleshooting"
+        url: /appendix-troubleshooting/
       - title: "Changing database dialect"
         url: /appendix-changing-database-dialect/                  
       - title: "Deploying a Skyve application"

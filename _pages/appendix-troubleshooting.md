@@ -1,14 +1,16 @@
 ---
-title: "Deployment Problem Solver"
-permalink: /appendix-deployment-problem-solver/
-excerpt: "Deployment Problem Solver"
+title: "Troubleshooting"
+permalink: /appendix-troubleshooting/
+excerpt: "Troubleshooting Skyve applications"
 toc: true
 sidebar:
   title: "Index"
   nav: docs
 ---
 
-## Deployment Problem solver
+The following are some common problems and solutions when working with Skyve applications.
+
+## Example building problems
 
 ### Problems building your app
 
@@ -40,14 +42,6 @@ For example, in Eclipse, right-click your project and choose _Run As_->_Run Conf
 In your project _config_ folder, right-click the _MyAppName - Generate Domain.launch_ task and choose 
 _Run As_->_MyAppName - Generate Domain_
 
-### Problems deploying your app
-
-* If you're using the collaboration option in [Skyve Foundry](https://foundry.skyve.org/foundry), or have exported your project, check that you selected the `editorial` (free) theme first. 
-
-If your project has a _paid theme_ selected we can't provide the theme files for your other environments.
-
-You should change your theme to the free `editorial` theme on the <em>Customise</em> tab in [Skyve Foundry](https://foundry.skyve.org/foundry) before you start collaboration (or export), OR you can proceed and collaborate (or export) with this theme selected, but we can't include the theme files in your code repository (or download). You will need to purchase your own licence to use the paid theme for local development.
-
 ### Incorrect hibernate dialect
 
 * If you have overlooked setting the correct dialect in your `.json` file, the application may not be able to deploy because the automatic database table creation feature may not be able to create the tables required for your application.
@@ -60,11 +54,13 @@ For example, if you created your application using the `h2` dialect and are atte
 
 In this case, check that:
 * the dialect in the `pom.xml` matches your target database and then `Generate Domain` to rebuild you project for that dialect (e.g. `<dialect>MSSQL_2016</dialect>`)
-* the dialect in the `.json` file also matches (e.g. `"dialect": "org.skyve.impl.persistence.hibernate.dialect.SQLServer2008SpatialDialect",`)
+* the dialect in the `.json` file also matches (e.g. `"dialect": "org.skyve.impl.persistence.hibernate.dialect.SQLServer2012SpatialDialect",`)
 
 See more at [Changing the database dialect](./../_pages/appendix-changing-database-dialect/)
 
 ### Problems finding your app
+
+If you are having trouble loading your Skyve application in your browser after it has been successfully deployed:
 
 * Check the URL settings in the project `.json` file for the URL and context. 
 
@@ -72,19 +68,25 @@ For example, if you project has the following:
 
 ```json
 	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
-url: {
-        // server URL
-        server: "${SKYVE_URL:http://localhost:8080}",
-        // web context path
-        context: "${SKYVE_CONTEXT:/helloWorld}",
-        // home path
-        home: "/"
-    },
+	"url": {
+		// server URL
+		"server": "${SKYVE_URL:http://localhost:8080}",
+		// web context path
+		"context": "${SKYVE_CONTEXT:/helloWorld}",
+		// home path
+		"home": "/"
+	},
 ```
 
-Then you can access your app at
+Then you can access your app at:
 
 [http://localhost:8080/helloWorld](http://localhost:8080/helloWorld)
+
+If this still does not work, check the value of the `context-root` element in `src/main/webapp/WEB-INF/jboss-web.xml`. This should match the `context` setting in the project `.json` file.
+
+```xml
+	<context-root>${env.SKYVE_WEB_CONTEXT:/helloWorld}</context-root>
+```
 
 See more at [Changing the project URL](./../_pages/appendix_skyve_application_configuration/#changing-the-project-url)
 
@@ -104,20 +106,20 @@ For example, if you have the following:
 
 ```json
 	// Environment settings
-	environment: {
+	"environment": {
 		// test, sit, uat, dev etc: null = prod
-		identifier: null,
-	...
+		"identifier": null,
+	}
 ```
 
-Change this to a specific environment setting such as 
+Change this to a specific environment setting such as :
 
 ```json
 	// Environment settings
-	environment: {
+	"environment": {
 		// test, sit, uat, dev etc: null = prod
-		identifier: "dev",
-	...
+		"identifier": "dev",
+	}
 ```
 
 Then restart your app server (e.g. Wildfly).
@@ -130,54 +132,49 @@ For example, if you have the following:
 
 ```json
 	// bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
-	bootstrap: {
-        customer: "skyve",
-        user: "${BOOTSTRAP_USERNAME:setup}",
-        email: "info@skyve.org",
-        password: "${BOOTSTRAP_PASSWORD:setup}"
+	"bootstrap": {
+        "customer": "skyve",
+        "user": "${BOOTSTRAP_USERNAME:setup}",
+        "email": "test@test.com",
+        "password": "${BOOTSTRAP_PASSWORD:setup}"
     }
 ```
 
 Then your bootstrap credentials will be:
 
-user: `setup`
+* user: `setup`
+* password: `setup`
 
-password: `setup`
-
-
-* If you still have problems, ensure that the bootstrap `customer` setting matches the environment default `customer` setting and that the environment identifier is not `null` (for example, you may switch the identifier to `config` to indicate the system is being configured, or `dev` for developer mode etc.)
+If you still have problems, ensure that the bootstrap `customer` setting matches the environment default `customer` setting and that the environment identifier is not `null` (for example, you may switch the identifier to `config` to indicate the system is being configured, or `dev` for developer mode etc.)
 
 For example, if you have the following:
 
 ```json
 	// Environment settings
-	environment: {
+	"environment": {
 		// test, sit, uat, dev etc: null = prod
-		identifier: "dev",
-		// Dev Mode does not cache the view metadata allowing the effects of view changes to be observed without redeploying
-		devMode: true,
+		"identifier": "dev",
+		// Dev Mode will drop cached metadata allowing the effects of any changes to be observed without redeploying
+		"devMode": true,
 		// Customer Default
-		customer: "skyve",
-		// Run the jobs scheduled in the data store or not - set false for slave skyve instances
-		jobScheduler: true,
-		// Password hashing algorithm - usually MD5 (obsolete) or SHA1 etc
-		passwordHashingAlgorithm: "MD5"
+		"customer": "skyve",
 	},
 	// bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
-	bootstrap: {
-		customer: "skve",
-		user: "setup",
-		email: "info@skyve.org",
-		password: "setup"
+	"bootstrap": {
+		"customer": "skve",
+		"user": "setup",
+		"email": "test@test.com",
+		"password": "setup"
 	}
 ```
 
 If you set the `environment.customer` to null, the Skyve sign in page will require you to specify the _customer_ as well as the _username_ and _password_.
 
-If you specify an `environment.customer`, make sure it matches the `bootstrap.customer` or your sign in will fail.
+If you specify an `environment.customer`, make sure it matches the `bootstrap.customer` or your initial sign in will fail.
 
-### Example deployment problems
-Key problems in the `myApplication.json` configuration file block your project from deploying successfully and sometime yield non-obvious errors or stack output. The following provides three common examples.
+## Example deployment problems
+
+Key problems in the `myApplication.json` configuration file block can your project from deploying successfully and sometimes yield non-obvious errors or stack output. The following provides three common examples.
 
 ### Example output for incorrect content or addins folder
 Incorrect content folder - the folder doesn't exist:
@@ -202,6 +199,7 @@ Incorrect content folder - the folder doesn't exist:
 In this case, the folder `C:/skyve/content/` doesn't exist or the name is incorrect.
 
 Attempting to deploy in this case yields results such as the following:
+
 ```
 15:51:09,837 ERROR [org.jboss.msc.service.fail] (ServerService Thread Pool -- 61) MSC000001: Failed to start service jboss.undertow.deployment.default-server.default-host./phweb: org.jboss.msc.service.StartException in service jboss.undertow.deployment.default-server.default-host./phweb: java.lang.RuntimeException: java.lang.IllegalStateException: content.directory C:/skyve/content/ does not exist.
 	at org.wildfly.extension.undertow.deployment.UndertowDeploymentService$1.run(UndertowDeploymentService.java:85)
@@ -241,14 +239,16 @@ org.jboss.msc.service.StartException in service jboss.deployment.unit."jobManage
 Manually create an `addins` directory inside the content directory specified for your project. This is where Skyve will look for the addins directory by default if no path is specified in the json.
 
 ### Example incorrect/invalid customer in bootstrap stanza
+
 Incorrect customer in the bootstrap- there is no such customer defined:
 
 ```json
 // bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
-bootstrap: {
-	customer: "skyve",
-	user: "admin",
-	password: "admin"
+"bootstrap": {
+	"customer": "skyve",
+	"user": "admin",
+	"email": "test@test.com",
+	"password": "admin"
 }
 ```
 
@@ -302,17 +302,18 @@ Missing comma or badly formed json file:
 
 ```json
 	// bootstrap user settings - creates a user with all customer roles assigned, if the user does not already exist
-	bootstrap: {
-		customer: "skyve",
-		user: "admin",
-		password: "admin"
+	"bootstrap": {
+		"customer": "skyve",
+		"user": "admin",
+		"email": "test@test.com",
+		"password": "admin"
 	} 
 	// When taking photos or uploading images they will be compressed to within the size below (if possible)
 	maxUploadedFileSizeInBytes: 1000000 // 10 MB
 }
 ```
 
-For example, should have been a comma after the bootstrap stanza.
+For example, there should have been a comma _after_ the bootstrap stanza.
 
 Attempting to deploy in this case yields results such as the following:
 
@@ -347,13 +348,8 @@ Caused by: java.lang.ClassCastException: java.lang.Long cannot be cast to java.u
 	... 8 more
 ```
 
-
 ### Still having problems?
 
 Join us on [Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LWNjMTBlMTMzNTA4YzBlMzFhYzE0ZmRhOWIzMWViODY4ZTE1N2QzYWM1MTdlMTliNDIyYTBkOWZhZDAxOGQyYjQ) and ask our friendly team. 
 
 **[⬆ back to top](#deployment-problem-solver)**
-
----
-**Next [Changing database dialect](./../_pages/appendix-changing-database-dialect.md)**<br>
-**Previous [Backup and restore](./../_pages/backup-restore.md)**

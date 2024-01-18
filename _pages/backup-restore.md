@@ -161,7 +161,3 @@ A single storage account may be used for multiple Skyve applications. By specify
 Once this is configured and up and running successfully, you should be able to see backups in your storage account via the Microsoft Azure `Storage browser` to confirm backups are working. When using an external backup class, Skyve will first perform the backup locally then upload it to Microsoft Azure, so sufficient disk space needs to be available to create an entire backup. When performing a restore, the backup is downloaded from Microsoft Azure, then restored locally.
 
 **[⬆ back to top](#backup-and-restore)**
-
----
-**Next [Appendix](./../_pages/appendix_deployment_problem_solver.md)**<br>
-**Previous [Automated UI testing](./../_pages/automated-ui-testing.md)**
