@@ -352,7 +352,6 @@ Caused by: java.lang.ClassCastException: java.lang.Long cannot be cast to java.u
 
 If you are still having problems with your Skyve application, please join us on [Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LWNjMTBlMTMzNTA4YzBlMzFhYzE0ZmRhOWIzMWViODY4ZTE1N2QzYWM1MTdlMTliNDIyYTBkOWZhZDAxOGQyYjQ) and ask our friendly team.
 
-
-<p style="padding-bottom: 100px">
 **[⬆ back to top](#example-building-problems)**
-</p>
+
+<div style="padding-bottom: 80px"></div>

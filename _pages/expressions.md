@@ -149,6 +149,6 @@ Binder.formatMessage("{user:text}", bean); // returns Attribute
 Binder.formatMessage("{el:newDecimal2(100)|TwoOptionalDecimalPlaces}", bean); // returns 100
 ```
 
-<p style="padding-bottom: 100px">
 **[⬆ back to top](#expressions)**
-</p>
+
+<div style="padding-bottom: 80px"></div>
