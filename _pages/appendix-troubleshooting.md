@@ -41,24 +41,73 @@ Check your database to see what tables have been created. If they have not been 
 See the [Changing database dialect](https://skyvers.github.io/skyve-dev-guide/appendix-changing-database-dialect/#updating-the-json-file-for-mysql) section of the developer guide for more details.
 
 **Question**
+
 I am getting an out of memory error at startup when deploying my application:
+
 ```
 09:42:27,901 ERROR [org.jboss.msc.service.fail] (ServerService Thread Pool -- 98) MSC000001: Failed to start service jboss.deployment.unit."appName.war".undertow-deployment: org.jboss.msc.service.StartException in service jboss.deployment.unit."appName.war".undertow-deployment: java.lang.OutOfMemoryError: Java heap space
 ```
 
 **Answer**
+
 If this happens during redeploys of the application, it may be that Wildfly does not have enough memory available to it. If running from within the Eclipse plugin, this can be increased by:
 
 * double-clicking on your Wildfly server in the `Servers` panel
-* click Open launch configuration url in the Overview
-* increase the `-Xmx` memory to something larger, e.g. `-Xmx2048m`
+* click the `Open launch configuration` link in the Overview
+* increase the `-Xmx` memory to something larger, e.g. `-Xmx2048m` which corresponds to 2GB of memory for the Wildfly server
 
 ![Open launch configuration](../assets/images/appendix/troubleshooting/eclipse-memory-1.png "Open launch configuration")
+
 ![VM arguments](../assets/images/appendix/troubleshooting/eclipse-memory-2.png "VM arguments")
 
 If the error still occurs, it is most likely caused by an error in your project JSON configuration file, usually when something is not terminated correctly, e.g. an open `{` without a matching `}`, or a new stanza `{ … }` without a comma after the previous one.
 
 Try reverting your JSON to the default or an earlier version to restore a working configuration, or see [Missing comma or badly formed json file](#missing-comma-or-badly-formed-json-file) for more details.
+
+**Question**
+
+Can I change or remove the Skyve logo in Desktop mode?
+
+**Answer**
+
+To customise the buttons in desktop mode in the top right corner, this is defined in the java class `org.skyve.impl.web.faces.beans.Desktop.java` in Skyve. If you copy this file into your project in the same package, your application will use your local copy over the one in the Skyve dependency.  You can then customise the `getHeaderTemplate()` method and modify the HTML to return what you like.
+
+**Question**
+
+Can I change the help location in Desktop mode?
+
+**Answer**
+
+To customise the buttons in desktop mode in the top right corner, this is defined in the java class `org.skyve.impl.web.faces.beans.Desktop.java` in Skyve. If you copy this file into your project in the same package, your application will use your local copy over the one in the Skyve dependency.  You can then customise the `getHeaderTemplate()` method and modify the HTML to return what you like.
+
+**Question**
+
+I have a list that appears to be showing no results. However, I can see the page numbers, so the query is returning something. It was working previously, and the data definitely still exists in the database.
+
+![Empty data grid](../assets/images/appendix/troubleshooting/empty-data-grid.png "Empty data grid")
+
+**Answer**
+
+This usually occurs when the query for your list has an association where `required=“true”`, but a record with the required association is `null`.
+
+Try to make all your associations in the document for this list are not required, or comment out association columns from your query until data appears again, then work through why the association is null, or confirm if it actually should not be required.
+
+**Question**
+
+The project contains compilation errors complaining about missing admin module files. Generate domain appears to succeed but there are errors in the project. For example:
+
+![Missing admin files](../assets/images/appendix/troubleshooting/missing-admin-files.png "Missing admin files")
+
+**Answer**
+
+Check that you do not have any spaces in your project path, generate domain cannot find the admin module if there are spaces in the path. E.g. if you are on windows, make sure your project is not located somewhere which contains a space in the path such as `C:/Users/My User/workspace/projectName`. Try move it to somewhere like `C:/development/workspace/projectName` instead.
+
+If you have generated domain and the admin files are missing, you will need to export these from Foundry or revert the deletion of the admin files in git. This error will look something like: 
+
+```
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	The import modules.admin.domain cannot be resolved
+```
 
 ## Example building problems
 
