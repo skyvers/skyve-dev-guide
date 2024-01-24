@@ -109,6 +109,164 @@ Caused by: java.lang.Error: Unresolved compilation problems:
 	The import modules.admin.domain cannot be resolved
 ```
 
+**Question**
+
+I get an error saying, `Failed to link PublicFacesView`.
+
+**Answer**
+
+Something is not compiled in your project.
+
+Try run the maven target: `clean compile skyve:generateDomain`
+
+* Try do a maven -> update project in Eclipse
+  * Right click the project in Project Explorer
+  * Select Maven -> Update Project
+  * Click OK
+* Try do a project -> build in Eclipse
+  * From the Project menu in Eclipse, select `Clean…` and make sure your project or Clean all projects is selected
+  * Make sure `Build automatically` is ticked in the Project menu
+
+**Question**
+
+I get an error similar to below when performing a document query in my code:
+
+```
+Caused by: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before flushing: <moduleName><documentName>
+	at org.hibernate.engine.internal.ForeignKeys.getEntityIdentifierIfNotUnsaved(ForeignKeys.java:347)
+```
+
+**Answer**
+
+This can be caused when you are querying with a record as part of a filter that has not been persisted yet. This will not return any results, so you should check that the record is persisted before doing the query. For example:
+
+```
+if(bean.isPersisted()) {
+    DocumentQuery q = CORE.getPersistence().newDocumentQuery...
+}
+```
+
+**Question**
+
+I receive an error similar to this when trying to log in:
+
+```
+12:04:23,671 INFO  [SKYVE] (default task-4) Security - moduleName.documentName.3f02df13-3282-46ce-b860-44638c059dcb denied - not in scope
+12:04:23,671 ERROR [stderr] (default task-4) org.skyve.impl.domain.messages.SecurityException: setup does not have access to read this data
+12:04:23,672 ERROR [stderr] (default task-4) 	at deployment.projectName.war//org.skyve.impl.web.WebUtil.findReferencedBean(WebUtil.java:450)
+```
+
+**Answer**
+
+Things to try:
+
+* check you have a role defined with permission in the `<privileges>` section of your module.xml to the document  listed in the error message
+* check that the user you are logging in with has a role that has permission to the document
+* try to turn off `accessControl` in the json
+  * ```json
+    "environment": {
+        "accessControl": false,
+    }
+  * redeploy your project and try to login again, if this resolves the issue, check if there are any missing privileges or accesses
+* check that the customer you are logging in with has permission to access the data
+  * this can happen if you restore a backup but the customer does not match (the `bizCustomer` column)
+
+**Question**
+
+I get an error deploying, and Wildfly won’t start. The error complains about `filterChain`.
+
+```
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'filterChain' threw exception; nested exception is java.lang.NoSuchMethodError: com.fasterxml.jackson.dataformat.xml.XmlMapper.coercionConfigDefaults()Lcom/fasterxml/jackson/databind/cfg/MutableCoercionConfig;
+	at deployment.projectName.war//org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at deployment.sense.war//org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 53 more
+```
+
+**Answer**
+
+This can happen when there is a problem with newer project dependencies using a newer version of the Jackson XML library when being deployed on an older version of Wildfly (e.g. Wildfly 20 which was previously used by Skyve Foundry).
+
+This can be corrected by disabling the Wildfly module which brings in Jackson by creating a `jboss-deployment-structure.xml` in src/main/webapp/WEB-INF.
+
+Place this in the contents of the `jboss-deployment-structure.xml` and redeploy:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2">
+	<deployment>
+		 <exclude-subsystems>
+	        <subsystem name="jaxrs" />
+	    </exclude-subsystems>
+	</deployment>
+</jboss-deployment-structure>
+```
+
+**Question**
+
+I have a scenario where one module is being referred to in another module, e.g. `<document ref="Branch" moduleRef="organizations" />`. In order to access that dependent module, for a user, we have to give at least a viewer role to that user. Even though we add `<document ref="Branch" moduleRef="organizations" />`, when we are giving that viewer permissions, I can access that document functionalities, but I am seeing it’s menu, which I don't want to show to this user, I want to hide this.
+
+**Answer**
+
+Permissions to documents are defined by the module which contains the document, not the importing module. The easiest way to solve this is to create a new role in the `organizations` module, which has read access to Branch (and any other documents you may need from that module) but has **no** menu access. This will permit them to read the data, but that module will not show up for the user as they have no menu access to any documents.
+
+**Question**
+
+I have some custom routes defined, but I do not see the screens I expect in responsive mode.
+
+**Answer**
+
+If you have a touchscreen laptop, Skyve often detects this as a tablet instead of a laptop. Check that you are not being routed to the `tablet` Uxui. Any changes to the `external` route will also need to be applied to `tablet` in the router.
+
+**Question**
+
+I am not seeing my changes when I deploy locally, something feels like it might be out of sync. What is the best way to refresh everything?
+
+**Answer**
+
+* Check that `devMode` is set to `true` in your project json in `wildfly/standalone/deployments`. This should be true when running locally and false when running in production.
+* Try do a maven -> update project in Eclipse
+  * Right click the project in Project Explorer
+  * Select Maven -> Update Project
+  * Click OK
+* Try do a project -> build in Eclipse
+  * From the Project menu in Eclipse, select `Clean…` and make sure your project or Clean all projects is selected
+  * Make sure `Build automatically` is ticked in the Project menu
+* Make sure you have a clean deployment in Wildfly
+  * right click the project name in your `Servers` panel for your active Wildfly server
+  * select Remove
+  * right click your Wildfly server name in your `Servers` panel
+  * select `Clean…`
+  * right click your Wildfly server name in your `Servers` panel
+  * select Show In -> File Explorer
+  * make sure there is not a projectName.war folder for your project, if there is, delete it
+
+**Question**
+
+My backup (or other file) fails to upload into my Skyve application. How can I increase the maximum file upload size?
+
+**Answer**
+
+There are two places that limit the maximum upload size of files into Skyve applications. If during the upload you receive a “File is too large” error, Skyve is blocking the upload due to application configuration. If the upload starts but never completes, Wildfly has prevented the file from uploading (the default maximum upload size in Skyve and Wildfly is 10Mb).
+
+![File too large](../assets/images/appendix/troubleshooting/file-too-large.png "File too large")
+
+If this project is being hosted by Skyve Foundry, there are two places to change the max upload size:
+
+* In the .json file for your project’s database dialect, which will live in projectRoot/docker/database/project.json. Update `upload.file.maximumSizeMB` with the new maximum file size.
+* From Skyve Foundry, on the Deploy tab of your application, switch to advanced mode. Update the maximum upload size limit in bytes and redeploy your application.
+
+If you are experiencing this problem locally, or on a manual server install, the Wildfly application server default maximum upload size is 10mb. This will need to be increased.
+
+* Stop Wildfly if it is running
+* Navigate to <wildfly install directory>/standalone/configuration
+* Edit `configuration.xml`
+* search for the undertow subsystem, something like `<subsystem xmlns="urn:jboss:domain:undertow:12.0"`
+* for the `http-listener` and `https-listener`, add a `max-post-size` attribute, e.g.
+```xml
+<http-listener name="default" socket-binding="http" max-post-size="104857600" redirect-socket="https" enable-http2="true"/>
+```
+* start Wildfly
+
 ## Example building problems
 
 ### Problems building your app
