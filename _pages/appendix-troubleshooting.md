@@ -262,8 +262,9 @@ If you are experiencing this problem locally, or on a manual server install, the
 * Edit `configuration.xml`
 * search for the undertow subsystem, something like `<subsystem xmlns="urn:jboss:domain:undertow:12.0"`
 * for the `http-listener` and `https-listener`, add a `max-post-size` attribute, e.g.
+
 ```xml
-<http-listener name="default" socket-binding="http" max-post-size="104857600" redirect-socket="https" enable-http2="true"/>
+    <http-listener name="default" socket-binding="http" max-post-size="104857600" redirect-socket="https" enable-http2="true"/>
 ```
 * start Wildfly
 
