@@ -10,6 +10,56 @@ sidebar:
 
 The following are some common problems and solutions when working with Skyve applications.
 
+## Frequently Asked Questions
+
+**Question**
+
+I am having issues with a new project not showing my added modules.  My menu entries don't show up, the modules aren't listed in the data maintenance section, and defined roles don't appear when editing a user.  The modules are in the WAR archive.  I can see from the Wildfly log that the modules are being parsed, and related tables are created in the database.
+
+**Answer**
+
+If your application runs locally and you already have a bootstrap user to sign in with, check if your bootstrap user has permission to the other modules.
+
+When Skyve first starts up and creates the bootstrap user, it will grant that user all module roles. 
+
+If you add a module *after* this user is created, you must manually assign the new roles.
+Check out the user guide for steps to [add a role or group to an existing user](https://skyvers.github.io/skyve-user-guide/users/#adding-a-group-or-role-to-a-user).
+
+**Question**
+
+I receive an error during deployment of an application to MySQL:
+
+```bash
+12:39:58,788 ERROR [[org.jboss.as](http://org.jboss.as/).controller.management-operation] (Controller Boot Thread) WFLYCTL0013: Operation ("deploy") failed - address: ([("deployment" => "iqms.war")]) - failure description: {"WFLYCTL0080: Failed services" => {"jboss.deployment.unit.\"iqms.war\".undertow-deployment" => "java.lang.RuntimeException: java.lang.IllegalStateException: Cannot initialise either the data schema or the bootstrap user.
+    Caused by: java.lang.RuntimeException: java.lang.IllegalStateException: Cannot initialise either the data schema or the bootstrap user.
+```
+
+**Answer**
+
+Check your database to see what tables have been created. If they have not been created for all modules, you may need to update your hibernate settings in your application json config file to specify the `catalog`. 
+
+See the [Changing database dialect](https://skyvers.github.io/skyve-dev-guide/appendix-changing-database-dialect/#updating-the-json-file-for-mysql) section of the developer guide for more details.
+
+**Question**
+I am getting an out of memory error at startup when deploying my application:
+```
+09:42:27,901 ERROR [org.jboss.msc.service.fail] (ServerService Thread Pool -- 98) MSC000001: Failed to start service jboss.deployment.unit."appName.war".undertow-deployment: org.jboss.msc.service.StartException in service jboss.deployment.unit."appName.war".undertow-deployment: java.lang.OutOfMemoryError: Java heap space
+```
+
+**Answer**
+If this happens during redeploys of the application, it may be that Wildfly does not have enough memory available to it. If running from within the Eclipse plugin, this can be increased by:
+
+* double-clicking on your Wildfly server in the `Servers` panel
+* click Open launch configuration url in the Overview
+* increase the `-Xmx` memory to something larger, e.g. `-Xmx2048m`
+
+![Open launch configuration](../assets/images/appendix/troubleshooting/eclipse-memory-1.png "Open launch configuration")
+![VM arguments](../assets/images/appendix/troubleshooting/eclipse-memory-2.png "VM arguments")
+
+If the error still occurs, it is most likely caused by an error in your project JSON configuration file, usually when something is not terminated correctly, e.g. an open `{` without a matching `}`, or a new stanza `{ … }` without a comma after the previous one.
+
+Try reverting your JSON to the default or an earlier version to restore a working configuration, or see [Missing comma or badly formed json file](#missing-comma-or-badly-formed-json-file) for more details.
+
 ## Example building problems
 
 ### Problems building your app
