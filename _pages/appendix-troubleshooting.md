@@ -140,7 +140,7 @@ Caused by: org.hibernate.TransientObjectException: object references an unsaved 
 
 This can be caused when you are querying with a record as part of a filter that has not been persisted yet. This will not return any results, so you should check that the record is persisted before doing the query. For example:
 
-```
+```java
 if(bean.isPersisted()) {
     DocumentQuery q = CORE.getPersistence().newDocumentQuery...
 }
