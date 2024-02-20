@@ -268,6 +268,14 @@ If you are experiencing this problem locally, or on a manual server install, the
 ```
 * start Wildfly
 
+**Question**
+
+The `Generating Edit View` target feature in my IDE fails to generate a view XML when the customer is not `skyve`. How can I generate views for other customer names?
+
+**Answer**
+
+Check the correct customer name is defined in the pom.xml. Our maven plugins can determine the customer from the file system if there is only 1 customer, otherwise they will prompt for the customer if there is more than 1.
+
 ## Example building problems
 
 ### Problems building your app
