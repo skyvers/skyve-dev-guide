@@ -531,8 +531,6 @@ To add the new `newModuleExample` module, the customer xml (skyve.xml in this ca
  ...
 ```
 
-### Adding the new module package
-
 In Skyve 9.0.0 onwards, there is a maven target for adding a new module
 
 ```
@@ -541,6 +539,7 @@ mvn skyve:newModule
 
 This will prompt you for the new module name, then create a new module directory and module.xml with the specified name. It will also update your customer.xml with the new module. Note: the new module will not pass generate domain, some required fields will be missing (such as the default view).
 
+### Adding the new module package
 
 A package for the new module (newModuleExample) should be created under {projectName}/src/main/java/modules/ (alongside admin.xml in all projects).
 
