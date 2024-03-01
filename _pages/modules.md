@@ -502,6 +502,137 @@ To declare `prototype` mode, add `prototype="true"` to the module declaration as
 	prototype="true">
 ```
 
+
+## Adding New Modules
+
+The following is a worked example of creating a new Module, replace anything in curly braces with your own values
+e.g. in this example, the {customer}.xml is skyve.xml, and {moduleName}.xml is newModuleExample.xml
+
+### Updating the {customer}.xml
+
+In the following example we have the default skyve customer, skvye.xml, with just the admin module:
+
+```xml
+...
+    <modules homeModule="admin">
+        <module name="admin"/>
+    </modules>
+...
+```
+
+To add the new `newModuleExample` module, the customer xml (skyve.xml in this case) is updated as so:
+
+```xml
+...
+    <modules homeModule="newModuleExample">
+        <module name="admin"/>
+        <module name="newModuleExample"/>
+    </modules>
+ ...
+```
+
+### Adding the new module package
+
+In Skyve 9.0.0 onwards, there is a maven target for adding a new module
+
+```
+mvn skyve:newModule
+```
+
+This will prompt you for the new module name, then create a new module directory and module.xml with the specified name. It will also update your customer.xml with the new module. Note: the new module will not pass generate domain, some required fields will be missing (such as the default view).
+
+
+A package for the new module (newModuleExample) should be created under {projectName}/src/main/java/modules/ (alongside admin.xml in all projects).
+
+![New Module package](../assets/images/modules/new-module-package.png "New Module package")
+
+This new Module package should include:
+    - {moduleName}.xml where the moduleName matches the module name added to {customerName}.xml (newModuleExample.xml in this example)
+    - at least one Document package (ExampleDocument in this case) with a {documentName}.xml inside
+
+
+{moduleName}.xml should look something like the following:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="http://www.skyve.org/xml/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" title="New Module Example" 
+	name="newModuleExample" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd">
+    <homeRef>list</homeRef>
+    <homeDocument>ExampleDocument</homeDocument>
+    <documents>
+    		<document ref="ExampleDocument"/>
+    </documents>
+    <roles>
+	    	<role name="ExampleDocumentMaintainer">
+	    		<description>CRUD access to ExampleDocument.</description>
+	    		<privileges>
+					<document name="ExampleDocument" permission="CRUDC" />
+	    		</privileges>
+	    	</role>
+    </roles>
+    <menu>
+	    	<list name="Example Documents">
+	    		<role name="ExampleDocumentMaintainer"/>
+	    	</list>
+    </menu>
+</module>
+```
+
+The `name` defined in the module should match the module name used in the customer xml and the package created
+
+```xml
+<module xmlns="http://www.skyve.org/xml/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" title="New Module Example" 
+	name="newModuleExample" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd">
+```
+
+At least one Document should be defined (ExampleDocument in this case):
+
+```xml
+<documents>
+	<document ref="ExampleDocument"/>
+</documents>
+```
+
+A role should be created (ExampleDocumentMaintainer) and a menu should be added:
+
+```xml
+<roles>
+    	<role name="ExampleDocumentMaintainer">
+    		<description>CRUD access to ExampleDocument.</description>
+    		<privileges>
+				<document name="ExampleDocument" permission="CRUDC" />
+    		</privileges>
+    	</role>
+</roles>
+```
+
+A menu should be added for the module:
+
+```xml
+<menu>
+    	<list name="Example Documents" query="qAllExampleDocuments">
+    		<role name="ExampleDocumentMaintainer"/>
+    	</list>
+</menu>
+```
+
+And a query needs to be created for the Document:
+
+```xml
+<queries>
+    	<query name="qAllExampleDocuments" documentName="ExampleDocument">
+    		<description>Default Query for all ExampleDocument</description>
+    		<columns>
+    			<column binding="bizKey"/>
+    		</columns>
+    	</query>
+</queries>
+```
+
+You can now run up the application and see the new Module, if the new Module is not visible, check the roles assigned to the logged in user, you may need to Add the new role via the UI (Admin > Security Admin > Users > zoom into the logged in user > Roles tab > add the new Role created (ExampleDocumentMaintainer in this example), then log out and log back in to see the new Module.
+
+
+
 **[⬆ back to top](#modules)**
 
 ---
