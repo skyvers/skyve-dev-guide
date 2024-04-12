@@ -8,51 +8,185 @@ sidebar:
   nav: docs
 ---
 
-## Recommended requirements 
-We recommend the following:
+The following page describes the steps required to set up an on-premise Skyve server instance. This is a high-level overview and assumes a basic understanding of the technologies involved. For more detailed information, refer to the documentation for the specific technologies.
+
+## Recommended requirements
+
+The minimum server requirements are: 
+
 - 4GB RAM for Linux and 8GB RAM for Windows
-- Java JDK 11 (this is the JDK for Java 11)
-- Wildfly 20+
-- Disk space requirements depend on the nature of the application especially if the database and content repository are located on the same drive, however, for most common applications, 50GB drive space will probably be sufficient.
+- Java JDK 17 (this is the JDK for Java 17)
+- Wildfly 30+
+- Disk space requirements vary based on the application, especially if the database and content repository share the same drive. However, most applications should run smoothly with at least 50GB of drive space.
 
-## Installation of prerequisites
-To run a Skyve application, the server requires:
+## Installation steps
 
-Java 11 - while the JRE is sufficient, the JDK is recommended.
- - Download the Java JDK 11 from https://www.oracle.com/technetwork/java/javase/downloads 
+### Windows
 
-Wildfly 20+
- - Download from http://wildfly.org/downloads/   
- - This link may assist (even though it is for an older version of Wildfly)- https://linuxtechlab.com/wildfly-10-10-1-0-installation/ 
-
-## Installing database driver
-For database access, load the appropriate driver and declare this driver in the Wildfly standalone.xml configuration file.
-
-For example, for SQL Server:
-- load the sqljdbc42.jar into wildfy.../modules/system/layers/base/com/microsoft/sqlserver/main/
-- copy the following definition into a new file  wildfy.../modules/system/layers/base/com/microsoft/sqlserver/main/module.xml
+1. Download and install Java 17 or 21 (requires UAC)
+    1. This can be downloaded from https://adoptium.net/temurin/releases/?os=windows&arch=x64&package=jdk
+    2. Change the defaults to also install the `JAVA_HOME` environment variable
+    3. Complete the wizard and close after the installation has completed
+1. Configure Environment Variables (requires UAC)
+    1. Search for `environment` in the Start menu and open *Edit the system environment variables*
+    2. Click the *Environment Variables* button
+    3. If `JAVA_HOME` is not present
+        1. Click *New...* in the System variables section
+        1. Enter `JAVA_HOME` for the variable name
+        1. Click Browse Directory... and browse to where the JDK was just installed, should be similar to `C:\Program Files\Eclipse Adoptium\jdk-17xxx`
+        1. Click *OK*
+    4. If the system has 8GB memory or more, click *New...* in the System variables section
+    5. Enter "JAVA_OPTS" for the variable name
+    6. Enter variable value `-Xms4G -Xmx4G -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=2G`
+    7. Click OK 3 times and then close the System window
+1. Download and install Wildfly
+    1. This can be downloaded from https://www.wildfly.org/downloads/
+    1. Unzip the downloaded `wildfly-x.x.x.Final.zip`
+    1. Move to the root of a drive, e.g. `C:\`
+1. Install any database specific drivers into Wildfly, e.g. for Microsoft SQL Server:
+    1. Download the [SQL Server JDBC Driver](https://go.microsoft.com/fwlink/?linkid=2262747)
+    1. Extract the JDBC driver
+    1. Navigate to `C:\wildfly-26.1.2.Final\modules\system\layers\base\com\microsoft\`
+    1. Create a new folder `sqlserver`
+    1. Open `sqlserver` and create a new folder `main`
+    1. Copy the downloaded `mssql-jdbc-12.6.1.jre11.jar` into main
+    1. Create a new file `module.xml` and paste the contents
 
 ```xml
-    <?xml version="1.0" encoding="utf-8"?> 
-        <module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 
-        <resources> 
-                <resource-root path="sqljdbc42.jar"/> 
-        </resources> 
-        <dependencies> 
-                <module name="javax.api"/> 
-                <module name="javax.transaction.api"/>
-            <module name="javax.xml.bind.api"/>
-        </dependencies> 
-    </module>
+<?xml version="1.0" encoding="utf-8"?> 
+<module xmlns="urn:jboss:module:1.3" name="com.microsoft.sqlserver"> 
+  <resources> 
+    <resource-root path="mssql-jdbc-12.6.1.jre11.jar"/> 
+  </resources> 
+  <dependencies> 
+    <module name="javax.api"/> 
+    <module name="javax.transaction.api"/> 
+  </dependencies> 
+</module>
 ```
 
-- declare the driver in the wildfly configuration file wildfly/standalone/configuration/standalone.xml `<drivers>` stanza as follows:
+1. Edit `wildfly/standalone/configuration.xml`
+    1. Add the SQL server driver configuration to the `drivers` section of the xml
+	
+```xml
+<driver name="sqlserver" module="com.microsoft.sqlserver">
+    <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+</driver>
+```
+
+1. Depending on your port-forwarding configuration, you may need to change the HTTPS listen port from `8443` to `443`
 
 ```xml
-    <driver name="sqlserver" module="com.microsoft.sqlserver">
-        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-    </driver>
+<socket-binding name="https" port="${jboss.https.port:443}"/>
 ```
+
+1. Find <interface name=”public”> and change to the following
+
+```xml
+<interface name="public">
+    <inet-address value="${jboss.bind.address:0.0.0.0}"/>
+</interface>
+```
+
+1. Configure Wildfly as a Windows service (requires UAC)
+    1. go to the directory `C:\wildfly\docs\contrib\scripts`
+    1. copy the folder `service`
+    1. go to the directory `C:\wildfly\bin`
+    1. paste the service folder there
+    1. Hold down shift and right click on the `C:\wildfly\bin\service` folder
+    1. Select *Open Powershell Window Here*
+    1. Type `.\service.bat install` and press *Enter*
+    1. Click *Yes* to the User Account Control prompt
+    1. The last line of text should say "Service Wildfly installed"
+    1. Close the Powershell window
+    1. Click the Windows key and type _services_, and open the Services control panel
+    1. Find the *Wildfly* service and double click
+    1. Change *Startup Type* to *Automatic (Delayed Start)*
+    1. Click *Start* then *OK*
+    1. Check the service starts and does not stop straight away
+1. Create a new folder called `content` in `C:\`
+1. Create a new folder called `addins` in `C:\content\`
+1. Update your application `appName.json` and specify the `content` path, `addins` path and environment `identifier`
+1. Deploy the application
+    1. Copy `skyve-content-x.x.x.zip` to `C:\content\addins`
+    1. Copy `appName.war.zip`, `appName.json` and `appName-ds.xml` to `C:\wildfly-x.x.x.Final\standalone\deployments`, replacing any existing files
+    1. Unzip `appName.war.zip`
+    1. Right click -> New Text File
+    1. Rename the text file to `appName.war.dodeploy` (make sure no `.txt` on the end)
+1. Once authenticated, remove the `identifier` and `bootstrap` from the json file and redeploy the application
+
+1. If required, create an inbound firewall rule for TCP port 443
+    1. Click start and type firewall and select "Windows Defender Firewall"
+    1. Click "Advanced settings"
+    1. Click "Inbound Rules" on the select, then "New Rule..." on the right
+    1. Select Port and click Next
+    1. Leave TCP selected and type `443` into "Specific local ports" and click Next
+    1. Leave "Allow the connection" selected and click Next
+    1. Uncheck Private and Public networks and click Next
+    1. Enter Wildfly as the name, and "Network port for Wildfly application server for Skyve application." as the Description
+    1. Click Finish
+
+### Linux (Ubuntu)
+
+ Assume you are working from a `sudoer`
+
+- Install OpenJDK >= 17
+    - `sudo apt update`
+    - `sudo apt install default-jdk`
+    - Test java is installed
+        - `which java`
+        - `java -version`
+- Create the wildfly user
+    - `sudo groupadd -r wildfly`
+    - `sudo useradd -r -g wildfly -d /opt/wildfly -s /sbin/nologin wildfly`
+- Install wildfly >= 27
+    - `wget https://github.com/wildfly/wildfly/releases/download/31.0.1.Final/wildfly-31.0.1.Final.tar.gz -P /tmp`
+    - Untar to /opt
+        - `sudo tar xf /tmp/wildfly-31.0.1.Final.tar.gz -C /opt/`
+    - Create a symbollic link
+        - `sudo ln -s /opt/wildfly-31.0.1.Final /opt/wildfly`
+    - Change wildfly install owner
+        - `sudo chown -RH wildfly: /opt/wildfly`
+- Run as a service
+    - `sudo mkdir -p /etc/wildfly`
+    - `sudo cp /opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf /etc/wildfly/`
+    - `sudo cp /opt/wildfly/docs/contrib/scripts/systemd/launch.sh /opt/wildfly/bin/`
+    - Make wildfly/bin content executable
+        - `sudo sh -c 'chmod +x /opt/wildfly/bin/*.sh'`
+    - `sudo cp /opt/wildfly/docs/contrib/scripts/systemd/wildfly.service /etc/systemd/system/`
+    - Reload service definitions
+        - `sudo systemctl daemon-reload`
+    - Start the wildfly service
+        - `sudo systemctl start wildfly`
+        - Check it
+            - `sudo systemctl status wildfly`
+    - Start the service automatically at boot time
+        - `sudo systemctl enable wildfly`
+- Optionally open port 8080
+    - `sudo ufw allow 8080/tcp`
+- Optionally change Wildfly JVM memory settings
+	- Edit `/opt/wildfly/bin/standalone.conf` and locate 
+	
+```
+#
+# Specify options to pass to the Java VM.
+#
+if [ "x$JBOSS_JAVA_SIZING" = "x" ]; then
+   JBOSS_JAVA_SIZING="-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m"
+fi
+```
+
+and replacing with (for example)
+
+```
+if [ "x$JBOSS_JAVA_SIZING" = "x" ]; then
+   JBOSS_JAVA_SIZING="-Xms4g -Xmx4g -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=512m"
+fi
+```
+
+- To start, stop, restart the wildfly service:
+    - `sudo service wildfly restart`
+    - availabile options are `start`/`status`/`stop`/`restart`
 
 ## Other datasource options
 
