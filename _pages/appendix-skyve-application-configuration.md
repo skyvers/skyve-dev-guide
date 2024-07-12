@@ -36,6 +36,9 @@ Ensure the `.json` properties file has been updated for the specific instance in
 Finally, ensure that the user credential that will run the wildfly service has read/write permissions to the wildfly folder and the content folder created above.
 
 ### Configuring Recaptcha for the sign in page 
+Skyve has two recaptcha options that you can use, `Google Recaptcha` and `Cloudflare Turnstile`. To enable one of the two options, follow the steps below:
+
+#### Google Recaptcha
 
 First, sign up for a Google Recaptcha key as follows:
 1. Visit [Google Recaptcha](https://www.google.com/recaptcha/intro/v3.html) console and sign in
@@ -50,7 +53,9 @@ First, sign up for a Google Recaptcha key as follows:
 Once you have received your *site* key, copy your key into the Startup Configuration section of the Admin menu of your Skyve application:
 1. From the Admin menu, open Configuration
 2. Change tabs to the Startup Configuration tab
-3. Scroll down to the Security Settings section, enter the Key and then press Save at the top of the form.
+3. Scroll down to the Security Settings section
+4. Select 'Google Recaptcha' as the CAPTCHA Type
+5. Enter the Site Key and then press Save at the top of the form.
 
 Alternatively, you can place the API key in the project JSON file under `api` -> `googleRecaptchaSiteKey:` 
 
@@ -58,6 +63,32 @@ Alternatively, you can place the API key in the project JSON file under `api` ->
 	// API Settings
 	api: {
 		googleRecaptchaSiteKey: "xxxxxxxxxxx",
+```
+#### Cloudflare Turnstile (requires skyve > 9.1.0) 
+
+First, sign up for a Cloudflare Turnstile key as follows:
+1. Visit [Cloudflare](https://dash.cloudflare.com/sign-up) and sign up
+2. Click Turnstile in the sidebar menu on the left
+3. Click the 'Add site' button to add a new site
+4. Enter a site name to identify what this key will be for (the name of your Application)
+5. Enter the domain name of your Skyve application e.g 'app.website.com' or 'website.com'
+6. Select the widget mode you wish to use.
+7. Click 'Create'
+
+Once you have received your *site* key and *secret* key, copy your key into the Startup Configuration section of the Admin menu of your Skyve application:
+1. From the Admin menu, open Configuration
+2. Change tabs to the Startup Configuration tab
+3. Scroll down to the Security Settings section
+4. Select 'Cloudflare Turnstile' as the CAPTCHA Type
+5. Enter the Site Key and Secret Key and then press Save at the top of the form.
+
+Alternatively, you can place the API keys in the project JSON file under `api` 
+
+```
+	// API Settings
+	api: {
+		cloudflareTurnstileSiteKey: "xxxxxxxxxxx",
+		cloudflareTurnstileSecretKey: "xxxxxxxxxxx",
 ```
 
 ### Changing the project URL
