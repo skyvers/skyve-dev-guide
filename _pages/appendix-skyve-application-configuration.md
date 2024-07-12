@@ -64,14 +64,14 @@ Alternatively, you can place the API key in the project JSON file under `api` ->
 	api: {
 		googleRecaptchaSiteKey: "xxxxxxxxxxx",
 ```
-#### Cloudflare Turnstile
+#### Cloudflare Turnstile (requires skyve > 9.1.0) 
 
 First, sign up for a Cloudflare Turnstile key as follows:
 1. Visit [Cloudflare](https://dash.cloudflare.com/sign-up) and sign up
 2. Click Turnstile in the sidebar menu on the left
 3. Click the 'Add site' button to add a new site
 4. Enter a site name to identify what this key will be for (the name of your Application)
-5. Enter the domain name of your application e.g 'website.com' or 'company.website.com'
+5. Enter the domain name of your Skyve application e.g 'app.website.com' or 'website.com'
 6. Select the widget mode you wish to use.
 7. Click 'Create'
 
