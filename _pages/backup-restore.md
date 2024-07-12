@@ -141,18 +141,23 @@ From version 6.0 (8.2.3 for multi-tenant applications), Skyve also supports clou
 },
 ```
 
-* add the following dependencies to your application's `pom.xml`:
+* add the following dependency to your application's `pom.xml`:
 
+**For Skyve 8.x.x**
 ```xml
 <dependency>
     <groupId>com.azure</groupId>
     <artifactId>azure-storage-blob</artifactId>
-    <version>12.14.0</version>
+    <version>12.25.2</version>
 </dependency>
+```
+
+**For Skyve 9.x.x**
+```xml
 <dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>2.12.5</version>
+    <groupId>com.azure</groupId>
+    <artifactId>azure-storage-blob</artifactId>
+    <version>12.26.1</version>
 </dependency>
 ```
 
