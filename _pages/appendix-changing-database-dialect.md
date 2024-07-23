@@ -119,7 +119,7 @@ Refer to other Wildfly documentation for detailed information, but the basic ste
 
 Place the appropriate jdbc driver into your `\wildfly-x\modules\system\layers\base\` folder.
 
-For MSSQL you should have the following files in `\wildfly-x\modules\system\layers\base\com\microsoft\sqlserver\main\`:
+For Microsoft SQL Server, you should have the following files in `\wildfly-x\modules\system\layers\base\com\microsoft\sqlserver\main\`:
 
 * module.xml
 * sqljdbc_auth.dll (if you use windows authentication)
@@ -186,20 +186,20 @@ where `catalog` represents the _database_ name and `schema` is the namespace - t
 
 #### Wildfly driver configuration for MySQL
 
-Place the appropriate jdbc driver into your `/wildfly-x/modules/system/layers/base/` folder.
+Download and place the appropriate jdbc driver into your `/wildfly-x.x.x/modules/system/layers/base/com/mysql/main` folder, e.g. `mysql-connector-j-8.0.33.jar`.
 
-For MySQL you should have the following files in `/wildfly-x/modules/system/layers/base/com/mysql/main/`:
+For MySQL you should have the following files in `/wildfly-x.x.x/modules/system/layers/base/com/mysql/main/`:
 
 * module.xml
-* mysql-connector-java-5.{version}.jar
+* mysql-connector-java-8.{version}.jar
 
-An example module.xml file is:
+An example `module.xml` file is:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?> 
 <module xmlns="urn:jboss:module:1.3" name="com.mysql">
     <resources>
-        <resource-root path="mysql-connector-java-5.1.33.jar" />
+        <resource-root path="mysql-connector-j-8.0.33.jar" />
     </resources>
     <dependencies>
         <module name="javax.api"/>
@@ -214,7 +214,7 @@ Ensure that the driver matches the version of your jar
 <resource-root path="mysql-connector-java-{version}.jar"/>
 ``` 
 
-Add the driver to the `drivers` stanza in the wildfly configuration, for example in `/wildfly-x/standalone/configuration/standalone.xml`
+Add the driver to the `drivers` stanza in the wildfly configuration, for example in `/wildfly-x.x.x/standalone/configuration/standalone.xml`
 
 ```xml
 <drivers>
@@ -223,6 +223,7 @@ Add the driver to the `drivers` stanza in the wildfly configuration, for example
 	</driver>
 ...
 ```
+
 ##### Updating the JSON file for MySQL
 
 When changing to MySQL, ensure that you specify the catalog in the project `.json` file, for example:
@@ -238,6 +239,15 @@ where `catalog` represents the _database_ name and `schema` is the namespace - t
 
 *NOTE* - don't forget to also update the project `pom.xml` file for the chosen dialect and update the project `-ds.xml` file accordingly.
 
+##### Create a new schema in MySQL
+
+Unlike H2, MySQL requires a schema to be created before it can be used. To create a new schema in MySQL, use the following SQL:
+
+```sql
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ <schemaName> CHARACTER SET utf8 COLLATE utf8_general_ci;
+```
+
+Replacing `<schemaName>` with the name of the schema you wish to create, which should match your `ds.xml` and json `catalog` settings.
 
 #### Problems with utf8 - character sets for other languages - MySQL
 If your Skyve application is not storing utf8 chars correctly, and you're using MySQL, check that MySQL is configured for utf8. Check the charset of the DB and tables, e.g. the default  is 'latin1'.
