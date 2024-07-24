@@ -8,12 +8,11 @@ sidebar:
   nav: docs
 ---
 
-## Skyve application configuration
-
 To deploy a Skyve application, there are typically three artefacts:
-- the application '.war' folder
-- the datasource 'ds.xml' file
-- the properties '.json' file
+
+- the application `.war` folder
+- the datasource `ds.xml` file
+- the properties `.json` file
 
 For example, if your Skyve application is called 'myApplication', these will be:
 - `myApplication.war`
@@ -36,11 +35,11 @@ Ensure the `.json` properties file has been updated for the specific instance in
 
 Finally, ensure that the user credential that will run the wildfly service has read/write permissions to the wildfly folder and the content folder created above.
 
-### Configuring Recaptcha for the sign in page 
+## Configuring Recaptcha for the sign in page 
 
 Skyve has two recaptcha options that you can use, `Google Recaptcha` and `Cloudflare Turnstile`. To enable one of the two options, follow the steps below:
 
-#### Google Recaptcha
+### Google Recaptcha
 
 First, sign up for a Google Recaptcha key as follows:
 
@@ -70,7 +69,7 @@ Alternatively, you can place the API key in the project JSON file under `api` ->
 		googleRecaptchaSecretKey: "xxxxxxxxxxx",
 	}
 ```
-#### Cloudflare Turnstile (requires skyve > 9.1.0) 
+### Cloudflare Turnstile (requires skyve > 9.1.0) 
 
 First, sign up for a Cloudflare Turnstile key as follows:
 
@@ -99,7 +98,7 @@ Alternatively, you can place the API keys in the project JSON file under `api`
 	}
 ```
 
-### Changing the project URL
+## Changing the project URL
 
 Normally, the project name will be the name of the `.war` - which will be the context on the URL for example `https://skyve.org/myApplication` where `myApplication` is also the name of the project.
 
@@ -157,13 +156,13 @@ from
 
 ```json
 	// URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
-	url: {
+	"url": {
 		// server URL
-		server: "https://skyve.org",
+		"server": "https://skyve.org",
 		// web context path
-		context: "/myApplication",
+		"context": "/myApplication",
 		// home path
-		home: "/"
+		"home": "/"
 	},
 ```
 
@@ -171,13 +170,13 @@ to
 
 ```json
         // URL settings - various SKYVE URL/URI fragments - useful for linking and mailing
-	url: {
+	"url": {
 		// server URL
-		server: "https://skyve.org",
+		"server": "https://skyve.org",
 		// web context path
-		context: "/tax_management",
+		"context": "/tax_management",
 		// home path
-		home: "/"
+		"home": "/"
 	},
 ```
 
@@ -190,7 +189,7 @@ Note that
 * You need to manually remove the previous `myApplication.war` if you didn't in the preparation stage. 
 * If you didn't rename the previous `myApplication.json` and `myApplication-ds.xml`, you should these files to avoid confusion (for example if the datasource name is the same for both the old `myApplication-ds.xml` and `tax_management-ds.xml`).
 
-### Protecting the ds.xml credentials
+## Protecting the ds.xml credentials
 
 The ds.xml password is clear text. While it is possible to use an encrypted password for the datasource connection, this is of limited use.
 
@@ -199,7 +198,7 @@ Instructions are available if this is required, for example [Encrypt password fo
 This approach has limited use as it is really just a level of indirection. The credentials need to be decrypted and so a key needs to be stored. This means the file containing the key then needs to be protected on the file system - and if this is possible, it would seem reasonable to simply apply that level of protection to the ds.xml file (and other config) directly.
 
 
-### Example deployment instructions for Single Sign-on
+## Example deployment instructions for Single Sign-on
 
 The following steps are to install an instance of XXX onto a vanilla
 Windows 10.
@@ -286,10 +285,3 @@ check `http://&lt;server&gt;.net.arc:8080/arc/init.biz`
 if error - check that you have an account in XXX, check
 `C:\wildfly\standalone\log\server.log` to see your user
 principal is being recognised
-
-**[⬆ back to top](#skyve-application-configuration)**
-
----
-
-**Next [Changing database dialect](./../_pages/appendix-deploying-a-skyve-application.md)**<br>
-**Previous [Changing database dialect](./../_pages/appendix-changing-database-dialect.md)**
