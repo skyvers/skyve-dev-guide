@@ -35,9 +35,9 @@ Ensure the `.json` properties file has been updated for the specific instance in
 
 Finally, ensure that the user credential that will run the wildfly service has read/write permissions to the wildfly folder and the content folder created above.
 
-## Configuring Recaptcha for the sign in page 
+## Configuring Captcha for the sign in page 
 
-Skyve has two recaptcha options that you can use, `Google Recaptcha` and `Cloudflare Turnstile`. To enable one of the two options, follow the steps below:
+Skyve has two Captcha options that you can use, `Google Recaptcha` and `Cloudflare Turnstile`. To enable one of the two options, follow the steps below:
 
 ### Google Recaptcha
 
