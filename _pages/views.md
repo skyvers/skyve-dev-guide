@@ -1736,7 +1736,7 @@ inject            | Y |   |
 spinner           | Y | Y |  
 listMembership    | Y | Y |  
 password          | Y | Y |  
-richText          | Y |   |  
+richText          | Y | Y |  
 radio             | Y | Y |  
 slider            | Y | Y |  
 spacer            | Y | Y |  
