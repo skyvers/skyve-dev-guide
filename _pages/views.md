@@ -606,7 +606,7 @@ will be displayed in bold type if the attribute is required.
 		</tr>
 		<tr>
 			<td>comparison</td>
-			<td>Displays the differences between two beans instances and the ability for the users to apply differences between the instances (for an example, see the <em>Audits</em> function in the Skyve admin module</td>
+			<td>Displays the differences between two beans instances and the ability for the users to apply differences between the instances (for an example, see the <em>Audits</em> function in the Skyve admin module)</td>
 			<td><img src="../assets/images/views/comparison.png" alt="comparison"/></td>
 			<td>Non-form</td>
 		</tr>
@@ -773,7 +773,7 @@ will be displayed in bold type if the attribute is required.
 		<tr>
 			<td>richText </td>
 			<td>Provides a rich text area together with formatting toolbar.</td>
-			<td> <img src="../assets/images/views/image115.png" alt="richText"/></td>
+			<td><img src="../assets/images/views/image115.png" alt="richText"/></td>
 			<td>Form</td>
 		</tr>
 		<tr>
@@ -784,6 +784,7 @@ will be displayed in bold type if the attribute is required.
 					<li>floatingPixelWidth</li>
 					<li>percentageWidth</li>
 				</ul>
+			</td>
 			<td><img src="../assets/images/views/sidebar-visible.png" alt="sidebar"/></td>
 			<td>Non-form</td>
 		</tr>
@@ -796,7 +797,8 @@ will be displayed in bold type if the attribute is required.
 					<li>numberOfDiscreteValues</li>
 					<li>roundingPrecision</li>
 				</ul>
-				<br/> May be displayed vertically when <em>vertical</em> is set to <code>true</code>.</td>
+				<br/> May be displayed vertically when <em>vertical</em> is set to <code>true</code>.
+			</td>
 			<td><img src="../assets/images/views/image116.png" alt="slider"/></td>
 			<td>Form</td>
 		</tr>
