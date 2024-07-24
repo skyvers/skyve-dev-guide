@@ -85,6 +85,8 @@ docs:
     children:
       - title: "Troubleshooting"
         url: /appendix-troubleshooting/
+      - title: "Skyve application configuration"
+        url: /appendix-skyve-application-configuration/
       - title: "Changing database dialect"
         url: /appendix-changing-database-dialect/                  
       - title: "Deploying a Skyve application"
