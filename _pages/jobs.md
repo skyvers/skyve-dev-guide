@@ -274,3 +274,5 @@ EXT.getJobScheduler().runBackgroundTask(MonthlyReportTask.class, CORE.getUser(),
 
 
 **[⬆ back to top](#jobs)**
+
+<div style="padding-bottom: 100px"></div>
