@@ -237,7 +237,7 @@ It’s `execute()` method takes the current contextual bean and is never null - 
 
 The persistence is set as async for the thread so that aysnc timeouts are used during its execution similar to Jobs (configured in the application .json properties file).
 
-### Background Task Classes
+### ViewBackgroundTask
 
 Background tasks must extend the `org.skyve.job.ViewBackgroundTask` abstract class. The application logic to run in the background is placed in the `execute()` method.
 
