@@ -8,12 +8,17 @@ sidebar:
   nav: docs
 ---
 
-# Jobs
-Skyve provides a mechanism for executing and scheduling offline Jobs
-(i.e. Jobs processed irrespective of the state of the conversation or
-session).
+Skyve provides two different mechanisms for executing tasks in the background, jobs and background tasks. Jobs can be scheduled to 
+run at a specific time or on a recurring schedule. Background tasks are used to run tasks in the background while the user continues 
+to work in the application.
 
-Jobs are declared in the *module.xml* file in the *jobs* section.
+## Jobs
+
+A Job represents an asynchronous process that can be scheduled or run ad-hoc. Jobs are registered against a module and available 
+to be scheduled through the user interface. The are typically long-running tasks that can be scheduled to run at a specific time 
+or on a recurring schedule. 
+
+Jobs are declared in the `module.xml` file in the `<jobs>` section.
 
 ![Job declaration](../assets/images/jobs/image142.png "_Job declaration within the module.xml file")
 
@@ -28,10 +33,11 @@ The *admin* module provides comprehensive job scheduling functionality,
 including assignment of the user under whose privileges the Job will be
 executed.
 
-Scheduling Jobs from the *admin* module requires the *JobMaintainer*
-role.
+Scheduling Jobs from the *admin* module requires the *JobMaintainer* role.
 
-## Job Classes
+Although job logging can be turned off for a Job, each run is generally logged.
+
+### Job Classes
 
 Job classes must extend the `org.skyve.job.Job` abstract class. Custom job code is located in the `execute()` method.
 
@@ -133,7 +139,7 @@ public class ExpirePasswordJob extends IteratingJob<UserExtension> {
 }
 ```
 
-## Job Transactions
+### Job Transactions
 
 Unless specified by the developer, a job will run in a single transaction and roll-back if an exception is thrown. This may be suitable especially for jobs dealing with small numbers of beans. 
 
@@ -206,7 +212,7 @@ For further examples, review the following classes in the Skyve admin module:
 * admin.Tag.PerformDocumentActionForTagJob 
 * admin.UserList.BulkUserCreationJob
 
-## Logging
+### Logging
 
 The Job class provides the `List<String> log` for developer logging.
 
@@ -220,10 +226,51 @@ Then click to view the job details and log.
 
 ![View Job details and log](../assets/images/jobs/viewing-job-results-detail.png "View Job details and log")
 
+## Background Tasks
+
+Background tasks allow the user to continue working in the application while a task is running in the background. This can be used for short-running tasks need to continue to run in the background, but do not need to be scheduled like a Job. Some examples of this are sending an email, or preparing a report.
+
+A `ViewBackgroundTask` is a short-running asynchronous process that can be kicked off via WebContext (no percent complete or interrupt method). It is applicable to the UI it is initiated from, and has access to and the ability to control the conversation caching in its execution via `cacheConversation()`.
+
+It continues to use the `Persistence` instance from the conversation with all the state as if it was another user gesture (same database cache, same local UI mutations).
+It’s `execute()` method takes the current contextual bean and is never null - ie it always must have a UI context (the record that initiated the task).
+
+The persistence is set as async for the thread so that aysnc timeouts are used during its execution similar to Jobs (configured in the application .json properties file).
+
+### Background Task Classes
+
+Background tasks must extend the `org.skyve.job.ViewBackgroundTask` abstract class. The application logic to run in the background is placed in the `execute()` method.
+
+```java
+public class MonthlyReportTask extends ViewBackgroundTask<MonthlyReport> {
+
+	@Override
+	public void execute(MonthlyReport bean) throws Exception {
+		// generate and email the report
+		// ...
+	}
+}
+```
+
+There are a couple of different methods of running the background task. From an action or Bizlet method with a `webContext`, there is a convenience `background()` method to run the task:
+
+```java
+	@Override
+	public ServerSideActionResult<MonthlyReport> execute(MonthlyReport bean, WebContext webContext) throws Exception {
+		// initiate task
+		webContext.growl(MessageSeverity.info, String
+				.format("A report job has been initiated. You will receive an email once the report is successfully generated."));
+		webContext.background(MonthlyReportTask.class);
+		
+		return new ServerSideActionResult<>(bean);
+	}
+```
+
+Alternatively, if you have access to the `webId` of the conversation, a task can be started in a similar method to immediately executing a job:
+
+```java
+EXT.getJobScheduler().runBackgroundTask(MonthlyReportTask.class, CORE.getUser(), webContext.getWebId());
+```
 
 
 **[⬆ back to top](#jobs)**
-
----
-**Next [Utility Classes](./../_pages/utility-classes.md)**  
-**Previous [Reports](./../_pages/reports.md)**
