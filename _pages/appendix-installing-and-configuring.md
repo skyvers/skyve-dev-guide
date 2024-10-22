@@ -22,7 +22,7 @@ For this section, we have chosen to show how to use Eclipse as the development e
 NOTE: do not use the Eclipse EE9 preview, you will need the Jakarta EE Full & Web Distribution
 
   - Click here to [Download Eclipse](https://www.eclipse.org/downloads/packages/)
-  - Next, Click on [Eclipse IDE for Enterprise Java Developers](https://www.eclipse.org/downloads/packages/release/2024-09/r/eclipse-ide-enterprise-java-and-web-developers)
+  - Next, Click on Eclipse IDE for Enterprise Java Developers
 
   ![Download Eclipse](../assets/images/appendix/installing-configuring/1.jpg "Download Eclipse")
 
@@ -31,9 +31,9 @@ NOTE: do not use the Eclipse EE9 preview, you will need the Jakarta EE Full & We
 
 #### Download and Install JDK
 
-  - Install an OpenJDK 17 version from [AdoptOpenJDK](https://adoptium.net/temurin/releases/?package=jdk&version=17) (or an alternative OpenJDK of your choice)
+  - Install an OpenJDK 17 version (JDK version 21 is also supported) from [AdoptOpenJDK](https://adoptium.net/temurin/releases/?package=jdk&version=17) (or an alternative OpenJDK of your choice)
 
-## 3.3. Install and Configure Wildfly Server
+## Install and Configure Wildfly Server
 
 We need an application server to be able to access the application through our browser. For this we will demonstrate using Red Hat's Wildfly application server plugin. Skyve apps can be deployed on recent versions of Wildfly (27+).
 
@@ -103,27 +103,14 @@ After JBoss Tools is installed properly, follow these steps to install WildFly S
    ![runtime-jre](../assets/images/wildfly/9.png "runtime-jre")
 
 8.  Wait for Eclipse to complete the download and installation process before moving on to the next step
- 
-## Configuring Java
-* Install an OpenJDK 17 version from [Temurin OpenJDK](https://adoptium.net/temurin/releases/?version=17) (or an alternative OpenJDK of your choice)
-    * Change the defaults to also install the JAVA_HOME environment variable
-    * Complete the wizard and close after the installation has completed 
-* Configure Environment Variables (Windows, requires UAC)
-    1. Search for `environment` in the Start menu and open *Edit the system environment variables*
-    1. Click the *Environment Variables* button
-    1. If JAVA_HOME is not present
-        1. Click *New...* in the System variables section
-        1. Enter "JAVA_HOME" for the variable name
-        1. Click Browse Directory... and browse to `C:\Program Files\Eclipse Adoptium\jdk-17....-hotspot` or the directory you installed it
-        1. Click *OK*
 
 ## Configuring the IDE (Windows example)
 
-* Create `C:\_\` (go to `C:\` -> right click -> New Folder then type `_` as the 
+* Create `C:\workspace\` (go to `C:\` -> right click -> New Folder then type `workspace` as the 
 folder name). You may use any folder for you workspace in Eclipse, just make sure you remember 
 the folder you've chosen and try to ensure that the folder name has no spaces to avoid 
 any issues with Java paths and spaces.
-* Start Eclipse using Eclipse.exe and select `C:\_\` as workspace, tick 'Use as 
+* Start Eclipse using Eclipse.exe and select `C:\workspace\` as workspace, tick 'Use as 
 default option - do not ask again', Cancel the welcome wizard and Close the welcome 
 tab in the editor frame.
 * Change compiler compliance level to 17 (Window -> Preferences -> Java -> Compiler) 
