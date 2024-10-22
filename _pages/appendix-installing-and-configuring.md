@@ -103,33 +103,7 @@ After JBoss Tools is installed properly, follow these steps to install WildFly S
    ![runtime-jre](../assets/images/wildfly/9.png "runtime-jre")
 
 8.  Wait for Eclipse to complete the download and installation process before moving on to the next step
-  
-We also recommend you:
-* load an RDBMS like MySQL, Postgres or MS SQL that is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
-  administrator username and password (if you're unable to do this, you can use H2 file-based database which requires no install).
-* register for an account with GitHub, GitLab or BitBucket (or other git-based repository)
-* register for an account on [Skyve Foundry](https://foundry.skyve.org/foundry)
-* register on our [public Slack account in case you have questions](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LTRkMWUxZDBlZmFlMmJkMjQzYWMzYWQxMmQzYWQ1ZTdlODNkNjRlYzVhYjFmMmQ4NTlhYWY4MjNhMGVkZGNlMjY)
-
-For this example, to use Microsoft SQL Server as the database for the Skyve project:
-* If you do not already have SQL Server installed:
-  * download and install the latest version of the Developer or Express edition for your platform from the [Microsoft website](https://www.microsoft.com/en-au/sql-server/sql-server-downloads)
-  * you will also need to download and install a copy of [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) to connect you your database and execute scripts
-* Open SQL Server Management Studio, choose Authentication as Windows Authentication and click the 'Connect' button.
-* Create a db named 'skyve', right click Databases->New Databases... and leave everything as is and click the _OK_ button.
-* Create a user for skyve db in SQL Server Management Studio, right click Security->New->Login...
-* Create a Login name (remember this login name as you will need it later), choose 
-  SQL Server authentication and enter your password. Remember that SQL Server policy 
-  requires a 'strong' password (remember this password as you will need it later), 
-  untick the 'Enforce password expiration' and the 'User must change password at 
-  next login'
-* On the same dialog box, choose Default database as 'skyve', now go to Server Roles 
-  on left hand pane and tick 'sysadmin', then go to User Mapping and tick 'skyve' 
-  and finally, click the _OK_ button down the bottom right.
-* If you've just installed SQL server, you will need to specify the port for this 
-  database, see instructions [here](https://community.spiceworks.com/how_to/124598-find-the-port-sql-server-is-using-and-change-a-dynamic-port-to-static), 
-  again, remember the port number you've entered.
-
+ 
 ## Configuring Java
 * Install an OpenJDK 17 version from [Temurin OpenJDK](https://adoptium.net/temurin/releases/?version=17) (or an alternative OpenJDK of your choice)
     * Change the defaults to also install the JAVA_HOME environment variable
@@ -156,6 +130,32 @@ tab in the editor frame.
 press 'Apply' - press Yes for full build, and then press OK.
   
 See additional details in [Setting up a Skyve instance](./../pages/appendix_setting-up-a-skyve-instance)
+
+We also recommend you:
+* load an RDBMS like MySQL, Postgres or MS SQL that is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
+  administrator username and password (if you're unable to do this, you can use H2 file-based database which requires no install).
+* register for an account with GitHub, GitLab or BitBucket (or other git-based repository)
+* register for an account on [Skyve Foundry](https://foundry.skyve.org/foundry)
+* register on our [public Slack account in case you have questions](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LTRkMWUxZDBlZmFlMmJkMjQzYWMzYWQxMmQzYWQ1ZTdlODNkNjRlYzVhYjFmMmQ4NTlhYWY4MjNhMGVkZGNlMjY)
+
+For this example, to use Microsoft SQL Server as the database for the Skyve project:
+* If you do not already have SQL Server installed:
+  * download and install the latest version of the Developer or Express edition for your platform from the [Microsoft website](https://www.microsoft.com/en-au/sql-server/sql-server-downloads)
+  * you will also need to download and install a copy of [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) to connect you your database and execute scripts
+* Open SQL Server Management Studio, choose Authentication as Windows Authentication and click the 'Connect' button.
+* Create a db named 'skyve', right click Databases->New Databases... and leave everything as is and click the _OK_ button.
+* Create a user for skyve db in SQL Server Management Studio, right click Security->New->Login...
+* Create a Login name (remember this login name as you will need it later), choose 
+  SQL Server authentication and enter your password. Remember that SQL Server policy 
+  requires a 'strong' password (remember this password as you will need it later), 
+  untick the 'Enforce password expiration' and the 'User must change password at 
+  next login'
+* On the same dialog box, choose Default database as 'skyve', now go to Server Roles 
+  on left hand pane and tick 'sysadmin', then go to User Mapping and tick 'skyve' 
+  and finally, click the _OK_ button down the bottom right.
+* If you've just installed SQL server, you will need to specify the port for this 
+  database, see instructions [here](https://community.spiceworks.com/how_to/124598-find-the-port-sql-server-is-using-and-change-a-dynamic-port-to-static), 
+  again, remember the port number you've entered.
 
 ## Importing an existing Skyve project from Git
 
