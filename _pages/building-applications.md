@@ -74,20 +74,8 @@ Whichever way you created your project, if you want to extend your application w
 
 Once you've done this, if you started with Skyve Foundry you can continue using Foundry's free trial server for testing your application, or purchase a dedicated production instance to run your application 24/7. Remember that at any time, you can export your project from Foundry to deploy to your own infrastructure if preferred.
 
-If you started with the Skyve project creator, we're assuming you understand how to configure and deploy a production instance yourself, however [you can find detailed steps in the dev guide](../appendix/#installing-and-configuring-the-skyve-development-environment).
+You can find detailed steps to set up the local environment [here](../appendix/#installing-and-configuring-the-skyve-development-environment).
 
-### Before you start
-
-Before you begin, you need to have the following software installed:
-* Java JDK 11+
-* Eclipse or an alternative Java based Integrated Development Environment (do not use the EE9 preview - choose the Jakarta EE Full & Web Distribution)
-* Wildfly 20+
-
-In Eclipse we also recommend you install the following from the Eclipse Marketplace:
-* JBoss tools (you only need to select the `JBoss AS, Wildfly & EAP Server Tools` option)
-* Runner
-
-![JBoss tools](../assets/images/building-applications/jboss-tools-component-selection.png "JBoss tools") 
 
 ### Quick overview
 
