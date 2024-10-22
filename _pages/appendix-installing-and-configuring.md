@@ -13,19 +13,111 @@ development environment for Skyve. These instructions assume that you are
 using Windows and SQL Server. Some changes will need to be made if using a 
 different operating system or database.
 
-If you're new to Java, you may find the instructions in our tutorial easier to follow - [Configure your local environment](https://skyvers.github.io/Aged-care/chapter3/#32-configure-your-local-environment)
+### Download and Install Eclipse and JDK
 
-## Prerequisites checklist
+#### Download and Install Eclipse
 
-Before you begin, ensure you have the following:
+For this section, we have chosen to show how to use Eclipse as the development environment, however, if you prefer, you can use other development environment tools such as IntelliJ, NetBeans, Visual Studio Code, etc. However, if you're not completely familiar with these, use Eclipse so that you can follow the steps below.
 
-* Java 11 JDK - [Temurin OpenJDK](https://adoptium.net/temurin/releases/?version=11) (or an alternative OpenJDK of your choice)
-* Eclipse IDE for Enterprise Java and Web Developers ([www.eclipse.org](https://www.eclipse.org/downloads/packages/))
-    * Note: Do not use the Eclipse IDE for Java Developers
-* Wildfly 26 (select the last final version of Wildfly 26 available) ([http://wildfly.org](http://wildfly.org/downloads/))
-    * Note: Select the Jakarta EE 8 Full & Web Distribution not the EE 9.1 Preview Distribution
-    * Note: Versions of Wildfly > 26 are not supported by Skyve at this time
+NOTE: do not use the Eclipse EE9 preview, you will need the Jakarta EE Full & Web Distribution
+
+  - Click here to [Download Eclipse](https://www.eclipse.org/downloads/packages/)
+  - Next, Click on Eclipse IDE for Enterprise Java Developers
+
+  ![Download Eclipse](../assets/images/appendix/installing-configuring/1.jpg "Download Eclipse")
+
+  - Click on download
+  - Then, install Eclipse in your system
+
+#### Download and Install JDK
+
+  - Install an OpenJDK 17 version (JDK version 21 is also supported) from [AdoptOpenJDK](https://adoptium.net/temurin/releases/?package=jdk&version=17) (or an alternative OpenJDK of your choice)
+
+## Install and Configure Wildfly Server
+
+We need an application server to be able to access the application through our browser. For this we will demonstrate using Red Hat's Wildfly application server plugin. Skyve apps can be deployed on recent versions of Wildfly (27+).
+
+### Install Wildfly Server
+
+You can skip this step if WildFly Server is already installed on your system.
+
+Before installing WildFly Server, make sure JBoss Tools is installed on your system.
+
+To install JBoss Tools, click on Help, then click Eclipse Marketplace.
+
+![JBoss tools](../assets/images/appendix/installing-configuring/2.JPG "JBoss tools")
+
+In the search bar, enter 'jboss', then search.
+
+Select the JBoss Tools version that the search returns, and click Install.
+
+![JBoss install](../assets/images/appendix/installing-configuring/3.JPG "JBoss install")
+
+Select the list as shown below
+
+![JBoss install selection](../assets/images/appendix/installing-configuring/15.jpg "JBoss install selection")
+
+To check if JBoss Tools is installed properly, click on Help, then click Eclipse Marketplace.
+
+![JBoss tool install](../assets/images/appendix/installing-configuring/4.JPG "JBoss tool install")
+
+Change to the `Installed` tab.
+
+If the JBoss Tools plugin is present, you are ready to continue.
+
+![JBoss tool plugin](../assets/images/appendix/installing-configuring/5.JPG "JBoss tool plugin")
+
+After JBoss Tools is installed properly, follow these steps to install WildFly Server.
+
+1. Once Eclipse is opened, right-click under the Project Explorer tab and highlight New, then from the pop-out, click on Other
+
+   ![new-other](../assets/images/wildfly/1.png "new-other")
+   
+2. Enter text `server` in the `type filter text` field, select `Server` and click the Next button.
+
+   ![server](../assets/images/wildfly/2.png "server")
+
+2. Select the WildFly version you wish to work with and click Next (Skyve currently supports versions 27+)
+
+   ![select server](../assets/images/wildfly/3.png "select server")
+
+3. Click Next again
+
+   ![select Next](../assets/images/wildfly/4.png "select Next")
+
+4. Click on the Download and install runtime link
+
+   ![install runtime](../assets/images/wildfly/5.png "install runtime")
+
+5. Select the latest version of WildFly, then click Next
+
+   ![select runtime](../assets/images/wildfly/6.png "select runtime")
+
+6. Once you have read the terms of the licence agreement, check the box to accept the terms, and click Next
+
+   ![accept agreement](../assets/images/wildfly/7.png "accept agreement")
+
+7. Finally, select the path for where you wish your download and install locations to be found, select the appropriate runtime JRE and then click `Finish` to complete the installation
+
+   ![download-runtime](../assets/images/wildfly/8.png "download-runtime")
+   ![runtime-jre](../assets/images/wildfly/9.png "runtime-jre")
+
+8.  Wait for Eclipse to complete the download and installation process before moving on to the next step
+
+## Configuring the IDE (Windows example)
+
+* Create `C:\workspace\` (go to `C:\` -> right click -> New Folder then type `workspace` as the 
+folder name). You may use any folder for you workspace in Eclipse, just make sure you remember 
+the folder you've chosen and try to ensure that the folder name has no spaces to avoid 
+any issues with Java paths and spaces.
+* Start Eclipse using Eclipse.exe and select `C:\workspace\` as workspace, tick 'Use as 
+default option - do not ask again', Cancel the welcome wizard and Close the welcome 
+tab in the editor frame.
+* Change compiler compliance level to 17 (Window -> Preferences -> Java -> Compiler) 
+press 'Apply' - press Yes for full build, and then press OK.
   
+See additional details in [Setting up a Skyve instance](./../pages/appendix_setting-up-a-skyve-instance)
+
 We also recommend you:
 * load an RDBMS like MySQL, Postgres or MS SQL that is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
   administrator username and password (if you're unable to do this, you can use H2 file-based database which requires no install).
@@ -51,44 +143,6 @@ For this example, to use Microsoft SQL Server as the database for the Skyve proj
 * If you've just installed SQL server, you will need to specify the port for this 
   database, see instructions [here](https://community.spiceworks.com/how_to/124598-find-the-port-sql-server-is-using-and-change-a-dynamic-port-to-static), 
   again, remember the port number you've entered.
-
-## Configuring Java
-* Install an OpenJDK 11 version from [Temurin OpenJDK](https://adoptium.net/temurin/releases/?version=11) (or an alternative OpenJDK of your choice)
-    * Change the defaults to also install the JAVA_HOME environment variable
-    * Complete the wizard and close after the installation has completed 
-* Configure Environment Variables (Windows, requires UAC)
-    1. Search for `environment` in the Start menu and open *Edit the system environment variables*
-    1. Click the *Environment Variables* button
-    1. If JAVA_HOME is not present
-        1. Click *New...* in the System variables section
-        1. Enter "JAVA_HOME" for the variable name
-        1. Click Browse Directory... and browse to `C:\Program Files\Eclipse Adoptium\jdk-11....-hotspot` or the directory you installed it
-        1. Click *OK*
-
-## Configuring the IDE (Windows example)
-
-* Create `C:\_\` (go to `C:\` -> right click -> New Folder then type `_` as the 
-folder name). You may use any folder for you workspace in Eclipse, just make sure you remember 
-the folder you've chosen and try to ensure that the folder name has no spaces to avoid 
-any issues with Java paths and spaces.
-* Start Eclipse using Eclipse.exe and select `C:\_\` as workspace, tick 'Use as 
-default option - do not ask again', Cancel the welcome wizard and Close the welcome 
-tab in the editor frame.
-* Change compiler compliance level to 11 (Window -> Preferences -> Java -> Compiler) 
-press 'Apply' - press Yes for full build, and then press OK.
-* To manage the Wildfly application server from Eclipse:
-  * Open the server explorer window if it is not already in your workspace (Window -> Show View -> Servers)
-  * Right click inside the server explorer and select New
-  * Expand JBoss Community
-  * If WildFly 26+ is not in the list of adapters, you will need to download them:
-    * Choose JBoss, WildFly & EAP Server Tools and click Next
-    * Accept the licence terms and click Finish
-    * Restart Eclipse when prompted
-  * Select WildFly 26+ and click _Next_
-  * Accept the defaults and click _Next_
-  * Click _Finish_
-  
-See additional details in [Setting up a Skyve instance](./../pages/appendix_setting-up-a-skyve-instance)
 
 ## Importing an existing Skyve project from Git
 
