@@ -14,9 +14,9 @@ Enabling OAuth2 authentication only allows a user to authenticate with Skyve, it
 
 Once enabled, the login screen will update and provide a new button for users to login with. Services can be enabled by turning on the specific properties in the `account` section of the application's json configuration file.
 
-## Azure AD integration
+## Microsoft Entra ID integration
 
-If you are using Microsoft 365, it is possible to integrate your Skyve application with Active Directory. This provides users the ability to login using their existing business email and password (and 2-factor authentication if enabled) to login, instead of having Skyve manage the credentials.
+If you are using Microsoft 365, it is possible to integrate your Skyve application with Entra ID. This provides users the ability to login using their existing business email and password (and 2-factor authentication if enabled) to login, instead of having Skyve manage the credentials.
 
 _Prerequisites:_
 
@@ -29,24 +29,26 @@ _Prerequisites:_
 #### Microsoft Azure Portal
 
 1. Login to portal.azure.com
-1. Click the hamburger menu in the top left hand corner, then select Azure Active Directory
+1. Click the hamburger menu in the top left hand corner, then select Microsoft Entra ID
 
-![Menu](../assets/images/appendix/menu.jpg "Azure active directory menu item")
+
+![Menu](../assets/images/appendix/oauth/menu.png "Azure Entra ID menu item")
 
 1. Select `App registrations`
 1. Click `New registration`
 
-![Select New Registration](../assets/images/appendix/selectNewRegistration.jpg "New registration")
+
+![Select New Registration](../assets/images/appendix/oauth/selectNewRegistration.png "New registration")
 
 1. Enter the name of the application
 1. Keep Single Tenant selected for supported account types
-1. Select Web and enter the url, the url should be the context path to the application and end with `/oauth2/code`, be sure to EXCLUDE the trailing slash
-	1. The Redirect URL should be the following with the application URL: `<protocol>://<domain>:<port>/<applicationName>/login/oauth2/code`
+1. Select Web and enter the url, the url should be the context path to the application and end with `oauth2/code/microsoft`, be sure to EXCLUDE the trailing slash
+	1. The Redirect URL should be the following with the application URL: `<protocol>://<domain>:<port>/<applicationName>/login/oauth2/code/microsoft`
   1. Ensure you have the correct `protocol` (http/http), `domain name`, optional `port` and `application name`
-  1. E.g. `http://localhost:8080/mySkyveApp/login/oauth2/code`
+  1. E.g. `http://localhost:8080/mySkyveApp/login/oauth2/code/microsoft`
 1. Click `Register`
 
-![Registering App](../assets/images/appendix/registeringApp.jpg "Register an application")
+![Registering App](../assets/images/appendix/oauth/registeringApp.png "Register an application")
 
 1. Add the following properties from the app registration you entered in the Azure portal to your application's json configuration:
 
@@ -60,13 +62,17 @@ _Prerequisites:_
 
 To generate a client secret if you do not have one, from the Overview -> Client credentials, click the link, or select Certificates & secrets from the left-hand menu. Follow the prompts to create a new client secret and copy the `value` once generated. (NOTE: Be sure to copy the value at this point in time as it will not be available later and a new Secret will need to be generated.)
 
+![Create New Secret](../assets/images/appendix/oauth/createNewSecret.png "Create New Secret")
+![Secret Value](../assets/images/appendix/oauth/secretValue.png "Secret Value")
+
+
 The clientID and tenantID can be taken from the App Registrations also, as shown.
 
-![Certificates and Secrets Menu Item](../assets/images/appendix/certificatesAndSecrets.jpg "Certificates and Secrets menu item")
+![Certificates and Secrets Menu Item](../assets/images/appendix/oauth/certificatesAndSecrets.png "Certificates and Secrets menu item")
 
 #### Skyve Customisations
 
-In order for the JSESSIONID to not be lost when redirecting through the Microsoft authorisation flow, the cookie settings need to be customised for the application when enabling Azure AD in Skyve.
+In order for the JSESSIONID to not be lost when redirecting through the Microsoft authorisation flow, the cookie settings need to be customised for the application when enabling Entra ID in Skyve.
 
 This requires a file to be created in your project:
 
@@ -81,7 +87,7 @@ path-prefix('/')->samesite-cookie('Strict')
 
 ##### Application JSON Changes
 
-In order for Skyve to enable the Azure AD login option, 3 properties need to be set in the account section of the project JSON file. Update these now if they were not entered previously.
+In order for Skyve to enable the Entra ID login option, 3 properties need to be set in the account section of the project JSON file. Update these now if they were not entered previously.
 
 ```json
 "account": {
@@ -99,10 +105,10 @@ You will need a user in your Skyve application with a _username_ that matches th
 
 #### Approve Access
 
-Once you login to your deployed Skyve application for the first time, the login screen should now show an Azure AD sign in option below the username / password input fields. Clicking this will attempt login using Azure AD, and after authenticating with AD, you will be prompted for approval. If you attempt to sign in with an account that does not have the correct permissions, you will be shown a message similar to below:
+Once you login to your deployed Skyve application for the first time, the login screen should now show an Entra ID sign in option below the username / password input fields. Clicking this will attempt login using Entra ID, and after authenticating, you will be prompted for approval. If you attempt to sign in with an account that does not have the correct permissions, you will be shown a message similar to below:
 
 ![Admin approval required](../assets/images/appendix/admin-approval.jpg "Admin approval required")
 
 Once approval has been granted, you should be signed in.
 
-**[⬆ back to top](#azure-ad-integration)**
+**[⬆ back to top](#microsoft-entra-id-integration)**
