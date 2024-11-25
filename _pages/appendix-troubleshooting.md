@@ -276,6 +276,23 @@ The `Generating Edit View` target feature in my IDE fails to generate a view XML
 
 Check the correct customer name is defined in the pom.xml. Our maven plugins can determine the customer from the file system if there is only 1 customer, otherwise they will prompt for the customer if there is more than 1.
 
+**Question**
+
+I am trying to test a service class with a unit test, but the test fails with a `NullPointerException` when trying to call methods on the service class.
+
+**Answer**
+
+Service classes should be injected into the unit test class using the `@Inject` annotation, similar to how they are injected when being used as part of Skyve. As long as the service is located within the `modules` package, the service class should be discovered and injected correctly during a unit test.
+
+In addition, the unit test class itself must be declared `public`, so that the dependency injection service can can access it. Declaring the class as package (omitting the `public`), will result in a `NullPointerException` when trying to call methods on the service class.
+
+```java
+public class MyCustomServiceH2Test extends AbstractH2Test {
+
+	@Inject
+	private MyCustomService myCustomService;
+```
+
 ## Example building problems
 
 ### Problems building your app
