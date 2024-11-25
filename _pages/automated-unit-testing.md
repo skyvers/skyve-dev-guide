@@ -17,6 +17,7 @@ This is intended to give developers:
 - a growing regression suite which can be immediately placed into a Continuous Integration environment
 
 ## Configuration
+
 By default, automated test generation is configured for all modules detected from the metadata for a Skyve project (see [Customers](./../_pages/customers.md)). Execution of the `generate domain` step during development is responsible for keeping the generated test artefacts in sync with new documents and actions as they are added to a project.
 
 The following sections describe the configuration which enables and creates the automated tests.
@@ -192,10 +193,24 @@ The `@SkyveFactory` annotation can be applied to any Factory class for finer gra
 - skip domain test generation for the document (`@SkyveFactory(testDomain = false)`)
 - skip action test generation for the document’s actions (`@SkyveFactory(testAction = false)`)
 - skip specified action test generation for some of the document's actions (`@SkyveFactory(excludedActions = { Check.class, Next.class })`)
+- skip specific attributes from being tested during automatic domain testing for some of the document's attributes (`@SkyveFactory(excludedUpdateAttributes = { "name", "email" })`)
 
 Any combination of these can be provided, but if `testAction` is set to false, `excludedActions` will be ignored as all actions will be skipped.
 
 After annotating a Factory in the document package of the module you are testing, you will need to run generate domain again for Skyve to detect the factory and update the generated tests. Any skipped domain or action tests should be removed from the generated test directory automatically. If they aren't, check the output log file from generate domain for any warnings or errors.
+
+#### excludedUpdateAttributes
+
+The `excludedUpdateAttributes` attribute is used to exclude specific attributes from being tested during automatic domain testing. This is useful when you have attributes that are not intended to be updated by the user, but are updated by the system, e.g. `lastUpdatedBy`, `lastUpdatedDate`, `createdBy`, `createdDate`. By default, random attributes are tested as part of update testing, which can lead to strobing test failures.
+
+```java
+@SkyveFactory(excludedUpdateAttributes = { 
+	User.passwordLastChangedCountryCodePropertyName, 
+	User.passwordLastChangedCountryNamePropertyName })
+public class UserFactory {
+	...
+}
+```
 
 ### Data files
 
