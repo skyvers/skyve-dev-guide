@@ -1,0 +1,56 @@
+@startuml inheritance-3
+
+abstract class AbstractAttachment {
+    file : content
+    name : text
+}
+
+class AbstractAttachmentExtension {
+    String generateThumnail()
+}
+
+class ClientAttachment {
+    parent : Client
+    type : enum
+}
+
+class Client {
+    name : text
+    attachments : List<ClientAttachment>
+}
+
+class QuoteAttachment {
+    parent : Quote
+}
+
+class Quote {
+    number : Integer
+    attachments : List<QuoteAttachment>
+}
+
+class InvoiceAttachment {
+    parent : Invoice
+}
+
+class Invoice {
+    number : Integer
+    attachments : List<InvoiceAttachment>
+}
+
+class ClientAttachmentExtension {
+    String generateThumnail()
+}
+
+AbstractAttachment <|-- AbstractAttachmentExtension
+
+AbstractAttachmentExtension <|-- ClientAttachment
+ClientAttachment <|-- ClientAttachmentExtension
+ClientAttachment o-- Client
+
+AbstractAttachmentExtension <|-- QuoteAttachment
+QuoteAttachment o-- Quote
+
+AbstractAttachmentExtension <|-- InvoiceAttachment
+InvoiceAttachment o-- Invoice
+
+@enduml

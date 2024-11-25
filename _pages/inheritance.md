@@ -48,16 +48,16 @@ In this case, we can declare an abstract document _AbstractFinanceItem_ with the
 			<length>100</length>
 		</textField>
 		<decimal2 name="amountExcludingTax">
-		   <displayName>Ex Tax</displayName>
-		   <converterName>Decimal2DollarsAndCents</converterName>
+			<displayName>Ex Tax</displayName>
+			<converterName>Decimal2DollarsAndCents</converterName>
 		</decimal2>
 		<decimal2 name="amountOfTax">
-		   <displayName>Tax</displayName>
-		   <converterName>Decimal2DollarsAndCents</converterName>
+			<displayName>Tax</displayName>
+			<converterName>Decimal2DollarsAndCents</converterName>
 		</decimal2>
 		<decimal2 name="amountIncludingTax">
-		   <displayName>Inc Tax</displayName>
-		   <converterName>Decimal2DollarsAndCents</converterName>
+			<displayName>Inc Tax</displayName>
+			<converterName>Decimal2DollarsAndCents</converterName>
 		</decimal2>
 	</attributes>
 ```
@@ -97,6 +97,8 @@ This means that _InvoiceItem_ will have all of the attributes of _AbstractFinanc
 
 Similarly _FeeItem_ will have all of the attributes of _AbstractFinanceItem_ as well as the _feeType_ attribute. Because the `mapped` strategy is used, all columns for _FeeItem_ (including the inherited columns) will be in the table _FIN_FeeItem_.
 
+![inheritance-1](../assets/images/inheritance/inheritance-1.png "Simple Inheritance example")
+
 ### Persistence
 
 Using the `mapped` strategy, the database tables will have the following columns (for clarity other implicit columns are not shown here):
@@ -124,8 +126,8 @@ In the `joined` strategy, corresponding rows in the participating tables will ha
 
 If the `single` strategy had been selected, the following tables would be created, a persistence name is only declared for the abstract document:
 
- FIN_FinanceItem |  
- -------- | ---
+ FIN_FinanceItem | 
+ -------- | 
  bizDiscriminator |
  description | 
  amountExcludingTax |
@@ -135,7 +137,6 @@ If the `single` strategy had been selected, the following tables would be create
  feeType | 
 
 Note - if you change persistence strategies after deploying, depending on the database dialect, automatic DDL may not be able to manage the change, so you may need to drop your tables and let the automatic DDL recreate them.
-
 
 ### Module permissions
 
@@ -174,7 +175,7 @@ public class AbstractFinanceItemExtension extends AbstractFinanceItem {
 }
 ```
 
-Bizlets will not extend the abstract document bizlet by default, but you can define a Bizlet for the abstract document then extend that manually and the Bizlet for the abstract document can use methods from the extension class as follows.
+Bizlets will not extend the abstract document bizlet by default, but you can define a Bizlet for the abstract document, then extend that manually. The Bizlet for the abstract document can then use methods from the extension class as follows.
 
 In this example, the calculate method ensures tax calculations are done whenever the bean is saved.
 
@@ -189,46 +190,50 @@ public abstract class AbstractFinanceItemBizlet<T extends AbstractFinanceItemExt
 }
 ```
 
-To inherit the same preSave behaviour in the subtype (inheriting) documents, create Bizlet classes that extend the abstract Bizlet. 
+As `AbstractFinanceItem` is `abstract`, it cannot be instantiated, so we also define an `abstract` `Bizlet`, `AbstractFinanceItemBizlet`. We do not define which document the `Bizlet` is for, as it can be used by all documents that extend `AbstractFinanceItem`. This is done by using the generic type `T` in the `Bizlet` class definition, where `T` we know must be a subclass of `AbstractFinanceItemExtension`.
 
-While the specific behaviour is defined in the abstract Bizlet class, the behaviour won't be inherited unless you create a Bizlet class that extends the abstract Bizlet (even if the subtype Bizlet class is empty) - so that Skyve can call the correct super class.
+To inherit this same `preSave` behaviour in the subtype (inheriting) documents, create Bizlet classes that _extend_ the abstract Bizlet. 
 
-For example, for _FeeItem_:
+While the specific behaviour is defined in the abstract `Bizlet` class, the behaviour won't be inherited unless you create a Bizlet class that extends the abstract Bizlet (even if the subtype Bizlet class is empty) - so that Skyve can call the correct super class.
+
+For example, for `FeeItem`:
 
 ```java
 public class FeeItemBizlet extends AbstractFinanceItemBizlet<FeeItem>{
-
+	// behaviour inherited from super class
 }
 ```
 
-And for _InvoiceItem_:
+And for `InvoiceItem`:
 
 ```java
 public class InvoiceItemBizlet extends AbstractFinanceItemBizlet<InvoiceItem> {
-
+	// behaviour inherited from super class
 }
 ```
 
-Because _AbstractFinanceItem_ does not define a class to satisfy the Bizlet <T extends Bean> and passes on T, we can use the generic type T in the Abstract Bizlet methods so when a FeeItem is preSaved by Skyve, FeeItem is the type that gets passed to its super Bizlet (AbstractFinanceItem) and satisifies the type <T extends AbstractFinanceItem> defined by AbstractFinanceItemBizlet.
+Because `AbstractFinanceItem` does not define a class to satisfy the Bizlet `<T extends Bean>` and passes on T, we can use the generic type T in the Abstract Bizlet methods so when a `FeeItem` is preSaved by Skyve, `FeeItem` is the type that gets passed to its super Bizlet (`AbstractFinanceItem`) and satisifies the type `<T extends AbstractFinanceItem>` defined by `AbstractFinanceItemBizlet`.
 
-However, because _FeeItem_ extends _AbstractFinanceItem_, methods in _AbstractFinanceItemExtension_ are automatically inherited by _FeeItem_ whether or not a _FeeItemExtension_ class is declared.
+However, because `FeeItem` extends `AbstractFinanceItem`, methods in `AbstractFinanceItemExtension` are automatically inherited by `FeeItem` whether or not a `FeeItemExtension` class is declared.
 
-So for example, the calculate() method can be used for _FeeItem_ as follows:
+So for example, the calculate() method can be used for `FeeItem` as follows:
 
 ```java
 	public static FeeItem createFee(Decimal2 exTaxAmount) {
 		FeeItem f = FeeItem.newInstance();
 		f.setAmountExcludingTax(exTaxAmount);
-		f.calculate();
+		f.calculate(); // inherited from AbstractFinanceItemExtension
 		return f;
 	}
 ```
+
+![inheritance-2](../assets/images/inheritance/inheritance-2.png "Bizlet inheritance example")
 
 #### Explanation of extensions
 
 Consider the following diagram:
 
-![Inheritance](../assets/images/inheritance/inheritance.png "Inheritance")
+![Multiple Inheritance](../assets/images/inheritance/inheritance-3.png "Multiple Inheritance")
 
 For _ClientAttachment_ as per the diagram which extends _AbstractAttachment_, the generated _ClientAttachment.java_ actually extends _AbstractAttachmentExtension_, so it will inherit all the extension methods automatically. If we then went on to define a _ClientAttachmentExtension_ that extends _ClientAttachment_, this would still inherit _AbsractAttachmentExtension_ methods because _ClientAttachment_ extends _AbstractAttachmentExtension_.
 

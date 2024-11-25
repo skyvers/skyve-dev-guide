@@ -1,0 +1,43 @@
+@startuml inheritance-2
+
+abstract class AbstractFinanceItem {
+    amountExcludingTax : Decimal2
+}
+
+abstract class AbstractFinanceItemExtension {
+    void calculate()
+}
+
+abstract class AbstractFinanceItemBizlet {
+    T preSave()
+}
+
+class InvoiceItem {
+    amountExcludingTax : Decimal2
+    quantity : Integer
+    void calculate()
+}
+
+class FeeItem {
+    amountExcludingTax : Decimal2
+    feeType : enum
+    void calculate()
+}
+
+class FeeItemBizlet {
+    FeeItem preSave()
+}
+class InvoiceItemBizlet {
+    InvoiceItem preSave()
+}
+
+AbstractFinanceItem <|-- AbstractFinanceItemExtension
+AbstractFinanceItemExtension <|-- InvoiceItem
+AbstractFinanceItemExtension <|-- FeeItem
+
+AbstractFinanceItemBizlet <|-- FeeItemBizlet
+AbstractFinanceItemBizlet <|-- InvoiceItemBizlet
+
+AbstractFinanceItemBizlet *-- AbstractFinanceItemExtension : "<T>"
+
+@enduml

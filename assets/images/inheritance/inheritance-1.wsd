@@ -1,0 +1,20 @@
+@startuml inheritance-1
+
+abstract class AbstractFinanceItem {
+    amountExcludingTax : Decimal2
+}
+
+class InvoiceItem {
+    amountExcludingTax : Decimal2
+    quantity : Integer
+}
+
+class FeeItem {
+    amountExcludingTax : Decimal2
+    feeType : enum
+}
+
+AbstractFinanceItem <|-- InvoiceItem
+AbstractFinanceItem <|-- FeeItem
+
+@enduml
