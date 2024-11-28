@@ -533,21 +533,25 @@ selectedTabIndexBinding | the binding on the document that controls the selected
 
 #### Specifying the selected tab
 
-Occiasionally it is useful to be able to specify the selected tab in a tab pane after the user performs an action or during a certain stage in the event lifecycle. This can be done by specifying the `selectedTabIndexBinding` attribute on the tab pane. This attribute should be bound to an integer attribute on the document. The integer attribute should be initialised to the index of the tab you wish to be selected by default. The first tab index is 0, then goes up by 1 for each tab declared in order in the view.
+Occiasionally it is useful to be able to specify the selected tab in a tab pane after the user performs an action or during a certain stage in the event lifecycle. 
+This can be done by specifying the `selectedTabIndexBinding` attribute on the tab pane. This attribute should be bound to an integer attribute on the document. The integer 
+attribute should be initialised to the index of the tab you wish to be selected by default. The first tab index is `0`, then goes up by 1 for each tab declared in the 
+order the tabs are declared in the view.
 
 For example, you could add the following attribute to your document to hold the selected tab:
 
 ```xml
-	<integer name="selectedTab" audited="false" persistent="false" trackChanges="false">
+	<integer name="selectedTab" audited="false" persistent="false" trackChanges="false" usage="view">
 		<documentation>Used to be able to set which tab is selected when moving around views.</documentation>
 		<displayName>Selected Tab</displayName>
+		<defaultValue>0</defaultValue>
 	</integer>
 ```
 
-And declare a tab pane in your view to use this attribute:
+And then declare a `tabPane` in your view to use this attribute:
 
 ```xml
-	<tabPane  selectedTabIndexBinding="selectedTab">
+	<tabPane selectedTabIndexBinding="selectedTab">
 		<tab title="Details">
 		</tab>
 		<tab title="Notes">
@@ -558,7 +562,21 @@ And declare a tab pane in your view to use this attribute:
 And in an action, if you wanted to always load the first tab, or return to the first tab after an action, in your code you could specify: 
 
 ```java
-setSelectedTab(Integer.valueOf(0));
+bean.setSelectedTab(Integer.valueOf(0));
+```
+
+Another option is to reset the selected tab each time the view is opened, performed by overriding the `preExecute()` method in the document's Bizlet. 
+For example, to ensure the first tab is always selected when the view is opened in edit mode:
+
+```java
+@Override
+public DocumentName preExecute(ImplicitActionName actionName, DocumentName bean, Bean parentBean, WebContext webContext) throws Exception {
+    if (ImplicitActionName.Edit.equals(actionName)) {
+        // Reset tab to the first tab (index 0)
+        bean.setSelectedTab(0);
+    }
+    super.preExecute(actionName, bean, parentBean, webContext);
+}
 ```
 
 ## Widget
