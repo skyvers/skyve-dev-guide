@@ -167,7 +167,7 @@ Report Templates are made up of 3 sections:
 
 ![Report template view](../assets/images/reports/report-templates.jpg "Report template view showing markup and datasets")
 
-![Report parameter view](../assets/images/reports/report-parameters.jpg "Report parameter detail view")
+![Report parameter view](../assets/images/reports/report-parameters.jpg "Report parameter section of the report dataset view")
 
 **1. Template Markup**
 
@@ -202,6 +202,17 @@ where name like ':name%'
 ```
 
 Skyve will detect the named parameter and create a new parameter for you and attempt to guess the data type. Users will be prompted for these parameters when they run it if they are marked as required.
+
+![Report parameter view](../assets/images/reports/report-parameter-detail.png "Report parameter detail view")
+
+When defining report parameters:
+
+- **Name** - The name of the parameter, this will be used in the query and should be created by Skyve automatically if you include a named parameter in your query body
+- **Description** - A description of the parameter, this will be displayed to the user when they run the report to assist them in understanding what the parameter is for
+- **Parameter Type** - The data type of the parameter, this will be used to validate the input from the user
+- **Required** - Whether the parameter is required to run the report
+- **Default Value** - The default value of the parameter, this will be used if the user does not provide a value when running the report
+- **Test Value** - A test value to use when testing the report, this will be used to validate the report is working correctly and will only be used in the Report Designer
 
 ### Report Manager
 
