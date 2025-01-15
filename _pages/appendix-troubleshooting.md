@@ -293,6 +293,40 @@ public class MyCustomServiceH2Test extends AbstractH2Test {
 	private MyCustomService myCustomService;
 ```
 
+**Question**
+
+When running unit tests which use injection, the test fails with an `Unable to access CDI` error.
+
+```
+java.lang.IllegalStateException: Unable to access CDI
+	at jakarta.enterprise.inject.spi.CDI.lambda$getCDIProvider$0(CDI.java:98)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at jakarta.enterprise.inject.spi.CDI.getCDIProvider(CDI.java:98)
+	at jakarta.enterprise.inject.spi.CDI.current(CDI.java:65)
+	at org.skyve.impl.util.UtilImpl.inject(UtilImpl.java:542)
+	at util.InternalBaseH2Test.<init>(InternalBaseH2Test.java:68)
+	at util.AbstractH2Test.<init>(AbstractH2Test.java:19)
+```
+
+**Answer**
+
+The most likely cause for this error is that the test class is not extending the correct Skyve base test class, which is responsible for bootstrapping the injection container for unit tests. When running unit tests which use injection, the test class should extend `AbstractH2Test` or `AbstractH2TestForJUnit4`.
+
+One common cause is to extend `AbstractH2Test`, which is based on JUnit 5, but your unit test is still using JUnit 4 annotations. To verify it is using the correct version, ensure your test class is using packages which contain jupiter (JUnit 5), such as:
+
+```java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+```
+
+instead of the JUnit 4 versions:
+
+```java
+import org.junit.Before;
+import org.junit.Test;
+```
+
+
 ## Example building problems
 
 ### Problems building your app
