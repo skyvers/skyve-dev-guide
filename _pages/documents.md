@@ -212,7 +212,41 @@ If an attribute includes a *description*, this will be rendered as
 tool-tip help button in the detail view. The *description* can
 contain simple markup as it will be rendered as HTML.
 
-### Attribute sensitivity
+#### Attribute usage
+
+The usage attribute in Skyve is used to differentiate between **Domain Model** and **View Model** attributes within a document’s metadata declaration. This provides a structured way to indicate whether an attribute is intended for backend data persistence, user interface representation, or both.
+
+Usage Values:
+
+- `domain`: The attribute is intended solely for the domain model. It may be included in persistence or business logic but may not be relevant for user interaction in the UI.
+- `view`: The attribute is used only in the view model, meaning it is relevant for UI rendering but probably not stored in the database.
+- `both` (default if not specified): The attribute is used for both domain and view models, meaning it probably persisted as well as being displayed in the UI.
+
+**Effects of usage:**
+
+1. Data Builders & filtering:
+    - The `Data`Builder class can filter attributes when generating test data, ensuring only domain attributes are used in test builds.
+2. `AbstractDomainTest` behavior:
+    - Skyve’s `AbstractDomainTest` logic ensures that test validation does not mistakenly include view-only attributes in domain-level operations.
+3. Auditing defaults:
+    - If an attribute is set to `view` and does not have an explicit audit configuration, it defaults to not audited, ensuring auditing remains relevant to persisted data.
+
+**Example:**
+
+```xml
+<text name="displayOnlyField" persistence="false" usage="view">
+    <displayName>Display Only</displayName>
+    <description>This field is used only for UI rendering and is not persisted.</description>
+</text>
+
+<text name="persistedField" usage="domain">
+    <displayName>Stored Field</displayName>
+    <description>This field is stored in the database but is not intended for UI display.</description>
+</text>
+```
+
+#### Attribute sensitivity
+
 ![Attribute Sensitivity example](../assets/images/documents/attribute-sensitivity-example.png)
 
 When adding attributes to a document, a developer should consider the sensitivity level of the data that will be used. The sensitivity level is used during skyve's backup feature to obfuscate certain data based on how sensitive it is. This is a security feature allowing a business to make a backup of their data to share with others while ensuring that whoever receives the backup sees only that which they have access to. There are 6 sensitivity levels available to choose from, which are highlight below in ascending order of data sensitivity. This hierarchy ensures that as you move from "None" to "Secret," the data becomes more sensitive, requiring stricter controls and more robust obfuscation when shared during backups:
@@ -223,8 +257,6 @@ When adding attributes to a document, a developer should consider the sensitivit
 - **Restricted** – Data that is sensitive and tightly controlled. Access is usually limited to a small group of authorized individuals within the organization. Sharing this data improperly could result in significant legal, financial, or operational consequences.
 - **Personal** – This refers to personally identifiable information (PII) such as names, addresses, or any data that could be linked to an individual. Unauthorized disclosure of personal data can lead to privacy violations, legal consequences, and a breach of trust.
 - **Secret** – The most sensitive level of information, where unauthorized access could lead to severe consequences, such as financial loss, reputational damage, or exposure of critical business or security-related information. Strict protocols are required to manage, store, and share this data securely.
-
-
 
 ### Attribute types
 
