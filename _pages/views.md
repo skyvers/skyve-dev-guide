@@ -1062,6 +1062,16 @@ limit rerendering to a specified container.
 
 In the above example, only the container with a `widgetId` of _citizenship_ will be rerendered when the value of the _combo_ is changed.
 
+#### Scrolling
+
+For the PrimeFaces renderer only - all template.xhtml pages have `head` and `body` ids. This allows controlled scrolling for PrimeFaces views as well as to any widgetId added by the developer. This can be useful for large views where the developer wants to focus the user attention on a particular area.
+
+```java
+PrimeFaces.current().scrollTo("head");
+PrimeFaces.current().scrollTo("body");
+PrimeFaces.current().scrollTo("widgetId");
+```
+
 ### The lookupDescription widget in detail
 
 The *lookupDescription* widget is unique to Skyve and provides
