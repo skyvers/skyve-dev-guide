@@ -326,6 +326,22 @@ import org.junit.Before;
 import org.junit.Test;
 ```
 
+**Question**
+
+Is there a way to Cancel when zoomed into a record from a parent? The Zoom Out action is performing validation and the user does not want to Remove.
+
+**Answer**
+
+No. When zoomed into a record from a parent in Skyve, the `Cancel` action may not behave as expected because you are still in the context of the parent bean.
+
+The `Cancel` action in Skyve is designed to undo all changes made in the current conversation. However, when you are zoomed into a specific row (a child document), any changes made to that row cannot simply be forgotten because they are part of the ongoing interaction. The context remains tied to the parent, and canceling may unintentionally affect other changes made on the parent or other child rows.
+
+This means that once you zoom in, the changes you make to the child record are effectively locked in and cannot be selectively discarded without potentially affecting other unsaved changes in the parent.
+
+Additionally:
+
+- In desktop mode, Skyve does not track "dirtiness" (changes) at the child level—only at the top level.
+- In responsive mode, Skyve does not track dirtiness at all, making it even more challenging to manage selective cancellations.
 
 ## Example building problems
 

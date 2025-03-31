@@ -524,7 +524,7 @@ Effects of inverseOne:
 <!-- Contact.xml document -->
 <inverseOne name="customer">
 	<displayName>Customer</displayName>
-    <documentName>Customer</documentName>
+	<documentName>Customer</documentName>
 	<referenceName>primaryContact</referenceName>
 </inverseOne>
 ```
