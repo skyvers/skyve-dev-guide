@@ -1055,8 +1055,17 @@ Also note that lists will be refreshed if the list is accessible by the user fro
 
 #### Update property
 
-The update property (PrimeFaces renderer only) implements the PrimeFaces update property - which allows developers to 
-limit rerendering to a specified container.
+The update property (PrimeFaces renderer only) implements the PrimeFaces update property - which allows developers to limit rerendering to a specified container. This prevents the page from being completely rerendered when a change occurs in a widget, leading to a better user experience and better performance on larger pages.
+
+Before using the c:property, ensure that your view element definition includes the XML common namespace (`xmlns:c="http://www.skyve.org/xml/common"`) as shown below:
+
+```xml
+<view name="edit" title="<view title>" 
+	xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd" 
+	xmlns="http://www.skyve.org/xml/view" 
+	xmlns:c="http://www.skyve.org/xml/common"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+```
 
 ![Update property for change handlers](../assets/images/views/update-property.png "Update property for change handlers")
 
