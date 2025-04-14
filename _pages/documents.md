@@ -259,6 +259,69 @@ When adding attributes to a document, a developer should consider the sensitivit
 - **Personal** – This refers to personally identifiable information (PII) such as names, addresses, or any data that could be linked to an individual. Unauthorized disclosure of personal data can lead to privacy violations, legal consequences, and a breach of trust.
 - **Secret** – The most sensitive level of information, where unauthorized access could lead to severe consequences, such as financial loss, reputational damage, or exposure of critical business or security-related information. Strict protocols are required to manage, store, and share this data securely.
 
+**Obfuscation strategies**
+
+Skyve attempts to ensure that sensitive data is obfuscated while retaining enough information for testing or debugging purposes. Different attribute types are obfuscated in different ways to ensure that the data is not easily readable while still being usable in a backup context. Obfuscation is not intended to be reversible, and the original data should not be recoverable from the obfuscated data.
+
+1. **Text Attributes (`text`, `markup`, `memo`, `id`)**:
+   - Text attributes are redacted by masking the middle part of the string with asterisks (`*`).
+   - For email addresses, the part before and after the `@` symbol is separately redacted.
+   - The number of visible characters at the start and end of the string depends on its length.
+
+   Example:
+   ```
+   Input: "example@example.com"
+   Output: "ex****@ex****"
+   ```
+
+2. **Numeric Attributes (`integer`, `longInteger`, `decimal2`, `decimal5`, `decimal10`)**:
+   - Numeric attributes are rounded to the nearest multiple of 10.
+   - This ensures that the original value is obfuscated while retaining a general sense of scale.
+
+   Example:
+   ```
+   Input: 123
+   Output: 120
+   ```
+
+3. **Date Attributes (`date`, `dateTime`, `timestamp`)**:
+   - Dates are rounded to the first day of the month.
+   - Timestamps are further rounded to midnight on the first day of the month.
+
+   Example:
+   ```
+   Input: 2023-10-15
+   Output: 2023-10-01
+   ```
+
+4. **Time Attributes (`time`)**:
+   - Time attributes are rounded to the nearest hour, with minutes and seconds set to zero.
+
+   Example:
+   ```
+   Input: 14:37:45
+   Output: 14:00:00
+   ```
+
+5. **Geometry Attributes (`geometry`)**:
+   - Geometric coordinates (latitude and longitude) are rounded to the nearest whole number.
+   - This reduces precision while maintaining approximate location information.
+
+   Example:
+   ```
+   Input: Point(123.456, 78.910)
+   Output: Point(123, 79)
+   ```
+
+6. **Content and Image Attributes (`content`, `image`)**:
+   - These attributes are nullified to completely remove sensitive data.
+
+   Example:
+   ```
+   Input: Binary content
+   Output: null
+   ```
+
 ### Attribute types
 
 Developers should note that database specific implementations of each
