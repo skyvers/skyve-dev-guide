@@ -1453,7 +1453,7 @@ you wish to change the columns displayed, update the query in the `module.xml`.
 
 The `listMembership` widget is used when a user should be able to quickly multi-select many options from a collection of available options and assign them to a record. It provides intuitive _add one_, _add all_, _remove one_, and _remove all_ controls for managing memberships in a list.
 
-This widget is typically used for many-to-many style relationships or permission-based configurations, such as assigning permission groups to users or selecting roles for access.
+This widget is typically used for **aggregated** many-to-many style relationships, such as assigning permission groups to users. This would not be used for owned collections (child or composition).
 
 See the `groups` collection in the `User` document in the `admin` module for a working example.
 
@@ -1465,7 +1465,7 @@ The list of **available** records (left-hand side) is automatically populated fr
 
 The left-hand side is therefore calculated as:
 
-> All candidates − currently selected members
+> All candidates **minus** the currently selected members
 
 You do **not** need to specify a domain to use `listMembership`. However, if you want to **refine** the list of candidates shown on the left-hand side (e.g. only active users), you can set `domain="variant"` or `domain="dynamic"` on the collection, and then override the appropriate method (`getVariantDomainValues()` or `getDynamicDomainValues()`) in the document’s Bizlet.
 
