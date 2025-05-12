@@ -1523,7 +1523,7 @@ public List<DomainValue> getDynamicDomainValues(String attributeName, DocumentNa
 }
 ```
 
-> **Important**: This list must include the currently selected records as well, otherwise Skyve will not be able to resolve the display values of the selected records in the collection in the UI when the bean is rehydrated. It will be a list of `bizId`s.
+> **Important**: This list must include the currently selected records as well, otherwise Skyve will not be able to resolve the display values of the selected records in the collection in the UI when the bean is rehydrated. Any records in the collection will still be saved, but will display as a list of bizIds instead of their bizKey.
 
 ## newParameter
 
