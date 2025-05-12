@@ -1459,11 +1459,21 @@ See the `groups` collection in the `User` document in the `admin` module for a w
 
 #### How it works
 
-The widget binds to a collection in the document, representing the **selected** records (right-hand side). The list of **available** records (left-hand side) can be defined by a `dynamic` or `variant` domain declaration on that collection, typically populated in the document's `Bizlet`.
+The widget binds to a collection in the document, representing the **selected** records (right-hand side).
+
+The list of **available** records (left-hand side) is automatically populated from all available instances of the target document, using the default query defined for that document. If no default query is specified, all persisted instances of the document are used.
+
+The left-hand side is therefore calculated as:
+
+> All candidates − currently selected members
+
+You do **not** need to specify a domain to use `listMembership`. However, if you want to **refine** the list of candidates shown on the left-hand side (e.g. only active users), you can set `domain="variant"` or `domain="dynamic"` on the collection, and then override the appropriate method (`getVariantDomainValues()` or `getDynamicDomainValues()`) in the document’s Bizlet.
+
+Each side of the `listMembership` is a single-column list that shows the bizKey of each record.
 
 #### Example Usage
 
-In this example, we will create a listMembership widget to manage a collection of users who will receive email reminders.
+In this example, we create a `listMembership` widget to manage a collection of users who will receive email reminders.
 
 **document.xml**
 
@@ -1473,7 +1483,7 @@ Define a persistent collection which will store the selected members:
 <collection name="subscribers" type="aggregation">
    <displayName>Reminder Subscribers</displayName>
    <description>Users in this group will receive reminder email notifications.</description>
-   <domain>dynamic</domain>
+   <domain>dynamic</domain> <!-- optional; required only if refining the available list -->
    <documentName>UserProxy</documentName>
    <minCardinality>0</minCardinality>
 </collection>
@@ -1490,8 +1500,8 @@ Add the `listMembership` widget to the view and specify the binding of the colle
 In this example:
 
 - `binding` specifies the attribute (collection) to bind to.
-- `candidatesHeading` is the label shown above the list of available candidates (Users).
-- `membersHeading` is the label shown above the selected list of subscribersx.
+- `candidatesHeading`  is the label shown above the list of available records.
+- `membersHeading` is the label shown above the list of selected members.
 
 **Bizlet** (dynamic domain population)
 
@@ -1501,7 +1511,7 @@ Override `getDynamicDomainValues()` in your Bizlet to provide the list of availa
 @Override
 public List<DomainValue> getDynamicDomainValues(String attributeName, DocumentName bean) throws Exception {
 	if (DocumentName.subscribersPropertyName.equals(attributeName)) {
-		// Get active users
+		// only return active users to be available for selection
 		DocumentQuery q = CORE.getPersistence().newDocumentQuery(User.MODULE_NAME, User.DOCUMENT_NAME);
 		q.getFilter().addNotEquals(User.inactivePropertyName, Boolean.TRUE);
 		q.addBoundOrdering(Bean.BIZ_KEY);
@@ -1512,6 +1522,8 @@ public List<DomainValue> getDynamicDomainValues(String attributeName, DocumentNa
 	return super.getDynamicDomainValues(attributeName, bean);
 }
 ```
+
+> **Important**: This list must include the currently selected records as well, otherwise Skyve will not be able to resolve the display values of the selected records in the collection in the UI when the bean is rehydrated. It will be a list of `bizId`s.
 
 ## newParameter
 
