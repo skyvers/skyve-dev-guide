@@ -1332,8 +1332,7 @@ boundColumns are the fields from your chosen document that you wish to show:
 
 ### listGrid
 
-Views may also contain an embedded *listGrid* which is identical to the
-main list feature. 
+Views may also contain an embedded *listGrid* which is identical to the main list feature. 
 
 A *listGrid* can be used for showing collections of
 document instances and can be used to show loosely defined relationships, for example, if the Contact view was required
@@ -1450,6 +1449,69 @@ you wish to change the columns displayed, update the query in the `module.xml`.
 
 ![ListGrid Example](../assets/images/views/listGrid.png "ListGrid Example")
 
+### listMembership
+
+The `listMembership` widget is used when a user should be able to quickly multi-select many options from a collection of available options and assign them to a record. It provides intuitive _add one_, _add all_, _remove one_, and _remove all_ controls for managing memberships in a list.
+
+This widget is typically used for many-to-many style relationships or permission-based configurations, such as assigning permission groups to users or selecting roles for access.
+
+See the `groups` collection in the `User` document in the `admin` module for a working example.
+
+#### How it works
+
+The widget binds to a collection in the document, representing the **selected** records (right-hand side). The list of **available** records (left-hand side) can be defined by a `dynamic` or `variant` domain declaration on that collection, typically populated in the document's `Bizlet`.
+
+#### Example Usage
+
+In this example, we will create a listMembership widget to manage a collection of users who will receive email reminders.
+
+**document.xml**
+
+Define a persistent collection which will store the selected members:
+
+```xml
+<collection name="subscribers" type="aggregation">
+   <displayName>Reminder Subscribers</displayName>
+   <description>Users in this group will receive reminder email notifications.</description>
+   <domain>dynamic</domain>
+   <documentName>UserProxy</documentName>
+   <minCardinality>0</minCardinality>
+</collection>
+```
+
+**edit.xml**
+
+Add the `listMembership` widget to the view and specify the binding of the collection. The `candidatesHeading` and `membersHeading` attributes are optional, but they help to clarify the purpose of each list, where the left-hand side is the list of available users and the right-hand side is the list of selected subscribers.
+
+```xml
+<listMembership binding="subscribers" candidatesHeading="All Active Users" membersHeading="Subscribers" />
+```
+
+In this example:
+
+- `binding` specifies the attribute (collection) to bind to.
+- `candidatesHeading` is the label shown above the list of available candidates (Users).
+- `membersHeading` is the label shown above the selected list of subscribersx.
+
+**Bizlet** (dynamic domain population)
+
+Override `getDynamicDomainValues()` in your Bizlet to provide the list of available records (this should include the selected values too):
+
+```java
+@Override
+public List<DomainValue> getDynamicDomainValues(String attributeName, DocumentName bean) throws Exception {
+	if (DocumentName.subscribersPropertyName.equals(attributeName)) {
+		// Get active users
+		DocumentQuery q = CORE.getPersistence().newDocumentQuery(User.MODULE_NAME, User.DOCUMENT_NAME);
+		q.getFilter().addNotEquals(User.inactivePropertyName, Boolean.TRUE);
+		q.addBoundOrdering(Bean.BIZ_KEY);
+		List<UserExtension> activeUsers = q.beanResults();
+
+		return activeUsers;
+	}
+	return super.getDynamicDomainValues(attributeName, bean);
+}
+```
 
 ## newParameter
 
