@@ -1055,8 +1055,17 @@ Also note that lists will be refreshed if the list is accessible by the user fro
 
 #### Update property
 
-The update property (PrimeFaces renderer only) implements the PrimeFaces update property - which allows developers to 
-limit rerendering to a specified container.
+The update property (PrimeFaces renderer only) implements the PrimeFaces update property - which allows developers to limit rerendering to a specified container. This prevents the page from being completely rerendered when a change occurs in a widget, leading to a better user experience and better performance on larger pages.
+
+Before using the c:property, ensure that your view element definition includes the XML common namespace (`xmlns:c="http://www.skyve.org/xml/common"`) as shown below:
+
+```xml
+<view name="edit" title="<view title>" 
+	xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd" 
+	xmlns="http://www.skyve.org/xml/view" 
+	xmlns:c="http://www.skyve.org/xml/common"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+```
 
 ![Update property for change handlers](../assets/images/views/update-property.png "Update property for change handlers")
 
@@ -1323,8 +1332,7 @@ boundColumns are the fields from your chosen document that you wish to show:
 
 ### listGrid
 
-Views may also contain an embedded *listGrid* which is identical to the
-main list feature. 
+Views may also contain an embedded *listGrid* which is identical to the main list feature. 
 
 A *listGrid* can be used for showing collections of
 document instances and can be used to show loosely defined relationships, for example, if the Contact view was required
@@ -1441,6 +1449,81 @@ you wish to change the columns displayed, update the query in the `module.xml`.
 
 ![ListGrid Example](../assets/images/views/listGrid.png "ListGrid Example")
 
+### listMembership
+
+The `listMembership` widget is used when a user should be able to quickly multi-select many options from a collection of available options and assign them to a record. It provides intuitive _add one_, _add all_, _remove one_, and _remove all_ controls for managing memberships in a list.
+
+This widget is typically used for **aggregated** many-to-many style relationships, such as assigning permission groups to users. This would not be used for owned collections (child or composition).
+
+See the `groups` collection in the `User` document in the `admin` module for a working example.
+
+#### How it works
+
+The widget binds to a collection in the document, representing the **selected** records (right-hand side).
+
+The list of **available** records (left-hand side) is automatically populated from all available instances of the target document, using the default query defined for that document. If no default query is specified, all persisted instances of the document are used.
+
+The left-hand side is therefore calculated as:
+
+> All candidates **minus** the currently selected members
+
+You do **not** need to specify a domain to use `listMembership`. However, if you want to **refine** the list of candidates shown on the left-hand side (e.g. only active users), you can set `domain="variant"` or `domain="dynamic"` on the collection, and then override the appropriate method (`getVariantDomainValues()` or `getDynamicDomainValues()`) in the document’s Bizlet.
+
+Each side of the `listMembership` is a single-column list that shows the bizKey of each record.
+
+#### Example Usage
+
+In this example, we create a `listMembership` widget to manage a collection of users who will receive email reminders.
+
+**document.xml**
+
+Define a persistent collection which will store the selected members:
+
+```xml
+<collection name="subscribers" type="aggregation">
+   <displayName>Reminder Subscribers</displayName>
+   <description>Users in this group will receive reminder email notifications.</description>
+   <domain>dynamic</domain> <!-- optional; required only if refining the available list -->
+   <documentName>UserProxy</documentName>
+   <minCardinality>0</minCardinality>
+</collection>
+```
+
+**edit.xml**
+
+Add the `listMembership` widget to the view and specify the binding of the collection. The `candidatesHeading` and `membersHeading` attributes are optional, but they help to clarify the purpose of each list, where the left-hand side is the list of available users and the right-hand side is the list of selected subscribers.
+
+```xml
+<listMembership binding="subscribers" candidatesHeading="All Active Users" membersHeading="Subscribers" />
+```
+
+In this example:
+
+- `binding` specifies the attribute (collection) to bind to.
+- `candidatesHeading`  is the label shown above the list of available records.
+- `membersHeading` is the label shown above the list of selected members.
+
+**Bizlet** (dynamic domain population)
+
+Override `getDynamicDomainValues()` in your Bizlet to provide the list of available records (this should include the selected values too):
+
+```java
+@Override
+public List<DomainValue> getDynamicDomainValues(String attributeName, DocumentName bean) throws Exception {
+	if (DocumentName.subscribersPropertyName.equals(attributeName)) {
+		// only return active users to be available for selection
+		DocumentQuery q = CORE.getPersistence().newDocumentQuery(User.MODULE_NAME, User.DOCUMENT_NAME);
+		q.getFilter().addNotEquals(User.inactivePropertyName, Boolean.TRUE);
+		q.addBoundOrdering(Bean.BIZ_KEY);
+		List<UserExtension> activeUsers = q.beanResults();
+
+		return activeUsers;
+	}
+	return super.getDynamicDomainValues(attributeName, bean);
+}
+```
+
+> **Important**: This list must include the currently selected records as well, otherwise Skyve will not be able to resolve the display values of the selected records in the collection in the UI when the bean is rehydrated. Any records in the collection will still be saved, but will display as a list of bizIds instead of their bizKey.
 
 ## newParameter
 

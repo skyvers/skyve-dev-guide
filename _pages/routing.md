@@ -107,7 +107,7 @@ Example 3 - list view for module and named query
 `m=invoice` | the `m` (*module*) named `invoice`
 `q=qAllInvoices` | the `q` (*query*) named `qAllInvoices`
 
-#### Routing criteria and outcomes
+### Routing criteria and outcomes
 
 The `router.xml` specifies the outcomes for each UXUI based on criteria. Skyve provides for criteria based on the session and the request. The route outcomes are processed in the order specified in `router.xml`.
  
@@ -137,6 +137,91 @@ Example route for a *phone* UXUI:
 ```	
 
 The above xml fragment will route to custom Faces (xhtml) pages for the edit views of documents *Office* and *MyStatus*, to the Skyve *list* archetype pages if the request is for webAction `l` or `e` and otherwise to the archetype page `menu.xhtml`.
+
+#### Module-level Routers
+
+In addition to the central `router.xml` located at the project level (`src/main/java/router/`), Skyve supports **module-specific router definitions**. Module-level routers are still defined as `router.xml`, and can be placed directly within a module’s package (e.g. `src/main/java/modules/admin/router.xml`).
+
+At runtime, Skyve **merges** these module-level router definitions with the main `router.xml` by _outcome_. This allows module authors to define routing logic in isolation while still contributing to the overall application routing table.
+
+This modular approach supports improved maintainability and clearer separation of concerns when building or overriding routes within individual modules, and makes them less susceptible to being affected during upgrades to newer Skyve versions.
+
+Note: If multiple `router.xml` files define the same outcome, the first-defined match in merge order wins, which may depend on the module compilation order or packaging.
+
+#### Default Route and homeModule
+
+When no routing criteria are specified in the URL, Skyve uses a **default route** to determine what the user sees upon initial login or when visiting the root of the application.
+
+**User-level homeModule**
+
+Each user may have a `homeModule` preference set, which overrides the customer-wide default. This defines the module that the user will land on if no explicit routing criteria are provided (e.g. `?m=...&d=...` are missing). This is managed via user preferences in the admin UI and is typically set when creating a new user.
+
+**Customer-level homeModule**
+
+If the user does not have a `homeModule` preference set, Skyve will fall back to the `homeModule` defined in the `customer.xml`:
+
+```xml
+<modules homeModule="admin">
+	<module name="admin"/>
+	<module name="sales"/>
+</modules>
+```
+
+This defines the default module for all users of that customer unless overridden individually.
+
+**Module-level homeDocument**
+
+Each module must declare a `<homeDocument>` value in its `module.xml` to define which document is launched for that module’s default route. For example in the admin module:
+
+```xml
+<homeDocument>UserDashboard</homeDocument>
+```
+
+Skyve will use this document as the context for the default route.
+
+**Default outcome route**
+
+The no-criteria route — i.e. when no `m` or `d` parameters are specified — is defined using a <route> without any <criteria>:
+
+```xml
+<route outcome="/external/home.xhtml" />
+```
+
+At runtime, this route is automatically bound to the user’s resolved `homeModule` and its `homeDocument`.
+
+**Outcome merging and conflicts**
+
+All `router.xml` files (global and module-level) are merged by **outcome**, meaning that the outcome path must be **globally unique across all routers**. If two routes share the same outcome, such as (global):
+
+```xml
+<route outcome="/myApp/dashboard.xhtml" />
+```
+
+and (module-level)
+
+```xml
+<route outcome="/myApp/dashboard.xhtml">
+	<criteria webAction="e" module="myApp" document="Dashboard"/>
+</route>
+```
+
+a conflict will occur because both resolve to the same `outcome` with different matching semantics.
+
+**Resolution options:**
+
+1.	Use a **different outcome** name for the default page:
+
+```xml
+<route outcome="/myApp/home.xhtml" />
+```
+
+2.	Disambiguate using a **query parameter** (note: parameters are considered part of the outcome string):
+
+```xml
+<route outcome="/myApp/dashboard.xhtml?home" />
+```
+
+This ensures unique keys during route merge and prevents ambiguity when resolving navigation.
 
 ### Creating menu items for specific UXUI
 
