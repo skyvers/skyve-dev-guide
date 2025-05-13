@@ -69,37 +69,77 @@ For the `json` file `dialect` setting, choose the appropriate dialect class:
 
 _Note: as mentioned above, if you require support for Oracle or other dialects, please contact us._
 
-### Accessing the H2 database console
+### Using H2
 
-Using the H2 database console directly can be useful for debugging. 
+From Skyve 9+, Skyve no longer uses a `JNDI` name and the H2 datasource is configured directly in the project `.json` settings file, and no project `-ds.xml` is required in the `wildfly` deployments folder.
 
-Before attempting to connect with the console, ensure you have allowed for multiple connections by setting `AUTO_SERVER=TRUE` both when starting the server (ds.xml) and when attempting to connect, e.g.
+An example H2 datasource configuration is 
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<datasources>
-	<datasource jndi-name="java:/myAppDB" pool-name="myApp" enabled="true" jta="true" use-ccm="false">
-		<connection-url>jdbc:h2:file:C:/content/myApp/myApp;IFEXISTS=FALSE;IGNORECASE=TRUE;AUTO_SERVER=TRUE</connection-url>
-		<driver>h2</driver>
-		<pool>
-			<min-pool-size>5</min-pool-size>
-			<max-pool-size>10</max-pool-size>
-		</pool>
-		<security>
-			<user-name>sa</user-name>
-			<password>sa</password>
-		</security>
-	</datasource>
-</datasources>
+```json
+...
+  // Datastore definitions
+	dataStores: {
+		// Skyve data store
+		"skyve": {
+			// Connection
+			"driver": "org.h2.Driver",
+			"url": "jdbc:h2:file:C:/_/content/myApp/myAppDB;IFEXISTS=FALSE;IGNORECASE=TRUE;AUTO_SERVER=TRUE",
+			"user": "sa",
+			"password": "sa",
+			// Dialect
+			dialect: "org.skyve.impl.persistence.hibernate.dialect.H2SpatialDialect",
+			// Timeout for data store connections employed in general UI/forms processing - 0 indicates no timeout
+			oltpConnectionTimeoutInSeconds: 30,
+			// Timeout for data store connections employed when running jobs and background tasks - 0 indicates no timeout
+			asyncConnectionTimeoutInSeconds: 300
+		}
+	},
+	...
 ```
+
+In this case `myAppDB` will be the name of the H2 database file created in `C:/_/content/myApp/`
 
 Note that we recommend, for consistency, locating the H2 database file within the application content folder (in the above example the H2 database file `C:/content/myApp/myApp.mv.db` will be created automatically when first deployed if it does not exist.
 
-To access the console, download and run the installer from <a href="http://www.h2database.com/html/download.html">http://www.h2database.com/html/download.html</a> (this has been tested with "Version 1.4.199 (2019-03-13), Last Stable")
+For other datasource types, continue to use the `JNDI` name matching the name in the`-ds.xml` file in the `wildfly` deployments folder.
+
+#### Accessing the H2 database console
+
+Using the H2 database console directly can be useful for debugging. You can enable the database console by uncommenting the sevlet section of the `/src/main/web/WEB-INF/web.xml` file:
+
+```xml
+	<!-- Uncomment the following to allow access to the H2 web console. -->
+	<servlet>
+		<servlet-name>H2Console</servlet-name>
+		<servlet-class>org.h2.server.web.JakartaWebServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>H2Console</servlet-name>
+		<url-pattern>/h2/*</url-pattern>
+	</servlet-mapping>
+```
+
+NOTE that this servlet is commented out by default.
+
+Once uncommented/enabled and deployed, you can access the console in your browser at a similar location to your application, for example:
+
+```
+https://localhost:8080/myApp/h2/
+```
+
+When accessing the console, use the same connection path and credentials as you configured above in the `.json` settings file.
+
+You can then access the H2 database directly with SQL.
+
+![H2 console](../assets/images/appendix/h2_console_query.PNG "H2 console")
+
+#### Alternative approach for the H2 console
+
+Alternatively, you can download and run the installer from <a href="http://www.h2database.com/html/download.html">http://www.h2database.com/html/download.html</a> (this has been tested with "Version 1.4.199 (2019-03-13), Last Stable")
 
 Once installed run 'H2 Console' from the start menu; the H2 console should open in your browser.
 
-When prompted use the same connection-url and credentials as the deployed project `-ds.xml` file.
+When prompted use the same connection-url and credentials as the deployed `.json` project settings file (or in the `-ds.xml` file for older versions of Skyve before 9.0).
 
 ![Connecting to the H2 console](../assets/images/appendix/h2_console.PNG "Connecting to the H2 console")
 
