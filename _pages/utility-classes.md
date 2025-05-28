@@ -185,8 +185,7 @@ someOtherObject = CORE.getPersistence().getUser().getAttributes().get("someKey")
 ## DocumentQuery
 
 *DocumentQuery* extends *ProjectionQuery* and provides the ability to
-retrieve persisted beans in a type-safe and secure way, without building
-SQL or OQL Strings.
+retrieve persisted beans in a type-safe and secure way, without building SQL or OQL Strings.
 
 Key benefits of the DocumentQuery approach are:
 1. to abstract the developer from implementation-specific SQL - so that applications can remain database independent, 

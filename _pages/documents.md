@@ -250,14 +250,16 @@ Usage Values:
 
 ![Attribute Sensitivity example](../assets/images/documents/attribute-sensitivity-example.png)
 
-When adding attributes to a document, a developer should consider the sensitivity level of the data that will be used. The sensitivity level is used during skyve's backup feature to obfuscate certain data based on how sensitive it is. This is a security feature allowing a business to make a backup of their data to share with others while ensuring that whoever receives the backup sees only that which they have access to. There are 6 sensitivity levels available to choose from, which are highlight below in ascending order of data sensitivity. This hierarchy ensures that as you move from "None" to "Secret," the data becomes more sensitive, requiring stricter controls and more robust obfuscation when shared during backups:
+When adding attributes to a document, a developer should consider the sensitivity level of the data that will be used. The sensitivity level is used during skyve's backup feature to obfuscate certain data based on how sensitive it is. This is a security feature allowing a business to make a backup of their data to share with others while ensuring that whoever receives the backup sees only that which they have access to.
 
-- **None** – This data is considered non-sensitive and can be freely shared with any party without restrictions. It poses no risk to the business or individuals if it becomes public.
-- **Internal** – Information designated for use within the organization. It is not meant to be shared externally, but it doesn’t contain critical or highly sensitive data. Sharing it outside the organization could potentially cause minor issues.
-- **Confidential** – This data is sensitive and should be shared only with trusted individuals or departments. Unauthorized access could harm the organization’s operations or reputation. It is protected and access is generally limited to specific roles.
-- **Restricted** – Data that is sensitive and tightly controlled. Access is usually limited to a small group of authorized individuals within the organization. Sharing this data improperly could result in significant legal, financial, or operational consequences.
-- **Personal** – This refers to personally identifiable information (PII) such as names, addresses, or any data that could be linked to an individual. Unauthorized disclosure of personal data can lead to privacy violations, legal consequences, and a breach of trust.
-- **Secret** – The most sensitive level of information, where unauthorized access could lead to severe consequences, such as financial loss, reputational damage, or exposure of critical business or security-related information. Strict protocols are required to manage, store, and share this data securely.
+There are six sensitivity levels to choose from, highlighted below in ascending order of data sensitivity. This hierarchy ensures that as you progress from "None" to "Secret", the data becomes increasingly sensitive, necessitating stricter controls and more robust obfuscation when shared during backups.
+
+- **None** – This data is regarded as non-sensitive and can be shared freely with any party without restrictions. It poses no risk to the business or individuals if it becomes public.
+- **Internal** – Information intended for use within the organisation. It is not meant to be shared externally, but it does not contain critical or highly sensitive data. Sharing it outside the organisation could potentially cause minor issues.
+- **Confidential** – This data is sensitive and should only be shared with trusted individuals or departments. Unauthorized access could harm the organisation's operations or reputation. It is protected, and access is generally restricted to specific roles.
+- **Restricted** – Data that is sensitive and closely controlled. Access is typically limited to a small group of authorised individuals within the organisation. Improper sharing of this data could lead to significant legal, financial, or operational consequences.
+- **Personal** – This pertains to personally identifiable information (PII) like names, addresses, or any data that may be associated with an individual. Unauthorised disclosure of personal information can give rise to privacy breaches, legal repercussions, and a loss of trust.
+- **Secret** – The most sensitive level of information, where unauthorised access could lead to severe consequences, such as financial loss, reputational damage, or exposure of critical business or security-related information. Strict protocols are necessary to manage, store, and share this data securely.
 
 **Obfuscation strategies**
 
