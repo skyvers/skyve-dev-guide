@@ -301,6 +301,54 @@ The following example returns the support tickets associated to the current user
 
 In the above example, _SupportTicket_ document in the _support_ module is the driving document and is aliased as `bean`.
 
+### Filtering with a join
+
+This example demonstrates how to filter data using an **inner join**, which is useful when you want to display only records that are associated with a related entity.
+
+In this scenario, each `User` has a collection of `Group` entities. The goal is to list only the users who belong to a specific `Group` - identified by its `bizId`.
+
+The `listGrid` component below references a query named `qUsersInGroup`, which is parameterized with the `bizId` of the target group. This ensures the grid only shows users associated with that group.
+
+#### ListGrid Component
+
+```xml
+<listGrid title="Users In Group"
+		query="qUsersInGroup"
+		continueConversation="false"
+		showAdd="false"
+		showEdit="false"
+		showRemove="false"
+		percentageWidth="50"
+		responsiveWidth="12">
+	<parameter name="bizId" valueBinding="bizId" />
+</listGrid>
+```
+
+#### Corresponding Query
+
+```xml
+<query name="qUsersInGroup" documentName="User">
+	<description>Group Users</description>
+	<from>
+		<![CDATA[
+			{admin.User} as bean
+			inner join bean.groups as group
+		]]>
+	</from>
+	<filter>
+		<![CDATA[
+			group.bizId = :bizId
+		]]>
+	</filter>
+	<columns>
+		<column binding="contact.name" sortOrder="ascending" />
+		<column binding="contact.email1" sortOrder="ascending" />
+		<column binding="contact.mobile" sortOrder="ascending" />
+		<column binding="userName" sortOrder="ascending" />
+	</columns>
+</query>
+```
+
 ### Ignoring a filter if the user has a specific role
 
 This example shows how to filter data that is relevant to the current user, or show all data if the if the user has a specific role.
