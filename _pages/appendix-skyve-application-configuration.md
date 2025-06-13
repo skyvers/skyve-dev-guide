@@ -75,11 +75,13 @@ First, sign up for a Cloudflare Turnstile key as follows:
 
 1. Visit [Cloudflare](https://dash.cloudflare.com/sign-up) and sign up
 2. Click Turnstile in the sidebar menu on the left
-3. Click the 'Add site' button to add a new site
+3. Click the **Add widget** button to add a new widget
 4. Enter a site name to identify what this key will be for (the name of your Application)
-5. Enter the domain name of your Skyve application e.g 'app.website.com' or 'website.com'
-6. Select the widget mode you wish to use.
-7. Click 'Create'
+5. Click **Add Hostnames**
+6. Enter the domain name of your Skyve application e.g 'app.website.com' or 'website.com' and click **Add**
+7. Click **Add** at the bottom of the dialog to confirm your hostname(s)
+8. Select the **widget mode** you wish to use for your challenges
+9. Click 'Create'
 
 Once you have received your *site* key and *secret* key, copy your key into the Startup Configuration section of the Admin menu of your Skyve application:
 1. From the Admin menu, open Configuration
@@ -90,11 +92,11 @@ Once you have received your *site* key and *secret* key, copy your key into the 
 
 Alternatively, you can place the API keys in the project JSON file under `api` 
 
-```
+```json
 	// API Settings
-	api: {
-		cloudflareTurnstileSiteKey: "xxxxxxxxxxx",
-		cloudflareTurnstileSecretKey: "xxxxxxxxxxx",
+	"api": {
+		"cloudflareTurnstileSiteKey": "xxxxxxxxxxx",
+		"cloudflareTurnstileSecretKey": "xxxxxxxxxxx"
 	}
 ```
 
