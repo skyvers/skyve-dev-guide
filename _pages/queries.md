@@ -44,6 +44,8 @@ To improve performance, Skyve will defer instantiation of domain objects unless 
 
 Non-persistent values can be projected (as well as persisted or database values) and the evaluation engine will load the domain objects behind the scenes only if necessary.
 
+Queries can be imported from one module to another. An imported query can be renamed but nothing else about the query can be changed. The driving document of the query needs to exist in the module the query is imported into.
+
 However you can also declare queries using bizQL (derived from [Hibernate Query Language](https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html) and SQL.
 
 ### Query column definition
@@ -263,7 +265,7 @@ List<User> activeUsers = qActiveUser.beanResults();
 
 However using the DocumentQuery method loads beans, not MapBeans.
 
-### Including a from element
+### Including a `from` element
 
 You can override the usual query behaviour to include other documents that may or not be directly related to the driving document by including a `from` element in the query declaration, and aliasing the documents. The documents must be declared using the `{module.Document}` naming convention.
 

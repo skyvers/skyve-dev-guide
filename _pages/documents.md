@@ -624,6 +624,8 @@ In this example:
 - The `Contact` document has an association to a Customer named `customer`.
 - Skyve will automatically resolve the relationship, allowing a `Customer` to retrieve its `contacts` without an explicit database reference. This can be used as if a collection of `Contact` instances were stored in the `Customer` document.
 
+<inverseMany/> can have an <ordering/> the same as <collection/>. If the ordering bindings are simple and persistent then the ordering is added to the orm.xml, otherwise Skyve orders the collection when loaded.
+
 #### Cascade
 
 The cascade attribute can be specified to cascade the save and delete operations to the inverse document. This is useful when the inverse document is a composition and should be deleted when the parent document is deleted, or changes made in an edit view should flow across the inverse to the persistent attribute.
