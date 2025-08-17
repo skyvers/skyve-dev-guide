@@ -44,7 +44,7 @@ To improve performance, Skyve will defer instantiation of domain objects unless 
 
 Non-persistent values can be projected (as well as persisted or database values) and the evaluation engine will load the domain objects behind the scenes only if necessary.
 
-Queries can be imported from one module to another. An imported query can be renamed but nothing else about the query can be changed. The driving document of the query needs to exist in the module the query is imported into.
+From Skyve 9.4.0, queries can be imported from one module to another. An imported query can be renamed but nothing else about the query can be changed. The driving document of the query needs to exist in the module the query is imported into.
 
 However you can also declare queries using bizQL (derived from [Hibernate Query Language](https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/queryhql.html) and SQL.
 
