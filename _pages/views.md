@@ -22,11 +22,46 @@ the document from a list.
 
 Two types of views can be declared for each document, and views can contain combinations of view components.
 
-  View        | Description
-  ------------|-----------
-  edit.xml    | The basic view declaration for detail editing of a bean (normally accessed by zooming into a row from a list).<br/><br/>Menu items can also target edit views directly. In this case the menu item will trigger `newInstance()` and a new document instance will be returned (and therefore displayed). To show a singleton (a document instance which is the only applicable existing instance within the context), the `newInstance()` method can be overridden to select and return an existing bean in place of the newly created instance.<br/><br/>If a *create.xml* is supplied, the *edit.xml* file is only used after the document is created.
-  create.xml  | A special case of edit view which is used if *create.xml* supplied and if `isCreated()` is false similar to the following
+View        | Description
+------------|-----------
+edit.xml    | The basic view declaration for detail editing of a bean (normally accessed by zooming into a row from a list).<br/><br/>Menu items can also target edit views directly. In this case the menu item will trigger `newInstance()` and a new document instance will be returned (and therefore displayed). To show a singleton (a document instance which is the only applicable existing instance within the context), the `newInstance()` method can be overridden to select and return an existing bean in place of the newly created instance.<br/><br/>If a *create.xml* is supplied, the *edit.xml* file is only used after the document is created.
+create.xml  | Optional initial creation view. If a *create.xml* exists and the current bean has NOT yet satisfied the `created` condition (e.g. it has not been persisted), Skyve renders *create.xml* instead of *edit.xml*. After the bean is saved and the `created` condition evaluates to true (commonly via an expression such as `isPersisted()`), subsequent opens display *edit.xml*. See the "Create vs Edit view selection" section below for full lifecycle details and an example condition.
   
+### Create vs Edit view selection
+
+When both `create.xml` and `edit.xml` are supplied for a document, Skyve decides which view to render based on the value of the special `created` condition at runtime.
+
+**Lifecycle summary:**
+
+1. A new instance constructed (e.g. via `newInstance()` or implicit New action) -> `created` condition is evaluated.
+2. If `created` is false, and `create.xml` exists, Skyve renders `create.xml`.
+3. User enters data and saves -> the instance is persisted.
+4. On the next render (or immediate rerender post-save), `created` is re-evaluated. Once it evaluates to true, `edit.xml` is used from then on.
+
+**Typical `created` condition**
+
+Most documents implement the `created` condition using the persistence state of the bean. For example, the Admin module `User` document defines:
+
+```xml
+<condition name="created">
+	<description>True when this User has been created</description>
+	<expression>isPersisted()</expression>
+</condition>
+```
+
+**Key points:**
+
+* `isPersisted()` (available in the expression context) returns true once the bean has been saved (has a primary key/bizId in the database).
+* If you do not provide `create.xml`, Skyve always renders `edit.xml` regardless of the `created` condition.
+* If you provide `create.xml` but omit a `created` condition, Skyve will only render the document's `edit.xml`.
+* You can tailor the `created` condition to switch to the edit view only after some additional business rule (e.g. required related entities) is satisfied, not strictly the first persistence.
+
+**Use cases for `create.xml`:**
+
+* Simplified first-step data capture before exposing a complex full edit layout.
+* Collecting minimal required attributes to establish identity, after which additional tabs/containers appear in `edit.xml`.
+* Providing a focused onboarding experience (e.g. a wizard) distinct from later maintenance screens.
+
 ### View declaration attributes
 
 Attribute | Description
