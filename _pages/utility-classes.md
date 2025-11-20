@@ -184,75 +184,97 @@ someOtherObject = CORE.getPersistence().getUser().getAttributes().get("someKey")
 
 ## DocumentQuery
 
-*DocumentQuery* extends *ProjectionQuery* and provides the ability to
-retrieve persisted beans in a type-safe and secure way, without building SQL or OQL Strings.
+*DocumentQuery* extends *ProjectionQuery* and provides a type-safe and secure way to retrieve persisted beans without requiring developers to write SQL or OQL strings.
 
-Key benefits of the DocumentQuery approach are:
-1. to abstract the developer from implementation-specific SQL - so that applications can remain database independent, 
-2. to allow compile-time checks on query code, and
-3. to ensure a consistent security and performance via Skyve's Persistence singleton object.
+Key Benefits:
+1. Abstracts developers from database-specific SQL, ensuring database independence.
+2. Enables compile-time checks on query code for better reliability.
+3. Ensures consistent security and performance via Skyve’s Persistence singleton.
 
-A trivial example of DocumentQuery is to retrieve typed beans using a simple filter:
+### Simple Example
+
+Retrieve a list of inactive users using a basic filter:
 
 ```java
-// retrieve a list of inactive users
+// Retrieve a list of inactive users
 DocumentQuery q = CORE.getPersistence().newDocumentQuery(User.MODULE_NAME, User.DOCUMENT_NAME);
 q.getFilter().addEquals(User.inactivePropertyName, Boolean.TRUE);
 
 List<UserExtension> inactiveUsers = q.beanResults();
-for(UserExtension u : inactiveUsers) {
-  ...
+for (UserExtension u : inactiveUsers) {
+  // Process each user
 }
 ```
 
-### Complex Example 
+### Using OR Filters
 
-For more complex queries, developers can construct queries using a range of extended filter features:
+You can construct OR conditions simply as follows:
 
 ```java
-// collect settlements between range, with area > 0
-// either from or to the current Grower
+final DocumentFilter codeFilter = q.newDocumentFilter();
+codeFilter.addEquals(Team.abbreviationPropertyName, code);
+
+final DocumentFilter altCodeFilter = q.newDocumentFilter();
+altCodeFilter.addEquals(Team.altCodePropertyName, code);
+
+q.getFilter()
+  .addOr(codeFilter)
+  .addOr(altCodeFilter);
+```
+
+Wrap OR filters inside another filter for combining with AND conditions:
+
+```java
+final DocumentFilter wrapperOrFilter = q.newDocumentFilter();
+
+final DocumentFilter codeFilter = q.newDocumentFilter();
+codeFilter.addEquals(Team.abbreviationPropertyName, code);
+wrapperOrFilter.addOr(codeFilter);
+
+final DocumentFilter altCodeFilter = q.newDocumentFilter();
+altCodeFilter.addEquals(Team.altCodePropertyName, code);
+wrapperOrFilter.addOr(altCodeFilter);
+
+q.getFilter().addAnd(wrapperOrFilter);
+```
+
+### Complex Example
+
+For more advanced queries, combine filters with different conditions:
+
+```java
+// Collect VineyardChange settlements between a date range with transferred area > 0, either from or to the current Grower
 DocumentQuery q = CORE.getPersistence().newDocumentQuery(VineyardChange.MODULE_NAME, VineyardChange.DOCUMENT_NAME);
+
 DocumentFilter dFrom = q.newDocumentFilter();
 DocumentFilter dTo = q.newDocumentFilter();
+
 q.getFilter().addBetween(VineyardChange.madePropertyName, firstDayOfYear, new DateOnly());
 q.getFilter().addGreaterThan(VineyardChange.transferredAreaPropertyName, Decimal5.ZERO);
 
 dFrom.addEquals(VineyardChange.fromGrowerPropertyName, bean);
 dTo.addEquals(VineyardChange.toGrowerPropertyName, bean);
+
+// Combine filters with OR: fromGrower = bean OR toGrower = bean
 dTo.addOr(dFrom);
 
+// Add the combined OR filter with AND to main filter
 q.getFilter().addAnd(dTo);
 
 List<VineyardChange> settlements = q.beanResults();
-for(VineyardChange settlement : settlements) {
+for (VineyardChange settlement : settlements) {
   settlement.setStatus(Status.completed);
 }
 ```
 
-_Example DocumentQuery_
-
-In the example provided in the above example, the `DocumentQuery` is used to
-retrieve all `VineyardChange` beans. The beans are returned in a typed
-List and document permissions and scoping rules are automatically
-enforced by Skyve.
-
-The use of `DocumentFilter` allows for correct enforcement of types at
-compile-time to reduce the possibility of errors arising from implicit
-type conversion which may arise if SQL strings were used.
-
-However, where necessary, developers can take advantage of other querying options including:
-1. creating queries using SQL and BizQL (similar to HQL)
-2. re-using and manipulating no-code queries declared in the module.xml
+This example shows how *DocumentQuery* returns typed beans while automatically enforcing document permissions and scoping rules. Using *DocumentFilter* supports compile-time type safety and helps avoid errors common with string-based queries.
 
 ### Aggregate Functions
 
-Another example of using a `DocumentQuery` is performing aggeregate functions. In this example, 
-it returns a count of the number of `Contacts` in the database:
+*DocumentQuery* also supports aggregate functions. For example, counting the number of *Contact* records:
 
 ```java
-DocumentQuery qCount = persistence.newDocumentQuery(Contact.MODULE_NAME,
-    Contact.DOCUMENT_NAME);
+DocumentQuery qCount = persistence.newDocumentQuery(Contact.MODULE_NAME, Contact.DOCUMENT_NAME);
 qCount.addAggregateProjection(AggregateFunction.Count, Bean.DOCUMENT_ID, "CountOfId");
 int numberOfContacts = qCount.scalarResult(Number.class).intValue();
 ```
