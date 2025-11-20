@@ -184,7 +184,7 @@ someOtherObject = CORE.getPersistence().getUser().getAttributes().get("someKey")
 
 ## DocumentQuery
 
-*DocumentQuery* extends *ProjectionQuery* and provides a type-safe and secure way to retrieve persisted beans without requiring developers to write SQL or OQL strings.
+`DocumentQuery` extends `ProjectionQuery` and provides a type-safe and secure way to retrieve persisted beans without requiring developers to write SQL or OQL strings.
 
 Key Benefits:
 1. Abstracts developers from database-specific SQL, ensuring database independence.
@@ -193,22 +193,44 @@ Key Benefits:
 
 ### Simple Example
 
-Retrieve a list of inactive users using a basic filter:
+Create queries by specifying the module and document, optionally adding filter criteria.
 
 ```java
 // Retrieve a list of inactive users
 DocumentQuery q = CORE.getPersistence().newDocumentQuery(User.MODULE_NAME, User.DOCUMENT_NAME);
+
+// Add filter: inactive = false (i.e. active users)
 q.getFilter().addEquals(User.inactivePropertyName, Boolean.TRUE);
 
 List<UserExtension> inactiveUsers = q.beanResults();
-for (UserExtension u : inactiveUsers) {
-  // Process each user
-}
 ```
+
+This example returns all inactive users.
+
+Other filter methods include `addLessThan`, `addLessThanOrEqualTo`, `addGreaterThan`, `addGreaterThanOrEqualTo`, `addNull`, `addNullOrEqualTo`, `addIn`, and more.
+
+### Chaining Filters with AND
+
+To refine queries with multiple conditions combined using AND, chain filters directly on the main filter:
+
+```java
+// Find active users created after a specific date
+DocumentQuery q = CORE.getPersistence().newDocumentQuery(User.MODULE_NAME, User.DOCUMENT_NAME);
+
+// Add filter: inactive = false (i.e. active users)
+q.getFilter().addEquals(User.inactivePropertyName, Boolean.FALSE);
+
+// Add filter: createdDate > specificDate
+q.getFilter().addGreaterThan(User.createdDatePropertyName, specificDate);
+
+List<UserExtension> activeRecentUsers = q.beanResults();
+```
+
+This example returns active users created after the specified date.
 
 ### Using OR Filters
 
-You can construct OR conditions simply as follows:
+Combine multiple filters with OR logic directly on the main filter:
 
 ```java
 final DocumentFilter codeFilter = q.newDocumentFilter();
@@ -222,7 +244,7 @@ q.getFilter()
   .addOr(altCodeFilter);
 ```
 
-Wrap OR filters inside another filter for combining with AND conditions:
+Alternatively, wrap multiple OR conditions inside a filter and combine it with other filters using AND:
 
 ```java
 final DocumentFilter wrapperOrFilter = q.newDocumentFilter();
@@ -238,40 +260,55 @@ wrapperOrFilter.addOr(altCodeFilter);
 q.getFilter().addAnd(wrapperOrFilter);
 ```
 
-### Complex Example
+### Sorting
 
-For more advanced queries, combine filters with different conditions:
+Specify the order of query results using `addBoundOrdering`. You can sort by one or more properties in ascending or descending order.
 
 ```java
-// Collect VineyardChange settlements between a date range with transferred area > 0, either from or to the current Grower
-DocumentQuery q = CORE.getPersistence().newDocumentQuery(VineyardChange.MODULE_NAME, VineyardChange.DOCUMENT_NAME);
+DocumentQuery q = CORE.getPersistence().newDocumentQuery(Audit.MODULE_NAME, Audit.DOCUMENT_NAME);
+q.addBoundOrdering(Audit.createdDatePropertyName, SortDirection.descending);
 
-DocumentFilter dFrom = q.newDocumentFilter();
-DocumentFilter dTo = q.newDocumentFilter();
+List<Audit> audits = q.beanResults();
 
-q.getFilter().addBetween(VineyardChange.madePropertyName, firstDayOfYear, new DateOnly());
-q.getFilter().addGreaterThan(VineyardChange.transferredAreaPropertyName, Decimal5.ZERO);
-
-dFrom.addEquals(VineyardChange.fromGrowerPropertyName, bean);
-dTo.addEquals(VineyardChange.toGrowerPropertyName, bean);
-
-// Combine filters with OR: fromGrower = bean OR toGrower = bean
-dTo.addOr(dFrom);
-
-// Add the combined OR filter with AND to main filter
-q.getFilter().addAnd(dTo);
-
-List<VineyardChange> settlements = q.beanResults();
-for (VineyardChange settlement : settlements) {
-  settlement.setStatus(Status.completed);
-}
 ```
 
-This example shows how *DocumentQuery* returns typed beans while automatically enforcing document permissions and scoping rules. Using *DocumentFilter* supports compile-time type safety and helps avoid errors common with string-based queries.
+This example returns all audits sorted by creation date in descending order.
+
+### Projection
+
+`DocumentQuery` supports projecting specific fields instead of entire beans, allowing queries to return only the data needed. Use `addBoundProjection` to specify which property to retrieve.
+
+```java
+DocumentQuery q = CORE.getPersistence().newDocumentQuery(Audit.MODULE_NAME, Audit.DOCUMENT_NAME);
+q.addBoundProjection(Audit.createdDatePropertyName);
+
+List<DateTime> createdDates = q.scalarResults(DateTime.class);
+```
+
+This example returns all audit creation dates.
+
+### Alternate Return Types
+
+Besides returning lists of full beans with `beanResults()`, you can retrieve a single result using `beanResult()`.
+
+```java
+DocumentQuery q = CORE.getPersistence().newDocumentQuery(Audit.MODULE_NAME, Audit.DOCUMENT_NAME);
+q.getFilter().addEquals(Bean.DOCUMENT_ID, bizId);
+
+Audit audit = q.beanResult();
+```
+
+This example retrieves the audit with the specified `bizId`.
+
+You can also retrieve scalar results for projected fields using `scalarResult()` or `scalarResults()` for single or multiple values, respectively:
+
+```java
+DateTime latestAuditCreatedDate = q.scalarResult(DateTime.class);
+```
 
 ### Aggregate Functions
 
-*DocumentQuery* also supports aggregate functions. For example, counting the number of *Contact* records:
+`DocumentQuery` supports aggregate functions such as counting, summing, and averaging.
 
 ```java
 DocumentQuery qCount = persistence.newDocumentQuery(Contact.MODULE_NAME, Contact.DOCUMENT_NAME);
@@ -279,7 +316,36 @@ qCount.addAggregateProjection(AggregateFunction.Count, Bean.DOCUMENT_ID, "CountO
 int numberOfContacts = qCount.scalarResult(Number.class).intValue();
 ```
 
-Other aggregate functions available include `Sum`, `Min`, `Max` and `Avg`.
+This example returns the total number of `Contact` records.
+
+Other aggregate functions include `Sum`, `Min`, `Max`, and `Avg`.
+
+### Additional Configurations
+
+Control query behavior with methods like:
+1. `setMaxResults(int max)` — limits the number of results returned by the query.
+2. `setDistinct(boolean distinct)` - ensures the query returns distinct results.
+
+```java
+DocumentQuery q = CORE.getPersistence().newDocumentQuery(Audit.MODULE_NAME, Audit.DOCUMENT_NAME);
+q.addBoundOrdering(Audit.createdDatePropertyName, SortDirection.descending);
+q.setMaxResults(10);
+
+List<Audit> results = q.beanResults();
+```
+
+This example returns the 10 most recent audits.
+
+```java
+DocumentQuery q = CORE.getPersistence().newDocumentQuery(Audit.MODULE_NAME, Audit.DOCUMENT_NAME);
+q.addBoundOrdering(Audit.createdDatePropertyName, SortDirection.descending);
+q.addBoundProjection(Audit.createdDatePropertyName);
+q.setDistinct(true);
+
+List<DateTime> createdDates = q.scalarResults(DateTime.class);
+```
+
+This example returns the 10 most recent distinct created dates.
 
 For more querying options, we recommend developers read [Using bizQL](../queries/#using-bizql) and [Using SQL](../queries/#using-sql) and review the other query examples provided in that chapter.
 
