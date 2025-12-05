@@ -471,8 +471,6 @@ Queries can then use this value for filtering, for example:
 </query>
 ```
 
-
-
 ### Using SQL
 
 If required, you can also declare queries using SQL (and a specific SQL dialect). In this case the SQL may be dialect-specific and your application may not function when used on other database types.
@@ -526,6 +524,156 @@ SQL sql = CORE.getPersistence().newNamedSQL(FoodAct.MODULE_NAME, SQL_QUERY_NAME)
 sql.putParameter("inspectionDateFrom", dateFrom);
 sql.putParameter("inspectionDateTo", dateTo);
 ```
+
+### SQL update, delete, and count examples
+
+The following examples show how to execute parameterised SQL from Skyve, both with named queries declared in module XML and with inline SQL strings.
+
+#### UPDATE using a named SQL query
+
+```java
+// In your action class
+SQL sql = CORE.getPersistence().newNamedSQL(ModuleName.MODULE_NAME, "qUpdateUserStatus");
+sql.putParameter("newStatus", "Active", false);
+sql.putParameter("oldStatus", "Inactive", false);
+int rowsUpdated = sql.execute();
+```
+
+```xml
+<sql name="qUpdateUserStatus">
+    <description>Updates user status from one value to another</description>
+    <query>
+        UPDATE u
+        SET u.status = :newStatus
+        FROM ADM_SecurityUser u
+        WHERE u.status = :oldStatus
+            AND u.inactive = 0
+    </query>
+</sql>
+```
+
+#### UPDATE using inline SQL
+
+```java
+String sql = "UPDATE ADM_SecurityUser "
+        + "SET passwordExpired = 1 "
+        + "WHERE lastPasswordChange < :expiryDate "
+        + "AND passwordExpired = 0 "
+        + "AND bizCustomer = :customer";
+
+SQL stmt = CORE.getPersistence().newSQL(sql);
+stmt.putParameter("expiryDate", expiryDate);
+stmt.putParameter("customer", CORE.getCustomer().getName(), false);
+int rowsUpdated = stmt.execute();
+```
+
+#### DELETE using inline SQL
+
+```java
+// Delete audit records older than a specified date
+String deleteAuditSql = "DELETE a "
+        + "FROM ADM_Audit a "
+        + "WHERE a.timestamp < :date "
+        + "AND a.bizCustomer = :customer";
+
+int auditsDeleted = CORE.getPersistence().newSQL(deleteAuditSql)
+        .putParameter("date", cutoffDate)
+        .putParameter("customer", CORE.getCustomer().getName(), false)
+        .execute();
+```
+
+#### DELETE with join
+
+```java
+// Delete tagged records that are no longer associated with a valid tag
+String deleteTaggedSql = "DELETE t "
+        + "FROM ADM_Tagged t "
+        + "LEFT JOIN ADM_Tag tag "
+        + "    ON tag.bizId = t.tag_id "
+        + "WHERE tag.bizId IS NULL "
+        + "    AND t.bizCustomer = :customer";
+
+int recordsDeleted = CORE.getPersistence().newSQL(deleteTaggedSql)
+        .putParameter("customer", CORE.getCustomer().getName(), false)
+        .execute();
+```
+
+#### Simple DELETE
+
+```java
+String deleteSQL = "DELETE FROM ADM_Tagged "
+        + "WHERE tag_id = :tagId "
+        + "AND bizCustomer = :customer";
+
+CORE.getPersistence().newSQL(deleteSQL)
+        .putParameter("tagId", tagBizId, false)
+        .putParameter("customer", CORE.getCustomer().getName(), false)
+        .execute();
+```
+
+#### COUNT using inline SQL
+
+```java
+String query = "SELECT COUNT(1) "
+        + "FROM ADM_Subscription s "
+        + "INNER JOIN ADM_Communication c "
+        + "    ON s.communication_id = c.bizId "
+        + "WHERE c.systemUse = 0 "
+        + "    AND s.declined = 0 "
+        + "    AND s.bizCustomer = :customer";
+
+SQL sql = CORE.getPersistence().newSQL(query);
+sql.putParameter("customer", CORE.getCustomer().getName(), false);
+Integer count = sql.scalarResult(Integer.class);
+```
+
+#### COUNT using a named SQL query
+
+```xml
+<sql name="qCountActiveUsers">
+    <description>Counts the number of active users in the system</description>
+    <query>
+        <![CDATA[
+            SELECT COUNT(1) 
+            FROM ADM_SecurityUser u
+            WHERE u.inactive = 0
+                AND u.activated = 1
+                AND u.bizCustomer = :customer
+        ]]>
+    </query>
+</sql>
+```
+
+```java
+// Usage in Java code
+SQL sql = CORE.getPersistence().newNamedSQL(ModuleName.MODULE_NAME, "qCountActiveUsers");
+sql.putParameter("customer", CORE.getCustomer().getName(), false);
+Integer count = sql.scalarResult(Integer.class);
+```
+
+#### COUNT with subquery
+
+```java
+String query = "SELECT COUNT(1) "
+        + "FROM ADM_Audit a "
+        + "WHERE EXISTS ("
+        + "    SELECT 1 FROM ADM_SecurityUser u "
+        + "    WHERE u.bizId = a.auditBizId "
+        + "        AND u.inactive = 1"
+        + ") "
+        + "AND a.bizCustomer = :customer";
+
+SQL sql = CORE.getPersistence().newSQL(query);
+sql.putParameter("customer", CORE.getCustomer().getName(), false);
+Integer count = sql.scalarResult(Integer.class);
+```
+
+#### Notes on SQL usage
+
+* Use `newSQL()` for inline SQL and `newNamedSQL()` for queries defined in module XML.
+* Bind values with `putParameter()` to avoid SQL injection and to pass tenant-specific filters.
+* Use `execute()` for update/delete operations and `scalarResult()` for single-value results (e.g. counts).
+* Always include `bizCustomer` filters when working with multi-tenant data.
 
 ### Using MEMBER OF
 
