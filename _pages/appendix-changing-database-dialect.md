@@ -95,7 +95,7 @@ An example H2 datasource configuration is:
 
 In this case `myAppDB` will be the name of the H2 database file created in `C:/_/content/myApp/`.
 
-Note that we recommend, for consistency, locating the H2 database file within the application content folder (in the above example the H2 database file `C:/content/myApp/myApp.mv.db` will be created automatically when first deployed if it does not exist).
+Note that we recommend, for consistency, locating the H2 database file within the application content folder (in the above example the H2 database file `C:/_/content/myApp/myAppDB.mv.db` will be created automatically when first deployed if it does not exist).
 
 A full example and upgrade notes are in the [Skyve 9.0.0 release notes](https://skyve.org/blog/2024/5/4/skyve-900-released) (see "Update H2 data source connections").
 
