@@ -15,7 +15,9 @@ _NOTE: Before you begin - backup your data (using the Skyve backup feature in th
 The steps to change database are:
 
 1. If you are changing to `MySQL`, `MSSQL` or `POSTGRES`, you will need to create a new empty database schema for your project
-2. Update the datasource connection: for MySQL, MSSQL and PostgreSQL, update the `-ds.xml` file in `wildfly/standalone/deployments/`; for H2, configure the datastore entirely in the application JSON (no `-ds.xml` file is required—see [Using H2](#using-h2) below).
+2. Update the datasource connection:
+   * For `MySQL`, `MSSQL` and `POSTGRES`, update the `-ds.xml` file in `wildfly/standalone/deployments/`.
+   * For `H2`, configure the datastore entirely in the application JSON (no `-ds.xml` file is required—see [Using H2](#using-h2) below).
 3. Ensure you have loaded and configured Wildfly for the new database dialect (detailed instructions are below)
 4. Update the dialect in the `json` settings file for the new dialect (in `wildfly/standalone/deployments/`)
 5. Update the dialect setting in the `pom.xml`, and use the `generate domain` target to update your project for the new dialect
