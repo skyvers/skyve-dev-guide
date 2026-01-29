@@ -20,7 +20,7 @@ There are two options for content management:
 * lucene based simple content manager addin (bundled with Skyve)
 * use others (like Elastic) in the cloud or on another server if using on-premise
 
-To use the free Skyve content management addin, retrieve the addin zip by performing a maven `install` or maven `compile` against your project and check the `target` folder in your project's workspace. Copy the downloaded `skyve-content.zip` to a file location, and specify that location for the `addins` section in the application `.json` settings file. 
+To use the free Skyve content management addin, retrieve the addin zip by performing a maven `install` or maven `compile` against your project and check the `target` folder in your project's workspace. The zip has a versioned name (e.g. `skyve-content-9.4.0.zip`). Copy that single zip to your addins directory and specify that directory for the `addins` section in the application `.json` settings file. Keep only one copy of the content addin zip in the addins directory. Do not unzip it—Skyve will detect it on startup and unzip/install it in the correct location. 
 
 The same content management addin can be referenced by multiple projects on the same instance, provided the version is compatible with the version of Skyve your project is using, you do not need to have a separate addin for each project.
 
