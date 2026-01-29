@@ -72,43 +72,6 @@ Wildfly is a Java application server that:
 
 You can skip this step if WildFly Server is already installed on your system.
 
-### Install JBoss Tools Plugin
-
-Before installing WildFly Server, we need to install the JBoss Tools plugin in Eclipse. This plugin provides tools to manage WildFly servers.
-
-1. In Eclipse, click **Help** → **Eclipse Marketplace**
-
-   ![JBoss tools](../assets/images/appendix/installing-configuring/2.JPG "JBoss tools")
-
-2. In the search bar, type `jboss` and press Enter
-
-3. Find **JBoss Tools** in the search results and click **Install**
-
-   ![JBoss install](../assets/images/appendix/installing-configuring/3.JPG "JBoss install")
-
-4. In the installation dialog, select all the components as shown below
-
-   ![JBoss install selection](../assets/images/appendix/installing-configuring/15.jpg "JBoss install selection")
-
-5. Click **Next** and follow the installation wizard
-6. Accept the license agreement and click **Finish**
-7. Restart Eclipse when prompted
-
-### Verify JBoss Tools Installation
-
-To confirm JBoss Tools is installed correctly:
-
-1. Click **Help** → **Eclipse Marketplace**
-
-   ![JBoss tool install](../assets/images/appendix/installing-configuring/4.JPG "JBoss tool install")
-
-2. Click the **Installed** tab
-3. Look for **JBoss Tools** in the list - if it's there, you're ready to continue
-
-   ![JBoss tool plugin](../assets/images/appendix/installing-configuring/5.JPG "JBoss tool plugin")
-
-### Install WildFly Server
-
 Now we'll create a WildFly server instance in Eclipse:
 
 1. In Eclipse, right-click in the **Project Explorer** panel (the left sidebar) and select **New** → **Other**
@@ -177,7 +140,7 @@ Set Eclipse to use Java 17 (required for Skyve):
 4. Click **Apply and Close**
 5. When prompted to rebuild, click **Yes**
   
-See additional details in [Setting up a Skyve instance](./../pages/appendix_setting-up-a-skyve-instance)
+See additional details in [Setting up a Skyve instance](./../_pages/appendix-setting-up-a-skyve-instance.md)
 
 ### Additional Recommended Setup
 
@@ -248,6 +211,7 @@ Now we'll download and import the Skyve project into Eclipse.
    ```
    git clone https://github.com/skyvers/skyve.git
    ```
+   If you are following a tutorial or setting up an existing application (for example from [Skyve Foundry](https://foundry.skyve.org/foundry) or the [Aged Care tutorial](https://skyvers.github.io/Aged-care/chapter3/)), clone that application's repository instead of (or in addition to) the main Skyve repository, then use that project for the Maven install and content/addins steps below.
 4. Wait for the download to complete
 
 ### Step 2: Import into Eclipse
@@ -267,21 +231,53 @@ Now we'll download and import the Skyve project into Eclipse.
 - Wait for the progress indicator in the bottom-right corner to finish
 - If you see any errors, try **Project** → **Clean** → **Clean all projects** → **OK**
 
+## Create content and addins directories
+
+Skyve uses a **content directory** for file uploads, images, backups, and caches, and an **addins directory** for addins such as the Skyve content management addin. The application will not start correctly unless these paths exist and are specified in your application's `.json` settings file. The steps below use `C:\workspace\` to match the workspace location used earlier in this guide.
+
+1. **Create the content directory**
+   - In Windows Explorer, navigate to your workspace (e.g. `C:\workspace`).
+   - Create a new folder named `content` (e.g. `C:\workspace\content\`).
+   - Optionally create a subfolder per application (e.g. `C:\workspace\content\myApp\`). The user or process running WildFly must have read and write access to this folder. Keeping the content folder outside your project folder avoids IDE scanning issues.
+
+2. **Create the addins directory**
+   - Inside the content folder you created, create a new folder named `addins` (e.g. `C:\workspace\content\addins\`). If you do not set `addins.directory` in your `.json` file, Skyve defaults to `<content.directory>/addins/`.
+
+3. **Produce the content addin zip**
+   - In Eclipse, right-click your project in Project Explorer and select **Run As** → **Maven install**.
+   - When the build completes, a versioned zip file appears in your project's **target** folder (e.g. `skyve-content-9.4.0.zip`). The exact filename matches your Skyve version.
+
+4. **Place the addin**
+   - Copy that single zip file (e.g. `skyve-content-9.4.0.zip`) from the project's `target` folder to the addins directory (e.g. `C:\workspace\content\addins\`). Keep only one copy of the content addin zip in the addins directory. Do not unzip it—Skyve will detect it on startup and unzip/install it in the correct location.
+
+5. **Configure the application**
+   - Ensure your application's `.json` settings file (in the project or in WildFly's `deployments/` folder) has:
+     - **content.directory** set to your content path. The value must end with a slash and use forward slashes even on Windows (e.g. `"C:/workspace/content/myApp/"`).
+     - **addins.directory** set to your addins path (e.g. `"C:/workspace/content/addins/"`).
+
+The same layout is used in the [Aged Care tutorial (chapter 3)](https://skyvers.github.io/Aged-care/chapter3/). For more detail on the `.json` format, see [Working with content](./working-with-content) and [Setting up a Skyve instance](./appendix-setting-up-a-skyve-instance).
+
 ## Start Your Skyve Application
 
 ### Development Environment
 
-1. **Start WildFly Server**:
+1. **Build the project and content addin (if not already done)**:
+   - Right-click your project in Project Explorer and select **Run As** → **Maven install**. This builds the project and produces the content addin zip (e.g. `skyve-content-9.4.0.zip`) in the `target` folder. If your application uses file uploads or images, complete the [Create content and addins directories](#create-content-and-addins-directories) steps first and ensure the `.json` content and addins paths point to the folders you created.
+
+2. **Add the project to the server (if needed)**:
+   - In the **Servers** tab (bottom panel), right-click your WildFly server and select **Add and Remove...**. Add your project to the server, then click **Finish**.
+
+3. **Start WildFly Server**:
    - In Eclipse, go to the **Servers** tab (bottom panel)
    - Right-click your WildFly server and select **Start**
    - Wait for the server to start (watch the Console tab for messages)
 
-2. **Deploy Your Application**:
+4. **Deploy Your Application**:
    - Right-click your Skyve project in Project Explorer
    - Select **Run As** → **Run on Server**
    - Choose your WildFly server and click **Finish**
 
-3. **Access Your Application**:
+5. **Access Your Application**:
    - Open a web browser
    - Go to `http://localhost:8080/your-app-name`
    - You should see the Skyve application login page
