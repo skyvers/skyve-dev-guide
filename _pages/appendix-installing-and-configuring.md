@@ -140,7 +140,7 @@ Set Eclipse to use Java 17 (required for Skyve):
 4. Click **Apply and Close**
 5. When prompted to rebuild, click **Yes**
   
-See additional details in [Setting up a Skyve instance](./../_pages/appendix-setting-up-a-skyve-instance.md)
+See additional details in [Setting up a Skyve instance](./appendix-setting-up-a-skyve-instance)
 
 ### Additional Recommended Setup
 
