@@ -250,34 +250,70 @@ Skyve uses a **content directory** for file uploads, images, backups, and caches
 4. **Place the addin**
    - Copy that single zip file (e.g. `skyve-content-9.4.0.zip`) from the project's `target` folder to the addins directory (e.g. `C:\workspace\content\addins\`). Keep only one copy of the content addin zip in the addins directory. Do not unzip it—Skyve will detect it on startup and unzip/install it in the correct location.
 
-5. **Configure the application**
-   - Ensure your application's `.json` settings file (in the project or in WildFly's `deployments/` folder) has:
+5. **Configure the application JSON**
+   - Ensure your application's `.json` settings file has:
      - **content.directory** set to your content path. The value must end with a slash and use forward slashes even on Windows (e.g. `"C:/workspace/content/myApp/"`).
      - **addins.directory** set to your addins path (e.g. `"C:/workspace/content/addins/"`).
 
 The same layout is used in the [Aged Care tutorial (chapter 3)](https://skyvers.github.io/Aged-care/chapter3/). For more detail on the `.json` format, see [Working with content](./working-with-content) and [Setting up a Skyve instance](./appendix-setting-up-a-skyve-instance).
 
+## Configure your application in WildFly deployments (manual deployment)
+
+During development there are two common ways to deploy your Skyve application:
+
+- From Eclipse, using **Run on Server**, which manages deployment for you (see [Start Your Skyve Application](#start-your-skyve-application) below).
+- By copying your application artefacts into WildFly’s `standalone/deployments/` folder, which is closer to how UAT and production environments are configured. This is the approach shown in step 3.7 of the [Aged Care tutorial](https://skyvers.github.io/Aged-care/chapter3/).
+
+Each Skyve application has:
+
+- An instance-specific JSON settings file (for example `myApp.json`).
+- For databases other than H2, a datasource file (for example `myApp-ds.xml`).
+
+To configure your application in WildFly using the manual deployment style:
+
+1. **Locate your settings files**
+   - In most Skyve projects, the application `.json` and `-ds.xml` files are included with the exported project or generated assembly (for example in the project). The file names will match your application name, such as `myApp.json` and `myApp-ds.xml`.
+
+2. **Copy settings into WildFly deployments**
+   - Copy your application JSON file (for example `myApp.json`) into the WildFly deployments folder, for example:
+     - `C:\wildfly-<version>\standalone\deployments\`
+   - If you are using a database other than H2, also copy your datasource file (for example `myApp-ds.xml`) into the same `deployments` folder.
+
+3. **Keep the JSON configuration consistent**
+   - The `.json` you copy into `standalone\deployments\` must include the `content.directory`, `addins.directory` and datastore configuration you set earlier in this guide. When you change these settings, make sure you update the copy of the JSON file in `deployments\` as well.
+
+4. **H2 exception**
+   - When you are using H2 as your database, the entire datastore definition (connection and dialect) is specified in the application JSON and **no `-ds.xml` file is required or should be created**. For details and an example H2 configuration, see [Changing database dialect](./appendix-changing-database-dialect).
+
+For a complete description of deploying your application `.war` alongside these settings files, see [Deploying a Skyve application](./appendix-deploying-a-skyve-application).
+
 ## Start Your Skyve Application
 
 ### Development Environment
 
-1. **Build the project and content addin (if not already done)**:
-   - Right-click your project in Project Explorer and select **Run As** → **Maven install**. This builds the project and produces the content addin zip (e.g. `skyve-content-9.4.0.zip`) in the `target` folder. If your application uses file uploads or images, complete the [Create content and addins directories](#create-content-and-addins-directories) steps first and ensure the `.json` content and addins paths point to the folders you created.
+You can either deploy your application directly from Eclipse using **Run on Server** (convenient for local development), or via the WildFly `standalone\deployments\` folder as described in [Configure your application in WildFly deployments (manual deployment)](#configure-your-application-in-wildfly-deployments-manual-deployment), which is closer to how staging and production environments are typically configured.
 
-2. **Add the project to the server (if needed)**:
+1. **Build the project and content addin (if not already done)**:
+   - Right-click your project in Project Explorer and select **Run As** → **Maven install**. This builds the project and produces the content addin zip (e.g. `skyve-content-9.4.0.zip`) in the `target` folder. Complete the [Create content and addins directories](#create-content-and-addins-directories) steps first and ensure the `.json` content and addins paths point to the folders you created.
+
+2. **Copy the application settings into WildFly deployments (once, before the first deploy)**:
+   - Copy your application's `.json` file (e.g. `myApp.json`) into WildFly's deployments folder (e.g. `C:\wildfly-<version>\standalone\deployments\`). This is required for every deployment.
+   - If you are using a database other than H2, also copy your application's datasource file (e.g. `myApp-ds.xml`) into the same `deployments` folder. When using H2, no `-ds.xml` file is needed (the datastore is defined in the JSON). See [Configure your application in WildFly deployments (manual deployment)](#configure-your-application-in-wildfly-deployments-manual-deployment) for details.
+
+3. **Add the project to the server (if needed)**:
    - In the **Servers** tab (bottom panel), right-click your WildFly server and select **Add and Remove...**. Add your project to the server, then click **Finish**.
 
-3. **Start WildFly Server**:
+4. **Start WildFly Server**:
    - In Eclipse, go to the **Servers** tab (bottom panel)
    - Right-click your WildFly server and select **Start**
    - Wait for the server to start (watch the Console tab for messages)
 
-4. **Deploy Your Application**:
+5. **Deploy Your Application**:
    - Right-click your Skyve project in Project Explorer
    - Select **Run As** → **Run on Server**
    - Choose your WildFly server and click **Finish**
 
-5. **Access Your Application**:
+6. **Access Your Application**:
    - Open a web browser
    - Go to `http://localhost:8080/your-app-name`
    - You should see the Skyve application login page
