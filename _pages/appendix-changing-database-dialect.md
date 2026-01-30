@@ -15,7 +15,9 @@ _NOTE: Before you begin - backup your data (using the Skyve backup feature in th
 The steps to change database are:
 
 1. If you are changing to `MySQL`, `MSSQL` or `POSTGRES`, you will need to create a new empty database schema for your project
-2. Update the datasource connection: for MySQL, MSSQL and PostgreSQL, update the `-ds.xml` file in `wildfly/standalone/deployments/`; for H2, configure the datastore entirely in the application JSON (no `-ds.xml` file is required—see [Using H2](#using-h2) below).
+2. Update the datasource connection:
+   * For `MySQL`, `MSSQL` and `POSTGRES`, update the `-ds.xml` file in `wildfly/standalone/deployments/`.
+   * For `H2`, configure the datastore entirely in the application JSON (no `-ds.xml` file is required—see [Using H2](#using-h2) below).
 3. Ensure you have loaded and configured Wildfly for the new database dialect (detailed instructions are below)
 4. Update the dialect in the `json` settings file for the new dialect (in `wildfly/standalone/deployments/`)
 5. Update the dialect setting in the `pom.xml`, and use the `generate domain` target to update your project for the new dialect
@@ -93,7 +95,7 @@ An example H2 datasource configuration is:
 
 In this case `myAppDB` will be the name of the H2 database file created in `C:/_/content/myApp/`.
 
-Note that we recommend, for consistency, locating the H2 database file within the application content folder (in the above example the H2 database file `C:/content/myApp/myApp.mv.db` will be created automatically when first deployed if it does not exist).
+Note that we recommend, for consistency, locating the H2 database file within the application content folder (in the above example the H2 database file `C:/_/content/myApp/myAppDB.mv.db` will be created automatically when first deployed if it does not exist).
 
 A full example and upgrade notes are in the [Skyve 9.0.0 release notes](https://skyve.org/blog/2024/5/4/skyve-900-released) (see "Update H2 data source connections").
 

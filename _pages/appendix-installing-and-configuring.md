@@ -211,7 +211,7 @@ Now we'll download and import the Skyve project into Eclipse.
    ```
    git clone https://github.com/skyvers/skyve.git
    ```
-   If you are following a tutorial or setting up an existing application (for example from [Skyve Foundry](https://foundry.skyve.org/foundry) or the [Aged Care tutorial](https://skyvers.github.io/Aged-care/chapter3/)), clone that application's repository instead of (or in addition to) the main Skyve repository. Then use that project for the Maven install and content/addins steps below.
+   If you are following a tutorial or setting up an existing application (for example from [Skyve Foundry](https://foundry.skyve.org/foundry) or the [Aged Care tutorial](https://skyvers.github.io/Aged-care/chapter3/)), clone that application's repository instead of (or in addition to) the main Skyve repository, then use that project for the Maven install and content/addins steps below.
 4. Wait for the download to complete
 
 ### Step 2: Import into Eclipse
@@ -250,8 +250,8 @@ Skyve uses a **content directory** for file uploads, images, backups, and caches
 4. **Place the addin**
    - Copy that single zip file (e.g. `skyve-content-9.4.0.zip`) from the project's `target` folder to the addins directory (e.g. `C:\workspace\content\addins\`). Keep only one copy of the content addin zip in the addins directory. Do not unzip it—Skyve will detect it on startup and unzip/install it in the correct location.
 
-5. **Configure the application JSON**
-   - Ensure your application's `.json` settings file has:
+5. **Configure the application**
+   - Ensure your application's `.json` settings file (in the project or in WildFly's `deployments/` folder) has:
      - **content.directory** set to your content path. The value must end with a slash and use forward slashes even on Windows (e.g. `"C:/workspace/content/myApp/"`).
      - **addins.directory** set to your addins path (e.g. `"C:/workspace/content/addins/"`).
 
