@@ -8,10 +8,9 @@ sidebar:
   nav: docs
 ---
 
-These instructions describe the process required to install and configure the 
-development environment for Skyve. These instructions assume that you are 
-using Windows and SQL Server. Some changes will need to be made if using a 
-different operating system or database.
+These instructions describe the process required to install and configure the development environment for Skyve. These instructions assume that you are using Windows and SQL Server. Some changes will need to be made if using a different operating system or database.
+
+*Note: These instructions assume some familiarity with the Java software development environment tools. For more step-by-step instructions getting familiar with setting up your Skyve environment for local development, please see the [Aged Care tutorial](https://skyvers.github.io/Aged-care/).*
 
 ## Prerequisites and Overview
 
@@ -194,24 +193,26 @@ Skyve needs a database to store your application data. This example uses Microso
    - See [these instructions](https://community.spiceworks.com/how_to/124598-find-the-port-sql-server-is-using-and-change-a-dynamic-port-to-static) for port configuration
    - Write down the port number (usually 1433)
 
-## Import the Skyve Project
+## Import your Skyve project
 
-Now we'll download and import the Skyve project into Eclipse.
+This section describes how to download and import your Skyve application into Eclipse. You need an existing Skyve application in a Git repository (for example on GitHub).
+
+**If you do not yet have a Skyve application:** Create one in [Skyve Foundry](https://foundry.skyve.org/foundry), then use Foundry's collaboration feature to save it to a GitHub (or other Git) repository. After that, return here and follow the steps below to clone and import your project. Alternatively, follow the steps in the [Aged Care tutorial](https://skyvers.github.io/Aged-care/) which will provide a more step-by-step sequence.
 
 *Note: These instructions are for Eclipse. If using another IDE, you'll need to find similar import instructions.*
 
-### Step 1: Download the Skyve Project
+### Step 1: Download your Skyve project
 
 1. Open a command prompt or terminal
 2. Navigate to your workspace directory:
    ```
    cd C:\workspace
    ```
-3. Clone the Skyve repository:
+3. Clone your application's repository. Use the clone URL from your Git host (for example, from the repository page on GitHub, click **Code** and copy the URL). For example:
    ```
-   git clone https://github.com/skyvers/skyve.git
+   git clone https://github.com/your-username/your-app-repo.git
    ```
-   If you are following a tutorial or setting up an existing application (for example from [Skyve Foundry](https://foundry.skyve.org/foundry) or the [Aged Care tutorial](https://skyvers.github.io/Aged-care/chapter3/)), clone that application's repository instead of (or in addition to) the main Skyve repository, then use that project for the Maven install and content/addins steps below.
+   Replace the URL with your own repository URL. The folder created will match your repository name (e.g. `your-app-repo`).
 4. Wait for the download to complete
 
 ### Step 2: Import into Eclipse
@@ -219,15 +220,14 @@ Now we'll download and import the Skyve project into Eclipse.
 1. In Eclipse, go to **File** → **Import...**
 2. Expand **Maven** and select **Existing Maven Projects**
 3. Click **Next**
-4. Click **Browse...** and navigate to the `skyve` folder you just downloaded
-5. Select the `skyve` folder and click **Select Folder**
-6. Eclipse should automatically detect multiple Maven projects (you'll see them listed with checkboxes)
-7. Ensure all projects are checked and click **Finish**
-8. Wait for Eclipse to import and build all projects (this may take several minutes)
+4. Click **Browse...** and navigate to the folder you just cloned (the folder created by `git clone`, e.g. `your-app-repo`)
+5. Select that folder and click **Select Folder**
+6. Eclipse should detect the Maven project(s). Ensure the project(s) are checked and click **Finish**
+7. Wait for Eclipse to import and build the project (this may take a few minutes)
 
 ### Step 3: Verify Import
 
-- You should see multiple projects in the Project Explorer (left panel)
+- You should see your project (or projects) in the Project Explorer (left panel)
 - Wait for the progress indicator in the bottom-right corner to finish
 - If you see any errors, try **Project** → **Clean** → **Clean all projects** → **OK**
 
