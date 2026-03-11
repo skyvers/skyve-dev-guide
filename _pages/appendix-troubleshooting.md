@@ -278,6 +278,33 @@ Check the correct customer name is defined in the pom.xml. Our maven plugins can
 
 **Question**
 
+When I compile changes to a Jasper report, I see this error (Skyve 9.2.0 and later):
+
+```
+Execution default-cli of goal org.skyve:skyve-maven-plugin:9.4.1:compileJasperReport failed: A required class was missing while executing org.skyve:skyve-maven-plugin:9.4.1:compileJasperReport: org/codehaus/groovy/control/CompilationFailedException
+```
+
+**Answer**
+
+This is usually due to a missing or out-of-date Jasper Groovy dependency. The default report language is Groovy, and this dependency is no longer part of Skyve from 9.2.0 onward.
+
+You can either:
+
+* Remove the language definition from your report so it compiles with Java instead of Groovy.
+* Add or update the Groovy dependency in your project `pom.xml`. Use a version compatible with your Java version (3.0.14 or higher works up to Java 21):
+
+```xml
+<!-- Groovy dependency for jasper reports (no longer part of Skyve) -->
+<dependency>
+    <groupId>org.codehaus.groovy</groupId>
+    <artifactId>groovy</artifactId>
+    <version>3.0.25</version>
+    <scope>compile</scope>
+</dependency>
+```
+
+**Question**
+
 I am trying to test a service class with a unit test, but the test fails with a `NullPointerException` when trying to call methods on the service class.
 
 **Answer**
