@@ -94,7 +94,7 @@ Expressions can be used within views within Skyve, as per the example below from
 	</blurb>
 ```
 
-Expressions can be combined with a formatter suffix in views to format specific values, as per the following examples:
+Expressions can be combined with a **formatter** suffix in views to format specific values, as per the following examples:
 
 ```xml
 	<blurb>{decimal2|OneDecimalPlace}</blurb>
@@ -107,6 +107,8 @@ and used within a DataGrid:
 	<column binding="resultValue" formatter="TenOptionalDecimalPlaces"/>
 </dataGrid>
 ```
+
+The list of available formatters can be found in the [FormatterName](https://github.com/skyvers/skyve/blob/master/skyve-core/src/main/java/org/skyve/metadata/FormatterName.java) enum.
 
 ### Conditions
 

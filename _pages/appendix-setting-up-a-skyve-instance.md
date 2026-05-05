@@ -264,7 +264,7 @@ Load the `skyve-content-<version>.zip` (this manages content locally) into the a
 [INFO] Copying skyve-content-8.0.0.zip to C:\_\j11\myproject\target\skyve-content-8.0.0.zip
 ```
 
-* copy the `skyve-content-<version>.zip` to the directory specified in the JSON settings file above.
+* copy the `skyve-content-<version>.zip` to the directory specified in the JSON settings file above. Keep only one copy of the content addin zip in the addins directory. Do not unzip it—Skyve will detect it on startup and unzip/install it in the correct location.
 
 ## Install Wildfly as a Service
 

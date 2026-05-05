@@ -882,17 +882,17 @@ Typically, it's easiest to add one add-ins subfolder for all your projects, and 
 ```
 (Note the trailing slash.)
 
-Load the skyve-content.zip (this manages content locally) into the addins by:
+Load the skyve-content-<version>.zip (this manages content locally) into the addins by:
 * right-click your project and Run As -> Maven install
-* the skyve-content.zip will be downloaded to your target folder - the results of the maven install will include this location, usually <project>\target\
+* the skyve-content-<version>.zip will be downloaded to your target folder - the results of the maven install will include this location, usually <project>\target\
 
 ```
 [INFO] --- maven-dependency-plugin:2.8:copy (copy-content-addin-dependency) @ elixan ---
 [INFO] Configured Artifact: org.skyve:skyve-content:7.0.2:zip
-[INFO] Copying skyve-content-7.0.2.zip to C:\_\j11\elixan\target\skyve-content.zip
+[INFO] Copying skyve-content-7.0.2.zip to C:\_\j11\elixan\target\skyve-content-7.0.2.zip
 ```
 
-* copy the skyve-content.zip to the directory specified in the JSON settings file above.
+* copy the skyve-content-<version>.zip to the directory specified in the JSON settings file above. Keep only one copy of the content addin zip in the addins directory. Do not unzip it—Skyve will detect it on startup and unzip/install it in the correct location.
 
 ### Install Wildfly as a Service
 

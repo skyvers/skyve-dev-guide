@@ -8,190 +8,358 @@ sidebar:
   nav: docs
 ---
 
-These instructions describe the process required to install and configure the 
-development environment for Skyve. These instructions assume that you are 
-using Windows and SQL Server. Some changes will need to be made if using a 
-different operating system or database.
+These instructions describe the process required to install and configure the development environment for Skyve. These instructions assume that you are using Windows and SQL Server. Some changes will need to be made if using a different operating system or database.
 
-### Download and Install Eclipse and JDK
+*Note: These instructions assume some familiarity with the Java software development environment tools. For more step-by-step instructions getting familiar with setting up your Skyve environment for local development, please see the [Aged Care tutorial](https://skyvers.github.io/Aged-care/).*
 
-#### Download and Install Eclipse
+## Prerequisites and Overview
+
+Before starting, you'll need to install several components:
+
+- **Eclipse IDE**: A development environment for writing and managing code
+- **Java Development Kit (JDK)**: Required to run Java applications
+- **Wildfly Application Server**: A server that runs your Skyve application
+- **Database**: SQL Server (or another supported database) to store your application data
+- **Git**: Version control system to download the Skyve project
+
+This guide will walk you through installing each component step by step.
+
+## Download and Install Eclipse and JDK
+
+### Download and Install Eclipse
 
 For this section, we have chosen to show how to use Eclipse as the development environment, however, if you prefer, you can use other development environment tools such as IntelliJ, NetBeans, Visual Studio Code, etc. However, if you're not completely familiar with these, use Eclipse so that you can follow the steps below.
 
-NOTE: do not use the Eclipse EE9 preview, you will need the Jakarta EE Full & Web Distribution
+**Important Note**: Do not use the Eclipse EE9 preview. You will need the Jakarta EE Full & Web Distribution.
 
-  - Click here to [Download Eclipse](https://www.eclipse.org/downloads/packages/)
-  - Next, Click on Eclipse IDE for Enterprise Java Developers
+1. Go to the [Eclipse Downloads page](https://www.eclipse.org/downloads/packages/)
+2. Click on **Eclipse IDE for Enterprise Java Developers** (this includes all the tools needed for Java web development)
 
-  ![Download Eclipse](../assets/images/appendix/installing-configuring/1.jpg "Download Eclipse")
+   ![Download Eclipse](../assets/images/appendix/installing-configuring/1.jpg "Download Eclipse")
 
-  - Click on download
-  - Then, install Eclipse in your system
+3. Click the **Download** button
+4. Run the downloaded installer and follow the installation wizard
+5. When prompted, choose a directory to install Eclipse (e.g., `C:\Program Files\Eclipse`)
+6. Complete the installation and create a desktop shortcut if offered
 
-#### Download and Install JDK
+### Download and Install JDK
 
-  - Install an OpenJDK 17 version (JDK version 21 is also supported) from [AdoptOpenJDK](https://adoptium.net/temurin/releases/?package=jdk&version=17) (or an alternative OpenJDK of your choice)
+The Java Development Kit (JDK) is required to compile and run Java applications. Skyve requires JDK 17 or 21.
+
+1. Go to [AdoptOpenJDK](https://adoptium.net/temurin/releases/?package=jdk&version=17)
+2. Download **OpenJDK 17** (or JDK 21 if you prefer)
+3. Run the installer and follow the installation wizard
+4. **Important**: Note the installation path (usually `C:\Program Files\Eclipse Adoptium\jdk-17.x.x.x-hotspot\`)
+5. After installation, verify it works by opening a command prompt and typing:
+   ```
+   java -version
+   ```
+   You should see version information displayed.
 
 ## Install and Configure Wildfly Server
 
-We need an application server to be able to access the application through our browser. For this we will demonstrate using Red Hat's Wildfly application server plugin. Skyve apps can be deployed on recent versions of Wildfly (27+).
+Wildfly is an application server that runs your Skyve application and makes it accessible through a web browser. Think of it as the "engine" that powers your web application. Skyve apps can be deployed on recent versions of Wildfly (27+).
+
+### What is Wildfly?
+Wildfly is a Java application server that:
+- Runs your Skyve application
+- Handles web requests from browsers
+- Manages database connections
+- Provides security and other enterprise features
 
 ### Install Wildfly Server
 
 You can skip this step if WildFly Server is already installed on your system.
 
-Before installing WildFly Server, make sure JBoss Tools is installed on your system.
+Now we'll create a WildFly server instance in Eclipse:
 
-To install JBoss Tools, click on Help, then click Eclipse Marketplace.
-
-![JBoss tools](../assets/images/appendix/installing-configuring/2.JPG "JBoss tools")
-
-In the search bar, enter 'jboss', then search.
-
-Select the JBoss Tools version that the search returns, and click Install.
-
-![JBoss install](../assets/images/appendix/installing-configuring/3.JPG "JBoss install")
-
-Select the list as shown below
-
-![JBoss install selection](../assets/images/appendix/installing-configuring/15.jpg "JBoss install selection")
-
-To check if JBoss Tools is installed properly, click on Help, then click Eclipse Marketplace.
-
-![JBoss tool install](../assets/images/appendix/installing-configuring/4.JPG "JBoss tool install")
-
-Change to the `Installed` tab.
-
-If the JBoss Tools plugin is present, you are ready to continue.
-
-![JBoss tool plugin](../assets/images/appendix/installing-configuring/5.JPG "JBoss tool plugin")
-
-After JBoss Tools is installed properly, follow these steps to install WildFly Server.
-
-1. Once Eclipse is opened, right-click under the Project Explorer tab and highlight New, then from the pop-out, click on Other
+1. In Eclipse, right-click in the **Project Explorer** panel (the left sidebar) and select **New** → **Other**
 
    ![new-other](../assets/images/wildfly/1.png "new-other")
    
-2. Enter text `server` in the `type filter text` field, select `Server` and click the Next button.
+2. In the "Select a wizard" dialog, type `server` in the search box, select **Server**, and click **Next**
 
    ![server](../assets/images/wildfly/2.png "server")
 
-2. Select the WildFly version you wish to work with and click Next (Skyve currently supports versions 27+)
+3. Select **WildFly** from the list (choose version 27 or later) and click **Next**
 
    ![select server](../assets/images/wildfly/3.png "select server")
 
-3. Click Next again
+4. Click **Next** again
 
    ![select Next](../assets/images/wildfly/4.png "select Next")
 
-4. Click on the Download and install runtime link
+5. Click **Download and install runtime** to download WildFly
 
    ![install runtime](../assets/images/wildfly/5.png "install runtime")
 
-5. Select the latest version of WildFly, then click Next
+6. Select the latest version of WildFly and click **Next**
 
    ![select runtime](../assets/images/wildfly/6.png "select runtime")
 
-6. Once you have read the terms of the licence agreement, check the box to accept the terms, and click Next
+7. Read and accept the license agreement by checking the box, then click **Next**
 
    ![accept agreement](../assets/images/wildfly/7.png "accept agreement")
 
-7. Finally, select the path for where you wish your download and install locations to be found, select the appropriate runtime JRE and then click `Finish` to complete the installation
+8. Choose where to install WildFly (e.g., `C:\wildfly`) and select your JDK installation, then click **Finish**
 
    ![download-runtime](../assets/images/wildfly/8.png "download-runtime")
    ![runtime-jre](../assets/images/wildfly/9.png "runtime-jre")
 
-8.  Wait for Eclipse to complete the download and installation process before moving on to the next step
+9. Wait for Eclipse to download and install WildFly (this may take several minutes)
 
-## Configuring the IDE (Windows example)
+**Note**: You should now see a WildFly server listed in the **Servers** tab at the bottom of Eclipse.
 
-* Create `C:\workspace\` (go to `C:\` -> right click -> New Folder then type `workspace` as the 
-folder name). You may use any folder for you workspace in Eclipse, just make sure you remember 
-the folder you've chosen and try to ensure that the folder name has no spaces to avoid 
-any issues with Java paths and spaces.
-* Start Eclipse using Eclipse.exe and select `C:\workspace\` as workspace, tick 'Use as 
-default option - do not ask again', Cancel the welcome wizard and Close the welcome 
-tab in the editor frame.
-* Change compiler compliance level to 17 (Window -> Preferences -> Java -> Compiler) 
-press 'Apply' - press Yes for full build, and then press OK.
+## Configure Eclipse IDE
+
+### Set Up Eclipse Workspace
+
+A workspace is a folder where Eclipse stores all your projects and settings.
+
+1. Create a workspace folder:
+   - Navigate to `C:\` in Windows Explorer
+   - Right-click and select **New Folder**
+   - Name it `workspace`
+   - **Important**: Avoid spaces in folder names to prevent Java path issues
+
+2. Start Eclipse and set up the workspace:
+   - Launch Eclipse
+   - When prompted for workspace location, browse to `C:\workspace\`
+   - Check **Use this as the default and do not ask again**
+   - Click **Launch**
+   - Close the welcome screen if it appears
+
+### Configure Java Compiler
+
+Set Eclipse to use Java 17 (required for Skyve):
+
+1. Go to **Window** → **Preferences**
+2. Navigate to **Java** → **Compiler**
+3. Set **Compiler compliance level** to **17**
+4. Click **Apply and Close**
+5. When prompted to rebuild, click **Yes**
   
-See additional details in [Setting up a Skyve instance](./../pages/appendix_setting-up-a-skyve-instance)
+See additional details in [Setting up a Skyve instance](./appendix-setting-up-a-skyve-instance)
 
-We also recommend you:
-* load an RDBMS like MySQL, Postgres or MS SQL that is supported by Hibernate ([www.hibernate.org](http://www.hibernate.org)) - ensure you record the
-  administrator username and password (if you're unable to do this, you can use H2 file-based database which requires no install).
-* register for an account with GitHub, GitLab or BitBucket (or other git-based repository)
-* register for an account on [Skyve Foundry](https://foundry.skyve.org/foundry)
-* register on our [public Slack account in case you have questions](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LTRkMWUxZDBlZmFlMmJkMjQzYWMzYWQxMmQzYWQ1ZTdlODNkNjRlYzVhYjFmMmQ4NTlhYWY4MjNhMGVkZGNlMjY)
+### Additional Recommended Setup
 
-For this example, to use Microsoft SQL Server as the database for the Skyve project:
-* If you do not already have SQL Server installed:
-  * download and install the latest version of the Developer or Express edition for your platform from the [Microsoft website](https://www.microsoft.com/en-au/sql-server/sql-server-downloads)
-  * you will also need to download and install a copy of [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) to connect you your database and execute scripts
-* Open SQL Server Management Studio, choose Authentication as Windows Authentication and click the 'Connect' button.
-* Create a db named 'skyve', right click Databases->New Databases... and leave everything as is and click the _OK_ button.
-* Create a user for skyve db in SQL Server Management Studio, right click Security->New->Login...
-* Create a Login name (remember this login name as you will need it later), choose 
-  SQL Server authentication and enter your password. Remember that SQL Server policy 
-  requires a 'strong' password (remember this password as you will need it later), 
-  untick the 'Enforce password expiration' and the 'User must change password at 
-  next login'
-* On the same dialog box, choose Default database as 'skyve', now go to Server Roles 
-  on left hand pane and tick 'sysadmin', then go to User Mapping and tick 'skyve' 
-  and finally, click the _OK_ button down the bottom right.
-* If you've just installed SQL server, you will need to specify the port for this 
-  database, see instructions [here](https://community.spiceworks.com/how_to/124598-find-the-port-sql-server-is-using-and-change-a-dynamic-port-to-static), 
-  again, remember the port number you've entered.
+For a complete development environment, we also recommend:
 
-## Importing an existing Skyve project from Git
+- **Database**: Install a database like MySQL, PostgreSQL, or SQL Server (see database setup below)
+- **Version Control**: Register for GitHub, GitLab, or BitBucket for code management
+- **Skyve Community**: Join [Skyve Foundry](https://foundry.skyve.org/foundry) for resources
+- **Support**: Join our [public Slack](https://join.slack.com/t/skyveframework/shared_invite/enQtNDMwNTcyNzE0NzI2LTRkMWUxZDBlZmFlMmJkMjQzYWMzYWQxMmQzYWQ1ZTdlODNkNjRlYzVhYjFmMmQ4NTlhYWY4MjNhMGVkZGNlMjY) for help
 
-*Note: These instructions are for the Eclipse IDE, you will need to locate instructions for your IDE if not using Eclipse.*
+## Set Up Database (SQL Server Example)
 
-In Eclipse, 
+Skyve needs a database to store your application data. This example uses Microsoft SQL Server.
 
-* choose File -> Import... -> Git -> Projects from Git -> Next -> Clone URI and set the URI (for example type in https://github.com/skyvers/skyve.git as URI),
-* then click the _Next_ button, 
-* choose the master and click the _Next_ button. 
-* Choose your destination directory, in this example, we have chosen `C:\\_\ directory`.
-* Then click the _Next_ button. 
-* The import wizard should be displayed and cloning the Skyve project.
+### Install SQL Server
 
-After cloning the master, go to Project -> Clean - Select clean all projects and press OK - wait for activity to cease in bottom right corner of the Eclipse window.
+1. Download SQL Server:
+   - Go to the [Microsoft SQL Server downloads page](https://www.microsoft.com/en-au/sql-server/sql-server-downloads)
+   - Download the **Developer** or **Express** edition (both are free for development use)
+   - Run the installer and follow the setup wizard
 
-## Starting the server
+2. Install SQL Server Management Studio (SSMS):
+   - Download from [Microsoft's SSMS page](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
+   - This tool lets you manage your database
 
-### Development environment
-Skyve provides a bootstrap user configuration (specified in the `.json` file) - this will insert a user with all module roles as a way to get started. The bootstrap configuration is disabled if the instance is a production instance.
+### Create Database and User
 
-### Other environments
-In UAT and PROD environments, Wildfly should be configured as a service. Refer to Wildfly documentation for detailed instructions.
+1. **Connect to SQL Server**:
+   - Open SQL Server Management Studio
+   - Choose **Windows Authentication** and click **Connect**
 
-### Connecting to your local instance from a mobile device
+2. **Create the database**:
+   - Right-click **Databases** in the left panel
+   - Select **New Database...**
+   - Name it `skyve` and click **OK**
 
-It is useful to be able to test your Skyve application from your own mobile devices as you develop locally. For example, if you connect your developer PC and mobile device to the same network (for example, your phone's hotspot) use IP address assigned to your PC for the URL in your `.json` settings file - then connect from your phone to your developer PC.
+3. **Create a database user**:
+   - Right-click **Security** → **Logins** → **New Login...**
+   - Enter a login name (e.g., `skyve_user`)
+   - Choose **SQL Server authentication**
+   - Enter a strong password (write it down!)
+   - Uncheck **Enforce password expiration**
+   - Uncheck **User must change password at next login**
+   - Set **Default database** to `skyve`
+   - In **Server Roles**, check **sysadmin**
+   - In **User Mapping**, check the `skyve` database
+   - Click **OK**
 
-To find the IP address assigned to your dveloper PC in Windows, in a `cmd` window, run:
+4. **Note the port number**:
+   - If you just installed SQL Server, you may need to configure the port
+   - See [these instructions](https://community.spiceworks.com/how_to/124598-find-the-port-sql-server-is-using-and-change-a-dynamic-port-to-static) for port configuration
+   - Write down the port number (usually 1433)
 
-```
-ipconfig
-```
+## Import your Skyve project
+
+This section describes how to download and import your Skyve application into Eclipse. You need an existing Skyve application in a Git repository (for example on GitHub).
+
+**If you do not yet have a Skyve application:** Create one in [Skyve Foundry](https://foundry.skyve.org/foundry), then use Foundry's collaboration feature to save it to a GitHub (or other Git) repository. After that, return here and follow the steps below to clone and import your project. Alternatively, follow the steps in the [Aged Care tutorial](https://skyvers.github.io/Aged-care/) which will provide a more step-by-step sequence.
+
+*Note: These instructions are for Eclipse. If using another IDE, you'll need to find similar import instructions.*
+
+### Step 1: Download your Skyve project
+
+1. Open a command prompt or terminal
+2. Navigate to your workspace directory:
+   ```
+   cd C:\workspace
+   ```
+3. Clone your application's repository. Use the clone URL from your Git host (for example, from the repository page on GitHub, click **Code** and copy the URL). For example:
+   ```
+   git clone https://github.com/your-username/your-app-repo.git
+   ```
+   Replace the URL with your own repository URL. The folder created will match your repository name (e.g. `your-app-repo`).
+4. Wait for the download to complete
+
+### Step 2: Import into Eclipse
+
+1. In Eclipse, go to **File** → **Import...**
+2. Expand **Maven** and select **Existing Maven Projects**
+3. Click **Next**
+4. Click **Browse...** and navigate to the folder you just cloned (the folder created by `git clone`, e.g. `your-app-repo`)
+5. Select that folder and click **Select Folder**
+6. Eclipse should detect the Maven project(s). Ensure the project(s) are checked and click **Finish**
+7. Wait for Eclipse to import and build the project (this may take a few minutes)
+
+### Step 3: Verify Import
+
+- You should see your project (or projects) in the Project Explorer (left panel)
+- Wait for the progress indicator in the bottom-right corner to finish
+- If you see any errors, try **Project** → **Clean** → **Clean all projects** → **OK**
+
+## Create content and addins directories
+
+Skyve uses a **content directory** for file uploads, images, backups, and caches, and an **addins directory** for addins such as the Skyve content management addin. The application will not start correctly unless these paths exist and are specified in your application's `.json` settings file. The steps below use `C:\workspace\` to match the workspace location used earlier in this guide.
+
+1. **Create the content directory**
+   - In Windows Explorer, navigate to your workspace (e.g. `C:\workspace`).
+   - Create a new folder named `content` (e.g. `C:\workspace\content\`).
+   - Optionally create a subfolder per application (e.g. `C:\workspace\content\myApp\`). The user or process running WildFly must have read and write access to this folder. Keeping the content folder outside your project folder avoids IDE scanning issues.
+
+2. **Create the addins directory**
+   - Inside the content folder you created, create a new folder named `addins` (e.g. `C:\workspace\content\addins\`). If you do not set `addins.directory` in your `.json` file, Skyve defaults to `<content.directory>/addins/`.
+
+3. **Produce the content addin zip**
+   - In Eclipse, right-click your project in Project Explorer and select **Run As** → **Maven install**.
+   - When the build completes, a versioned zip file appears in your project's **target** folder (e.g. `skyve-content-9.4.0.zip`). The exact filename matches your Skyve version.
+
+4. **Place the addin**
+   - Copy that single zip file (e.g. `skyve-content-9.4.0.zip`) from the project's `target` folder to the addins directory (e.g. `C:\workspace\content\addins\`). Keep only one copy of the content addin zip in the addins directory. Do not unzip it—Skyve will detect it on startup and unzip/install it in the correct location.
+
+5. **Configure the application**
+   - Ensure your application's `.json` settings file (in the project or in WildFly's `deployments/` folder) has:
+     - **content.directory** set to your content path. The value must end with a slash and use forward slashes even on Windows (e.g. `"C:/workspace/content/myApp/"`).
+     - **addins.directory** set to your addins path (e.g. `"C:/workspace/content/addins/"`).
+
+The same layout is used in the [Aged Care tutorial (chapter 3)](https://skyvers.github.io/Aged-care/chapter3/). For more detail on the `.json` format, see [Working with content](./working-with-content) and [Setting up a Skyve instance](./appendix-setting-up-a-skyve-instance).
+
+## Configure your application in WildFly deployments (manual deployment)
+
+During development there are two common ways to deploy your Skyve application:
+
+- From Eclipse, using **Run on Server**, which manages deployment for you (see [Start Your Skyve Application](#start-your-skyve-application) below).
+- By copying your application artefacts into WildFly’s `standalone/deployments/` folder, which is closer to how UAT and production environments are configured. This is the approach shown in step 3.7 of the [Aged Care tutorial](https://skyvers.github.io/Aged-care/chapter3/).
+
+Each Skyve application has:
+
+- An instance-specific JSON settings file (for example `myApp.json`).
+- For databases other than H2, a datasource file (for example `myApp-ds.xml`).
+
+To configure your application in WildFly using the manual deployment style:
+
+1. **Locate your settings files**
+   - In most Skyve projects, the application `.json` and `-ds.xml` files are included with the exported project or generated assembly (for example in the project). The file names will match your application name, such as `myApp.json` and `myApp-ds.xml`.
+
+2. **Copy settings into WildFly deployments**
+   - Copy your application JSON file (for example `myApp.json`) into the WildFly deployments folder, for example:
+     - `C:\wildfly-<version>\standalone\deployments\`
+   - If you are using a database other than H2, also copy your datasource file (for example `myApp-ds.xml`) into the same `deployments` folder.
+
+3. **Keep the JSON configuration consistent**
+   - The `.json` you copy into `standalone\deployments\` must include the `content.directory`, `addins.directory` and datastore configuration you set earlier in this guide. When you change these settings, make sure you update the copy of the JSON file in `deployments\` as well.
+
+4. **H2 exception**
+   - When you are using H2 as your database, the entire datastore definition (connection and dialect) is specified in the application JSON and **no `-ds.xml` file is required or should be created**. For details and an example H2 configuration, see [Changing database dialect](./appendix-changing-database-dialect).
+
+For a complete description of deploying your application `.war` alongside these settings files, see [Deploying a Skyve application](./appendix-deploying-a-skyve-application).
+
+## Start Your Skyve Application
+
+### Development Environment
+
+You can either deploy your application directly from Eclipse using **Run on Server** (convenient for local development), or via the WildFly `standalone\deployments\` folder as described in [Configure your application in WildFly deployments (manual deployment)](#configure-your-application-in-wildfly-deployments-manual-deployment), which is closer to how staging and production environments are typically configured.
+
+1. **Build the project and content addin (if not already done)**:
+   - Right-click your project in Project Explorer and select **Run As** → **Maven install**. This builds the project and produces the content addin zip (e.g. `skyve-content-9.4.0.zip`) in the `target` folder. Complete the [Create content and addins directories](#create-content-and-addins-directories) steps first and ensure the `.json` content and addins paths point to the folders you created.
+
+2. **Copy the application settings into WildFly deployments (once, before the first deploy)**:
+   - Copy your application's `.json` file (e.g. `myApp.json`) into WildFly's deployments folder (e.g. `C:\wildfly-<version>\standalone\deployments\`). This is required for every deployment.
+   - If you are using a database other than H2, also copy your application's datasource file (e.g. `myApp-ds.xml`) into the same `deployments` folder. When using H2, no `-ds.xml` file is needed (the datastore is defined in the JSON). See [Configure your application in WildFly deployments (manual deployment)](#configure-your-application-in-wildfly-deployments-manual-deployment) for details.
+
+3. **Add the project to the server (if needed)**:
+   - In the **Servers** tab (bottom panel), right-click your WildFly server and select **Add and Remove...**. Add your project to the server, then click **Finish**.
+
+4. **Start WildFly Server**:
+   - In Eclipse, go to the **Servers** tab (bottom panel)
+   - Right-click your WildFly server and select **Start**
+   - Wait for the server to start (watch the Console tab for messages)
+
+5. **Deploy Your Application**:
+   - Right-click your Skyve project in Project Explorer
+   - Select **Run As** → **Run on Server**
+   - Choose your WildFly server and click **Finish**
+
+6. **Access Your Application**:
+   - Open a web browser
+   - Go to `http://localhost:8080/your-app-name`
+   - You should see the Skyve application login page
+
+**Note**: Skyve creates a default admin user for development. Check your project's configuration files for the default login credentials.
+
+### Production Environments
+
+For UAT and production environments, WildFly should be configured as a Windows service. See the WildFly documentation for detailed instructions.
+
+### Test from Mobile Device (Optional)
+
+You can test your Skyve application from mobile devices on the same network.
+
+#### Step 1: Find Your Computer's IP Address
+
+1. Open Command Prompt (press Windows + R, type `cmd`, press Enter)
+2. Type `ipconfig` and press Enter
+3. Look for your network adapter's IPv4 address (e.g., 192.168.1.100)
 
 ![Local IP Configuration](./../assets/images/appendix/local_ip_config.png "Local IP Configuration")
 
-Then set the `server url` setting in the `.json` properties file to match the assigned address, for example `http://192.168.43.182:8080/` (matching your port settings etc) and keep your existing context setting, e.g. `/myapp`.
+#### Step 2: Configure WildFly for External Access
 
-You will also need to set Wildfly to be able to serve clients other than localhost. To do this double click on your Wildfly server from eclipse to open the configuration and change the standalone arguments to include `-b 0.0.0.0` (note this can also be done directly in the `standalone.xml` file).
+1. In Eclipse, double-click your WildFly server in the **Servers** tab
+2. In the **Server Locations** section, select **Use custom location**
+3. In the **Open launch configuration** link, add `-b 0.0.0.0` to the **Program arguments**
+4. Save and restart WildFly
 
 ![Setting Wildfly for external access](./../assets/images/appendix/wildfly_external_access.png "Setting Wildfly for external access")
 
-Restart Wildfly so the changes take effect.
+#### Step 3: Update Application Configuration
 
-You can then use the browser on your mobile device to connect to the local Skyve instance using the URL:
+1. Find your project's configuration file (usually a `.json` file)
+2. Update the `server url` setting to use your IP address:
+   ```
+   http://192.168.1.100:8080/
+   ```
+3. Keep your existing context path (e.g., `/myapp`)
 
-```
-http://192.168.43.182:8080/myapp
-```
+#### Step 4: Test from Mobile
+
+1. Connect your mobile device to the same network as your computer
+2. Open a browser on your mobile device
+3. Navigate to: `http://YOUR_IP_ADDRESS:8080/your-app-name`
+4. You should see your Skyve application
 
 **[⬆ back to top](#installing-and-configuring-a-skyve-development-environment)**
 

@@ -92,7 +92,7 @@ The basic steps to configure your environment are:
 2. In eclipse, File->Import and import the project
 3. Right-click your project->Run As->Maven install to resolve and download dependencies, build and download addins.
 4. In your local file system, create a folder for content (uploads, backups, caches) and a folder for Skyve addins (e.g. for Windows machines, create `C:\Workspace\content\<projectName>\` and `C:\Workspace\content\addins\`)
-5. Expand the target folder in your project and copy the `skyve-content.zip` file - then copy this to the `addins` folder you created above - you do not need to unzip this addin
+5. Expand the target folder in your project and copy the content addin zip (e.g. `skyve-content-9.4.0.zip`; the filename includes the Skyve version) to the `addins` folder you created above. Keep only one copy of this zip in the addins directory. Do not unzip it—Skyve will detect it on startup and unzip/install it in the correct location.
 6. Copy the project `<projectName>.json` properties file and the project `<projectName>-ds.xml` datasource file to the Wildfly `/standalone/deployments/` folder.
 7. Update the `<projectName>.json` properties file you have just copied (in the `/standalone/deployments/` folder) with:
     * the path of your `content` folder
