@@ -155,7 +155,8 @@ Binder.orderByMetaData(bean, Risk.riskControlsPropertyName);
 
 ```java
 // Compound bindings are supported (navigates to the owning bean first)
-Binder.orderByMetaData(bean, "child.lines");
+Binder.orderByMetaData(bean,
+		Binder.createCompoundBinding(Parent.childPropertyName, Child.linesPropertyName));
 ```
 
 If the target attribute has no ordering (and is not an ordered child collection), the call is a no-op.
