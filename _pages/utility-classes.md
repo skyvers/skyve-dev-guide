@@ -28,7 +28,7 @@ Skyve provides the following utility classes:
   </tr>
   <tr>
     <td>Binder</td>
-    <td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li><code>formatMessage()</code> for using binding substitutions in string outputs using the correct converter</li><li><code>convertAndSet()</code> for setting a converted string value using the correct converter</li><li><code>createCompoundBinding()</code> for correctly constructing compound bindings (i.e. across document references), and </li><li>read and interpret the nature of bean properties.</li></ul></td>
+    <td>Provides methods for generic bean binding manipulations, including: <br><br><ul><li>generic get() and set() methods for a bean with nominated binding, </li><li><code>formatMessage()</code> for using binding substitutions in string outputs using the correct converter</li><li><code>convertAndSet()</code> for setting a converted string value using the correct converter</li><li><code>createCompoundBinding()</code> for correctly constructing compound bindings (i.e. across document references), </li><li><code>orderByMetaData()</code> and <code>order()</code> for sorting collections and inverseManys, and </li><li>read and interpret the nature of bean properties.</li></ul></td>
   </tr>
   <tr>
     <td>CORE</td>
@@ -140,6 +140,58 @@ DateOnly weekEndingDate = Binder.get(timesheet, WeeklyTimesheet.weekEndingDatePr
 Binder.set(timesheet, WeeklyTimesheet.weekEndingDatePropertyName, weekEndingDate);		
 ```
 
+### Sorting collections
+
+Collections and `inverseMany` attributes can declare default ordering in document metadata (see [Documents](/documents/) and [Skyve persistence](/skyve-persistence-mechanisms/)). Skyve also re-applies that ordering during common UI interactions (for example after zooming out of a child edit). When application code mutates a collection and needs it sorted immediately, use one of the approaches below.
+
+#### Sort by metadata with `Binder.orderByMetaData()`
+
+`Binder.orderByMetaData()` sorts a collection or `inverseMany` according to the `<ordering>` declared on that attribute. The binding may be simple or compound. For child collections declared `ordered="true"`, elements are ordered by `bizOrdinal` before any declared `<order>` bindings.
+
+```java
+// Sort by the collection's metadata ordering
+Binder.orderByMetaData(bean, Risk.riskControlsPropertyName);
+```
+
+```java
+// Compound bindings are supported (navigates to the owning bean first)
+Binder.orderByMetaData(bean,
+		Binder.createCompoundBinding(Parent.childPropertyName, Child.linesPropertyName));
+```
+
+If the target attribute has no ordering (and is not an ordered child collection), the call is a no-op.
+
+#### Sort with an explicit ordering via `Binder.order()`
+
+Use `Binder.order()` when the required sort is not (or not only) the metadata ordering. Build each criterion with `CORE.newOrdering()`.
+
+```java
+Binder.order(bean.getRiskControls(),
+		CORE.newOrdering(RiskControl.namePropertyName, SortDirection.ascending),
+		CORE.newOrdering(RiskControl.createdTimestampPropertyName, SortDirection.descending));
+```
+
+`Binder.order()` works on any `List`, not only Skyve beans. Before calling `Collections.sort()`, Skyve checks whether the list is already in order — sorting an already-ordered Hibernate collection marks it dirty even when the element sequence does not change.
+
+#### Sort in place with `Collections.sort()` / `List.sort()`
+
+Standard JDK sorting mutates the list in place. Prefer this for transient lists (domain values, in-memory results). On a persistent Hibernate collection it will mark the collection dirty even if you only re-establish the existing order.
+
+```java
+Collections.sort(bean.getRiskControls(),
+		Comparator.comparing(RiskControl::getName, Comparator.nullsFirst(String::compareToIgnoreCase)));
+```
+
+#### Produce a sorted copy with `Stream.sorted()`
+
+`stream().sorted()` does not mutate the original list. Collect into a new list when you need a sorted view without changing the persistent collection order (or its dirty state).
+
+```java
+List<RiskControl> sorted = bean.getRiskControls().stream()
+		.sorted(Comparator.comparing(RiskControl::getName, Comparator.nullsFirst(String::compareToIgnoreCase)))
+		.collect(Collectors.toList());
+```
+
 ## CORE
 
 CORE offers a number of key convenience methods.
@@ -149,6 +201,7 @@ Method | Description/Usage
 `getUser()` | returns the metadata user/user principal (as distinct from the current `modules.admin.domainUser`)
 `getCustomer()` | returns the current customer in for the current metadata user/user principal
 `getNumberGenerator()` | returns the Skyve sequence function to create unique formatted serial document identifiers
+`newOrdering()` | creates an `Ordering` used by `Binder.order()` and query ordering APIs
 `getPersistence()` | See Persistence below
 `getStash()` | returns a convenience Map for the current conversation available to the developer
 

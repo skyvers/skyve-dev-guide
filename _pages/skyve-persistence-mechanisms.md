@@ -86,6 +86,13 @@ data has bizOrdinals of 2,5,5 and 11 and there are only 4 rows, Skyve
 will still order them for presentation, but the next time the collection
 is saved, they will be reset to 0,1,2 and 3.
 
+Collections and `inverseMany` attributes may also declare an
+`<ordering>` clause. Simple persistent order bindings are applied in
+`orm.xml`; otherwise Skyve orders the collection when it is loaded.
+To re-apply metadata ordering (or an explicit ordering) from application
+code, use `Binder.orderByMetaData()` or `Binder.order()` — see
+[Sorting collections](/utility-classes/#sorting-collections).
+
 ## UUID enterprise-level guaranteed uniqueness
 
 To guarantee enterprise-wide uniqueness, Skyve generally uses
