@@ -101,6 +101,7 @@ From version 6.0 (8.2.3 for multi-tenant applications), Skyve also supports clou
     * enter a name, e.g. `SkyveAppBackups`, then click `OK`
 * Enter a `Storage account name`, e.g. `<appname>backup`
 * Select the `Region` for your backup
+* Select `Azure Blob Storage or Azure Data Lake Storage` for `Primary service`
 * Keep performance and redundancy defaults
 * click `Next`
 * scroll to the bottom of the `Advanced` screen
