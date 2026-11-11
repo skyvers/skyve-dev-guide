@@ -78,7 +78,7 @@ First, sign up for a Cloudflare Turnstile key as follows:
 3. Click the **Add widget** button to add a new widget
 4. Enter a site name to identify what this key will be for (the name of your Application)
 5. Click **Add Hostnames**
-6. Enter the domain name of your Skyve application e.g 'app.website.com' or 'website.com' and click **Add**
+6. Enter the domain name of your Skyve application e.g 'app.website.com' or 'website.com' and click **Add**. Adding a parent domain (e.g. 'website.com') also covers all of its subdomains, which is useful when one widget serves several environments.
 7. Click **Add** at the bottom of the dialog to confirm your hostname(s)
 8. Select the **widget mode** you wish to use for your challenges
 9. Click 'Create'
@@ -99,6 +99,17 @@ Alternatively, you can place the API keys in the project JSON file under `api`
 		"cloudflareTurnstileSecretKey": "xxxxxxxxxxx"
 	}
 ```
+
+#### Troubleshooting: the Turnstile widget does not render
+
+If the CAPTCHA does not appear on the sign in page, check the browser console for a Turnstile error. Error `110200` means the domain is not authorised: the application's hostname is not in the widget's hostname list. To fix it:
+
+1. In the Cloudflare dashboard, go to Turnstile and open the widget for your site key
+2. Go to **Settings** > **Hostname management**
+3. Add the application's hostname, or its parent domain to cover all subdomains
+4. Save, wait a minute or two, then reload the sign in page
+
+If the widget is managed in a client's Cloudflare account, send them these steps along with the site key and affected hostnames.
 
 ## Changing the project URL
 
